@@ -45,6 +45,7 @@ type Stats = {
   failed: number;
   updatedCsvRows: number;
   updatedDbRows: number;
+  skippedDbExistingImageUrl: number;
 };
 
 const DEFAULT_MANIFEST_PATH = "data/verified/approved-images-manifest.csv";
@@ -482,30 +483,58 @@ async function updatePerfumeImageInDb(params: {
   brand: string;
   name: string;
   publicUrl: string;
-}): Promise<number> {
-  const bySlug = await params.prisma.perfume.updateMany({
+  force: boolean;
+}): Promise<{ updated: number; skippedExisting: number }> {
+  const bySlugCandidates = await params.prisma.perfume.findMany({
     where: { slug: params.slug },
-    data: { imageUrl: params.publicUrl },
+    select: {
+      id: true,
+      imageUrl: true,
+    },
   });
 
-  if (bySlug.count > 0) {
-    return bySlug.count;
+  const candidates =
+    bySlugCandidates.length > 0
+      ? bySlugCandidates
+      : await params.prisma.perfume.findMany({
+          where: {
+            name: params.name,
+            brand: {
+              slug: slugify(params.brand),
+            },
+          },
+          select: {
+            id: true,
+            imageUrl: true,
+          },
+        });
+
+  let updated = 0;
+  let skippedExisting = 0;
+
+  for (const candidate of candidates) {
+    if (!params.force && cleanString(candidate.imageUrl) && cleanString(candidate.imageUrl) !== params.publicUrl) {
+      skippedExisting += 1;
+      continue;
+    }
+
+    if (!params.force && cleanString(candidate.imageUrl) === params.publicUrl) {
+      skippedExisting += 1;
+      continue;
+    }
+
+    await params.prisma.perfume.update({
+      where: {
+        id: candidate.id,
+      },
+      data: {
+        imageUrl: params.publicUrl,
+      },
+    });
+    updated += 1;
   }
 
-  const brandSlug = slugify(params.brand);
-  const byBrandName = await params.prisma.perfume.updateMany({
-    where: {
-      name: params.name,
-      brand: {
-        slug: brandSlug,
-      },
-    },
-    data: {
-      imageUrl: params.publicUrl,
-    },
-  });
-
-  return byBrandName.count;
+  return { updated, skippedExisting };
 }
 
 async function main() {
@@ -592,6 +621,7 @@ async function main() {
     failed: 0,
     updatedCsvRows: 0,
     updatedDbRows: 0,
+    skippedDbExistingImageUrl: 0,
   };
 
   const pendingDbUpdates: Array<{ slug: string; brand: string; name: string; publicUrl: string }> = [];
@@ -726,14 +756,16 @@ async function main() {
       const prisma = new PrismaClient();
       try {
         for (const item of pendingDbUpdates) {
-          const updated = await updatePerfumeImageInDb({
+          const dbResult = await updatePerfumeImageInDb({
             prisma,
             slug: item.slug,
             brand: item.brand,
             name: item.name,
             publicUrl: item.publicUrl,
+            force: options.force,
           });
-          stats.updatedDbRows += updated;
+          stats.updatedDbRows += dbResult.updated;
+          stats.skippedDbExistingImageUrl += dbResult.skippedExisting;
         }
       } finally {
         await prisma.$disconnect();
@@ -751,6 +783,7 @@ async function main() {
   console.log(`failed: ${stats.failed}`);
   console.log(`updated CSV rows: ${stats.updatedCsvRows}`);
   console.log(`updated DB rows: ${stats.updatedDbRows}`);
+  console.log(`skipped DB rows (existing imageUrl): ${stats.skippedDbExistingImageUrl}`);
 
   if (options.diagnostic) {
     console.log("\nDiagnostic");
@@ -760,6 +793,7 @@ async function main() {
     console.log(`files uploaded: ${stats.uploaded}`);
     console.log(`rows updated in CSV: ${stats.updatedCsvRows}`);
     console.log(`rows updated in DB: ${stats.updatedDbRows}`);
+    console.log(`rows skipped in DB (existing imageUrl): ${stats.skippedDbExistingImageUrl}`);
   }
 }
 

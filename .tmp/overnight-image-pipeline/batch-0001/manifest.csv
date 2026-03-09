@@ -1,0 +1,51 @@
+brand,name,slug,local_image_path,approved_image_url,image_storage_path
+Lattafa,Khamrah,lattafa-khamrah,approved-images/lattafa-khamrah.jpg,,lattafa/lattafa-khamrah.jpg
+Lattafa,Bade'e Al Oud Oud for Glory,lattafa-badee-al-oud-for-glory,approved-images/lattafa-badee-al-oud-for-glory.jpg,,lattafa/lattafa-badee-al-oud-for-glory.jpg
+Dior,J'adore L'Or,dior-jadore-lor,approved-images/dior-jadore-lor.jpg,,dior/dior-jadore-lor.jpg
+Maison Francis Kurkdjian,Oud Satin Mood,mfk-oud-satin-mood,approved-images/mfk-oud-satin-mood.jpg,,maison-francis-kurkdjian/mfk-oud-satin-mood.jpg
+Maison Francis Kurkdjian,Baccarat Rouge 540,mfk-baccarat-rouge-540,approved-images/mfk-baccarat-rouge-540.jpg,,maison-francis-kurkdjian/mfk-baccarat-rouge-540.jpg
+Xerjoff,Erba Pura,xerjoff-erba-pura,approved-images/xerjoff-erba-pura.jpg,,xerjoff/xerjoff-erba-pura.jpg
+Chanel,Coco Mademoiselle Eau de Parfum,chanel-coco-mademoiselle-edp,approved-images/chanel-coco-mademoiselle-edp.jpg,,chanel/chanel-coco-mademoiselle-edp.jpg
+Diptyque,Philosykos Eau de Toilette,diptyque-philosykos-edt,approved-images/diptyque-philosykos-edt.jpg,,diptyque/diptyque-philosykos-edt.jpg
+Diptyque,Eau Duelle Eau de Parfum,diptyque-eau-duelle-edp,approved-images/diptyque-eau-duelle-edp.jpg,,diptyque/diptyque-eau-duelle-edp.jpg
+Dior,Solar Whisper 0001,dior-solar-whisper-0001,approved-images/dior-solar-whisper-0001.jpg,,dior/dior-solar-whisper-0001.jpg
+Chanel,Noble Edition 0002,chanel-noble-edition-0002,approved-images/chanel-noble-edition-0002.jpg,,chanel/chanel-noble-edition-0002.jpg
+Xerjoff,Amber Trail 0003,xerjoff-amber-trail-0003,approved-images/xerjoff-amber-trail-0003.jpg,,xerjoff/xerjoff-amber-trail-0003.jpg
+Lattafa,Opaline Whisper 0004,lattafa-opaline-whisper-0004,approved-images/lattafa-opaline-whisper-0004.jpg,,lattafa/lattafa-opaline-whisper-0004.jpg
+Tom Ford,Solar Trail 0006,tom-ford-solar-trail-0006,approved-images/tom-ford-solar-trail-0006.jpg,,tom-ford/tom-ford-solar-trail-0006.jpg
+Guerlain,Solar Sillage 0007,guerlain-solar-sillage-0007,approved-images/guerlain-solar-sillage-0007.jpg,,guerlain/guerlain-solar-sillage-0007.jpg
+Maison Francis Kurkdjian,Opaline Veil 0008,maison-francis-kurkdjian-opaline-veil-0008,approved-images/maison-francis-kurkdjian-opaline-veil-0008.jpg,,maison-francis-kurkdjian/maison-francis-kurkdjian-opaline-veil-0008.jpg
+Diptyque,Intense Elixir 0009,diptyque-intense-elixir-0009,approved-images/diptyque-intense-elixir-0009.jpg,,diptyque/diptyque-intense-elixir-0009.jpg
+Yves Saint Laurent,Oud Whisper 0011,yves-saint-laurent-oud-whisper-0011,approved-images/yves-saint-laurent-oud-whisper-0011.jpg,,yves-saint-laurent/yves-saint-laurent-oud-whisper-0011.jpg
+Acqua di Parma,Luminous Nectar 0012,acqua-di-parma-luminous-nectar-0012,approved-images/acqua-di-parma-luminous-nectar-0012.jpg,,acqua-di-parma/acqua-di-parma-luminous-nectar-0012.jpg
+Parfums de Marly,Intense Reserve 0013,parfums-de-marly-intense-reserve-0013,approved-images/parfums-de-marly-intense-reserve-0013.jpg,,parfums-de-marly/parfums-de-marly-intense-reserve-0013.jpg
+Initio,Eclat Elixir 0014,initio-eclat-elixir-0014,approved-images/initio-eclat-elixir-0014.jpg,,initio/initio-eclat-elixir-0014.jpg
+Montale,Zenith Essence 0016,montale-zenith-essence-0016,approved-images/montale-zenith-essence-0016.jpg,,montale/montale-zenith-essence-0016.jpg
+Nishane,Noble Trail 0017,nishane-noble-trail-0017,approved-images/nishane-noble-trail-0017.jpg,,nishane/nishane-noble-trail-0017.jpg
+Memo Paris,Oud Edition 0018,memo-paris-oud-edition-0018,approved-images/memo-paris-oud-edition-0018.jpg,,memo-paris/memo-paris-oud-edition-0018.jpg
+Frederic Malle,Mystic Eau de Parfum 0019,frederic-malle-mystic-eau-de-parfum-0019,approved-images/frederic-malle-mystic-eau-de-parfum-0019.jpg,,frederic-malle/frederic-malle-mystic-eau-de-parfum-0019.jpg
+Dior,Opaline Trail 0021,dior-opaline-trail-0021,approved-images/dior-opaline-trail-0021.jpg,,dior/dior-opaline-trail-0021.jpg
+Chanel,Amber Code 0022,chanel-amber-code-0022,approved-images/chanel-amber-code-0022.jpg,,chanel/chanel-amber-code-0022.jpg
+Xerjoff,Luminous Reserve 0023,xerjoff-luminous-reserve-0023,approved-images/xerjoff-luminous-reserve-0023.jpg,,xerjoff/xerjoff-luminous-reserve-0023.jpg
+Lattafa,Royal Edition 0024,lattafa-royal-edition-0024,approved-images/lattafa-royal-edition-0024.jpg,,lattafa/lattafa-royal-edition-0024.jpg
+Tom Ford,Aura Essence 0026,tom-ford-aura-essence-0026,approved-images/tom-ford-aura-essence-0026.jpg,,tom-ford/tom-ford-aura-essence-0026.jpg
+Guerlain,Saffron Edition 0027,guerlain-saffron-edition-0027,approved-images/guerlain-saffron-edition-0027.jpg,,guerlain/guerlain-saffron-edition-0027.jpg
+Maison Francis Kurkdjian,Amber Code 0028,maison-francis-kurkdjian-amber-code-0028,approved-images/maison-francis-kurkdjian-amber-code-0028.jpg,,maison-francis-kurkdjian/maison-francis-kurkdjian-amber-code-0028.jpg
+Diptyque,Aura Pulse 0029,diptyque-aura-pulse-0029,approved-images/diptyque-aura-pulse-0029.jpg,,diptyque/diptyque-aura-pulse-0029.jpg
+Yves Saint Laurent,Eclat Trail 0031,yves-saint-laurent-eclat-trail-0031,approved-images/yves-saint-laurent-eclat-trail-0031.jpg,,yves-saint-laurent/yves-saint-laurent-eclat-trail-0031.jpg
+Acqua di Parma,Mystic Fusion 0032,acqua-di-parma-mystic-fusion-0032,approved-images/acqua-di-parma-mystic-fusion-0032.jpg,,acqua-di-parma/acqua-di-parma-mystic-fusion-0032.jpg
+Parfums de Marly,Opaline Spirit 0033,parfums-de-marly-opaline-spirit-0033,approved-images/parfums-de-marly-opaline-spirit-0033.jpg,,parfums-de-marly/parfums-de-marly-opaline-spirit-0033.jpg
+Initio,Eclat Pulse 0034,initio-eclat-pulse-0034,approved-images/initio-eclat-pulse-0034.jpg,,initio/initio-eclat-pulse-0034.jpg
+Montale,Solar Trail 0036,montale-solar-trail-0036,approved-images/montale-solar-trail-0036.jpg,,montale/montale-solar-trail-0036.jpg
+Nishane,Saffron Essence 0037,nishane-saffron-essence-0037,approved-images/nishane-saffron-essence-0037.jpg,,nishane/nishane-saffron-essence-0037.jpg
+Memo Paris,Velvet Legend 0038,memo-paris-velvet-legend-0038,approved-images/memo-paris-velvet-legend-0038.jpg,,memo-paris/memo-paris-velvet-legend-0038.jpg
+Frederic Malle,Eclat Edition 0039,frederic-malle-eclat-edition-0039,approved-images/frederic-malle-eclat-edition-0039.jpg,,frederic-malle/frederic-malle-eclat-edition-0039.jpg
+Dior,Velvet Signature 0041,dior-velvet-signature-0041,approved-images/dior-velvet-signature-0041.jpg,,dior/dior-velvet-signature-0041.jpg
+Chanel,Noir Pulse 0042,chanel-noir-pulse-0042,approved-images/chanel-noir-pulse-0042.jpg,,chanel/chanel-noir-pulse-0042.jpg
+Xerjoff,Noir Veil 0043,xerjoff-noir-veil-0043,approved-images/xerjoff-noir-veil-0043.jpg,,xerjoff/xerjoff-noir-veil-0043.jpg
+Lattafa,Oud Legend 0044,lattafa-oud-legend-0044,approved-images/lattafa-oud-legend-0044.jpg,,lattafa/lattafa-oud-legend-0044.jpg
+Tom Ford,Solar Reserve 0046,tom-ford-solar-reserve-0046,approved-images/tom-ford-solar-reserve-0046.jpg,,tom-ford/tom-ford-solar-reserve-0046.jpg
+Guerlain,Silk Signature 0047,guerlain-silk-signature-0047,approved-images/guerlain-silk-signature-0047.jpg,,guerlain/guerlain-silk-signature-0047.jpg
+Maison Francis Kurkdjian,Absolu Code 0048,maison-francis-kurkdjian-absolu-code-0048,approved-images/maison-francis-kurkdjian-absolu-code-0048.jpg,,maison-francis-kurkdjian/maison-francis-kurkdjian-absolu-code-0048.jpg
+Diptyque,Noble Essence 0049,diptyque-noble-essence-0049,approved-images/diptyque-noble-essence-0049.jpg,,diptyque/diptyque-noble-essence-0049.jpg
+Yves Saint Laurent,Noir Code 0051,yves-saint-laurent-noir-code-0051,approved-images/yves-saint-laurent-noir-code-0051.jpg,,yves-saint-laurent/yves-saint-laurent-noir-code-0051.jpg
