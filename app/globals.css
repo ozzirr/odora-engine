@@ -28,3 +28,12 @@ body {
 .font-display {
   font-family: var(--font-heading);
 }
+
+.font-logo {
+  font-family: "Didot", "Bodoni 72", "Bodoni MT", "Iowan Old Style", serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  transform: scaleX(0.88);
+  transform-origin: left center;
+}
