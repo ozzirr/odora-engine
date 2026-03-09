@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import type { Prisma } from "@prisma/client";
 
 import { Container } from "@/components/layout/Container";
@@ -7,6 +8,12 @@ import { prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
 import { PerfumesClient } from "./PerfumesClient";
+
+export const metadata: Metadata = {
+  title: "Perfumes | Odora",
+  description:
+    "Browse fragrances on Odora with filters for family, gender, price, and notes. Compare offers and discover your next scent.",
+};
 
 type PerfumesPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -94,7 +101,7 @@ export default async function PerfumesPage({ searchParams }: PerfumesPageProps) 
       <SectionTitle
         eyebrow="Catalog"
         title="Discover perfumes"
-        subtitle="Filter by gender, family, price range, and style. Sorting and filtering are URL-driven for shareable discovery pages."
+        subtitle="Filter by family, note profile, gender, and price. Every filter is URL-driven so discovery links are easy to share."
       />
       <PerfumesClient perfumes={perfumes} selectedFilters={selectedFilters} />
     </Container>
