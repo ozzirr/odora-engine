@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
+import { computeBestOffer } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
 export type OfferTableItem = {
@@ -35,6 +36,8 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
     );
   }
 
+  const bestOffer = computeBestOffer(offers);
+
   return (
     <div className="overflow-hidden rounded-2xl border border-[#ddcfbc]">
       <div className="overflow-x-auto">
@@ -44,19 +47,21 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
               <th className="px-4 py-3">Store</th>
               <th className="px-4 py-3">Price</th>
               <th className="px-4 py-3">Shipping</th>
+              <th className="px-4 py-3">Total</th>
               <th className="px-4 py-3">Availability</th>
-              <th className="px-4 py-3">Updated</th>
               <th className="px-4 py-3">Action</th>
             </tr>
           </thead>
           <tbody>
             {offers.map((offer) => {
               const targetUrl = offer.affiliateUrl ?? offer.productUrl;
+              const total = offer.priceAmount + (offer.shippingCost ?? 0);
+              const isComputedBest = bestOffer?.offer.id === offer.id;
 
               return (
                 <tr
                   key={offer.id}
-                  className={offer.isBestPrice ? "bg-[#f9f4ea]" : "border-t border-[#eee3d5]"}
+                  className={isComputedBest ? "bg-[#f9f4ea]" : "border-t border-[#eee3d5]"}
                 >
                   <td className="px-4 py-3 font-medium text-[#2a2018]">{offer.store.name}</td>
                   <td className="px-4 py-3 text-[#2a2018]">
@@ -67,13 +72,13 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                       ? "-"
                       : formatCurrency(offer.shippingCost, offer.currency)}
                   </td>
+                  <td className="px-4 py-3 text-[#2a2018]">
+                    {formatCurrency(total, offer.currency)}
+                  </td>
                   <td className="px-4 py-3">
                     <Badge variant="outline">
                       {availabilityLabel[offer.availability] ?? offer.availability}
                     </Badge>
-                  </td>
-                  <td className="px-4 py-3 text-[#5f4f40]">
-                    {offer.lastCheckedAt.toLocaleDateString("it-IT")}
                   </td>
                   <td className="px-4 py-3">
                     <Link
@@ -82,7 +87,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                       rel="noreferrer"
                       className={buttonStyles({ size: "sm" })}
                     >
-                      View
+                      View offer
                     </Link>
                   </td>
                 </tr>

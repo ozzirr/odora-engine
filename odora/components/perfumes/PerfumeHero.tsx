@@ -1,17 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { Badge } from "@/components/ui/Badge";
-import { buttonStyles } from "@/components/ui/Button";
+import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
-
-export type PerfumeHeroOffer = {
-  storeName: string;
-  priceAmount: number;
-  currency: string;
-  productUrl: string;
-  affiliateUrl: string | null;
-};
 
 type PerfumeHeroProps = {
   perfume: {
@@ -29,8 +20,8 @@ type PerfumeHeroProps = {
     brand: {
       name: string;
     };
+    offers: OfferForPricing[];
   };
-  bestOffer: PerfumeHeroOffer | null;
 };
 
 function ScoreBlock({ label, value }: { label: string; value: number | null }) {
@@ -42,8 +33,8 @@ function ScoreBlock({ label, value }: { label: string; value: number | null }) {
   );
 }
 
-export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
-  const bestPriceUrl = bestOffer?.affiliateUrl ?? bestOffer?.productUrl;
+export function PerfumeHero({ perfume }: PerfumeHeroProps) {
+  const bestOffer = computeBestOffer(perfume.offers);
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.1fr_1.4fr]">
@@ -70,6 +61,11 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
         <div className="flex flex-wrap gap-2">
           <Badge>{formatGender(perfume.gender)}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
+          {bestOffer ? (
+            <Badge variant="outline">
+              from {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
+            </Badge>
+          ) : null}
           {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}
           {perfume.isNiche ? <Badge variant="soft">Niche</Badge> : null}
           {perfume.ratingInternal ? (
@@ -82,24 +78,6 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
           <ScoreBlock label="Sillage" value={perfume.sillageScore} />
           <ScoreBlock label="Versatility" value={perfume.versatilityScore} />
         </div>
-
-        {bestOffer && bestPriceUrl ? (
-          <div className="rounded-2xl border border-[#ddcfbc] bg-[#f8f2e9] p-4">
-            <p className="text-xs uppercase tracking-[0.14em] text-[#8a7763]">Best price</p>
-            <p className="mt-1 text-2xl font-semibold text-[#1f1914]">
-              {formatCurrency(bestOffer.priceAmount, bestOffer.currency)}
-            </p>
-            <p className="text-sm text-[#5f4f40]">Available at {bestOffer.storeName}</p>
-            <Link
-              href={bestPriceUrl}
-              target="_blank"
-              rel="noreferrer"
-              className={buttonStyles({ className: "mt-4" })}
-            >
-              View best offer
-            </Link>
-          </div>
-        ) : null}
       </div>
     </section>
   );

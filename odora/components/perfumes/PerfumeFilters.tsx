@@ -1,83 +1,67 @@
 "use client";
 
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { Button } from "@/components/ui/Button";
-import { formatGender, formatPriceRange } from "@/lib/utils";
+import {
+  familyOptions,
+  genderOptions,
+  noteFilterOptions,
+  priceOptions,
+  sortOptions,
+  type ParsedPerfumeFilters,
+} from "@/lib/filters";
 
 type PerfumeFiltersProps = {
-  search: string;
-  onSearchChange: (value: string) => void;
-  gender: string;
-  onGenderChange: (value: string) => void;
-  fragranceFamily: string;
-  onFragranceFamilyChange: (value: string) => void;
-  priceRange: string;
-  onPriceRangeChange: (value: string) => void;
-  arabicOnly: boolean;
-  onArabicOnlyChange: (value: boolean) => void;
-  nicheOnly: boolean;
-  onNicheOnlyChange: (value: boolean) => void;
-  genderOptions: string[];
-  familyOptions: string[];
-  priceRangeOptions: string[];
-  onClear: () => void;
+  selectedFilters: ParsedPerfumeFilters;
 };
 
-export function PerfumeFilters({
-  search,
-  onSearchChange,
-  gender,
-  onGenderChange,
-  fragranceFamily,
-  onFragranceFamilyChange,
-  priceRange,
-  onPriceRangeChange,
-  arabicOnly,
-  onArabicOnlyChange,
-  nicheOnly,
-  onNicheOnlyChange,
-  genderOptions,
-  familyOptions,
-  priceRangeOptions,
-  onClear,
-}: PerfumeFiltersProps) {
+export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const updateParam = (key: string, value?: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (!value) {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+
+    const query = params.toString();
+    router.push(query ? `${pathname}?${query}` : pathname);
+  };
+
+  const clearFilters = () => {
+    router.push(pathname);
+  };
+
   return (
     <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:sticky lg:top-24 lg:h-fit">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-[#7a6654]">Filters</h2>
-        <Button variant="ghost" size="sm" onClick={onClear}>
+        <Button variant="ghost" size="sm" onClick={clearFilters}>
           Reset
         </Button>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label htmlFor="search" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Search
-          </label>
-          <input
-            id="search"
-            type="text"
-            value={search}
-            onChange={(event) => onSearchChange(event.target.value)}
-            placeholder="Name or brand"
-            className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
-          />
-        </div>
-
-        <div>
           <label htmlFor="gender" className="mb-2 block text-xs font-medium text-[#6e5a48]">
             Gender
           </label>
           <select
             id="gender"
-            value={gender}
-            onChange={(event) => onGenderChange(event.target.value)}
+            value={selectedFilters.gender ?? ""}
+            onChange={(event) => updateParam("gender", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="all">All</option>
+            <option value="">All</option>
             {genderOptions.map((option) => (
-              <option key={option} value={option}>
-                {formatGender(option)}
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -89,14 +73,14 @@ export function PerfumeFilters({
           </label>
           <select
             id="family"
-            value={fragranceFamily}
-            onChange={(event) => onFragranceFamilyChange(event.target.value)}
+            value={selectedFilters.family ?? ""}
+            onChange={(event) => updateParam("family", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="all">All</option>
+            <option value="">All</option>
             {familyOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -108,14 +92,104 @@ export function PerfumeFilters({
           </label>
           <select
             id="price"
-            value={priceRange}
-            onChange={(event) => onPriceRangeChange(event.target.value)}
+            value={selectedFilters.price ?? ""}
+            onChange={(event) => updateParam("price", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="all">All</option>
-            {priceRangeOptions.map((option) => (
-              <option key={option} value={option}>
-                {formatPriceRange(option)}
+            <option value="">All</option>
+            {priceOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="note" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+            Any note
+          </label>
+          <input
+            id="note"
+            value={selectedFilters.note ?? ""}
+            onChange={(event) => updateParam("note", event.target.value || undefined)}
+            placeholder="oud, vanilla, amber..."
+            className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+          />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+          <div>
+            <label htmlFor="top" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+              Top note
+            </label>
+            <select
+              id="top"
+              value={selectedFilters.top ?? ""}
+              onChange={(event) => updateParam("top", event.target.value || undefined)}
+              className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+            >
+              <option value="">Any</option>
+              {noteFilterOptions.map((option) => (
+                <option key={`top-${option.value}`} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="heart" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+              Heart note
+            </label>
+            <select
+              id="heart"
+              value={selectedFilters.heart ?? ""}
+              onChange={(event) => updateParam("heart", event.target.value || undefined)}
+              className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+            >
+              <option value="">Any</option>
+              {noteFilterOptions.map((option) => (
+                <option key={`heart-${option.value}`} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="base" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+              Base note
+            </label>
+            <select
+              id="base"
+              value={selectedFilters.base ?? ""}
+              onChange={(event) => updateParam("base", event.target.value || undefined)}
+              className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+            >
+              <option value="">Any</option>
+              {noteFilterOptions.map((option) => (
+                <option key={`base-${option.value}`} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="sort" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+            Sort
+          </label>
+          <select
+            id="sort"
+            value={selectedFilters.sort ?? "rating"}
+            onChange={(event) => updateParam("sort", event.target.value || undefined)}
+            className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+          >
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
               </option>
             ))}
           </select>
@@ -126,8 +200,8 @@ export function PerfumeFilters({
             <span className="text-sm text-[#2a2018]">Arabic only</span>
             <input
               type="checkbox"
-              checked={arabicOnly}
-              onChange={(event) => onArabicOnlyChange(event.target.checked)}
+              checked={selectedFilters.arabic === true}
+              onChange={(event) => updateParam("arabic", event.target.checked ? "true" : undefined)}
               className="h-4 w-4 rounded border-[#b89f85]"
             />
           </label>
@@ -136,8 +210,8 @@ export function PerfumeFilters({
             <span className="text-sm text-[#2a2018]">Niche only</span>
             <input
               type="checkbox"
-              checked={nicheOnly}
-              onChange={(event) => onNicheOnlyChange(event.target.checked)}
+              checked={selectedFilters.niche === true}
+              onChange={(event) => updateParam("niche", event.target.checked ? "true" : undefined)}
               className="h-4 w-4 rounded border-[#b89f85]"
             />
           </label>

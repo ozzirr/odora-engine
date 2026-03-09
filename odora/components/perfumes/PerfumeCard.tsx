@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/Badge";
-import { formatCurrency, formatGender, formatPriceRange } from "@/lib/utils";
+import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
+import { formatCurrency, formatGender } from "@/lib/utils";
 
 export type PerfumeCardItem = {
   id: number;
@@ -18,10 +19,7 @@ export type PerfumeCardItem = {
   brand: {
     name: string;
   };
-  offers?: Array<{
-    priceAmount: number;
-    currency: string;
-  }>;
+  offers?: OfferForPricing[];
 };
 
 type PerfumeCardProps = {
@@ -29,10 +27,10 @@ type PerfumeCardProps = {
 };
 
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
-  const bestOffer = perfume.offers?.[0];
+  const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)]">
+    <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
       <Link href={`/perfumes/${perfume.slug}`}>
         <div className="relative h-56 w-full bg-[#efe7dc]">
           <Image
@@ -40,7 +38,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             alt={perfume.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
           />
         </div>
       </Link>
@@ -49,7 +47,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
         <div>
           <p className="text-xs uppercase tracking-[0.14em] text-[#8a7763]">{perfume.brand.name}</p>
           <Link href={`/perfumes/${perfume.slug}`}>
-            <h3 className="mt-1 font-display text-2xl text-[#1f1914] hover:text-[#6c5946]">
+            <h3 className="mt-1 font-display text-2xl text-[#1f1914] transition-colors hover:text-[#6c5946]">
               {perfume.name}
             </h3>
           </Link>
@@ -57,20 +55,18 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge>{formatGender(perfume.gender)}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
-          <Badge variant="outline">{formatPriceRange(perfume.priceRange)}</Badge>
+          <Badge>{formatGender(perfume.gender)}</Badge>
+          {bestOffer ? (
+            <Badge variant="default">
+              from {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
+            </Badge>
+          ) : (
+            <Badge variant="outline">No offers</Badge>
+          )}
           {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}
           {perfume.isNiche ? <Badge variant="soft">Niche</Badge> : null}
         </div>
-
-        {bestOffer ? (
-          <p className="text-sm font-semibold text-[#2a2018]">
-            From {formatCurrency(bestOffer.priceAmount, bestOffer.currency)}
-          </p>
-        ) : (
-          <p className="text-sm text-[#7a6857]">Offers coming soon</p>
-        )}
       </div>
     </article>
   );

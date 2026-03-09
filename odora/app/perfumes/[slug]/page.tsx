@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Container } from "@/components/layout/Container";
@@ -6,8 +7,11 @@ import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
+import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { prisma } from "@/lib/prisma";
+import { computeBestOffer } from "@/lib/pricing";
+import { formatCurrency } from "@/lib/utils";
 
 type PerfumeDetailPageProps = {
   params: Promise<{
@@ -77,40 +81,29 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       brand: true,
       offers: {
         select: {
+          id: true,
           priceAmount: true,
           currency: true,
+          shippingCost: true,
+          availability: true,
+          affiliateUrl: true,
+          productUrl: true,
+          store: {
+            select: {
+              name: true,
+            },
+          },
         },
-        orderBy: {
-          priceAmount: "asc",
-        },
-        take: 1,
       },
     },
     take: 3,
   });
 
-  const bestOffer =
-    perfume.offers.find((offer) => offer.isBestPrice && offer.availability !== "OUT_OF_STOCK") ??
-    perfume.offers.find((offer) => offer.availability !== "OUT_OF_STOCK") ??
-    perfume.offers[0] ??
-    null;
+  const bestOffer = computeBestOffer(perfume.offers);
 
   return (
     <Container className="space-y-10 pt-10">
-      <PerfumeHero
-        perfume={perfume}
-        bestOffer={
-          bestOffer
-            ? {
-                storeName: bestOffer.store.name,
-                priceAmount: bestOffer.priceAmount,
-                currency: bestOffer.currency,
-                productUrl: bestOffer.productUrl,
-                affiliateUrl: bestOffer.affiliateUrl,
-              }
-            : null
-        }
-      />
+      <PerfumeHero perfume={perfume} />
 
       <section className="space-y-4">
         <SectionTitle
@@ -125,6 +118,41 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             intensity: item.intensity,
           }))}
         />
+      </section>
+
+      <section className="space-y-4">
+        <SectionTitle
+          eyebrow="Prices"
+          title="Compare current offers"
+          subtitle="Best offer is calculated by total cost: price + shipping."
+        />
+
+        {bestOffer ? (
+          <div className="rounded-2xl border border-[#ddcfbc] bg-[#f8f2e9] p-5">
+            <p className="text-sm text-[#5f4f40]">
+              Best price:{" "}
+              <span className="font-semibold text-[#1f1914]">
+                {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
+              </span>{" "}
+              at <span className="font-semibold text-[#1f1914]">{bestOffer.bestStore ?? "Selected store"}</span>
+            </p>
+            <p className="mt-2 text-sm text-[#5f4f40]">
+              Total with shipping: {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency)}
+            </p>
+            {bestOffer.bestUrl ? (
+              <Link
+                href={bestOffer.bestUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={buttonStyles({ className: "mt-4" })}
+              >
+                View offer
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+
+        <OfferTable offers={perfume.offers} />
       </section>
 
       <section className="grid gap-4 md:grid-cols-3">
@@ -143,15 +171,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             weight: item.weight,
           }))}
         />
-      </section>
-
-      <section className="space-y-4">
-        <SectionTitle
-          eyebrow="Offers"
-          title="Compare available prices"
-          subtitle="Offers are sorted by price and refreshed from selected partner stores."
-        />
-        <OfferTable offers={perfume.offers} />
       </section>
 
       <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
