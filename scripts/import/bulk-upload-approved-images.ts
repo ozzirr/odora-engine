@@ -14,6 +14,7 @@ type CliOptions = {
   force: boolean;
   limit?: number;
   updateDb: boolean;
+  diagnostic: boolean;
 };
 
 type RowObject = Record<string, string>;
@@ -37,6 +38,7 @@ type CatalogIndex = {
 
 type Stats = {
   manifestRowsRead: number;
+  localFilesFound: number;
   processed: number;
   uploaded: number;
   skipped: number;
@@ -67,6 +69,7 @@ function parseCliOptions(argv: string[]): CliOptions {
     dryRun: false,
     force: false,
     updateDb: false,
+    diagnostic: false,
   };
 
   for (const arg of argv) {
@@ -82,6 +85,11 @@ function parseCliOptions(argv: string[]): CliOptions {
 
     if (arg === "--update-db") {
       options.updateDb = true;
+      continue;
+    }
+
+    if (arg === "--diagnostic") {
+      options.diagnostic = true;
       continue;
     }
 
@@ -286,6 +294,10 @@ function normalizeStoragePath(storagePath: string): string {
   return cleanString(storagePath).replace(/^\/+/, "").replace(/^perfumes\//i, "");
 }
 
+function defaultLocalImagePath(slug: string): string {
+  return `approved-images/${slug}.jpg`;
+}
+
 function inferSlug(row: RowObject, headerMap: Map<string, string>): string {
   const explicitSlug = getField(row, headerMap, ["slug", "perfume_slug", "perfumeslug"]);
   if (explicitSlug) {
@@ -452,7 +464,8 @@ function parseManifestRows(headers: string[], rows: RowObject[]): ManifestEntry[
       brand,
       name,
       slug,
-      localImagePath: getField(row, headerMap, ["local_image_path", "localimagepath"]),
+      localImagePath:
+        getField(row, headerMap, ["local_image_path", "localimagepath"]) || defaultLocalImagePath(slug),
       approvedImageUrl: getField(row, headerMap, ["approved_image_url", "approvedimageurl"]),
       imageStoragePath:
         normalizeStoragePath(getField(row, headerMap, ["image_storage_path", "imagestoragepath"])) ||
@@ -572,6 +585,7 @@ async function main() {
 
   const stats: Stats = {
     manifestRowsRead: entriesToProcess.length,
+    localFilesFound: 0,
     processed: 0,
     uploaded: 0,
     skipped: 0,
@@ -596,23 +610,39 @@ async function main() {
       continue;
     }
 
-    const resolvedLocalPath = path.isAbsolute(entry.localImagePath)
-      ? entry.localImagePath
-      : path.resolve(repoRoot, entry.localImagePath);
+    const defaultLocalPath = defaultLocalImagePath(entry.slug);
+    const candidateLocalPaths = [defaultLocalPath];
 
-    if (!entry.localImagePath) {
-      stats.skipped += 1;
-      console.log(`[skip] ${label} missing local_image_path in manifest`);
-      continue;
+    if (entry.localImagePath && entry.localImagePath !== defaultLocalPath) {
+      candidateLocalPaths.push(entry.localImagePath);
     }
 
-    try {
-      await access(resolvedLocalPath);
-    } catch {
+    let resolvedLocalPath = "";
+    let resolvedLocalPathDisplay = "";
+    let localFileFound = false;
+
+    for (const candidate of candidateLocalPaths) {
+      const absolute = path.isAbsolute(candidate) ? candidate : path.resolve(repoRoot, candidate);
+
+      try {
+        await access(absolute);
+        resolvedLocalPath = absolute;
+        resolvedLocalPathDisplay = candidate;
+        localFileFound = true;
+        break;
+      } catch {
+        // Try next candidate path.
+      }
+    }
+
+    if (!localFileFound) {
       stats.skipped += 1;
-      console.log(`[skip] ${label} local file not found: ${resolvedLocalPath}`);
+      console.log(
+        `[skip] ${label} local file not found (checked: ${candidateLocalPaths.join(", ")})`,
+      );
       continue;
     }
+    stats.localFilesFound += 1;
 
     const row = match.row;
     const existingPublicUrl = getField(row, catalogHeaderMap, ["image_public_url", "imagepublicurl"]);
@@ -628,7 +658,7 @@ async function main() {
 
     if (options.dryRun) {
       publicUrl = buildPublicUrl(supabaseUrl || "https://example.supabase.co", bucket, storagePath);
-      console.log(`[dry-run] ${label} would upload ${resolvedLocalPath} -> ${storagePath}`);
+      console.log(`[dry-run] ${label} would upload ${resolvedLocalPathDisplay} -> ${storagePath}`);
       stats.uploaded += 1;
     } else {
       try {
@@ -714,12 +744,23 @@ async function main() {
   console.log("\nBulk approved images summary");
   console.log("----------------------------");
   console.log(`manifest rows read: ${stats.manifestRowsRead}`);
+  console.log(`local files found: ${stats.localFilesFound}`);
   console.log(`processed: ${stats.processed}`);
   console.log(`uploaded: ${stats.uploaded}`);
   console.log(`skipped: ${stats.skipped}`);
   console.log(`failed: ${stats.failed}`);
   console.log(`updated CSV rows: ${stats.updatedCsvRows}`);
   console.log(`updated DB rows: ${stats.updatedDbRows}`);
+
+  if (options.diagnostic) {
+    console.log("\nDiagnostic");
+    console.log("----------");
+    console.log(`rows found in manifest: ${stats.manifestRowsRead}`);
+    console.log(`local files found: ${stats.localFilesFound}`);
+    console.log(`files uploaded: ${stats.uploaded}`);
+    console.log(`rows updated in CSV: ${stats.updatedCsvRows}`);
+    console.log(`rows updated in DB: ${stats.updatedDbRows}`);
+  }
 }
 
 main().catch((error) => {

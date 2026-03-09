@@ -182,7 +182,7 @@ async function main() {
       brand,
       name,
       slug,
-      local_image_path: `data/verified/approved-images/${slugify(brand)}/${slug}.jpg`,
+      local_image_path: `approved-images/${slug}.jpg`,
       approved_image_url: "",
       image_storage_path: storagePath,
     });
