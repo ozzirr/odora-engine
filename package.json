@@ -9,7 +9,16 @@
     "lint": "eslint .",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "generate:parfumo-dataset": "tsx scripts/import/generate-parfumo-dataset.ts",
+    "import:parfumo:dry": "tsx scripts/import/import-parfumo.ts --dry-run --limit=2000",
+    "import:parfumo": "tsx scripts/import/import-parfumo.ts --limit=2000",
+    "import:verified:dry": "tsx scripts/import/import-verified-catalog.ts --dry-run --input=data/verified/perfumes.csv",
+    "import:verified": "tsx scripts/import/import-verified-catalog.ts --input=data/verified/perfumes.csv",
+    "sync:verified:images": "tsx scripts/import/sync-verified-images.ts --input=data/verified/perfumes.csv",
+    "sync:verified:images:force": "tsx scripts/import/sync-verified-images.ts --force --input=data/verified/perfumes.csv",
+    "catalog:backfill:provenance:dry": "tsx scripts/import/backfill-catalog-provenance.ts",
+    "catalog:backfill:provenance": "tsx scripts/import/backfill-catalog-provenance.ts --apply"
   },
   "dependencies": {
     "@prisma/client": "^6.19.2",

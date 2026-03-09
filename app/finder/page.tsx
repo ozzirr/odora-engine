@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ async function getFinderPerfumes() {
   }
 
   return prisma.perfume.findMany({
+    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
     include: {
       brand: true,
       offers: {

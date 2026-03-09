@@ -3,6 +3,7 @@ import type { Prisma } from "@prisma/client";
 
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
 import { applySorting, buildPerfumeQuery } from "@/lib/filters";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
@@ -54,7 +55,7 @@ async function getPerfumes(searchParams: Record<string, string | string[] | unde
   }
 
   const baseQuery: Prisma.PerfumeFindManyArgs = {
-    where,
+    where: mergePerfumeWhere(where, getCatalogVisibilityWhere()),
     include: {
       brand: true,
       offers: {

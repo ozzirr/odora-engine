@@ -15,7 +15,7 @@ This MVP foundation focuses on technical structure and UX scaffolding for:
 - TypeScript
 - Tailwind CSS
 - Prisma
-- SQLite (local development)
+- PostgreSQL (Supabase)
 
 ## Getting Started
 
@@ -61,9 +61,105 @@ Open `http://localhost:3000`.
 
 ## Database Commands
 
-- `npm run db:push` -> apply schema to SQLite
+- `npm run db:push` -> apply schema to PostgreSQL
 - `npm run db:seed` -> seed realistic fragrance sample data
 - `npm run db:studio` -> inspect data in Prisma Studio
+
+## Catalog Provenance
+
+Perfume records now include provenance metadata and quality classification:
+
+- `catalogStatus`: `DEMO` | `IMPORTED_UNVERIFIED` | `VERIFIED`
+- `sourceName`
+- `sourceType`: `INTERNAL_DEMO` | `MANUAL_CURATION` | `COMMERCIAL_LICENSED` | `BRAND_OFFICIAL` | `PARTNER_FEED` | `OTHER`
+- `officialSourceUrl`
+- `sourceConfidence` (0-1)
+- `dataQuality`: `LOW` | `MEDIUM` | `HIGH`
+
+To exclude demo records from listing endpoints:
+
+```bash
+ODORA_CATALOG_MODE=no_demo
+```
+
+Or only show verified catalog records:
+
+```bash
+ODORA_CATALOG_MODE=verified_only
+```
+
+## Verified Catalog Import
+
+Import verified manually curated/commercial catalog data:
+
+- Dry run:
+
+```bash
+npm run import:verified:dry
+```
+
+- Real import:
+
+```bash
+npm run import:verified
+```
+
+Default input path: `data/verified/perfumes.csv` (override with `--input=...`).
+
+Supported formats:
+
+- CSV
+- JSON array
+
+Supported record fields:
+
+- `brand`, `brand_slug` (optional)
+- `name`, `slug` (optional)
+- `gender`
+- `year` / `release_year`
+- `family` / `fragrance_family`
+- `description_short`, `description_long`
+- `price_range`
+- `image_url`
+- `rating`
+- `is_arabic`, `is_niche`
+- `top_notes`, `heart_notes`, `base_notes`
+- `catalog_status`, `source_name`, `source_type`, `official_source_url`, `source_confidence`, `data_quality`
+
+## Verified Images Sync (Supabase Storage)
+
+Sync verified perfume images from source URLs to Supabase Storage and write back `image_public_url` in `data/verified/perfumes.csv`.
+
+Required env vars:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_STORAGE_BUCKET` (optional, defaults to `perfumes`)
+
+CSV image fields used by the sync script:
+
+- `image_source_url`
+- `image_storage_path`
+- `image_public_url`
+
+Commands:
+
+```bash
+# Normal mode: skip rows that already have image_public_url
+npm run sync:verified:images
+
+# Force mode: re-upload and overwrite image_public_url
+npm run sync:verified:images:force
+```
+
+## Backfill Existing Demo Data
+
+Backfill provenance for legacy records with missing source metadata:
+
+```bash
+npm run catalog:backfill:provenance:dry
+npm run catalog:backfill:provenance
+```
 
 ## Implemented MVP Scope
 

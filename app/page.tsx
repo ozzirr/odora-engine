@@ -6,6 +6,7 @@ import { Hero } from "@/components/home/Hero";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { trendingPreviewCards } from "@/lib/sample-data";
 
@@ -17,6 +18,7 @@ async function getFeaturedPerfumes(): Promise<PerfumeCardItem[]> {
   }
 
   const perfumes = await prisma.perfume.findMany({
+    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
     take: 6,
     orderBy: [{ ratingInternal: "desc" }, { createdAt: "desc" }],
     include: {

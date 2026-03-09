@@ -10,6 +10,7 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
@@ -28,8 +29,10 @@ async function getPerfumePageData(slug: string) {
     return null;
   }
 
-  const perfume = await prisma.perfume.findUnique({
-    where: { slug },
+  const visibilityWhere = getCatalogVisibilityWhere();
+
+  const perfume = await prisma.perfume.findFirst({
+    where: mergePerfumeWhere({ slug }, visibilityWhere),
     include: {
       brand: true,
       notes: {
@@ -74,11 +77,14 @@ async function getPerfumePageData(slug: string) {
   }
 
   const allPerfumes = await prisma.perfume.findMany({
-    where: {
-      id: {
-        not: perfume.id,
+    where: mergePerfumeWhere(
+      {
+        id: {
+          not: perfume.id,
+        },
       },
-    },
+      visibilityWhere,
+    ),
     include: {
       brand: true,
       notes: {
@@ -115,8 +121,8 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
 
   const { slug } = await params;
 
-  const perfume = await prisma.perfume.findUnique({
-    where: { slug },
+  const perfume = await prisma.perfume.findFirst({
+    where: mergePerfumeWhere({ slug }, getCatalogVisibilityWhere()),
     select: {
       name: true,
       descriptionShort: true,

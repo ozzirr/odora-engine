@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
@@ -20,6 +21,7 @@ async function getTopPageData() {
   }
 
   return prisma.perfume.findMany({
+    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
     include: {
       brand: true,
       offers: {

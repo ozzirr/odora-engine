@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
@@ -33,12 +33,13 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
       <Link href={`/perfumes/${perfume.slug}`}>
         <div className="relative h-56 w-full bg-[#efe7dc]">
-          <Image
-            src={perfume.imageUrl ?? "/images/perfume-placeholder.svg"}
-            alt={perfume.name}
-            fill
+          <PerfumeImage
+            imageUrl={perfume.imageUrl}
+            perfumeName={perfume.name}
+            brandName={perfume.brand.name}
+            fragranceFamily={perfume.fragranceFamily}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
           />
         </div>
       </Link>

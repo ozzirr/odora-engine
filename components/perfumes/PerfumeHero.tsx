@@ -1,6 +1,5 @@
-import Image from "next/image";
-
 import { Badge } from "@/components/ui/Badge";
+import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
 
@@ -39,12 +38,12 @@ export function PerfumeHero({ perfume }: PerfumeHeroProps) {
   return (
     <section className="grid gap-8 lg:grid-cols-[1.1fr_1.4fr]">
       <div className="relative h-[380px] overflow-hidden rounded-2xl border border-[#ddcfbc] bg-[#efe7dc] sm:h-[460px]">
-        <Image
-          src={perfume.imageUrl ?? "/images/perfume-placeholder.svg"}
-          alt={perfume.name}
-          fill
+        <PerfumeImage
+          imageUrl={perfume.imageUrl}
+          perfumeName={perfume.name}
+          brandName={perfume.brand.name}
+          fragranceFamily={perfume.fragranceFamily}
           priority
-          className="object-cover"
           sizes="(max-width: 1024px) 100vw, 40vw"
         />
       </div>
