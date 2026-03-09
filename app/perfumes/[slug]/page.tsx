@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -9,6 +10,7 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
 import { prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
@@ -19,9 +21,7 @@ type PerfumeDetailPageProps = {
   }>;
 };
 
-export default async function PerfumeDetailPage({ params }: PerfumeDetailPageProps) {
-  const { slug } = await params;
-
+async function getPerfumePageData(slug: string) {
   const perfume = await prisma.perfume.findUnique({
     where: { slug },
     include: {
@@ -59,47 +59,93 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         include: {
           store: true,
         },
-        orderBy: {
-          priceAmount: "asc",
+      },
+    },
+  });
+
+  if (!perfume) {
+    return null;
+  }
+
+  const allPerfumes = await prisma.perfume.findMany({
+    where: {
+      id: {
+        not: perfume.id,
+      },
+    },
+    include: {
+      brand: true,
+      notes: {
+        include: {
+          note: true,
+        },
+      },
+      moods: {
+        include: {
+          mood: true,
+        },
+      },
+      offers: {
+        include: {
+          store: true,
+        },
+      },
+    },
+  });
+
+  return {
+    perfume,
+    allPerfumes,
+  };
+}
+
+export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const perfume = await prisma.perfume.findUnique({
+    where: { slug },
+    select: {
+      name: true,
+      descriptionShort: true,
+      brand: {
+        select: {
+          name: true,
         },
       },
     },
   });
 
   if (!perfume) {
+    return {
+      title: "Perfume not found | Odora",
+    };
+  }
+
+  return {
+    title: `${perfume.name} by ${perfume.brand.name} | Odora`,
+    description: perfume.descriptionShort,
+  };
+}
+
+export default async function PerfumeDetailPage({ params }: PerfumeDetailPageProps) {
+  const { slug } = await params;
+  const data = await getPerfumePageData(slug);
+
+  if (!data) {
     notFound();
   }
 
-  const relatedPerfumes = await prisma.perfume.findMany({
-    where: {
-      id: {
-        not: perfume.id,
-      },
-      fragranceFamily: perfume.fragranceFamily,
-    },
-    include: {
-      brand: true,
-      offers: {
-        select: {
-          id: true,
-          priceAmount: true,
-          currency: true,
-          shippingCost: true,
-          availability: true,
-          affiliateUrl: true,
-          productUrl: true,
-          store: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-    },
-    take: 3,
-  });
+  const { perfume, allPerfumes } = data;
 
   const bestOffer = computeBestOffer(perfume.offers);
+  const similarPerfumes = getSimilarPerfumes(perfume, allPerfumes, 4);
+  const cheaperAlternatives = getCheaperAlternatives(perfume, allPerfumes, 4);
+  const groupedNotes = getPerfumeNotes(perfume);
+  const notesForRender = [
+    ...groupedNotes.top.map((note) => ({ ...note, noteType: "TOP" })),
+    ...groupedNotes.heart.map((note) => ({ ...note, noteType: "HEART" })),
+    ...groupedNotes.base.map((note) => ({ ...note, noteType: "BASE" })),
+  ];
 
   return (
     <Container className="space-y-10 pt-10">
@@ -109,15 +155,9 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         <SectionTitle
           eyebrow="Notes"
           title="Fragrance pyramid"
-          subtitle="Top, heart, and base notes with relative emphasis."
+          subtitle="Top, heart, and base notes with relative emphasis. Click a note to explore matching perfumes."
         />
-        <NotesList
-          notes={perfume.notes.map((item) => ({
-            name: item.note.name,
-            noteType: item.note.noteType,
-            intensity: item.intensity,
-          }))}
-        />
+        <NotesList notes={notesForRender} />
       </section>
 
       <section className="space-y-4">
@@ -174,20 +214,25 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       </section>
 
       <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
+        <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={perfume.descriptionLong} />
+      </section>
+
+      <section className="space-y-4">
         <SectionTitle
-          eyebrow="Overview"
-          title="About this perfume"
-          subtitle={perfume.descriptionLong}
+          eyebrow="Discovery"
+          title="Similar fragrances"
+          subtitle="Fragrances with similar profile, notes, and style signal."
         />
+        <PerfumeGrid perfumes={similarPerfumes} />
       </section>
 
       <section className="space-y-4 pb-6">
         <SectionTitle
-          eyebrow="Related"
-          title="More from this style"
-          subtitle="Placeholder block for future recommendation logic."
+          eyebrow="Value"
+          title="Cheaper alternatives"
+          subtitle="Similar fragrances for less, ranked by profile match and lower total price."
         />
-        <PerfumeGrid perfumes={relatedPerfumes} />
+        <PerfumeGrid perfumes={cheaperAlternatives} />
       </section>
     </Container>
   );

@@ -19,11 +19,17 @@ export type DiscoveryPerfume = {
   id: number;
   slug: string;
   name: string;
+  descriptionShort: string;
+  imageUrl: string | null;
   fragranceFamily: string;
   gender: string;
+  priceRange: string;
   isArabic: boolean;
   isNiche: boolean;
   ratingInternal?: number | null;
+  brand: {
+    name: string;
+  };
   offers: OfferForPricing[];
   notes: DiscoveryNote[];
   moods: DiscoveryMood[];

@@ -1,7 +1,10 @@
+import Link from "next/link";
+
 import { Badge } from "@/components/ui/Badge";
 
 export type NoteListItem = {
   name: string;
+  slug: string;
   noteType: string;
   intensity: number | null;
 };
@@ -21,10 +24,12 @@ export function NotesList({ notes }: { notes: NoteListItem[] }) {
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               {items.map((item) => (
-                <Badge key={`${type}-${item.name}`} variant="outline">
-                  {item.name}
-                  {item.intensity ? ` ${item.intensity}/10` : ""}
-                </Badge>
+                <Link key={`${type}-${item.slug}`} href={`/perfumes?note=${encodeURIComponent(item.slug)}`}>
+                  <Badge variant="outline" className="transition-colors hover:bg-[#efe3d2]">
+                    {item.name}
+                    {item.intensity ? ` ${item.intensity}/10` : ""}
+                  </Badge>
+                </Link>
               ))}
               {items.length === 0 ? <p className="text-sm text-[#6b5948]">No notes listed</p> : null}
             </div>
