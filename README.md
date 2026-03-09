@@ -51,6 +51,14 @@ npm run dev
 
 Open `http://localhost:3000`.
 
+## Deployment Notes (Vercel)
+
+- The app is configured to **build safely even if `DATABASE_URL` is missing**.
+- Routes that rely on Prisma are runtime-dynamic and use safe fallbacks when DB config is absent.
+- To enable full database-backed behavior in production, set:
+  - `DATABASE_URL` (for example `file:./dev.db` locally; for Vercel use a production database URL when you introduce one)
+- For local SQLite development, continue using `.env` from `.env.example`.
+
 ## Database Commands
 
 - `npm run db:push` -> apply schema to SQLite
@@ -77,52 +85,51 @@ Open `http://localhost:3000`.
 ## Project Structure
 
 ```text
-odora/
-  app/
-    layout.tsx
+app/
+  layout.tsx
+  page.tsx
+  globals.css
+  perfumes/
     page.tsx
-    globals.css
-    perfumes/
+    PerfumesClient.tsx
+    [slug]/
       page.tsx
-      PerfumesClient.tsx
-      [slug]/
-        page.tsx
-    finder/
-      page.tsx
-    top/
-      page.tsx
-  components/
-    layout/
-      Header.tsx
-      Footer.tsx
-      Container.tsx
-    home/
-      Hero.tsx
-      FeaturedPerfumes.tsx
-      QuickFilters.tsx
-    perfumes/
-      PerfumeCard.tsx
-      PerfumeGrid.tsx
-      PerfumeFilters.tsx
-      PerfumeHero.tsx
-      OfferTable.tsx
-      NotesList.tsx
-      MoodBadges.tsx
-    ui/
-      Button.tsx
-      Badge.tsx
-      SectionTitle.tsx
-  lib/
-    prisma.ts
-    utils.ts
-    sample-data.ts
-  prisma/
-    schema.prisma
-    seed.ts
-  public/
-    images/
-  .env.example
-  README.md
+  finder/
+    page.tsx
+  top/
+    page.tsx
+components/
+  layout/
+    Header.tsx
+    Footer.tsx
+    Container.tsx
+  home/
+    Hero.tsx
+    FeaturedPerfumes.tsx
+    QuickFilters.tsx
+  perfumes/
+    PerfumeCard.tsx
+    PerfumeGrid.tsx
+    PerfumeFilters.tsx
+    PerfumeHero.tsx
+    OfferTable.tsx
+    NotesList.tsx
+    MoodBadges.tsx
+  ui/
+    Button.tsx
+    Badge.tsx
+    SectionTitle.tsx
+lib/
+  prisma.ts
+  utils.ts
+  sample-data.ts
+prisma/
+  schema.prisma
+  seed.ts
+public/
+  images/
+.env.example
+README.md
 ```
 
 ## What to Build Next

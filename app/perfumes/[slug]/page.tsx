@@ -11,7 +11,7 @@ import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
-import { prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
@@ -21,7 +21,13 @@ type PerfumeDetailPageProps = {
   }>;
 };
 
+export const dynamic = "force-dynamic";
+
 async function getPerfumePageData(slug: string) {
+  if (!isDatabaseConfigured) {
+    return null;
+  }
+
   const perfume = await prisma.perfume.findUnique({
     where: { slug },
     include: {
@@ -100,6 +106,13 @@ async function getPerfumePageData(slug: string) {
 }
 
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
+  if (!isDatabaseConfigured) {
+    return {
+      title: "Perfume | Odora",
+      description: "Fragrance details and offer comparison on Odora.",
+    };
+  }
+
   const { slug } = await params;
 
   const perfume = await prisma.perfume.findUnique({

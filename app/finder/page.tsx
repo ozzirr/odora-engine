@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Fragrance Finder | Odora",
@@ -11,7 +11,13 @@ export const metadata: Metadata = {
     "Use Odora Finder to match perfumes by mood, season, budget, note preferences, and fragrance style.",
 };
 
+export const dynamic = "force-dynamic";
+
 async function getFinderPerfumes() {
+  if (!isDatabaseConfigured) {
+    return [];
+  }
+
   return prisma.perfume.findMany({
     include: {
       brand: true,

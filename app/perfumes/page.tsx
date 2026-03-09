@@ -4,7 +4,7 @@ import type { Prisma } from "@prisma/client";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { applySorting, buildPerfumeQuery } from "@/lib/filters";
-import { prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
 import { PerfumesClient } from "./PerfumesClient";
@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description:
     "Browse fragrances on Odora with filters for family, gender, price, and notes. Compare offers and discover your next scent.",
 };
+
+export const dynamic = "force-dynamic";
 
 type PerfumesPageProps = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -43,6 +45,13 @@ type PerfumeListItem = Prisma.PerfumeGetPayload<{
 
 async function getPerfumes(searchParams: Record<string, string | string[] | undefined>) {
   const { parsed, where } = buildPerfumeQuery(searchParams);
+
+  if (!isDatabaseConfigured) {
+    return {
+      perfumes: [] as PerfumeListItem[],
+      selectedFilters: parsed,
+    };
+  }
 
   const baseQuery: Prisma.PerfumeFindManyArgs = {
     where,

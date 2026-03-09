@@ -6,10 +6,16 @@ import { Hero } from "@/components/home/Hero";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { trendingPreviewCards } from "@/lib/sample-data";
 
+export const dynamic = "force-dynamic";
+
 async function getFeaturedPerfumes(): Promise<PerfumeCardItem[]> {
+  if (!isDatabaseConfigured) {
+    return [];
+  }
+
   const perfumes = await prisma.perfume.findMany({
     take: 6,
     orderBy: [{ ratingInternal: "desc" }, { createdAt: "desc" }],

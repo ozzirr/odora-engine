@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
 export const metadata: Metadata = {
@@ -12,7 +12,13 @@ export const metadata: Metadata = {
     "Explore Odora's curated top fragrances by Arabic style, niche quality, longevity, and value picks.",
 };
 
+export const dynamic = "force-dynamic";
+
 async function getTopPageData() {
+  if (!isDatabaseConfigured) {
+    return [];
+  }
+
   return prisma.perfume.findMany({
     include: {
       brand: true,
