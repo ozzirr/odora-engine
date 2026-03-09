@@ -1,5 +1,6 @@
 import { access, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 type CliOptions = {
   inputPath: string;
@@ -42,8 +43,60 @@ const FALLBACK_EXT_BY_TYPE: Record<string, string> = {
   "image/svg+xml": "svg",
 };
 
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, "..", "..");
+const rootEnvPath = path.join(repoRoot, ".env");
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function parseDotenvLine(line: string): [string, string] | null {
+  const trimmed = line.trim();
+  if (!trimmed || trimmed.startsWith("#")) {
+    return null;
+  }
+
+  const withoutExport = trimmed.startsWith("export ") ? trimmed.slice(7).trim() : trimmed;
+  const separatorIndex = withoutExport.indexOf("=");
+  if (separatorIndex <= 0) {
+    return null;
+  }
+
+  const key = withoutExport.slice(0, separatorIndex).trim();
+  let value = withoutExport.slice(separatorIndex + 1).trim();
+  if (!key) {
+    return null;
+  }
+
+  if ((value.startsWith("\"") && value.endsWith("\"")) || (value.startsWith("'") && value.endsWith("'"))) {
+    value = value.slice(1, -1);
+  }
+
+  return [key, value];
+}
+
+async function loadRootDotenv() {
+  try {
+    await access(rootEnvPath);
+  } catch {
+    return;
+  }
+
+  const content = await readFile(rootEnvPath, "utf8");
+  const lines = content.split(/\r?\n/);
+
+  for (const line of lines) {
+    const parsed = parseDotenvLine(line);
+    if (!parsed) {
+      continue;
+    }
+
+    const [key, value] = parsed;
+    if (process.env[key] === undefined) {
+      process.env[key] = value;
+    }
+  }
 }
 
 function parseCliOptions(argv: string[]): CliOptions {
@@ -369,14 +422,23 @@ async function uploadToStorageWithRetry(params: {
 
 async function main() {
   const options = parseCliOptions(process.argv.slice(2));
-  const resolvedInputPath = path.resolve(process.cwd(), options.inputPath);
+  const resolvedInputPath = path.resolve(repoRoot, options.inputPath);
+
+  await loadRootDotenv();
 
   const supabaseUrl = cleanString(process.env.SUPABASE_URL);
   const supabaseServiceRoleKey = cleanString(process.env.SUPABASE_SERVICE_ROLE_KEY);
   const bucket = cleanString(process.env.SUPABASE_STORAGE_BUCKET) || DEFAULT_BUCKET;
 
+  console.log("[images-sync] env diagnostics:");
+  console.log(`- SUPABASE_URL: ${supabaseUrl ? "present" : "missing"}`);
+  console.log(`- SUPABASE_SERVICE_ROLE_KEY: ${supabaseServiceRoleKey ? "present" : "missing"}`);
+  console.log(`- SUPABASE_STORAGE_BUCKET: ${cleanString(process.env.SUPABASE_STORAGE_BUCKET) ? "present" : "missing (using default perfumes)"}`);
+
   if (!supabaseUrl || !supabaseServiceRoleKey) {
-    throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+    throw new Error(
+      "Missing required env vars. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the repository root .env, then rerun `npm run sync:verified:images`.",
+    );
   }
 
   await access(resolvedInputPath);

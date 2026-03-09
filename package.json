@@ -17,6 +17,10 @@
     "import:verified": "tsx scripts/import/import-verified-catalog.ts --input=data/verified/perfumes.csv",
     "sync:verified:images": "tsx scripts/import/sync-verified-images.ts --input=data/verified/perfumes.csv",
     "sync:verified:images:force": "tsx scripts/import/sync-verified-images.ts --force --input=data/verified/perfumes.csv",
+    "images:suggest-sources": "tsx scripts/import/suggest-image-source-urls.ts --missing-images-only",
+    "images:suggest-sources:verified": "tsx scripts/import/suggest-image-source-urls.ts --status=VERIFIED --missing-images-only",
+    "images:worklist": "tsx scripts/import/fill-verified-image-fields.ts --missing-images-only",
+    "images:worklist:verified": "tsx scripts/import/fill-verified-image-fields.ts --status=VERIFIED --missing-images-only",
     "catalog:backfill:provenance:dry": "tsx scripts/import/backfill-catalog-provenance.ts",
     "catalog:backfill:provenance": "tsx scripts/import/backfill-catalog-provenance.ts --apply"
   },
