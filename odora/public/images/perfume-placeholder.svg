@@ -1,0 +1,10 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#EDE3D6"/>
+  <rect x="230" y="180" width="340" height="150" rx="30" fill="#D7C5AE"/>
+  <rect x="170" y="300" width="460" height="520" rx="60" fill="#F8F2E9" stroke="#BFA588" stroke-width="12"/>
+  <rect x="290" y="80" width="220" height="120" rx="20" fill="#8E7358"/>
+  <circle cx="400" cy="560" r="98" fill="#E5D7C5"/>
+  <path d="M340 560H460" stroke="#8E7358" stroke-width="16" stroke-linecap="round"/>
+  <path d="M400 500V620" stroke="#8E7358" stroke-width="16" stroke-linecap="round"/>
+  <text x="400" y="900" text-anchor="middle" font-family="serif" font-size="44" fill="#6D5540">Odora</text>
+</svg>

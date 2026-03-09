@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MEN
+  WOMEN
+  UNISEX
+}
+
+enum NoteType {
+  TOP
+  HEART
+  BASE
+}
+
+enum PriceRange {
+  BUDGET
+  MID
+  PREMIUM
+  LUXURY
+}
+
+enum Availability {
+  IN_STOCK
+  LIMITED
+  OUT_OF_STOCK
+  PREORDER
+}
+
+model Brand {
+  id          Int       @id @default(autoincrement())
+  name        String
+  slug        String    @unique
+  country     String?
+  description String?
+  logoUrl     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  perfumes    Perfume[]
+}
+
+model Perfume {
+  id               Int               @id @default(autoincrement())
+  brandId          Int
+  name             String
+  slug             String            @unique
+  gender           Gender
+  descriptionShort String
+  descriptionLong  String
+  fragranceFamily  String
+  priceRange       PriceRange
+  releaseYear      Int?
+  isArabic         Boolean           @default(false)
+  isNiche          Boolean           @default(false)
+  imageUrl         String?
+  ratingInternal   Float?
+  longevityScore   Int?
+  sillageScore     Int?
+  versatilityScore Int?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  brand            Brand             @relation(fields: [brandId], references: [id], onDelete: Restrict)
+  notes            PerfumeNote[]
+  moods            PerfumeMood[]
+  seasons          PerfumeSeason[]
+  occasions        PerfumeOccasion[]
+  offers           Offer[]
+
+  @@index([brandId])
+  @@index([fragranceFamily])
+  @@index([gender])
+  @@index([priceRange])
+}
+
+model Note {
+  id       Int           @id @default(autoincrement())
+  name     String
+  slug     String        @unique
+  noteType NoteType
+  perfumes PerfumeNote[]
+}
+
+model PerfumeNote {
+  id        Int      @id @default(autoincrement())
+  perfumeId Int
+  noteId    Int
+  intensity Int?
+  perfume   Perfume  @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+  note      Note     @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  @@unique([perfumeId, noteId])
+  @@index([noteId])
+}
+
+model Mood {
+  id       Int           @id @default(autoincrement())
+  name     String
+  slug     String        @unique
+  perfumes PerfumeMood[]
+}
+
+model PerfumeMood {
+  id        Int     @id @default(autoincrement())
+  perfumeId Int
+  moodId    Int
+  weight    Int?
+  perfume   Perfume @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+  mood      Mood    @relation(fields: [moodId], references: [id], onDelete: Cascade)
+
+  @@unique([perfumeId, moodId])
+  @@index([moodId])
+}
+
+model Season {
+  id       Int             @id @default(autoincrement())
+  name     String
+  slug     String          @unique
+  perfumes PerfumeSeason[]
+}
+
+model PerfumeSeason {
+  id        Int     @id @default(autoincrement())
+  perfumeId Int
+  seasonId  Int
+  weight    Int?
+  perfume   Perfume @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+  season    Season  @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([perfumeId, seasonId])
+  @@index([seasonId])
+}
+
+model Occasion {
+  id       Int               @id @default(autoincrement())
+  name     String
+  slug     String            @unique
+  perfumes PerfumeOccasion[]
+}
+
+model PerfumeOccasion {
+  id         Int      @id @default(autoincrement())
+  perfumeId  Int
+  occasionId Int
+  weight     Int?
+  perfume    Perfume  @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+
+  @@unique([perfumeId, occasionId])
+  @@index([occasionId])
+}
+
+model Store {
+  id               Int     @id @default(autoincrement())
+  name             String
+  slug             String  @unique
+  websiteUrl       String
+  affiliateProgram String?
+  logoUrl          String?
+  isActive         Boolean @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  offers           Offer[]
+}
+
+model Offer {
+  id           Int          @id @default(autoincrement())
+  perfumeId    Int
+  storeId      Int
+  productUrl   String
+  affiliateUrl String?
+  priceAmount  Float
+  currency     String
+  shippingCost Float?
+  availability Availability
+  lastCheckedAt DateTime
+  isBestPrice  Boolean      @default(false)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  perfume      Perfume      @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+  store        Store        @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@index([perfumeId])
+  @@index([storeId])
+  @@index([isBestPrice])
+}
