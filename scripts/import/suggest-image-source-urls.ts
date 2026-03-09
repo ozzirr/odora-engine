@@ -979,7 +979,11 @@ function getField(row: RowObject, headersByNormalizedName: Map<string, string>, 
 
 function buildStoragePath(brand: string, slug: string): string {
   const brandSlug = slugify(brand);
-  return `perfumes/${brandSlug}/${slug}.jpg`;
+  return `${brandSlug}/${slug}.jpg`;
+}
+
+function normalizeStoragePath(storagePath: string): string {
+  return cleanString(storagePath).replace(/^\/+/, "").replace(/^perfumes\//i, "");
 }
 
 async function main() {
@@ -1064,7 +1068,7 @@ async function main() {
     ]);
 
     const imageStoragePath =
-      getField(row, headersByNormalizedName, ["image_storage_path", "imagestoragepath"]) ||
+      normalizeStoragePath(getField(row, headersByNormalizedName, ["image_storage_path", "imagestoragepath"])) ||
       buildStoragePath(brand, slug);
 
     targetRows.push({

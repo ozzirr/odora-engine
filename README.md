@@ -1,23 +1,60 @@
-# Odora MVP Foundation
+# Odora Engine
 
 Odora is an Italian-first fragrance discovery and comparison platform.
-This MVP foundation focuses on technical structure and UX scaffolding for:
+This repository contains the MVP web app, Prisma schema, and data pipelines used to build and maintain a production-grade perfume catalog.
 
-- Browsing perfumes
-- Filtering by style and profile
-- Viewing perfume detail pages
-- Comparing offers from stores
-- Preparing for a future finder/advisor flow
+## Current MVP Scope
+
+- Next.js App Router frontend with responsive premium UI
+- URL-driven perfume discovery on `/perfumes`:
+  - gender, family, price, arabic/niche toggles
+  - note filters (`note`, `top`, `heart`, `base`)
+  - sorting (`rating`, `longevity`, `sillage`, `price_low`, `price_high`)
+- Perfume detail page `/perfumes/[slug]` with:
+  - notes, moods, seasons, occasions
+  - best-price computation from offers
+  - similar fragrances + cheaper alternatives
+- Finder MVP on `/finder` (preference-based matching)
+- Editorial discovery page `/top` with computed sections
+- Catalog provenance support (`DEMO`, `IMPORTED_UNVERIFIED`, `VERIFIED`)
+- Verified data and image ingestion workflows
 
 ## Tech Stack
 
-- Next.js (App Router)
+- Next.js 16 (App Router)
 - TypeScript
-- Tailwind CSS
-- Prisma
+- Tailwind CSS v4
+- Prisma ORM
 - PostgreSQL (Supabase)
 
-## Getting Started
+## Requirements
+
+- Node.js 20+
+- npm 10+
+- Supabase project (for Postgres + Storage)
+
+## Environment Variables
+
+Use one root `.env` file:
+
+```bash
+cp .env.example .env
+```
+
+Required/optional variables:
+
+- `DATABASE_URL` (required for DB-backed routes and Prisma commands)
+- `ODORA_CATALOG_MODE` (optional): `all` | `no_demo` | `verified_only`
+- `SUPABASE_URL` (required for image upload/sync scripts)
+- `SUPABASE_SERVICE_ROLE_KEY` (required for image upload/sync scripts)
+- `SUPABASE_STORAGE_BUCKET` (optional, default `perfumes`)
+
+Important:
+
+- Do not quote `DATABASE_URL`
+- Do not commit secrets
+
+## Local Setup
 
 1. Install dependencies:
 
@@ -25,49 +62,45 @@ This MVP foundation focuses on technical structure and UX scaffolding for:
 npm install
 ```
 
-2. Set environment variables:
+2. Generate Prisma client:
 
 ```bash
-cp .env.example .env
+npx prisma generate
 ```
 
-3. Generate Prisma client and sync database:
+3. Push schema to DB:
 
 ```bash
 npm run db:push
 ```
 
-4. Seed sample data:
+4. Seed baseline data:
 
 ```bash
 npm run db:seed
 ```
 
-5. Start development server:
+5. Start dev server:
 
 ```bash
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open: `http://localhost:3000`
 
-## Deployment Notes (Vercel)
+## Core Commands
 
-- The app is configured to **build safely even if `DATABASE_URL` is missing**.
-- Routes that rely on Prisma are runtime-dynamic and use safe fallbacks when DB config is absent.
-- To enable full database-backed behavior in production, set:
-  - `DATABASE_URL` (for example `file:./dev.db` locally; for Vercel use a production database URL when you introduce one)
-- For local SQLite development, continue using `.env` from `.env.example`.
-
-## Database Commands
-
-- `npm run db:push` -> apply schema to PostgreSQL
-- `npm run db:seed` -> seed realistic fragrance sample data
-- `npm run db:studio` -> inspect data in Prisma Studio
+- `npm run dev` -> start Next.js in development
+- `npm run build` -> generate Prisma client + production build
+- `npm run start` -> run production build locally
+- `npm run lint` -> run ESLint
+- `npm run db:push` -> apply Prisma schema
+- `npm run db:seed` -> seed baseline catalog
+- `npm run db:studio` -> open Prisma Studio
 
 ## Catalog Provenance
 
-Perfume records now include provenance metadata and quality classification:
+`Perfume` records include source-quality metadata:
 
 - `catalogStatus`: `DEMO` | `IMPORTED_UNVERIFIED` | `VERIFIED`
 - `sourceName`
@@ -76,21 +109,39 @@ Perfume records now include provenance metadata and quality classification:
 - `sourceConfidence` (0-1)
 - `dataQuality`: `LOW` | `MEDIUM` | `HIGH`
 
-To exclude demo records from listing endpoints:
+Catalog visibility for frontend queries is controlled via:
 
 ```bash
+ODORA_CATALOG_MODE=all
 ODORA_CATALOG_MODE=no_demo
-```
-
-Or only show verified catalog records:
-
-```bash
 ODORA_CATALOG_MODE=verified_only
 ```
 
-## Verified Catalog Import
+## Data Import Pipelines
 
-Import verified manually curated/commercial catalog data:
+### 1) Demo / Parfumo-style Import
+
+- Generate synthetic Parfumo-style dataset:
+
+```bash
+npm run generate:parfumo-dataset
+```
+
+- Dry run import (first 2000):
+
+```bash
+npm run import:parfumo:dry
+```
+
+- Real import (first 2000):
+
+```bash
+npm run import:parfumo
+```
+
+### 2) Verified Catalog Import
+
+Input default: `data/verified/perfumes.csv`
 
 - Dry run:
 
@@ -104,135 +155,133 @@ npm run import:verified:dry
 npm run import:verified
 ```
 
-Default input path: `data/verified/perfumes.csv` (override with `--input=...`).
-
-Supported formats:
-
-- CSV
-- JSON array
-
-Supported record fields:
-
-- `brand`, `brand_slug` (optional)
-- `name`, `slug` (optional)
-- `gender`
-- `year` / `release_year`
-- `family` / `fragrance_family`
-- `description_short`, `description_long`
-- `price_range`
-- `image_url`
-- `rating`
-- `is_arabic`, `is_niche`
-- `top_notes`, `heart_notes`, `base_notes`
-- `catalog_status`, `source_name`, `source_type`, `official_source_url`, `source_confidence`, `data_quality`
-
-## Verified Images Sync (Supabase Storage)
-
-Sync verified perfume images from source URLs to Supabase Storage and write back `image_public_url` in `data/verified/perfumes.csv`.
-
-Required env vars:
-
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `SUPABASE_STORAGE_BUCKET` (optional, defaults to `perfumes`)
-
-CSV image fields used by the sync script:
-
-- `image_source_url`
-- `image_storage_path`
-- `image_public_url`
-
-Commands:
-
-```bash
-# Normal mode: skip rows that already have image_public_url
-npm run sync:verified:images
-
-# Force mode: re-upload and overwrite image_public_url
-npm run sync:verified:images:force
-```
-
-## Backfill Existing Demo Data
-
-Backfill provenance for legacy records with missing source metadata:
+### 3) Backfill Provenance for Existing Records
 
 ```bash
 npm run catalog:backfill:provenance:dry
 npm run catalog:backfill:provenance
 ```
 
-## Implemented MVP Scope
+## Image Workflows
 
-- Global layout with responsive header and footer
-- Home page (`/`) with hero, featured perfumes, quick filters, and trending preview cards
-- Perfumes catalog (`/perfumes`) with client-side filtering UI
-- Perfume detail page (`/perfumes/[slug]`) with notes, scores, badges, offers, and related placeholder
-- Finder placeholder page (`/finder`)
-- Top/editorial placeholder page (`/top`)
-- Reusable UI and domain components
-- Prisma schema with full domain models (brands, perfumes, notes, moods, seasons, occasions, stores, offers)
-- Seed script with:
-  - 6 brands
-  - 12 perfumes
-  - notes, moods, seasons, occasions
-  - 3 stores
-  - multi-offer data per perfume
+### A) Build Image Worklist
 
-## Project Structure
+Generates curation worklists and auto-fills missing `image_storage_path` when needed.
+
+```bash
+npm run images:worklist
+npm run images:worklist:verified
+```
+
+Output:
+
+- `data/verified/worklists/image-sourcing-worklist.csv`
+- `data/verified/worklists/image-sourcing-worklist.json`
+
+### B) Suggest `image_source_url` Candidates
+
+Attempts suggestions from `official_source_url` using metadata/JSON-LD/common image selectors.
+
+```bash
+npm run images:suggest-sources
+npm run images:suggest-sources:verified
+```
+
+You can pass extra flags, for example:
+
+```bash
+npm run images:suggest-sources:verified -- --limit=50
+```
+
+Output:
+
+- `data/verified/worklists/image-source-suggestions.csv`
+- `data/verified/worklists/image-source-suggestions.json`
+
+Includes diagnostics per row (`review_status`, `failure_reason`, `http_status_code`, `final_url`).
+
+### C) Sync Images from Source URLs to Supabase Storage
+
+Reads `image_source_url`, uploads to Storage, writes back `image_public_url`.
+
+```bash
+npm run sync:verified:images
+npm run sync:verified:images:force
+```
+
+### D) Bulk Upload Approved Local Images (Fastest Production Path)
+
+Manifest:
+
+- `data/verified/approved-images-manifest.csv`
+- `image_storage_path` format: `<brand-slug>/<perfume-slug>.jpg` (no leading `perfumes/`)
+
+Expected local files (example pattern):
+
+- `data/verified/approved-images/<brand-slug>/<perfume-slug>.jpg`
+
+Commands:
+
+```bash
+npm run images:manifest:generate
+npm run images:bulk-upload:dry
+npm run images:bulk-upload
+npm run images:bulk-upload:db
+```
+
+Optional flags (examples):
+
+```bash
+npm run images:bulk-upload:dry -- --limit=10
+npm run images:bulk-upload -- --force --limit=50
+npm run images:bulk-upload:db -- --force
+```
+
+Behavior:
+
+- Uploads local image files to Supabase bucket `perfumes`
+- Updates matching rows in `data/verified/perfumes.csv`
+- Matching by `slug`, fallback to normalized `brand + name`
+- `--update-db` also updates `Perfume.imageUrl` in PostgreSQL
+
+### E) Repair Incorrect Storage Paths / URLs
+
+Fixes legacy values where storage path started with `perfumes/` and URLs contained `/public/perfumes/perfumes/`.
+
+```bash
+npm run images:repair-paths:dry
+npm run images:repair-paths
+```
+
+## Deployment Notes (Vercel)
+
+- Repository root is the app root for Vercel.
+- Dynamic routes use runtime DB access where needed.
+- Set env vars in Vercel Project Settings:
+  - `DATABASE_URL`
+  - `ODORA_CATALOG_MODE` (optional)
+  - `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` (if image scripts or server-side integrations require them)
+
+## Project Structure (Key Paths)
 
 ```text
 app/
-  layout.tsx
-  page.tsx
-  globals.css
-  perfumes/
-    page.tsx
-    PerfumesClient.tsx
-    [slug]/
-      page.tsx
-  finder/
-    page.tsx
-  top/
-    page.tsx
 components/
-  layout/
-    Header.tsx
-    Footer.tsx
-    Container.tsx
-  home/
-    Hero.tsx
-    FeaturedPerfumes.tsx
-    QuickFilters.tsx
-  perfumes/
-    PerfumeCard.tsx
-    PerfumeGrid.tsx
-    PerfumeFilters.tsx
-    PerfumeHero.tsx
-    OfferTable.tsx
-    NotesList.tsx
-    MoodBadges.tsx
-  ui/
-    Button.tsx
-    Badge.tsx
-    SectionTitle.tsx
 lib/
-  prisma.ts
-  utils.ts
-  sample-data.ts
 prisma/
-  schema.prisma
-  seed.ts
-public/
-  images/
-.env.example
-README.md
+scripts/import/
+data/verified/
+  perfumes.csv
+  approved-images-manifest.csv
+  worklists/
 ```
 
-## What to Build Next
+## Troubleshooting
 
-1. URL-driven filtering and sorting state for `/perfumes`
-2. Rich perfume comparison view (side-by-side)
-3. Finder flow (multi-step preferences + recommendation logic)
-4. Better media pipeline and real product imagery
-5. Editorial and ranking logic for `/top`
-6. Automated tests for filtering and detail rendering
+- Prisma URL error (`protocol postgresql:// or postgres://`):
+  - verify `prisma/schema.prisma` datasource provider is `postgresql`
+  - verify root `.env` has valid unquoted `DATABASE_URL`
+- `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` missing:
+  - set them in root `.env` before running image upload/sync scripts
+- `images:suggest-sources` returns many `FETCH_FAILED` with `BLOCKED:HTTP 403`:
+  - some brand domains block automated requests; use approved local image workflow (`images:bulk-upload`) for reliable production ingestion

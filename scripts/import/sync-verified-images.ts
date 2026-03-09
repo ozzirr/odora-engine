@@ -334,15 +334,19 @@ async function downloadImageWithRetry(sourceUrl: string): Promise<DownloadResult
 }
 
 function encodeStoragePath(storagePath: string): string {
-  return storagePath
+  return normalizeStoragePath(storagePath)
     .split("/")
     .filter((segment) => segment.length > 0)
     .map((segment) => encodeURIComponent(segment))
     .join("/");
 }
 
+function normalizeStoragePath(storagePath: string): string {
+  return cleanString(storagePath).replace(/^\/+/, "").replace(/^perfumes\//i, "");
+}
+
 function withExtension(storagePath: string, contentType: string): string {
-  const cleanPath = storagePath.replace(/^\/+/, "");
+  const cleanPath = normalizeStoragePath(storagePath);
   if (!cleanPath) {
     return cleanPath;
   }
@@ -504,7 +508,7 @@ async function main() {
     const rowLabel = `row ${index + 2}`;
 
     const sourceUrl = cleanString(row[sourceHeader]);
-    let storagePath = cleanString(row[storageHeader]);
+    let storagePath = normalizeStoragePath(row[storageHeader]);
     const existingPublicUrl = cleanString(row[publicHeader]);
     stats.rowsRead += 1;
 

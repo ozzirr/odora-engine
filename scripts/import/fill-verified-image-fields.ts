@@ -181,7 +181,11 @@ function toWorklistCsv(rows: WorklistRow[]): string {
 
 function buildStoragePath(brand: string, perfumeSlug: string) {
   const brandSlug = slugify(brand);
-  return `perfumes/${brandSlug}/${perfumeSlug}.jpg`;
+  return `${brandSlug}/${perfumeSlug}.jpg`;
+}
+
+function normalizeStoragePath(storagePath: string) {
+  return cleanString(storagePath).replace(/^\/+/, "").replace(/^perfumes\//i, "");
 }
 
 async function main() {
@@ -277,9 +281,13 @@ async function main() {
 
     const perfumeSlug = existingSlug || slugify(`${brand}-${name}`);
 
-    if (!cleanString(row[imageStoragePathHeader])) {
+    const normalizedStoragePath = normalizeStoragePath(row[imageStoragePathHeader]);
+
+    if (!normalizedStoragePath) {
       row[imageStoragePathHeader] = buildStoragePath(brand, perfumeSlug);
       rowsWithAutoStoragePath += 1;
+    } else if (normalizedStoragePath !== cleanString(row[imageStoragePathHeader])) {
+      row[imageStoragePathHeader] = normalizedStoragePath;
     }
 
     if (options.status && status !== options.status) {
