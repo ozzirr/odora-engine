@@ -1,6 +1,6 @@
 import type { ReactNode, SVGProps } from "react";
 
-import type { QuickFilterIllustration } from "@/lib/sample-data";
+import type { QuickFilterIllustration } from "@/lib/homepage";
 
 function IllustrationFrame({ children }: { children: ReactNode }) {
   return (

@@ -71,7 +71,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   };
 
   return (
-    <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain">
+    <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
       <div className="mb-4 flex items-center justify-between">
         <button
           type="button"

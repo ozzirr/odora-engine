@@ -94,6 +94,12 @@ npm run db:push
 npm run db:seed
 ```
 
+Optional: populate homepage hero/trending/featured placements and discovery collections on an existing catalog:
+
+```bash
+npm run homepage:bootstrap
+```
+
 5. Start dev server:
 
 ```bash
@@ -111,6 +117,7 @@ Open: `http://localhost:3000`
 - `npm run db:push` -> apply Prisma schema
 - `npm run db:seed` -> seed baseline catalog
 - `npm run db:studio` -> open Prisma Studio
+- `npm run homepage:bootstrap` -> mark hero/trending/featured perfumes and homepage collections from real DB records
 
 ## Catalog Provenance
 

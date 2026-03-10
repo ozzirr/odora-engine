@@ -4,6 +4,7 @@ import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
+import { getPerfumeShortText } from "@/lib/perfume-text";
 import { type ComputedBestOffer } from "@/lib/pricing";
 import { formatGender } from "@/lib/utils";
 
@@ -11,6 +12,7 @@ type PerfumeHeroProps = {
   perfume: {
     name: string;
     descriptionShort: string;
+    descriptionLong?: string;
     imageUrl: string | null;
     gender: string;
     fragranceFamily: string;
@@ -23,6 +25,27 @@ type PerfumeHeroProps = {
     brand: {
       name: string;
     };
+    notes?: Array<{
+      intensity?: number | null;
+      note?: {
+        name?: string | null;
+        slug?: string | null;
+      } | null;
+    }>;
+    moods?: Array<{
+      weight?: number | null;
+      mood?: {
+        name?: string | null;
+        slug?: string | null;
+      } | null;
+    }>;
+    occasions?: Array<{
+      weight?: number | null;
+      occasion?: {
+        name?: string | null;
+        slug?: string | null;
+      } | null;
+    }>;
   };
   bestOffer: ComputedBestOffer | null;
 };
@@ -38,6 +61,7 @@ function MetricItem({ label, value }: { label: string; value: number | null }) {
 
 export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
   const brandName = perfume.brand?.name?.trim() || "Unknown brand";
+  const summary = getPerfumeShortText(perfume);
 
   return (
     <section className="grid gap-6 lg:grid-cols-[1.05fr_1.35fr] lg:gap-8">
@@ -56,7 +80,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">{brandName}</p>
           <h1 className="mt-2 font-display text-4xl text-[#1f1914] sm:text-5xl">{perfume.name}</h1>
-          <p className="mt-2 text-sm text-[#5b4c3d]">{perfume.descriptionShort}</p>
+          <p className="mt-2 text-sm text-[#5b4c3d]">{summary}</p>
         </div>
 
         <div className="flex flex-wrap gap-2">

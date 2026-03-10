@@ -6,6 +6,8 @@ import {
   PrismaClient,
 } from "@prisma/client";
 
+import { bootstrapHomepageContent } from "../scripts/homepage/lib/bootstrap";
+
 const prisma = new PrismaClient();
 
 type PerfumeSeed = {
@@ -1022,6 +1024,8 @@ const perfumes: PerfumeSeed[] = [
 
 async function main() {
   await prisma.offer.deleteMany();
+  await prisma.perfumeHomepagePlacement.deleteMany();
+  await prisma.homepageCollection.deleteMany();
   await prisma.perfumeOccasion.deleteMany();
   await prisma.perfumeSeason.deleteMany();
   await prisma.perfumeMood.deleteMany();
@@ -1167,6 +1171,11 @@ async function main() {
       },
     });
   }
+
+  await bootstrapHomepageContent(prisma, {
+    logger: console,
+    resetExisting: false,
+  });
 
   console.info(`Seed completed with ${brands.length} brands and ${perfumes.length} perfumes.`);
 }

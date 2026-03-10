@@ -10,6 +10,7 @@
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
+    "homepage:bootstrap": "tsx scripts/homepage/bootstrap-content.ts",
     "generate:parfumo-dataset": "tsx scripts/import/generate-parfumo-dataset.ts",
     "import:parfumo:dry": "tsx scripts/import/import-parfumo.ts --dry-run --limit=2000",
     "import:parfumo": "tsx scripts/import/import-parfumo.ts --limit=2000",

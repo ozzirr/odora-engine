@@ -19,8 +19,8 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
     <section className="mt-24 space-y-8">
       <SectionTitle
         eyebrow="Trending Now"
-        title="Catalog picks marked as trending"
-        subtitle="Real perfume records surfaced from the catalog's trending flags, each linked to its live product page."
+        title="Real catalog picks marked as trending"
+        subtitle="Homepage placements from the database, ordered intentionally and linked to live perfume detail pages."
       />
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -65,10 +65,12 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
                       {formatCurrency(perfume.bestPrice, perfume.currency)}
                     </p>
                   ) : (
-                    <p className="mt-1 text-sm text-[#5d4e3f]">See live offers on product page</p>
+                    <p className="mt-1 text-sm text-[#5d4e3f]">See product details</p>
                   )}
                 </div>
-                <p className="text-right text-sm text-[#5d4e3f]">{perfume.storeName ?? "Odora catalog"}</p>
+                <p className="text-right text-sm text-[#5d4e3f]">
+                  {perfume.storeName ?? perfume.ctaLabel}
+                </p>
               </div>
             </div>
           </Link>

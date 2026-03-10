@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
+import { getPerfumeShortText } from "@/lib/perfume-text";
 import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
 
@@ -20,6 +21,13 @@ export type PerfumeCardItem = {
     name: string;
   };
   offers?: OfferForPricing[];
+  notes?: Array<{
+    intensity?: number | null;
+    note?: {
+      name?: string | null;
+      slug?: string | null;
+    } | null;
+  }>;
 };
 
 type PerfumeCardProps = {
@@ -29,7 +37,7 @@ type PerfumeCardProps = {
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
   const brandName = perfume.brand?.name?.trim() || "Unknown brand";
   const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
-  const description = perfume.descriptionShort?.trim();
+  const description = getPerfumeShortText(perfume);
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
@@ -66,7 +74,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             </Badge>
           ) : (
             <Badge variant="outline" className="bg-[#faf6ef]">
-              Offers coming soon
+              See product details
             </Badge>
           )}
           {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}

@@ -7,12 +7,16 @@ type FeaturedPerfumesProps = {
 };
 
 export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
+  if (perfumes.length === 0) {
+    return null;
+  }
+
   return (
     <section className="mt-24 space-y-8">
       <SectionTitle
         eyebrow="Featured"
-        title="Curated perfumes to start your journey"
-        subtitle="A mix of Arabic signatures, niche standouts, and designer icons with active offers."
+        title="Featured perfumes"
+        subtitle="Real product records selected in the homepage content layer, with graceful fallbacks when offers are missing."
       />
       <PerfumeGrid perfumes={perfumes} />
     </section>

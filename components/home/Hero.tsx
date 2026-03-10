@@ -102,16 +102,16 @@ export function Hero({ preview }: HeroProps) {
                     <div className="flex items-end justify-between gap-4 rounded-[1.25rem] border border-[#e6d8c5] bg-white/75 px-4 py-3">
                       <div>
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                          {preview.bestPrice != null && preview.currency ? "Best price" : "Offers"}
+                          {preview.bestPrice != null && preview.currency ? "Best price" : "Product"}
                         </p>
                         <p className="mt-1 font-display text-2xl text-[#1d1712]">
                           {preview.bestPrice != null && preview.currency
                             ? formatCurrency(preview.bestPrice, preview.currency)
-                            : "Compare offers on product page"}
+                            : "See product details"}
                         </p>
                       </div>
                       <p className="text-right text-sm text-[#5d4e3f]">
-                        {preview.storeName ?? "Real product route"}
+                        {preview.storeName ?? "Odora product page"}
                       </p>
                     </div>
 
@@ -123,7 +123,7 @@ export function Hero({ preview }: HeroProps) {
                         className: "w-full bg-[#efe6da] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
                       })}
                     >
-                      View offers
+                      {preview.ctaLabel}
                     </Link>
                   </div>
                 </div>

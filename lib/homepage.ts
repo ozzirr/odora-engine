@@ -1,7 +1,53 @@
-import type { Prisma } from "@prisma/client";
+import {
+  HomepageCollectionType,
+  HomepageSection,
+  type Prisma,
+} from "@prisma/client";
 
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
+import { getCatalogVisibilityWhere, logCatalogQueryError } from "@/lib/catalog";
+import { getPerfumeShortText } from "@/lib/perfume-text";
 import { computeBestOffer } from "@/lib/pricing";
+import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+
+export type QuickFilterIllustration =
+  | "vanilla"
+  | "fresh"
+  | "oud"
+  | "musk"
+  | "rose"
+  | "citrus";
+
+type FinderPresetQuery = Partial<{
+  preset: string;
+  gender: string;
+  mood: string;
+  season: string;
+  occasion: string;
+  budget: string;
+  preferredNote: string;
+  arabicOnly: "true";
+  nicheOnly: "true";
+}>;
+
+export type HomepageMoodCard = {
+  label: string;
+  tone: string;
+  subtitle: string;
+  gradientClass: string;
+  illustration: QuickFilterIllustration;
+  preset: FinderPresetQuery;
+  href: string;
+};
+
+export type HomeCollectionCard = {
+  title: string;
+  slug: string;
+  subtitle: string | null;
+  description: string | null;
+  href: string;
+  typeLabel: string;
+};
 
 export const homepagePerfumeInclude = {
   brand: true,
@@ -22,10 +68,73 @@ export const homepagePerfumeInclude = {
       },
     },
   },
+  notes: {
+    select: {
+      intensity: true,
+      note: {
+        select: {
+          name: true,
+          slug: true,
+          noteType: true,
+        },
+      },
+    },
+    orderBy: [{ intensity: "desc" }, { id: "asc" }],
+    take: 6,
+  },
+  moods: {
+    select: {
+      weight: true,
+      mood: {
+        select: {
+          name: true,
+          slug: true,
+        },
+      },
+    },
+    orderBy: [{ weight: "desc" }, { id: "asc" }],
+    take: 4,
+  },
+  occasions: {
+    select: {
+      weight: true,
+      occasion: {
+        select: {
+          name: true,
+          slug: true,
+        },
+      },
+    },
+    orderBy: [{ weight: "desc" }, { id: "asc" }],
+    take: 3,
+  },
 } satisfies Prisma.PerfumeInclude;
+
+const homepagePlacementInclude = {
+  perfume: {
+    include: homepagePerfumeInclude,
+  },
+} satisfies Prisma.PerfumeHomepagePlacementInclude;
+
+const homepageCollectionSelect = {
+  title: true,
+  slug: true,
+  subtitle: true,
+  description: true,
+  href: true,
+  type: true,
+} satisfies Prisma.HomepageCollectionSelect;
 
 export type HomePerfumeRecord = Prisma.PerfumeGetPayload<{
   include: typeof homepagePerfumeInclude;
+}>;
+
+type HomePlacementRecord = Prisma.PerfumeHomepagePlacementGetPayload<{
+  include: typeof homepagePlacementInclude;
+}>;
+
+type HomeCollectionRecord = Prisma.HomepageCollectionGetPayload<{
+  select: typeof homepageCollectionSelect;
 }>;
 
 export type HomePerfumeSpotlight = {
@@ -38,27 +147,118 @@ export type HomePerfumeSpotlight = {
   currency: string | null;
   storeName: string | null;
   badge: string;
+  ctaLabel: string;
 };
 
-const TRENDING_FLAG_KEYS = ["homepageTrending", "isTrending"] as const;
-const HERO_FLAG_KEYS = ["featuredHero", "homepageHero"] as const;
+export type HomepageData = {
+  hero: HomePerfumeRecord | null;
+  trending: HomePerfumeRecord[];
+  featured: HomePerfumeRecord[];
+  collections: HomeCollectionCard[];
+  trustedStores: string[];
+};
 
-function readBooleanFlag(perfume: HomePerfumeRecord, keys: readonly string[]) {
-  const rawPerfume = perfume as Record<string, unknown>;
-  return keys.some((key) => rawPerfume[key] === true);
+const homepageMoodCardConfig = [
+  {
+    label: "Vanilla Lovers",
+    tone: "Warm",
+    subtitle: "Finder preset for creamy vanilla-led perfumes with cozy warmth.",
+    gradientClass: "from-[#f7eddc] via-[#f2e7d4] to-[#eadcc7]",
+    illustration: "vanilla" as const,
+    preset: {
+      preset: "Vanilla Lovers",
+      mood: "cozy",
+      preferredNote: "vanilla",
+    },
+  },
+  {
+    label: "Fresh Daily",
+    tone: "Clean",
+    subtitle: "Crisp everyday matches with fresh mood, daily-wear use, and bright notes.",
+    gradientClass: "from-[#edf6f2] via-[#e2f1ee] to-[#d7ece8]",
+    illustration: "fresh" as const,
+    preset: {
+      preset: "Fresh Daily",
+      mood: "fresh",
+      occasion: "daily-wear",
+      preferredNote: "bergamot",
+    },
+  },
+  {
+    label: "Arabic Signature",
+    tone: "Bold",
+    subtitle: "Rich Arabic profiles filtered by bold mood, oud note, and Arabic-only catalog data.",
+    gradientClass: "from-[#efe5d9] via-[#ead8c6] to-[#dfc5ac]",
+    illustration: "oud" as const,
+    preset: {
+      preset: "Arabic Signature",
+      mood: "bold",
+      preferredNote: "oud",
+      arabicOnly: "true",
+    },
+  },
+  {
+    label: "Office Safe",
+    tone: "Balanced",
+    subtitle: "Finder shortcut for elegant office-friendly perfumes with soft musky structure.",
+    gradientClass: "from-[#f5f1ea] via-[#efe9df] to-[#e7dfd4]",
+    illustration: "musk" as const,
+    preset: {
+      preset: "Office Safe",
+      mood: "elegant",
+      occasion: "office",
+      preferredNote: "musk",
+    },
+  },
+  {
+    label: "Date Night",
+    tone: "Magnetic",
+    subtitle: "Romantic evening matches tuned to date-night wear and warm amber signatures.",
+    gradientClass: "from-[#efe3e0] via-[#ead8d6] to-[#ddc3c0]",
+    illustration: "rose" as const,
+    preset: {
+      preset: "Date Night",
+      mood: "romantic",
+      occasion: "date-night",
+      preferredNote: "amber",
+    },
+  },
+  {
+    label: "Summer Citrus",
+    tone: "Bright",
+    subtitle: "Fresh summer presets centered on sparkling citrus-style notes.",
+    gradientClass: "from-[#f7efdc] via-[#f4e4b8] to-[#edd49a]",
+    illustration: "citrus" as const,
+    preset: {
+      preset: "Summer Citrus",
+      mood: "fresh",
+      season: "summer",
+      preferredNote: "bergamot",
+    },
+  },
+] satisfies Array<Omit<HomepageMoodCard, "href">>;
+
+function buildFinderHref(preset: FinderPresetQuery) {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(preset)) {
+    if (value) {
+      params.set(key, value);
+    }
+  }
+
+  const query = params.toString();
+  return query ? `/finder?${query}` : "/finder";
 }
 
-function getBestOffer(perfume: HomePerfumeRecord) {
-  return perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
-}
+export const homepageMoodCards: HomepageMoodCard[] = homepageMoodCardConfig.map((card) => ({
+  ...card,
+  href: buildFinderHref(card.preset),
+}));
 
-function hasNamedOfferStore(perfume: HomePerfumeRecord) {
-  return perfume.offers.some((offer) => Boolean(offer.store?.name));
-}
-
-function sortByHomepagePriority(left: HomePerfumeRecord, right: HomePerfumeRecord) {
-  const leftHasOffer = getBestOffer(left) ? 1 : 0;
-  const rightHasOffer = getBestOffer(right) ? 1 : 0;
+function compareHomepagePerfumes(left: HomePerfumeRecord, right: HomePerfumeRecord) {
+  const leftHasOffer = computeBestOffer(left.offers) ? 1 : 0;
+  const rightHasOffer = computeBestOffer(right.offers) ? 1 : 0;
 
   if (rightHasOffer !== leftHasOffer) {
     return rightHasOffer - leftHasOffer;
@@ -78,8 +278,17 @@ function sortByHomepagePriority(left: HomePerfumeRecord, right: HomePerfumeRecor
   return left.name.localeCompare(right.name);
 }
 
-function dedupePerfumes(perfumes: HomePerfumeRecord[]) {
+function compareHomepagePlacements(left: HomePlacementRecord, right: HomePlacementRecord) {
+  if (left.priority !== right.priority) {
+    return left.priority - right.priority;
+  }
+
+  return compareHomepagePerfumes(left.perfume, right.perfume);
+}
+
+function toUniquePerfumes(perfumes: HomePerfumeRecord[]) {
   const seen = new Set<number>();
+
   return perfumes.filter((perfume) => {
     if (seen.has(perfume.id)) {
       return false;
@@ -90,43 +299,138 @@ function dedupePerfumes(perfumes: HomePerfumeRecord[]) {
   });
 }
 
-export function isTrendingPerfume(perfume: HomePerfumeRecord) {
-  return readBooleanFlag(perfume, TRENDING_FLAG_KEYS);
+async function getHomepageSectionPerfumes(
+  section: HomepageSection,
+  take: number | undefined,
+): Promise<HomePerfumeRecord[]> {
+  const visibilityWhere = getCatalogVisibilityWhere();
+
+  const placements = (await prisma.perfumeHomepagePlacement.findMany({
+    where: {
+      section,
+      ...(visibilityWhere
+        ? {
+            perfume: {
+              is: visibilityWhere,
+            },
+          }
+        : {}),
+    },
+    include: homepagePlacementInclude,
+    orderBy: [{ priority: "asc" }, { updatedAt: "desc" }],
+    ...(take ? { take } : {}),
+  })) as HomePlacementRecord[];
+
+  return toUniquePerfumes(
+    placements.sort(compareHomepagePlacements).map((placement) => placement.perfume),
+  );
 }
 
-export function selectTrendingPerfumes(perfumes: HomePerfumeRecord[], count = 4) {
-  return dedupePerfumes(
-    perfumes.filter((perfume) => isTrendingPerfume(perfume)).sort(sortByHomepagePriority),
-  ).slice(0, count);
-}
-
-export function selectHeroPerfume(
+function minimizeDuplicates(
   perfumes: HomePerfumeRecord[],
-  trendingPerfumes: HomePerfumeRecord[],
-  featuredPerfumes: HomePerfumeRecord[],
+  excludedIds: Set<number>,
+  desiredCount?: number,
 ) {
-  // These dynamic lookups are intentionally string-based so the homepage can
-  // start honoring future schema flags such as `featuredHero` or
-  // `homepageTrending` as soon as they exist on Perfume.
-  const flaggedHero = [...perfumes]
-    .filter((perfume) => readBooleanFlag(perfume, HERO_FLAG_KEYS))
-    .sort(sortByHomepagePriority)[0];
+  const unique = toUniquePerfumes(perfumes);
+  const withoutOverlap = unique.filter((perfume) => !excludedIds.has(perfume.id));
 
-  if (flaggedHero) {
-    return flaggedHero;
+  if (!desiredCount) {
+    return withoutOverlap.length > 0 ? withoutOverlap : unique;
   }
 
-  const trendingHero = [...trendingPerfumes].sort(sortByHomepagePriority)[0];
-  if (trendingHero) {
-    return trendingHero;
+  if (withoutOverlap.length >= desiredCount) {
+    return withoutOverlap.slice(0, desiredCount);
   }
 
-  const featuredHero = [...featuredPerfumes].sort(sortByHomepagePriority)[0];
-  if (featuredHero) {
-    return featuredHero;
+  const fallback = [...withoutOverlap];
+
+  for (const perfume of unique) {
+    if (fallback.some((item) => item.id === perfume.id)) {
+      continue;
+    }
+    fallback.push(perfume);
+    if (fallback.length >= desiredCount) {
+      break;
+    }
   }
 
-  return [...perfumes].sort(sortByHomepagePriority)[0] ?? null;
+  return fallback.slice(0, desiredCount);
+}
+
+function toCollectionCard(collection: HomeCollectionRecord): HomeCollectionCard {
+  return {
+    title: collection.title,
+    slug: collection.slug,
+    subtitle: collection.subtitle,
+    description: collection.description,
+    href: collection.href,
+    typeLabel:
+      collection.type === HomepageCollectionType.FINDER_PRESET ? "Finder preset" : "Catalog route",
+  };
+}
+
+export async function getHomepageData(): Promise<HomepageData> {
+  if (!isDatabaseConfigured) {
+    return {
+      hero: null,
+      trending: [],
+      featured: [],
+      collections: [],
+      trustedStores: [],
+    };
+  }
+
+  try {
+    const [heroCandidates, trendingCandidates, featuredCandidates, collections] = await Promise.all([
+      getHomepageSectionPerfumes(HomepageSection.HERO, 4),
+      getHomepageSectionPerfumes(HomepageSection.TRENDING, 8),
+      getHomepageSectionPerfumes(HomepageSection.FEATURED, 12),
+      prisma.homepageCollection.findMany({
+        where: {
+          isHomepageVisible: true,
+        },
+        select: homepageCollectionSelect,
+        orderBy: [{ homepagePriority: "asc" }, { title: "asc" }],
+        take: 6,
+      }),
+    ]);
+
+    const hero =
+      heroCandidates[0] ??
+      trendingCandidates[0] ??
+      featuredCandidates[0] ??
+      null;
+
+    const excludedHeroIds = new Set<number>(hero ? [hero.id] : []);
+    const trending = minimizeDuplicates(trendingCandidates, excludedHeroIds, 4);
+    const excludedFeaturedIds = new Set<number>([
+      ...excludedHeroIds,
+      ...trending.map((perfume) => perfume.id),
+    ]);
+    const featured = minimizeDuplicates(featuredCandidates, excludedFeaturedIds);
+    const trustedStores = selectTrustedStores(
+      toUniquePerfumes([...(hero ? [hero] : []), ...trending, ...featured]),
+      4,
+    );
+
+    return {
+      hero,
+      trending,
+      featured,
+      collections: collections.map(toCollectionCard),
+      trustedStores,
+    };
+  } catch (error) {
+    logCatalogQueryError("home:homepage", error);
+
+    return {
+      hero: null,
+      trending: [],
+      featured: [],
+      collections: [],
+      trustedStores: [],
+    };
+  }
 }
 
 export function selectTrustedStores(perfumes: HomePerfumeRecord[], count = 4) {
@@ -150,8 +454,8 @@ export function selectTrustedStores(perfumes: HomePerfumeRecord[], count = 4) {
     .map(([name]) => name);
 }
 
-export function toHomeSpotlight(perfume: HomePerfumeRecord, badge = "Best deal"): HomePerfumeSpotlight {
-  const bestOffer = getBestOffer(perfume);
+export function toHomeSpotlight(perfume: HomePerfumeRecord, badge: string): HomePerfumeSpotlight {
+  const bestOffer = computeBestOffer(perfume.offers);
 
   return {
     href: `/perfumes/${perfume.slug}`,
@@ -163,6 +467,7 @@ export function toHomeSpotlight(perfume: HomePerfumeRecord, badge = "Best deal")
     currency: bestOffer?.bestCurrency ?? null,
     storeName: bestOffer?.bestStore ?? null,
     badge,
+    ctaLabel: bestOffer ? "View offers" : "See product details",
   };
 }
 
@@ -171,7 +476,7 @@ export function toPerfumeCardItem(perfume: HomePerfumeRecord): PerfumeCardItem {
     id: perfume.id,
     slug: perfume.slug,
     name: perfume.name,
-    descriptionShort: perfume.descriptionShort,
+    descriptionShort: getPerfumeShortText(perfume),
     imageUrl: perfume.imageUrl,
     gender: perfume.gender,
     fragranceFamily: perfume.fragranceFamily,
@@ -180,25 +485,6 @@ export function toPerfumeCardItem(perfume: HomePerfumeRecord): PerfumeCardItem {
     isNiche: perfume.isNiche,
     brand: perfume.brand,
     offers: perfume.offers,
+    notes: perfume.notes,
   };
-}
-
-export function sortFeaturedPerfumes(perfumes: HomePerfumeRecord[]) {
-  return [...perfumes].sort(sortByHomepagePriority);
-}
-
-export function excludePerfumes(
-  perfumes: HomePerfumeRecord[],
-  excludedPerfumes: HomePerfumeRecord[],
-) {
-  const excludedIds = new Set(excludedPerfumes.map((perfume) => perfume.id));
-  return perfumes.filter((perfume) => !excludedIds.has(perfume.id));
-}
-
-export function hasOfferData(perfume: HomePerfumeRecord) {
-  return Boolean(getBestOffer(perfume));
-}
-
-export function hasStoreCoverage(perfume: HomePerfumeRecord) {
-  return hasNamedOfferStore(perfume);
 }

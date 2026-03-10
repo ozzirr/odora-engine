@@ -3,20 +3,7 @@ import Link from "next/link";
 import { MoodIllustration } from "@/components/home/HomeIllustrations";
 import { Badge } from "@/components/ui/Badge";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import type { QuickFilterPreset } from "@/lib/sample-data";
-import { quickFilters } from "@/lib/sample-data";
-
-function buildFinderHref(preset: QuickFilterPreset) {
-  const params = new URLSearchParams();
-
-  Object.entries(preset).forEach(([key, value]) => {
-    if (value) {
-      params.set(key, value);
-    }
-  });
-
-  return `/finder?${params.toString()}`;
-}
+import { homepageMoodCards } from "@/lib/homepage";
 
 export function QuickFilters() {
   return (
@@ -24,14 +11,14 @@ export function QuickFilters() {
       <SectionTitle
         eyebrow="Quick Start"
         title="Explore by mood and style"
-        subtitle="Visual pathways into the Finder for warm vanillas, polished office scents, bold Arabic signatures, and more."
+        subtitle="Finder shortcuts built with the route's real query params, so presets load with meaningful filters already applied."
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {quickFilters.map((filter) => (
+        {homepageMoodCards.map((filter) => (
           <Link
             key={filter.label}
-            href={buildFinderHref(filter.preset)}
+            href={filter.href}
             className={`premium-card group relative overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-gradient-to-br ${filter.gradientClass} p-6 shadow-[0_22px_45px_-34px_rgba(50,35,20,0.42)] transition-all duration-300 hover:-translate-y-1`}
           >
             <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-white/30 blur-3xl transition-transform duration-500 group-hover:scale-110" />

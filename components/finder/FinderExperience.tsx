@@ -11,6 +11,7 @@ import {
   type FinderPreferences,
   matchPerfumesFromPreferences,
 } from "@/lib/finder";
+import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type FinderExperienceProps = {
   perfumes: FinderPerfume[];
@@ -56,6 +57,7 @@ export function FinderExperience({
   initialPreferences,
   presetLabel,
 }: FinderExperienceProps) {
+  const authStatus = useAuthStatus(isAuthenticated);
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>([]);
   const [totalMatches, setTotalMatches] = useState(0);
@@ -180,7 +182,7 @@ export function FinderExperience({
         total: number;
       };
       const nextResults = payload.results ?? [];
-      const maxVisible = isAuthenticated
+      const maxVisible = authStatus
         ? nextResults.length
         : Math.min(nextResults.length, FREE_FINDER_PREVIEW_LIMIT);
 
@@ -190,7 +192,7 @@ export function FinderExperience({
       setSubmitted(true);
     } catch {
       const fallbackResults = matchPerfumesFromPreferences(nextPreferences, perfumes);
-      const maxVisible = isAuthenticated
+      const maxVisible = authStatus
         ? fallbackResults.length
         : Math.min(fallbackResults.length, FREE_FINDER_PREVIEW_LIMIT);
       setResults(fallbackResults);
@@ -201,7 +203,7 @@ export function FinderExperience({
     } finally {
       setIsLoading(false);
     }
-  }, [isAuthenticated, perfumes]);
+  }, [authStatus, perfumes]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -227,12 +229,12 @@ export function FinderExperience({
     void runFinderSearch(initialPreferences);
   }, [initialPreferences, runFinderSearch]);
 
-  const maxVisibleResults = isAuthenticated
+  const maxVisibleResults = authStatus
     ? results.length
     : Math.min(results.length, FREE_FINDER_PREVIEW_LIMIT);
   const displayedResults = results.slice(0, visibleCount);
   const hasMoreVisibleResults = displayedResults.length < maxVisibleResults;
-  const isCatalogLocked = !isAuthenticated && results.length > FREE_FINDER_PREVIEW_LIMIT && visibleCount >= FREE_FINDER_PREVIEW_LIMIT;
+  const isCatalogLocked = !authStatus && results.length > FREE_FINDER_PREVIEW_LIMIT && visibleCount >= FREE_FINDER_PREVIEW_LIMIT;
   const showPresetBanner = Boolean(presetLabel) && hasConfiguredPreferences(preferences);
 
   const loadMoreResults = useCallback(() => {

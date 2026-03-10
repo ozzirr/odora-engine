@@ -25,6 +25,19 @@ const perfumeListInclude = {
       },
     },
   },
+  notes: {
+    select: {
+      intensity: true,
+      note: {
+        select: {
+          name: true,
+          slug: true,
+        },
+      },
+    },
+    orderBy: [{ intensity: "desc" }, { id: "asc" }],
+    take: 6,
+  },
 } satisfies Prisma.PerfumeInclude;
 
 export type PerfumeListItem = Prisma.PerfumeGetPayload<{

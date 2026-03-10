@@ -14,6 +14,7 @@ import {
   mergePerfumeWhere,
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
+import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
@@ -134,6 +135,20 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
       select: {
         name: true,
         descriptionShort: true,
+        fragranceFamily: true,
+        notes: {
+          select: {
+            intensity: true,
+            note: {
+              select: {
+                name: true,
+                slug: true,
+              },
+            },
+          },
+          orderBy: [{ intensity: "desc" }, { id: "asc" }],
+          take: 5,
+        },
         brand: {
           select: {
             name: true,
@@ -150,7 +165,7 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
 
     return {
       title: `${perfume.name} by ${perfume.brand?.name ?? "Unknown brand"} | Odora`,
-      description: perfume.descriptionShort,
+      description: getPerfumeShortText(perfume),
     };
   } catch (error) {
     logCatalogQueryError("perfumes:metadata", error);
@@ -197,6 +212,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const cheaperAlternativesSubtitle = topSavings
     ? `Similar profile for less. You can save up to ${formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR")} compared to this bottle.`
     : "Similar fragrances for less, ranked by profile match and lower total price.";
+  const overviewText = getPerfumeOverviewText(perfume);
 
   return (
     <>
@@ -213,7 +229,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         </section>
 
         <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
-          <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={perfume.descriptionLong} />
+          <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={overviewText} />
         </section>
 
         <section className="space-y-4">

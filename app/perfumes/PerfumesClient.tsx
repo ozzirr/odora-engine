@@ -8,6 +8,7 @@ import { PerfumeFilters } from "@/components/perfumes/PerfumeFilters";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import type { ParsedPerfumeFilters } from "@/lib/filters";
+import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type PerfumesClientProps = {
   initialPerfumes: PerfumeCardItem[];
@@ -51,6 +52,7 @@ export function PerfumesClient({
   pageSize,
   isAuthenticated,
 }: PerfumesClientProps) {
+  const authStatus = useAuthStatus(isAuthenticated);
   const searchParams = useSearchParams();
   const [perfumes, setPerfumes] = useState<PerfumeCardItem[]>(initialPerfumes);
   const [totalCount, setTotalCount] = useState(total);
@@ -59,24 +61,12 @@ export function PerfumesClient({
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const resultsScrollRef = useRef<HTMLElement | null>(null);
   const isFetchingRef = useRef(false);
-  const [isDesktopLayout, setIsDesktopLayout] = useState(false);
 
   const querySignature = useMemo(() => searchParams.toString(), [searchParams]);
-  const maxVisiblePerfumes = isAuthenticated ? Number.MAX_SAFE_INTEGER : FREE_CATALOG_PREVIEW_LIMIT;
-  const isCatalogLocked = !isAuthenticated && totalCount > perfumes.length && perfumes.length >= maxVisiblePerfumes;
+  const maxVisiblePerfumes = authStatus ? Number.MAX_SAFE_INTEGER : FREE_CATALOG_PREVIEW_LIMIT;
+  const isCatalogLocked = !authStatus && totalCount > perfumes.length && perfumes.length >= maxVisiblePerfumes;
   const canLoadMore = hasMoreResults && !isCatalogLocked;
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const syncLayout = () => setIsDesktopLayout(mediaQuery.matches);
-
-    syncLayout();
-    mediaQuery.addEventListener("change", syncLayout);
-
-    return () => mediaQuery.removeEventListener("change", syncLayout);
-  }, []);
 
   useEffect(() => {
     setPerfumes(initialPerfumes);
@@ -119,12 +109,12 @@ export function PerfumesClient({
       };
 
       const remainingPreviewSlots = Math.max(0, maxVisiblePerfumes - perfumes.length);
-      const fetchedPerfumes = isAuthenticated
+      const fetchedPerfumes = authStatus
         ? payload.perfumes
         : payload.perfumes.slice(0, remainingPreviewSlots);
       const nextVisibleCount = perfumes.length + fetchedPerfumes.length;
       const reachedPreviewLimit =
-        !isAuthenticated && nextVisibleCount >= FREE_CATALOG_PREVIEW_LIMIT && payload.total > nextVisibleCount;
+        !authStatus && nextVisibleCount >= FREE_CATALOG_PREVIEW_LIMIT && payload.total > nextVisibleCount;
 
       setPerfumes((current) => {
         const existingIds = new Set(current.map((item) => item.id));
@@ -140,7 +130,7 @@ export function PerfumesClient({
       setIsLoadingMore(false);
       isFetchingRef.current = false;
     }
-  }, [canLoadMore, isAuthenticated, maxVisiblePerfumes, nextOffset, pageSize, perfumes.length, searchParams]);
+  }, [authStatus, canLoadMore, maxVisiblePerfumes, nextOffset, pageSize, perfumes.length, searchParams]);
 
   useEffect(() => {
     if (!loadMoreRef.current || !canLoadMore) {
@@ -154,20 +144,19 @@ export function PerfumesClient({
         }
       },
       {
-        root: isDesktopLayout ? resultsScrollRef.current : null,
         rootMargin: "320px 0px",
       },
     );
 
     observer.observe(loadMoreRef.current);
     return () => observer.disconnect();
-  }, [canLoadMore, isDesktopLayout, loadMore]);
+  }, [canLoadMore, loadMore]);
 
   return (
-    <div className="mt-8 grid gap-6 lg:h-[calc(100vh-13.5rem)] lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:overflow-hidden">
+    <div className="mt-8 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:gap-8">
       <PerfumeFilters selectedFilters={selectedFilters} />
 
-      <section ref={resultsScrollRef} className="space-y-4 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain lg:pr-2">
+      <section className="space-y-4 lg:min-w-0 lg:pb-8">
         <p className="text-sm text-[#615140]">
           Showing <span className="font-semibold text-[#2a2018]">{perfumes.length}</span> of{" "}
           <span className="font-semibold text-[#2a2018]">{totalCount}</span> fragrances
