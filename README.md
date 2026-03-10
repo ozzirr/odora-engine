@@ -45,6 +45,9 @@ Required/optional variables:
 
 - `DATABASE_URL` (required for DB-backed routes and Prisma commands)
 - `ODORA_CATALOG_MODE` (optional): `all` | `no_demo` | `verified_only`
+- `NEXT_PUBLIC_SUPABASE_URL` (required for auth client/session middleware)
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for auth client/session middleware)
+- `NEXT_PUBLIC_SITE_URL` (recommended, used for auth email callback links)
 - `SUPABASE_URL` (required for image upload/sync scripts)
 - `SUPABASE_SERVICE_ROLE_KEY` (required for image upload/sync scripts)
 - `SUPABASE_STORAGE_BUCKET` (optional, default `perfumes`)
@@ -53,6 +56,17 @@ Important:
 
 - Do not quote `DATABASE_URL`
 - Do not commit secrets
+
+### Auth (Email/Password) Setup
+
+Odora uses Supabase Auth (SSR) for email/password:
+
+- `/login` -> real `signInWithPassword`
+- `/signup` -> real `signUp`
+- `/auth/callback` -> verifies callback tokens/codes
+- `middleware.ts` -> keeps auth session cookies refreshed
+
+Social providers (Google/Apple/Facebook) are still placeholder buttons in UI until provider keys are configured.
 
 ## Local Setup
 
@@ -154,6 +168,17 @@ npm run import:verified:dry
 ```bash
 npm run import:verified
 ```
+
+- Notes enrichment only (safe for existing catalog rows; no perfume upsert):
+
+```bash
+npm run import:verified:notes:dry
+npm run import:verified:notes
+```
+
+This mode reads `top_notes`, `heart_notes`, `base_notes`, normalizes them, upserts `Note` records, and creates
+`PerfumeNote` links for matched existing perfumes (slug first, then brand+name fallback), with idempotent duplicate
+protection.
 
 ### 3) Backfill Provenance for Existing Records
 

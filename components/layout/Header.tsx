@@ -46,6 +46,9 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <Link href="/login" className={buttonStyles({ variant: "secondary", size: "sm" })}>
+            Accedi
+          </Link>
           <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
             Explore perfumes
           </Link>
@@ -76,9 +79,16 @@ export function Header() {
               </Link>
             ))}
             <Link
+              href="/login"
+              onClick={() => setMenuOpen(false)}
+              className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+            >
+              Accedi
+            </Link>
+            <Link
               href="/perfumes"
               onClick={() => setMenuOpen(false)}
-              className={buttonStyles({ size: "sm", className: "mt-2 w-fit" })}
+              className={buttonStyles({ size: "sm", className: "w-fit" })}
             >
               Explore perfumes
             </Link>

@@ -13,6 +13,11 @@ type PerfumeImageProps = {
   imageClassName?: string;
 };
 
+const ALLOWED_EXTERNAL_IMAGE_HOSTS = new Set([
+  "rmnbfnaapibtyfxuacde.supabase.co",
+  "media.parfumo.com",
+]);
+
 function isRenderableImageUrl(value: string | null | undefined) {
   const raw = value?.trim();
   if (!raw) {
@@ -25,7 +30,11 @@ function isRenderableImageUrl(value: string | null | undefined) {
 
   try {
     const parsed = new URL(raw);
-    return parsed.protocol === "http:" || parsed.protocol === "https:";
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return false;
+    }
+
+    return ALLOWED_EXTERNAL_IMAGE_HOSTS.has(parsed.hostname);
   } catch {
     return false;
   }

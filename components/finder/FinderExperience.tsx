@@ -34,7 +34,10 @@ const initialPreferences: FinderPreferences = {
 export function FinderExperience({ perfumes }: FinderExperienceProps) {
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>([]);
+  const [totalMatches, setTotalMatches] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const moodOptions = useMemo(
     () =>
@@ -81,17 +84,51 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
       .slice(0, 14);
   }, [perfumes]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const matches = matchPerfumesFromPreferences(preferences, perfumes).slice(0, 8);
-    setResults(matches);
-    setSubmitted(true);
+    setIsLoading(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/finder", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(preferences),
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Finder request failed with status ${response.status}`);
+      }
+
+      const payload = (await response.json()) as {
+        results: FinderPerfume[];
+        total: number;
+      };
+
+      setResults(payload.results ?? []);
+      setTotalMatches(payload.total ?? (payload.results ?? []).length);
+      setSubmitted(true);
+    } catch {
+      const fallbackResults = matchPerfumesFromPreferences(preferences, perfumes);
+      setResults(fallbackResults);
+      setTotalMatches(fallbackResults.length);
+      setSubmitted(true);
+      setErrorMessage("Finder service temporarily unavailable. Showing fallback results.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const resetForm = () => {
     setPreferences(initialPreferences);
     setResults([]);
+    setTotalMatches(0);
     setSubmitted(false);
+    setErrorMessage(null);
+    setIsLoading(false);
   };
 
   return (
@@ -228,7 +265,9 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button type="submit">Find fragrances</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Finding..." : "Find fragrances"}
+          </Button>
           <Button type="button" variant="secondary" onClick={resetForm}>
             Reset
           </Button>
@@ -238,8 +277,13 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
       {submitted ? (
         <section className="space-y-4">
           <p className="text-sm text-[#615140]">
-            Found <span className="font-semibold text-[#2a2018]">{results.length}</span> matching fragrances
+            Found <span className="font-semibold text-[#2a2018]">{totalMatches}</span> matching fragrances
           </p>
+          {errorMessage ? (
+            <div className="rounded-xl border border-[#dfd1bf] bg-[#faf4eb] px-4 py-3 text-sm text-[#6b5747]">
+              {errorMessage}
+            </div>
+          ) : null}
           <PerfumeGrid perfumes={results} />
         </section>
       ) : (

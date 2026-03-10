@@ -23,6 +23,7 @@ type CliOptions = {
   limit?: number;
   dryRun: boolean;
   batchSize: number;
+  notesOnly: boolean;
 };
 
 type RawRecord = Record<string, unknown>;
@@ -68,6 +69,9 @@ type Stats = {
   updatedPerfumes: number;
   insertedNotes: number;
   insertedPerfumeNotes: number;
+  matchedPerfumesBySlug: number;
+  matchedPerfumesByNameFallback: number;
+  missingPerfumeMatches: number;
 };
 
 type CachedBrand = {
@@ -90,11 +94,17 @@ function parseCliOptions(argv: string[]): CliOptions {
     format: "auto",
     dryRun: false,
     batchSize: 100,
+    notesOnly: false,
   };
 
   for (const arg of argv) {
     if (arg === "--dry-run") {
       options.dryRun = true;
+      continue;
+    }
+
+    if (arg === "--notes-only") {
+      options.notesOnly = true;
       continue;
     }
 
@@ -129,6 +139,10 @@ function parseCliOptions(argv: string[]): CliOptions {
   }
 
   return options;
+}
+
+function makePerfumeLookupKey(brandValue: string, perfumeName: string): string {
+  return `${slugify(brandValue)}::${cleanString(perfumeName).toLowerCase()}`;
 }
 
 function parseCsvRows(content: string): string[][] {
@@ -530,6 +544,9 @@ async function main() {
     updatedPerfumes: 0,
     insertedNotes: 0,
     insertedPerfumeNotes: 0,
+    matchedPerfumesBySlug: 0,
+    matchedPerfumesByNameFallback: 0,
+    missingPerfumeMatches: 0,
   };
 
   const invalidLogs: string[] = [];
@@ -575,10 +592,28 @@ async function main() {
 
   stats.validRows = normalizedRows.length;
 
-  const [existingBrands, existingNotes, existingPerfumes] = await Promise.all([
+  const [existingBrands, existingNotes, existingPerfumes, existingPerfumeNotes] = await Promise.all([
     prisma.brand.findMany({ select: { id: true, slug: true, name: true } }),
     prisma.note.findMany({ select: { id: true, slug: true, name: true, noteType: true } }),
-    prisma.perfume.findMany({ select: { id: true, slug: true } }),
+    prisma.perfume.findMany({
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        brand: {
+          select: {
+            name: true,
+            slug: true,
+          },
+        },
+      },
+    }),
+    prisma.perfumeNote.findMany({
+      select: {
+        perfumeId: true,
+        noteId: true,
+      },
+    }),
   ]);
 
   const brandsBySlug = new Map<string, CachedBrand>(
@@ -597,6 +632,19 @@ async function main() {
   );
   const noteByTypeKey = new Map<string, CachedNote>();
   const perfumeIdsBySlug = new Map<string, number>(existingPerfumes.map((perfume) => [perfume.slug, perfume.id]));
+  const perfumeIdsByBrandSlugAndName = new Map<string, number>(
+    existingPerfumes.map((perfume) => [makePerfumeLookupKey(perfume.brand.slug, perfume.name), perfume.id]),
+  );
+  const perfumeIdsByBrandNameAndName = new Map<string, number>(
+    existingPerfumes.map((perfume) => [makePerfumeLookupKey(perfume.brand.name, perfume.name), perfume.id]),
+  );
+  const existingNoteIdsByPerfumeId = new Map<number, Set<number>>();
+
+  for (const row of existingPerfumeNotes) {
+    const noteIds = existingNoteIdsByPerfumeId.get(row.perfumeId) ?? new Set<number>();
+    noteIds.add(row.noteId);
+    existingNoteIdsByPerfumeId.set(row.perfumeId, noteIds);
+  }
 
   for (const note of existingNotes) {
     noteByTypeKey.set(`${note.noteType}:${slugify(note.name)}`, {
@@ -747,8 +795,6 @@ async function main() {
   };
 
   const processRecord = async (record: NormalizedRecord) => {
-    const brandId = await ensureBrand(record.brandName, record.brandSlug);
-
     const noteIds = new Set<number>();
     for (const note of record.notes.top) {
       noteIds.add(await ensureNote(note, NoteType.TOP));
@@ -760,10 +806,50 @@ async function main() {
       noteIds.add(await ensureNote(note, NoteType.BASE));
     }
 
-    const existingPerfumeId = perfumeIdsBySlug.get(record.perfumeSlug);
+    const brandSlugNameKey = makePerfumeLookupKey(record.brandSlug, record.perfumeName);
+    const brandNameKey = makePerfumeLookupKey(record.brandName, record.perfumeName);
+
+    const slugMatchedPerfumeId = perfumeIdsBySlug.get(record.perfumeSlug);
+    const fallbackPerfumeId =
+      perfumeIdsByBrandSlugAndName.get(brandSlugNameKey) ?? perfumeIdsByBrandNameAndName.get(brandNameKey);
+    const matchedPerfumeId = slugMatchedPerfumeId ?? fallbackPerfumeId;
+
+    if (options.notesOnly && !matchedPerfumeId) {
+      stats.missingPerfumeMatches += 1;
+      stats.skippedRows += 1;
+      if (invalidLogs.length < 10) {
+        invalidLogs.push(
+          `row ${record.sourceRow}: perfume not found for notes-only enrichment (slug=${record.perfumeSlug})`,
+        );
+      }
+      return;
+    }
 
     if (options.dryRun) {
-      if (existingPerfumeId) {
+      if (slugMatchedPerfumeId) {
+        stats.matchedPerfumesBySlug += 1;
+      } else if (fallbackPerfumeId) {
+        stats.matchedPerfumesByNameFallback += 1;
+      }
+
+      if (options.notesOnly && matchedPerfumeId) {
+        const existingSet = existingNoteIdsByPerfumeId.get(matchedPerfumeId) ?? new Set<number>();
+        let wouldInsert = 0;
+
+        for (const noteId of noteIds) {
+          if (!existingSet.has(noteId)) {
+            existingSet.add(noteId);
+            wouldInsert += 1;
+          }
+        }
+
+        existingNoteIdsByPerfumeId.set(matchedPerfumeId, existingSet);
+        stats.insertedPerfumeNotes += wouldInsert;
+        stats.processedRows += 1;
+        return;
+      }
+
+      if (slugMatchedPerfumeId) {
         stats.updatedPerfumes += 1;
       } else {
         const fakeId = createTempId();
@@ -775,6 +861,29 @@ async function main() {
       stats.processedRows += 1;
       return;
     }
+
+    if (options.notesOnly && matchedPerfumeId) {
+      const result = await prisma.perfumeNote.createMany({
+        data: [...noteIds].map((noteId) => ({
+          perfumeId: matchedPerfumeId,
+          noteId,
+        })),
+        skipDuplicates: true,
+      });
+
+      if (slugMatchedPerfumeId) {
+        stats.matchedPerfumesBySlug += 1;
+      } else if (fallbackPerfumeId) {
+        stats.matchedPerfumesByNameFallback += 1;
+      }
+
+      stats.insertedPerfumeNotes += result.count;
+      stats.processedRows += 1;
+      return;
+    }
+
+    const brandId = await ensureBrand(record.brandName, record.brandSlug);
+    const existingPerfumeId = slugMatchedPerfumeId;
 
     const perfume = await prisma.$transaction(async (tx) => {
       const upserted = await tx.perfume.upsert({
@@ -853,7 +962,7 @@ async function main() {
 
   console.log(`[verified-import] source=${resolvedPath}`);
   console.log(
-    `[verified-import] format=${resolvedFormat} dryRun=${options.dryRun} limit=${options.limit ?? "none"} batchSize=${options.batchSize}`,
+    `[verified-import] format=${resolvedFormat} dryRun=${options.dryRun} notesOnly=${options.notesOnly} limit=${options.limit ?? "none"} batchSize=${options.batchSize}`,
   );
 
   const batches = splitIntoChunks(normalizedRows, options.batchSize);
@@ -894,6 +1003,9 @@ async function main() {
   console.log(`updated perfumes: ${stats.updatedPerfumes}`);
   console.log(`inserted notes: ${stats.insertedNotes}`);
   console.log(`inserted perfume-note relations: ${stats.insertedPerfumeNotes}`);
+  console.log(`matched perfumes by slug: ${stats.matchedPerfumesBySlug}`);
+  console.log(`matched perfumes by brand+name fallback: ${stats.matchedPerfumesByNameFallback}`);
+  console.log(`missing perfume matches: ${stats.missingPerfumeMatches}`);
   console.log(`malformed rows: ${stats.malformedRows}`);
   console.log(`invalid rows: ${stats.invalidRows}`);
   console.log(`skipped rows: ${stats.skippedRows}`);
