@@ -40,7 +40,13 @@ export async function loginWithPassword(
     return { error: "Inserisci email e password." };
   }
 
-  const supabase = await createClient();
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return { error: "Configurazione autenticazione non disponibile. Riprova tra poco." };
+  }
+
   const { error } = await supabase.auth.signInWithPassword({
     email,
     password,

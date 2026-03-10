@@ -52,7 +52,13 @@ export async function signupWithPassword(
     return { error: "Le password non coincidono." };
   }
 
-  const supabase = await createClient();
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return { error: "Configurazione autenticazione non disponibile. Riprova tra poco." };
+  }
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,

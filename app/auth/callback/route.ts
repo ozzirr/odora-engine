@@ -31,7 +31,12 @@ export async function GET(request: NextRequest) {
   const type = requestUrl.searchParams.get("type");
   const nextPath = sanitizeNextPath(requestUrl.searchParams.get("next"));
 
-  const supabase = await createClient();
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return NextResponse.redirect(new URL("/login?error=auth_not_configured", requestUrl.origin));
+  }
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);

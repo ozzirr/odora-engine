@@ -39,6 +39,10 @@ function mapAuthErrorToMessage(errorCode: string | undefined) {
     return "Link di autenticazione non valido.";
   }
 
+  if (errorCode === "auth_not_configured") {
+    return "Autenticazione non configurata correttamente.";
+  }
+
   return "Operazione di autenticazione non riuscita.";
 }
 
