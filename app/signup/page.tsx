@@ -62,8 +62,7 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         </p>
 
         <p className="mt-3 text-xs text-[#8b7762]">
-          I pulsanti social sono temporaneamente in modalita mock e verranno collegati a Supabase Auth nel prossimo
-          step.
+          La registrazione social arrivera presto. Per ora puoi creare l&apos;account con email e password.
         </p>
       </div>
     </Container>

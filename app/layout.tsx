@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Odora",
-  description: "Italian-first fragrance discovery and comparison platform.",
+  description: "Fragrance discovery and price comparison, designed to help you choose better.",
 };
 
 export default function RootLayout({

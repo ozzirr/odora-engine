@@ -16,7 +16,7 @@ export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
       <SectionTitle
         eyebrow="Featured"
         title="Featured perfumes"
-        subtitle="Real product records selected in the homepage content layer, with graceful fallbacks when offers are missing."
+        subtitle="A considered edit of bottles worth knowing, from easy daily signatures to richer statement scents."
       />
       <PerfumeGrid perfumes={perfumes} />
     </section>

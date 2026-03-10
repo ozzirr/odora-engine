@@ -14,7 +14,7 @@ import { computeBestOffer } from "@/lib/pricing";
 export const metadata: Metadata = {
   title: "Top Fragrances | Odora",
   description:
-    "Explore Odora's curated top fragrances by Arabic style, niche quality, longevity, and value picks.",
+    "Explore Odora's curated fragrance rankings by style, performance, and value.",
 };
 
 export const dynamic = "force-dynamic";
@@ -85,35 +85,35 @@ export default async function TopPage() {
         <SectionTitle
           eyebrow="Editorial"
           title="Curated fragrance rankings"
-          subtitle="Odora highlights fragrances by style, performance, and value so you can discover faster without browsing the entire catalog."
+          subtitle="A sharper way to explore the catalog through standout picks for style, performance, and value."
         />
       </div>
 
       <EditorialSection
         eyebrow="Arabic"
         title="Top Arabic fragrances"
-        subtitle="High-impact Arabic signatures with strong character and value."
+        subtitle="Bold Arabic signatures with presence, texture, and memorability."
         perfumes={topArabic}
       />
 
       <EditorialSection
         eyebrow="Niche"
         title="Best niche perfumes"
-        subtitle="Distinctive niche compositions selected for quality and identity."
+        subtitle="Distinctive compositions chosen for character, polish, and identity."
         perfumes={topNiche}
       />
 
       <EditorialSection
         eyebrow="Value"
         title={`Best perfumes under €${priceCap}`}
-        subtitle="Curated picks that stay under the selected budget range while keeping strong profile quality."
+        subtitle="Smart buys that stay under budget without feeling compromise-driven."
         perfumes={topValuePicks}
       />
 
       <EditorialSection
         eyebrow="Performance"
         title="Best long-lasting fragrances"
-        subtitle="Perfumes ranked by longevity performance for all-day and evening wear."
+        subtitle="Fragrances selected for the kind of staying power people actually notice."
         perfumes={topLongLasting}
       />
     </Container>

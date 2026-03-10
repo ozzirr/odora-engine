@@ -108,7 +108,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
             rel="noreferrer"
             className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
           >
-            View offer
+            Go to offer
           </Link>
         ) : null}
       </div>

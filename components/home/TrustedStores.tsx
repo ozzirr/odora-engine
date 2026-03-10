@@ -18,8 +18,7 @@ export function TrustedStores({ stores }: TrustedStoresProps) {
             Compare prices from trusted stores
           </h2>
           <p className="mt-3 text-sm text-[#685848]">
-            Retailers are surfaced in a restrained, store-first layout so price comparison
-            stays clear and credible.
+            We surface retailers in a clean comparison view so prices, shipping, and availability stay easy to read.
           </p>
         </div>
 

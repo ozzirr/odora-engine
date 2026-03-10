@@ -17,7 +17,7 @@ export function DiscoveryCollections({ collections }: DiscoveryCollectionsProps)
       <SectionTitle
         eyebrow="Collections"
         title="Discovery collections"
-        subtitle="Database-backed discovery links that route into real Finder or catalog pages."
+        subtitle="Browse the catalog through thoughtful edits built around style, mood, and what you want to find next."
       />
 
       <div className="grid gap-4 md:grid-cols-3">
@@ -40,7 +40,7 @@ export function DiscoveryCollections({ collections }: DiscoveryCollectionsProps)
               <p className="mt-2 text-sm leading-6 text-[#625243]">{card.description}</p>
             ) : null}
             <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#816f5c]">
-              Browse collection
+              Explore collection
             </p>
           </Link>
         ))}

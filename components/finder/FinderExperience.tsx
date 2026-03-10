@@ -199,7 +199,7 @@ export function FinderExperience({
       setTotalMatches(fallbackResults.length);
       setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
       setSubmitted(true);
-      setErrorMessage("Finder service temporarily unavailable. Showing fallback results.");
+      setErrorMessage("Live matching is temporarily unavailable. Showing the closest catalog matches instead.");
     } finally {
       setIsLoading(false);
     }
@@ -281,10 +281,10 @@ export function FinderExperience({
           <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-display text-3xl text-[#1f1914]">
-                {presetLabel ? presetLabel : "Preconfigured discovery"}
+                {presetLabel ? presetLabel : "Suggested starting point"}
               </h2>
               <p className="mt-1 text-sm text-[#635343]">
-                Finder is already configured from the homepage card you selected.
+                These filters were pre-filled from the shortcut you selected on the homepage.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -478,7 +478,7 @@ export function FinderExperience({
         </section>
       ) : (
         <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">
-          Select your preferences and run the finder to see your best perfume matches.
+          Choose a few preferences and run Finder to see fragrances that fit your taste.
         </div>
       )}
     </div>

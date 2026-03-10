@@ -78,8 +78,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </p>
 
         <p className="mt-3 text-xs text-[#8b7762]">
-          I pulsanti social sono temporaneamente in modalita mock e verranno collegati all&apos;autenticazione reale
-          nel prossimo step.
+          L&apos;accesso social arrivera presto. Per ora puoi entrare con email e password.
         </p>
       </div>
     </Container>

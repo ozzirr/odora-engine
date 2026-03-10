@@ -5,18 +5,18 @@ type AuthSocialButtonsProps = {
 };
 
 export function AuthSocialButtons({ mode }: AuthSocialButtonsProps) {
-  const ctaPrefix = mode === "login" ? "Accedi" : "Registrati";
+  const labelPrefix = mode === "login" ? "Accesso" : "Registrazione";
 
   return (
     <div className="grid gap-2">
-      <Button type="button" variant="secondary" className="w-full">
-        {ctaPrefix} con Google (mock)
+      <Button type="button" variant="secondary" className="w-full" disabled>
+        {labelPrefix} Google presto disponibile
       </Button>
-      <Button type="button" variant="secondary" className="w-full">
-        {ctaPrefix} con Apple (mock)
+      <Button type="button" variant="secondary" className="w-full" disabled>
+        {labelPrefix} Apple presto disponibile
       </Button>
-      <Button type="button" variant="secondary" className="w-full">
-        {ctaPrefix} con Facebook (mock)
+      <Button type="button" variant="secondary" className="w-full" disabled>
+        {labelPrefix} Facebook presto disponibile
       </Button>
     </div>
   );

@@ -19,8 +19,8 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
     <section className="mt-24 space-y-8">
       <SectionTitle
         eyebrow="Trending Now"
-        title="Real catalog picks marked as trending"
-        subtitle="Homepage placements from the database, ordered intentionally and linked to live perfume detail pages."
+        title="Trending picks right now"
+        subtitle="A curated edit of fragrances people are discovering and revisiting right now."
       />
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">

@@ -10,7 +10,7 @@ import { PerfumesClient } from "./PerfumesClient";
 export const metadata: Metadata = {
   title: "Perfumes | Odora",
   description:
-    "Browse fragrances on Odora with filters for family, gender, price, and notes. Compare offers and discover your next scent.",
+    "Browse perfumes by family, notes, gender, and price, then compare offers with clarity.",
 };
 
 export const dynamic = "force-dynamic";
@@ -32,7 +32,7 @@ export default async function PerfumesPage({ searchParams }: PerfumesPageProps) 
       <SectionTitle
         eyebrow="Catalog"
         title="Discover perfumes"
-        subtitle="Filter by family, note profile, gender, and price. Every filter is URL-driven so discovery links are easy to share."
+        subtitle="Browse the catalog by family, notes, gender, and price, then narrow in on the bottles worth your attention."
       />
       <PerfumesClient
         initialPerfumes={perfumes}

@@ -56,7 +56,7 @@ export function BestOfferCard({
     return (
       <div className={cn("rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-5", className)}>
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{title}</p>
-        <p className="mt-2 text-sm text-[#665545]">No active offers available yet.</p>
+        <p className="mt-2 text-sm text-[#665545]">Pricing will appear here as soon as offers are available.</p>
       </div>
     );
   }

@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
   if (!isDatabaseConfigured) {
     return {
       title: "Perfume | Odora",
-      description: "Fragrance details and offer comparison on Odora.",
+      description: "Fragrance details, notes, and price comparison on Odora.",
     };
   }
 
@@ -171,7 +171,7 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
     logCatalogQueryError("perfumes:metadata", error);
     return {
       title: "Perfume | Odora",
-      description: "Fragrance details and offer comparison on Odora.",
+      description: "Fragrance details, notes, and price comparison on Odora.",
     };
   }
 }
@@ -210,8 +210,8 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
   const topSavings = alternativeSavings.length > 0 ? Math.max(...alternativeSavings) : null;
   const cheaperAlternativesSubtitle = topSavings
-    ? `Similar profile for less. You can save up to ${formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR")} compared to this bottle.`
-    : "Similar fragrances for less, ranked by profile match and lower total price.";
+    ? `A similar mood for less. You can save up to ${formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR")} compared to this bottle.`
+    : "Similar fragrances with a lower total price, selected for profile match and value.";
   const overviewText = getPerfumeOverviewText(perfume);
 
   return (
@@ -223,7 +223,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
           <SectionTitle
             eyebrow="Prices"
             title="Compare current offers"
-            subtitle="Best offer is calculated by total cost: price + shipping."
+            subtitle="We rank offers by total cost, so price and shipping are considered together."
           />
           <OfferTable offers={perfume.offers} />
         </section>
@@ -236,7 +236,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
           <SectionTitle
             eyebrow="Notes"
             title="Fragrance pyramid"
-            subtitle="Top, heart, and base notes with relative emphasis. Click a note to explore matching perfumes."
+            subtitle="Top, heart, and base notes arranged by prominence, with direct paths to explore similar scents."
           />
           <NotesList notes={notesForRender} />
         </section>

@@ -11,9 +11,9 @@ const navLinks = [
 ];
 
 const legalLinks = [
-  { href: "#", label: "Privacy" },
-  { href: "#", label: "Terms" },
-  { href: "#", label: "Affiliate Disclosure" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
 ];
 
 export function Footer() {
@@ -32,8 +32,7 @@ export function Footer() {
               />
             </div>
             <p className="max-w-sm text-sm text-[#5e4f40]">
-              Italian-first fragrance discovery platform to compare perfumes, notes,
-              moods, and the best available offers.
+              Discover perfumes, compare notes and prices, and find the right bottle faster.
             </p>
           </div>
 

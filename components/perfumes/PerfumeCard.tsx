@@ -74,7 +74,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             </Badge>
           ) : (
             <Badge variant="outline" className="bg-[#faf6ef]">
-              See product details
+              View fragrance
             </Badge>
           )}
           {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}

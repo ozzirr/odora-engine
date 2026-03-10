@@ -11,7 +11,7 @@ export function QuickFilters() {
       <SectionTitle
         eyebrow="Quick Start"
         title="Explore by mood and style"
-        subtitle="Finder shortcuts built with the route's real query params, so presets load with meaningful filters already applied."
+        subtitle="Start from a mood, a note, or a style and jump straight into a refined set of results."
       />
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

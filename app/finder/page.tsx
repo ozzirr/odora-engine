@@ -110,7 +110,7 @@ export default async function FinderPage({ searchParams }: FinderPageProps) {
   return (
     <Container className="space-y-8 pt-14">
       <SectionTitle
-        eyebrow="Finder MVP"
+        eyebrow="Finder"
         title="Find your next fragrance in minutes"
         subtitle="Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
       />

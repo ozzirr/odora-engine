@@ -4,17 +4,17 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 const steps = [
   {
     title: "Discover",
-    description: "Browse perfumes by notes, mood and style.",
+    description: "Start with notes, style, mood, or occasion.",
     Icon: DiscoverIcon,
   },
   {
     title: "Compare",
-    description: "See prices from multiple trusted stores.",
+    description: "Compare stores, shipping, and total price at a glance.",
     Icon: CompareIcon,
   },
   {
-    title: "Buy",
-    description: "Get the best available deal instantly.",
+    title: "Choose",
+    description: "Leave for the retailer with a clearer sense of what fits and what it costs.",
     Icon: BuyIcon,
   },
 ];
@@ -25,7 +25,7 @@ export function HowItWorks() {
       <SectionTitle
         eyebrow="How Odora Works"
         title="A simpler way to choose well"
-        subtitle="Odora keeps discovery, comparison, and purchase intent in one refined flow."
+        subtitle="Move from inspiration to comparison without bouncing between multiple tabs and retailer pages."
       />
 
       <div className="grid gap-5 lg:grid-cols-3">

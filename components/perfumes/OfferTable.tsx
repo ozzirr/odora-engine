@@ -24,7 +24,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
   if (!Array.isArray(offers) || offers.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">
-        No active offers yet.
+        Offers will appear here as soon as pricing is available.
       </div>
     );
   }
@@ -93,7 +93,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                         View offer
                       </Link>
                     ) : (
-                      <span className="text-xs text-[#7b6854]">Unavailable</span>
+                      <span className="text-xs text-[#7b6854]">Coming soon</span>
                     )}
                   </td>
                 </tr>

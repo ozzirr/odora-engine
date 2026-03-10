@@ -12,9 +12,9 @@ type HeroProps = {
 };
 
 const valueProps = [
-  "Compare prices from trusted stores",
-  "Discover perfumes by notes and mood",
-  "Find the best deal instantly",
+  "Compare prices across trusted retailers",
+  "Explore perfumes by notes, mood, and style",
+  "Choose with more confidence",
 ];
 
 export function Hero({ preview }: HeroProps) {
@@ -35,11 +35,10 @@ export function Hero({ preview }: HeroProps) {
                 Fragrance Discovery
               </p>
               <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-[#1c1712] sm:text-6xl">
-                Discover your next fragrance.
+                Find the fragrance that feels like you.
               </h1>
               <p className="mt-5 max-w-2xl text-base text-[#5f5041] sm:text-lg">
-                Browse perfumes, explore notes and styles, and compare offers from trusted
-                stores in one elegant experience.
+                Browse standout perfumes, understand their character, and compare offers in one calm, elegant flow.
               </p>
 
               <ul className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -58,10 +57,10 @@ export function Hero({ preview }: HeroProps) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/perfumes" className={buttonStyles({ size: "lg" })}>
-                  Explore perfumes
+                  Browse catalog
                 </Link>
                 <Link href="/finder" className={buttonStyles({ variant: "secondary", size: "lg" })}>
-                  Open Finder
+                  Start Finder
                 </Link>
               </div>
             </div>
@@ -73,7 +72,7 @@ export function Hero({ preview }: HeroProps) {
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
-                        Featured now
+                        Spotlight
                       </p>
                       <p className="mt-1 text-sm text-[#5e4f40]">{preview.brandName}</p>
                     </div>
@@ -102,16 +101,16 @@ export function Hero({ preview }: HeroProps) {
                     <div className="flex items-end justify-between gap-4 rounded-[1.25rem] border border-[#e6d8c5] bg-white/75 px-4 py-3">
                       <div>
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                          {preview.bestPrice != null && preview.currency ? "Best price" : "Product"}
+                          {preview.bestPrice != null && preview.currency ? "Best price today" : "Discover"}
                         </p>
                         <p className="mt-1 font-display text-2xl text-[#1d1712]">
                           {preview.bestPrice != null && preview.currency
                             ? formatCurrency(preview.bestPrice, preview.currency)
-                            : "See product details"}
+                            : "View fragrance"}
                         </p>
                       </div>
                       <p className="text-right text-sm text-[#5d4e3f]">
-                        {preview.storeName ?? "Odora product page"}
+                        {preview.storeName ?? "Odora fragrance page"}
                       </p>
                     </div>
 
