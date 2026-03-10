@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { buttonStyles } from "@/components/ui/Button";
+import { createClient } from "@/lib/supabase/client";
+import { getSupabaseEnvOrNull } from "@/lib/supabase/config";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -18,6 +20,41 @@ const navItems = [
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const accountHref = isAuthenticated ? "/profile" : "/login";
+  const accountLabel = isAuthenticated ? "Profilo" : "Accedi";
+
+  useEffect(() => {
+    if (!getSupabaseEnvOrNull()) {
+      return;
+    }
+
+    const supabase = createClient();
+    let isMounted = true;
+
+    void supabase.auth.getUser().then(({ data, error }) => {
+      if (!isMounted || error) {
+        return;
+      }
+
+      setIsAuthenticated(Boolean(data.user));
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!isMounted) {
+        return;
+      }
+
+      setIsAuthenticated(Boolean(session?.user));
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -54,8 +91,8 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href="/login" className={buttonStyles({ variant: "secondary", size: "sm" })}>
-            Accedi
+          <Link href={accountHref} className={buttonStyles({ variant: "secondary", size: "sm" })}>
+            {accountLabel}
           </Link>
           <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
             Explore perfumes
@@ -87,11 +124,11 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href="/login"
+              href={accountHref}
               onClick={() => setMenuOpen(false)}
               className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
             >
-              Accedi
+              {accountLabel}
             </Link>
             <Link
               href="/perfumes"

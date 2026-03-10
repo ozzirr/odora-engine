@@ -1,0 +1,67 @@
+"use client";
+
+import { useActionState } from "react";
+
+import { updateProfile, type ProfileFormState } from "@/app/profile/actions";
+import { buttonStyles } from "@/components/ui/Button";
+
+type ProfileFormProps = {
+  email: string;
+  initialName: string;
+};
+
+const initialState: ProfileFormState = {};
+
+export function ProfileForm({ email, initialName }: ProfileFormProps) {
+  const [state, formAction, isPending] = useActionState(updateProfile, initialState);
+
+  return (
+    <form action={formAction} className="space-y-4">
+      <div className="space-y-1.5">
+        <label htmlFor="name" className="text-sm font-medium text-[#3a2e24]">
+          Nome
+        </label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          defaultValue={initialName}
+          placeholder="Come vuoi essere chiamato"
+          className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
+        />
+      </div>
+
+      <div className="space-y-1.5">
+        <label htmlFor="email" className="text-sm font-medium text-[#3a2e24]">
+          Email
+        </label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          value={email}
+          readOnly
+          disabled
+          className="h-11 w-full rounded-xl border border-[#e4d8ca] bg-[#f6f0e8] px-3 text-sm text-[#796857]"
+        />
+      </div>
+
+      {state?.error ? (
+        <div className="rounded-xl border border-[#dfcab0] bg-[#faf4eb] px-3 py-2 text-sm text-[#6d5644]">
+          {state.error}
+        </div>
+      ) : null}
+
+      {state?.message ? (
+        <div className="rounded-xl border border-[#d1dbc3] bg-[#f3f8eb] px-3 py-2 text-sm text-[#4d6340]">
+          {state.message}
+        </div>
+      ) : null}
+
+      <button type="submit" disabled={isPending} className={buttonStyles({ className: "w-full sm:w-auto" })}>
+        {isPending ? "Salvataggio..." : "Salva modifiche"}
+      </button>
+    </form>
+  );
+}

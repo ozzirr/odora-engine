@@ -31,11 +31,13 @@ export async function signupWithPassword(
   _previousState: SignupFormState,
   formData: FormData,
 ): Promise<SignupFormState> {
+  const nameValue = formData.get("name");
   const emailValue = formData.get("email");
   const passwordValue = formData.get("password");
   const confirmPasswordValue = formData.get("confirmPassword");
   const nextPath = sanitizeNextPath(formData.get("next"));
 
+  const name = typeof nameValue === "string" ? nameValue.trim() : "";
   const email = typeof emailValue === "string" ? emailValue.trim().toLowerCase() : "";
   const password = typeof passwordValue === "string" ? passwordValue : "";
   const confirmPassword = typeof confirmPasswordValue === "string" ? confirmPasswordValue : "";
@@ -63,6 +65,9 @@ export async function signupWithPassword(
     email,
     password,
     options: {
+      data: {
+        name,
+      },
       emailRedirectTo: `${getBaseSiteUrl()}/auth/callback?next=${encodeURIComponent(nextPath)}`,
     },
   });

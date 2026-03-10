@@ -22,12 +22,12 @@ export function Footer() {
       <Container className="py-10">
         <div className="grid gap-8 md:grid-cols-3">
           <div className="space-y-3">
-            <div className="relative h-28 w-[440px] max-w-full">
+            <div className="relative h-20 w-[320px] max-w-full sm:h-24 sm:w-[360px]">
               <Image
                 src="/images/odora-logo.png"
                 alt="Odora"
                 fill
-                sizes="(max-width: 768px) 90vw, 440px"
+                sizes="(max-width: 640px) 320px, 360px"
                 className="object-contain object-left"
               />
             </div>
