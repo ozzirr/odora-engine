@@ -1,0 +1,1394 @@
+
+> odora@0.1.0 images:pipeline:overnight
+> tsx scripts/import/run-overnight-image-pipeline.ts --limit=2000 --batch-size=100 --sleep-ms=1500 --status=all --limit=500 --batch-size=50 --sleep-ms=1500 --status=all
+
+[overnight] starting pipeline
+[overnight] limit=500 status=all batchSize=50 sleepMs=1500 dryRun=false force=false
+[manifest-from-db] status: all
+[manifest-from-db] limit: 500
+[manifest-from-db] manifest path: /Users/andrerizzo/Documents/GitHub/odora-engine/data/verified/approved-images-manifest.csv
+[manifest-from-db] perfumes selected: 500
+[manifest-from-db] manifest rows added: 480
+[manifest-from-db] manifest total rows: 550
+[manifest-from-db] dryRun: false
+
+[overnight] batch 1/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0001/manifest.csv rows=50 dryRun=false force=false
+[skip] lattafa-khamrah file exists: approved-images/lattafa-khamrah.jpg
+[saved] lattafa-badee-al-oud-for-glory -> approved-images/lattafa-badee-al-oud-for-glory.jpg (47645 bytes, image/jpeg)
+[skip] dior-jadore-lor file exists: approved-images/dior-jadore-lor.jpg
+[saved] mfk-oud-satin-mood -> approved-images/mfk-oud-satin-mood.jpg (27737 bytes, image/jpeg)
+[saved] mfk-baccarat-rouge-540 -> approved-images/mfk-baccarat-rouge-540.jpg (49761 bytes, image/jpeg)
+[saved] xerjoff-erba-pura -> approved-images/xerjoff-erba-pura.jpg (31556 bytes, image/jpeg)
+[skip] chanel-coco-mademoiselle-edp file exists: approved-images/chanel-coco-mademoiselle-edp.jpg
+[saved] diptyque-philosykos-edt -> approved-images/diptyque-philosykos-edt.jpg (32391 bytes, image/jpeg)
+[saved] diptyque-eau-duelle-edp -> approved-images/diptyque-eau-duelle-edp.jpg (36087 bytes, image/jpeg)
+[skip] dior-solar-whisper-0001 file exists: approved-images/dior-solar-whisper-0001.jpg
+[skip] chanel-noble-edition-0002 file exists: approved-images/chanel-noble-edition-0002.jpg
+[saved] xerjoff-amber-trail-0003 -> approved-images/xerjoff-amber-trail-0003.jpg (45084 bytes, image/jpeg)
+[saved] lattafa-opaline-whisper-0004 -> approved-images/lattafa-opaline-whisper-0004.jpg (12945 bytes, image/jpeg)
+[saved] tom-ford-solar-trail-0006 -> approved-images/tom-ford-solar-trail-0006.jpg (32191 bytes, image/jpeg)
+[saved] guerlain-solar-sillage-0007 -> approved-images/guerlain-solar-sillage-0007.jpg (25575 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-opaline-veil-0008 -> approved-images/maison-francis-kurkdjian-opaline-veil-0008.jpg (29971 bytes, image/jpeg)
+[saved] diptyque-intense-elixir-0009 -> approved-images/diptyque-intense-elixir-0009.jpg (62205 bytes, image/jpeg)
+[saved] yves-saint-laurent-oud-whisper-0011 -> approved-images/yves-saint-laurent-oud-whisper-0011.jpg (23028 bytes, image/jpeg)
+[skip] acqua-di-parma-luminous-nectar-0012 file exists: approved-images/acqua-di-parma-luminous-nectar-0012.jpg
+[saved] parfums-de-marly-intense-reserve-0013 -> approved-images/parfums-de-marly-intense-reserve-0013.jpg (14050 bytes, image/jpeg)
+[saved] initio-eclat-elixir-0014 -> approved-images/initio-eclat-elixir-0014.jpg (10535 bytes, image/jpeg)
+[saved] montale-zenith-essence-0016 -> approved-images/montale-zenith-essence-0016.jpg (21388 bytes, image/jpeg)
+[saved] nishane-noble-trail-0017 -> approved-images/nishane-noble-trail-0017.jpg (16121 bytes, image/jpeg)
+[saved] memo-paris-oud-edition-0018 -> approved-images/memo-paris-oud-edition-0018.jpg (82294 bytes, image/jpeg)
+[saved] frederic-malle-mystic-eau-de-parfum-0019 -> approved-images/frederic-malle-mystic-eau-de-parfum-0019.jpg (19138 bytes, image/jpeg)
+[saved] dior-opaline-trail-0021 -> approved-images/dior-opaline-trail-0021.jpg (12686 bytes, image/jpeg)
+[saved] chanel-amber-code-0022 -> approved-images/chanel-amber-code-0022.jpg (178255 bytes, image/jpeg)
+[fail-download] xerjoff-luminous-reserve-0023 all candidates failed validation/download
+[saved] lattafa-royal-edition-0024 -> approved-images/lattafa-royal-edition-0024.jpg (173972 bytes, image/png)
+[saved] tom-ford-aura-essence-0026 -> approved-images/tom-ford-aura-essence-0026.jpg (32191 bytes, image/jpeg)
+[saved] guerlain-saffron-edition-0027 -> approved-images/guerlain-saffron-edition-0027.jpg (190913 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-amber-code-0028 -> approved-images/maison-francis-kurkdjian-amber-code-0028.jpg (216903 bytes, image/jpeg)
+[saved] diptyque-aura-pulse-0029 -> approved-images/diptyque-aura-pulse-0029.jpg (32286 bytes, image/jpeg)
+[saved] yves-saint-laurent-eclat-trail-0031 -> approved-images/yves-saint-laurent-eclat-trail-0031.jpg (24050 bytes, image/jpeg)
+[saved] acqua-di-parma-mystic-fusion-0032 -> approved-images/acqua-di-parma-mystic-fusion-0032.jpg (11241 bytes, image/jpeg)
+[saved] parfums-de-marly-opaline-spirit-0033 -> approved-images/parfums-de-marly-opaline-spirit-0033.jpg (31843 bytes, image/jpeg)
+[saved] initio-eclat-pulse-0034 -> approved-images/initio-eclat-pulse-0034.jpg (14653 bytes, image/jpeg)
+[saved] montale-solar-trail-0036 -> approved-images/montale-solar-trail-0036.jpg (30470 bytes, image/jpeg)
+[saved] nishane-saffron-essence-0037 -> approved-images/nishane-saffron-essence-0037.jpg (123358 bytes, image/jpeg)
+[saved] memo-paris-velvet-legend-0038 -> approved-images/memo-paris-velvet-legend-0038.jpg (23537 bytes, image/jpeg)
+[fail-download] frederic-malle-eclat-edition-0039 all candidates failed validation/download
+[saved] dior-velvet-signature-0041 -> approved-images/dior-velvet-signature-0041.jpg (105954 bytes, image/jpeg)
+[saved] chanel-noir-pulse-0042 -> approved-images/chanel-noir-pulse-0042.jpg (11273 bytes, image/jpeg)
+[saved] xerjoff-noir-veil-0043 -> approved-images/xerjoff-noir-veil-0043.jpg (16790 bytes, image/jpeg)
+[saved] lattafa-oud-legend-0044 -> approved-images/lattafa-oud-legend-0044.jpg (69508 bytes, image/jpeg)
+[saved] tom-ford-solar-reserve-0046 -> approved-images/tom-ford-solar-reserve-0046.jpg (21093 bytes, image/jpeg)
+[saved] guerlain-silk-signature-0047 -> approved-images/guerlain-silk-signature-0047.jpg (367453 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-absolu-code-0048 -> approved-images/maison-francis-kurkdjian-absolu-code-0048.jpg (24815 bytes, image/jpeg)
+[saved] diptyque-noble-essence-0049 -> approved-images/diptyque-noble-essence-0049.jpg (13677 bytes, image/jpeg)
+[saved] yves-saint-laurent-noir-code-0051 -> approved-images/yves-saint-laurent-noir-code-0051.jpg (29799 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 6
+skipped missing data: 0
+searched: 44
+downloaded: 42
+failed search: 0
+failed download: 2
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0001/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0001/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] lattafa-khamrah (manifest row 2) -> lattafa/lattafa-khamrah.jpg
+[upload] lattafa-badee-al-oud-for-glory (manifest row 3) -> lattafa/lattafa-badee-al-oud-for-glory.jpg
+[upload] dior-jadore-lor (manifest row 4) -> dior/dior-jadore-lor.jpg
+[upload] mfk-oud-satin-mood (manifest row 5) -> maison-francis-kurkdjian/mfk-oud-satin-mood.jpg
+[upload] mfk-baccarat-rouge-540 (manifest row 6) -> maison-francis-kurkdjian/mfk-baccarat-rouge-540.jpg
+[upload] xerjoff-erba-pura (manifest row 7) -> xerjoff/xerjoff-erba-pura.jpg
+[upload] chanel-coco-mademoiselle-edp (manifest row 8) -> chanel/chanel-coco-mademoiselle-edp.jpg
+[upload] diptyque-philosykos-edt (manifest row 9) -> diptyque/diptyque-philosykos-edt.jpg
+[upload] diptyque-eau-duelle-edp (manifest row 10) -> diptyque/diptyque-eau-duelle-edp.jpg
+[upload] dior-solar-whisper-0001 (manifest row 11) -> dior/dior-solar-whisper-0001.jpg
+[upload] chanel-noble-edition-0002 (manifest row 12) -> chanel/chanel-noble-edition-0002.jpg
+[upload] xerjoff-amber-trail-0003 (manifest row 13) -> xerjoff/xerjoff-amber-trail-0003.jpg
+[upload] lattafa-opaline-whisper-0004 (manifest row 14) -> lattafa/lattafa-opaline-whisper-0004.jpg
+[upload] tom-ford-solar-trail-0006 (manifest row 15) -> tom-ford/tom-ford-solar-trail-0006.jpg
+[upload] guerlain-solar-sillage-0007 (manifest row 16) -> guerlain/guerlain-solar-sillage-0007.jpg
+[upload] maison-francis-kurkdjian-opaline-veil-0008 (manifest row 17) -> maison-francis-kurkdjian/maison-francis-kurkdjian-opaline-veil-0008.jpg
+[upload] diptyque-intense-elixir-0009 (manifest row 18) -> diptyque/diptyque-intense-elixir-0009.jpg
+[upload] yves-saint-laurent-oud-whisper-0011 (manifest row 19) -> yves-saint-laurent/yves-saint-laurent-oud-whisper-0011.jpg
+[upload] acqua-di-parma-luminous-nectar-0012 (manifest row 20) -> acqua-di-parma/acqua-di-parma-luminous-nectar-0012.jpg
+[upload] parfums-de-marly-intense-reserve-0013 (manifest row 21) -> parfums-de-marly/parfums-de-marly-intense-reserve-0013.jpg
+[upload] initio-eclat-elixir-0014 (manifest row 22) -> initio/initio-eclat-elixir-0014.jpg
+[upload] montale-zenith-essence-0016 (manifest row 23) -> montale/montale-zenith-essence-0016.jpg
+[upload] nishane-noble-trail-0017 (manifest row 24) -> nishane/nishane-noble-trail-0017.jpg
+[upload] memo-paris-oud-edition-0018 (manifest row 25) -> memo-paris/memo-paris-oud-edition-0018.jpg
+[upload] frederic-malle-mystic-eau-de-parfum-0019 (manifest row 26) -> frederic-malle/frederic-malle-mystic-eau-de-parfum-0019.jpg
+[upload] dior-opaline-trail-0021 (manifest row 27) -> dior/dior-opaline-trail-0021.jpg
+[upload] chanel-amber-code-0022 (manifest row 28) -> chanel/chanel-amber-code-0022.jpg
+[skip] xerjoff-luminous-reserve-0023 (manifest row 29) local file not found (checked: approved-images/xerjoff-luminous-reserve-0023.jpg)
+[upload] lattafa-royal-edition-0024 (manifest row 30) -> lattafa/lattafa-royal-edition-0024.jpg
+[upload] tom-ford-aura-essence-0026 (manifest row 31) -> tom-ford/tom-ford-aura-essence-0026.jpg
+[upload] guerlain-saffron-edition-0027 (manifest row 32) -> guerlain/guerlain-saffron-edition-0027.jpg
+[upload] maison-francis-kurkdjian-amber-code-0028 (manifest row 33) -> maison-francis-kurkdjian/maison-francis-kurkdjian-amber-code-0028.jpg
+[upload] diptyque-aura-pulse-0029 (manifest row 34) -> diptyque/diptyque-aura-pulse-0029.jpg
+[upload] yves-saint-laurent-eclat-trail-0031 (manifest row 35) -> yves-saint-laurent/yves-saint-laurent-eclat-trail-0031.jpg
+[upload] acqua-di-parma-mystic-fusion-0032 (manifest row 36) -> acqua-di-parma/acqua-di-parma-mystic-fusion-0032.jpg
+[upload] parfums-de-marly-opaline-spirit-0033 (manifest row 37) -> parfums-de-marly/parfums-de-marly-opaline-spirit-0033.jpg
+[upload] initio-eclat-pulse-0034 (manifest row 38) -> initio/initio-eclat-pulse-0034.jpg
+[upload] montale-solar-trail-0036 (manifest row 39) -> montale/montale-solar-trail-0036.jpg
+[upload] nishane-saffron-essence-0037 (manifest row 40) -> nishane/nishane-saffron-essence-0037.jpg
+[upload] memo-paris-velvet-legend-0038 (manifest row 41) -> memo-paris/memo-paris-velvet-legend-0038.jpg
+[skip] frederic-malle-eclat-edition-0039 (manifest row 42) local file not found (checked: approved-images/frederic-malle-eclat-edition-0039.jpg)
+[upload] dior-velvet-signature-0041 (manifest row 43) -> dior/dior-velvet-signature-0041.jpg
+[upload] chanel-noir-pulse-0042 (manifest row 44) -> chanel/chanel-noir-pulse-0042.jpg
+[upload] xerjoff-noir-veil-0043 (manifest row 45) -> xerjoff/xerjoff-noir-veil-0043.jpg
+[upload] lattafa-oud-legend-0044 (manifest row 46) -> lattafa/lattafa-oud-legend-0044.jpg
+[upload] tom-ford-solar-reserve-0046 (manifest row 47) -> tom-ford/tom-ford-solar-reserve-0046.jpg
+[upload] guerlain-silk-signature-0047 (manifest row 48) -> guerlain/guerlain-silk-signature-0047.jpg
+[upload] maison-francis-kurkdjian-absolu-code-0048 (manifest row 49) -> maison-francis-kurkdjian/maison-francis-kurkdjian-absolu-code-0048.jpg
+[upload] diptyque-noble-essence-0049 (manifest row 50) -> diptyque/diptyque-noble-essence-0049.jpg
+[upload] yves-saint-laurent-noir-code-0051 (manifest row 51) -> yves-saint-laurent/yves-saint-laurent-noir-code-0051.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 48
+processed: 50
+uploaded: 48
+skipped: 2
+failed: 0
+updated CSV rows: 48
+updated DB rows: 48
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 48
+files uploaded: 48
+rows updated in CSV: 48
+rows updated in DB: 48
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 1/10 done | downloaded=42 uploaded=48 dbUpdated=48 skipped=8 failed=2
+
+[overnight] batch 2/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0002/manifest.csv rows=50 dryRun=false force=false
+[saved] acqua-di-parma-aura-bloom-0052 -> approved-images/acqua-di-parma-aura-bloom-0052.jpg (20696 bytes, image/jpeg)
+[saved] parfums-de-marly-aura-nectar-0053 -> approved-images/parfums-de-marly-aura-nectar-0053.jpg (16008 bytes, image/jpeg)
+[saved] initio-aura-veil-0054 -> approved-images/initio-aura-veil-0054.jpg (175802 bytes, image/jpeg)
+[saved] montale-noble-spirit-0056 -> approved-images/montale-noble-spirit-0056.jpg (29499 bytes, image/jpeg)
+[saved] nishane-aura-veil-0057 -> approved-images/nishane-aura-veil-0057.jpg (14074 bytes, image/jpeg)
+[fail-download] memo-paris-midnight-spirit-0058 all candidates failed validation/download
+[saved] frederic-malle-opaline-signature-0059 -> approved-images/frederic-malle-opaline-signature-0059.jpg (10934 bytes, image/jpeg)
+[saved] dior-royal-legend-0061 -> approved-images/dior-royal-legend-0061.jpg (89000 bytes, image/jpeg)
+[saved] chanel-velvet-spirit-0062 -> approved-images/chanel-velvet-spirit-0062.jpg (20341 bytes, image/jpeg)
+[saved] xerjoff-intense-legend-0063 -> approved-images/xerjoff-intense-legend-0063.jpg (43368 bytes, image/jpeg)
+[saved] lattafa-aura-pulse-0064 -> approved-images/lattafa-aura-pulse-0064.jpg (16781 bytes, image/jpeg)
+[saved] tom-ford-noir-elixir-0066 -> approved-images/tom-ford-noir-elixir-0066.jpg (26130 bytes, image/jpeg)
+[saved] guerlain-absolu-reserve-0067 -> approved-images/guerlain-absolu-reserve-0067.jpg (41469 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-absolu-whisper-0068 -> approved-images/maison-francis-kurkdjian-absolu-whisper-0068.jpg (24815 bytes, image/jpeg)
+[saved] diptyque-mystic-pulse-0069 -> approved-images/diptyque-mystic-pulse-0069.jpg (25088 bytes, image/webp)
+[saved] yves-saint-laurent-luminous-edition-0071 -> approved-images/yves-saint-laurent-luminous-edition-0071.jpg (16487 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-parfum-0072 -> approved-images/acqua-di-parma-noble-parfum-0072.jpg (11676 bytes, image/jpeg)
+[saved] parfums-de-marly-eclat-elixir-0073 -> approved-images/parfums-de-marly-eclat-elixir-0073.jpg (43569 bytes, image/jpeg)
+[saved] initio-luminous-parfum-0074 -> approved-images/initio-luminous-parfum-0074.jpg (81421 bytes, image/jpeg)
+[saved] montale-oud-bloom-0076 -> approved-images/montale-oud-bloom-0076.jpg (20428 bytes, image/jpeg)
+[saved] nishane-opaline-sillage-0077 -> approved-images/nishane-opaline-sillage-0077.jpg (112217 bytes, image/jpeg)
+[saved] memo-paris-intense-pulse-0078 -> approved-images/memo-paris-intense-pulse-0078.jpg (24793 bytes, image/jpeg)
+[saved] frederic-malle-royal-reserve-0079 -> approved-images/frederic-malle-royal-reserve-0079.jpg (19915 bytes, image/jpeg)
+[saved] dior-zenith-eau-de-parfum-0081 -> approved-images/dior-zenith-eau-de-parfum-0081.jpg (22511 bytes, image/jpeg)
+[saved] chanel-velvet-elixir-0082 -> approved-images/chanel-velvet-elixir-0082.jpg (28665 bytes, image/jpeg)
+[saved] xerjoff-midnight-reserve-0083 -> approved-images/xerjoff-midnight-reserve-0083.jpg (23325 bytes, image/jpeg)
+[saved] lattafa-silk-fusion-0084 -> approved-images/lattafa-silk-fusion-0084.jpg (56920 bytes, image/jpeg)
+[saved] tom-ford-eclat-pulse-0086 -> approved-images/tom-ford-eclat-pulse-0086.jpg (40867 bytes, image/jpeg)
+[saved] guerlain-oud-trail-0087 -> approved-images/guerlain-oud-trail-0087.jpg (29928 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-zenith-legend-0088 -> approved-images/maison-francis-kurkdjian-zenith-legend-0088.jpg (23820 bytes, image/jpeg)
+[saved] diptyque-eclat-legend-0089 -> approved-images/diptyque-eclat-legend-0089.jpg (25797 bytes, image/jpeg)
+[saved] yves-saint-laurent-zenith-signature-0091 -> approved-images/yves-saint-laurent-zenith-signature-0091.jpg (25614 bytes, image/jpeg)
+[saved] acqua-di-parma-opaline-legend-0092 -> approved-images/acqua-di-parma-opaline-legend-0092.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-velvet-whisper-0093 -> approved-images/parfums-de-marly-velvet-whisper-0093.jpg (30788 bytes, image/jpeg)
+[saved] initio-amber-trail-0094 -> approved-images/initio-amber-trail-0094.jpg (460952 bytes, image/jpeg)
+[saved] montale-solar-eau-de-parfum-0096 -> approved-images/montale-solar-eau-de-parfum-0096.jpg (18086 bytes, image/jpeg)
+[saved] nishane-opaline-pulse-0097 -> approved-images/nishane-opaline-pulse-0097.jpg (43665 bytes, image/jpeg)
+[fail-download] memo-paris-zenith-parfum-0098 all candidates failed validation/download
+[saved] frederic-malle-eclat-legend-0099 -> approved-images/frederic-malle-eclat-legend-0099.jpg (15757 bytes, image/jpeg)
+[saved] dior-eclat-spirit-0101 -> approved-images/dior-eclat-spirit-0101.jpg (89000 bytes, image/jpeg)
+[saved] chanel-saffron-veil-0102 -> approved-images/chanel-saffron-veil-0102.jpg (27362 bytes, image/jpeg)
+[saved] xerjoff-mystic-whisper-0103 -> approved-images/xerjoff-mystic-whisper-0103.jpg (843517 bytes, image/png)
+[saved] lattafa-royal-pulse-0104 -> approved-images/lattafa-royal-pulse-0104.jpg (20963 bytes, image/jpeg)
+[saved] tom-ford-amber-elixir-0106 -> approved-images/tom-ford-amber-elixir-0106.jpg (28696 bytes, image/jpeg)
+[saved] guerlain-absolu-pulse-0107 -> approved-images/guerlain-absolu-pulse-0107.jpg (27697 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-opaline-reserve-0108 -> approved-images/maison-francis-kurkdjian-opaline-reserve-0108.jpg (21971 bytes, image/jpeg)
+[saved] diptyque-noble-spirit-0109 -> approved-images/diptyque-noble-spirit-0109.jpg (52129 bytes, image/jpeg)
+[saved] yves-saint-laurent-solar-code-0111 -> approved-images/yves-saint-laurent-solar-code-0111.jpg (18853 bytes, image/jpeg)
+[saved] acqua-di-parma-royal-pulse-0112 -> approved-images/acqua-di-parma-royal-pulse-0112.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-intense-edition-0113 -> approved-images/parfums-de-marly-intense-edition-0113.jpg (43569 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 48
+failed search: 0
+failed download: 2
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0002/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0002/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] acqua-di-parma-aura-bloom-0052 (manifest row 2) -> acqua-di-parma/acqua-di-parma-aura-bloom-0052.jpg
+[upload] parfums-de-marly-aura-nectar-0053 (manifest row 3) -> parfums-de-marly/parfums-de-marly-aura-nectar-0053.jpg
+[upload] initio-aura-veil-0054 (manifest row 4) -> initio/initio-aura-veil-0054.jpg
+[upload] montale-noble-spirit-0056 (manifest row 5) -> montale/montale-noble-spirit-0056.jpg
+[upload] nishane-aura-veil-0057 (manifest row 6) -> nishane/nishane-aura-veil-0057.jpg
+[skip] memo-paris-midnight-spirit-0058 (manifest row 7) local file not found (checked: approved-images/memo-paris-midnight-spirit-0058.jpg)
+[upload] frederic-malle-opaline-signature-0059 (manifest row 8) -> frederic-malle/frederic-malle-opaline-signature-0059.jpg
+[upload] dior-royal-legend-0061 (manifest row 9) -> dior/dior-royal-legend-0061.jpg
+[upload] chanel-velvet-spirit-0062 (manifest row 10) -> chanel/chanel-velvet-spirit-0062.jpg
+[upload] xerjoff-intense-legend-0063 (manifest row 11) -> xerjoff/xerjoff-intense-legend-0063.jpg
+[upload] lattafa-aura-pulse-0064 (manifest row 12) -> lattafa/lattafa-aura-pulse-0064.jpg
+[upload] tom-ford-noir-elixir-0066 (manifest row 13) -> tom-ford/tom-ford-noir-elixir-0066.jpg
+[upload] guerlain-absolu-reserve-0067 (manifest row 14) -> guerlain/guerlain-absolu-reserve-0067.jpg
+[upload] maison-francis-kurkdjian-absolu-whisper-0068 (manifest row 15) -> maison-francis-kurkdjian/maison-francis-kurkdjian-absolu-whisper-0068.jpg
+[upload] diptyque-mystic-pulse-0069 (manifest row 16) -> diptyque/diptyque-mystic-pulse-0069.jpg
+[upload] yves-saint-laurent-luminous-edition-0071 (manifest row 17) -> yves-saint-laurent/yves-saint-laurent-luminous-edition-0071.jpg
+[upload] acqua-di-parma-noble-parfum-0072 (manifest row 18) -> acqua-di-parma/acqua-di-parma-noble-parfum-0072.jpg
+[upload] parfums-de-marly-eclat-elixir-0073 (manifest row 19) -> parfums-de-marly/parfums-de-marly-eclat-elixir-0073.jpg
+[upload] initio-luminous-parfum-0074 (manifest row 20) -> initio/initio-luminous-parfum-0074.jpg
+[upload] montale-oud-bloom-0076 (manifest row 21) -> montale/montale-oud-bloom-0076.jpg
+[upload] nishane-opaline-sillage-0077 (manifest row 22) -> nishane/nishane-opaline-sillage-0077.jpg
+[upload] memo-paris-intense-pulse-0078 (manifest row 23) -> memo-paris/memo-paris-intense-pulse-0078.jpg
+[upload] frederic-malle-royal-reserve-0079 (manifest row 24) -> frederic-malle/frederic-malle-royal-reserve-0079.jpg
+[upload] dior-zenith-eau-de-parfum-0081 (manifest row 25) -> dior/dior-zenith-eau-de-parfum-0081.jpg
+[upload] chanel-velvet-elixir-0082 (manifest row 26) -> chanel/chanel-velvet-elixir-0082.jpg
+[upload] xerjoff-midnight-reserve-0083 (manifest row 27) -> xerjoff/xerjoff-midnight-reserve-0083.jpg
+[upload] lattafa-silk-fusion-0084 (manifest row 28) -> lattafa/lattafa-silk-fusion-0084.jpg
+[upload] tom-ford-eclat-pulse-0086 (manifest row 29) -> tom-ford/tom-ford-eclat-pulse-0086.jpg
+[upload] guerlain-oud-trail-0087 (manifest row 30) -> guerlain/guerlain-oud-trail-0087.jpg
+[upload] maison-francis-kurkdjian-zenith-legend-0088 (manifest row 31) -> maison-francis-kurkdjian/maison-francis-kurkdjian-zenith-legend-0088.jpg
+[upload] diptyque-eclat-legend-0089 (manifest row 32) -> diptyque/diptyque-eclat-legend-0089.jpg
+[upload] yves-saint-laurent-zenith-signature-0091 (manifest row 33) -> yves-saint-laurent/yves-saint-laurent-zenith-signature-0091.jpg
+[upload] acqua-di-parma-opaline-legend-0092 (manifest row 34) -> acqua-di-parma/acqua-di-parma-opaline-legend-0092.jpg
+[upload] parfums-de-marly-velvet-whisper-0093 (manifest row 35) -> parfums-de-marly/parfums-de-marly-velvet-whisper-0093.jpg
+[upload] initio-amber-trail-0094 (manifest row 36) -> initio/initio-amber-trail-0094.jpg
+[upload] montale-solar-eau-de-parfum-0096 (manifest row 37) -> montale/montale-solar-eau-de-parfum-0096.jpg
+[upload] nishane-opaline-pulse-0097 (manifest row 38) -> nishane/nishane-opaline-pulse-0097.jpg
+[skip] memo-paris-zenith-parfum-0098 (manifest row 39) local file not found (checked: approved-images/memo-paris-zenith-parfum-0098.jpg)
+[upload] frederic-malle-eclat-legend-0099 (manifest row 40) -> frederic-malle/frederic-malle-eclat-legend-0099.jpg
+[upload] dior-eclat-spirit-0101 (manifest row 41) -> dior/dior-eclat-spirit-0101.jpg
+[upload] chanel-saffron-veil-0102 (manifest row 42) -> chanel/chanel-saffron-veil-0102.jpg
+[upload] xerjoff-mystic-whisper-0103 (manifest row 43) -> xerjoff/xerjoff-mystic-whisper-0103.jpg
+[upload] lattafa-royal-pulse-0104 (manifest row 44) -> lattafa/lattafa-royal-pulse-0104.jpg
+[upload] tom-ford-amber-elixir-0106 (manifest row 45) -> tom-ford/tom-ford-amber-elixir-0106.jpg
+[upload] guerlain-absolu-pulse-0107 (manifest row 46) -> guerlain/guerlain-absolu-pulse-0107.jpg
+[upload] maison-francis-kurkdjian-opaline-reserve-0108 (manifest row 47) -> maison-francis-kurkdjian/maison-francis-kurkdjian-opaline-reserve-0108.jpg
+[upload] diptyque-noble-spirit-0109 (manifest row 48) -> diptyque/diptyque-noble-spirit-0109.jpg
+[upload] yves-saint-laurent-solar-code-0111 (manifest row 49) -> yves-saint-laurent/yves-saint-laurent-solar-code-0111.jpg
+[upload] acqua-di-parma-royal-pulse-0112 (manifest row 50) -> acqua-di-parma/acqua-di-parma-royal-pulse-0112.jpg
+[upload] parfums-de-marly-intense-edition-0113 (manifest row 51) -> parfums-de-marly/parfums-de-marly-intense-edition-0113.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 48
+processed: 50
+uploaded: 48
+skipped: 2
+failed: 0
+updated CSV rows: 48
+updated DB rows: 48
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 48
+files uploaded: 48
+rows updated in CSV: 48
+rows updated in DB: 48
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 2/10 done | downloaded=48 uploaded=48 dbUpdated=48 skipped=2 failed=2
+
+[overnight] batch 3/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0003/manifest.csv rows=50 dryRun=false force=false
+[saved] initio-midnight-trail-0114 -> approved-images/initio-midnight-trail-0114.jpg (2661988 bytes, image/jpeg)
+[saved] montale-saffron-reserve-0116 -> approved-images/montale-saffron-reserve-0116.jpg (16377 bytes, image/jpeg)
+[saved] nishane-eclat-sillage-0117 -> approved-images/nishane-eclat-sillage-0117.jpg (21486 bytes, image/jpeg)
+[fail-download] memo-paris-eclat-parfum-0118 all candidates failed validation/download
+[saved] frederic-malle-noir-nectar-0119 -> approved-images/frederic-malle-noir-nectar-0119.jpg (20638 bytes, image/jpeg)
+[saved] dior-royal-essence-0121 -> approved-images/dior-royal-essence-0121.jpg (33654 bytes, image/jpeg)
+[saved] chanel-zenith-fusion-0122 -> approved-images/chanel-zenith-fusion-0122.jpg (22572 bytes, image/jpeg)
+[saved] xerjoff-noir-fusion-0123 -> approved-images/xerjoff-noir-fusion-0123.jpg (14943 bytes, image/jpeg)
+[saved] lattafa-royal-sillage-0124 -> approved-images/lattafa-royal-sillage-0124.jpg (30058 bytes, image/jpeg)
+[saved] tom-ford-intense-elixir-0126 -> approved-images/tom-ford-intense-elixir-0126.jpg (11367 bytes, image/jpeg)
+[saved] guerlain-oud-trail-0127 -> approved-images/guerlain-oud-trail-0127.jpg (29928 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-mystic-trail-0128 -> approved-images/maison-francis-kurkdjian-mystic-trail-0128.jpg (24917 bytes, image/jpeg)
+[saved] diptyque-oud-trail-0129 -> approved-images/diptyque-oud-trail-0129.jpg (40311 bytes, image/jpeg)
+[saved] yves-saint-laurent-royal-elixir-0131 -> approved-images/yves-saint-laurent-royal-elixir-0131.jpg (21801 bytes, image/jpeg)
+[saved] acqua-di-parma-opaline-spirit-0132 -> approved-images/acqua-di-parma-opaline-spirit-0132.jpg (12848 bytes, image/jpeg)
+[saved] parfums-de-marly-midnight-legend-0133 -> approved-images/parfums-de-marly-midnight-legend-0133.jpg (43569 bytes, image/jpeg)
+[saved] initio-saffron-whisper-0134 -> approved-images/initio-saffron-whisper-0134.jpg (18808 bytes, image/jpeg)
+[saved] montale-silk-essence-0136 -> approved-images/montale-silk-essence-0136.jpg (16377 bytes, image/jpeg)
+[saved] nishane-noble-bloom-0137 -> approved-images/nishane-noble-bloom-0137.jpg (21486 bytes, image/jpeg)
+[saved] memo-paris-saffron-parfum-0138 -> approved-images/memo-paris-saffron-parfum-0138.jpg (26220 bytes, image/jpeg)
+[saved] frederic-malle-eclat-bloom-0139 -> approved-images/frederic-malle-eclat-bloom-0139.jpg (781275 bytes, image/jpeg)
+[saved] dior-noble-bloom-0141 -> approved-images/dior-noble-bloom-0141.jpg (38066 bytes, image/jpeg)
+[saved] chanel-royal-eau-de-parfum-0142 -> approved-images/chanel-royal-eau-de-parfum-0142.jpg (13543 bytes, image/jpeg)
+[saved] xerjoff-absolu-pulse-0143 -> approved-images/xerjoff-absolu-pulse-0143.jpg (41936 bytes, image/jpeg)
+[saved] lattafa-absolu-essence-0144 -> approved-images/lattafa-absolu-essence-0144.jpg (37974 bytes, image/jpeg)
+[saved] tom-ford-oud-spirit-0146 -> approved-images/tom-ford-oud-spirit-0146.jpg (22166 bytes, image/jpeg)
+[saved] guerlain-absolu-veil-0147 -> approved-images/guerlain-absolu-veil-0147.jpg (16426 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-luminous-eau-de-parfum-0148 -> approved-images/maison-francis-kurkdjian-luminous-eau-de-parfum-0148.jpg (29729 bytes, image/jpeg)
+[saved] diptyque-oud-signature-0149 -> approved-images/diptyque-oud-signature-0149.jpg (40311 bytes, image/jpeg)
+[saved] yves-saint-laurent-silk-code-0151 -> approved-images/yves-saint-laurent-silk-code-0151.jpg (18853 bytes, image/jpeg)
+[saved] acqua-di-parma-oud-legend-0152 -> approved-images/acqua-di-parma-oud-legend-0152.jpg (12060 bytes, image/jpeg)
+[saved] parfums-de-marly-saffron-eau-de-parfum-0153 -> approved-images/parfums-de-marly-saffron-eau-de-parfum-0153.jpg (81137 bytes, image/jpeg)
+[saved] initio-amber-reserve-0154 -> approved-images/initio-amber-reserve-0154.jpg (15429 bytes, image/jpeg)
+[saved] montale-noir-code-0156 -> approved-images/montale-noir-code-0156.jpg (20775 bytes, image/jpeg)
+[saved] nishane-amber-reserve-0157 -> approved-images/nishane-amber-reserve-0157.jpg (16003 bytes, image/jpeg)
+[fail-download] memo-paris-zenith-parfum-0158 all candidates failed validation/download
+[saved] frederic-malle-luminous-legend-0159 -> approved-images/frederic-malle-luminous-legend-0159.jpg (11594 bytes, image/jpeg)
+[saved] dior-noir-spirit-0161 -> approved-images/dior-noir-spirit-0161.jpg (22511 bytes, image/jpeg)
+[saved] chanel-oud-elixir-0162 -> approved-images/chanel-oud-elixir-0162.jpg (23982 bytes, image/jpeg)
+[saved] xerjoff-royal-elixir-0163 -> approved-images/xerjoff-royal-elixir-0163.jpg (25255 bytes, image/jpeg)
+[saved] lattafa-absolu-eau-de-parfum-0164 -> approved-images/lattafa-absolu-eau-de-parfum-0164.jpg (20963 bytes, image/jpeg)
+[saved] tom-ford-oud-reserve-0166 -> approved-images/tom-ford-oud-reserve-0166.jpg (83126 bytes, image/jpeg)
+[saved] guerlain-velvet-spirit-0167 -> approved-images/guerlain-velvet-spirit-0167.jpg (42921 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-noir-edition-0168 -> approved-images/maison-francis-kurkdjian-noir-edition-0168.jpg (14258 bytes, image/jpeg)
+[saved] diptyque-opaline-bloom-0169 -> approved-images/diptyque-opaline-bloom-0169.jpg (20021 bytes, image/jpeg)
+[saved] yves-saint-laurent-aura-nectar-0171 -> approved-images/yves-saint-laurent-aura-nectar-0171.jpg (20297 bytes, image/jpeg)
+[saved] acqua-di-parma-noir-reserve-0172 -> approved-images/acqua-di-parma-noir-reserve-0172.jpg (24395 bytes, image/jpeg)
+[saved] parfums-de-marly-eclat-signature-0173 -> approved-images/parfums-de-marly-eclat-signature-0173.jpg (42812 bytes, image/jpeg)
+[saved] initio-intense-elixir-0174 -> approved-images/initio-intense-elixir-0174.jpg (14316 bytes, image/jpeg)
+[saved] montale-intense-edition-0176 -> approved-images/montale-intense-edition-0176.jpg (22003 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 48
+failed search: 0
+failed download: 2
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0003/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0003/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] initio-midnight-trail-0114 (manifest row 2) -> initio/initio-midnight-trail-0114.jpg
+[upload] montale-saffron-reserve-0116 (manifest row 3) -> montale/montale-saffron-reserve-0116.jpg
+[upload] nishane-eclat-sillage-0117 (manifest row 4) -> nishane/nishane-eclat-sillage-0117.jpg
+[skip] memo-paris-eclat-parfum-0118 (manifest row 5) local file not found (checked: approved-images/memo-paris-eclat-parfum-0118.jpg)
+[upload] frederic-malle-noir-nectar-0119 (manifest row 6) -> frederic-malle/frederic-malle-noir-nectar-0119.jpg
+[upload] dior-royal-essence-0121 (manifest row 7) -> dior/dior-royal-essence-0121.jpg
+[upload] chanel-zenith-fusion-0122 (manifest row 8) -> chanel/chanel-zenith-fusion-0122.jpg
+[upload] xerjoff-noir-fusion-0123 (manifest row 9) -> xerjoff/xerjoff-noir-fusion-0123.jpg
+[upload] lattafa-royal-sillage-0124 (manifest row 10) -> lattafa/lattafa-royal-sillage-0124.jpg
+[upload] tom-ford-intense-elixir-0126 (manifest row 11) -> tom-ford/tom-ford-intense-elixir-0126.jpg
+[upload] guerlain-oud-trail-0127 (manifest row 12) -> guerlain/guerlain-oud-trail-0127.jpg
+[upload] maison-francis-kurkdjian-mystic-trail-0128 (manifest row 13) -> maison-francis-kurkdjian/maison-francis-kurkdjian-mystic-trail-0128.jpg
+[upload] diptyque-oud-trail-0129 (manifest row 14) -> diptyque/diptyque-oud-trail-0129.jpg
+[upload] yves-saint-laurent-royal-elixir-0131 (manifest row 15) -> yves-saint-laurent/yves-saint-laurent-royal-elixir-0131.jpg
+[upload] acqua-di-parma-opaline-spirit-0132 (manifest row 16) -> acqua-di-parma/acqua-di-parma-opaline-spirit-0132.jpg
+[upload] parfums-de-marly-midnight-legend-0133 (manifest row 17) -> parfums-de-marly/parfums-de-marly-midnight-legend-0133.jpg
+[upload] initio-saffron-whisper-0134 (manifest row 18) -> initio/initio-saffron-whisper-0134.jpg
+[upload] montale-silk-essence-0136 (manifest row 19) -> montale/montale-silk-essence-0136.jpg
+[upload] nishane-noble-bloom-0137 (manifest row 20) -> nishane/nishane-noble-bloom-0137.jpg
+[upload] memo-paris-saffron-parfum-0138 (manifest row 21) -> memo-paris/memo-paris-saffron-parfum-0138.jpg
+[upload] frederic-malle-eclat-bloom-0139 (manifest row 22) -> frederic-malle/frederic-malle-eclat-bloom-0139.jpg
+[upload] dior-noble-bloom-0141 (manifest row 23) -> dior/dior-noble-bloom-0141.jpg
+[upload] chanel-royal-eau-de-parfum-0142 (manifest row 24) -> chanel/chanel-royal-eau-de-parfum-0142.jpg
+[upload] xerjoff-absolu-pulse-0143 (manifest row 25) -> xerjoff/xerjoff-absolu-pulse-0143.jpg
+[upload] lattafa-absolu-essence-0144 (manifest row 26) -> lattafa/lattafa-absolu-essence-0144.jpg
+[upload] tom-ford-oud-spirit-0146 (manifest row 27) -> tom-ford/tom-ford-oud-spirit-0146.jpg
+[upload] guerlain-absolu-veil-0147 (manifest row 28) -> guerlain/guerlain-absolu-veil-0147.jpg
+[upload] maison-francis-kurkdjian-luminous-eau-de-parfum-0148 (manifest row 29) -> maison-francis-kurkdjian/maison-francis-kurkdjian-luminous-eau-de-parfum-0148.jpg
+[upload] diptyque-oud-signature-0149 (manifest row 30) -> diptyque/diptyque-oud-signature-0149.jpg
+[upload] yves-saint-laurent-silk-code-0151 (manifest row 31) -> yves-saint-laurent/yves-saint-laurent-silk-code-0151.jpg
+[upload] acqua-di-parma-oud-legend-0152 (manifest row 32) -> acqua-di-parma/acqua-di-parma-oud-legend-0152.jpg
+[upload] parfums-de-marly-saffron-eau-de-parfum-0153 (manifest row 33) -> parfums-de-marly/parfums-de-marly-saffron-eau-de-parfum-0153.jpg
+[upload] initio-amber-reserve-0154 (manifest row 34) -> initio/initio-amber-reserve-0154.jpg
+[upload] montale-noir-code-0156 (manifest row 35) -> montale/montale-noir-code-0156.jpg
+[upload] nishane-amber-reserve-0157 (manifest row 36) -> nishane/nishane-amber-reserve-0157.jpg
+[skip] memo-paris-zenith-parfum-0158 (manifest row 37) local file not found (checked: approved-images/memo-paris-zenith-parfum-0158.jpg)
+[upload] frederic-malle-luminous-legend-0159 (manifest row 38) -> frederic-malle/frederic-malle-luminous-legend-0159.jpg
+[upload] dior-noir-spirit-0161 (manifest row 39) -> dior/dior-noir-spirit-0161.jpg
+[upload] chanel-oud-elixir-0162 (manifest row 40) -> chanel/chanel-oud-elixir-0162.jpg
+[upload] xerjoff-royal-elixir-0163 (manifest row 41) -> xerjoff/xerjoff-royal-elixir-0163.jpg
+[upload] lattafa-absolu-eau-de-parfum-0164 (manifest row 42) -> lattafa/lattafa-absolu-eau-de-parfum-0164.jpg
+[upload] tom-ford-oud-reserve-0166 (manifest row 43) -> tom-ford/tom-ford-oud-reserve-0166.jpg
+[upload] guerlain-velvet-spirit-0167 (manifest row 44) -> guerlain/guerlain-velvet-spirit-0167.jpg
+[upload] maison-francis-kurkdjian-noir-edition-0168 (manifest row 45) -> maison-francis-kurkdjian/maison-francis-kurkdjian-noir-edition-0168.jpg
+[upload] diptyque-opaline-bloom-0169 (manifest row 46) -> diptyque/diptyque-opaline-bloom-0169.jpg
+[upload] yves-saint-laurent-aura-nectar-0171 (manifest row 47) -> yves-saint-laurent/yves-saint-laurent-aura-nectar-0171.jpg
+[upload] acqua-di-parma-noir-reserve-0172 (manifest row 48) -> acqua-di-parma/acqua-di-parma-noir-reserve-0172.jpg
+[upload] parfums-de-marly-eclat-signature-0173 (manifest row 49) -> parfums-de-marly/parfums-de-marly-eclat-signature-0173.jpg
+[upload] initio-intense-elixir-0174 (manifest row 50) -> initio/initio-intense-elixir-0174.jpg
+[upload] montale-intense-edition-0176 (manifest row 51) -> montale/montale-intense-edition-0176.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 48
+processed: 50
+uploaded: 48
+skipped: 2
+failed: 0
+updated CSV rows: 48
+updated DB rows: 48
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 48
+files uploaded: 48
+rows updated in CSV: 48
+rows updated in DB: 48
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 3/10 done | downloaded=48 uploaded=48 dbUpdated=48 skipped=2 failed=2
+
+[overnight] batch 4/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0004/manifest.csv rows=50 dryRun=false force=false
+[saved] nishane-royal-fusion-0177 -> approved-images/nishane-royal-fusion-0177.jpg (24779 bytes, image/jpeg)
+[saved] memo-paris-solar-signature-0178 -> approved-images/memo-paris-solar-signature-0178.jpg (190508 bytes, image/jpeg)
+[saved] frederic-malle-intense-sillage-0179 -> approved-images/frederic-malle-intense-sillage-0179.jpg (23734 bytes, image/jpeg)
+[saved] dior-zenith-nectar-0181 -> approved-images/dior-zenith-nectar-0181.jpg (19235 bytes, image/jpeg)
+[saved] chanel-saffron-pulse-0182 -> approved-images/chanel-saffron-pulse-0182.jpg (17471 bytes, image/jpeg)
+[saved] xerjoff-zenith-reserve-0183 -> approved-images/xerjoff-zenith-reserve-0183.jpg (20780 bytes, image/jpeg)
+[saved] lattafa-noble-spirit-0184 -> approved-images/lattafa-noble-spirit-0184.jpg (39061 bytes, image/jpeg)
+[saved] tom-ford-solar-elixir-0186 -> approved-images/tom-ford-solar-elixir-0186.jpg (12596 bytes, image/jpeg)
+[saved] guerlain-luminous-spirit-0187 -> approved-images/guerlain-luminous-spirit-0187.jpg (16426 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-midnight-veil-0188 -> approved-images/maison-francis-kurkdjian-midnight-veil-0188.jpg (24917 bytes, image/jpeg)
+[saved] diptyque-solar-pulse-0189 -> approved-images/diptyque-solar-pulse-0189.jpg (31872 bytes, image/webp)
+[saved] yves-saint-laurent-noir-parfum-0191 -> approved-images/yves-saint-laurent-noir-parfum-0191.jpg (16710 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-reserve-0192 -> approved-images/acqua-di-parma-noble-reserve-0192.jpg (27880 bytes, image/jpeg)
+[saved] parfums-de-marly-absolu-trail-0193 -> approved-images/parfums-de-marly-absolu-trail-0193.jpg (19951 bytes, image/jpeg)
+[saved] initio-noble-essence-0194 -> approved-images/initio-noble-essence-0194.jpg (18794 bytes, image/jpeg)
+[saved] montale-opaline-essence-0196 -> approved-images/montale-opaline-essence-0196.jpg (11406 bytes, image/jpeg)
+[saved] nishane-zenith-parfum-0197 -> approved-images/nishane-zenith-parfum-0197.jpg (18901 bytes, image/jpeg)
+[saved] memo-paris-velvet-parfum-0198 -> approved-images/memo-paris-velvet-parfum-0198.jpg (25823 bytes, image/jpeg)
+[saved] frederic-malle-amber-fusion-0199 -> approved-images/frederic-malle-amber-fusion-0199.jpg (50264 bytes, image/jpeg)
+[saved] dior-intense-edition-0201 -> approved-images/dior-intense-edition-0201.jpg (13341 bytes, image/jpeg)
+[saved] chanel-zenith-nectar-0202 -> approved-images/chanel-zenith-nectar-0202.jpg (67424 bytes, image/jpeg)
+[saved] xerjoff-midnight-reserve-0203 -> approved-images/xerjoff-midnight-reserve-0203.jpg (38444 bytes, image/jpeg)
+[saved] lattafa-oud-eau-de-parfum-0204 -> approved-images/lattafa-oud-eau-de-parfum-0204.jpg (38118 bytes, image/jpeg)
+[saved] tom-ford-luminous-reserve-0206 -> approved-images/tom-ford-luminous-reserve-0206.jpg (20034 bytes, image/jpeg)
+[saved] guerlain-eclat-essence-0207 -> approved-images/guerlain-eclat-essence-0207.jpg (34365 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-noir-eau-de-parfum-0208 -> approved-images/maison-francis-kurkdjian-noir-eau-de-parfum-0208.jpg (26026 bytes, image/jpeg)
+[saved] diptyque-noble-signature-0209 -> approved-images/diptyque-noble-signature-0209.jpg (13677 bytes, image/jpeg)
+[saved] yves-saint-laurent-intense-edition-0211 -> approved-images/yves-saint-laurent-intense-edition-0211.jpg (69213 bytes, image/jpeg)
+[saved] acqua-di-parma-solar-whisper-0212 -> approved-images/acqua-di-parma-solar-whisper-0212.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-opaline-eau-de-parfum-0213 -> approved-images/parfums-de-marly-opaline-eau-de-parfum-0213.jpg (110861 bytes, image/jpeg)
+[saved] initio-oud-legend-0214 -> approved-images/initio-oud-legend-0214.jpg (17212 bytes, image/jpeg)
+[saved] montale-intense-eau-de-parfum-0216 -> approved-images/montale-intense-eau-de-parfum-0216.jpg (41676 bytes, image/jpeg)
+[saved] nishane-opaline-code-0217 -> approved-images/nishane-opaline-code-0217.jpg (98808 bytes, image/jpeg)
+[saved] memo-paris-oud-essence-0218 -> approved-images/memo-paris-oud-essence-0218.jpg (12256 bytes, image/jpeg)
+[saved] frederic-malle-noble-legend-0219 -> approved-images/frederic-malle-noble-legend-0219.jpg (2624594 bytes, image/jpeg)
+[saved] dior-amber-eau-de-parfum-0221 -> approved-images/dior-amber-eau-de-parfum-0221.jpg (12292 bytes, image/jpeg)
+[saved] chanel-intense-sillage-0222 -> approved-images/chanel-intense-sillage-0222.jpg (42438 bytes, image/jpeg)
+[saved] xerjoff-saffron-bloom-0223 -> approved-images/xerjoff-saffron-bloom-0223.jpg (17518 bytes, image/jpeg)
+[saved] lattafa-noble-nectar-0224 -> approved-images/lattafa-noble-nectar-0224.jpg (12475 bytes, image/jpeg)
+[saved] tom-ford-intense-pulse-0226 -> approved-images/tom-ford-intense-pulse-0226.jpg (21693 bytes, image/jpeg)
+[saved] guerlain-opaline-reserve-0227 -> approved-images/guerlain-opaline-reserve-0227.jpg (84148 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-silk-code-0228 -> approved-images/maison-francis-kurkdjian-silk-code-0228.jpg (23779 bytes, image/jpeg)
+[saved] diptyque-zenith-elixir-0229 -> approved-images/diptyque-zenith-elixir-0229.jpg (31505 bytes, image/jpeg)
+[saved] yves-saint-laurent-intense-bloom-0231 -> approved-images/yves-saint-laurent-intense-bloom-0231.jpg (20297 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-fusion-0232 -> approved-images/acqua-di-parma-noble-fusion-0232.jpg (38810 bytes, image/jpeg)
+[saved] parfums-de-marly-eclat-edition-0233 -> approved-images/parfums-de-marly-eclat-edition-0233.jpg (27028 bytes, image/jpeg)
+[saved] initio-silk-nectar-0234 -> approved-images/initio-silk-nectar-0234.jpg (65287 bytes, image/jpeg)
+[saved] montale-luminous-parfum-0236 -> approved-images/montale-luminous-parfum-0236.jpg (21683 bytes, image/jpeg)
+[saved] nishane-amber-eau-de-parfum-0237 -> approved-images/nishane-amber-eau-de-parfum-0237.jpg (12297 bytes, image/jpeg)
+[saved] memo-paris-noble-bloom-0238 -> approved-images/memo-paris-noble-bloom-0238.jpg (12256 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 50
+failed search: 0
+failed download: 0
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0004/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0004/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] nishane-royal-fusion-0177 (manifest row 2) -> nishane/nishane-royal-fusion-0177.jpg
+[upload] memo-paris-solar-signature-0178 (manifest row 3) -> memo-paris/memo-paris-solar-signature-0178.jpg
+[upload] frederic-malle-intense-sillage-0179 (manifest row 4) -> frederic-malle/frederic-malle-intense-sillage-0179.jpg
+[upload] dior-zenith-nectar-0181 (manifest row 5) -> dior/dior-zenith-nectar-0181.jpg
+[upload] chanel-saffron-pulse-0182 (manifest row 6) -> chanel/chanel-saffron-pulse-0182.jpg
+[upload] xerjoff-zenith-reserve-0183 (manifest row 7) -> xerjoff/xerjoff-zenith-reserve-0183.jpg
+[upload] lattafa-noble-spirit-0184 (manifest row 8) -> lattafa/lattafa-noble-spirit-0184.jpg
+[upload] tom-ford-solar-elixir-0186 (manifest row 9) -> tom-ford/tom-ford-solar-elixir-0186.jpg
+[upload] guerlain-luminous-spirit-0187 (manifest row 10) -> guerlain/guerlain-luminous-spirit-0187.jpg
+[upload] maison-francis-kurkdjian-midnight-veil-0188 (manifest row 11) -> maison-francis-kurkdjian/maison-francis-kurkdjian-midnight-veil-0188.jpg
+[upload] diptyque-solar-pulse-0189 (manifest row 12) -> diptyque/diptyque-solar-pulse-0189.jpg
+[upload] yves-saint-laurent-noir-parfum-0191 (manifest row 13) -> yves-saint-laurent/yves-saint-laurent-noir-parfum-0191.jpg
+[upload] acqua-di-parma-noble-reserve-0192 (manifest row 14) -> acqua-di-parma/acqua-di-parma-noble-reserve-0192.jpg
+[upload] parfums-de-marly-absolu-trail-0193 (manifest row 15) -> parfums-de-marly/parfums-de-marly-absolu-trail-0193.jpg
+[upload] initio-noble-essence-0194 (manifest row 16) -> initio/initio-noble-essence-0194.jpg
+[upload] montale-opaline-essence-0196 (manifest row 17) -> montale/montale-opaline-essence-0196.jpg
+[upload] nishane-zenith-parfum-0197 (manifest row 18) -> nishane/nishane-zenith-parfum-0197.jpg
+[upload] memo-paris-velvet-parfum-0198 (manifest row 19) -> memo-paris/memo-paris-velvet-parfum-0198.jpg
+[upload] frederic-malle-amber-fusion-0199 (manifest row 20) -> frederic-malle/frederic-malle-amber-fusion-0199.jpg
+[upload] dior-intense-edition-0201 (manifest row 21) -> dior/dior-intense-edition-0201.jpg
+[upload] chanel-zenith-nectar-0202 (manifest row 22) -> chanel/chanel-zenith-nectar-0202.jpg
+[upload] xerjoff-midnight-reserve-0203 (manifest row 23) -> xerjoff/xerjoff-midnight-reserve-0203.jpg
+[upload] lattafa-oud-eau-de-parfum-0204 (manifest row 24) -> lattafa/lattafa-oud-eau-de-parfum-0204.jpg
+[upload] tom-ford-luminous-reserve-0206 (manifest row 25) -> tom-ford/tom-ford-luminous-reserve-0206.jpg
+[upload] guerlain-eclat-essence-0207 (manifest row 26) -> guerlain/guerlain-eclat-essence-0207.jpg
+[upload] maison-francis-kurkdjian-noir-eau-de-parfum-0208 (manifest row 27) -> maison-francis-kurkdjian/maison-francis-kurkdjian-noir-eau-de-parfum-0208.jpg
+[upload] diptyque-noble-signature-0209 (manifest row 28) -> diptyque/diptyque-noble-signature-0209.jpg
+[upload] yves-saint-laurent-intense-edition-0211 (manifest row 29) -> yves-saint-laurent/yves-saint-laurent-intense-edition-0211.jpg
+[upload] acqua-di-parma-solar-whisper-0212 (manifest row 30) -> acqua-di-parma/acqua-di-parma-solar-whisper-0212.jpg
+[upload] parfums-de-marly-opaline-eau-de-parfum-0213 (manifest row 31) -> parfums-de-marly/parfums-de-marly-opaline-eau-de-parfum-0213.jpg
+[upload] initio-oud-legend-0214 (manifest row 32) -> initio/initio-oud-legend-0214.jpg
+[upload] montale-intense-eau-de-parfum-0216 (manifest row 33) -> montale/montale-intense-eau-de-parfum-0216.jpg
+[upload] nishane-opaline-code-0217 (manifest row 34) -> nishane/nishane-opaline-code-0217.jpg
+[upload] memo-paris-oud-essence-0218 (manifest row 35) -> memo-paris/memo-paris-oud-essence-0218.jpg
+[upload] frederic-malle-noble-legend-0219 (manifest row 36) -> frederic-malle/frederic-malle-noble-legend-0219.jpg
+[upload] dior-amber-eau-de-parfum-0221 (manifest row 37) -> dior/dior-amber-eau-de-parfum-0221.jpg
+[upload] chanel-intense-sillage-0222 (manifest row 38) -> chanel/chanel-intense-sillage-0222.jpg
+[upload] xerjoff-saffron-bloom-0223 (manifest row 39) -> xerjoff/xerjoff-saffron-bloom-0223.jpg
+[upload] lattafa-noble-nectar-0224 (manifest row 40) -> lattafa/lattafa-noble-nectar-0224.jpg
+[upload] tom-ford-intense-pulse-0226 (manifest row 41) -> tom-ford/tom-ford-intense-pulse-0226.jpg
+[upload] guerlain-opaline-reserve-0227 (manifest row 42) -> guerlain/guerlain-opaline-reserve-0227.jpg
+[upload] maison-francis-kurkdjian-silk-code-0228 (manifest row 43) -> maison-francis-kurkdjian/maison-francis-kurkdjian-silk-code-0228.jpg
+[upload] diptyque-zenith-elixir-0229 (manifest row 44) -> diptyque/diptyque-zenith-elixir-0229.jpg
+[upload] yves-saint-laurent-intense-bloom-0231 (manifest row 45) -> yves-saint-laurent/yves-saint-laurent-intense-bloom-0231.jpg
+[upload] acqua-di-parma-noble-fusion-0232 (manifest row 46) -> acqua-di-parma/acqua-di-parma-noble-fusion-0232.jpg
+[upload] parfums-de-marly-eclat-edition-0233 (manifest row 47) -> parfums-de-marly/parfums-de-marly-eclat-edition-0233.jpg
+[upload] initio-silk-nectar-0234 (manifest row 48) -> initio/initio-silk-nectar-0234.jpg
+[upload] montale-luminous-parfum-0236 (manifest row 49) -> montale/montale-luminous-parfum-0236.jpg
+[upload] nishane-amber-eau-de-parfum-0237 (manifest row 50) -> nishane/nishane-amber-eau-de-parfum-0237.jpg
+[upload] memo-paris-noble-bloom-0238 (manifest row 51) -> memo-paris/memo-paris-noble-bloom-0238.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 50
+processed: 50
+uploaded: 50
+skipped: 0
+failed: 0
+updated CSV rows: 50
+updated DB rows: 50
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 50
+files uploaded: 50
+rows updated in CSV: 50
+rows updated in DB: 50
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 4/10 done | downloaded=50 uploaded=50 dbUpdated=50 skipped=0 failed=0
+
+[overnight] batch 5/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0005/manifest.csv rows=50 dryRun=false force=false
+[saved] frederic-malle-saffron-eau-de-parfum-0239 -> approved-images/frederic-malle-saffron-eau-de-parfum-0239.jpg (22597 bytes, image/jpeg)
+[saved] dior-solar-spirit-0241 -> approved-images/dior-solar-spirit-0241.jpg (41652 bytes, image/jpeg)
+[saved] chanel-silk-veil-0242 -> approved-images/chanel-silk-veil-0242.jpg (64685 bytes, image/jpeg)
+[saved] xerjoff-mystic-essence-0243 -> approved-images/xerjoff-mystic-essence-0243.jpg (11189 bytes, image/jpeg)
+[saved] lattafa-noble-legend-0244 -> approved-images/lattafa-noble-legend-0244.jpg (116190 bytes, image/jpeg)
+[saved] tom-ford-saffron-nectar-0246 -> approved-images/tom-ford-saffron-nectar-0246.jpg (29292 bytes, image/jpeg)
+[saved] guerlain-aura-veil-0247 -> approved-images/guerlain-aura-veil-0247.jpg (13846 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-noble-signature-0248 -> approved-images/maison-francis-kurkdjian-noble-signature-0248.jpg (216903 bytes, image/jpeg)
+[saved] diptyque-aura-nectar-0249 -> approved-images/diptyque-aura-nectar-0249.jpg (17283 bytes, image/jpeg)
+[saved] yves-saint-laurent-opaline-essence-0251 -> approved-images/yves-saint-laurent-opaline-essence-0251.jpg (30698 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-parfum-0252 -> approved-images/acqua-di-parma-noble-parfum-0252.jpg (13323 bytes, image/jpeg)
+[saved] parfums-de-marly-aura-legend-0253 -> approved-images/parfums-de-marly-aura-legend-0253.jpg (110861 bytes, image/jpeg)
+[saved] initio-mystic-edition-0254 -> approved-images/initio-mystic-edition-0254.jpg (116718 bytes, image/jpeg)
+[saved] montale-intense-trail-0256 -> approved-images/montale-intense-trail-0256.jpg (120704 bytes, image/jpeg)
+[saved] nishane-opaline-sillage-0257 -> approved-images/nishane-opaline-sillage-0257.jpg (18725 bytes, image/jpeg)
+[saved] memo-paris-zenith-veil-0258 -> approved-images/memo-paris-zenith-veil-0258.jpg (12256 bytes, image/jpeg)
+[saved] frederic-malle-velvet-bloom-0259 -> approved-images/frederic-malle-velvet-bloom-0259.jpg (23435 bytes, image/jpeg)
+[saved] dior-intense-whisper-0261 -> approved-images/dior-intense-whisper-0261.jpg (300122 bytes, image/jpeg)
+[saved] chanel-velvet-trail-0262 -> approved-images/chanel-velvet-trail-0262.jpg (26983 bytes, image/jpeg)
+[saved] xerjoff-aura-legend-0263 -> approved-images/xerjoff-aura-legend-0263.jpg (11186 bytes, image/jpeg)
+[saved] lattafa-oud-whisper-0264 -> approved-images/lattafa-oud-whisper-0264.jpg (39243 bytes, image/jpeg)
+[saved] tom-ford-intense-parfum-0266 -> approved-images/tom-ford-intense-parfum-0266.jpg (21693 bytes, image/jpeg)
+[saved] guerlain-noir-eau-de-parfum-0267 -> approved-images/guerlain-noir-eau-de-parfum-0267.jpg (30936 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-royal-signature-0268 -> approved-images/maison-francis-kurkdjian-royal-signature-0268.jpg (216903 bytes, image/jpeg)
+[saved] diptyque-velvet-essence-0269 -> approved-images/diptyque-velvet-essence-0269.jpg (20912 bytes, image/jpeg)
+[saved] yves-saint-laurent-royal-elixir-0271 -> approved-images/yves-saint-laurent-royal-elixir-0271.jpg (19018 bytes, image/jpeg)
+[saved] acqua-di-parma-velvet-pulse-0272 -> approved-images/acqua-di-parma-velvet-pulse-0272.jpg (22866 bytes, image/jpeg)
+[saved] parfums-de-marly-noble-spirit-0273 -> approved-images/parfums-de-marly-noble-spirit-0273.jpg (36690 bytes, image/jpeg)
+[saved] initio-zenith-edition-0274 -> approved-images/initio-zenith-edition-0274.jpg (14653 bytes, image/jpeg)
+[saved] montale-eclat-parfum-0276 -> approved-images/montale-eclat-parfum-0276.jpg (24810 bytes, image/jpeg)
+[saved] nishane-amber-bloom-0277 -> approved-images/nishane-amber-bloom-0277.jpg (19255 bytes, image/jpeg)
+[saved] memo-paris-noir-pulse-0278 -> approved-images/memo-paris-noir-pulse-0278.jpg (10706 bytes, image/jpeg)
+[saved] frederic-malle-absolu-elixir-0279 -> approved-images/frederic-malle-absolu-elixir-0279.jpg (50510 bytes, image/png)
+[saved] dior-noble-essence-0281 -> approved-images/dior-noble-essence-0281.jpg (33654 bytes, image/jpeg)
+[saved] chanel-saffron-nectar-0282 -> approved-images/chanel-saffron-nectar-0282.jpg (14481 bytes, image/jpeg)
+[saved] xerjoff-amber-elixir-0283 -> approved-images/xerjoff-amber-elixir-0283.jpg (21336 bytes, image/jpeg)
+[saved] lattafa-eclat-fusion-0284 -> approved-images/lattafa-eclat-fusion-0284.jpg (51789 bytes, image/jpeg)
+[saved] tom-ford-saffron-whisper-0286 -> approved-images/tom-ford-saffron-whisper-0286.jpg (1991561 bytes, image/jpeg)
+[saved] guerlain-noir-signature-0287 -> approved-images/guerlain-noir-signature-0287.jpg (77728 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-saffron-fusion-0288 -> approved-images/maison-francis-kurkdjian-saffron-fusion-0288.jpg (33543 bytes, image/jpeg)
+[saved] diptyque-midnight-spirit-0289 -> approved-images/diptyque-midnight-spirit-0289.jpg (16424 bytes, image/jpeg)
+[saved] yves-saint-laurent-noble-legend-0291 -> approved-images/yves-saint-laurent-noble-legend-0291.jpg (211832 bytes, image/jpeg)
+[saved] acqua-di-parma-midnight-nectar-0292 -> approved-images/acqua-di-parma-midnight-nectar-0292.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-noir-pulse-0293 -> approved-images/parfums-de-marly-noir-pulse-0293.jpg (43569 bytes, image/jpeg)
+[saved] initio-opaline-spirit-0294 -> approved-images/initio-opaline-spirit-0294.jpg (14847 bytes, image/jpeg)
+[saved] montale-zenith-bloom-0296 -> approved-images/montale-zenith-bloom-0296.jpg (14644 bytes, image/jpeg)
+[saved] nishane-amber-parfum-0297 -> approved-images/nishane-amber-parfum-0297.jpg (145046 bytes, image/jpeg)
+[saved] memo-paris-amber-sillage-0298 -> approved-images/memo-paris-amber-sillage-0298.jpg (24843 bytes, image/jpeg)
+[saved] frederic-malle-zenith-parfum-0299 -> approved-images/frederic-malle-zenith-parfum-0299.jpg (22597 bytes, image/jpeg)
+[saved] dior-noble-fusion-0301 -> approved-images/dior-noble-fusion-0301.jpg (45786 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 50
+failed search: 0
+failed download: 0
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0005/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0005/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] frederic-malle-saffron-eau-de-parfum-0239 (manifest row 2) -> frederic-malle/frederic-malle-saffron-eau-de-parfum-0239.jpg
+[upload] dior-solar-spirit-0241 (manifest row 3) -> dior/dior-solar-spirit-0241.jpg
+[upload] chanel-silk-veil-0242 (manifest row 4) -> chanel/chanel-silk-veil-0242.jpg
+[upload] xerjoff-mystic-essence-0243 (manifest row 5) -> xerjoff/xerjoff-mystic-essence-0243.jpg
+[upload] lattafa-noble-legend-0244 (manifest row 6) -> lattafa/lattafa-noble-legend-0244.jpg
+[upload] tom-ford-saffron-nectar-0246 (manifest row 7) -> tom-ford/tom-ford-saffron-nectar-0246.jpg
+[upload] guerlain-aura-veil-0247 (manifest row 8) -> guerlain/guerlain-aura-veil-0247.jpg
+[upload] maison-francis-kurkdjian-noble-signature-0248 (manifest row 9) -> maison-francis-kurkdjian/maison-francis-kurkdjian-noble-signature-0248.jpg
+[upload] diptyque-aura-nectar-0249 (manifest row 10) -> diptyque/diptyque-aura-nectar-0249.jpg
+[upload] yves-saint-laurent-opaline-essence-0251 (manifest row 11) -> yves-saint-laurent/yves-saint-laurent-opaline-essence-0251.jpg
+[upload] acqua-di-parma-noble-parfum-0252 (manifest row 12) -> acqua-di-parma/acqua-di-parma-noble-parfum-0252.jpg
+[upload] parfums-de-marly-aura-legend-0253 (manifest row 13) -> parfums-de-marly/parfums-de-marly-aura-legend-0253.jpg
+[upload] initio-mystic-edition-0254 (manifest row 14) -> initio/initio-mystic-edition-0254.jpg
+[upload] montale-intense-trail-0256 (manifest row 15) -> montale/montale-intense-trail-0256.jpg
+[upload] nishane-opaline-sillage-0257 (manifest row 16) -> nishane/nishane-opaline-sillage-0257.jpg
+[upload] memo-paris-zenith-veil-0258 (manifest row 17) -> memo-paris/memo-paris-zenith-veil-0258.jpg
+[upload] frederic-malle-velvet-bloom-0259 (manifest row 18) -> frederic-malle/frederic-malle-velvet-bloom-0259.jpg
+[upload] dior-intense-whisper-0261 (manifest row 19) -> dior/dior-intense-whisper-0261.jpg
+[upload] chanel-velvet-trail-0262 (manifest row 20) -> chanel/chanel-velvet-trail-0262.jpg
+[upload] xerjoff-aura-legend-0263 (manifest row 21) -> xerjoff/xerjoff-aura-legend-0263.jpg
+[upload] lattafa-oud-whisper-0264 (manifest row 22) -> lattafa/lattafa-oud-whisper-0264.jpg
+[upload] tom-ford-intense-parfum-0266 (manifest row 23) -> tom-ford/tom-ford-intense-parfum-0266.jpg
+[upload] guerlain-noir-eau-de-parfum-0267 (manifest row 24) -> guerlain/guerlain-noir-eau-de-parfum-0267.jpg
+[upload] maison-francis-kurkdjian-royal-signature-0268 (manifest row 25) -> maison-francis-kurkdjian/maison-francis-kurkdjian-royal-signature-0268.jpg
+[upload] diptyque-velvet-essence-0269 (manifest row 26) -> diptyque/diptyque-velvet-essence-0269.jpg
+[upload] yves-saint-laurent-royal-elixir-0271 (manifest row 27) -> yves-saint-laurent/yves-saint-laurent-royal-elixir-0271.jpg
+[upload] acqua-di-parma-velvet-pulse-0272 (manifest row 28) -> acqua-di-parma/acqua-di-parma-velvet-pulse-0272.jpg
+[upload] parfums-de-marly-noble-spirit-0273 (manifest row 29) -> parfums-de-marly/parfums-de-marly-noble-spirit-0273.jpg
+[upload] initio-zenith-edition-0274 (manifest row 30) -> initio/initio-zenith-edition-0274.jpg
+[upload] montale-eclat-parfum-0276 (manifest row 31) -> montale/montale-eclat-parfum-0276.jpg
+[upload] nishane-amber-bloom-0277 (manifest row 32) -> nishane/nishane-amber-bloom-0277.jpg
+[upload] memo-paris-noir-pulse-0278 (manifest row 33) -> memo-paris/memo-paris-noir-pulse-0278.jpg
+[upload] frederic-malle-absolu-elixir-0279 (manifest row 34) -> frederic-malle/frederic-malle-absolu-elixir-0279.jpg
+[upload] dior-noble-essence-0281 (manifest row 35) -> dior/dior-noble-essence-0281.jpg
+[upload] chanel-saffron-nectar-0282 (manifest row 36) -> chanel/chanel-saffron-nectar-0282.jpg
+[upload] xerjoff-amber-elixir-0283 (manifest row 37) -> xerjoff/xerjoff-amber-elixir-0283.jpg
+[upload] lattafa-eclat-fusion-0284 (manifest row 38) -> lattafa/lattafa-eclat-fusion-0284.jpg
+[upload] tom-ford-saffron-whisper-0286 (manifest row 39) -> tom-ford/tom-ford-saffron-whisper-0286.jpg
+[upload] guerlain-noir-signature-0287 (manifest row 40) -> guerlain/guerlain-noir-signature-0287.jpg
+[upload] maison-francis-kurkdjian-saffron-fusion-0288 (manifest row 41) -> maison-francis-kurkdjian/maison-francis-kurkdjian-saffron-fusion-0288.jpg
+[upload] diptyque-midnight-spirit-0289 (manifest row 42) -> diptyque/diptyque-midnight-spirit-0289.jpg
+[upload] yves-saint-laurent-noble-legend-0291 (manifest row 43) -> yves-saint-laurent/yves-saint-laurent-noble-legend-0291.jpg
+[upload] acqua-di-parma-midnight-nectar-0292 (manifest row 44) -> acqua-di-parma/acqua-di-parma-midnight-nectar-0292.jpg
+[upload] parfums-de-marly-noir-pulse-0293 (manifest row 45) -> parfums-de-marly/parfums-de-marly-noir-pulse-0293.jpg
+[upload] initio-opaline-spirit-0294 (manifest row 46) -> initio/initio-opaline-spirit-0294.jpg
+[upload] montale-zenith-bloom-0296 (manifest row 47) -> montale/montale-zenith-bloom-0296.jpg
+[upload] nishane-amber-parfum-0297 (manifest row 48) -> nishane/nishane-amber-parfum-0297.jpg
+[upload] memo-paris-amber-sillage-0298 (manifest row 49) -> memo-paris/memo-paris-amber-sillage-0298.jpg
+[upload] frederic-malle-zenith-parfum-0299 (manifest row 50) -> frederic-malle/frederic-malle-zenith-parfum-0299.jpg
+[upload] dior-noble-fusion-0301 (manifest row 51) -> dior/dior-noble-fusion-0301.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 50
+processed: 50
+uploaded: 50
+skipped: 0
+failed: 0
+updated CSV rows: 50
+updated DB rows: 50
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 50
+files uploaded: 50
+rows updated in CSV: 50
+rows updated in DB: 50
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 5/10 done | downloaded=50 uploaded=50 dbUpdated=50 skipped=0 failed=0
+
+[overnight] batch 6/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0006/manifest.csv rows=50 dryRun=false force=false
+[saved] chanel-oud-essence-0302 -> approved-images/chanel-oud-essence-0302.jpg (15947 bytes, image/jpeg)
+[saved] xerjoff-velvet-bloom-0303 -> approved-images/xerjoff-velvet-bloom-0303.jpg (18568 bytes, image/jpeg)
+[saved] lattafa-oud-spirit-0304 -> approved-images/lattafa-oud-spirit-0304.jpg (14038 bytes, image/jpeg)
+[saved] tom-ford-absolu-elixir-0306 -> approved-images/tom-ford-absolu-elixir-0306.jpg (25402 bytes, image/jpeg)
+[saved] guerlain-mystic-trail-0307 -> approved-images/guerlain-mystic-trail-0307.jpg (87510 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-intense-veil-0308 -> approved-images/maison-francis-kurkdjian-intense-veil-0308.jpg (24605 bytes, image/jpeg)
+[saved] diptyque-zenith-essence-0309 -> approved-images/diptyque-zenith-essence-0309.jpg (10350 bytes, image/jpeg)
+[saved] yves-saint-laurent-saffron-spirit-0311 -> approved-images/yves-saint-laurent-saffron-spirit-0311.jpg (23456 bytes, image/jpeg)
+[saved] acqua-di-parma-oud-sillage-0312 -> approved-images/acqua-di-parma-oud-sillage-0312.jpg (23082 bytes, image/jpeg)
+[saved] parfums-de-marly-mystic-signature-0313 -> approved-images/parfums-de-marly-mystic-signature-0313.jpg (139511 bytes, image/jpeg)
+[saved] initio-noir-trail-0314 -> approved-images/initio-noir-trail-0314.jpg (26615 bytes, image/jpeg)
+[saved] montale-noir-whisper-0316 -> approved-images/montale-noir-whisper-0316.jpg (18079 bytes, image/jpeg)
+[saved] nishane-oud-bloom-0317 -> approved-images/nishane-oud-bloom-0317.jpg (45211 bytes, image/jpeg)
+[saved] memo-paris-solar-bloom-0318 -> approved-images/memo-paris-solar-bloom-0318.jpg (190508 bytes, image/jpeg)
+[saved] frederic-malle-intense-fusion-0319 -> approved-images/frederic-malle-intense-fusion-0319.jpg (38331 bytes, image/jpeg)
+[saved] dior-opaline-spirit-0321 -> approved-images/dior-opaline-spirit-0321.jpg (111939 bytes, image/jpeg)
+[saved] chanel-luminous-signature-0322 -> approved-images/chanel-luminous-signature-0322.jpg (18964 bytes, image/jpeg)
+[saved] xerjoff-silk-elixir-0323 -> approved-images/xerjoff-silk-elixir-0323.jpg (254052 bytes, image/jpeg)
+[saved] lattafa-mystic-legend-0324 -> approved-images/lattafa-mystic-legend-0324.jpg (61819 bytes, image/jpeg)
+[saved] tom-ford-zenith-edition-0326 -> approved-images/tom-ford-zenith-edition-0326.jpg (23523 bytes, image/jpeg)
+[saved] guerlain-royal-parfum-0327 -> approved-images/guerlain-royal-parfum-0327.jpg (15768 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-eclat-eau-de-parfum-0328 -> approved-images/maison-francis-kurkdjian-eclat-eau-de-parfum-0328.jpg (30256 bytes, image/jpeg)
+[saved] diptyque-midnight-edition-0329 -> approved-images/diptyque-midnight-edition-0329.jpg (11989 bytes, image/jpeg)
+[saved] yves-saint-laurent-luminous-essence-0331 -> approved-images/yves-saint-laurent-luminous-essence-0331.jpg (57872 bytes, image/jpeg)
+[saved] acqua-di-parma-zenith-nectar-0332 -> approved-images/acqua-di-parma-zenith-nectar-0332.jpg (15272 bytes, image/jpeg)
+[fail-download] parfums-de-marly-royal-reserve-0333 all candidates failed validation/download
+[saved] initio-silk-trail-0334 -> approved-images/initio-silk-trail-0334.jpg (110148 bytes, image/jpeg)
+[saved] montale-intense-bloom-0336 -> approved-images/montale-intense-bloom-0336.jpg (182348 bytes, image/jpeg)
+[saved] nishane-velvet-signature-0337 -> approved-images/nishane-velvet-signature-0337.jpg (24025 bytes, image/jpeg)
+[saved] memo-paris-eclat-trail-0338 -> approved-images/memo-paris-eclat-trail-0338.jpg (87228 bytes, image/jpeg)
+[saved] frederic-malle-zenith-pulse-0339 -> approved-images/frederic-malle-zenith-pulse-0339.jpg (22597 bytes, image/jpeg)
+[saved] dior-zenith-eau-de-parfum-0341 -> approved-images/dior-zenith-eau-de-parfum-0341.jpg (52227 bytes, image/jpeg)
+[saved] chanel-absolu-signature-0342 -> approved-images/chanel-absolu-signature-0342.jpg (21342 bytes, image/jpeg)
+[fail-download] xerjoff-silk-reserve-0343 all candidates failed validation/download
+[saved] lattafa-midnight-trail-0344 -> approved-images/lattafa-midnight-trail-0344.jpg (24313 bytes, image/jpeg)
+[saved] tom-ford-luminous-sillage-0346 -> approved-images/tom-ford-luminous-sillage-0346.jpg (11554 bytes, image/jpeg)
+[saved] guerlain-silk-bloom-0347 -> approved-images/guerlain-silk-bloom-0347.jpg (11763 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-intense-spirit-0348 -> approved-images/maison-francis-kurkdjian-intense-spirit-0348.jpg (24917 bytes, image/jpeg)
+[saved] diptyque-aura-legend-0349 -> approved-images/diptyque-aura-legend-0349.jpg (16424 bytes, image/jpeg)
+[saved] yves-saint-laurent-midnight-essence-0351 -> approved-images/yves-saint-laurent-midnight-essence-0351.jpg (21321 bytes, image/jpeg)
+[saved] acqua-di-parma-intense-signature-0352 -> approved-images/acqua-di-parma-intense-signature-0352.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-opaline-elixir-0353 -> approved-images/parfums-de-marly-opaline-elixir-0353.jpg (110861 bytes, image/jpeg)
+[saved] initio-midnight-edition-0354 -> approved-images/initio-midnight-edition-0354.jpg (175802 bytes, image/jpeg)
+[saved] montale-absolu-sillage-0356 -> approved-images/montale-absolu-sillage-0356.jpg (20540 bytes, image/png)
+[saved] nishane-zenith-spirit-0357 -> approved-images/nishane-zenith-spirit-0357.jpg (18901 bytes, image/jpeg)
+[fail-download] memo-paris-midnight-essence-0358 all candidates failed validation/download
+[saved] frederic-malle-eclat-legend-0359 -> approved-images/frederic-malle-eclat-legend-0359.jpg (438900 bytes, image/jpeg)
+[saved] dior-luminous-trail-0361 -> approved-images/dior-luminous-trail-0361.jpg (18731 bytes, image/jpeg)
+[saved] chanel-absolu-legend-0362 -> approved-images/chanel-absolu-legend-0362.jpg (15947 bytes, image/jpeg)
+[fail-download] xerjoff-midnight-fusion-0363 all candidates failed validation/download
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 46
+failed search: 0
+failed download: 4
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0006/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0006/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] chanel-oud-essence-0302 (manifest row 2) -> chanel/chanel-oud-essence-0302.jpg
+[upload] xerjoff-velvet-bloom-0303 (manifest row 3) -> xerjoff/xerjoff-velvet-bloom-0303.jpg
+[upload] lattafa-oud-spirit-0304 (manifest row 4) -> lattafa/lattafa-oud-spirit-0304.jpg
+[upload] tom-ford-absolu-elixir-0306 (manifest row 5) -> tom-ford/tom-ford-absolu-elixir-0306.jpg
+[upload] guerlain-mystic-trail-0307 (manifest row 6) -> guerlain/guerlain-mystic-trail-0307.jpg
+[upload] maison-francis-kurkdjian-intense-veil-0308 (manifest row 7) -> maison-francis-kurkdjian/maison-francis-kurkdjian-intense-veil-0308.jpg
+[upload] diptyque-zenith-essence-0309 (manifest row 8) -> diptyque/diptyque-zenith-essence-0309.jpg
+[upload] yves-saint-laurent-saffron-spirit-0311 (manifest row 9) -> yves-saint-laurent/yves-saint-laurent-saffron-spirit-0311.jpg
+[upload] acqua-di-parma-oud-sillage-0312 (manifest row 10) -> acqua-di-parma/acqua-di-parma-oud-sillage-0312.jpg
+[upload] parfums-de-marly-mystic-signature-0313 (manifest row 11) -> parfums-de-marly/parfums-de-marly-mystic-signature-0313.jpg
+[upload] initio-noir-trail-0314 (manifest row 12) -> initio/initio-noir-trail-0314.jpg
+[upload] montale-noir-whisper-0316 (manifest row 13) -> montale/montale-noir-whisper-0316.jpg
+[upload] nishane-oud-bloom-0317 (manifest row 14) -> nishane/nishane-oud-bloom-0317.jpg
+[upload] memo-paris-solar-bloom-0318 (manifest row 15) -> memo-paris/memo-paris-solar-bloom-0318.jpg
+[upload] frederic-malle-intense-fusion-0319 (manifest row 16) -> frederic-malle/frederic-malle-intense-fusion-0319.jpg
+[upload] dior-opaline-spirit-0321 (manifest row 17) -> dior/dior-opaline-spirit-0321.jpg
+[upload] chanel-luminous-signature-0322 (manifest row 18) -> chanel/chanel-luminous-signature-0322.jpg
+[upload] xerjoff-silk-elixir-0323 (manifest row 19) -> xerjoff/xerjoff-silk-elixir-0323.jpg
+[upload] lattafa-mystic-legend-0324 (manifest row 20) -> lattafa/lattafa-mystic-legend-0324.jpg
+[upload] tom-ford-zenith-edition-0326 (manifest row 21) -> tom-ford/tom-ford-zenith-edition-0326.jpg
+[upload] guerlain-royal-parfum-0327 (manifest row 22) -> guerlain/guerlain-royal-parfum-0327.jpg
+[upload] maison-francis-kurkdjian-eclat-eau-de-parfum-0328 (manifest row 23) -> maison-francis-kurkdjian/maison-francis-kurkdjian-eclat-eau-de-parfum-0328.jpg
+[upload] diptyque-midnight-edition-0329 (manifest row 24) -> diptyque/diptyque-midnight-edition-0329.jpg
+[upload] yves-saint-laurent-luminous-essence-0331 (manifest row 25) -> yves-saint-laurent/yves-saint-laurent-luminous-essence-0331.jpg
+[upload] acqua-di-parma-zenith-nectar-0332 (manifest row 26) -> acqua-di-parma/acqua-di-parma-zenith-nectar-0332.jpg
+[skip] parfums-de-marly-royal-reserve-0333 (manifest row 27) local file not found (checked: approved-images/parfums-de-marly-royal-reserve-0333.jpg)
+[upload] initio-silk-trail-0334 (manifest row 28) -> initio/initio-silk-trail-0334.jpg
+[upload] montale-intense-bloom-0336 (manifest row 29) -> montale/montale-intense-bloom-0336.jpg
+[upload] nishane-velvet-signature-0337 (manifest row 30) -> nishane/nishane-velvet-signature-0337.jpg
+[upload] memo-paris-eclat-trail-0338 (manifest row 31) -> memo-paris/memo-paris-eclat-trail-0338.jpg
+[upload] frederic-malle-zenith-pulse-0339 (manifest row 32) -> frederic-malle/frederic-malle-zenith-pulse-0339.jpg
+[upload] dior-zenith-eau-de-parfum-0341 (manifest row 33) -> dior/dior-zenith-eau-de-parfum-0341.jpg
+[upload] chanel-absolu-signature-0342 (manifest row 34) -> chanel/chanel-absolu-signature-0342.jpg
+[skip] xerjoff-silk-reserve-0343 (manifest row 35) local file not found (checked: approved-images/xerjoff-silk-reserve-0343.jpg)
+[upload] lattafa-midnight-trail-0344 (manifest row 36) -> lattafa/lattafa-midnight-trail-0344.jpg
+[upload] tom-ford-luminous-sillage-0346 (manifest row 37) -> tom-ford/tom-ford-luminous-sillage-0346.jpg
+[upload] guerlain-silk-bloom-0347 (manifest row 38) -> guerlain/guerlain-silk-bloom-0347.jpg
+[upload] maison-francis-kurkdjian-intense-spirit-0348 (manifest row 39) -> maison-francis-kurkdjian/maison-francis-kurkdjian-intense-spirit-0348.jpg
+[upload] diptyque-aura-legend-0349 (manifest row 40) -> diptyque/diptyque-aura-legend-0349.jpg
+[upload] yves-saint-laurent-midnight-essence-0351 (manifest row 41) -> yves-saint-laurent/yves-saint-laurent-midnight-essence-0351.jpg
+[upload] acqua-di-parma-intense-signature-0352 (manifest row 42) -> acqua-di-parma/acqua-di-parma-intense-signature-0352.jpg
+[upload] parfums-de-marly-opaline-elixir-0353 (manifest row 43) -> parfums-de-marly/parfums-de-marly-opaline-elixir-0353.jpg
+[upload] initio-midnight-edition-0354 (manifest row 44) -> initio/initio-midnight-edition-0354.jpg
+[upload] montale-absolu-sillage-0356 (manifest row 45) -> montale/montale-absolu-sillage-0356.jpg
+[upload] nishane-zenith-spirit-0357 (manifest row 46) -> nishane/nishane-zenith-spirit-0357.jpg
+[skip] memo-paris-midnight-essence-0358 (manifest row 47) local file not found (checked: approved-images/memo-paris-midnight-essence-0358.jpg)
+[upload] frederic-malle-eclat-legend-0359 (manifest row 48) -> frederic-malle/frederic-malle-eclat-legend-0359.jpg
+[upload] dior-luminous-trail-0361 (manifest row 49) -> dior/dior-luminous-trail-0361.jpg
+[upload] chanel-absolu-legend-0362 (manifest row 50) -> chanel/chanel-absolu-legend-0362.jpg
+[skip] xerjoff-midnight-fusion-0363 (manifest row 51) local file not found (checked: approved-images/xerjoff-midnight-fusion-0363.jpg)
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 46
+processed: 50
+uploaded: 46
+skipped: 4
+failed: 0
+updated CSV rows: 46
+updated DB rows: 46
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 46
+files uploaded: 46
+rows updated in CSV: 46
+rows updated in DB: 46
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 6/10 done | downloaded=46 uploaded=46 dbUpdated=46 skipped=4 failed=4
+
+[overnight] batch 7/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0007/manifest.csv rows=50 dryRun=false force=false
+[fail-download] lattafa-luminous-bloom-0364 all candidates failed validation/download
+[saved] tom-ford-zenith-veil-0366 -> approved-images/tom-ford-zenith-veil-0366.jpg (16983 bytes, image/jpeg)
+[saved] guerlain-saffron-pulse-0367 -> approved-images/guerlain-saffron-pulse-0367.jpg (21810 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-saffron-code-0368 -> approved-images/maison-francis-kurkdjian-saffron-code-0368.jpg (28493 bytes, image/jpeg)
+[saved] diptyque-opaline-trail-0369 -> approved-images/diptyque-opaline-trail-0369.jpg (17283 bytes, image/jpeg)
+[saved] yves-saint-laurent-amber-parfum-0371 -> approved-images/yves-saint-laurent-amber-parfum-0371.jpg (29354 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-legend-0372 -> approved-images/acqua-di-parma-noble-legend-0372.jpg (15236 bytes, image/jpeg)
+[saved] parfums-de-marly-eclat-fusion-0373 -> approved-images/parfums-de-marly-eclat-fusion-0373.jpg (110861 bytes, image/jpeg)
+[saved] initio-silk-code-0374 -> approved-images/initio-silk-code-0374.jpg (26106 bytes, image/jpeg)
+[saved] montale-aura-veil-0376 -> approved-images/montale-aura-veil-0376.jpg (21781 bytes, image/jpeg)
+[saved] nishane-aura-reserve-0377 -> approved-images/nishane-aura-reserve-0377.jpg (36145 bytes, image/jpeg)
+[saved] memo-paris-intense-signature-0378 -> approved-images/memo-paris-intense-signature-0378.jpg (87228 bytes, image/jpeg)
+[saved] frederic-malle-oud-pulse-0379 -> approved-images/frederic-malle-oud-pulse-0379.jpg (14052 bytes, image/jpeg)
+[saved] dior-noble-eau-de-parfum-0381 -> approved-images/dior-noble-eau-de-parfum-0381.jpg (30705 bytes, image/jpeg)
+[saved] chanel-velvet-parfum-0382 -> approved-images/chanel-velvet-parfum-0382.jpg (210844 bytes, image/jpeg)
+[saved] xerjoff-noir-whisper-0383 -> approved-images/xerjoff-noir-whisper-0383.jpg (19996 bytes, image/jpeg)
+[saved] lattafa-zenith-bloom-0384 -> approved-images/lattafa-zenith-bloom-0384.jpg (18677 bytes, image/jpeg)
+[saved] tom-ford-midnight-eau-de-parfum-0386 -> approved-images/tom-ford-midnight-eau-de-parfum-0386.jpg (107594 bytes, image/jpeg)
+[saved] guerlain-mystic-elixir-0387 -> approved-images/guerlain-mystic-elixir-0387.jpg (29544 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-luminous-essence-0388 -> approved-images/maison-francis-kurkdjian-luminous-essence-0388.jpg (77079 bytes, image/jpeg)
+[saved] diptyque-saffron-code-0389 -> approved-images/diptyque-saffron-code-0389.jpg (17283 bytes, image/jpeg)
+[saved] yves-saint-laurent-silk-veil-0391 -> approved-images/yves-saint-laurent-silk-veil-0391.jpg (11488 bytes, image/jpeg)
+[saved] acqua-di-parma-oud-pulse-0392 -> approved-images/acqua-di-parma-oud-pulse-0392.jpg (23430 bytes, image/jpeg)
+[saved] parfums-de-marly-royal-trail-0393 -> approved-images/parfums-de-marly-royal-trail-0393.jpg (110861 bytes, image/jpeg)
+[saved] initio-eclat-fusion-0394 -> approved-images/initio-eclat-fusion-0394.jpg (20845 bytes, image/jpeg)
+[saved] montale-zenith-pulse-0396 -> approved-images/montale-zenith-pulse-0396.jpg (21388 bytes, image/jpeg)
+[saved] nishane-solar-bloom-0397 -> approved-images/nishane-solar-bloom-0397.jpg (26998 bytes, image/jpeg)
+[fail-download] memo-paris-absolu-spirit-0398 all candidates failed validation/download
+[saved] frederic-malle-midnight-code-0399 -> approved-images/frederic-malle-midnight-code-0399.jpg (17194 bytes, image/jpeg)
+[saved] dior-velvet-parfum-0401 -> approved-images/dior-velvet-parfum-0401.jpg (22511 bytes, image/jpeg)
+[saved] chanel-mystic-nectar-0402 -> approved-images/chanel-mystic-nectar-0402.jpg (44436 bytes, image/jpeg)
+[saved] xerjoff-velvet-edition-0403 -> approved-images/xerjoff-velvet-edition-0403.jpg (11071 bytes, image/jpeg)
+[saved] lattafa-solar-parfum-0404 -> approved-images/lattafa-solar-parfum-0404.jpg (10949 bytes, image/jpeg)
+[saved] tom-ford-zenith-eau-de-parfum-0406 -> approved-images/tom-ford-zenith-eau-de-parfum-0406.jpg (32191 bytes, image/jpeg)
+[saved] guerlain-luminous-bloom-0407 -> approved-images/guerlain-luminous-bloom-0407.jpg (27697 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-oud-whisper-0408 -> approved-images/maison-francis-kurkdjian-oud-whisper-0408.jpg (28549 bytes, image/jpeg)
+[saved] diptyque-noble-trail-0409 -> approved-images/diptyque-noble-trail-0409.jpg (13554 bytes, image/jpeg)
+[saved] yves-saint-laurent-noir-code-0411 -> approved-images/yves-saint-laurent-noir-code-0411.jpg (17422 bytes, image/jpeg)
+[saved] acqua-di-parma-oud-veil-0412 -> approved-images/acqua-di-parma-oud-veil-0412.jpg (29960 bytes, image/jpeg)
+[saved] parfums-de-marly-solar-elixir-0413 -> approved-images/parfums-de-marly-solar-elixir-0413.jpg (10368 bytes, image/jpeg)
+[saved] initio-amber-parfum-0414 -> approved-images/initio-amber-parfum-0414.jpg (62595 bytes, image/jpeg)
+[saved] montale-opaline-whisper-0416 -> approved-images/montale-opaline-whisper-0416.jpg (14847 bytes, image/jpeg)
+[saved] nishane-noir-whisper-0417 -> approved-images/nishane-noir-whisper-0417.jpg (33048 bytes, image/jpeg)
+[saved] memo-paris-royal-whisper-0418 -> approved-images/memo-paris-royal-whisper-0418.jpg (47906 bytes, image/jpeg)
+[saved] frederic-malle-noir-bloom-0419 -> approved-images/frederic-malle-noir-bloom-0419.jpg (866530 bytes, image/jpeg)
+[saved] dior-intense-veil-0421 -> approved-images/dior-intense-veil-0421.jpg (11003 bytes, image/jpeg)
+[saved] chanel-solar-whisper-0422 -> approved-images/chanel-solar-whisper-0422.jpg (20794 bytes, image/jpeg)
+[saved] xerjoff-royal-elixir-0423 -> approved-images/xerjoff-royal-elixir-0423.jpg (22598 bytes, image/jpeg)
+[saved] lattafa-opaline-signature-0424 -> approved-images/lattafa-opaline-signature-0424.jpg (14847 bytes, image/jpeg)
+[saved] tom-ford-noir-whisper-0426 -> approved-images/tom-ford-noir-whisper-0426.jpg (23183 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 48
+failed search: 0
+failed download: 2
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0007/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0007/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[skip] lattafa-luminous-bloom-0364 (manifest row 2) local file not found (checked: approved-images/lattafa-luminous-bloom-0364.jpg)
+[upload] tom-ford-zenith-veil-0366 (manifest row 3) -> tom-ford/tom-ford-zenith-veil-0366.jpg
+[upload] guerlain-saffron-pulse-0367 (manifest row 4) -> guerlain/guerlain-saffron-pulse-0367.jpg
+[upload] maison-francis-kurkdjian-saffron-code-0368 (manifest row 5) -> maison-francis-kurkdjian/maison-francis-kurkdjian-saffron-code-0368.jpg
+[upload] diptyque-opaline-trail-0369 (manifest row 6) -> diptyque/diptyque-opaline-trail-0369.jpg
+[upload] yves-saint-laurent-amber-parfum-0371 (manifest row 7) -> yves-saint-laurent/yves-saint-laurent-amber-parfum-0371.jpg
+[upload] acqua-di-parma-noble-legend-0372 (manifest row 8) -> acqua-di-parma/acqua-di-parma-noble-legend-0372.jpg
+[upload] parfums-de-marly-eclat-fusion-0373 (manifest row 9) -> parfums-de-marly/parfums-de-marly-eclat-fusion-0373.jpg
+[upload] initio-silk-code-0374 (manifest row 10) -> initio/initio-silk-code-0374.jpg
+[upload] montale-aura-veil-0376 (manifest row 11) -> montale/montale-aura-veil-0376.jpg
+[upload] nishane-aura-reserve-0377 (manifest row 12) -> nishane/nishane-aura-reserve-0377.jpg
+[upload] memo-paris-intense-signature-0378 (manifest row 13) -> memo-paris/memo-paris-intense-signature-0378.jpg
+[upload] frederic-malle-oud-pulse-0379 (manifest row 14) -> frederic-malle/frederic-malle-oud-pulse-0379.jpg
+[upload] dior-noble-eau-de-parfum-0381 (manifest row 15) -> dior/dior-noble-eau-de-parfum-0381.jpg
+[upload] chanel-velvet-parfum-0382 (manifest row 16) -> chanel/chanel-velvet-parfum-0382.jpg
+[upload] xerjoff-noir-whisper-0383 (manifest row 17) -> xerjoff/xerjoff-noir-whisper-0383.jpg
+[upload] lattafa-zenith-bloom-0384 (manifest row 18) -> lattafa/lattafa-zenith-bloom-0384.jpg
+[upload] tom-ford-midnight-eau-de-parfum-0386 (manifest row 19) -> tom-ford/tom-ford-midnight-eau-de-parfum-0386.jpg
+[upload] guerlain-mystic-elixir-0387 (manifest row 20) -> guerlain/guerlain-mystic-elixir-0387.jpg
+[upload] maison-francis-kurkdjian-luminous-essence-0388 (manifest row 21) -> maison-francis-kurkdjian/maison-francis-kurkdjian-luminous-essence-0388.jpg
+[upload] diptyque-saffron-code-0389 (manifest row 22) -> diptyque/diptyque-saffron-code-0389.jpg
+[upload] yves-saint-laurent-silk-veil-0391 (manifest row 23) -> yves-saint-laurent/yves-saint-laurent-silk-veil-0391.jpg
+[upload] acqua-di-parma-oud-pulse-0392 (manifest row 24) -> acqua-di-parma/acqua-di-parma-oud-pulse-0392.jpg
+[upload] parfums-de-marly-royal-trail-0393 (manifest row 25) -> parfums-de-marly/parfums-de-marly-royal-trail-0393.jpg
+[upload] initio-eclat-fusion-0394 (manifest row 26) -> initio/initio-eclat-fusion-0394.jpg
+[upload] montale-zenith-pulse-0396 (manifest row 27) -> montale/montale-zenith-pulse-0396.jpg
+[upload] nishane-solar-bloom-0397 (manifest row 28) -> nishane/nishane-solar-bloom-0397.jpg
+[skip] memo-paris-absolu-spirit-0398 (manifest row 29) local file not found (checked: approved-images/memo-paris-absolu-spirit-0398.jpg)
+[upload] frederic-malle-midnight-code-0399 (manifest row 30) -> frederic-malle/frederic-malle-midnight-code-0399.jpg
+[upload] dior-velvet-parfum-0401 (manifest row 31) -> dior/dior-velvet-parfum-0401.jpg
+[upload] chanel-mystic-nectar-0402 (manifest row 32) -> chanel/chanel-mystic-nectar-0402.jpg
+[upload] xerjoff-velvet-edition-0403 (manifest row 33) -> xerjoff/xerjoff-velvet-edition-0403.jpg
+[upload] lattafa-solar-parfum-0404 (manifest row 34) -> lattafa/lattafa-solar-parfum-0404.jpg
+[upload] tom-ford-zenith-eau-de-parfum-0406 (manifest row 35) -> tom-ford/tom-ford-zenith-eau-de-parfum-0406.jpg
+[upload] guerlain-luminous-bloom-0407 (manifest row 36) -> guerlain/guerlain-luminous-bloom-0407.jpg
+[upload] maison-francis-kurkdjian-oud-whisper-0408 (manifest row 37) -> maison-francis-kurkdjian/maison-francis-kurkdjian-oud-whisper-0408.jpg
+[upload] diptyque-noble-trail-0409 (manifest row 38) -> diptyque/diptyque-noble-trail-0409.jpg
+[upload] yves-saint-laurent-noir-code-0411 (manifest row 39) -> yves-saint-laurent/yves-saint-laurent-noir-code-0411.jpg
+[upload] acqua-di-parma-oud-veil-0412 (manifest row 40) -> acqua-di-parma/acqua-di-parma-oud-veil-0412.jpg
+[upload] parfums-de-marly-solar-elixir-0413 (manifest row 41) -> parfums-de-marly/parfums-de-marly-solar-elixir-0413.jpg
+[upload] initio-amber-parfum-0414 (manifest row 42) -> initio/initio-amber-parfum-0414.jpg
+[upload] montale-opaline-whisper-0416 (manifest row 43) -> montale/montale-opaline-whisper-0416.jpg
+[upload] nishane-noir-whisper-0417 (manifest row 44) -> nishane/nishane-noir-whisper-0417.jpg
+[upload] memo-paris-royal-whisper-0418 (manifest row 45) -> memo-paris/memo-paris-royal-whisper-0418.jpg
+[upload] frederic-malle-noir-bloom-0419 (manifest row 46) -> frederic-malle/frederic-malle-noir-bloom-0419.jpg
+[upload] dior-intense-veil-0421 (manifest row 47) -> dior/dior-intense-veil-0421.jpg
+[upload] chanel-solar-whisper-0422 (manifest row 48) -> chanel/chanel-solar-whisper-0422.jpg
+[upload] xerjoff-royal-elixir-0423 (manifest row 49) -> xerjoff/xerjoff-royal-elixir-0423.jpg
+[upload] lattafa-opaline-signature-0424 (manifest row 50) -> lattafa/lattafa-opaline-signature-0424.jpg
+[upload] tom-ford-noir-whisper-0426 (manifest row 51) -> tom-ford/tom-ford-noir-whisper-0426.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 48
+processed: 50
+uploaded: 48
+skipped: 2
+failed: 0
+updated CSV rows: 48
+updated DB rows: 48
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 48
+files uploaded: 48
+rows updated in CSV: 48
+rows updated in DB: 48
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 7/10 done | downloaded=48 uploaded=48 dbUpdated=48 skipped=2 failed=2
+
+[overnight] batch 8/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0008/manifest.csv rows=50 dryRun=false force=false
+[saved] guerlain-midnight-spirit-0427 -> approved-images/guerlain-midnight-spirit-0427.jpg (31353 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-noir-signature-0428 -> approved-images/maison-francis-kurkdjian-noir-signature-0428.jpg (707062 bytes, image/jpeg)
+[saved] diptyque-noble-code-0429 -> approved-images/diptyque-noble-code-0429.jpg (32180 bytes, image/jpeg)
+[saved] yves-saint-laurent-aura-parfum-0431 -> approved-images/yves-saint-laurent-aura-parfum-0431.jpg (201234 bytes, image/jpeg)
+[saved] acqua-di-parma-eclat-eau-de-parfum-0432 -> approved-images/acqua-di-parma-eclat-eau-de-parfum-0432.jpg (13323 bytes, image/jpeg)
+[saved] parfums-de-marly-luminous-edition-0433 -> approved-images/parfums-de-marly-luminous-edition-0433.jpg (11288 bytes, image/jpeg)
+[saved] initio-noir-essence-0434 -> approved-images/initio-noir-essence-0434.jpg (65525 bytes, image/jpeg)
+[saved] montale-aura-whisper-0436 -> approved-images/montale-aura-whisper-0436.jpg (21954 bytes, image/jpeg)
+[saved] nishane-midnight-reserve-0437 -> approved-images/nishane-midnight-reserve-0437.jpg (16509 bytes, image/jpeg)
+[saved] memo-paris-luminous-edition-0438 -> approved-images/memo-paris-luminous-edition-0438.jpg (169605 bytes, image/jpeg)
+[saved] frederic-malle-mystic-veil-0439 -> approved-images/frederic-malle-mystic-veil-0439.jpg (22597 bytes, image/jpeg)
+[saved] dior-absolu-bloom-0441 -> approved-images/dior-absolu-bloom-0441.jpg (36140 bytes, image/jpeg)
+[saved] chanel-royal-code-0442 -> approved-images/chanel-royal-code-0442.jpg (1090433 bytes, image/png)
+[saved] xerjoff-mystic-whisper-0443 -> approved-images/xerjoff-mystic-whisper-0443.jpg (19996 bytes, image/jpeg)
+[saved] lattafa-aura-trail-0444 -> approved-images/lattafa-aura-trail-0444.jpg (35709 bytes, image/jpeg)
+[saved] tom-ford-saffron-pulse-0446 -> approved-images/tom-ford-saffron-pulse-0446.jpg (56464 bytes, image/jpeg)
+[saved] guerlain-intense-signature-0447 -> approved-images/guerlain-intense-signature-0447.jpg (34195 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-oud-parfum-0448 -> approved-images/maison-francis-kurkdjian-oud-parfum-0448.jpg (27181 bytes, image/jpeg)
+[saved] diptyque-saffron-signature-0449 -> approved-images/diptyque-saffron-signature-0449.jpg (52183 bytes, image/jpeg)
+[saved] yves-saint-laurent-opaline-trail-0451 -> approved-images/yves-saint-laurent-opaline-trail-0451.jpg (20353 bytes, image/jpeg)
+[saved] acqua-di-parma-noble-legend-0452 -> approved-images/acqua-di-parma-noble-legend-0452.jpg (13323 bytes, image/jpeg)
+[saved] parfums-de-marly-luminous-trail-0453 -> approved-images/parfums-de-marly-luminous-trail-0453.jpg (19951 bytes, image/jpeg)
+[saved] initio-intense-elixir-0454 -> approved-images/initio-intense-elixir-0454.jpg (14316 bytes, image/jpeg)
+[saved] montale-velvet-nectar-0456 -> approved-images/montale-velvet-nectar-0456.jpg (42588 bytes, image/jpeg)
+[saved] nishane-zenith-bloom-0457 -> approved-images/nishane-zenith-bloom-0457.jpg (18901 bytes, image/jpeg)
+[saved] memo-paris-saffron-nectar-0458 -> approved-images/memo-paris-saffron-nectar-0458.jpg (12392 bytes, image/jpeg)
+[saved] frederic-malle-absolu-edition-0459 -> approved-images/frederic-malle-absolu-edition-0459.jpg (26612 bytes, image/jpeg)
+[saved] dior-absolu-eau-de-parfum-0461 -> approved-images/dior-absolu-eau-de-parfum-0461.jpg (26962 bytes, image/jpeg)
+[saved] chanel-saffron-elixir-0462 -> approved-images/chanel-saffron-elixir-0462.jpg (124700 bytes, image/jpeg)
+[saved] xerjoff-silk-pulse-0463 -> approved-images/xerjoff-silk-pulse-0463.jpg (16831 bytes, image/jpeg)
+[saved] lattafa-silk-legend-0464 -> approved-images/lattafa-silk-legend-0464.jpg (11796 bytes, image/jpeg)
+[fail-download] tom-ford-luminous-elixir-0466 all candidates failed validation/download
+[saved] guerlain-oud-bloom-0467 -> approved-images/guerlain-oud-bloom-0467.jpg (27697 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-saffron-eau-de-parfum-0468 -> approved-images/maison-francis-kurkdjian-saffron-eau-de-parfum-0468.jpg (27181 bytes, image/jpeg)
+[saved] diptyque-solar-parfum-0469 -> approved-images/diptyque-solar-parfum-0469.jpg (36087 bytes, image/jpeg)
+[saved] yves-saint-laurent-amber-fusion-0471 -> approved-images/yves-saint-laurent-amber-fusion-0471.jpg (26187 bytes, image/jpeg)
+[saved] acqua-di-parma-oud-whisper-0472 -> approved-images/acqua-di-parma-oud-whisper-0472.jpg (25132 bytes, image/jpeg)
+[saved] parfums-de-marly-opaline-essence-0473 -> approved-images/parfums-de-marly-opaline-essence-0473.jpg (42812 bytes, image/jpeg)
+[saved] initio-noble-spirit-0474 -> approved-images/initio-noble-spirit-0474.jpg (96337 bytes, image/jpeg)
+[saved] montale-oud-sillage-0476 -> approved-images/montale-oud-sillage-0476.jpg (20385 bytes, image/jpeg)
+[saved] nishane-noir-veil-0477 -> approved-images/nishane-noir-veil-0477.jpg (16121 bytes, image/jpeg)
+[saved] memo-paris-oud-parfum-0478 -> approved-images/memo-paris-oud-parfum-0478.jpg (17647 bytes, image/jpeg)
+[saved] frederic-malle-silk-trail-0479 -> approved-images/frederic-malle-silk-trail-0479.jpg (22786 bytes, image/jpeg)
+[saved] dior-midnight-edition-0481 -> approved-images/dior-midnight-edition-0481.jpg (14040 bytes, image/jpeg)
+[saved] chanel-midnight-spirit-0482 -> approved-images/chanel-midnight-spirit-0482.jpg (15947 bytes, image/jpeg)
+[saved] xerjoff-intense-eau-de-parfum-0483 -> approved-images/xerjoff-intense-eau-de-parfum-0483.jpg (24734 bytes, image/jpeg)
+[saved] lattafa-noir-elixir-0484 -> approved-images/lattafa-noir-elixir-0484.jpg (410533 bytes, image/jpeg)
+[saved] tom-ford-saffron-whisper-0486 -> approved-images/tom-ford-saffron-whisper-0486.jpg (916310 bytes, image/jpeg)
+[saved] guerlain-opaline-trail-0487 -> approved-images/guerlain-opaline-trail-0487.jpg (190913 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-royal-essence-0488 -> approved-images/maison-francis-kurkdjian-royal-essence-0488.jpg (24917 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 49
+failed search: 0
+failed download: 1
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0008/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0008/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] guerlain-midnight-spirit-0427 (manifest row 2) -> guerlain/guerlain-midnight-spirit-0427.jpg
+[upload] maison-francis-kurkdjian-noir-signature-0428 (manifest row 3) -> maison-francis-kurkdjian/maison-francis-kurkdjian-noir-signature-0428.jpg
+[upload] diptyque-noble-code-0429 (manifest row 4) -> diptyque/diptyque-noble-code-0429.jpg
+[upload] yves-saint-laurent-aura-parfum-0431 (manifest row 5) -> yves-saint-laurent/yves-saint-laurent-aura-parfum-0431.jpg
+[upload] acqua-di-parma-eclat-eau-de-parfum-0432 (manifest row 6) -> acqua-di-parma/acqua-di-parma-eclat-eau-de-parfum-0432.jpg
+[upload] parfums-de-marly-luminous-edition-0433 (manifest row 7) -> parfums-de-marly/parfums-de-marly-luminous-edition-0433.jpg
+[upload] initio-noir-essence-0434 (manifest row 8) -> initio/initio-noir-essence-0434.jpg
+[upload] montale-aura-whisper-0436 (manifest row 9) -> montale/montale-aura-whisper-0436.jpg
+[upload] nishane-midnight-reserve-0437 (manifest row 10) -> nishane/nishane-midnight-reserve-0437.jpg
+[upload] memo-paris-luminous-edition-0438 (manifest row 11) -> memo-paris/memo-paris-luminous-edition-0438.jpg
+[upload] frederic-malle-mystic-veil-0439 (manifest row 12) -> frederic-malle/frederic-malle-mystic-veil-0439.jpg
+[upload] dior-absolu-bloom-0441 (manifest row 13) -> dior/dior-absolu-bloom-0441.jpg
+[upload] chanel-royal-code-0442 (manifest row 14) -> chanel/chanel-royal-code-0442.jpg
+[upload] xerjoff-mystic-whisper-0443 (manifest row 15) -> xerjoff/xerjoff-mystic-whisper-0443.jpg
+[upload] lattafa-aura-trail-0444 (manifest row 16) -> lattafa/lattafa-aura-trail-0444.jpg
+[upload] tom-ford-saffron-pulse-0446 (manifest row 17) -> tom-ford/tom-ford-saffron-pulse-0446.jpg
+[upload] guerlain-intense-signature-0447 (manifest row 18) -> guerlain/guerlain-intense-signature-0447.jpg
+[upload] maison-francis-kurkdjian-oud-parfum-0448 (manifest row 19) -> maison-francis-kurkdjian/maison-francis-kurkdjian-oud-parfum-0448.jpg
+[upload] diptyque-saffron-signature-0449 (manifest row 20) -> diptyque/diptyque-saffron-signature-0449.jpg
+[upload] yves-saint-laurent-opaline-trail-0451 (manifest row 21) -> yves-saint-laurent/yves-saint-laurent-opaline-trail-0451.jpg
+[upload] acqua-di-parma-noble-legend-0452 (manifest row 22) -> acqua-di-parma/acqua-di-parma-noble-legend-0452.jpg
+[upload] parfums-de-marly-luminous-trail-0453 (manifest row 23) -> parfums-de-marly/parfums-de-marly-luminous-trail-0453.jpg
+[upload] initio-intense-elixir-0454 (manifest row 24) -> initio/initio-intense-elixir-0454.jpg
+[upload] montale-velvet-nectar-0456 (manifest row 25) -> montale/montale-velvet-nectar-0456.jpg
+[upload] nishane-zenith-bloom-0457 (manifest row 26) -> nishane/nishane-zenith-bloom-0457.jpg
+[upload] memo-paris-saffron-nectar-0458 (manifest row 27) -> memo-paris/memo-paris-saffron-nectar-0458.jpg
+[upload] frederic-malle-absolu-edition-0459 (manifest row 28) -> frederic-malle/frederic-malle-absolu-edition-0459.jpg
+[upload] dior-absolu-eau-de-parfum-0461 (manifest row 29) -> dior/dior-absolu-eau-de-parfum-0461.jpg
+[upload] chanel-saffron-elixir-0462 (manifest row 30) -> chanel/chanel-saffron-elixir-0462.jpg
+[upload] xerjoff-silk-pulse-0463 (manifest row 31) -> xerjoff/xerjoff-silk-pulse-0463.jpg
+[upload] lattafa-silk-legend-0464 (manifest row 32) -> lattafa/lattafa-silk-legend-0464.jpg
+[skip] tom-ford-luminous-elixir-0466 (manifest row 33) local file not found (checked: approved-images/tom-ford-luminous-elixir-0466.jpg)
+[upload] guerlain-oud-bloom-0467 (manifest row 34) -> guerlain/guerlain-oud-bloom-0467.jpg
+[upload] maison-francis-kurkdjian-saffron-eau-de-parfum-0468 (manifest row 35) -> maison-francis-kurkdjian/maison-francis-kurkdjian-saffron-eau-de-parfum-0468.jpg
+[upload] diptyque-solar-parfum-0469 (manifest row 36) -> diptyque/diptyque-solar-parfum-0469.jpg
+[upload] yves-saint-laurent-amber-fusion-0471 (manifest row 37) -> yves-saint-laurent/yves-saint-laurent-amber-fusion-0471.jpg
+[upload] acqua-di-parma-oud-whisper-0472 (manifest row 38) -> acqua-di-parma/acqua-di-parma-oud-whisper-0472.jpg
+[upload] parfums-de-marly-opaline-essence-0473 (manifest row 39) -> parfums-de-marly/parfums-de-marly-opaline-essence-0473.jpg
+[upload] initio-noble-spirit-0474 (manifest row 40) -> initio/initio-noble-spirit-0474.jpg
+[upload] montale-oud-sillage-0476 (manifest row 41) -> montale/montale-oud-sillage-0476.jpg
+[upload] nishane-noir-veil-0477 (manifest row 42) -> nishane/nishane-noir-veil-0477.jpg
+[upload] memo-paris-oud-parfum-0478 (manifest row 43) -> memo-paris/memo-paris-oud-parfum-0478.jpg
+[upload] frederic-malle-silk-trail-0479 (manifest row 44) -> frederic-malle/frederic-malle-silk-trail-0479.jpg
+[upload] dior-midnight-edition-0481 (manifest row 45) -> dior/dior-midnight-edition-0481.jpg
+[upload] chanel-midnight-spirit-0482 (manifest row 46) -> chanel/chanel-midnight-spirit-0482.jpg
+[upload] xerjoff-intense-eau-de-parfum-0483 (manifest row 47) -> xerjoff/xerjoff-intense-eau-de-parfum-0483.jpg
+[upload] lattafa-noir-elixir-0484 (manifest row 48) -> lattafa/lattafa-noir-elixir-0484.jpg
+[upload] tom-ford-saffron-whisper-0486 (manifest row 49) -> tom-ford/tom-ford-saffron-whisper-0486.jpg
+[upload] guerlain-opaline-trail-0487 (manifest row 50) -> guerlain/guerlain-opaline-trail-0487.jpg
+[upload] maison-francis-kurkdjian-royal-essence-0488 (manifest row 51) -> maison-francis-kurkdjian/maison-francis-kurkdjian-royal-essence-0488.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 49
+processed: 50
+uploaded: 49
+skipped: 1
+failed: 0
+updated CSV rows: 49
+updated DB rows: 49
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 49
+files uploaded: 49
+rows updated in CSV: 49
+rows updated in DB: 49
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 8/10 done | downloaded=49 uploaded=49 dbUpdated=49 skipped=1 failed=1
+
+[overnight] batch 9/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0009/manifest.csv rows=50 dryRun=false force=false
+[saved] diptyque-zenith-parfum-0489 -> approved-images/diptyque-zenith-parfum-0489.jpg (12133 bytes, image/jpeg)
+[saved] yves-saint-laurent-luminous-veil-0491 -> approved-images/yves-saint-laurent-luminous-veil-0491.jpg (32427 bytes, image/jpeg)
+[saved] acqua-di-parma-opaline-whisper-0492 -> approved-images/acqua-di-parma-opaline-whisper-0492.jpg (13172 bytes, image/jpeg)
+[saved] parfums-de-marly-noble-whisper-0493 -> approved-images/parfums-de-marly-noble-whisper-0493.jpg (24030 bytes, image/jpeg)
+[saved] initio-velvet-trail-0494 -> approved-images/initio-velvet-trail-0494.jpg (50068 bytes, image/jpeg)
+[saved] montale-royal-code-0496 -> approved-images/montale-royal-code-0496.jpg (30470 bytes, image/jpeg)
+[saved] nishane-eclat-reserve-0497 -> approved-images/nishane-eclat-reserve-0497.jpg (16121 bytes, image/jpeg)
+[fail-download] memo-paris-noble-sillage-0498 all candidates failed validation/download
+[saved] frederic-malle-zenith-sillage-0499 -> approved-images/frederic-malle-zenith-sillage-0499.jpg (22597 bytes, image/jpeg)
+[saved] dior-saffron-nectar-0501 -> approved-images/dior-saffron-nectar-0501.jpg (19235 bytes, image/jpeg)
+[saved] chanel-absolu-veil-0502 -> approved-images/chanel-absolu-veil-0502.jpg (24895 bytes, image/jpeg)
+[saved] xerjoff-luminous-spirit-0503 -> approved-images/xerjoff-luminous-spirit-0503.jpg (16520 bytes, image/jpeg)
+[saved] lattafa-midnight-veil-0504 -> approved-images/lattafa-midnight-veil-0504.jpg (61404 bytes, image/jpeg)
+[saved] tom-ford-midnight-legend-0506 -> approved-images/tom-ford-midnight-legend-0506.jpg (23604 bytes, image/jpeg)
+[saved] guerlain-saffron-sillage-0507 -> approved-images/guerlain-saffron-sillage-0507.jpg (165971 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-oud-code-0508 -> approved-images/maison-francis-kurkdjian-oud-code-0508.jpg (43564 bytes, image/jpeg)
+[saved] diptyque-aura-edition-0509 -> approved-images/diptyque-aura-edition-0509.jpg (32099 bytes, image/jpeg)
+[saved] yves-saint-laurent-absolu-nectar-0511 -> approved-images/yves-saint-laurent-absolu-nectar-0511.jpg (23014 bytes, image/jpeg)
+[saved] acqua-di-parma-eclat-veil-0512 -> approved-images/acqua-di-parma-eclat-veil-0512.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-silk-elixir-0513 -> approved-images/parfums-de-marly-silk-elixir-0513.jpg (110861 bytes, image/jpeg)
+[saved] initio-amber-fusion-0514 -> approved-images/initio-amber-fusion-0514.jpg (15794 bytes, image/jpeg)
+[saved] montale-intense-elixir-0516 -> approved-images/montale-intense-elixir-0516.jpg (66878 bytes, image/jpeg)
+[saved] nishane-oud-eau-de-parfum-0517 -> approved-images/nishane-oud-eau-de-parfum-0517.jpg (25732 bytes, image/jpeg)
+[saved] memo-paris-opaline-fusion-0518 -> approved-images/memo-paris-opaline-fusion-0518.jpg (14701 bytes, image/jpeg)
+[saved] frederic-malle-noir-legend-0519 -> approved-images/frederic-malle-noir-legend-0519.jpg (30285 bytes, image/png)
+[saved] dior-noble-fusion-0521 -> approved-images/dior-noble-fusion-0521.jpg (41652 bytes, image/jpeg)
+[saved] chanel-oud-edition-0522 -> approved-images/chanel-oud-edition-0522.jpg (28512 bytes, image/jpeg)
+[saved] xerjoff-noir-veil-0523 -> approved-images/xerjoff-noir-veil-0523.jpg (15247 bytes, image/jpeg)
+[saved] lattafa-opaline-signature-0524 -> approved-images/lattafa-opaline-signature-0524.jpg (14847 bytes, image/jpeg)
+[saved] tom-ford-aura-reserve-0526 -> approved-images/tom-ford-aura-reserve-0526.jpg (23604 bytes, image/jpeg)
+[saved] guerlain-royal-veil-0527 -> approved-images/guerlain-royal-veil-0527.jpg (25298 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-zenith-bloom-0528 -> approved-images/maison-francis-kurkdjian-zenith-bloom-0528.jpg (24605 bytes, image/jpeg)
+[saved] diptyque-silk-legend-0529 -> approved-images/diptyque-silk-legend-0529.jpg (23972 bytes, image/jpeg)
+[saved] yves-saint-laurent-noir-nectar-0531 -> approved-images/yves-saint-laurent-noir-nectar-0531.jpg (10824 bytes, image/jpeg)
+[saved] acqua-di-parma-absolu-code-0532 -> approved-images/acqua-di-parma-absolu-code-0532.jpg (12982 bytes, image/jpeg)
+[saved] parfums-de-marly-eclat-trail-0533 -> approved-images/parfums-de-marly-eclat-trail-0533.jpg (19951 bytes, image/jpeg)
+[saved] initio-opaline-parfum-0534 -> approved-images/initio-opaline-parfum-0534.jpg (14701 bytes, image/jpeg)
+[saved] montale-velvet-trail-0536 -> approved-images/montale-velvet-trail-0536.jpg (23673 bytes, image/jpeg)
+[saved] nishane-midnight-eau-de-parfum-0537 -> approved-images/nishane-midnight-eau-de-parfum-0537.jpg (13877 bytes, image/jpeg)
+[saved] memo-paris-absolu-edition-0538 -> approved-images/memo-paris-absolu-edition-0538.jpg (19901 bytes, image/jpeg)
+[saved] frederic-malle-eclat-trail-0539 -> approved-images/frederic-malle-eclat-trail-0539.jpg (21773 bytes, image/jpeg)
+[saved] dior-mystic-veil-0541 -> approved-images/dior-mystic-veil-0541.jpg (23275 bytes, image/jpeg)
+[saved] chanel-amber-sillage-0542 -> approved-images/chanel-amber-sillage-0542.jpg (24409 bytes, image/jpeg)
+[saved] xerjoff-opaline-veil-0543 -> approved-images/xerjoff-opaline-veil-0543.jpg (31914 bytes, image/jpeg)
+[saved] lattafa-oud-veil-0544 -> approved-images/lattafa-oud-veil-0544.jpg (143797 bytes, image/jpeg)
+[saved] tom-ford-oud-legend-0546 -> approved-images/tom-ford-oud-legend-0546.jpg (96076 bytes, image/jpeg)
+[saved] guerlain-absolu-nectar-0547 -> approved-images/guerlain-absolu-nectar-0547.jpg (18702 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-opaline-pulse-0548 -> approved-images/maison-francis-kurkdjian-opaline-pulse-0548.jpg (24815 bytes, image/jpeg)
+[saved] diptyque-aura-edition-0549 -> approved-images/diptyque-aura-edition-0549.jpg (37795 bytes, image/jpeg)
+[saved] yves-saint-laurent-absolu-trail-0551 -> approved-images/yves-saint-laurent-absolu-trail-0551.jpg (23014 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 49
+failed search: 0
+failed download: 1
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0009/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0009/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] diptyque-zenith-parfum-0489 (manifest row 2) -> diptyque/diptyque-zenith-parfum-0489.jpg
+[upload] yves-saint-laurent-luminous-veil-0491 (manifest row 3) -> yves-saint-laurent/yves-saint-laurent-luminous-veil-0491.jpg
+[upload] acqua-di-parma-opaline-whisper-0492 (manifest row 4) -> acqua-di-parma/acqua-di-parma-opaline-whisper-0492.jpg
+[upload] parfums-de-marly-noble-whisper-0493 (manifest row 5) -> parfums-de-marly/parfums-de-marly-noble-whisper-0493.jpg
+[upload] initio-velvet-trail-0494 (manifest row 6) -> initio/initio-velvet-trail-0494.jpg
+[upload] montale-royal-code-0496 (manifest row 7) -> montale/montale-royal-code-0496.jpg
+[upload] nishane-eclat-reserve-0497 (manifest row 8) -> nishane/nishane-eclat-reserve-0497.jpg
+[skip] memo-paris-noble-sillage-0498 (manifest row 9) local file not found (checked: approved-images/memo-paris-noble-sillage-0498.jpg)
+[upload] frederic-malle-zenith-sillage-0499 (manifest row 10) -> frederic-malle/frederic-malle-zenith-sillage-0499.jpg
+[upload] dior-saffron-nectar-0501 (manifest row 11) -> dior/dior-saffron-nectar-0501.jpg
+[upload] chanel-absolu-veil-0502 (manifest row 12) -> chanel/chanel-absolu-veil-0502.jpg
+[upload] xerjoff-luminous-spirit-0503 (manifest row 13) -> xerjoff/xerjoff-luminous-spirit-0503.jpg
+[upload] lattafa-midnight-veil-0504 (manifest row 14) -> lattafa/lattafa-midnight-veil-0504.jpg
+[upload] tom-ford-midnight-legend-0506 (manifest row 15) -> tom-ford/tom-ford-midnight-legend-0506.jpg
+[upload] guerlain-saffron-sillage-0507 (manifest row 16) -> guerlain/guerlain-saffron-sillage-0507.jpg
+[upload] maison-francis-kurkdjian-oud-code-0508 (manifest row 17) -> maison-francis-kurkdjian/maison-francis-kurkdjian-oud-code-0508.jpg
+[upload] diptyque-aura-edition-0509 (manifest row 18) -> diptyque/diptyque-aura-edition-0509.jpg
+[upload] yves-saint-laurent-absolu-nectar-0511 (manifest row 19) -> yves-saint-laurent/yves-saint-laurent-absolu-nectar-0511.jpg
+[upload] acqua-di-parma-eclat-veil-0512 (manifest row 20) -> acqua-di-parma/acqua-di-parma-eclat-veil-0512.jpg
+[upload] parfums-de-marly-silk-elixir-0513 (manifest row 21) -> parfums-de-marly/parfums-de-marly-silk-elixir-0513.jpg
+[upload] initio-amber-fusion-0514 (manifest row 22) -> initio/initio-amber-fusion-0514.jpg
+[upload] montale-intense-elixir-0516 (manifest row 23) -> montale/montale-intense-elixir-0516.jpg
+[upload] nishane-oud-eau-de-parfum-0517 (manifest row 24) -> nishane/nishane-oud-eau-de-parfum-0517.jpg
+[upload] memo-paris-opaline-fusion-0518 (manifest row 25) -> memo-paris/memo-paris-opaline-fusion-0518.jpg
+[upload] frederic-malle-noir-legend-0519 (manifest row 26) -> frederic-malle/frederic-malle-noir-legend-0519.jpg
+[upload] dior-noble-fusion-0521 (manifest row 27) -> dior/dior-noble-fusion-0521.jpg
+[upload] chanel-oud-edition-0522 (manifest row 28) -> chanel/chanel-oud-edition-0522.jpg
+[upload] xerjoff-noir-veil-0523 (manifest row 29) -> xerjoff/xerjoff-noir-veil-0523.jpg
+[upload] lattafa-opaline-signature-0524 (manifest row 30) -> lattafa/lattafa-opaline-signature-0524.jpg
+[upload] tom-ford-aura-reserve-0526 (manifest row 31) -> tom-ford/tom-ford-aura-reserve-0526.jpg
+[upload] guerlain-royal-veil-0527 (manifest row 32) -> guerlain/guerlain-royal-veil-0527.jpg
+[upload] maison-francis-kurkdjian-zenith-bloom-0528 (manifest row 33) -> maison-francis-kurkdjian/maison-francis-kurkdjian-zenith-bloom-0528.jpg
+[upload] diptyque-silk-legend-0529 (manifest row 34) -> diptyque/diptyque-silk-legend-0529.jpg
+[upload] yves-saint-laurent-noir-nectar-0531 (manifest row 35) -> yves-saint-laurent/yves-saint-laurent-noir-nectar-0531.jpg
+[upload] acqua-di-parma-absolu-code-0532 (manifest row 36) -> acqua-di-parma/acqua-di-parma-absolu-code-0532.jpg
+[upload] parfums-de-marly-eclat-trail-0533 (manifest row 37) -> parfums-de-marly/parfums-de-marly-eclat-trail-0533.jpg
+[upload] initio-opaline-parfum-0534 (manifest row 38) -> initio/initio-opaline-parfum-0534.jpg
+[upload] montale-velvet-trail-0536 (manifest row 39) -> montale/montale-velvet-trail-0536.jpg
+[upload] nishane-midnight-eau-de-parfum-0537 (manifest row 40) -> nishane/nishane-midnight-eau-de-parfum-0537.jpg
+[upload] memo-paris-absolu-edition-0538 (manifest row 41) -> memo-paris/memo-paris-absolu-edition-0538.jpg
+[upload] frederic-malle-eclat-trail-0539 (manifest row 42) -> frederic-malle/frederic-malle-eclat-trail-0539.jpg
+[upload] dior-mystic-veil-0541 (manifest row 43) -> dior/dior-mystic-veil-0541.jpg
+[upload] chanel-amber-sillage-0542 (manifest row 44) -> chanel/chanel-amber-sillage-0542.jpg
+[upload] xerjoff-opaline-veil-0543 (manifest row 45) -> xerjoff/xerjoff-opaline-veil-0543.jpg
+[upload] lattafa-oud-veil-0544 (manifest row 46) -> lattafa/lattafa-oud-veil-0544.jpg
+[upload] tom-ford-oud-legend-0546 (manifest row 47) -> tom-ford/tom-ford-oud-legend-0546.jpg
+[upload] guerlain-absolu-nectar-0547 (manifest row 48) -> guerlain/guerlain-absolu-nectar-0547.jpg
+[upload] maison-francis-kurkdjian-opaline-pulse-0548 (manifest row 49) -> maison-francis-kurkdjian/maison-francis-kurkdjian-opaline-pulse-0548.jpg
+[upload] diptyque-aura-edition-0549 (manifest row 50) -> diptyque/diptyque-aura-edition-0549.jpg
+[upload] yves-saint-laurent-absolu-trail-0551 (manifest row 51) -> yves-saint-laurent/yves-saint-laurent-absolu-trail-0551.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 49
+processed: 50
+uploaded: 49
+skipped: 1
+failed: 0
+updated CSV rows: 49
+updated DB rows: 49
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 49
+files uploaded: 49
+rows updated in CSV: 49
+rows updated in DB: 49
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 9/10 done | downloaded=49 uploaded=49 dbUpdated=49 skipped=1 failed=1
+
+[overnight] batch 10/10 start (rows=50)
+[images-fetch] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0010/manifest.csv rows=50 dryRun=false force=false
+[saved] acqua-di-parma-luminous-legend-0552 -> approved-images/acqua-di-parma-luminous-legend-0552.jpg (85344 bytes, image/jpeg)
+[saved] parfums-de-marly-aura-whisper-0553 -> approved-images/parfums-de-marly-aura-whisper-0553.jpg (16008 bytes, image/jpeg)
+[saved] initio-oud-spirit-0554 -> approved-images/initio-oud-spirit-0554.jpg (23943 bytes, image/jpeg)
+[saved] montale-midnight-code-0556 -> approved-images/montale-midnight-code-0556.jpg (24807 bytes, image/jpeg)
+[saved] nishane-opaline-signature-0557 -> approved-images/nishane-opaline-signature-0557.jpg (32396 bytes, image/jpeg)
+[saved] memo-paris-silk-veil-0558 -> approved-images/memo-paris-silk-veil-0558.jpg (13715 bytes, image/jpeg)
+[saved] frederic-malle-absolu-parfum-0559 -> approved-images/frederic-malle-absolu-parfum-0559.jpg (20683 bytes, image/jpeg)
+[saved] dior-aura-fusion-0561 -> approved-images/dior-aura-fusion-0561.jpg (22383 bytes, image/jpeg)
+[saved] chanel-saffron-essence-0562 -> approved-images/chanel-saffron-essence-0562.jpg (12702 bytes, image/jpeg)
+[saved] xerjoff-amber-legend-0563 -> approved-images/xerjoff-amber-legend-0563.jpg (51626 bytes, image/jpeg)
+[saved] lattafa-aura-edition-0564 -> approved-images/lattafa-aura-edition-0564.jpg (15101 bytes, image/jpeg)
+[saved] tom-ford-midnight-spirit-0566 -> approved-images/tom-ford-midnight-spirit-0566.jpg (23482 bytes, image/jpeg)
+[saved] guerlain-aura-reserve-0567 -> approved-images/guerlain-aura-reserve-0567.jpg (19187 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-silk-whisper-0568 -> approved-images/maison-francis-kurkdjian-silk-whisper-0568.jpg (27566 bytes, image/jpeg)
+[saved] diptyque-amber-reserve-0569 -> approved-images/diptyque-amber-reserve-0569.jpg (42180 bytes, image/jpeg)
+[saved] yves-saint-laurent-aura-parfum-0571 -> approved-images/yves-saint-laurent-aura-parfum-0571.jpg (19018 bytes, image/jpeg)
+[saved] acqua-di-parma-royal-reserve-0572 -> approved-images/acqua-di-parma-royal-reserve-0572.jpg (22526 bytes, image/jpeg)
+[saved] parfums-de-marly-aura-elixir-0573 -> approved-images/parfums-de-marly-aura-elixir-0573.jpg (16008 bytes, image/jpeg)
+[saved] initio-noir-bloom-0574 -> approved-images/initio-noir-bloom-0574.jpg (19382 bytes, image/jpeg)
+[saved] montale-mystic-whisper-0576 -> approved-images/montale-mystic-whisper-0576.jpg (21954 bytes, image/jpeg)
+[saved] nishane-silk-bloom-0577 -> approved-images/nishane-silk-bloom-0577.jpg (26980 bytes, image/jpeg)
+[saved] memo-paris-solar-essence-0578 -> approved-images/memo-paris-solar-essence-0578.jpg (87228 bytes, image/jpeg)
+[saved] frederic-malle-saffron-code-0579 -> approved-images/frederic-malle-saffron-code-0579.jpg (21773 bytes, image/jpeg)
+[saved] dior-midnight-spirit-0581 -> approved-images/dior-midnight-spirit-0581.jpg (22511 bytes, image/jpeg)
+[saved] chanel-mystic-essence-0582 -> approved-images/chanel-mystic-essence-0582.jpg (227237 bytes, image/jpeg)
+[saved] xerjoff-silk-fusion-0583 -> approved-images/xerjoff-silk-fusion-0583.jpg (14943 bytes, image/jpeg)
+[saved] lattafa-luminous-elixir-0584 -> approved-images/lattafa-luminous-elixir-0584.jpg (39061 bytes, image/jpeg)
+[saved] tom-ford-noble-essence-0586 -> approved-images/tom-ford-noble-essence-0586.jpg (18794 bytes, image/jpeg)
+[saved] guerlain-luminous-signature-0587 -> approved-images/guerlain-luminous-signature-0587.jpg (13424 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-luminous-nectar-0588 -> approved-images/maison-francis-kurkdjian-luminous-nectar-0588.jpg (77079 bytes, image/jpeg)
+[saved] diptyque-luminous-edition-0589 -> approved-images/diptyque-luminous-edition-0589.jpg (40230 bytes, image/jpeg)
+[saved] yves-saint-laurent-noir-eau-de-parfum-0591 -> approved-images/yves-saint-laurent-noir-eau-de-parfum-0591.jpg (19018 bytes, image/jpeg)
+[saved] acqua-di-parma-absolu-pulse-0592 -> approved-images/acqua-di-parma-absolu-pulse-0592.jpg (22866 bytes, image/jpeg)
+[saved] parfums-de-marly-mystic-pulse-0593 -> approved-images/parfums-de-marly-mystic-pulse-0593.jpg (43569 bytes, image/jpeg)
+[saved] initio-aura-eau-de-parfum-0594 -> approved-images/initio-aura-eau-de-parfum-0594.jpg (99854 bytes, image/jpeg)
+[saved] montale-noble-essence-0596 -> approved-images/montale-noble-essence-0596.jpg (332105 bytes, image/jpeg)
+[saved] nishane-intense-signature-0597 -> approved-images/nishane-intense-signature-0597.jpg (80412 bytes, image/jpeg)
+[saved] memo-paris-noble-bloom-0598 -> approved-images/memo-paris-noble-bloom-0598.jpg (23593 bytes, image/jpeg)
+[saved] frederic-malle-absolu-bloom-0599 -> approved-images/frederic-malle-absolu-bloom-0599.jpg (24726 bytes, image/jpeg)
+[saved] dior-absolu-sillage-0601 -> approved-images/dior-absolu-sillage-0601.jpg (11139 bytes, image/jpeg)
+[saved] chanel-amber-signature-0602 -> approved-images/chanel-amber-signature-0602.jpg (32986 bytes, image/jpeg)
+[saved] xerjoff-eclat-eau-de-parfum-0603 -> approved-images/xerjoff-eclat-eau-de-parfum-0603.jpg (25797 bytes, image/jpeg)
+[saved] lattafa-saffron-parfum-0604 -> approved-images/lattafa-saffron-parfum-0604.jpg (11213 bytes, image/jpeg)
+[saved] tom-ford-opaline-sillage-0606 -> approved-images/tom-ford-opaline-sillage-0606.jpg (198549 bytes, image/jpeg)
+[saved] guerlain-saffron-bloom-0607 -> approved-images/guerlain-saffron-bloom-0607.jpg (11223 bytes, image/jpeg)
+[saved] maison-francis-kurkdjian-intense-veil-0608 -> approved-images/maison-francis-kurkdjian-intense-veil-0608.jpg (24917 bytes, image/jpeg)
+[saved] diptyque-velvet-spirit-0609 -> approved-images/diptyque-velvet-spirit-0609.jpg (24025 bytes, image/jpeg)
+[saved] yves-saint-laurent-midnight-veil-0611 -> approved-images/yves-saint-laurent-midnight-veil-0611.jpg (21321 bytes, image/jpeg)
+[saved] acqua-di-parma-eclat-reserve-0612 -> approved-images/acqua-di-parma-eclat-reserve-0612.jpg (30620 bytes, image/jpeg)
+[saved] parfums-de-marly-mystic-whisper-0613 -> approved-images/parfums-de-marly-mystic-whisper-0613.jpg (42812 bytes, image/jpeg)
+
+Brave image fetch summary
+-------------------------
+rows read: 50
+processed: 50
+skipped existing: 0
+skipped missing data: 0
+searched: 50
+downloaded: 50
+failed search: 0
+failed download: 0
+[images-bulk-upload] manifest=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0010/manifest.csv catalog=/Users/andrerizzo/Documents/GitHub/odora-engine/.tmp/overnight-image-pipeline/batch-0010/catalog.csv rows=50 dryRun=false force=false updateDb=true
+[upload] acqua-di-parma-luminous-legend-0552 (manifest row 2) -> acqua-di-parma/acqua-di-parma-luminous-legend-0552.jpg
+[upload] parfums-de-marly-aura-whisper-0553 (manifest row 3) -> parfums-de-marly/parfums-de-marly-aura-whisper-0553.jpg
+[upload] initio-oud-spirit-0554 (manifest row 4) -> initio/initio-oud-spirit-0554.jpg
+[upload] montale-midnight-code-0556 (manifest row 5) -> montale/montale-midnight-code-0556.jpg
+[upload] nishane-opaline-signature-0557 (manifest row 6) -> nishane/nishane-opaline-signature-0557.jpg
+[upload] memo-paris-silk-veil-0558 (manifest row 7) -> memo-paris/memo-paris-silk-veil-0558.jpg
+[upload] frederic-malle-absolu-parfum-0559 (manifest row 8) -> frederic-malle/frederic-malle-absolu-parfum-0559.jpg
+[upload] dior-aura-fusion-0561 (manifest row 9) -> dior/dior-aura-fusion-0561.jpg
+[upload] chanel-saffron-essence-0562 (manifest row 10) -> chanel/chanel-saffron-essence-0562.jpg
+[upload] xerjoff-amber-legend-0563 (manifest row 11) -> xerjoff/xerjoff-amber-legend-0563.jpg
+[upload] lattafa-aura-edition-0564 (manifest row 12) -> lattafa/lattafa-aura-edition-0564.jpg
+[upload] tom-ford-midnight-spirit-0566 (manifest row 13) -> tom-ford/tom-ford-midnight-spirit-0566.jpg
+[upload] guerlain-aura-reserve-0567 (manifest row 14) -> guerlain/guerlain-aura-reserve-0567.jpg
+[upload] maison-francis-kurkdjian-silk-whisper-0568 (manifest row 15) -> maison-francis-kurkdjian/maison-francis-kurkdjian-silk-whisper-0568.jpg
+[upload] diptyque-amber-reserve-0569 (manifest row 16) -> diptyque/diptyque-amber-reserve-0569.jpg
+[upload] yves-saint-laurent-aura-parfum-0571 (manifest row 17) -> yves-saint-laurent/yves-saint-laurent-aura-parfum-0571.jpg
+[upload] acqua-di-parma-royal-reserve-0572 (manifest row 18) -> acqua-di-parma/acqua-di-parma-royal-reserve-0572.jpg
+[upload] parfums-de-marly-aura-elixir-0573 (manifest row 19) -> parfums-de-marly/parfums-de-marly-aura-elixir-0573.jpg
+[upload] initio-noir-bloom-0574 (manifest row 20) -> initio/initio-noir-bloom-0574.jpg
+[upload] montale-mystic-whisper-0576 (manifest row 21) -> montale/montale-mystic-whisper-0576.jpg
+[upload] nishane-silk-bloom-0577 (manifest row 22) -> nishane/nishane-silk-bloom-0577.jpg
+[upload] memo-paris-solar-essence-0578 (manifest row 23) -> memo-paris/memo-paris-solar-essence-0578.jpg
+[upload] frederic-malle-saffron-code-0579 (manifest row 24) -> frederic-malle/frederic-malle-saffron-code-0579.jpg
+[upload] dior-midnight-spirit-0581 (manifest row 25) -> dior/dior-midnight-spirit-0581.jpg
+[upload] chanel-mystic-essence-0582 (manifest row 26) -> chanel/chanel-mystic-essence-0582.jpg
+[upload] xerjoff-silk-fusion-0583 (manifest row 27) -> xerjoff/xerjoff-silk-fusion-0583.jpg
+[upload] lattafa-luminous-elixir-0584 (manifest row 28) -> lattafa/lattafa-luminous-elixir-0584.jpg
+[upload] tom-ford-noble-essence-0586 (manifest row 29) -> tom-ford/tom-ford-noble-essence-0586.jpg
+[upload] guerlain-luminous-signature-0587 (manifest row 30) -> guerlain/guerlain-luminous-signature-0587.jpg
+[upload] maison-francis-kurkdjian-luminous-nectar-0588 (manifest row 31) -> maison-francis-kurkdjian/maison-francis-kurkdjian-luminous-nectar-0588.jpg
+[upload] diptyque-luminous-edition-0589 (manifest row 32) -> diptyque/diptyque-luminous-edition-0589.jpg
+[upload] yves-saint-laurent-noir-eau-de-parfum-0591 (manifest row 33) -> yves-saint-laurent/yves-saint-laurent-noir-eau-de-parfum-0591.jpg
+[upload] acqua-di-parma-absolu-pulse-0592 (manifest row 34) -> acqua-di-parma/acqua-di-parma-absolu-pulse-0592.jpg
+[upload] parfums-de-marly-mystic-pulse-0593 (manifest row 35) -> parfums-de-marly/parfums-de-marly-mystic-pulse-0593.jpg
+[upload] initio-aura-eau-de-parfum-0594 (manifest row 36) -> initio/initio-aura-eau-de-parfum-0594.jpg
+[upload] montale-noble-essence-0596 (manifest row 37) -> montale/montale-noble-essence-0596.jpg
+[upload] nishane-intense-signature-0597 (manifest row 38) -> nishane/nishane-intense-signature-0597.jpg
+[upload] memo-paris-noble-bloom-0598 (manifest row 39) -> memo-paris/memo-paris-noble-bloom-0598.jpg
+[upload] frederic-malle-absolu-bloom-0599 (manifest row 40) -> frederic-malle/frederic-malle-absolu-bloom-0599.jpg
+[upload] dior-absolu-sillage-0601 (manifest row 41) -> dior/dior-absolu-sillage-0601.jpg
+[upload] chanel-amber-signature-0602 (manifest row 42) -> chanel/chanel-amber-signature-0602.jpg
+[upload] xerjoff-eclat-eau-de-parfum-0603 (manifest row 43) -> xerjoff/xerjoff-eclat-eau-de-parfum-0603.jpg
+[upload] lattafa-saffron-parfum-0604 (manifest row 44) -> lattafa/lattafa-saffron-parfum-0604.jpg
+[upload] tom-ford-opaline-sillage-0606 (manifest row 45) -> tom-ford/tom-ford-opaline-sillage-0606.jpg
+[upload] guerlain-saffron-bloom-0607 (manifest row 46) -> guerlain/guerlain-saffron-bloom-0607.jpg
+[upload] maison-francis-kurkdjian-intense-veil-0608 (manifest row 47) -> maison-francis-kurkdjian/maison-francis-kurkdjian-intense-veil-0608.jpg
+[upload] diptyque-velvet-spirit-0609 (manifest row 48) -> diptyque/diptyque-velvet-spirit-0609.jpg
+[upload] yves-saint-laurent-midnight-veil-0611 (manifest row 49) -> yves-saint-laurent/yves-saint-laurent-midnight-veil-0611.jpg
+[upload] acqua-di-parma-eclat-reserve-0612 (manifest row 50) -> acqua-di-parma/acqua-di-parma-eclat-reserve-0612.jpg
+[upload] parfums-de-marly-mystic-whisper-0613 (manifest row 51) -> parfums-de-marly/parfums-de-marly-mystic-whisper-0613.jpg
+
+Bulk approved images summary
+----------------------------
+manifest rows read: 50
+local files found: 50
+processed: 50
+uploaded: 50
+skipped: 0
+failed: 0
+updated CSV rows: 50
+updated DB rows: 50
+skipped DB rows (existing imageUrl): 0
+
+Diagnostic
+----------
+rows found in manifest: 50
+local files found: 50
+files uploaded: 50
+rows updated in CSV: 50
+rows updated in DB: 50
+rows skipped in DB (existing imageUrl): 0
+[overnight] batch 10/10 done | downloaded=50 uploaded=50 dbUpdated=50 skipped=0 failed=0
+
+Overnight image pipeline summary
+-------------------------------
+perfumes selected: 500
+manifest rows added: 480
+Brave images downloaded: 480
+upload count: 486
+DB updated count: 486
+skipped count: 20
+failed count: 14
+batches processed: 10
