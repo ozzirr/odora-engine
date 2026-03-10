@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 
 import { defaultLocale, hasLocale, localeCookieName } from "@/lib/i18n";
 
@@ -15,7 +16,10 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body suppressHydrationWarning className="antialiased">{children}</body>
+      <body suppressHydrationWarning className="antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
