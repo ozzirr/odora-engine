@@ -1,25 +1,42 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
 import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 import { PerfumesClient } from "./PerfumesClient";
 
-export const metadata: Metadata = {
-  title: "Perfumes | Odora",
-  description:
-    "Browse perfumes by family, notes, gender, and price, then compare offers with clarity.",
-};
-
 export const dynamic = "force-dynamic";
 
 type PerfumesPageProps = {
+  params: Promise<{
+    locale: string;
+  }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function PerfumesPage({ searchParams }: PerfumesPageProps) {
+export async function generateMetadata({ params }: PerfumesPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.perfumes" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: getAlternateLinks("/perfumes")[resolvedLocale],
+      languages: getAlternateLinks("/perfumes"),
+    },
+  };
+}
+
+export default async function PerfumesPage({ params, searchParams }: PerfumesPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "catalog.page" });
   const resolvedSearchParams = await searchParams;
   const isAuthenticated = await getIsAuthenticated();
   const { perfumes, selectedFilters, total, hasMore } = await getPerfumesPage(resolvedSearchParams, {
@@ -30,9 +47,9 @@ export default async function PerfumesPage({ searchParams }: PerfumesPageProps) 
   return (
     <Container className="pt-10">
       <SectionTitle
-        eyebrow="Catalog"
-        title="Discover perfumes"
-        subtitle="Browse the catalog by family, notes, gender, and price, then narrow in on the bottles worth your attention."
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
       />
       <PerfumesClient
         initialPerfumes={perfumes}

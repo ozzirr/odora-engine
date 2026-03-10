@@ -1,3 +1,5 @@
+import { defaultLocale, type AppLocale } from "@/lib/i18n";
+
 export type OfferForPricing = {
   id?: number;
   priceAmount: number;
@@ -55,15 +57,26 @@ export function getOfferUrl(affiliateUrl?: string | null, productUrl?: string | 
   return null;
 }
 
-export function formatAvailabilityLabel(value: string | undefined) {
-  const availabilityLabel: Record<string, string> = {
-    IN_STOCK: "In stock",
-    LIMITED: "Limited",
-    OUT_OF_STOCK: "Out of stock",
-    PREORDER: "Preorder",
+export function formatAvailabilityLabel(
+  value: string | undefined,
+  locale: AppLocale = defaultLocale,
+) {
+  const availabilityLabel: Record<AppLocale, Record<string, string>> = {
+    en: {
+      IN_STOCK: "In stock",
+      LIMITED: "Limited",
+      OUT_OF_STOCK: "Out of stock",
+      PREORDER: "Preorder",
+    },
+    it: {
+      IN_STOCK: "Disponibile",
+      LIMITED: "Limitato",
+      OUT_OF_STOCK: "Esaurito",
+      PREORDER: "Preordine",
+    },
   };
 
-  return availabilityLabel[value ?? ""] ?? "Check in store";
+  return availabilityLabel[locale][value ?? ""] ?? (locale === "it" ? "Verifica in negozio" : "Check in store");
 }
 
 export function computeBestOffer<T extends OfferForPricing>(

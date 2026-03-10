@@ -1,0 +1,777 @@
+{
+  "localeSwitcher": {
+    "label": "Cambia lingua"
+  },
+  "common": {
+    "badges": {
+      "arabic": "Arabo",
+      "niche": "Niche"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "home": "Home",
+        "perfumes": "Profumi",
+        "finder": "Finder",
+        "top": "Top"
+      },
+      "account": {
+        "profile": "Il tuo profilo",
+        "login": "Accedi"
+      },
+      "cta": "Esplora profumi",
+      "menu": "Menu"
+    },
+    "footer": {
+      "description": "Scopri profumi, confronta note e prezzi e trova la bottiglia giusta piu velocemente.",
+      "navigation": "Navigazione",
+      "legal": "Legale",
+      "nav": {
+        "home": "Home",
+        "perfumes": "Profumi",
+        "finder": "Finder",
+        "top": "Top"
+      },
+      "legalLinks": {
+        "privacy": "Privacy",
+        "terms": "Termini",
+        "affiliateDisclosure": "Trasparenza affiliazione"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Scoperta fragranze",
+      "title": "Trova la fragranza che ti rappresenta.",
+      "subtitle": "Esplora profumi selezionati, capiscine il carattere e confronta le offerte in un unico flusso chiaro ed elegante.",
+      "valueProps": {
+        "compare": "Confronta i prezzi tra retailer affidabili",
+        "explore": "Esplora profumi per note, mood e stile",
+        "choose": "Scegli con piu sicurezza"
+      },
+      "browseCatalog": "Sfoglia catalogo",
+      "startFinder": "Apri Finder",
+      "spotlight": "In evidenza",
+      "badges": {
+        "heroPick": "Scelta hero",
+        "trending": "Trending"
+      },
+      "bestPriceToday": "Miglior prezzo di oggi",
+      "discover": "Scopri",
+      "viewFragrance": "Vedi fragranza",
+      "fallbackStore": "Scheda fragranza Odora",
+      "viewOffers": "Vedi offerte",
+      "seeProductDetails": "Vedi dettagli prodotto"
+    },
+    "trending": {
+      "eyebrow": "Trending ora",
+      "title": "Le scelte piu osservate del momento",
+      "subtitle": "Una selezione curata di fragranze che le persone stanno scoprendo e riscoprendo in questo momento.",
+      "badges": {
+        "heroPick": "Scelta hero",
+        "trending": "Trending"
+      },
+      "bestPrice": "Miglior prezzo",
+      "offers": "Offerte",
+      "viewOffers": "Vedi offerte",
+      "seeProductDetails": "Vedi dettagli prodotto"
+    },
+    "featured": {
+      "eyebrow": "In evidenza",
+      "title": "Profumi in evidenza",
+      "subtitle": "Una selezione ragionata di bottiglie da conoscere, dalle firme quotidiane facili alle fragranze piu intense."
+    },
+    "quickFilters": {
+      "eyebrow": "Partenza rapida",
+      "title": "Esplora per mood e stile",
+      "subtitle": "Parti da un mood, una nota o uno stile e vai subito a un set di risultati piu mirato.",
+      "tones": {
+        "warm": "Caldo",
+        "clean": "Pulito",
+        "bold": "Deciso",
+        "balanced": "Equilibrato",
+        "magnetic": "Magnetico",
+        "bright": "Luminoso"
+      },
+      "cards": {
+        "vanillaLovers": {
+          "label": "Amanti della vaniglia",
+          "subtitle": "Preset Finder per profumi cremosi guidati dalla vaniglia con calore avvolgente."
+        },
+        "freshDaily": {
+          "label": "Fresco quotidiano",
+          "subtitle": "Match da tutti i giorni con mood fresco, uso daily-wear e note luminose."
+        },
+        "arabicSignature": {
+          "label": "Firma araba",
+          "subtitle": "Profili arabi ricchi filtrati per mood deciso, nota oud e catalogo solo arabo."
+        },
+        "officeSafe": {
+          "label": "Perfetto per ufficio",
+          "subtitle": "Scorciatoia Finder per profumi eleganti da ufficio con struttura muschiata morbida."
+        },
+        "dateNight": {
+          "label": "Serata romantica",
+          "subtitle": "Match serali romantici calibrati su date-night e firme ambrate calde."
+        },
+        "summerCitrus": {
+          "label": "Agrumi estivi",
+          "subtitle": "Preset freschi per l'estate centrati su note agrumate brillanti."
+        }
+      },
+      "openInFinder": "Apri nel Finder"
+    },
+    "howItWorks": {
+      "eyebrow": "Come funziona Odora",
+      "title": "Un modo piu semplice per scegliere bene",
+      "subtitle": "Passa dall'ispirazione al confronto senza saltare tra schede e pagine retailer.",
+      "steps": {
+        "discover": {
+          "title": "Scopri",
+          "description": "Parti da note, stile, mood o occasione."
+        },
+        "compare": {
+          "title": "Confronta",
+          "description": "Confronta negozi, spedizione e prezzo totale a colpo d'occhio."
+        },
+        "choose": {
+          "title": "Scegli",
+          "description": "Vai dal retailer con un'idea piu chiara di cosa ti sta bene e quanto costa."
+        }
+      }
+    },
+    "trustedStores": {
+      "eyebrow": "Negozi affidabili",
+      "title": "Confronta i prezzi dei negozi affidabili",
+      "subtitle": "Mostriamo i retailer in una vista di confronto pulita cosi prezzo, spedizione e disponibilita restano facili da leggere."
+    },
+    "discoveryCollections": {
+      "eyebrow": "Collezioni",
+      "title": "Collezioni di scoperta",
+      "subtitle": "Esplora il catalogo attraverso selezioni ragionate costruite attorno a stile, mood e a cio che vuoi trovare dopo.",
+      "type": {
+        "finderPreset": "Preset Finder",
+        "catalogRoute": "Percorso catalogo"
+      },
+      "cta": "Esplora collezione"
+    }
+  },
+  "finder": {
+    "page": {
+      "eyebrow": "Finder",
+      "title": "Trova la tua prossima fragranza in pochi minuti",
+      "subtitle": "Imposta le preferenze per mood, stagione, budget e note e scopri profumi in linea con il tuo stile."
+    },
+    "experience": {
+      "chips": {
+        "mood": "Mood: {value}",
+        "season": "Stagione: {value}",
+        "occasion": "Occasione: {value}",
+        "note": "Nota: {value}"
+      },
+      "arabicOnly": "Solo arabi",
+      "nicheOnly": "Solo niche",
+      "fallbackError": "Il matching live e temporaneamente non disponibile. Ti mostriamo i match di catalogo piu vicini.",
+      "preset": {
+        "eyebrow": "Preset Finder",
+        "fallbackTitle": "Punto di partenza suggerito",
+        "description": "Questi filtri sono stati precompilati dalla scorciatoia che hai selezionato in homepage."
+      },
+      "fields": {
+        "mood": "Mood preferito",
+        "season": "Stagione",
+        "occasion": "Occasione",
+        "budget": "Budget",
+        "note": "Nota preferita",
+        "gender": "Preferenza genere"
+      },
+      "any": "Qualsiasi",
+      "budget": {
+        "any": "Qualsiasi",
+        "budget": "Budget",
+        "mid": "Medio",
+        "premium": "Premium",
+        "luxury": "Lusso"
+      },
+      "gender": {
+        "any": "Qualsiasi",
+        "male": "Uomo",
+        "female": "Donna",
+        "unisex": "Unisex"
+      },
+      "finding": "Ricerca in corso...",
+      "submit": "Trova fragranze",
+      "reset": "Reset",
+      "results": "Trovate {total} fragranze compatibili",
+      "empty": "Scegli alcune preferenze e avvia Finder per vedere le fragranze piu adatte ai tuoi gusti."
+    }
+  },
+  "taxonomy": {
+    "moods": {
+      "cozy": "Avvolgente",
+      "fresh": "Fresco",
+      "bold": "Deciso",
+      "elegant": "Elegante",
+      "romantic": "Romantico"
+    },
+    "seasons": {
+      "spring": "Primavera",
+      "summer": "Estate",
+      "fall": "Autunno",
+      "winter": "Inverno"
+    },
+    "occasions": {
+      "daily-wear": "Uso quotidiano",
+      "office": "Ufficio",
+      "date-night": "Serata romantica"
+    },
+    "notes": {
+      "bergamot": "Bergamotto",
+      "vanilla": "Vaniglia",
+      "oud": "Oud",
+      "musk": "Muschio",
+      "amber": "Ambra",
+      "rose": "Rosa",
+      "sandalwood": "Sandalo",
+      "citrus": "Agrumi",
+      "jasmine": "Gelsomino",
+      "coffee": "Caffe",
+      "patchouli": "Patchouli"
+    }
+  },
+  "catalog": {
+    "page": {
+      "eyebrow": "Catalogo",
+      "title": "Scopri i profumi",
+      "subtitle": "Sfoglia il catalogo per famiglia, note, genere e prezzo, poi restringi il campo sulle bottiglie che meritano attenzione."
+    },
+    "filters": {
+      "title": "Filtri",
+      "reset": "Reset",
+      "summary": "Apri i filtri per affinare ordinamento, famiglia, prezzo, note e genere.",
+      "fields": {
+        "sort": "Ordina",
+        "family": "Famiglia olfattiva",
+        "price": "Fascia prezzo",
+        "top": "Nota di testa",
+        "heart": "Nota di cuore",
+        "base": "Nota di fondo",
+        "gender": "Genere",
+        "note": "Qualsiasi nota"
+      },
+      "sortOptions": {
+        "rating": "Piu votati",
+        "price_low": "Prezzo: dal piu basso",
+        "price_high": "Prezzo: dal piu alto",
+        "longevity": "Migliore persistenza",
+        "sillage": "Migliore scia"
+      },
+      "familyOptions": {
+        "woody": "Legnoso",
+        "fresh": "Fresco",
+        "oriental": "Orientale",
+        "gourmand": "Gourmand",
+        "citrus": "Agrumato",
+        "aromatic": "Aromatico"
+      },
+      "priceOptions": {
+        "budget": "Budget",
+        "mid": "Medio",
+        "premium": "Premium",
+        "luxury": "Lusso"
+      },
+      "noteOptions": {
+        "oud": "Oud",
+        "vanilla": "Vaniglia",
+        "amber": "Ambra",
+        "rose": "Rosa",
+        "sandalwood": "Sandalo",
+        "musk": "Muschio",
+        "citrus": "Agrumi",
+        "jasmine": "Gelsomino",
+        "coffee": "Caffe",
+        "patchouli": "Patchouli"
+      },
+      "genderOptions": {
+        "male": "Uomo",
+        "female": "Donna",
+        "unisex": "Unisex"
+      },
+      "notePlaceholder": "oud, vaniglia, ambra...",
+      "arabicOnly": "Solo arabi",
+      "nicheOnly": "Solo niche",
+      "all": "Tutti",
+      "any": "Qualsiasi"
+    },
+    "client": {
+      "loadError": "Impossibile caricare altri profumi. Riprova tra poco.",
+      "showing": "Stai vedendo {visible} fragranze su {total}",
+      "end": "Fine catalogo"
+    },
+    "grid": {
+      "empty": "Nessuna fragranza trovata. Prova a modificare i filtri."
+    },
+    "gate": {
+      "eyebrow": "Continua la scoperta",
+      "title": "Accedi per sbloccare l'intero catalogo",
+      "description": "Hai visto i primi {previewLimit} profumi. Accedi o crea un account per continuare a esplorare tutto il catalogo.",
+      "login": "Accedi",
+      "signup": "Crea account"
+    }
+  },
+  "perfume": {
+    "card": {
+      "unknownBrand": "Brand sconosciuto",
+      "from": "da",
+      "viewFragrance": "Vedi fragranza"
+    },
+    "hero": {
+      "unknownBrand": "Brand sconosciuto",
+      "rating": "Valutazione {value}",
+      "metrics": {
+        "longevity": "Persistenza",
+        "sillage": "Scia",
+        "versatility": "Versatilita"
+      },
+      "goToOffer": "Vai all'offerta"
+    },
+    "offerTable": {
+      "empty": "Le offerte appariranno qui non appena i prezzi saranno disponibili.",
+      "columns": {
+        "store": "Negozio",
+        "price": "Prezzo",
+        "shipping": "Spedizione",
+        "total": "Totale",
+        "availability": "Disponibilita",
+        "action": "Azione"
+      },
+      "bestTotal": "Miglior totale",
+      "viewOffer": "Vedi offerta",
+      "comingSoon": "Presto disponibile"
+    },
+    "bestOffer": {
+      "title": "Miglior prezzo di oggi",
+      "empty": "I prezzi appariranno qui non appena saranno disponibili offerte.",
+      "selectedRetailer": "Retailer selezionato",
+      "updatedJustNow": "Aggiornato ora",
+      "updatedLessThanOneHourAgo": "Aggiornato meno di 1 ora fa",
+      "updatedHoursAgo": "Aggiornato {hours}h fa",
+      "updatedDaysAgo": "Aggiornato {days}g fa",
+      "updatedRecently": "Aggiornato di recente",
+      "at": "presso",
+      "item": "Prodotto",
+      "shipping": "Spedizione",
+      "shippingIncluded": "inclusa / n.d.",
+      "availability": "Disponibilita",
+      "viewOffer": "Vedi offerta"
+    },
+    "notes": {
+      "types": {
+        "TOP": "Note di testa",
+        "HEART": "Note di cuore",
+        "BASE": "Note di fondo"
+      },
+      "empty": "Nessuna nota indicata"
+    },
+    "image": {
+      "selection": "Selezione Odora"
+    },
+    "detail": {
+      "cheaperAlternativesSavings": "Un mood simile a meno. Puoi risparmiare fino a {savings} rispetto a questa bottiglia.",
+      "cheaperAlternativesSubtitle": "Fragranze simili con un prezzo totale piu basso, selezionate per affinità di profilo e convenienza.",
+      "overviewLabels": {
+        "family": "Famiglia",
+        "notes": "Note",
+        "moods": "Mood",
+        "occasions": "Occasioni"
+      },
+      "prices": {
+        "eyebrow": "Prezzi",
+        "title": "Confronta le offerte attuali",
+        "subtitle": "Ordiniamo le offerte per costo totale, cosi prezzo e spedizione vengono valutati insieme."
+      },
+      "overview": {
+        "eyebrow": "Panoramica",
+        "title": "Su questo profumo"
+      },
+      "notes": {
+        "eyebrow": "Note",
+        "title": "Piramide olfattiva",
+        "subtitle": "Note di testa, cuore e fondo ordinate per rilevanza, con accesso diretto a fragranze simili."
+      },
+      "badges": {
+        "moods": "Mood",
+        "seasons": "Stagioni",
+        "occasions": "Occasioni"
+      },
+      "unknown": "Sconosciuto",
+      "value": {
+        "eyebrow": "Convenienza",
+        "title": "Alternative piu economiche"
+      },
+      "discovery": {
+        "eyebrow": "Scoperta",
+        "title": "Fragranze simili",
+        "subtitle": "Fragranze con profilo, note e segnale stilistico simili."
+      }
+    }
+  },
+  "top": {
+    "page": {
+      "eyebrow": "Editoriale",
+      "title": "Classifiche curate di fragranze",
+      "subtitle": "Un modo piu nitido di esplorare il catalogo attraverso scelte forti per stile, performance e valore.",
+      "sections": {
+        "arabic": {
+          "eyebrow": "Arabi",
+          "title": "Migliori fragranze arabe",
+          "subtitle": "Firme arabe intense con presenza, texture e memorabilita."
+        },
+        "niche": {
+          "eyebrow": "Niche",
+          "title": "Migliori profumi niche",
+          "subtitle": "Composizioni distintive selezionate per carattere, rifinitura e identita."
+        },
+        "value": {
+          "eyebrow": "Valore",
+          "title": "Migliori profumi sotto €{priceCap}",
+          "subtitle": "Acquisti intelligenti che restano nel budget senza sembrare compromessi."
+        },
+        "performance": {
+          "eyebrow": "Performance",
+          "title": "Migliori fragranze a lunga durata",
+          "subtitle": "Fragranze selezionate per il tipo di persistenza che le persone notano davvero."
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "page": {
+        "eyebrow": "Account Odora",
+        "title": "Accedi",
+        "subtitle": "Continua a esplorare il catalogo con il tuo profilo Odora.",
+        "or": "oppure",
+        "signupPrompt": "Non hai ancora un account?",
+        "signupLink": "Crea account",
+        "socialNotice": "L'accesso social arrivera presto. Per ora puoi entrare con email e password.",
+        "errors": {
+          "authCallbackFailed": "Accesso non completato. Riprova.",
+          "emailVerificationFailed": "Verifica email non completata. Richiedi un nuovo link.",
+          "invalidAuthCallback": "Link di autenticazione non valido.",
+          "authNotConfigured": "Autenticazione non configurata correttamente.",
+          "fallback": "Operazione di autenticazione non riuscita."
+        },
+        "form": {
+          "email": "Email",
+          "emailPlaceholder": "nome@esempio.com",
+          "password": "Password",
+          "passwordPlaceholder": "Inserisci la password",
+          "submitting": "Accesso in corso...",
+          "submit": "Accedi"
+        }
+      }
+    },
+    "signup": {
+      "page": {
+        "eyebrow": "Account Odora",
+        "title": "Crea account",
+        "subtitle": "Registrati per continuare la scoperta delle fragranze senza limiti.",
+        "or": "oppure",
+        "loginPrompt": "Hai gia un account?",
+        "loginLink": "Accedi",
+        "socialNotice": "La registrazione social arrivera presto. Per ora puoi creare l'account con email e password.",
+        "errors": {
+          "fallback": "Registrazione non completata. Riprova."
+        },
+        "form": {
+          "name": "Nome",
+          "namePlaceholder": "Il tuo nome",
+          "email": "Email",
+          "emailPlaceholder": "nome@esempio.com",
+          "password": "Password",
+          "passwordPlaceholder": "Scegli una password",
+          "confirmPassword": "Conferma password",
+          "confirmPasswordPlaceholder": "Conferma la password",
+          "submitting": "Creazione account...",
+          "submit": "Crea account"
+        }
+      }
+    },
+    "social": {
+      "loginPrefix": "Accesso",
+      "signupPrefix": "Registrazione",
+      "providerSoon": "{prefix} {provider} presto disponibile"
+    },
+    "actions": {
+      "login": {
+        "missingCredentials": "Inserisci email e password.",
+        "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "invalidCredentials": "Credenziali non valide. Controlla email e password."
+      },
+      "signup": {
+        "missingCredentials": "Inserisci email e password.",
+        "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
+        "passwordMismatch": "Le password non coincidono.",
+        "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "signupFailed": "Registrazione non completata. Verifica i dati e riprova.",
+        "success": "Account creato. Controlla la tua email per confermare la registrazione e completare l'accesso."
+      }
+    }
+  },
+  "profile": {
+    "page": {
+      "eyebrow": "Account Odora",
+      "title": "Il tuo profilo",
+      "subtitle": "Qui puoi aggiornare i dati base del tuo account e gestire la sessione attiva.",
+      "session": {
+        "eyebrow": "Sessione",
+        "title": "Accesso attivo",
+        "authenticatedAs": "Sei autenticato come"
+      },
+      "logout": "Logout"
+    },
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Come vuoi essere chiamato",
+      "email": "Email",
+      "saving": "Salvataggio...",
+      "submit": "Salva modifiche"
+    },
+    "actions": {
+      "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+      "invalidSession": "Sessione non valida. Effettua di nuovo l'accesso.",
+      "nameTooLong": "Il nome non puo superare 80 caratteri.",
+      "updateFailed": "Non sono riuscito ad aggiornare il profilo. Riprova.",
+      "updated": "Profilo aggiornato."
+    }
+  },
+  "legal": {
+    "common": {
+      "effectiveDate": "Data di efficacia: {date}"
+    },
+    "privacy": {
+      "eyebrow": "Legale",
+      "title": "Informativa privacy",
+      "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni.",
+      "effectiveDate": "10 marzo 2026",
+      "sections": [
+        {
+          "title": "Quali dati raccogliamo",
+          "paragraphs": [
+            "Odora puo raccogliere informazioni che fornisci direttamente, come nome, indirizzo email e dettagli account quando ti registri, accedi o aggiorni il profilo.",
+            "Possiamo anche raccogliere informazioni tecniche e di utilizzo necessarie per far funzionare il sito, inclusi dati su dispositivo e browser, pagine viste, provenienza del traffico, stato di autenticazione e interazioni con link prodotto o retailer."
+          ]
+        },
+        {
+          "title": "Come usiamo le informazioni",
+          "paragraphs": [
+            "Usiamo le informazioni per fornire il servizio, proteggere gli account, personalizzare le funzioni di scoperta, migliorare l'esperienza del catalogo e capire come le persone usano il sito.",
+            "Possiamo usarle anche per mantenere la qualita del servizio, prevenire abusi, indagare problemi tecnici e misurare l'interesse verso pagine, collezioni e link retailer."
+          ]
+        },
+        {
+          "title": "Cookie, sessioni e tecnologie simili",
+          "paragraphs": [
+            "Odora usa cookie e tecnologie simili per mantenerti autenticato, ricordare lo stato della sessione e supportare le funzioni essenziali del sito.",
+            "Se verranno aggiunti analytics, tracking affiliato o script di terze parti, questa pagina dovrebbe essere aggiornata per riflettere tali tecnologie e le eventuali scelte disponibili agli utenti."
+          ]
+        },
+        {
+          "title": "Quando condividiamo le informazioni",
+          "paragraphs": [
+            "Possiamo condividere informazioni con fornitori di servizi che ci aiutano a ospitare, proteggere e gestire Odora, inclusi fornitori di infrastruttura, autenticazione, analytics e storage.",
+            "Possiamo inoltre divulgarle se richiesto dalla legge, per proteggere utenti e servizio o in connessione con un trasferimento d'azienda, fusione o riorganizzazione."
+          ]
+        },
+        {
+          "title": "Retailer e link esterni",
+          "paragraphs": [
+            "Odora collega a siti web di retailer esterni. Quando lasci Odora, si applicano l'informativa privacy, i termini e le pratiche di tracking del retailer.",
+            "Non siamo responsabili per contenuti, prezzi, disponibilita o pratiche privacy dei siti terzi collegati da Odora."
+          ]
+        },
+        {
+          "title": "Conservazione dati e sicurezza",
+          "paragraphs": [
+            "Conserviamo le informazioni personali per il tempo ragionevolmente necessario a gestire il servizio, mantenere gli account, rispettare obblighi di legge, risolvere controversie e far valere le policy del sito.",
+            "Adottiamo misure tecniche e organizzative ragionevoli per proteggere le informazioni, ma nessun servizio basato su internet puo garantire sicurezza assoluta."
+          ]
+        },
+        {
+          "title": "Diritti e scelte",
+          "paragraphs": [
+            "A seconda di dove vivi, potresti avere diritti di accesso, rettifica, cancellazione o limitazione dell'uso delle tue informazioni personali e di opposizione a determinati trattamenti.",
+            "Se contatti Odora con una richiesta privacy, potremmo chiederti informazioni necessarie a verificare la richiesta prima di agire."
+          ]
+        },
+        {
+          "title": "Modifiche a questa informativa",
+          "paragraphs": [
+            "Potremmo aggiornare questa informativa privacy di tanto in tanto. Quando accade, aggiorneremo la data di efficacia mostrata in questa pagina.",
+            "Le modifiche sostanziali dovrebbero essere riflesse sul sito prima di entrare in vigore."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "eyebrow": "Legale",
+      "title": "Termini d'uso",
+      "intro": "Questi termini d'uso regolano l'accesso a Odora e spiegano le regole di base che si applicano quando esplori fragranze, confronti offerte, crei un account o segui link verso retailer esterni.",
+      "effectiveDate": "10 marzo 2026",
+      "sections": [
+        {
+          "title": "Uso di Odora",
+          "paragraphs": [
+            "Accedendo o utilizzando Odora, accetti di usare il sito in modo lecito e conforme a questi termini d'uso.",
+            "Non devi abusare del sito, tentare di interferire con il suo funzionamento, eseguire scraping di aree riservate senza permesso o usare il servizio in modo da danneggiare Odora, i suoi utenti o i retailer collegati."
+          ]
+        },
+        {
+          "title": "Contenuti, prezzi e disponibilita",
+          "paragraphs": [
+            "Odora fornisce contenuti di scoperta fragranze, informazioni prodotto e confronti prezzo a fini informativi generali.",
+            "Prezzi, costi di spedizione, disponibilita e informazioni retailer possono cambiare in qualsiasi momento. Prezzo finale e condizioni d'acquisto sono sempre determinati dal retailer che scegli."
+          ]
+        },
+        {
+          "title": "Account",
+          "paragraphs": [
+            "Se crei un account, sei responsabile della sicurezza delle tue credenziali di accesso e delle attivita che avvengono sul tuo account.",
+            "Odora puo sospendere o limitare account usati in modo fraudolento, abusivo o in violazione di questi termini."
+          ]
+        },
+        {
+          "title": "Retailer e servizi di terze parti",
+          "paragraphs": [
+            "Odora puo collegare retailer e servizi di terze parti. Questi siti operano in modo indipendente e hanno termini, policy e condizioni commerciali proprie.",
+            "Qualsiasi problema relativo ad acquisto, reso, spedizione o assistenza clienti di un ordine retailer deve essere risolto con quel retailer."
+          ]
+        },
+        {
+          "title": "Relazioni di affiliazione",
+          "paragraphs": [
+            "Alcuni link in uscita su Odora possono essere link affiliati. Se clicchi uno di questi link e completi un acquisto idoneo, Odora puo ricevere una commissione.",
+            "Le relazioni di affiliazione non modificano il prezzo che paghi e non creano un rapporto di vendita diretto tra Odora e la transazione del retailer."
+          ]
+        },
+        {
+          "title": "Proprieta intellettuale",
+          "paragraphs": [
+            "Il brand Odora, il design del sito, i testi originali, le selezioni editoriali e gli altri materiali originali presenti sul sito sono protetti dalle leggi applicabili sulla proprieta intellettuale.",
+            "Non puoi copiare, ripubblicare o sfruttare commercialmente contenuti Odora senza autorizzazione scritta preventiva, salvo dove consentito dalla legge."
+          ]
+        },
+        {
+          "title": "Esclusioni e responsabilita",
+          "paragraphs": [
+            "Odora e fornito 'cosi com'e' e 'come disponibile'. Non garantiamo accesso ininterrotto, accuratezza perfetta o che ogni scheda, offerta o classifica sia sempre completa o aggiornata.",
+            "Nei limiti massimi consentiti dalla legge, Odora non e responsabile per perdite indirette, incidentali, consequenziali o lato retailer derivanti dall'uso del sito o dall'affidamento su informazioni retailer di terze parti."
+          ]
+        },
+        {
+          "title": "Modifiche",
+          "paragraphs": [
+            "Potremmo aggiornare questi termini d'uso di tanto in tanto. L'uso continuato del sito dopo l'entrata in vigore delle modifiche implica accettazione dei termini rivisti.",
+            "La data di efficacia in cima a questa pagina riflette la versione piu recente."
+          ]
+        }
+      ]
+    },
+    "affiliateDisclosure": {
+      "eyebrow": "Legale",
+      "title": "Trasparenza affiliazione",
+      "intro": "Odora puo partecipare a programmi di affiliazione con retailer e network selezionati. Questa pagina spiega come funziona il rapporto e come influisce sui link prodotto in uscita.",
+      "effectiveDate": "10 marzo 2026",
+      "sections": [
+        {
+          "title": "Come funzionano i link affiliati",
+          "paragraphs": [
+            "Alcuni link da Odora verso retailer esterni possono essere link affiliati. Se clicchi uno di questi link e completi un acquisto idoneo, Odora puo ricevere una commissione dal retailer o dal network affiliato.",
+            "Questa commissione aiuta a sostenere il funzionamento del sito, inclusi ricerca prodotto, cura editoriale e manutenzione delle funzioni di confronto prezzi."
+          ]
+        },
+        {
+          "title": "Cosa significa per te",
+          "paragraphs": [
+            "Usare un link affiliato in genere non aumenta il prezzo che paghi. L'acquisto viene completato sul sito del retailer, secondo i suoi prezzi e le sue condizioni commerciali.",
+            "Disponibilita, prezzo finale, spedizione, resi e assistenza clienti sono tutti gestiti dal retailer che scegli."
+          ]
+        },
+        {
+          "title": "Indipendenza editoriale",
+          "paragraphs": [
+            "Odora punta a mantenere selezione editoriale, scoperta prodotto e design di confronto indipendenti dalle relazioni di affiliazione.",
+            "Quando mettiamo in evidenza una fragranza, una collezione o un retailer, l'obiettivo e migliorare chiarezza di scoperta e confronto, non garantire un consiglio d'acquisto per ogni utente."
+          ]
+        },
+        {
+          "title": "Copertura retailer",
+          "paragraphs": [
+            "Non tutti i retailer mostrati su Odora saranno necessariamente monetizzati tramite affiliazione in ogni momento. La copertura retailer puo cambiare quando i programmi aprono, chiudono o aggiornano il loro stato.",
+            "Dove i link affiliati sono disponibili, Odora puo dare priorita a questi rispetto ai link prodotto standard per la stessa destinazione retailer."
+          ]
+        },
+        {
+          "title": "Prezzo e disponibilita",
+          "paragraphs": [
+            "Prezzi retailer e stato stock possono cambiare rapidamente. Odora puo mostrare l'ultimo prezzo noto, ma la pagina retailer resta sempre la fonte finale prima dell'acquisto.",
+            "Se un retailer cambia prezzo o disponibilita dopo il click, quella variazione e fuori dal controllo di Odora."
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "pages": {
+      "home": {
+        "title": "Odora",
+        "description": "Scoperta fragranze e confronto prezzi per aiutarti a scegliere meglio."
+      },
+      "finder": {
+        "title": "Fragrance Finder | Odora",
+        "description": "Usa Odora Finder per abbinare profumi per mood, stagione, budget, preferenze di note e stile."
+      },
+      "perfumes": {
+        "title": "Profumi | Odora",
+        "description": "Sfoglia i profumi per famiglia, note, genere e prezzo, poi confronta le offerte con chiarezza."
+      },
+      "top": {
+        "title": "Top Fragranze | Odora",
+        "description": "Esplora le classifiche curate di Odora per stile, performance e valore."
+      },
+      "login": {
+        "title": "Accedi | Odora",
+        "description": "Accedi al tuo account Odora per continuare la scoperta delle fragranze e sbloccare il catalogo completo."
+      },
+      "signup": {
+        "title": "Crea account | Odora",
+        "description": "Crea il tuo account Odora per sbloccare il catalogo completo e salvare la tua esperienza di scoperta."
+      },
+      "profile": {
+        "title": "Profilo | Odora",
+        "description": "Gestisci il tuo profilo Odora e la sessione attiva."
+      },
+      "privacy": {
+        "title": "Informativa privacy | Odora",
+        "description": "Scopri come Odora raccoglie, usa e protegge le informazioni personali."
+      },
+      "terms": {
+        "title": "Termini d'uso | Odora",
+        "description": "Leggi i termini che regolano l'uso di Odora."
+      },
+      "affiliateDisclosure": {
+        "title": "Trasparenza affiliazione | Odora",
+        "description": "Scopri come funzionano i link affiliati su Odora."
+      },
+      "perfumeDetail": {
+        "fallbackTitle": "Profumo | Odora",
+        "fallbackDescription": "Dettagli fragranza, note e confronto prezzi su Odora.",
+        "notFoundTitle": "Profumo non trovato | Odora",
+        "title": "{name} di {brand} | Odora",
+        "unknownBrand": "Brand sconosciuto"
+      }
+    }
+  }
+}

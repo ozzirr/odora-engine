@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+
 import { Container } from "@/components/layout/Container";
 import { DiscoveryCollections } from "@/components/home/DiscoveryCollections";
 import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
@@ -11,14 +14,36 @@ import {
   toHomeSpotlight,
   toPerfumeCardItem,
 } from "@/lib/homepage";
+import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 
 export const dynamic = "force-dynamic";
 
+type HomePageProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export async function generateMetadata({ params }: HomePageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.home" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: getAlternateLinks("/")[resolvedLocale],
+      languages: getAlternateLinks("/"),
+    },
+  };
+}
+
 export default async function HomePage() {
   const homepageData = await getHomepageData();
-  const heroPreview = homepageData.hero ? toHomeSpotlight(homepageData.hero, "Hero pick") : null;
+  const heroPreview = homepageData.hero ? toHomeSpotlight(homepageData.hero, "heroPick") : null;
   const trendingPerfumes = homepageData.trending.map((perfume) =>
-    toHomeSpotlight(perfume, "Trending"),
+    toHomeSpotlight(perfume, "trending"),
   );
 
   return (

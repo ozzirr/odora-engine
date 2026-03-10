@@ -138,152 +138,39 @@ ODORA_CATALOG_MODE=no_demo
 ODORA_CATALOG_MODE=verified_only
 ```
 
-## Data Import Pipelines
+## Perfume Data Flow
 
-### 1) Demo / Parfumo-style Import
-
-- Generate synthetic Parfumo-style dataset:
+The catalog workflow now runs through four canonical commands:
 
 ```bash
-npm run generate:parfumo-dataset
+npm run perfumes:enrich
+npm run perfumes:verify
+npm run perfumes:import
+npm run prices:sync
 ```
 
-- Dry run import (first 2000):
+What each command does:
 
-```bash
-npm run import:parfumo:dry
-```
+- `perfumes:enrich` rewrites a source file into the canonical catalog shape with shared normalization for gender, family, notes, concentration, URLs, descriptions, and slugs.
+- `perfumes:verify` checks the same normalization and validation rules without writing anything.
+- `perfumes:import` upserts the normalized catalog into PostgreSQL. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
+- `prices:sync` recomputes `Perfume.priceRange` from current offers and refreshes `Offer.isBestPrice`.
 
-- Real import (first 2000):
+Defaults:
 
-```bash
-npm run import:parfumo
-```
+- `perfumes:enrich`, `perfumes:verify`, `perfumes:import` target `data/verified/perfumes.csv`
+- `perfumes:import -- --source=parfumo` targets `data/parfumo/perfumes.csv`
+- all commands support `-- --dry-run`
 
-### 2) Verified Catalog Import
+The single source of truth for perfume data normalization now lives in:
 
-Input default: `data/verified/perfumes.csv`
+- `lib/perfume-taxonomy.ts`
+- `lib/perfume-data/normalize.ts`
+- `lib/perfume-data/validate.ts`
+- `lib/perfume-data/import.ts`
+- `lib/perfume-data/prices.ts`
 
-- Dry run:
-
-```bash
-npm run import:verified:dry
-```
-
-- Real import:
-
-```bash
-npm run import:verified
-```
-
-- Notes enrichment only (safe for existing catalog rows; no perfume upsert):
-
-```bash
-npm run import:verified:notes:dry
-npm run import:verified:notes
-```
-
-This mode reads `top_notes`, `heart_notes`, `base_notes`, normalizes them, upserts `Note` records, and creates
-`PerfumeNote` links for matched existing perfumes (slug first, then brand+name fallback), with idempotent duplicate
-protection.
-
-### 3) Backfill Provenance for Existing Records
-
-```bash
-npm run catalog:backfill:provenance:dry
-npm run catalog:backfill:provenance
-```
-
-## Image Workflows
-
-### A) Build Image Worklist
-
-Generates curation worklists and auto-fills missing `image_storage_path` when needed.
-
-```bash
-npm run images:worklist
-npm run images:worklist:verified
-```
-
-Output:
-
-- `data/verified/worklists/image-sourcing-worklist.csv`
-- `data/verified/worklists/image-sourcing-worklist.json`
-
-### B) Suggest `image_source_url` Candidates
-
-Attempts suggestions from `official_source_url` using metadata/JSON-LD/common image selectors.
-
-```bash
-npm run images:suggest-sources
-npm run images:suggest-sources:verified
-```
-
-You can pass extra flags, for example:
-
-```bash
-npm run images:suggest-sources:verified -- --limit=50
-```
-
-Output:
-
-- `data/verified/worklists/image-source-suggestions.csv`
-- `data/verified/worklists/image-source-suggestions.json`
-
-Includes diagnostics per row (`review_status`, `failure_reason`, `http_status_code`, `final_url`).
-
-### C) Sync Images from Source URLs to Supabase Storage
-
-Reads `image_source_url`, uploads to Storage, writes back `image_public_url`.
-
-```bash
-npm run sync:verified:images
-npm run sync:verified:images:force
-```
-
-### D) Bulk Upload Approved Local Images (Fastest Production Path)
-
-Manifest:
-
-- `data/verified/approved-images-manifest.csv`
-- `image_storage_path` format: `<brand-slug>/<perfume-slug>.jpg` (no leading `perfumes/`)
-
-Expected local files (example pattern):
-
-- `data/verified/approved-images/<brand-slug>/<perfume-slug>.jpg`
-
-Commands:
-
-```bash
-npm run images:manifest:generate
-npm run images:bulk-upload:dry
-npm run images:bulk-upload
-npm run images:bulk-upload:db
-```
-
-Optional flags (examples):
-
-```bash
-npm run images:bulk-upload:dry -- --limit=10
-npm run images:bulk-upload -- --force --limit=50
-npm run images:bulk-upload:db -- --force
-```
-
-Behavior:
-
-- Uploads local image files to Supabase bucket `perfumes`
-- Updates matching rows in `data/verified/perfumes.csv`
-- Matching by `slug`, fallback to normalized `brand + name`
-- `--update-db` also updates `Perfume.imageUrl` in PostgreSQL
-
-### E) Repair Incorrect Storage Paths / URLs
-
-Fixes legacy values where storage path started with `perfumes/` and URLs contained `/public/perfumes/perfumes/`.
-
-```bash
-npm run images:repair-paths:dry
-npm run images:repair-paths
-```
+Historical one-off import/image scripts were moved to `scripts/archive/import/` for reference only.
 
 ## Deployment Notes (Vercel)
 
@@ -301,11 +188,10 @@ app/
 components/
 lib/
 prisma/
-scripts/import/
+scripts/
+scripts/archive/import/
 data/verified/
   perfumes.csv
-  approved-images-manifest.csv
-  worklists/
 ```
 
 ## Troubleshooting
@@ -313,7 +199,7 @@ data/verified/
 - Prisma URL error (`protocol postgresql:// or postgres://`):
   - verify `prisma/schema.prisma` datasource provider is `postgresql`
   - verify root `.env` has valid unquoted `DATABASE_URL`
-- `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` missing:
-  - set them in root `.env` before running image upload/sync scripts
-- `images:suggest-sources` returns many `FETCH_FAILED` with `BLOCKED:HTTP 403`:
-  - some brand domains block automated requests; use approved local image workflow (`images:bulk-upload`) for reliable production ingestion
+- dry-run a catalog command before writing:
+  - `npm run perfumes:verify`
+  - `npm run perfumes:enrich -- --dry-run`
+  - `npm run perfumes:import -- --dry-run`

@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -7,6 +9,8 @@ type FeaturedPerfumesProps = {
 };
 
 export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
+  const t = useTranslations("home.featured");
+
   if (perfumes.length === 0) {
     return null;
   }
@@ -14,9 +18,9 @@ export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
   return (
     <section className="mt-24 space-y-8">
       <SectionTitle
-        eyebrow="Featured"
-        title="Featured perfumes"
-        subtitle="A considered edit of bottles worth knowing, from easy daily signatures to richer statement scents."
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
       />
       <PerfumeGrid perfumes={perfumes} />
     </section>

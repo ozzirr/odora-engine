@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
@@ -15,12 +16,14 @@ import {
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
+import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
 type PerfumeDetailPageProps = {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 };
@@ -120,14 +123,16 @@ async function getPerfumePageData(slug: string) {
 }
 
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.perfumeDetail" });
+
   if (!isDatabaseConfigured) {
     return {
-      title: "Perfume | Odora",
-      description: "Fragrance details, notes, and price comparison on Odora.",
+      title: t("fallbackTitle"),
+      description: t("fallbackDescription"),
     };
   }
-
-  const { slug } = await params;
 
   try {
     const perfume = await prisma.perfume.findFirst({
@@ -159,25 +164,34 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
 
     if (!perfume) {
       return {
-        title: "Perfume not found | Odora",
+        title: t("notFoundTitle"),
       };
     }
 
     return {
-      title: `${perfume.name} by ${perfume.brand?.name ?? "Unknown brand"} | Odora`,
+      title: t("title", {
+        name: perfume.name,
+        brand: perfume.brand?.name ?? t("unknownBrand"),
+      }),
       description: getPerfumeShortText(perfume),
+      alternates: {
+        canonical: getAlternateLinks("/perfumes/[slug]", { slug })[resolvedLocale],
+        languages: getAlternateLinks("/perfumes/[slug]", { slug }),
+      },
     };
   } catch (error) {
     logCatalogQueryError("perfumes:metadata", error);
     return {
-      title: "Perfume | Odora",
-      description: "Fragrance details, notes, and price comparison on Odora.",
+      title: t("fallbackTitle"),
+      description: t("fallbackDescription"),
     };
   }
 }
 
 export default async function PerfumeDetailPage({ params }: PerfumeDetailPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "perfume.detail" });
   const data = await getPerfumePageData(slug);
 
   if (!data) {
@@ -210,9 +224,16 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
   const topSavings = alternativeSavings.length > 0 ? Math.max(...alternativeSavings) : null;
   const cheaperAlternativesSubtitle = topSavings
-    ? `A similar mood for less. You can save up to ${formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR")} compared to this bottle.`
-    : "Similar fragrances with a lower total price, selected for profile match and value.";
-  const overviewText = getPerfumeOverviewText(perfume);
+    ? t("cheaperAlternativesSavings", {
+        savings: formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR", resolvedLocale),
+      })
+    : t("cheaperAlternativesSubtitle");
+  const overviewText = getPerfumeOverviewText(perfume, {
+    family: t("overviewLabels.family"),
+    notes: t("overviewLabels.notes"),
+    moods: t("overviewLabels.moods"),
+    occasions: t("overviewLabels.occasions"),
+  });
 
   return (
     <>
@@ -221,45 +242,45 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
         <section className="space-y-4">
           <SectionTitle
-            eyebrow="Prices"
-            title="Compare current offers"
-            subtitle="We rank offers by total cost, so price and shipping are considered together."
+            eyebrow={t("prices.eyebrow")}
+            title={t("prices.title")}
+            subtitle={t("prices.subtitle")}
           />
           <OfferTable offers={perfume.offers} />
         </section>
 
         <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
-          <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={overviewText} />
+          <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
         </section>
 
         <section className="space-y-4">
           <SectionTitle
-            eyebrow="Notes"
-            title="Fragrance pyramid"
-            subtitle="Top, heart, and base notes arranged by prominence, with direct paths to explore similar scents."
+            eyebrow={t("notes.eyebrow")}
+            title={t("notes.title")}
+            subtitle={t("notes.subtitle")}
           />
           <NotesList notes={notesForRender} />
         </section>
 
         <section className="grid gap-4 md:grid-cols-3">
           <MoodBadges
-            title="Moods"
+            title={t("badges.moods")}
             items={(perfume.moods ?? []).map((item) => ({
-              name: item.mood?.name ?? "Unknown",
+              name: item.mood?.name ?? t("unknown"),
               weight: item.weight,
             }))}
           />
           <MoodBadges
-            title="Seasons"
+            title={t("badges.seasons")}
             items={(perfume.seasons ?? []).map((item) => ({
-              name: item.season?.name ?? "Unknown",
+              name: item.season?.name ?? t("unknown"),
               weight: item.weight,
             }))}
           />
           <MoodBadges
-            title="Occasions"
+            title={t("badges.occasions")}
             items={(perfume.occasions ?? []).map((item) => ({
-              name: item.occasion?.name ?? "Unknown",
+              name: item.occasion?.name ?? t("unknown"),
               weight: item.weight,
             }))}
           />
@@ -267,8 +288,8 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
         <section className="space-y-4">
           <SectionTitle
-            eyebrow="Value"
-            title="Cheaper alternatives"
+            eyebrow={t("value.eyebrow")}
+            title={t("value.title")}
             subtitle={cheaperAlternativesSubtitle}
           />
           <PerfumeGrid perfumes={cheaperAlternatives} />
@@ -276,9 +297,9 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
         <section className="space-y-4 pb-4 md:pb-6">
           <SectionTitle
-            eyebrow="Discovery"
-            title="Similar fragrances"
-            subtitle="Fragrances with similar profile, notes, and style signal."
+            eyebrow={t("discovery.eyebrow")}
+            title={t("discovery.title")}
+            subtitle={t("discovery.subtitle")}
           />
           <PerfumeGrid perfumes={similarPerfumes} />
         </section>

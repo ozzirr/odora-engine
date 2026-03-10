@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { Container } from "@/components/layout/Container";
 
 type LegalSection = {
@@ -14,6 +16,8 @@ type LegalPageProps = {
 };
 
 export function LegalPage({ eyebrow, title, intro, effectiveDate, sections }: LegalPageProps) {
+  const t = useTranslations("legal.common");
+
   return (
     <Container className="py-14 sm:py-18">
       <div className="mx-auto max-w-4xl space-y-8">
@@ -22,7 +26,7 @@ export function LegalPage({ eyebrow, title, intro, effectiveDate, sections }: Le
           <h1 className="mt-2 font-display text-4xl text-[#21180f]">{title}</h1>
           <p className="mt-4 text-sm leading-7 text-[#685747]">{intro}</p>
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">
-            Effective date: {effectiveDate}
+            {t("effectiveDate", { date: effectiveDate })}
           </p>
         </header>
 

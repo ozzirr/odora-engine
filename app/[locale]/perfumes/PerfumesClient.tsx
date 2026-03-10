@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { CatalogGate } from "@/components/catalog/CatalogGate";
 import { PerfumeFilters } from "@/components/perfumes/PerfumeFilters";
@@ -52,6 +53,7 @@ export function PerfumesClient({
   pageSize,
   isAuthenticated,
 }: PerfumesClientProps) {
+  const t = useTranslations("catalog.client");
   const authStatus = useAuthStatus(isAuthenticated);
   const searchParams = useSearchParams();
   const [perfumes, setPerfumes] = useState<PerfumeCardItem[]>(initialPerfumes);
@@ -125,12 +127,12 @@ export function PerfumesClient({
       setHasMoreResults(reachedPreviewLimit ? true : payload.hasMore);
       setNextOffset(payload.nextOffset);
     } catch {
-      setLoadError("Unable to load more fragrances. Retry in a moment.");
+      setLoadError(t("loadError"));
     } finally {
       setIsLoadingMore(false);
       isFetchingRef.current = false;
     }
-  }, [authStatus, canLoadMore, maxVisiblePerfumes, nextOffset, pageSize, perfumes.length, searchParams]);
+  }, [authStatus, canLoadMore, maxVisiblePerfumes, nextOffset, pageSize, perfumes.length, searchParams, t]);
 
   useEffect(() => {
     if (!loadMoreRef.current || !canLoadMore) {
@@ -158,8 +160,7 @@ export function PerfumesClient({
 
       <section className="space-y-4 lg:min-w-0 lg:pb-8">
         <p className="text-sm text-[#615140]">
-          Showing <span className="font-semibold text-[#2a2018]">{perfumes.length}</span> of{" "}
-          <span className="font-semibold text-[#2a2018]">{totalCount}</span> fragrances
+          {t("showing", { visible: perfumes.length, total: totalCount })}
         </p>
         <PerfumeGrid perfumes={perfumes} />
 
@@ -177,7 +178,7 @@ export function PerfumesClient({
 
         {!hasMoreResults && perfumes.length > 0 ? (
           <p className="pt-2 text-center text-xs uppercase tracking-[0.1em] text-[#8a7763]">
-            End of catalog
+            {t("end")}
           </p>
         ) : null}
       </section>

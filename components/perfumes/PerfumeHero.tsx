@@ -1,10 +1,12 @@
-import Link from "next/link";
+import type { ComponentProps } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { getPerfumeShortText } from "@/lib/perfume-text";
+import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
 import { formatGender } from "@/lib/utils";
 
@@ -50,6 +52,8 @@ type PerfumeHeroProps = {
   bestOffer: ComputedBestOffer | null;
 };
 
+type LinkHref = ComponentProps<typeof Link>["href"];
+
 function MetricItem({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="rounded-xl border border-[#deceb9] bg-white/70 px-3 py-2">
@@ -60,7 +64,10 @@ function MetricItem({ label, value }: { label: string; value: number | null }) {
 }
 
 export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
-  const brandName = perfume.brand?.name?.trim() || "Unknown brand";
+  const t = useTranslations("perfume.hero");
+  const commonT = useTranslations("common");
+  const locale = useLocale();
+  const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const summary = getPerfumeShortText(perfume);
 
   return (
@@ -84,31 +91,31 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge>{formatGender(perfume.gender)}</Badge>
+          <Badge>{formatGender(perfume.gender, locale as "it" | "en")}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
-          {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}
-          {perfume.isNiche ? <Badge variant="soft">Niche</Badge> : null}
+          {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
+          {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
           {perfume.ratingInternal ? (
-            <Badge variant="outline">Rating {perfume.ratingInternal.toFixed(1)}</Badge>
+            <Badge variant="outline">{t("rating", { value: perfume.ratingInternal.toFixed(1) })}</Badge>
           ) : null}
         </div>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <MetricItem label="Longevity" value={perfume.longevityScore} />
-          <MetricItem label="Sillage" value={perfume.sillageScore} />
-          <MetricItem label="Versatility" value={perfume.versatilityScore} />
+          <MetricItem label={t("metrics.longevity")} value={perfume.longevityScore} />
+          <MetricItem label={t("metrics.sillage")} value={perfume.sillageScore} />
+          <MetricItem label={t("metrics.versatility")} value={perfume.versatilityScore} />
         </div>
 
         <BestOfferCard bestOffer={bestOffer} showButton={false} className="bg-[#f7efe2]" />
 
         {bestOffer?.bestUrl ? (
           <Link
-            href={bestOffer.bestUrl}
+            href={bestOffer.bestUrl as unknown as LinkHref}
             target="_blank"
             rel="noreferrer"
             className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
           >
-            Go to offer
+            {t("goToOffer")}
           </Link>
         ) : null}
       </div>

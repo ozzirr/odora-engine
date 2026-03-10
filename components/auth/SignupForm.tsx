@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { signupWithPassword, type SignupFormState } from "@/app/signup/actions";
 import { buttonStyles } from "@/components/ui/Button";
@@ -13,6 +14,8 @@ type SignupFormProps = {
 const initialState: SignupFormState = {};
 
 export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormProps) {
+  const t = useTranslations("auth.signup.page.form");
+  const locale = useLocale();
   const [state, formAction, isPending] = useActionState(signupWithPassword, {
     ...initialState,
     ...(initialError ? { error: initialError } : {}),
@@ -21,24 +24,25 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
   return (
     <form action={formAction} className="mt-6 space-y-4">
       <input type="hidden" name="next" value={nextPath} />
+      <input type="hidden" name="locale" value={locale} />
 
       <div className="space-y-1.5">
         <label htmlFor="name" className="text-sm font-medium text-[#3a2e24]">
-          Nome
+          {t("name")}
         </label>
         <input
           id="name"
           name="name"
           type="text"
           autoComplete="name"
-          placeholder="Il tuo nome"
+          placeholder={t("namePlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
       </div>
 
       <div className="space-y-1.5">
         <label htmlFor="email" className="text-sm font-medium text-[#3a2e24]">
-          Email
+          {t("email")}
         </label>
         <input
           id="email"
@@ -46,14 +50,14 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
           type="email"
           autoComplete="email"
           required
-          placeholder="nome@esempio.com"
+          placeholder={t("emailPlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
       </div>
 
       <div className="space-y-1.5">
         <label htmlFor="password" className="text-sm font-medium text-[#3a2e24]">
-          Password
+          {t("password")}
         </label>
         <input
           id="password"
@@ -61,14 +65,14 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
           type="password"
           autoComplete="new-password"
           required
-          placeholder="Scegli una password"
+          placeholder={t("passwordPlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
       </div>
 
       <div className="space-y-1.5">
         <label htmlFor="confirmPassword" className="text-sm font-medium text-[#3a2e24]">
-          Conferma password
+          {t("confirmPassword")}
         </label>
         <input
           id="confirmPassword"
@@ -76,7 +80,7 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
           type="password"
           autoComplete="new-password"
           required
-          placeholder="Conferma la password"
+          placeholder={t("confirmPasswordPlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
       </div>
@@ -94,7 +98,7 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
       ) : null}
 
       <button type="submit" disabled={isPending} className={buttonStyles({ className: "mt-2 w-full" })}>
-        {isPending ? "Creazione account..." : "Crea account"}
+        {isPending ? t("submitting") : t("submit")}
       </button>
     </form>
   );

@@ -1,11 +1,11 @@
-# Verified Catalog Import Format
+# Verified Catalog Format
 
 The verified importer accepts:
 
 - CSV files (`.csv`)
 - JSON arrays (`.json`)
 
-Default command targets:
+Default verified catalog target:
 
 - `data/verified/perfumes.csv`
 
@@ -49,16 +49,20 @@ Maison Francis Kurkdjian,Baccarat Rouge 540,UNISEX,2015,Saffron;Jasmine,Amberwoo
 ]
 ```
 
-## Commands
+## Canonical Commands
 
 ```bash
-# Dry run
-npm run import:verified:dry
+# Normalize the file in-place
+npm run perfumes:enrich
 
-# Real import
-npm run import:verified
+# Validate only
+npm run perfumes:verify
 
-# Sync verified images (normal / force)
-npm run sync:verified:images
-npm run sync:verified:images:force
+# Import into PostgreSQL
+npm run perfumes:import
+
+# Notes-only enrichment for existing perfumes
+npm run perfumes:import -- --mode=notes
 ```
+
+The shared normalization and validation rules for these commands live in `lib/perfume-data/`.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { EditorialSection } from "@/components/top/EditorialSection";
@@ -8,14 +9,9 @@ import {
   logCatalogQueryError,
   mergePerfumeWhere,
 } from "@/lib/catalog";
+import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
-
-export const metadata: Metadata = {
-  title: "Top Fragrances | Odora",
-  description:
-    "Explore Odora's curated fragrance rankings by style, performance, and value.",
-};
 
 export const dynamic = "force-dynamic";
 
@@ -42,7 +38,31 @@ async function getTopPageData() {
   }
 }
 
-export default async function TopPage() {
+type TopPageProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export async function generateMetadata({ params }: TopPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.top" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: getAlternateLinks("/top")[resolvedLocale],
+      languages: getAlternateLinks("/top"),
+    },
+  };
+}
+
+export default async function TopPage({ params }: TopPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "top.page" });
   const perfumes = await getTopPageData();
 
   const topArabic = perfumes
@@ -83,37 +103,37 @@ export default async function TopPage() {
     <Container className="space-y-12 pt-14 pb-8">
       <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
         <SectionTitle
-          eyebrow="Editorial"
-          title="Curated fragrance rankings"
-          subtitle="A sharper way to explore the catalog through standout picks for style, performance, and value."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          subtitle={t("subtitle")}
         />
       </div>
 
       <EditorialSection
-        eyebrow="Arabic"
-        title="Top Arabic fragrances"
-        subtitle="Bold Arabic signatures with presence, texture, and memorability."
+        eyebrow={t("sections.arabic.eyebrow")}
+        title={t("sections.arabic.title")}
+        subtitle={t("sections.arabic.subtitle")}
         perfumes={topArabic}
       />
 
       <EditorialSection
-        eyebrow="Niche"
-        title="Best niche perfumes"
-        subtitle="Distinctive compositions chosen for character, polish, and identity."
+        eyebrow={t("sections.niche.eyebrow")}
+        title={t("sections.niche.title")}
+        subtitle={t("sections.niche.subtitle")}
         perfumes={topNiche}
       />
 
       <EditorialSection
-        eyebrow="Value"
-        title={`Best perfumes under €${priceCap}`}
-        subtitle="Smart buys that stay under budget without feeling compromise-driven."
+        eyebrow={t("sections.value.eyebrow")}
+        title={t("sections.value.title", { priceCap })}
+        subtitle={t("sections.value.subtitle")}
         perfumes={topValuePicks}
       />
 
       <EditorialSection
-        eyebrow="Performance"
-        title="Best long-lasting fragrances"
-        subtitle="Fragrances selected for the kind of staying power people actually notice."
+        eyebrow={t("sections.performance.eyebrow")}
+        title={t("sections.performance.title")}
+        subtitle={t("sections.performance.subtitle")}
         perfumes={topLongLasting}
       />
     </Container>

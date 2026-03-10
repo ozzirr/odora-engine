@@ -1,0 +1,777 @@
+{
+  "localeSwitcher": {
+    "label": "Switch language"
+  },
+  "common": {
+    "badges": {
+      "arabic": "Arabic",
+      "niche": "Niche"
+    }
+  },
+  "layout": {
+    "header": {
+      "nav": {
+        "home": "Home",
+        "perfumes": "Perfumes",
+        "finder": "Finder",
+        "top": "Top"
+      },
+      "account": {
+        "profile": "Your profile",
+        "login": "Log in"
+      },
+      "cta": "Explore perfumes",
+      "menu": "Menu"
+    },
+    "footer": {
+      "description": "Discover perfumes, compare notes and prices, and find the right bottle faster.",
+      "navigation": "Navigation",
+      "legal": "Legal",
+      "nav": {
+        "home": "Home",
+        "perfumes": "Perfumes",
+        "finder": "Finder",
+        "top": "Top"
+      },
+      "legalLinks": {
+        "privacy": "Privacy",
+        "terms": "Terms",
+        "affiliateDisclosure": "Affiliate Disclosure"
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Fragrance Discovery",
+      "title": "Find the fragrance that feels like you.",
+      "subtitle": "Browse standout perfumes, understand their character, and compare offers in one calm, elegant flow.",
+      "valueProps": {
+        "compare": "Compare prices across trusted retailers",
+        "explore": "Explore perfumes by notes, mood, and style",
+        "choose": "Choose with more confidence"
+      },
+      "browseCatalog": "Browse catalog",
+      "startFinder": "Start Finder",
+      "spotlight": "Spotlight",
+      "badges": {
+        "heroPick": "Hero pick",
+        "trending": "Trending"
+      },
+      "bestPriceToday": "Best price today",
+      "discover": "Discover",
+      "viewFragrance": "View fragrance",
+      "fallbackStore": "Odora fragrance page",
+      "viewOffers": "View offers",
+      "seeProductDetails": "See product details"
+    },
+    "trending": {
+      "eyebrow": "Trending Now",
+      "title": "Trending picks right now",
+      "subtitle": "A curated edit of fragrances people are discovering and revisiting right now.",
+      "badges": {
+        "heroPick": "Hero pick",
+        "trending": "Trending"
+      },
+      "bestPrice": "Best price",
+      "offers": "Offers",
+      "viewOffers": "View offers",
+      "seeProductDetails": "See product details"
+    },
+    "featured": {
+      "eyebrow": "Featured",
+      "title": "Featured perfumes",
+      "subtitle": "A considered edit of bottles worth knowing, from easy daily signatures to richer statement scents."
+    },
+    "quickFilters": {
+      "eyebrow": "Quick Start",
+      "title": "Explore by mood and style",
+      "subtitle": "Start from a mood, a note, or a style and jump straight into a refined set of results.",
+      "tones": {
+        "warm": "Warm",
+        "clean": "Clean",
+        "bold": "Bold",
+        "balanced": "Balanced",
+        "magnetic": "Magnetic",
+        "bright": "Bright"
+      },
+      "cards": {
+        "vanillaLovers": {
+          "label": "Vanilla Lovers",
+          "subtitle": "Finder preset for creamy vanilla-led perfumes with cozy warmth."
+        },
+        "freshDaily": {
+          "label": "Fresh Daily",
+          "subtitle": "Crisp everyday matches with fresh mood, daily-wear use, and bright notes."
+        },
+        "arabicSignature": {
+          "label": "Arabic Signature",
+          "subtitle": "Rich Arabic profiles filtered by bold mood, oud note, and Arabic-only catalog data."
+        },
+        "officeSafe": {
+          "label": "Office Safe",
+          "subtitle": "Finder shortcut for elegant office-friendly perfumes with soft musky structure."
+        },
+        "dateNight": {
+          "label": "Date Night",
+          "subtitle": "Romantic evening matches tuned to date-night wear and warm amber signatures."
+        },
+        "summerCitrus": {
+          "label": "Summer Citrus",
+          "subtitle": "Fresh summer presets centered on sparkling citrus-style notes."
+        }
+      },
+      "openInFinder": "Open in Finder"
+    },
+    "howItWorks": {
+      "eyebrow": "How Odora Works",
+      "title": "A simpler way to choose well",
+      "subtitle": "Move from inspiration to comparison without bouncing between multiple tabs and retailer pages.",
+      "steps": {
+        "discover": {
+          "title": "Discover",
+          "description": "Start with notes, style, mood, or occasion."
+        },
+        "compare": {
+          "title": "Compare",
+          "description": "Compare stores, shipping, and total price at a glance."
+        },
+        "choose": {
+          "title": "Choose",
+          "description": "Leave for the retailer with a clearer sense of what fits and what it costs."
+        }
+      }
+    },
+    "trustedStores": {
+      "eyebrow": "Trusted Stores",
+      "title": "Compare prices from trusted stores",
+      "subtitle": "We surface retailers in a clean comparison view so prices, shipping, and availability stay easy to read."
+    },
+    "discoveryCollections": {
+      "eyebrow": "Collections",
+      "title": "Discovery collections",
+      "subtitle": "Browse the catalog through thoughtful edits built around style, mood, and what you want to find next.",
+      "type": {
+        "finderPreset": "Finder preset",
+        "catalogRoute": "Catalog route"
+      },
+      "cta": "Explore collection"
+    }
+  },
+  "finder": {
+    "page": {
+      "eyebrow": "Finder",
+      "title": "Find your next fragrance in minutes",
+      "subtitle": "Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
+    },
+    "experience": {
+      "chips": {
+        "mood": "Mood: {value}",
+        "season": "Season: {value}",
+        "occasion": "Occasion: {value}",
+        "note": "Note: {value}"
+      },
+      "arabicOnly": "Arabic only",
+      "nicheOnly": "Niche only",
+      "fallbackError": "Live matching is temporarily unavailable. Showing the closest catalog matches instead.",
+      "preset": {
+        "eyebrow": "Finder preset",
+        "fallbackTitle": "Suggested starting point",
+        "description": "These filters were pre-filled from the shortcut you selected on the homepage."
+      },
+      "fields": {
+        "mood": "Preferred mood",
+        "season": "Season",
+        "occasion": "Occasion",
+        "budget": "Budget",
+        "note": "Preferred note",
+        "gender": "Gender preference"
+      },
+      "any": "Any",
+      "budget": {
+        "any": "Any",
+        "budget": "Budget",
+        "mid": "Mid",
+        "premium": "Premium",
+        "luxury": "Luxury"
+      },
+      "gender": {
+        "any": "Any",
+        "male": "Male",
+        "female": "Female",
+        "unisex": "Unisex"
+      },
+      "finding": "Finding...",
+      "submit": "Find fragrances",
+      "reset": "Reset",
+      "results": "Found {total} matching fragrances",
+      "empty": "Choose a few preferences and run Finder to see fragrances that fit your taste."
+    }
+  },
+  "taxonomy": {
+    "moods": {
+      "cozy": "Cozy",
+      "fresh": "Fresh",
+      "bold": "Bold",
+      "elegant": "Elegant",
+      "romantic": "Romantic"
+    },
+    "seasons": {
+      "spring": "Spring",
+      "summer": "Summer",
+      "fall": "Fall",
+      "winter": "Winter"
+    },
+    "occasions": {
+      "daily-wear": "Daily wear",
+      "office": "Office",
+      "date-night": "Date night"
+    },
+    "notes": {
+      "bergamot": "Bergamot",
+      "vanilla": "Vanilla",
+      "oud": "Oud",
+      "musk": "Musk",
+      "amber": "Amber",
+      "rose": "Rose",
+      "sandalwood": "Sandalwood",
+      "citrus": "Citrus",
+      "jasmine": "Jasmine",
+      "coffee": "Coffee",
+      "patchouli": "Patchouli"
+    }
+  },
+  "catalog": {
+    "page": {
+      "eyebrow": "Catalog",
+      "title": "Discover perfumes",
+      "subtitle": "Browse the catalog by family, notes, gender, and price, then narrow in on the bottles worth your attention."
+    },
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "summary": "Open filters to refine sorting, family, price, notes, and gender.",
+      "fields": {
+        "sort": "Sort",
+        "family": "Fragrance family",
+        "price": "Price range",
+        "top": "Top note",
+        "heart": "Heart note",
+        "base": "Base note",
+        "gender": "Gender",
+        "note": "Any note"
+      },
+      "sortOptions": {
+        "rating": "Top rated",
+        "price_low": "Price: low to high",
+        "price_high": "Price: high to low",
+        "longevity": "Best longevity",
+        "sillage": "Best sillage"
+      },
+      "familyOptions": {
+        "woody": "Woody",
+        "fresh": "Fresh",
+        "oriental": "Oriental",
+        "gourmand": "Gourmand",
+        "citrus": "Citrus",
+        "aromatic": "Aromatic"
+      },
+      "priceOptions": {
+        "budget": "Budget",
+        "mid": "Mid",
+        "premium": "Premium",
+        "luxury": "Luxury"
+      },
+      "noteOptions": {
+        "oud": "Oud",
+        "vanilla": "Vanilla",
+        "amber": "Amber",
+        "rose": "Rose",
+        "sandalwood": "Sandalwood",
+        "musk": "Musk",
+        "citrus": "Citrus",
+        "jasmine": "Jasmine",
+        "coffee": "Coffee",
+        "patchouli": "Patchouli"
+      },
+      "genderOptions": {
+        "male": "Male",
+        "female": "Female",
+        "unisex": "Unisex"
+      },
+      "notePlaceholder": "oud, vanilla, amber...",
+      "arabicOnly": "Arabic only",
+      "nicheOnly": "Niche only",
+      "all": "All",
+      "any": "Any"
+    },
+    "client": {
+      "loadError": "Unable to load more fragrances. Retry in a moment.",
+      "showing": "Showing {visible} of {total} fragrances",
+      "end": "End of catalog"
+    },
+    "grid": {
+      "empty": "No fragrances found. Try adjusting your filters."
+    },
+    "gate": {
+      "eyebrow": "Continue Discovery",
+      "title": "Log in to unlock the full catalog",
+      "description": "You’ve seen the first {previewLimit} perfumes. Log in or create an account to keep exploring the full catalog.",
+      "login": "Log in",
+      "signup": "Create account"
+    }
+  },
+  "perfume": {
+    "card": {
+      "unknownBrand": "Unknown brand",
+      "from": "from",
+      "viewFragrance": "View fragrance"
+    },
+    "hero": {
+      "unknownBrand": "Unknown brand",
+      "rating": "Rating {value}",
+      "metrics": {
+        "longevity": "Longevity",
+        "sillage": "Sillage",
+        "versatility": "Versatility"
+      },
+      "goToOffer": "Go to offer"
+    },
+    "offerTable": {
+      "empty": "Offers will appear here as soon as pricing is available.",
+      "columns": {
+        "store": "Store",
+        "price": "Price",
+        "shipping": "Shipping",
+        "total": "Total",
+        "availability": "Availability",
+        "action": "Action"
+      },
+      "bestTotal": "Best total",
+      "viewOffer": "View offer",
+      "comingSoon": "Coming soon"
+    },
+    "bestOffer": {
+      "title": "Best price today",
+      "empty": "Pricing will appear here as soon as offers are available.",
+      "selectedRetailer": "Selected retailer",
+      "updatedJustNow": "Updated just now",
+      "updatedLessThanOneHourAgo": "Updated less than 1 hour ago",
+      "updatedHoursAgo": "Updated {hours}h ago",
+      "updatedDaysAgo": "Updated {days}d ago",
+      "updatedRecently": "Updated recently",
+      "at": "at",
+      "item": "Item",
+      "shipping": "Shipping",
+      "shippingIncluded": "included / n.a.",
+      "availability": "Availability",
+      "viewOffer": "View offer"
+    },
+    "notes": {
+      "types": {
+        "TOP": "Top notes",
+        "HEART": "Heart notes",
+        "BASE": "Base notes"
+      },
+      "empty": "No notes listed"
+    },
+    "image": {
+      "selection": "Odora Selection"
+    },
+    "detail": {
+      "cheaperAlternativesSavings": "A similar mood for less. You can save up to {savings} compared to this bottle.",
+      "cheaperAlternativesSubtitle": "Similar fragrances with a lower total price, selected for profile match and value.",
+      "overviewLabels": {
+        "family": "Family",
+        "notes": "Notes",
+        "moods": "Moods",
+        "occasions": "Occasions"
+      },
+      "prices": {
+        "eyebrow": "Prices",
+        "title": "Compare current offers",
+        "subtitle": "We rank offers by total cost, so price and shipping are considered together."
+      },
+      "overview": {
+        "eyebrow": "Overview",
+        "title": "About this perfume"
+      },
+      "notes": {
+        "eyebrow": "Notes",
+        "title": "Fragrance pyramid",
+        "subtitle": "Top, heart, and base notes arranged by prominence, with direct paths to explore similar scents."
+      },
+      "badges": {
+        "moods": "Moods",
+        "seasons": "Seasons",
+        "occasions": "Occasions"
+      },
+      "unknown": "Unknown",
+      "value": {
+        "eyebrow": "Value",
+        "title": "Cheaper alternatives"
+      },
+      "discovery": {
+        "eyebrow": "Discovery",
+        "title": "Similar fragrances",
+        "subtitle": "Fragrances with similar profile, notes, and style signal."
+      }
+    }
+  },
+  "top": {
+    "page": {
+      "eyebrow": "Editorial",
+      "title": "Curated fragrance rankings",
+      "subtitle": "A sharper way to explore the catalog through standout picks for style, performance, and value.",
+      "sections": {
+        "arabic": {
+          "eyebrow": "Arabic",
+          "title": "Top Arabic fragrances",
+          "subtitle": "Bold Arabic signatures with presence, texture, and memorability."
+        },
+        "niche": {
+          "eyebrow": "Niche",
+          "title": "Best niche perfumes",
+          "subtitle": "Distinctive compositions chosen for character, polish, and identity."
+        },
+        "value": {
+          "eyebrow": "Value",
+          "title": "Best perfumes under €{priceCap}",
+          "subtitle": "Smart buys that stay under budget without feeling compromise-driven."
+        },
+        "performance": {
+          "eyebrow": "Performance",
+          "title": "Best long-lasting fragrances",
+          "subtitle": "Fragrances selected for the kind of staying power people actually notice."
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "page": {
+        "eyebrow": "Odora Account",
+        "title": "Log in",
+        "subtitle": "Continue exploring the catalog with your Odora profile.",
+        "or": "or",
+        "signupPrompt": "Don’t have an account yet?",
+        "signupLink": "Create account",
+        "socialNotice": "Social login is coming soon. For now, you can log in with email and password.",
+        "errors": {
+          "authCallbackFailed": "Login was not completed. Try again.",
+          "emailVerificationFailed": "Email verification was not completed. Request a new link.",
+          "invalidAuthCallback": "Invalid authentication link.",
+          "authNotConfigured": "Authentication is not configured correctly.",
+          "fallback": "Authentication failed."
+        },
+        "form": {
+          "email": "Email",
+          "emailPlaceholder": "name@example.com",
+          "password": "Password",
+          "passwordPlaceholder": "Enter your password",
+          "submitting": "Logging in...",
+          "submit": "Log in"
+        }
+      }
+    },
+    "signup": {
+      "page": {
+        "eyebrow": "Odora Account",
+        "title": "Create account",
+        "subtitle": "Sign up to continue discovering fragrances without limits.",
+        "or": "or",
+        "loginPrompt": "Already have an account?",
+        "loginLink": "Log in",
+        "socialNotice": "Social signup is coming soon. For now, you can create your account with email and password.",
+        "errors": {
+          "fallback": "Sign-up was not completed. Try again."
+        },
+        "form": {
+          "name": "Name",
+          "namePlaceholder": "Your name",
+          "email": "Email",
+          "emailPlaceholder": "name@example.com",
+          "password": "Password",
+          "passwordPlaceholder": "Choose a password",
+          "confirmPassword": "Confirm password",
+          "confirmPasswordPlaceholder": "Confirm your password",
+          "submitting": "Creating account...",
+          "submit": "Create account"
+        }
+      }
+    },
+    "social": {
+      "loginPrefix": "Login",
+      "signupPrefix": "Signup",
+      "providerSoon": "{prefix} with {provider} coming soon"
+    },
+    "actions": {
+      "login": {
+        "missingCredentials": "Enter your email and password.",
+        "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "invalidCredentials": "Invalid credentials. Check your email and password."
+      },
+      "signup": {
+        "missingCredentials": "Enter your email and password.",
+        "passwordTooShort": "Password must contain at least 8 characters.",
+        "passwordMismatch": "Passwords do not match.",
+        "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "signupFailed": "Sign-up was not completed. Check your details and try again.",
+        "success": "Account created. Check your email to confirm registration and complete login."
+      }
+    }
+  },
+  "profile": {
+    "page": {
+      "eyebrow": "Odora Account",
+      "title": "Your profile",
+      "subtitle": "Update your basic account details and manage your active session here.",
+      "session": {
+        "eyebrow": "Session",
+        "title": "Active login",
+        "authenticatedAs": "You are authenticated as"
+      },
+      "logout": "Log out"
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "How should we call you",
+      "email": "Email",
+      "saving": "Saving...",
+      "submit": "Save changes"
+    },
+    "actions": {
+      "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+      "invalidSession": "Invalid session. Please log in again.",
+      "nameTooLong": "Name cannot exceed 80 characters.",
+      "updateFailed": "Couldn’t update your profile. Try again.",
+      "updated": "Profile updated."
+    }
+  },
+  "legal": {
+    "common": {
+      "effectiveDate": "Effective date: {date}"
+    },
+    "privacy": {
+      "eyebrow": "Legal",
+      "title": "Privacy Policy",
+      "intro": "This Privacy Policy explains how Odora handles personal information when you browse the site, create an account, use discovery features, or click through to external retailers.",
+      "effectiveDate": "March 10, 2026",
+      "sections": [
+        {
+          "title": "What We Collect",
+          "paragraphs": [
+            "Odora may collect information you provide directly, such as your name, email address, and account details when you sign up, log in, or update your profile.",
+            "We may also collect technical and usage information needed to operate the site, including device and browser data, pages viewed, referral information, authentication status, and interactions with product or retailer links."
+          ]
+        },
+        {
+          "title": "How We Use Information",
+          "paragraphs": [
+            "We use information to provide the service, secure accounts, personalize discovery features, improve the catalog experience, and understand how people use the site.",
+            "We may also use information to maintain service quality, prevent abuse, investigate technical issues, and measure interest in pages, collections, and retailer links."
+          ]
+        },
+        {
+          "title": "Cookies, Sessions, and Similar Technologies",
+          "paragraphs": [
+            "Odora uses cookies and similar technologies to keep you signed in, remember session state, and support essential site functionality.",
+            "If analytics, affiliate tracking, or third-party scripts are added, this page should be updated to reflect those technologies and any choices available to users."
+          ]
+        },
+        {
+          "title": "When We Share Information",
+          "paragraphs": [
+            "We may share information with service providers that help us host, secure, and operate Odora, including infrastructure, authentication, analytics, and storage providers.",
+            "We may also disclose information if required by law, to protect users and the service, or in connection with a business transfer, merger, or restructuring."
+          ]
+        },
+        {
+          "title": "Retailers and External Links",
+          "paragraphs": [
+            "Odora links to external retailer websites. When you leave Odora, the retailer's own privacy policy, terms, and tracking practices apply.",
+            "We are not responsible for the content, pricing, availability, or privacy practices of third-party websites linked from Odora."
+          ]
+        },
+        {
+          "title": "Data Retention and Security",
+          "paragraphs": [
+            "We keep personal information for as long as reasonably necessary to operate the service, maintain accounts, comply with legal obligations, resolve disputes, and enforce site policies.",
+            "We take reasonable technical and organizational measures to protect information, but no internet-based service can guarantee absolute security."
+          ]
+        },
+        {
+          "title": "Your Rights and Choices",
+          "paragraphs": [
+            "Depending on where you live, you may have rights to access, correct, delete, or restrict the use of your personal information, and to object to certain processing.",
+            "If you contact Odora with a privacy request, we may ask for information needed to verify the request before taking action."
+          ]
+        },
+        {
+          "title": "Changes to This Policy",
+          "paragraphs": [
+            "We may update this Privacy Policy from time to time. When we do, we will revise the effective date shown on this page.",
+            "Material changes should be reflected on the site before they take effect."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "eyebrow": "Legal",
+      "title": "Terms of Use",
+      "intro": "These Terms of Use govern access to Odora and explain the basic rules that apply when you browse fragrances, compare offers, create an account, or follow links to external retailers.",
+      "effectiveDate": "March 10, 2026",
+      "sections": [
+        {
+          "title": "Using Odora",
+          "paragraphs": [
+            "By accessing or using Odora, you agree to use the site lawfully and in accordance with these Terms of Use.",
+            "You must not misuse the site, attempt to interfere with its operation, scrape restricted areas without permission, or use the service in a way that harms Odora, its users, or connected retailers."
+          ]
+        },
+        {
+          "title": "Content, Pricing, and Availability",
+          "paragraphs": [
+            "Odora provides fragrance discovery content, product information, and price comparisons for general informational purposes.",
+            "Prices, shipping costs, availability, and retailer information can change at any time. Final pricing and purchase terms are always determined by the retailer you choose."
+          ]
+        },
+        {
+          "title": "Accounts",
+          "paragraphs": [
+            "If you create an account, you are responsible for keeping your login credentials secure and for activity that occurs under your account.",
+            "Odora may suspend or restrict accounts that are used fraudulently, abusively, or in violation of these terms."
+          ]
+        },
+        {
+          "title": "Retailers and Third-Party Services",
+          "paragraphs": [
+            "Odora may link to third-party retailers and services. Those sites operate independently and have their own terms, policies, and commercial conditions.",
+            "Any purchase, return, shipment, or customer service issue relating to a retailer order must be resolved with that retailer."
+          ]
+        },
+        {
+          "title": "Affiliate Relationships",
+          "paragraphs": [
+            "Some outbound links on Odora may be affiliate links. If you click one of those links and complete a qualifying purchase, Odora may earn a commission.",
+            "Affiliate relationships do not change the price you pay, and they do not create a direct sales relationship between Odora and the retailer transaction."
+          ]
+        },
+        {
+          "title": "Intellectual Property",
+          "paragraphs": [
+            "The Odora brand, site design, original copy, editorial selections, and other original materials on the site are protected by applicable intellectual property laws.",
+            "You may not copy, republish, or commercially exploit Odora content without prior written permission, except where permitted by law."
+          ]
+        },
+        {
+          "title": "Disclaimers and Liability",
+          "paragraphs": [
+            "Odora is provided on an as-is and as-available basis. We do not guarantee uninterrupted access, perfect accuracy, or that every listing, offer, or ranking will always be complete or current.",
+            "To the maximum extent permitted by law, Odora is not liable for indirect, incidental, consequential, or retailer-side losses arising from your use of the site or reliance on third-party retailer information."
+          ]
+        },
+        {
+          "title": "Changes",
+          "paragraphs": [
+            "We may update these Terms of Use from time to time. Continued use of the site after changes become effective means you accept the revised terms.",
+            "The effective date at the top of this page reflects the latest version."
+          ]
+        }
+      ]
+    },
+    "affiliateDisclosure": {
+      "eyebrow": "Legal",
+      "title": "Affiliate Disclosure",
+      "intro": "Odora may participate in affiliate programs with selected retailers and networks. This page explains how that relationship works and how it affects outbound product links.",
+      "effectiveDate": "March 10, 2026",
+      "sections": [
+        {
+          "title": "How Affiliate Links Work",
+          "paragraphs": [
+            "Some links from Odora to external retailers may be affiliate links. If you click one of those links and complete a qualifying purchase, Odora may earn a commission from the retailer or affiliate network.",
+            "This commission helps support the operation of the site, including product research, editorial curation, and maintenance of price comparison features."
+          ]
+        },
+        {
+          "title": "What This Means for You",
+          "paragraphs": [
+            "Using an affiliate link generally does not increase the price you pay. The purchase is completed on the retailer's website, under that retailer's own pricing and commercial terms.",
+            "Availability, final pricing, shipping, returns, and customer support are all handled by the retailer you choose."
+          ]
+        },
+        {
+          "title": "Editorial Independence",
+          "paragraphs": [
+            "Odora aims to keep editorial selection, product discovery, and comparison design independent from affiliate relationships.",
+            "When we highlight a fragrance, a collection, or a retailer, the goal is to improve discovery and comparison clarity, not to guarantee a purchase recommendation for every user."
+          ]
+        },
+        {
+          "title": "Retailer Coverage",
+          "paragraphs": [
+            "Not every retailer shown on Odora will necessarily be monetized through an affiliate relationship at all times. Retailer coverage can change as programs open, close, or update approval status.",
+            "Where affiliate links are available, Odora may prioritize them over standard product links for the same retailer destination."
+          ]
+        },
+        {
+          "title": "Price and Availability",
+          "paragraphs": [
+            "Retailer prices and stock status can change quickly. Odora may display the latest known pricing, but the retailer page is always the final source of truth before purchase.",
+            "If a retailer changes pricing or availability after you click through, that change is outside Odora's control."
+          ]
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "pages": {
+      "home": {
+        "title": "Odora",
+        "description": "Fragrance discovery and price comparison to help you choose better."
+      },
+      "finder": {
+        "title": "Fragrance Finder | Odora",
+        "description": "Use Odora Finder to match perfumes by mood, season, budget, note preferences, and fragrance style."
+      },
+      "perfumes": {
+        "title": "Perfumes | Odora",
+        "description": "Browse perfumes by family, notes, gender, and price, then compare offers with clarity."
+      },
+      "top": {
+        "title": "Top Fragrances | Odora",
+        "description": "Explore Odora’s curated fragrance rankings by style, performance, and value."
+      },
+      "login": {
+        "title": "Log in | Odora",
+        "description": "Log in to your Odora account to continue exploring fragrances and unlock the full catalog."
+      },
+      "signup": {
+        "title": "Create account | Odora",
+        "description": "Create your Odora account to unlock the full catalog and save your discovery experience."
+      },
+      "profile": {
+        "title": "Profile | Odora",
+        "description": "Manage your Odora profile and active session."
+      },
+      "privacy": {
+        "title": "Privacy Policy | Odora",
+        "description": "Learn how Odora collects, uses, and protects personal information."
+      },
+      "terms": {
+        "title": "Terms of Use | Odora",
+        "description": "Read the terms that govern use of Odora."
+      },
+      "affiliateDisclosure": {
+        "title": "Affiliate Disclosure | Odora",
+        "description": "Understand how affiliate links work on Odora."
+      },
+      "perfumeDetail": {
+        "fallbackTitle": "Perfume | Odora",
+        "fallbackDescription": "Fragrance details, notes, and price comparison on Odora.",
+        "notFoundTitle": "Perfume not found | Odora",
+        "title": "{name} by {brand} | Odora",
+        "unknownBrand": "Unknown brand"
+      }
+    }
+  }
+}

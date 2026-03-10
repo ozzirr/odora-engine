@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
 import {
@@ -12,17 +13,20 @@ import {
   sortOptions,
   type ParsedPerfumeFilters,
 } from "@/lib/filters";
+import { usePathname, useRouter } from "@/lib/navigation";
 
 type PerfumeFiltersProps = {
   selectedFilters: ParsedPerfumeFilters;
 };
 
 export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
+  const t = useTranslations("catalog.filters");
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktopLayout, setIsDesktopLayout] = useState(false);
+  const filtersPathname = pathname === "/perfumes" ? pathname : "/perfumes";
 
   const activeFiltersCount = useMemo(() => {
     let count = 0;
@@ -62,12 +66,15 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
       params.set(key, value);
     }
 
-    const query = params.toString();
-    router.push(query ? `${pathname}?${query}` : pathname);
+    const query = Object.fromEntries(params.entries());
+    const nextHref = (
+      params.size > 0 ? { pathname: filtersPathname, query } : filtersPathname
+    ) as Parameters<typeof router.push>[0];
+    router.push(nextHref);
   };
 
   const clearFilters = () => {
-    router.push(pathname);
+    router.push(filtersPathname);
   };
 
   return (
@@ -83,7 +90,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
           className="flex items-center gap-2 text-left text-sm font-semibold uppercase tracking-[0.1em] text-[#7a6654]"
           aria-expanded={showFilters}
         >
-          <span>Filters</span>
+          <span>{t("title")}</span>
           {activeFiltersCount > 0 ? (
             <span className="rounded-full border border-[#ddcfbc] bg-[#f7f1e8] px-2 py-0.5 text-[11px] font-medium normal-case tracking-normal text-[#6b5846]">
               {activeFiltersCount}
@@ -93,19 +100,19 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
         </button>
         {showFilters ? (
           <Button variant="ghost" size="sm" onClick={clearFilters}>
-            Reset
+            {t("reset")}
           </Button>
         ) : null}
       </div>
 
       {!showFilters ? (
-        <p className="text-sm text-[#6a5847]">Open filters to refine sorting, family, price, notes, and gender.</p>
+        <p className="text-sm text-[#6a5847]">{t("summary")}</p>
       ) : null}
 
       {showFilters ? <div className="space-y-4">
         <div>
           <label htmlFor="sort" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Sort
+            {t("fields.sort")}
           </label>
           <select
             id="sort"
@@ -115,7 +122,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(`sortOptions.${option.value}`)}
               </option>
             ))}
           </select>
@@ -123,7 +130,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
         <div>
           <label htmlFor="family" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Fragrance Family
+            {t("fields.family")}
           </label>
           <select
             id="family"
@@ -131,10 +138,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
             onChange={(event) => updateParam("family", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="">All</option>
+            <option value="">{t("all")}</option>
             {familyOptions.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(`familyOptions.${option.value}`)}
               </option>
             ))}
           </select>
@@ -142,7 +149,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
         <div>
           <label htmlFor="price" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Price Range
+            {t("fields.price")}
           </label>
           <select
             id="price"
@@ -150,10 +157,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
             onChange={(event) => updateParam("price", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="">All</option>
+            <option value="">{t("all")}</option>
             {priceOptions.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(`priceOptions.${option.value}`)}
               </option>
             ))}
           </select>
@@ -162,7 +169,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
           <div>
             <label htmlFor="top" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-              Top note
+              {t("fields.top")}
             </label>
             <select
               id="top"
@@ -170,10 +177,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
               onChange={(event) => updateParam("top", event.target.value || undefined)}
               className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
             >
-              <option value="">Any</option>
+              <option value="">{t("any")}</option>
               {noteFilterOptions.map((option) => (
                 <option key={`top-${option.value}`} value={option.value}>
-                  {option.label}
+                  {t(`noteOptions.${option.value}`)}
                 </option>
               ))}
             </select>
@@ -181,7 +188,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
           <div>
             <label htmlFor="heart" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-              Heart note
+              {t("fields.heart")}
             </label>
             <select
               id="heart"
@@ -189,10 +196,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
               onChange={(event) => updateParam("heart", event.target.value || undefined)}
               className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
             >
-              <option value="">Any</option>
+              <option value="">{t("any")}</option>
               {noteFilterOptions.map((option) => (
                 <option key={`heart-${option.value}`} value={option.value}>
-                  {option.label}
+                  {t(`noteOptions.${option.value}`)}
                 </option>
               ))}
             </select>
@@ -200,7 +207,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
           <div>
             <label htmlFor="base" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-              Base note
+              {t("fields.base")}
             </label>
             <select
               id="base"
@@ -208,10 +215,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
               onChange={(event) => updateParam("base", event.target.value || undefined)}
               className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
             >
-              <option value="">Any</option>
+              <option value="">{t("any")}</option>
               {noteFilterOptions.map((option) => (
                 <option key={`base-${option.value}`} value={option.value}>
-                  {option.label}
+                  {t(`noteOptions.${option.value}`)}
                 </option>
               ))}
             </select>
@@ -220,7 +227,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
         <div>
           <label htmlFor="gender" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Gender
+            {t("fields.gender")}
           </label>
           <select
             id="gender"
@@ -228,10 +235,10 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
             onChange={(event) => updateParam("gender", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="">All</option>
+            <option value="">{t("all")}</option>
             {genderOptions.map((option) => (
               <option key={option.value} value={option.value}>
-                {option.label}
+                {t(`genderOptions.${option.value}`)}
               </option>
             ))}
           </select>
@@ -239,20 +246,20 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
         <div>
           <label htmlFor="note" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Any note
+            {t("fields.note")}
           </label>
           <input
             id="note"
             value={selectedFilters.note ?? ""}
             onChange={(event) => updateParam("note", event.target.value || undefined)}
-            placeholder="oud, vanilla, amber..."
+            placeholder={t("notePlaceholder")}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           />
         </div>
 
         <div className="space-y-3 pt-1">
           <label className="flex cursor-pointer items-center justify-between rounded-xl border border-[#dfd1bf] px-3 py-2">
-            <span className="text-sm text-[#2a2018]">Arabic only</span>
+            <span className="text-sm text-[#2a2018]">{t("arabicOnly")}</span>
             <input
               type="checkbox"
               checked={selectedFilters.arabic === true}
@@ -262,7 +269,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
           </label>
 
           <label className="flex cursor-pointer items-center justify-between rounded-xl border border-[#dfd1bf] px-3 py-2">
-            <span className="text-sm text-[#2a2018]">Niche only</span>
+            <span className="text-sm text-[#2a2018]">{t("nicheOnly")}</span>
             <input
               type="checkbox"
               checked={selectedFilters.niche === true}

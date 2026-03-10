@@ -1,8 +1,9 @@
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { getPerfumeShortText } from "@/lib/perfume-text";
+import { Link } from "@/lib/navigation";
 import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
 
@@ -35,13 +36,16 @@ type PerfumeCardProps = {
 };
 
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
-  const brandName = perfume.brand?.name?.trim() || "Unknown brand";
+  const t = useTranslations("perfume.card");
+  const commonT = useTranslations("common");
+  const locale = useLocale();
+  const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
   const description = getPerfumeShortText(perfume);
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
-      <Link href={`/perfumes/${perfume.slug}`}>
+      <Link href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}>
         <div className="relative h-56 w-full bg-[#efe7dc]">
           <PerfumeImage
             imageUrl={perfume.imageUrl}
@@ -57,7 +61,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
       <div className="space-y-3 p-5">
         <div>
           <p className="text-xs uppercase tracking-[0.14em] text-[#8a7763]">{brandName}</p>
-          <Link href={`/perfumes/${perfume.slug}`}>
+          <Link href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}>
             <h3 className="mt-1 font-display text-2xl text-[#1f1914] transition-colors hover:text-[#6c5946]">
               {perfume.name}
             </h3>
@@ -67,18 +71,18 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
-          <Badge>{formatGender(perfume.gender)}</Badge>
+          <Badge>{formatGender(perfume.gender, locale as "it" | "en")}</Badge>
           {bestOffer ? (
             <Badge variant="default">
-              from {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
+              {t("from")} {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}
             </Badge>
           ) : (
             <Badge variant="outline" className="bg-[#faf6ef]">
-              View fragrance
+              {t("viewFragrance")}
             </Badge>
           )}
-          {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}
-          {perfume.isNiche ? <Badge variant="soft">Niche</Badge> : null}
+          {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
+          {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
         </div>
       </div>
     </article>

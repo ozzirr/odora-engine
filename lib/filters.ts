@@ -3,46 +3,46 @@ import { Gender, NoteType, type Prisma, PriceRange } from "@prisma/client";
 export type SearchParamInput = Record<string, string | string[] | undefined>;
 
 export const genderOptions = [
-  { value: "male", label: "Male" },
-  { value: "female", label: "Female" },
-  { value: "unisex", label: "Unisex" },
+  { value: "male" },
+  { value: "female" },
+  { value: "unisex" },
 ] as const;
 
 export const familyOptions = [
-  { value: "woody", label: "Woody" },
-  { value: "fresh", label: "Fresh" },
-  { value: "oriental", label: "Oriental" },
-  { value: "gourmand", label: "Gourmand" },
-  { value: "citrus", label: "Citrus" },
-  { value: "aromatic", label: "Aromatic" },
+  { value: "woody" },
+  { value: "fresh" },
+  { value: "oriental" },
+  { value: "gourmand" },
+  { value: "citrus" },
+  { value: "aromatic" },
 ] as const;
 
 export const priceOptions = [
-  { value: "budget", label: "Budget" },
-  { value: "mid", label: "Mid" },
-  { value: "premium", label: "Premium" },
-  { value: "luxury", label: "Luxury" },
+  { value: "budget" },
+  { value: "mid" },
+  { value: "premium" },
+  { value: "luxury" },
 ] as const;
 
 export const noteFilterOptions = [
-  { value: "oud", label: "Oud" },
-  { value: "vanilla", label: "Vanilla" },
-  { value: "amber", label: "Amber" },
-  { value: "rose", label: "Rose" },
-  { value: "sandalwood", label: "Sandalwood" },
-  { value: "musk", label: "Musk" },
-  { value: "citrus", label: "Citrus" },
-  { value: "jasmine", label: "Jasmine" },
-  { value: "coffee", label: "Coffee" },
-  { value: "patchouli", label: "Patchouli" },
+  { value: "oud" },
+  { value: "vanilla" },
+  { value: "amber" },
+  { value: "rose" },
+  { value: "sandalwood" },
+  { value: "musk" },
+  { value: "citrus" },
+  { value: "jasmine" },
+  { value: "coffee" },
+  { value: "patchouli" },
 ] as const;
 
 export const sortOptions = [
-  { value: "rating", label: "Top rated" },
-  { value: "price_low", label: "Price: low to high" },
-  { value: "price_high", label: "Price: high to low" },
-  { value: "longevity", label: "Best longevity" },
-  { value: "sillage", label: "Best sillage" },
+  { value: "rating" },
+  { value: "price_low" },
+  { value: "price_high" },
+  { value: "longevity" },
+  { value: "sillage" },
 ] as const;
 
 export type GenderParam = (typeof genderOptions)[number]["value"];

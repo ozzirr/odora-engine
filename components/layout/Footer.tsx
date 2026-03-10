@@ -1,22 +1,23 @@
-import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/Container";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/perfumes", label: "Perfumes" },
-  { href: "/finder", label: "Finder" },
-  { href: "/top", label: "Top" },
-];
-
-const legalLinks = [
-  { href: "/privacy", label: "Privacy" },
-  { href: "/terms", label: "Terms" },
-  { href: "/affiliate-disclosure", label: "Affiliate Disclosure" },
-];
+import { Link } from "@/lib/navigation";
 
 export function Footer() {
+  const t = useTranslations("layout.footer");
+  const navLinks = [
+    { href: "/" as const, label: t("nav.home") },
+    { href: "/perfumes" as const, label: t("nav.perfumes") },
+    { href: "/finder" as const, label: t("nav.finder") },
+    { href: "/top" as const, label: t("nav.top") },
+  ];
+  const legalLinks = [
+    { href: "/privacy" as const, label: t("legalLinks.privacy") },
+    { href: "/terms" as const, label: t("legalLinks.terms") },
+    { href: "/affiliate-disclosure" as const, label: t("legalLinks.affiliateDisclosure") },
+  ];
+
   return (
     <footer className="mt-20 border-t border-[#e8dfd2] bg-[#f5efe4]">
       <Container className="py-10">
@@ -32,13 +33,13 @@ export function Footer() {
               />
             </div>
             <p className="max-w-sm text-sm text-[#5e4f40]">
-              Discover perfumes, compare notes and prices, and find the right bottle faster.
+              {t("description")}
             </p>
           </div>
 
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-              Navigation
+              {t("navigation")}
             </p>
             <ul className="space-y-2 text-sm text-[#4f3f31]">
               {navLinks.map((link) => (
@@ -53,7 +54,7 @@ export function Footer() {
 
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-              Legal
+              {t("legal")}
             </p>
             <ul className="space-y-2 text-sm text-[#4f3f31]">
               {legalLinks.map((link) => (

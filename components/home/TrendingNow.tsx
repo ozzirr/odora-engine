@@ -1,16 +1,23 @@
-import Link from "next/link";
+import type { ComponentProps } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
+import { Link } from "@/lib/navigation";
 import { formatCurrency } from "@/lib/utils";
 
 type TrendingNowProps = {
   perfumes: HomePerfumeSpotlight[];
 };
 
+type LinkHref = ComponentProps<typeof Link>["href"];
+
 export function TrendingNow({ perfumes }: TrendingNowProps) {
+  const t = useTranslations("home.trending");
+  const locale = useLocale();
+
   if (perfumes.length === 0) {
     return null;
   }
@@ -18,21 +25,21 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
   return (
     <section className="mt-24 space-y-8">
       <SectionTitle
-        eyebrow="Trending Now"
-        title="Trending picks right now"
-        subtitle="A curated edit of fragrances people are discovering and revisiting right now."
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
       />
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {perfumes.map((perfume) => (
           <Link
             key={`${perfume.brandName}-${perfume.name}`}
-            href={perfume.href}
+            href={perfume.href as unknown as LinkHref}
             className="premium-card group overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-white shadow-[0_24px_48px_-36px_rgba(50,35,20,0.44)] transition-all duration-300 hover:-translate-y-1"
           >
             <div className="relative h-64 overflow-hidden bg-[radial-gradient(circle_at_20%_16%,rgba(255,255,255,0.9),transparent_24%),linear-gradient(180deg,#f1e8dc_0%,#e7dbca_100%)]">
               <div className="absolute right-4 top-4 z-10">
-                <Badge>{perfume.badge}</Badge>
+                <Badge>{t(`badges.${perfume.badgeKey}`)}</Badge>
               </div>
               <PerfumeImage
                 imageUrl={perfume.imageUrl}
@@ -58,18 +65,18 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
               <div className="flex items-end justify-between gap-4 rounded-[1.2rem] border border-[#e8dccb] bg-[#fbf8f2] px-4 py-3">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                    {perfume.bestPrice != null && perfume.currency ? "Best price" : "Offers"}
+                    {perfume.bestPrice != null && perfume.currency ? t("bestPrice") : t("offers")}
                   </p>
                   {perfume.bestPrice != null && perfume.currency ? (
                     <p className="mt-1 text-lg font-semibold text-[#1d1712]">
-                      {formatCurrency(perfume.bestPrice, perfume.currency)}
+                      {formatCurrency(perfume.bestPrice, perfume.currency, locale as "it" | "en")}
                     </p>
                   ) : (
-                    <p className="mt-1 text-sm text-[#5d4e3f]">See product details</p>
+                    <p className="mt-1 text-sm text-[#5d4e3f]">{t("seeProductDetails")}</p>
                   )}
                 </div>
                 <p className="text-right text-sm text-[#5d4e3f]">
-                  {perfume.storeName ?? perfume.ctaLabel}
+                  {perfume.storeName ?? (perfume.hasOffer ? t("viewOffers") : t("seeProductDetails"))}
                 </p>
               </div>
             </div>

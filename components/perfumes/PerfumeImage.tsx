@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
@@ -49,6 +50,8 @@ function PerfumeImageFallback({
   perfumeName: string;
   fragranceFamily?: string;
 }) {
+  const t = useTranslations("perfume.image");
+
   return (
     <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_18%_16%,#fffefc_0%,#f5ede2_40%,#e8ddce_100%)]">
       <div className="absolute -left-12 top-10 h-40 w-40 rounded-full bg-white/35 blur-3xl" />
@@ -67,7 +70,7 @@ function PerfumeImageFallback({
           ) : null}
         </div>
 
-        <p className="text-[10px] uppercase tracking-[0.16em] text-[#8f7c68]">Odora Selection</p>
+        <p className="text-[10px] uppercase tracking-[0.16em] text-[#8f7c68]">{t("selection")}</p>
       </div>
     </div>
   );

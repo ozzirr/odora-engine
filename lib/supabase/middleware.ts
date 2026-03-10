@@ -3,10 +3,12 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { getSupabaseEnvOrNull } from "@/lib/supabase/config";
 
-export async function updateSession(request: NextRequest) {
-  let response = NextResponse.next({
-    request,
-  });
+export async function updateSession(request: NextRequest, initialResponse?: NextResponse) {
+  const response =
+    initialResponse ??
+    NextResponse.next({
+      request,
+    });
 
   const supabaseEnv = getSupabaseEnvOrNull();
   if (!supabaseEnv) {
@@ -24,10 +26,6 @@ export async function updateSession(request: NextRequest) {
         for (const { name, value } of cookiesToSet) {
           request.cookies.set(name, value);
         }
-
-        response = NextResponse.next({
-          request,
-        });
 
         for (const { name, value, options } of cookiesToSet) {
           response.cookies.set(name, value, options);

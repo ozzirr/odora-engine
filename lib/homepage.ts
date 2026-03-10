@@ -18,6 +18,22 @@ export type QuickFilterIllustration =
   | "rose"
   | "citrus";
 
+export type HomeSpotlightBadgeKey = "heroPick" | "trending";
+export type HomepageMoodCardId =
+  | "vanillaLovers"
+  | "freshDaily"
+  | "arabicSignature"
+  | "officeSafe"
+  | "dateNight"
+  | "summerCitrus";
+export type HomepageMoodCardToneKey =
+  | "warm"
+  | "clean"
+  | "bold"
+  | "balanced"
+  | "magnetic"
+  | "bright";
+
 type FinderPresetQuery = Partial<{
   preset: string;
   gender: string;
@@ -31,9 +47,8 @@ type FinderPresetQuery = Partial<{
 }>;
 
 export type HomepageMoodCard = {
-  label: string;
-  tone: string;
-  subtitle: string;
+  id: HomepageMoodCardId;
+  toneKey: HomepageMoodCardToneKey;
   gradientClass: string;
   illustration: QuickFilterIllustration;
   preset: FinderPresetQuery;
@@ -46,7 +61,7 @@ export type HomeCollectionCard = {
   subtitle: string | null;
   description: string | null;
   href: string;
-  typeLabel: string;
+  type: HomepageCollectionType;
 };
 
 export const homepagePerfumeInclude = {
@@ -146,8 +161,8 @@ export type HomePerfumeSpotlight = {
   bestPrice: number | null;
   currency: string | null;
   storeName: string | null;
-  badge: string;
-  ctaLabel: string;
+  badgeKey: HomeSpotlightBadgeKey;
+  hasOffer: boolean;
 };
 
 export type HomepageData = {
@@ -160,9 +175,8 @@ export type HomepageData = {
 
 const homepageMoodCardConfig = [
   {
-    label: "Vanilla Lovers",
-    tone: "Warm",
-    subtitle: "Finder preset for creamy vanilla-led perfumes with cozy warmth.",
+    id: "vanillaLovers" as const,
+    toneKey: "warm" as const,
     gradientClass: "from-[#f7eddc] via-[#f2e7d4] to-[#eadcc7]",
     illustration: "vanilla" as const,
     preset: {
@@ -172,9 +186,8 @@ const homepageMoodCardConfig = [
     },
   },
   {
-    label: "Fresh Daily",
-    tone: "Clean",
-    subtitle: "Crisp everyday matches with fresh mood, daily-wear use, and bright notes.",
+    id: "freshDaily" as const,
+    toneKey: "clean" as const,
     gradientClass: "from-[#edf6f2] via-[#e2f1ee] to-[#d7ece8]",
     illustration: "fresh" as const,
     preset: {
@@ -185,9 +198,8 @@ const homepageMoodCardConfig = [
     },
   },
   {
-    label: "Arabic Signature",
-    tone: "Bold",
-    subtitle: "Rich Arabic profiles filtered by bold mood, oud note, and Arabic-only catalog data.",
+    id: "arabicSignature" as const,
+    toneKey: "bold" as const,
     gradientClass: "from-[#efe5d9] via-[#ead8c6] to-[#dfc5ac]",
     illustration: "oud" as const,
     preset: {
@@ -198,9 +210,8 @@ const homepageMoodCardConfig = [
     },
   },
   {
-    label: "Office Safe",
-    tone: "Balanced",
-    subtitle: "Finder shortcut for elegant office-friendly perfumes with soft musky structure.",
+    id: "officeSafe" as const,
+    toneKey: "balanced" as const,
     gradientClass: "from-[#f5f1ea] via-[#efe9df] to-[#e7dfd4]",
     illustration: "musk" as const,
     preset: {
@@ -211,9 +222,8 @@ const homepageMoodCardConfig = [
     },
   },
   {
-    label: "Date Night",
-    tone: "Magnetic",
-    subtitle: "Romantic evening matches tuned to date-night wear and warm amber signatures.",
+    id: "dateNight" as const,
+    toneKey: "magnetic" as const,
     gradientClass: "from-[#efe3e0] via-[#ead8d6] to-[#ddc3c0]",
     illustration: "rose" as const,
     preset: {
@@ -224,9 +234,8 @@ const homepageMoodCardConfig = [
     },
   },
   {
-    label: "Summer Citrus",
-    tone: "Bright",
-    subtitle: "Fresh summer presets centered on sparkling citrus-style notes.",
+    id: "summerCitrus" as const,
+    toneKey: "bright" as const,
     gradientClass: "from-[#f7efdc] via-[#f4e4b8] to-[#edd49a]",
     illustration: "citrus" as const,
     preset: {
@@ -364,8 +373,7 @@ function toCollectionCard(collection: HomeCollectionRecord): HomeCollectionCard 
     subtitle: collection.subtitle,
     description: collection.description,
     href: collection.href,
-    typeLabel:
-      collection.type === HomepageCollectionType.FINDER_PRESET ? "Finder preset" : "Catalog route",
+    type: collection.type,
   };
 }
 
@@ -454,7 +462,10 @@ export function selectTrustedStores(perfumes: HomePerfumeRecord[], count = 4) {
     .map(([name]) => name);
 }
 
-export function toHomeSpotlight(perfume: HomePerfumeRecord, badge: string): HomePerfumeSpotlight {
+export function toHomeSpotlight(
+  perfume: HomePerfumeRecord,
+  badgeKey: HomeSpotlightBadgeKey,
+): HomePerfumeSpotlight {
   const bestOffer = computeBestOffer(perfume.offers);
 
   return {
@@ -466,8 +477,8 @@ export function toHomeSpotlight(perfume: HomePerfumeRecord, badge: string): Home
     bestPrice: bestOffer?.bestPrice ?? null,
     currency: bestOffer?.bestCurrency ?? null,
     storeName: bestOffer?.bestStore ?? null,
-    badge,
-    ctaLabel: bestOffer ? "View offers" : "See product details",
+    badgeKey,
+    hasOffer: bestOffer != null,
   };
 }
 

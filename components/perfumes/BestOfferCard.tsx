@@ -1,6 +1,8 @@
-import Link from "next/link";
+import type { ComponentProps } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
+import { Link } from "@/lib/navigation";
 import {
   type ComputedBestOffer,
   formatAvailabilityLabel,
@@ -14,7 +16,14 @@ type BestOfferCardProps = {
   className?: string;
 };
 
-function getRecencyLabel(lastCheckedAt: Date | string | null | undefined) {
+type LinkHref = ComponentProps<typeof Link>["href"];
+
+function getRecencyLabel(
+  lastCheckedAt: Date | string | null | undefined,
+  t: {
+    (key: string, values?: Record<string, string | number>): string;
+  },
+) {
   if (!lastCheckedAt) {
     return null;
   }
@@ -26,45 +35,49 @@ function getRecencyLabel(lastCheckedAt: Date | string | null | undefined) {
 
   const diffMs = Date.now() - checkedAt.getTime();
   if (diffMs <= 0) {
-    return "Updated just now";
+    return t("updatedJustNow");
   }
 
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   if (diffHours < 1) {
-    return "Updated less than 1 hour ago";
+    return t("updatedLessThanOneHourAgo");
   }
 
   if (diffHours < 24) {
-    return `Updated ${diffHours}h ago`;
+    return t("updatedHoursAgo", { hours: diffHours });
   }
 
   const diffDays = Math.floor(diffHours / 24);
   if (diffDays < 7) {
-    return `Updated ${diffDays}d ago`;
+    return t("updatedDaysAgo", { days: diffDays });
   }
 
-  return "Updated recently";
+  return t("updatedRecently");
 }
 
 export function BestOfferCard({
   bestOffer,
   showButton = true,
-  title = "Best price today",
+  title,
   className,
 }: BestOfferCardProps) {
+  const t = useTranslations("perfume.bestOffer");
+  const locale = useLocale();
+  const resolvedTitle = title ?? t("title");
+
   if (!bestOffer) {
     return (
       <div className={cn("rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-5", className)}>
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{title}</p>
-        <p className="mt-2 text-sm text-[#665545]">Pricing will appear here as soon as offers are available.</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{resolvedTitle}</p>
+        <p className="mt-2 text-sm text-[#665545]">{t("empty")}</p>
       </div>
     );
   }
 
-  const storeName = bestOffer.bestStore ?? "Selected retailer";
+  const storeName = bestOffer.bestStore ?? t("selectedRetailer");
   const shipping = bestOffer.offer.shippingCost;
-  const availability = formatAvailabilityLabel(bestOffer.offer.availability);
-  const updatedLabel = getRecencyLabel(bestOffer.offer.lastCheckedAt);
+  const availability = formatAvailabilityLabel(bestOffer.offer.availability, locale as "it" | "en");
+  const updatedLabel = getRecencyLabel(bestOffer.offer.lastCheckedAt, t);
 
   return (
     <div
@@ -73,31 +86,33 @@ export function BestOfferCard({
         className,
       )}
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{title}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{resolvedTitle}</p>
       <p className="mt-2 font-display text-3xl text-[#1f1710]">
-        {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency)}
+        {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency, locale as "it" | "en")}
       </p>
       <p className="mt-1 text-sm text-[#5f4f40]">
-        at <span className="font-semibold text-[#1f1710]">{storeName}</span>
+        {t("at")} <span className="font-semibold text-[#1f1710]">{storeName}</span>
       </p>
 
       <div className="mt-3 grid gap-2 text-xs text-[#655546] sm:grid-cols-2">
-        <p>Item: {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}</p>
+        <p>{t("item")}: {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}</p>
         <p>
-          Shipping: {typeof shipping === "number" ? formatCurrency(shipping, bestOffer.bestCurrency) : "included / n.d."}
+          {t("shipping")}: {typeof shipping === "number"
+            ? formatCurrency(shipping, bestOffer.bestCurrency, locale as "it" | "en")
+            : t("shippingIncluded")}
         </p>
-        <p>Availability: {availability}</p>
+        <p>{t("availability")}: {availability}</p>
         {updatedLabel ? <p>{updatedLabel}</p> : null}
       </div>
 
       {showButton && bestOffer.bestUrl ? (
         <Link
-          href={bestOffer.bestUrl}
+          href={bestOffer.bestUrl as unknown as LinkHref}
           target="_blank"
           rel="noreferrer"
           className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}
         >
-          View offer
+          {t("viewOffer")}
         </Link>
       ) : null}
     </div>

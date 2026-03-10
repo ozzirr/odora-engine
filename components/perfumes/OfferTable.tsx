@@ -1,7 +1,9 @@
-import Link from "next/link";
+import type { ComponentProps } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
+import { Link } from "@/lib/navigation";
 import { computeBestOffer, formatAvailabilityLabel, getOfferUrl } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
@@ -20,11 +22,16 @@ export type OfferTableItem = {
   lastCheckedAt: Date;
 };
 
+type LinkHref = ComponentProps<typeof Link>["href"];
+
 export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
+  const t = useTranslations("perfume.offerTable");
+  const locale = useLocale();
+
   if (!Array.isArray(offers) || offers.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">
-        Offers will appear here as soon as pricing is available.
+        {t("empty")}
       </div>
     );
   }
@@ -37,12 +44,12 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
         <table className="min-w-full border-collapse bg-white text-sm">
           <thead className="bg-[#f7f1e8] text-left text-xs uppercase tracking-[0.1em] text-[#7b6854]">
             <tr>
-              <th className="px-4 py-3">Store</th>
-              <th className="px-4 py-3">Price</th>
-              <th className="px-4 py-3">Shipping</th>
-              <th className="px-4 py-3">Total</th>
-              <th className="px-4 py-3">Availability</th>
-              <th className="px-4 py-3">Action</th>
+              <th className="px-4 py-3">{t("columns.store")}</th>
+              <th className="px-4 py-3">{t("columns.price")}</th>
+              <th className="px-4 py-3">{t("columns.shipping")}</th>
+              <th className="px-4 py-3">{t("columns.total")}</th>
+              <th className="px-4 py-3">{t("columns.availability")}</th>
+              <th className="px-4 py-3">{t("columns.action")}</th>
             </tr>
           </thead>
           <tbody>
@@ -63,37 +70,37 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                   <td className="px-4 py-3 font-medium text-[#2a2018]">
                     <div className="flex flex-wrap items-center gap-2">
                       <span>{offer.store.name}</span>
-                      {isComputedBest ? <Badge variant="soft">Best total</Badge> : null}
+                      {isComputedBest ? <Badge variant="soft">{t("bestTotal")}</Badge> : null}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-[#2a2018]">
-                    {formatCurrency(offer.priceAmount, offer.currency)}
+                    {formatCurrency(offer.priceAmount, offer.currency, locale as "it" | "en")}
                   </td>
                   <td className="px-4 py-3 text-[#5f4f40]">
                     {offer.shippingCost == null
                       ? "-"
-                      : formatCurrency(offer.shippingCost, offer.currency)}
+                      : formatCurrency(offer.shippingCost, offer.currency, locale as "it" | "en")}
                   </td>
                   <td className="px-4 py-3 text-[#2a2018]">
-                    {formatCurrency(total, offer.currency)}
+                    {formatCurrency(total, offer.currency, locale as "it" | "en")}
                   </td>
                   <td className="px-4 py-3">
                     <Badge variant="outline">
-                      {formatAvailabilityLabel(offer.availability)}
+                      {formatAvailabilityLabel(offer.availability, locale as "it" | "en")}
                     </Badge>
                   </td>
                   <td className="px-4 py-3">
                     {targetUrl ? (
                       <Link
-                        href={targetUrl}
+                        href={targetUrl as unknown as LinkHref}
                         target="_blank"
                         rel="noreferrer"
                         className={buttonStyles({ size: "sm", className: "w-full sm:w-auto" })}
                       >
-                        View offer
+                        {t("viewOffer")}
                       </Link>
                     ) : (
-                      <span className="text-xs text-[#7b6854]">Coming soon</span>
+                      <span className="text-xs text-[#7b6854]">{t("comingSoon")}</span>
                     )}
                   </td>
                 </tr>

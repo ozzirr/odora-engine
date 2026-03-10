@@ -1,9 +1,11 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 
 import { getBaseSiteUrl } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
+import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
 
 export type SignupFormState = {
   error?: string;
@@ -31,11 +33,14 @@ export async function signupWithPassword(
   _previousState: SignupFormState,
   formData: FormData,
 ): Promise<SignupFormState> {
+  const localeValue = formData.get("locale");
+  const locale = typeof localeValue === "string" && hasLocale(localeValue) ? localeValue : defaultLocale;
+  const t = await getTranslations({ locale, namespace: "auth.actions.signup" });
   const nameValue = formData.get("name");
   const emailValue = formData.get("email");
   const passwordValue = formData.get("password");
   const confirmPasswordValue = formData.get("confirmPassword");
-  const nextPath = sanitizeNextPath(formData.get("next"));
+  const nextPath = sanitizeNextPath(formData.get("next")) || getLocalizedPathname(locale, "/perfumes");
 
   const name = typeof nameValue === "string" ? nameValue.trim() : "";
   const email = typeof emailValue === "string" ? emailValue.trim().toLowerCase() : "";
@@ -43,22 +48,22 @@ export async function signupWithPassword(
   const confirmPassword = typeof confirmPasswordValue === "string" ? confirmPasswordValue : "";
 
   if (!email || !password) {
-    return { error: "Inserisci email e password." };
+    return { error: t("missingCredentials") };
   }
 
   if (password.length < 8) {
-    return { error: "La password deve contenere almeno 8 caratteri." };
+    return { error: t("passwordTooShort") };
   }
 
   if (password !== confirmPassword) {
-    return { error: "Le password non coincidono." };
+    return { error: t("passwordMismatch") };
   }
 
   let supabase;
   try {
     supabase = await createClient();
   } catch {
-    return { error: "Configurazione autenticazione non disponibile. Riprova tra poco." };
+    return { error: t("authUnavailable") };
   }
 
   const { data, error } = await supabase.auth.signUp({
@@ -73,7 +78,7 @@ export async function signupWithPassword(
   });
 
   if (error) {
-    return { error: "Registrazione non completata. Verifica i dati e riprova." };
+    return { error: t("signupFailed") };
   }
 
   if (data.session) {
@@ -81,7 +86,6 @@ export async function signupWithPassword(
   }
 
   return {
-    message:
-      "Account creato. Controlla la tua email per confermare la registrazione e completare l’accesso.",
+    message: t("success"),
   };
 }

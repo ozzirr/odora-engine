@@ -3,6 +3,13 @@ type PerfumeTextRelation = {
   slug?: string | null;
 };
 
+type PerfumeTextLabels = {
+  family: string;
+  notes: string;
+  moods: string;
+  occasions: string;
+};
+
 type PerfumeTextSource = {
   name: string;
   fragranceFamily?: string | null;
@@ -96,21 +103,29 @@ export function getPerfumeShortText(perfume: PerfumeTextSource) {
   return family ?? perfume.brand?.name?.trim() ?? perfume.name;
 }
 
-export function getPerfumeOverviewText(perfume: PerfumeTextSource) {
+export function getPerfumeOverviewText(
+  perfume: PerfumeTextSource,
+  labels: PerfumeTextLabels = {
+    family: "Family",
+    notes: "Notes",
+    moods: "Moods",
+    occasions: "Occasions",
+  },
+) {
   const description = perfume.descriptionLong?.trim();
   if (description && !isLikelySyntheticPerfumeDescription(description)) {
     return description;
   }
 
   const facts = [
-    perfume.fragranceFamily?.trim() ? `Family: ${perfume.fragranceFamily.trim()}` : null,
+    perfume.fragranceFamily?.trim() ? `${labels.family}: ${perfume.fragranceFamily.trim()}` : null,
     (() => {
       const notes = uniqueRankedLabels(perfume.notes ?? [], (item) => toDisplayLabel(item.note), 5);
-      return notes.length > 0 ? `Notes: ${joinLabels(notes)}` : null;
+      return notes.length > 0 ? `${labels.notes}: ${joinLabels(notes)}` : null;
     })(),
     (() => {
       const moods = uniqueRankedLabels(perfume.moods ?? [], (item) => toDisplayLabel(item.mood), 3);
-      return moods.length > 0 ? `Moods: ${joinLabels(moods)}` : null;
+      return moods.length > 0 ? `${labels.moods}: ${joinLabels(moods)}` : null;
     })(),
     (() => {
       const occasions = uniqueRankedLabels(
@@ -118,7 +133,7 @@ export function getPerfumeOverviewText(perfume: PerfumeTextSource) {
         (item) => toDisplayLabel(item.occasion),
         3,
       );
-      return occasions.length > 0 ? `Occasions: ${joinLabels(occasions)}` : null;
+      return occasions.length > 0 ? `${labels.occasions}: ${joinLabels(occasions)}` : null;
     })(),
   ].filter((value): value is string => Boolean(value));
 

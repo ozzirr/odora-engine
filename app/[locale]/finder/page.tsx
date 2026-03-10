@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
@@ -9,14 +10,9 @@ import {
   mergePerfumeWhere,
 } from "@/lib/catalog";
 import { buildFinderPreferencesFromInput } from "@/lib/finder";
+import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { getIsAuthenticated } from "@/lib/supabase/auth-state";
-
-export const metadata: Metadata = {
-  title: "Fragrance Finder | Odora",
-  description:
-    "Use Odora Finder to match perfumes by mood, season, budget, note preferences, and fragrance style.",
-};
 
 export const dynamic = "force-dynamic";
 
@@ -80,6 +76,9 @@ async function getFinderPerfumes() {
 }
 
 type FinderPageProps = {
+  params: Promise<{
+    locale: string;
+  }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
@@ -91,7 +90,25 @@ function readSearchParam(
   return Array.isArray(value) ? value[0] : value;
 }
 
-export default async function FinderPage({ searchParams }: FinderPageProps) {
+export async function generateMetadata({ params }: FinderPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.finder" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: getAlternateLinks("/finder")[resolvedLocale],
+      languages: getAlternateLinks("/finder"),
+    },
+  };
+}
+
+export default async function FinderPage({ params, searchParams }: FinderPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "finder.page" });
   const resolvedSearchParams = await searchParams;
   const isAuthenticated = await getIsAuthenticated();
   const perfumes = await getFinderPerfumes();
@@ -110,9 +127,9 @@ export default async function FinderPage({ searchParams }: FinderPageProps) {
   return (
     <Container className="space-y-8 pt-14">
       <SectionTitle
-        eyebrow="Finder"
-        title="Find your next fragrance in minutes"
-        subtitle="Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        subtitle={t("subtitle")}
       />
 
       <FinderExperience

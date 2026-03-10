@@ -1,23 +1,25 @@
-import Link from "next/link";
+import type { ComponentProps } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/Container";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { buttonStyles } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
+import { Link } from "@/lib/navigation";
 import { formatCurrency } from "@/lib/utils";
 
 type HeroProps = {
   preview: HomePerfumeSpotlight | null;
 };
 
-const valueProps = [
-  "Compare prices across trusted retailers",
-  "Explore perfumes by notes, mood, and style",
-  "Choose with more confidence",
-];
+type LinkHref = ComponentProps<typeof Link>["href"];
 
 export function Hero({ preview }: HeroProps) {
+  const t = useTranslations("home.hero");
+  const locale = useLocale();
+  const valueProps = [t("valueProps.compare"), t("valueProps.explore"), t("valueProps.choose")];
+
   return (
     <section className="pt-14 sm:pt-18">
       <Container>
@@ -32,13 +34,13 @@ export function Hero({ preview }: HeroProps) {
           >
             <div className="max-w-3xl">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
-                Fragrance Discovery
+                {t("eyebrow")}
               </p>
               <h1 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-[#1c1712] sm:text-6xl">
-                Find the fragrance that feels like you.
+                {t("title")}
               </h1>
               <p className="mt-5 max-w-2xl text-base text-[#5f5041] sm:text-lg">
-                Browse standout perfumes, understand their character, and compare offers in one calm, elegant flow.
+                {t("subtitle")}
               </p>
 
               <ul className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -57,10 +59,10 @@ export function Hero({ preview }: HeroProps) {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/perfumes" className={buttonStyles({ size: "lg" })}>
-                  Browse catalog
+                  {t("browseCatalog")}
                 </Link>
                 <Link href="/finder" className={buttonStyles({ variant: "secondary", size: "lg" })}>
-                  Start Finder
+                  {t("startFinder")}
                 </Link>
               </div>
             </div>
@@ -72,11 +74,13 @@ export function Hero({ preview }: HeroProps) {
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
-                        Spotlight
+                        {t("spotlight")}
                       </p>
                       <p className="mt-1 text-sm text-[#5e4f40]">{preview.brandName}</p>
                     </div>
-                    <Badge className="bg-[#1f1914] text-[#f8f4ed]">{preview.badge}</Badge>
+                    <Badge className="bg-[#1f1914] text-[#f8f4ed]">
+                      {t(`badges.${preview.badgeKey}`)}
+                    </Badge>
                   </div>
 
                   <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#eadfce] bg-[#efe7dc]">
@@ -101,28 +105,30 @@ export function Hero({ preview }: HeroProps) {
                     <div className="flex items-end justify-between gap-4 rounded-[1.25rem] border border-[#e6d8c5] bg-white/75 px-4 py-3">
                       <div>
                         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                          {preview.bestPrice != null && preview.currency ? "Best price today" : "Discover"}
+                          {preview.bestPrice != null && preview.currency
+                            ? t("bestPriceToday")
+                            : t("discover")}
                         </p>
                         <p className="mt-1 font-display text-2xl text-[#1d1712]">
                           {preview.bestPrice != null && preview.currency
-                            ? formatCurrency(preview.bestPrice, preview.currency)
-                            : "View fragrance"}
+                            ? formatCurrency(preview.bestPrice, preview.currency, locale as "it" | "en")
+                            : t("viewFragrance")}
                         </p>
                       </div>
                       <p className="text-right text-sm text-[#5d4e3f]">
-                        {preview.storeName ?? "Odora fragrance page"}
+                        {preview.storeName ?? t("fallbackStore")}
                       </p>
                     </div>
 
                     <Link
-                      href={preview.href}
+                      href={preview.href as unknown as LinkHref}
                       className={buttonStyles({
                         variant: "secondary",
                         size: "lg",
                         className: "w-full bg-[#efe6da] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
                       })}
                     >
-                      {preview.ctaLabel}
+                      {preview.hasOffer ? t("viewOffers") : t("seeProductDetails")}
                     </Link>
                   </div>
                 </div>

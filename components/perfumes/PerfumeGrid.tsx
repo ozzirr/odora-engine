@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { PerfumeCard, type PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 
 type PerfumeGridProps = {
@@ -5,10 +7,12 @@ type PerfumeGridProps = {
 };
 
 export function PerfumeGrid({ perfumes }: PerfumeGridProps) {
+  const t = useTranslations("catalog.grid");
+
   if (perfumes.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-center text-sm text-[#655444]">
-        No fragrances found. Try adjusting your filters.
+        {t("empty")}
       </div>
     );
   }

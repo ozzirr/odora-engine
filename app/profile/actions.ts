@@ -2,7 +2,9 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { getTranslations } from "next-intl/server";
 
+import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
 
 export type ProfileFormState = {
@@ -14,11 +16,14 @@ export async function updateProfile(
   _previousState: ProfileFormState,
   formData: FormData,
 ): Promise<ProfileFormState> {
+  const localeValue = formData.get("locale");
+  const locale = typeof localeValue === "string" && hasLocale(localeValue) ? localeValue : defaultLocale;
+  const t = await getTranslations({ locale, namespace: "profile.actions" });
   let supabase;
   try {
     supabase = await createClient();
   } catch {
-    return { error: "Configurazione autenticazione non disponibile. Riprova tra poco." };
+    return { error: t("authUnavailable") };
   }
 
   const {
@@ -27,14 +32,14 @@ export async function updateProfile(
   } = await supabase.auth.getUser();
 
   if (userError || !user) {
-    return { error: "Sessione non valida. Effettua di nuovo l'accesso." };
+    return { error: t("invalidSession") };
   }
 
   const nameValue = formData.get("name");
   const name = typeof nameValue === "string" ? nameValue.trim() : "";
 
   if (name.length > 80) {
-    return { error: "Il nome non puo superare 80 caratteri." };
+    return { error: t("nameTooLong") };
   }
 
   const { error } = await supabase.auth.updateUser({
@@ -44,19 +49,21 @@ export async function updateProfile(
   });
 
   if (error) {
-    return { error: "Non sono riuscito ad aggiornare il profilo. Riprova." };
+    return { error: t("updateFailed") };
   }
 
   revalidatePath("/", "layout");
   revalidatePath("/profile");
 
-  return { message: "Profilo aggiornato." };
+  return { message: t("updated") };
 }
 
-export async function signOut() {
+export async function signOut(formData: FormData) {
+  const localeValue = formData.get("locale");
+  const locale = typeof localeValue === "string" && hasLocale(localeValue) ? localeValue : defaultLocale;
   const supabase = await createClient();
   await supabase.auth.signOut();
 
   revalidatePath("/", "layout");
-  redirect("/");
+  redirect(getLocalizedPathname(locale, "/"));
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { updateProfile, type ProfileFormState } from "@/app/profile/actions";
 import { buttonStyles } from "@/components/ui/Button";
@@ -13,13 +14,16 @@ type ProfileFormProps = {
 const initialState: ProfileFormState = {};
 
 export function ProfileForm({ email, initialName }: ProfileFormProps) {
+  const t = useTranslations("profile.form");
+  const locale = useLocale();
   const [state, formAction, isPending] = useActionState(updateProfile, initialState);
 
   return (
     <form action={formAction} className="space-y-4">
+      <input type="hidden" name="locale" value={locale} />
       <div className="space-y-1.5">
         <label htmlFor="name" className="text-sm font-medium text-[#3a2e24]">
-          Nome
+          {t("name")}
         </label>
         <input
           id="name"
@@ -27,14 +31,14 @@ export function ProfileForm({ email, initialName }: ProfileFormProps) {
           type="text"
           autoComplete="name"
           defaultValue={initialName}
-          placeholder="Come vuoi essere chiamato"
+          placeholder={t("namePlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
       </div>
 
       <div className="space-y-1.5">
         <label htmlFor="email" className="text-sm font-medium text-[#3a2e24]">
-          Email
+          {t("email")}
         </label>
         <input
           id="email"
@@ -60,7 +64,7 @@ export function ProfileForm({ email, initialName }: ProfileFormProps) {
       ) : null}
 
       <button type="submit" disabled={isPending} className={buttonStyles({ className: "w-full sm:w-auto" })}>
-        {isPending ? "Salvataggio..." : "Salva modifiche"}
+        {isPending ? t("saving") : t("submit")}
       </button>
     </form>
   );

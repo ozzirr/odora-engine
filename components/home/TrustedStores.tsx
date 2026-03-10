@@ -1,8 +1,12 @@
+import { useTranslations } from "next-intl";
+
 type TrustedStoresProps = {
   stores: string[];
 };
 
 export function TrustedStores({ stores }: TrustedStoresProps) {
+  const t = useTranslations("home.trustedStores");
+
   if (stores.length === 0) {
     return null;
   }
@@ -12,13 +16,13 @@ export function TrustedStores({ stores }: TrustedStoresProps) {
       <div className="rounded-[2rem] border border-[#e3d8c9] bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(244,237,227,0.92))] px-6 py-8 shadow-[0_24px_52px_-40px_rgba(50,35,20,0.35)] sm:px-8 sm:py-10">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-            Trusted Stores
+            {t("eyebrow")}
           </p>
           <h2 className="mt-3 font-display text-3xl text-[#1e1813] sm:text-4xl">
-            Compare prices from trusted stores
+            {t("title")}
           </h2>
           <p className="mt-3 text-sm text-[#685848]">
-            We surface retailers in a clean comparison view so prices, shipping, and availability stay easy to read.
+            {t("subtitle")}
           </p>
         </div>
 

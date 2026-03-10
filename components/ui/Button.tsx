@@ -13,7 +13,7 @@ type ButtonStyleOptions = {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#1f1914] text-[#f8f4ed] hover:bg-[#30261e] focus-visible:outline-[#1f1914]",
+    "bg-[#1E4B3B] !text-white visited:!text-white hover:bg-[#183D30] hover:!text-white focus-visible:outline-[#1E4B3B]",
   secondary:
     "bg-[#f0e9de] text-[#1f1914] hover:bg-[#e7ddcf] focus-visible:outline-[#d4c6b2]",
   ghost:

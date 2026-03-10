@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/Button";
 
 type AuthSocialButtonsProps = {
@@ -5,18 +7,19 @@ type AuthSocialButtonsProps = {
 };
 
 export function AuthSocialButtons({ mode }: AuthSocialButtonsProps) {
-  const labelPrefix = mode === "login" ? "Accesso" : "Registrazione";
+  const t = useTranslations("auth.social");
+  const labelPrefix = mode === "login" ? t("loginPrefix") : t("signupPrefix");
 
   return (
     <div className="grid gap-2">
       <Button type="button" variant="secondary" className="w-full" disabled>
-        {labelPrefix} Google presto disponibile
+        {t("providerSoon", { prefix: labelPrefix, provider: "Google" })}
       </Button>
       <Button type="button" variant="secondary" className="w-full" disabled>
-        {labelPrefix} Apple presto disponibile
+        {t("providerSoon", { prefix: labelPrefix, provider: "Apple" })}
       </Button>
       <Button type="button" variant="secondary" className="w-full" disabled>
-        {labelPrefix} Facebook presto disponibile
+        {t("providerSoon", { prefix: labelPrefix, provider: "Facebook" })}
       </Button>
     </div>
   );

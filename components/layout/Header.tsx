@@ -1,27 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
+import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/perfumes", label: "Perfumes" },
-  { href: "/finder", label: "Finder" },
-  { href: "/top", label: "Top" },
-];
-
 export function Header() {
+  const t = useTranslations("layout.header");
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const isAuthenticated = useAuthStatus(false, { refreshOnChange: true });
+  const navItems = [
+    { href: "/" as const, label: t("nav.home") },
+    { href: "/perfumes" as const, label: t("nav.perfumes") },
+    { href: "/finder" as const, label: t("nav.finder") },
+    { href: "/top" as const, label: t("nav.top") },
+  ];
   const accountHref = isAuthenticated ? "/profile" : "/login";
-  const accountLabel = isAuthenticated ? "Profilo" : "Accedi";
+  const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -62,7 +62,7 @@ export function Header() {
             {accountLabel}
           </Link>
           <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
-            Explore perfumes
+            {t("cta")}
           </Link>
         </nav>
 
@@ -70,7 +70,7 @@ export function Header() {
           onClick={() => setMenuOpen((prev) => !prev)}
           className="inline-flex items-center rounded-md border border-[#d8cbb9] px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#3e3025] md:hidden"
         >
-          Menu
+          {t("menu")}
         </button>
       </div>
 
@@ -102,7 +102,7 @@ export function Header() {
               onClick={() => setMenuOpen(false)}
               className={buttonStyles({ size: "sm", className: "w-fit" })}
             >
-              Explore perfumes
+              {t("cta")}
             </Link>
           </div>
         </div>
