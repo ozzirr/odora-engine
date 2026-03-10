@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { CatalogGate } from "@/components/catalog/CatalogGate";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { Button } from "@/components/ui/Button";
 import {
@@ -12,6 +13,7 @@ import {
 
 type FinderExperienceProps = {
   perfumes: FinderPerfume[];
+  isAuthenticated: boolean;
 };
 
 function toLabel(slug: string) {
@@ -31,13 +33,19 @@ const initialPreferences: FinderPreferences = {
   nicheOnly: false,
 };
 
-export function FinderExperience({ perfumes }: FinderExperienceProps) {
+const FINDER_RESULTS_PAGE_SIZE = 20;
+const FREE_FINDER_PREVIEW_LIMIT = 25;
+
+export function FinderExperience({ perfumes, isAuthenticated }: FinderExperienceProps) {
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>([]);
   const [totalMatches, setTotalMatches] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const isAutoLoadingRef = useRef(false);
 
   const moodOptions = useMemo(
     () =>
@@ -107,14 +115,23 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
         results: FinderPerfume[];
         total: number;
       };
+      const nextResults = payload.results ?? [];
+      const maxVisible = isAuthenticated
+        ? nextResults.length
+        : Math.min(nextResults.length, FREE_FINDER_PREVIEW_LIMIT);
 
-      setResults(payload.results ?? []);
-      setTotalMatches(payload.total ?? (payload.results ?? []).length);
+      setResults(nextResults);
+      setTotalMatches(payload.total ?? nextResults.length);
+      setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
       setSubmitted(true);
     } catch {
       const fallbackResults = matchPerfumesFromPreferences(preferences, perfumes);
+      const maxVisible = isAuthenticated
+        ? fallbackResults.length
+        : Math.min(fallbackResults.length, FREE_FINDER_PREVIEW_LIMIT);
       setResults(fallbackResults);
       setTotalMatches(fallbackResults.length);
+      setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
       setSubmitted(true);
       setErrorMessage("Finder service temporarily unavailable. Showing fallback results.");
     } finally {
@@ -126,10 +143,52 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
     setPreferences(initialPreferences);
     setResults([]);
     setTotalMatches(0);
+    setVisibleCount(0);
     setSubmitted(false);
     setErrorMessage(null);
     setIsLoading(false);
   };
+
+  const maxVisibleResults = isAuthenticated
+    ? results.length
+    : Math.min(results.length, FREE_FINDER_PREVIEW_LIMIT);
+  const displayedResults = results.slice(0, visibleCount);
+  const hasMoreVisibleResults = displayedResults.length < maxVisibleResults;
+  const isCatalogLocked = !isAuthenticated && results.length > FREE_FINDER_PREVIEW_LIMIT && visibleCount >= FREE_FINDER_PREVIEW_LIMIT;
+
+  const loadMoreResults = useCallback(() => {
+    if (isAutoLoadingRef.current || !hasMoreVisibleResults || isCatalogLocked) {
+      return;
+    }
+
+    isAutoLoadingRef.current = true;
+    setVisibleCount((current) =>
+      Math.min(current + FINDER_RESULTS_PAGE_SIZE, maxVisibleResults),
+    );
+    queueMicrotask(() => {
+      isAutoLoadingRef.current = false;
+    });
+  }, [hasMoreVisibleResults, isCatalogLocked, maxVisibleResults]);
+
+  useEffect(() => {
+    if (!submitted || !loadMoreRef.current || !hasMoreVisibleResults || isCatalogLocked) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          loadMoreResults();
+        }
+      },
+      {
+        rootMargin: "320px 0px",
+      },
+    );
+
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [hasMoreVisibleResults, isCatalogLocked, loadMoreResults, submitted]);
 
   return (
     <div className="space-y-8">
@@ -284,7 +343,11 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
               {errorMessage}
             </div>
           ) : null}
-          <PerfumeGrid perfumes={results} />
+          <PerfumeGrid perfumes={displayedResults} />
+
+          {hasMoreVisibleResults && !isCatalogLocked ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
+
+          {isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_PREVIEW_LIMIT} /> : null}
         </section>
       ) : (
         <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">

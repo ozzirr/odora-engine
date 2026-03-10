@@ -9,6 +9,7 @@ import {
   mergePerfumeWhere,
 } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 export const metadata: Metadata = {
   title: "Fragrance Finder | Odora",
@@ -69,6 +70,7 @@ async function getFinderPerfumes() {
 }
 
 export default async function FinderPage() {
+  const isAuthenticated = await getIsAuthenticated();
   const perfumes = await getFinderPerfumes();
 
   return (
@@ -79,7 +81,7 @@ export default async function FinderPage() {
         subtitle="Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
       />
 
-      <FinderExperience perfumes={perfumes} />
+      <FinderExperience perfumes={perfumes} isAuthenticated={isAuthenticated} />
     </Container>
   );
 }

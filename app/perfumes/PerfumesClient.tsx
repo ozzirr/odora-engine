@@ -1,12 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
+import { CatalogGate } from "@/components/catalog/CatalogGate";
 import { PerfumeFilters } from "@/components/perfumes/PerfumeFilters";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
-import { buttonStyles } from "@/components/ui/Button";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import type { ParsedPerfumeFilters } from "@/lib/filters";
 
@@ -16,9 +15,10 @@ type PerfumesClientProps = {
   total: number;
   hasMore: boolean;
   pageSize: number;
+  isAuthenticated: boolean;
 };
 
-const MAX_FREE_CATALOG_PAGES = 3;
+const FREE_CATALOG_PREVIEW_LIMIT = 25;
 
 function PerfumeGridSkeleton({ count = 6 }: { count?: number }) {
   return (
@@ -49,6 +49,7 @@ export function PerfumesClient({
   total,
   hasMore,
   pageSize,
+  isAuthenticated,
 }: PerfumesClientProps) {
   const searchParams = useSearchParams();
   const [perfumes, setPerfumes] = useState<PerfumeCardItem[]>(initialPerfumes);
@@ -61,8 +62,8 @@ export function PerfumesClient({
   const isFetchingRef = useRef(false);
 
   const querySignature = useMemo(() => searchParams.toString(), [searchParams]);
-  const maxVisiblePerfumes = pageSize * MAX_FREE_CATALOG_PAGES;
-  const isCatalogLocked = hasMoreResults && perfumes.length >= maxVisiblePerfumes;
+  const maxVisiblePerfumes = isAuthenticated ? Number.MAX_SAFE_INTEGER : FREE_CATALOG_PREVIEW_LIMIT;
+  const isCatalogLocked = !isAuthenticated && totalCount > perfumes.length && perfumes.length >= maxVisiblePerfumes;
   const canLoadMore = hasMoreResults && !isCatalogLocked;
 
   useEffect(() => {
@@ -105,13 +106,21 @@ export function PerfumesClient({
         nextOffset: number;
       };
 
+      const remainingPreviewSlots = Math.max(0, maxVisiblePerfumes - perfumes.length);
+      const fetchedPerfumes = isAuthenticated
+        ? payload.perfumes
+        : payload.perfumes.slice(0, remainingPreviewSlots);
+      const nextVisibleCount = perfumes.length + fetchedPerfumes.length;
+      const reachedPreviewLimit =
+        !isAuthenticated && nextVisibleCount >= FREE_CATALOG_PREVIEW_LIMIT && payload.total > nextVisibleCount;
+
       setPerfumes((current) => {
         const existingIds = new Set(current.map((item) => item.id));
-        const nextItems = payload.perfumes.filter((item) => !existingIds.has(item.id));
+        const nextItems = fetchedPerfumes.filter((item) => !existingIds.has(item.id));
         return [...current, ...nextItems];
       });
       setTotalCount(payload.total);
-      setHasMoreResults(payload.hasMore);
+      setHasMoreResults(reachedPreviewLimit ? true : payload.hasMore);
       setNextOffset(payload.nextOffset);
     } catch {
       setLoadError("Unable to load more fragrances. Retry in a moment.");
@@ -119,7 +128,7 @@ export function PerfumesClient({
       setIsLoadingMore(false);
       isFetchingRef.current = false;
     }
-  }, [canLoadMore, nextOffset, pageSize, searchParams]);
+  }, [canLoadMore, isAuthenticated, maxVisiblePerfumes, nextOffset, pageSize, perfumes.length, searchParams]);
 
   useEffect(() => {
     if (!loadMoreRef.current || !canLoadMore) {
@@ -160,26 +169,7 @@ export function PerfumesClient({
 
         {isLoadingMore ? <PerfumeGridSkeleton count={Math.min(6, pageSize)} /> : null}
 
-        {isCatalogLocked ? (
-          <div className="rounded-2xl border border-[#d8c8b5] bg-[#fbf5ec] px-6 py-8 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7763]">
-              Continue Discovery
-            </p>
-            <h3 className="mt-2 font-display text-3xl text-[#201711]">Accedi per vedere tutto il catalogo</h3>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-[#675545]">
-              Hai raggiunto i primi {maxVisiblePerfumes} profumi. Accedi o crea un account per continuare a
-              esplorare tutte le fragranze disponibili.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Link href="/login" className={buttonStyles()}>
-                Accedi
-              </Link>
-              <Link href="/signup" className={buttonStyles({ variant: "secondary" })}>
-                Crea account
-              </Link>
-            </div>
-          </div>
-        ) : null}
+        {isCatalogLocked ? <CatalogGate previewLimit={FREE_CATALOG_PREVIEW_LIMIT} /> : null}
 
         {canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
 
