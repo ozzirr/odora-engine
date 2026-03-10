@@ -55,6 +55,7 @@
       "spotlight": "Spotlight",
       "badges": {
         "heroPick": "Hero pick",
+        "spotlight": "Rotating pick",
         "trending": "Trending"
       },
       "bestPriceToday": "Best price today",

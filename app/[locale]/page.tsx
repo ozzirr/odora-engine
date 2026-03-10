@@ -41,14 +41,16 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
 
 export default async function HomePage() {
   const homepageData = await getHomepageData();
-  const heroPreview = homepageData.hero ? toHomeSpotlight(homepageData.hero, "heroPick") : null;
+  const heroPreviews = homepageData.heroSpotlights.map((perfume, index) =>
+    toHomeSpotlight(perfume, index === 0 ? "heroPick" : "spotlight"),
+  );
   const trendingPerfumes = homepageData.trending.map((perfume) =>
     toHomeSpotlight(perfume, "trending"),
   );
 
   return (
     <>
-      <Hero preview={heroPreview} />
+      <Hero previews={heroPreviews} />
 
       <Container>
         <TrendingNow perfumes={trendingPerfumes} />

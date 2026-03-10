@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+import { sanitizeAuthNextPath } from "@/lib/auth-navigation";
 import { getBaseSiteUrl } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
@@ -11,23 +12,6 @@ export type SignupFormState = {
   error?: string;
   message?: string;
 };
-
-function sanitizeNextPath(value: FormDataEntryValue | null | undefined) {
-  if (typeof value !== "string") {
-    return "/perfumes";
-  }
-
-  const trimmed = value.trim();
-  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
-    return "/perfumes";
-  }
-
-  if (trimmed === "/login" || trimmed === "/signup") {
-    return "/perfumes";
-  }
-
-  return trimmed;
-}
 
 export async function signupWithPassword(
   _previousState: SignupFormState,
@@ -40,7 +24,10 @@ export async function signupWithPassword(
   const emailValue = formData.get("email");
   const passwordValue = formData.get("password");
   const confirmPasswordValue = formData.get("confirmPassword");
-  const nextPath = sanitizeNextPath(formData.get("next")) || getLocalizedPathname(locale, "/perfumes");
+  const nextPath = sanitizeAuthNextPath(
+    typeof formData.get("next") === "string" ? (formData.get("next") as string) : null,
+    getLocalizedPathname(locale, "/perfumes"),
+  );
 
   const name = typeof nameValue === "string" ? nameValue.trim() : "";
   const email = typeof emailValue === "string" ? emailValue.trim().toLowerCase() : "";

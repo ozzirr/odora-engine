@@ -18,7 +18,7 @@ export type QuickFilterIllustration =
   | "rose"
   | "citrus";
 
-export type HomeSpotlightBadgeKey = "heroPick" | "trending";
+export type HomeSpotlightBadgeKey = "heroPick" | "trending" | "spotlight";
 export type HomepageMoodCardId =
   | "vanillaLovers"
   | "freshDaily"
@@ -167,6 +167,7 @@ export type HomePerfumeSpotlight = {
 
 export type HomepageData = {
   hero: HomePerfumeRecord | null;
+  heroSpotlights: HomePerfumeRecord[];
   trending: HomePerfumeRecord[];
   featured: HomePerfumeRecord[];
   collections: HomeCollectionCard[];
@@ -381,6 +382,7 @@ export async function getHomepageData(): Promise<HomepageData> {
   if (!isDatabaseConfigured) {
     return {
       hero: null,
+      heroSpotlights: [],
       trending: [],
       featured: [],
       collections: [],
@@ -403,13 +405,14 @@ export async function getHomepageData(): Promise<HomepageData> {
       }),
     ]);
 
-    const hero =
-      heroCandidates[0] ??
-      trendingCandidates[0] ??
-      featuredCandidates[0] ??
-      null;
+    const heroSpotlights = toUniquePerfumes([
+      ...heroCandidates,
+      ...trendingCandidates,
+      ...featuredCandidates,
+    ]).slice(0, 4);
 
-    const excludedHeroIds = new Set<number>(hero ? [hero.id] : []);
+    const hero = heroSpotlights[0] ?? null;
+    const excludedHeroIds = new Set<number>(heroSpotlights.map((perfume) => perfume.id));
     const trending = minimizeDuplicates(trendingCandidates, excludedHeroIds, 4);
     const excludedFeaturedIds = new Set<number>([
       ...excludedHeroIds,
@@ -417,12 +420,13 @@ export async function getHomepageData(): Promise<HomepageData> {
     ]);
     const featured = minimizeDuplicates(featuredCandidates, excludedFeaturedIds);
     const trustedStores = selectTrustedStores(
-      toUniquePerfumes([...(hero ? [hero] : []), ...trending, ...featured]),
+      toUniquePerfumes([...heroSpotlights, ...trending, ...featured]),
       4,
     );
 
     return {
       hero,
+      heroSpotlights,
       trending,
       featured,
       collections: collections.map(toCollectionCard),
@@ -433,6 +437,7 @@ export async function getHomepageData(): Promise<HomepageData> {
 
     return {
       hero: null,
+      heroSpotlights: [],
       trending: [],
       featured: [],
       collections: [],

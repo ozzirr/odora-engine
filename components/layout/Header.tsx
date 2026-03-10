@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
@@ -22,6 +23,7 @@ export function Header() {
   ];
   const accountHref = isAuthenticated ? "/profile" : "/login";
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
+  const canOpenAuthModal = !isAuthenticated && pathname !== "/login" && pathname !== "/signup";
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -58,9 +60,15 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <Link href={accountHref} className={buttonStyles({ variant: "secondary", size: "sm" })}>
-            {accountLabel}
-          </Link>
+          {canOpenAuthModal ? (
+            <AuthModalTrigger mode="login" className={buttonStyles({ variant: "secondary", size: "sm" })}>
+              {accountLabel}
+            </AuthModalTrigger>
+          ) : (
+            <Link href={accountHref} className={buttonStyles({ variant: "secondary", size: "sm" })}>
+              {accountLabel}
+            </Link>
+          )}
           <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
             {t("cta")}
           </Link>
@@ -90,13 +98,23 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href={accountHref}
-              onClick={() => setMenuOpen(false)}
-              className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
-            >
-              {accountLabel}
-            </Link>
+            {canOpenAuthModal ? (
+              <AuthModalTrigger
+                mode="login"
+                onOpen={() => setMenuOpen(false)}
+                className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+              >
+                {accountLabel}
+              </AuthModalTrigger>
+            ) : (
+              <Link
+                href={accountHref}
+                onClick={() => setMenuOpen(false)}
+                className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+              >
+                {accountLabel}
+              </Link>
+            )}
             <Link
               href="/perfumes"
               onClick={() => setMenuOpen(false)}

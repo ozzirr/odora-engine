@@ -1,6 +1,7 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { NextResponse, type NextRequest } from "next/server";
 
+import { sanitizeAuthNextPath } from "@/lib/auth-navigation";
 import { defaultLocale, getLocalizedPathname, hasLocale, localeCookieName } from "@/lib/i18n";
 import { createClient } from "@/lib/supabase/server";
 
@@ -14,26 +15,24 @@ function getFallbackLocale(request: NextRequest, nextPath?: string | null) {
   return cookieLocale && hasLocale(cookieLocale) ? cookieLocale : defaultLocale;
 }
 
-function sanitizeNextPath(value: string | null, fallbackLocale: "it" | "en") {
-  if (!value) {
-    return getLocalizedPathname(fallbackLocale, "/perfumes");
+function buildAuthErrorRedirect(
+  requestUrl: URL,
+  fallbackLocale: "it" | "en",
+  rawNextPath: string | null,
+  nextPath: string,
+  errorCode: string,
+) {
+  const loginPath = getLocalizedPathname(fallbackLocale, "/login");
+
+  if (!rawNextPath) {
+    return new URL(`${loginPath}?error=${errorCode}`, requestUrl.origin);
   }
 
-  const trimmed = value.trim();
-  if (!trimmed.startsWith("/") || trimmed.startsWith("//")) {
-    return getLocalizedPathname(fallbackLocale, "/perfumes");
-  }
-
-  if (
-    trimmed === "/login" ||
-    trimmed === "/signup" ||
-    trimmed.endsWith("/login") ||
-    trimmed.endsWith("/signup")
-  ) {
-    return getLocalizedPathname(fallbackLocale, "/perfumes");
-  }
-
-  return trimmed;
+  const redirectUrl = new URL(nextPath, requestUrl.origin);
+  redirectUrl.searchParams.set("auth", "login");
+  redirectUrl.searchParams.set("authNext", nextPath);
+  redirectUrl.searchParams.set("error", errorCode);
+  return redirectUrl;
 }
 
 function isOtpType(value: string | null): value is EmailOtpType {
@@ -45,21 +44,25 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get("code");
   const tokenHash = requestUrl.searchParams.get("token_hash");
   const type = requestUrl.searchParams.get("type");
-  const fallbackLocale = getFallbackLocale(request, requestUrl.searchParams.get("next"));
-  const nextPath = sanitizeNextPath(requestUrl.searchParams.get("next"), fallbackLocale);
-  const loginPath = getLocalizedPathname(fallbackLocale, "/login");
+  const rawNextPath = requestUrl.searchParams.get("next");
+  const fallbackLocale = getFallbackLocale(request, rawNextPath);
+  const nextPath = sanitizeAuthNextPath(rawNextPath, getLocalizedPathname(fallbackLocale, "/perfumes"));
 
   let supabase;
   try {
     supabase = await createClient();
   } catch {
-    return NextResponse.redirect(new URL(`${loginPath}?error=auth_not_configured`, requestUrl.origin));
+    return NextResponse.redirect(
+      buildAuthErrorRedirect(requestUrl, fallbackLocale, rawNextPath, nextPath, "auth_not_configured"),
+    );
   }
 
   if (code) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (error) {
-      return NextResponse.redirect(new URL(`${loginPath}?error=auth_callback_failed`, requestUrl.origin));
+      return NextResponse.redirect(
+        buildAuthErrorRedirect(requestUrl, fallbackLocale, rawNextPath, nextPath, "auth_callback_failed"),
+      );
     }
 
     return NextResponse.redirect(new URL(nextPath, requestUrl.origin));
@@ -72,11 +75,15 @@ export async function GET(request: NextRequest) {
     });
 
     if (error) {
-      return NextResponse.redirect(new URL(`${loginPath}?error=email_verification_failed`, requestUrl.origin));
+      return NextResponse.redirect(
+        buildAuthErrorRedirect(requestUrl, fallbackLocale, rawNextPath, nextPath, "email_verification_failed"),
+      );
     }
 
     return NextResponse.redirect(new URL(nextPath, requestUrl.origin));
   }
 
-  return NextResponse.redirect(new URL(`${loginPath}?error=invalid_auth_callback`, requestUrl.origin));
+  return NextResponse.redirect(
+    buildAuthErrorRedirect(requestUrl, fallbackLocale, rawNextPath, nextPath, "invalid_auth_callback"),
+  );
 }

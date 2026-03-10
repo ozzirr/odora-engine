@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { buttonStyles } from "@/components/ui/Button";
-import { Link } from "@/lib/navigation";
 
 type CatalogGateProps = {
   previewLimit: number;
@@ -18,12 +18,12 @@ export function CatalogGate({ previewLimit }: CatalogGateProps) {
         {t("description", { previewLimit })}
       </p>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <Link href="/login" className={buttonStyles()}>
+        <AuthModalTrigger mode="login" className={buttonStyles()}>
           {t("login")}
-        </Link>
-        <Link href="/signup" className={buttonStyles({ variant: "secondary" })}>
+        </AuthModalTrigger>
+        <AuthModalTrigger mode="signup" className={buttonStyles({ variant: "secondary" })}>
           {t("signup")}
-        </Link>
+        </AuthModalTrigger>
       </div>
     </div>
   );

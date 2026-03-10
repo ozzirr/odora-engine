@@ -1,23 +1,17 @@
-import type { ComponentProps } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/Container";
-import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
+import { HeroSpotlightCarousel } from "@/components/home/HeroSpotlightCarousel";
 import { buttonStyles } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
 import { Link } from "@/lib/navigation";
-import { formatCurrency } from "@/lib/utils";
 
 type HeroProps = {
-  preview: HomePerfumeSpotlight | null;
+  previews: HomePerfumeSpotlight[];
 };
 
-type LinkHref = ComponentProps<typeof Link>["href"];
-
-export function Hero({ preview }: HeroProps) {
+export function Hero({ previews }: HeroProps) {
   const t = useTranslations("home.hero");
-  const locale = useLocale();
   const valueProps = [t("valueProps.compare"), t("valueProps.explore"), t("valueProps.choose")];
 
   return (
@@ -27,8 +21,8 @@ export function Hero({ preview }: HeroProps) {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.75),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(225,209,189,0.55),transparent_28%),linear-gradient(120deg,rgba(255,255,255,0.22),transparent_42%)]" />
           <div
             className={
-              preview
-                ? "relative grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_360px] lg:items-center"
+              previews.length > 0
+                ? "relative grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_390px] lg:items-center"
                 : "relative"
             }
           >
@@ -67,73 +61,7 @@ export function Hero({ preview }: HeroProps) {
               </div>
             </div>
 
-            {preview ? (
-              <div className="premium-card relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.82),rgba(247,239,229,0.9))] p-5 shadow-[0_28px_60px_-42px_rgba(45,31,19,0.55)]">
-                <div className="absolute inset-x-6 top-0 h-24 rounded-b-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.85),transparent_72%)]" />
-                <div className="relative">
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
-                        {t("spotlight")}
-                      </p>
-                      <p className="mt-1 text-sm text-[#5e4f40]">{preview.brandName}</p>
-                    </div>
-                    <Badge className="bg-[#1f1914] text-[#f8f4ed]">
-                      {t(`badges.${preview.badgeKey}`)}
-                    </Badge>
-                  </div>
-
-                  <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#eadfce] bg-[#efe7dc]">
-                    <div className="h-64">
-                      <PerfumeImage
-                        imageUrl={preview.imageUrl}
-                        perfumeName={preview.name}
-                        brandName={preview.brandName}
-                        fragranceFamily={preview.fragranceFamily}
-                        sizes="(max-width: 1024px) 100vw, 360px"
-                        priority
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-5 space-y-4">
-                    <div>
-                      <h2 className="font-display text-3xl text-[#1f1914]">{preview.name}</h2>
-                      <p className="mt-1 text-sm text-[#6b5b4b]">{preview.fragranceFamily}</p>
-                    </div>
-
-                    <div className="flex items-end justify-between gap-4 rounded-[1.25rem] border border-[#e6d8c5] bg-white/75 px-4 py-3">
-                      <div>
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                          {preview.bestPrice != null && preview.currency
-                            ? t("bestPriceToday")
-                            : t("discover")}
-                        </p>
-                        <p className="mt-1 font-display text-2xl text-[#1d1712]">
-                          {preview.bestPrice != null && preview.currency
-                            ? formatCurrency(preview.bestPrice, preview.currency, locale as "it" | "en")
-                            : t("viewFragrance")}
-                        </p>
-                      </div>
-                      <p className="text-right text-sm text-[#5d4e3f]">
-                        {preview.storeName ?? t("fallbackStore")}
-                      </p>
-                    </div>
-
-                    <Link
-                      href={preview.href as unknown as LinkHref}
-                      className={buttonStyles({
-                        variant: "secondary",
-                        size: "lg",
-                        className: "w-full bg-[#efe6da] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
-                      })}
-                    >
-                      {preview.hasOffer ? t("viewOffers") : t("seeProductDetails")}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ) : null}
+            {previews.length > 0 ? <HeroSpotlightCarousel previews={previews} /> : null}
           </div>
         </div>
       </Container>
