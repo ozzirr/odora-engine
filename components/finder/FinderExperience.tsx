@@ -39,7 +39,11 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
   const moodOptions = useMemo(
     () =>
       Array.from(
-        new Set(perfumes.flatMap((perfume) => perfume.moods.map((mood) => mood.mood.slug))),
+        new Set(
+          perfumes.flatMap((perfume) =>
+            (perfume.moods ?? []).map((mood) => mood.mood?.slug).filter((slug): slug is string => Boolean(slug)),
+          ),
+        ),
       ).sort(),
     [perfumes],
   );
@@ -47,7 +51,13 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
   const seasonOptions = useMemo(
     () =>
       Array.from(
-        new Set(perfumes.flatMap((perfume) => perfume.seasons.map((season) => season.season.slug))),
+        new Set(
+          perfumes.flatMap((perfume) =>
+            (perfume.seasons ?? [])
+              .map((season) => season.season?.slug)
+              .filter((slug): slug is string => Boolean(slug)),
+          ),
+        ),
       ).sort(),
     [perfumes],
   );
@@ -56,8 +66,11 @@ export function FinderExperience({ perfumes }: FinderExperienceProps) {
     const counts = new Map<string, number>();
 
     for (const perfume of perfumes) {
-      for (const note of perfume.notes) {
-        const key = note.note.slug;
+      for (const note of perfume.notes ?? []) {
+        const key = note.note?.slug;
+        if (!key) {
+          continue;
+        }
         counts.set(key, (counts.get(key) ?? 0) + 1);
       }
     }

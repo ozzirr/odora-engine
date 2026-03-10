@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import { Container } from "@/components/layout/Container";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
+import {
+  getCatalogVisibilityWhere,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+} from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
@@ -20,17 +24,22 @@ async function getTopPageData() {
     return [];
   }
 
-  return prisma.perfume.findMany({
-    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
-    include: {
-      brand: true,
-      offers: {
-        include: {
-          store: true,
+  try {
+    return await prisma.perfume.findMany({
+      where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
+      include: {
+        brand: true,
+        offers: {
+          include: {
+            store: true,
+          },
         },
       },
-    },
-  });
+    });
+  } catch (error) {
+    logCatalogQueryError("top:list", error);
+    return [];
+  }
 }
 
 export default async function TopPage() {
@@ -46,7 +55,7 @@ export default async function TopPage() {
     .sort((a, b) => (b.ratingInternal ?? 0) - (a.ratingInternal ?? 0))
     .slice(0, 4);
 
-  const topLongLasting = perfumes
+  const topLongLasting = [...perfumes]
     .sort((a, b) => (b.longevityScore ?? 0) - (a.longevityScore ?? 0))
     .slice(0, 4);
 

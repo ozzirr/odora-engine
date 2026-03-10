@@ -3,7 +3,11 @@ import type { Prisma } from "@prisma/client";
 
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
+import {
+  getCatalogVisibilityWhere,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+} from "@/lib/catalog";
 import { applySorting, buildPerfumeQuery } from "@/lib/filters";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
@@ -77,29 +81,37 @@ async function getPerfumes(searchParams: Record<string, string | string[] | unde
     },
   };
 
-  const { query, postSort } = applySorting(baseQuery, parsed.sort);
-  const perfumes = (await prisma.perfume.findMany(query)) as PerfumeListItem[];
+  try {
+    const { query, postSort } = applySorting(baseQuery, parsed.sort);
+    const perfumes = (await prisma.perfume.findMany(query)) as PerfumeListItem[];
 
-  if (postSort === "price_low") {
-    perfumes.sort((a, b) => {
-      const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-      const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-      return aPrice - bPrice;
-    });
+    if (postSort === "price_low") {
+      perfumes.sort((a, b) => {
+        const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
+        const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
+        return aPrice - bPrice;
+      });
+    }
+
+    if (postSort === "price_high") {
+      perfumes.sort((a, b) => {
+        const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.NEGATIVE_INFINITY;
+        const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.NEGATIVE_INFINITY;
+        return bPrice - aPrice;
+      });
+    }
+
+    return {
+      perfumes,
+      selectedFilters: parsed,
+    };
+  } catch (error) {
+    logCatalogQueryError("perfumes:list", error);
+    return {
+      perfumes: [] as PerfumeListItem[],
+      selectedFilters: parsed,
+    };
   }
-
-  if (postSort === "price_high") {
-    perfumes.sort((a, b) => {
-      const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.NEGATIVE_INFINITY;
-      const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.NEGATIVE_INFINITY;
-      return bPrice - aPrice;
-    });
-  }
-
-  return {
-    perfumes,
-    selectedFilters: parsed,
-  };
 }
 
 export default async function PerfumesPage({ searchParams }: PerfumesPageProps) {

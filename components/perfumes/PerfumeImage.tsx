@@ -13,6 +13,24 @@ type PerfumeImageProps = {
   imageClassName?: string;
 };
 
+function isRenderableImageUrl(value: string | null | undefined) {
+  const raw = value?.trim();
+  if (!raw) {
+    return false;
+  }
+
+  if (raw.startsWith("/")) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(raw);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 function PerfumeImageFallback({
   brandName,
   perfumeName,
@@ -56,7 +74,7 @@ export function PerfumeImage({
   className,
   imageClassName,
 }: PerfumeImageProps) {
-  const normalizedUrl = imageUrl?.trim() ? imageUrl : null;
+  const normalizedUrl = isRenderableImageUrl(imageUrl) ? imageUrl!.trim() : null;
 
   return (
     <div className={cn("relative h-full w-full", className)}>
@@ -79,4 +97,3 @@ export function PerfumeImage({
     </div>
   );
 }
-

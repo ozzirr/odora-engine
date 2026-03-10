@@ -27,6 +27,7 @@ type PerfumeCardProps = {
 };
 
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
+  const brandName = perfume.brand?.name?.trim() || "Unknown brand";
   const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
 
   return (
@@ -36,7 +37,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
           <PerfumeImage
             imageUrl={perfume.imageUrl}
             perfumeName={perfume.name}
-            brandName={perfume.brand.name}
+            brandName={brandName}
             fragranceFamily={perfume.fragranceFamily}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
@@ -46,7 +47,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
 
       <div className="space-y-3 p-5">
         <div>
-          <p className="text-xs uppercase tracking-[0.14em] text-[#8a7763]">{perfume.brand.name}</p>
+          <p className="text-xs uppercase tracking-[0.14em] text-[#8a7763]">{brandName}</p>
           <Link href={`/perfumes/${perfume.slug}`}>
             <h3 className="mt-1 font-display text-2xl text-[#1f1914] transition-colors hover:text-[#6c5946]">
               {perfume.name}

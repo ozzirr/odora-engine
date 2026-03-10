@@ -44,14 +44,21 @@ export function getPerfumeNotes(perfume: { notes: DiscoveryNote[] }) {
 
   const seen = new Set<string>();
 
-  for (const item of perfume.notes) {
-    const type = item.note.noteType.toLowerCase();
+  for (const item of perfume.notes ?? []) {
+    const noteType = item.note?.noteType ?? "";
+    const type = noteType.toLowerCase();
 
     if (type !== "top" && type !== "heart" && type !== "base") {
       continue;
     }
 
-    const key = `${type}:${item.note.slug}`;
+    const noteSlug = item.note?.slug;
+    const noteName = item.note?.name;
+    if (!noteSlug || !noteName) {
+      continue;
+    }
+
+    const key = `${type}:${noteSlug}`;
 
     if (seen.has(key)) {
       continue;
@@ -60,7 +67,7 @@ export function getPerfumeNotes(perfume: { notes: DiscoveryNote[] }) {
     seen.add(key);
     groups[type].push({
       name: item.note.name,
-      slug: item.note.slug,
+      slug: noteSlug,
       intensity: item.intensity ?? null,
     });
   }
@@ -69,11 +76,11 @@ export function getPerfumeNotes(perfume: { notes: DiscoveryNote[] }) {
 }
 
 function getNoteSlugSet(perfume: DiscoveryPerfume) {
-  return new Set(perfume.notes.map((item) => item.note.slug));
+  return new Set((perfume.notes ?? []).map((item) => item.note?.slug).filter((value): value is string => Boolean(value)));
 }
 
 function getMoodSlugSet(perfume: DiscoveryPerfume) {
-  return new Set(perfume.moods.map((item) => item.mood.slug));
+  return new Set((perfume.moods ?? []).map((item) => item.mood?.slug).filter((value): value is string => Boolean(value)));
 }
 
 function getSetOverlapCount(first: Set<string>, second: Set<string>) {
@@ -99,7 +106,10 @@ function scoreSimilarity(target: DiscoveryPerfume, candidate: DiscoveryPerfume) 
 
   let score = 0;
 
-  if (target.fragranceFamily.toLowerCase() === candidate.fragranceFamily.toLowerCase()) {
+  if (
+    (target.fragranceFamily ?? "").toLowerCase() === (candidate.fragranceFamily ?? "").toLowerCase() &&
+    Boolean(target.fragranceFamily)
+  ) {
     score += 5;
   }
 
@@ -195,7 +205,8 @@ export function getCheaperAlternatives(
 
       return (
         item.noteOverlap > 0 ||
-        perfume.fragranceFamily.toLowerCase() === item.candidate.fragranceFamily.toLowerCase()
+        (perfume.fragranceFamily ?? "").toLowerCase() ===
+          (item.candidate.fragranceFamily ?? "").toLowerCase()
       );
     })
     .sort((a, b) => {

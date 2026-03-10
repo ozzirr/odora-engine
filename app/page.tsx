@@ -6,7 +6,7 @@ import { Hero } from "@/components/home/Hero";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
+import { getCatalogVisibilityWhere, logCatalogQueryError, mergePerfumeWhere } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { trendingPreviewCards } from "@/lib/sample-data";
 
@@ -17,26 +17,31 @@ async function getFeaturedPerfumes(): Promise<PerfumeCardItem[]> {
     return [];
   }
 
-  const perfumes = await prisma.perfume.findMany({
-    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
-    take: 6,
-    orderBy: [{ ratingInternal: "desc" }, { createdAt: "desc" }],
-    include: {
-      brand: true,
-      offers: {
-        select: {
-          priceAmount: true,
-          currency: true,
+  try {
+    const perfumes = await prisma.perfume.findMany({
+      where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
+      take: 6,
+      orderBy: [{ ratingInternal: "desc" }, { createdAt: "desc" }],
+      include: {
+        brand: true,
+        offers: {
+          select: {
+            priceAmount: true,
+            currency: true,
+          },
+          orderBy: {
+            priceAmount: "asc",
+          },
+          take: 1,
         },
-        orderBy: {
-          priceAmount: "asc",
-        },
-        take: 1,
       },
-    },
-  });
+    });
 
-  return perfumes;
+    return perfumes;
+  } catch (error) {
+    logCatalogQueryError("home:featured", error);
+    return [];
+  }
 }
 
 export default async function HomePage() {

@@ -10,7 +10,11 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
+import {
+  getCatalogVisibilityWhere,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+} from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
@@ -31,84 +35,89 @@ async function getPerfumePageData(slug: string) {
 
   const visibilityWhere = getCatalogVisibilityWhere();
 
-  const perfume = await prisma.perfume.findFirst({
-    where: mergePerfumeWhere({ slug }, visibilityWhere),
-    include: {
-      brand: true,
-      notes: {
-        include: {
-          note: true,
+  try {
+    const perfume = await prisma.perfume.findFirst({
+      where: mergePerfumeWhere({ slug }, visibilityWhere),
+      include: {
+        brand: true,
+        notes: {
+          include: {
+            note: true,
+          },
+        },
+        moods: {
+          include: {
+            mood: true,
+          },
+          orderBy: {
+            weight: "desc",
+          },
+        },
+        seasons: {
+          include: {
+            season: true,
+          },
+          orderBy: {
+            weight: "desc",
+          },
+        },
+        occasions: {
+          include: {
+            occasion: true,
+          },
+          orderBy: {
+            weight: "desc",
+          },
+        },
+        offers: {
+          include: {
+            store: true,
+          },
         },
       },
-      moods: {
-        include: {
-          mood: true,
-        },
-        orderBy: {
-          weight: "desc",
-        },
-      },
-      seasons: {
-        include: {
-          season: true,
-        },
-        orderBy: {
-          weight: "desc",
-        },
-      },
-      occasions: {
-        include: {
-          occasion: true,
-        },
-        orderBy: {
-          weight: "desc",
-        },
-      },
-      offers: {
-        include: {
-          store: true,
-        },
-      },
-    },
-  });
+    });
 
-  if (!perfume) {
+    if (!perfume) {
+      return null;
+    }
+
+    const allPerfumes = await prisma.perfume.findMany({
+      where: mergePerfumeWhere(
+        {
+          id: {
+            not: perfume.id,
+          },
+        },
+        visibilityWhere,
+      ),
+      include: {
+        brand: true,
+        notes: {
+          include: {
+            note: true,
+          },
+        },
+        moods: {
+          include: {
+            mood: true,
+          },
+        },
+        offers: {
+          include: {
+            store: true,
+          },
+        },
+      },
+    });
+
+    return {
+      perfume,
+      allPerfumes,
+    };
+  } catch (error) {
+    logCatalogQueryError("perfumes:detail", error);
     return null;
   }
-
-  const allPerfumes = await prisma.perfume.findMany({
-    where: mergePerfumeWhere(
-      {
-        id: {
-          not: perfume.id,
-        },
-      },
-      visibilityWhere,
-    ),
-    include: {
-      brand: true,
-      notes: {
-        include: {
-          note: true,
-        },
-      },
-      moods: {
-        include: {
-          mood: true,
-        },
-      },
-      offers: {
-        include: {
-          store: true,
-        },
-      },
-    },
-  });
-
-  return {
-    perfume,
-    allPerfumes,
-  };
 }
 
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
@@ -121,29 +130,37 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
 
   const { slug } = await params;
 
-  const perfume = await prisma.perfume.findFirst({
-    where: mergePerfumeWhere({ slug }, getCatalogVisibilityWhere()),
-    select: {
-      name: true,
-      descriptionShort: true,
-      brand: {
-        select: {
-          name: true,
+  try {
+    const perfume = await prisma.perfume.findFirst({
+      where: mergePerfumeWhere({ slug }, getCatalogVisibilityWhere()),
+      select: {
+        name: true,
+        descriptionShort: true,
+        brand: {
+          select: {
+            name: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  if (!perfume) {
+    if (!perfume) {
+      return {
+        title: "Perfume not found | Odora",
+      };
+    }
+
     return {
-      title: "Perfume not found | Odora",
+      title: `${perfume.name} by ${perfume.brand?.name ?? "Unknown brand"} | Odora`,
+      description: perfume.descriptionShort,
+    };
+  } catch (error) {
+    logCatalogQueryError("perfumes:metadata", error);
+    return {
+      title: "Perfume | Odora",
+      description: "Fragrance details and offer comparison on Odora.",
     };
   }
-
-  return {
-    title: `${perfume.name} by ${perfume.brand.name} | Odora`,
-    description: perfume.descriptionShort,
-  };
 }
 
 export default async function PerfumeDetailPage({ params }: PerfumeDetailPageProps) {
@@ -217,16 +234,22 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       <section className="grid gap-4 md:grid-cols-3">
         <MoodBadges
           title="Moods"
-          items={perfume.moods.map((item) => ({ name: item.mood.name, weight: item.weight }))}
+          items={(perfume.moods ?? []).map((item) => ({
+            name: item.mood?.name ?? "Unknown",
+            weight: item.weight,
+          }))}
         />
         <MoodBadges
           title="Seasons"
-          items={perfume.seasons.map((item) => ({ name: item.season.name, weight: item.weight }))}
+          items={(perfume.seasons ?? []).map((item) => ({
+            name: item.season?.name ?? "Unknown",
+            weight: item.weight,
+          }))}
         />
         <MoodBadges
           title="Occasions"
-          items={perfume.occasions.map((item) => ({
-            name: item.occasion.name,
+          items={(perfume.occasions ?? []).map((item) => ({
+            name: item.occasion?.name ?? "Unknown",
             weight: item.weight,
           }))}
         />

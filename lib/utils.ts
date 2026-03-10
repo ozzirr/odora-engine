@@ -24,11 +24,18 @@ export function formatPriceRange(priceRange: string) {
 }
 
 export function formatCurrency(amount: number, currency: string) {
-  return new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 2,
-  }).format(amount);
+  const safeAmount = Number.isFinite(amount) ? amount : 0;
+  const safeCurrency = /^[A-Z]{3}$/.test(currency) ? currency : "EUR";
+
+  try {
+    return new Intl.NumberFormat("it-IT", {
+      style: "currency",
+      currency: safeCurrency,
+      maximumFractionDigits: 2,
+    }).format(safeAmount);
+  } catch {
+    return `€${safeAmount.toFixed(2)}`;
+  }
 }
 
 export function formatNoteType(type: string) {

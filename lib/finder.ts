@@ -108,22 +108,24 @@ export function matchPerfumesFromPreferences(
 
       if (
         preferredMood &&
-        perfume.moods.some((mood) => normalize(mood.mood.slug) === preferredMood)
+        (perfume.moods ?? []).some((mood) => normalize(mood.mood?.slug ?? "") === preferredMood)
       ) {
         score += 3;
       }
 
       if (
         preferredSeason &&
-        perfume.seasons.some((season) => normalize(season.season.slug) === preferredSeason)
+        (perfume.seasons ?? []).some(
+          (season) => normalize(season.season?.slug ?? "") === preferredSeason,
+        )
       ) {
         score += 3;
       }
 
       if (
         preferredNote &&
-        perfume.notes.some((note) => {
-          const slug = normalize(note.note.slug);
+        (perfume.notes ?? []).some((note) => {
+          const slug = normalize(note.note?.slug ?? "");
           return slug === preferredNote || slug.includes(preferredNote);
         })
       ) {

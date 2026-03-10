@@ -33,6 +33,7 @@ function ScoreBlock({ label, value }: { label: string; value: number | null }) {
 }
 
 export function PerfumeHero({ perfume }: PerfumeHeroProps) {
+  const brandName = perfume.brand?.name?.trim() || "Unknown brand";
   const bestOffer = computeBestOffer(perfume.offers);
 
   return (
@@ -41,7 +42,7 @@ export function PerfumeHero({ perfume }: PerfumeHeroProps) {
         <PerfumeImage
           imageUrl={perfume.imageUrl}
           perfumeName={perfume.name}
-          brandName={perfume.brand.name}
+          brandName={brandName}
           fragranceFamily={perfume.fragranceFamily}
           priority
           sizes="(max-width: 1024px) 100vw, 40vw"
@@ -51,7 +52,7 @@ export function PerfumeHero({ perfume }: PerfumeHeroProps) {
       <div className="space-y-5">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-            {perfume.brand.name}
+            {brandName}
           </p>
           <h1 className="mt-2 font-display text-4xl text-[#1f1914] sm:text-5xl">{perfume.name}</h1>
           <p className="mt-3 max-w-2xl text-sm text-[#5b4c3d]">{perfume.descriptionShort}</p>

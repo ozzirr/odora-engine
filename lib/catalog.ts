@@ -57,3 +57,11 @@ export function mergePerfumeWhere(
   };
 }
 
+export function logCatalogQueryError(scope: string, error: unknown) {
+  if (error instanceof Error) {
+    console.error(`[catalog:${scope}] ${error.message}`);
+    return;
+  }
+
+  console.error(`[catalog:${scope}] query failed`, error);
+}

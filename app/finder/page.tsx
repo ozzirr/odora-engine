@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { getCatalogVisibilityWhere, mergePerfumeWhere } from "@/lib/catalog";
+import {
+  getCatalogVisibilityWhere,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+} from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -19,44 +23,49 @@ async function getFinderPerfumes() {
     return [];
   }
 
-  return prisma.perfume.findMany({
-    where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
-    include: {
-      brand: true,
-      offers: {
-        include: {
-          store: true,
+  try {
+    return await prisma.perfume.findMany({
+      where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
+      include: {
+        brand: true,
+        offers: {
+          include: {
+            store: true,
+          },
         },
-      },
-      notes: {
-        include: {
-          note: {
-            select: {
-              slug: true,
+        notes: {
+          include: {
+            note: {
+              select: {
+                slug: true,
+              },
+            },
+          },
+        },
+        moods: {
+          include: {
+            mood: {
+              select: {
+                slug: true,
+              },
+            },
+          },
+        },
+        seasons: {
+          include: {
+            season: {
+              select: {
+                slug: true,
+              },
             },
           },
         },
       },
-      moods: {
-        include: {
-          mood: {
-            select: {
-              slug: true,
-            },
-          },
-        },
-      },
-      seasons: {
-        include: {
-          season: {
-            select: {
-              slug: true,
-            },
-          },
-        },
-      },
-    },
-  });
+    });
+  } catch (error) {
+    logCatalogQueryError("finder:list", error);
+    return [];
+  }
 }
 
 export default async function FinderPage() {

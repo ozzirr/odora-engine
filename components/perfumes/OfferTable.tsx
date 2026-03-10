@@ -27,8 +27,34 @@ const availabilityLabel: Record<string, string> = {
   PREORDER: "Preorder",
 };
 
+function getOfferUrl(affiliateUrl: string | null, productUrl: string) {
+  const candidates = [affiliateUrl, productUrl];
+
+  for (const raw of candidates) {
+    const value = raw?.trim();
+    if (!value) {
+      continue;
+    }
+
+    if (value.startsWith("/")) {
+      return value;
+    }
+
+    try {
+      const parsed = new URL(value);
+      if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+        return value;
+      }
+    } catch {
+      // Ignore malformed URL and continue to the next candidate.
+    }
+  }
+
+  return null;
+}
+
 export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
-  if (offers.length === 0) {
+  if (!Array.isArray(offers) || offers.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">
         No active offers yet.
@@ -54,7 +80,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
           </thead>
           <tbody>
             {offers.map((offer) => {
-              const targetUrl = offer.affiliateUrl ?? offer.productUrl;
+              const targetUrl = getOfferUrl(offer.affiliateUrl, offer.productUrl);
               const total = offer.priceAmount + (offer.shippingCost ?? 0);
               const isComputedBest = bestOffer?.offer.id === offer.id;
 
@@ -81,14 +107,18 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                     </Badge>
                   </td>
                   <td className="px-4 py-3">
-                    <Link
-                      href={targetUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={buttonStyles({ size: "sm" })}
-                    >
-                      View offer
-                    </Link>
+                    {targetUrl ? (
+                      <Link
+                        href={targetUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={buttonStyles({ size: "sm" })}
+                      >
+                        View offer
+                      </Link>
+                    ) : (
+                      <span className="text-xs text-[#7b6854]">Unavailable</span>
+                    )}
                   </td>
                 </tr>
               );
