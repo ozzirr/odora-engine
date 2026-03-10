@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Container } from "@/components/layout/Container";
+import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
-import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import {
   getCatalogVisibilityWhere,
@@ -183,99 +182,95 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     ...groupedNotes.base.map((note) => ({ ...note, noteType: "BASE" })),
   ];
 
+  const currentTotal = bestOffer?.bestTotalPrice ?? null;
+  const alternativeSavings = cheaperAlternatives
+    .map((alternative) => {
+      const alternativeBest = computeBestOffer(alternative.offers);
+      if (!alternativeBest || currentTotal == null) {
+        return null;
+      }
+      const savings = currentTotal - alternativeBest.bestTotalPrice;
+      return savings > 0 ? savings : null;
+    })
+    .filter((value): value is number => value != null);
+
+  const topSavings = alternativeSavings.length > 0 ? Math.max(...alternativeSavings) : null;
+  const cheaperAlternativesSubtitle = topSavings
+    ? `Similar profile for less. You can save up to ${formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR")} compared to this bottle.`
+    : "Similar fragrances for less, ranked by profile match and lower total price.";
+
   return (
-    <Container className="space-y-10 pt-10">
-      <PerfumeHero perfume={perfume} />
+    <>
+      <Container className="space-y-9 pt-8 pb-8 md:space-y-10 md:pt-10 md:pb-10">
+        <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
-      <section className="space-y-4">
-        <SectionTitle
-          eyebrow="Notes"
-          title="Fragrance pyramid"
-          subtitle="Top, heart, and base notes with relative emphasis. Click a note to explore matching perfumes."
-        />
-        <NotesList notes={notesForRender} />
-      </section>
-
-      <section className="space-y-4">
-        <SectionTitle
-          eyebrow="Prices"
-          title="Compare current offers"
-          subtitle="Best offer is calculated by total cost: price + shipping."
-        />
-
-        {bestOffer ? (
-          <div className="rounded-2xl border border-[#ddcfbc] bg-[#f8f2e9] p-5">
-            <p className="text-sm text-[#5f4f40]">
-              Best price:{" "}
-              <span className="font-semibold text-[#1f1914]">
-                {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
-              </span>{" "}
-              at <span className="font-semibold text-[#1f1914]">{bestOffer.bestStore ?? "Selected store"}</span>
-            </p>
-            <p className="mt-2 text-sm text-[#5f4f40]">
-              Total with shipping: {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency)}
-            </p>
-            {bestOffer.bestUrl ? (
-              <Link
-                href={bestOffer.bestUrl}
-                target="_blank"
-                rel="noreferrer"
-                className={buttonStyles({ className: "mt-4" })}
-              >
-                View offer
-              </Link>
-            ) : null}
+        <section className="space-y-4">
+          <SectionTitle
+            eyebrow="Prices"
+            title="Compare current offers"
+            subtitle="Best offer is calculated by total cost: price + shipping."
+          />
+          <div className="grid gap-4 xl:grid-cols-[320px_1fr]">
+            <BestOfferCard bestOffer={bestOffer} title="Best offer summary" />
+            <OfferTable offers={perfume.offers} />
           </div>
-        ) : null}
+        </section>
 
-        <OfferTable offers={perfume.offers} />
-      </section>
+        <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
+          <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={perfume.descriptionLong} />
+        </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        <MoodBadges
-          title="Moods"
-          items={(perfume.moods ?? []).map((item) => ({
-            name: item.mood?.name ?? "Unknown",
-            weight: item.weight,
-          }))}
-        />
-        <MoodBadges
-          title="Seasons"
-          items={(perfume.seasons ?? []).map((item) => ({
-            name: item.season?.name ?? "Unknown",
-            weight: item.weight,
-          }))}
-        />
-        <MoodBadges
-          title="Occasions"
-          items={(perfume.occasions ?? []).map((item) => ({
-            name: item.occasion?.name ?? "Unknown",
-            weight: item.weight,
-          }))}
-        />
-      </section>
+        <section className="space-y-4">
+          <SectionTitle
+            eyebrow="Notes"
+            title="Fragrance pyramid"
+            subtitle="Top, heart, and base notes with relative emphasis. Click a note to explore matching perfumes."
+          />
+          <NotesList notes={notesForRender} />
+        </section>
 
-      <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
-        <SectionTitle eyebrow="Overview" title="About this perfume" subtitle={perfume.descriptionLong} />
-      </section>
+        <section className="grid gap-4 md:grid-cols-3">
+          <MoodBadges
+            title="Moods"
+            items={(perfume.moods ?? []).map((item) => ({
+              name: item.mood?.name ?? "Unknown",
+              weight: item.weight,
+            }))}
+          />
+          <MoodBadges
+            title="Seasons"
+            items={(perfume.seasons ?? []).map((item) => ({
+              name: item.season?.name ?? "Unknown",
+              weight: item.weight,
+            }))}
+          />
+          <MoodBadges
+            title="Occasions"
+            items={(perfume.occasions ?? []).map((item) => ({
+              name: item.occasion?.name ?? "Unknown",
+              weight: item.weight,
+            }))}
+          />
+        </section>
 
-      <section className="space-y-4">
-        <SectionTitle
-          eyebrow="Discovery"
-          title="Similar fragrances"
-          subtitle="Fragrances with similar profile, notes, and style signal."
-        />
-        <PerfumeGrid perfumes={similarPerfumes} />
-      </section>
+        <section className="space-y-4">
+          <SectionTitle
+            eyebrow="Value"
+            title="Cheaper alternatives"
+            subtitle={cheaperAlternativesSubtitle}
+          />
+          <PerfumeGrid perfumes={cheaperAlternatives} />
+        </section>
 
-      <section className="space-y-4 pb-6">
-        <SectionTitle
-          eyebrow="Value"
-          title="Cheaper alternatives"
-          subtitle="Similar fragrances for less, ranked by profile match and lower total price."
-        />
-        <PerfumeGrid perfumes={cheaperAlternatives} />
-      </section>
-    </Container>
+        <section className="space-y-4 pb-4 md:pb-6">
+          <SectionTitle
+            eyebrow="Discovery"
+            title="Similar fragrances"
+            subtitle="Fragrances with similar profile, notes, and style signal."
+          />
+          <PerfumeGrid perfumes={similarPerfumes} />
+        </section>
+      </Container>
+    </>
   );
 }

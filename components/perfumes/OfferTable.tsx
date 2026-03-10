@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
-import { computeBestOffer } from "@/lib/pricing";
+import { computeBestOffer, formatAvailabilityLabel, getOfferUrl } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
 export type OfferTableItem = {
@@ -20,39 +20,6 @@ export type OfferTableItem = {
   lastCheckedAt: Date;
 };
 
-const availabilityLabel: Record<string, string> = {
-  IN_STOCK: "In Stock",
-  LIMITED: "Limited",
-  OUT_OF_STOCK: "Out of Stock",
-  PREORDER: "Preorder",
-};
-
-function getOfferUrl(affiliateUrl: string | null, productUrl: string) {
-  const candidates = [affiliateUrl, productUrl];
-
-  for (const raw of candidates) {
-    const value = raw?.trim();
-    if (!value) {
-      continue;
-    }
-
-    if (value.startsWith("/")) {
-      return value;
-    }
-
-    try {
-      const parsed = new URL(value);
-      if (parsed.protocol === "http:" || parsed.protocol === "https:") {
-        return value;
-      }
-    } catch {
-      // Ignore malformed URL and continue to the next candidate.
-    }
-  }
-
-  return null;
-}
-
 export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
   if (!Array.isArray(offers) || offers.length === 0) {
     return (
@@ -65,7 +32,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
   const bestOffer = computeBestOffer(offers);
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#ddcfbc]">
+    <div className="overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white">
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse bg-white text-sm">
           <thead className="bg-[#f7f1e8] text-left text-xs uppercase tracking-[0.1em] text-[#7b6854]">
@@ -87,9 +54,18 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
               return (
                 <tr
                   key={offer.id}
-                  className={isComputedBest ? "bg-[#f9f4ea]" : "border-t border-[#eee3d5]"}
+                  className={
+                    isComputedBest
+                      ? "border-t border-[#e5d7c6] bg-[#f9f2e7]"
+                      : "border-t border-[#eee3d5]"
+                  }
                 >
-                  <td className="px-4 py-3 font-medium text-[#2a2018]">{offer.store.name}</td>
+                  <td className="px-4 py-3 font-medium text-[#2a2018]">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span>{offer.store.name}</span>
+                      {isComputedBest ? <Badge variant="soft">Best total</Badge> : null}
+                    </div>
+                  </td>
                   <td className="px-4 py-3 text-[#2a2018]">
                     {formatCurrency(offer.priceAmount, offer.currency)}
                   </td>
@@ -103,7 +79,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                   </td>
                   <td className="px-4 py-3">
                     <Badge variant="outline">
-                      {availabilityLabel[offer.availability] ?? offer.availability}
+                      {formatAvailabilityLabel(offer.availability)}
                     </Badge>
                   </td>
                   <td className="px-4 py-3">
@@ -112,7 +88,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                         href={targetUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className={buttonStyles({ size: "sm" })}
+                        className={buttonStyles({ size: "sm", className: "w-full sm:w-auto" })}
                       >
                         View offer
                       </Link>

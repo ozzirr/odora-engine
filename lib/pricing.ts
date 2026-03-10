@@ -5,10 +5,20 @@ export type OfferForPricing = {
   currency: string;
   availability?: string;
   affiliateUrl?: string | null;
-  productUrl?: string;
+  productUrl?: string | null;
+  lastCheckedAt?: Date | string | null;
   store?: {
     name: string;
   };
+};
+
+export type ComputedBestOffer<T extends OfferForPricing = OfferForPricing> = {
+  bestStore: string | null;
+  bestPrice: number;
+  bestCurrency: string;
+  bestTotalPrice: number;
+  bestUrl: string | null;
+  offer: T;
 };
 
 function isFiniteNumber(value: unknown): value is number {
@@ -19,7 +29,46 @@ function isSupportedCurrency(value: unknown): value is string {
   return typeof value === "string" && /^[A-Z]{3}$/.test(value);
 }
 
-export function computeBestOffer<T extends OfferForPricing>(offers: T[] | null | undefined) {
+export function getOfferUrl(affiliateUrl?: string | null, productUrl?: string | null) {
+  const candidates = [affiliateUrl, productUrl];
+
+  for (const raw of candidates) {
+    const value = raw?.trim();
+    if (!value) {
+      continue;
+    }
+
+    if (value.startsWith("/")) {
+      return value;
+    }
+
+    try {
+      const parsed = new URL(value);
+      if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+        return value;
+      }
+    } catch {
+      // Ignore malformed URL and continue to the next candidate.
+    }
+  }
+
+  return null;
+}
+
+export function formatAvailabilityLabel(value: string | undefined) {
+  const availabilityLabel: Record<string, string> = {
+    IN_STOCK: "In stock",
+    LIMITED: "Limited",
+    OUT_OF_STOCK: "Out of stock",
+    PREORDER: "Preorder",
+  };
+
+  return availabilityLabel[value ?? ""] ?? "Check in store";
+}
+
+export function computeBestOffer<T extends OfferForPricing>(
+  offers: T[] | null | undefined,
+): ComputedBestOffer<T> | null {
   if (!Array.isArray(offers) || offers.length === 0) {
     return null;
   }
@@ -55,7 +104,7 @@ export function computeBestOffer<T extends OfferForPricing>(offers: T[] | null |
     bestPrice: bestOffer.priceAmount,
     bestCurrency: bestOffer.currency,
     bestTotalPrice: bestOffer.priceAmount + (bestOffer.shippingCost ?? 0),
-    bestUrl: bestOffer.affiliateUrl ?? bestOffer.productUrl ?? null,
+    bestUrl: getOfferUrl(bestOffer.affiliateUrl, bestOffer.productUrl),
     offer: bestOffer,
   };
 }

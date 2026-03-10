@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -28,9 +29,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="font-logo text-[2.25rem] leading-none text-[#1f1914] sm:text-[2.5rem]">
-          ODORA
+      <div className="mx-auto flex h-[4.5rem] w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <Link href="/" className="relative block h-12 w-[190px] sm:w-[220px]">
+          <Image
+            src="/images/odora_logo_m.png"
+            alt="Odora"
+            fill
+            priority
+            sizes="(max-width: 640px) 190px, 220px"
+            className="object-contain object-left"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

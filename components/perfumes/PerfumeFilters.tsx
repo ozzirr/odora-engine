@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
@@ -20,6 +21,24 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+
+    if (selectedFilters.gender) count += 1;
+    if (selectedFilters.family) count += 1;
+    if (selectedFilters.price) count += 1;
+    if (selectedFilters.note) count += 1;
+    if (selectedFilters.top) count += 1;
+    if (selectedFilters.heart) count += 1;
+    if (selectedFilters.base) count += 1;
+    if (selectedFilters.arabic) count += 1;
+    if (selectedFilters.niche) count += 1;
+    if (selectedFilters.sort && selectedFilters.sort !== "rating") count += 1;
+
+    return count;
+  }, [selectedFilters]);
 
   const updateParam = (key: string, value?: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -41,13 +60,32 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   return (
     <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:sticky lg:top-24 lg:h-fit">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-[#7a6654]">Filters</h2>
-        <Button variant="ghost" size="sm" onClick={clearFilters}>
-          Reset
-        </Button>
+        <button
+          type="button"
+          onClick={() => setIsOpen((current) => !current)}
+          className="flex items-center gap-2 text-left text-sm font-semibold uppercase tracking-[0.1em] text-[#7a6654]"
+          aria-expanded={isOpen}
+        >
+          <span>Filters</span>
+          {activeFiltersCount > 0 ? (
+            <span className="rounded-full border border-[#ddcfbc] bg-[#f7f1e8] px-2 py-0.5 text-[11px] font-medium normal-case tracking-normal text-[#6b5846]">
+              {activeFiltersCount}
+            </span>
+          ) : null}
+          <span className="text-xs">{isOpen ? "▲" : "▼"}</span>
+        </button>
+        {isOpen ? (
+          <Button variant="ghost" size="sm" onClick={clearFilters}>
+            Reset
+          </Button>
+        ) : null}
       </div>
 
-      <div className="space-y-4">
+      {!isOpen ? (
+        <p className="text-sm text-[#6a5847]">Open filters to refine gender, family, notes, price, and sorting.</p>
+      ) : null}
+
+      {isOpen ? <div className="space-y-4">
         <div>
           <label htmlFor="gender" className="mb-2 block text-xs font-medium text-[#6e5a48]">
             Gender
@@ -216,7 +254,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
             />
           </label>
         </div>
-      </div>
+      </div> : null}
     </aside>
   );
 }

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { Container } from "@/components/layout/Container";
 
@@ -21,7 +22,15 @@ export function Footer() {
       <Container className="py-10">
         <div className="grid gap-8 md:grid-cols-3">
           <div className="space-y-3">
-            <p className="font-display text-3xl text-[#1f1914]">Odora</p>
+            <div className="relative h-28 w-[440px] max-w-full">
+              <Image
+                src="/images/odora-logo.png"
+                alt="Odora"
+                fill
+                sizes="(max-width: 768px) 90vw, 440px"
+                className="object-contain object-left"
+              />
+            </div>
             <p className="max-w-sm text-sm text-[#5e4f40]">
               Italian-first fragrance discovery platform to compare perfumes, notes,
               moods, and the best available offers.

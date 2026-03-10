@@ -1,0 +1,54 @@
+<svg width="820" height="210" viewBox="0 0 820 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="820" height="210" fill="transparent" />
+
+  <g>
+    <text
+      x="192"
+      y="118"
+      fill="#1E4B3B"
+      font-family="Didot, Bodoni MT, Iowan Old Style, serif"
+      font-size="152"
+      letter-spacing="2"
+    >
+      ODORA
+    </text>
+    <text
+      x="154"
+      y="66"
+      fill="#1E4B3B"
+      font-family="Didot, Bodoni MT, Iowan Old Style, serif"
+      font-size="42"
+    >
+      ™
+    </text>
+  </g>
+
+  <g transform="translate(24 8)">
+    <ellipse cx="88" cy="72" rx="74" ry="66" stroke="#1E4B3B" stroke-width="10" fill="none" />
+    <path
+      d="M5 64C27 43 56 44 92 54C121 62 143 60 157 47"
+      stroke="#C5A96A"
+      stroke-width="9"
+      stroke-linecap="round"
+      fill="none"
+    />
+    <path
+      d="M8 78C32 97 59 98 89 88C116 79 131 59 146 38"
+      stroke="#1E4B3B"
+      stroke-width="9"
+      stroke-linecap="round"
+      fill="none"
+    />
+  </g>
+
+  <text
+    x="104"
+    y="186"
+    fill="#1E4B3B"
+    font-family="Didot, Bodoni MT, Iowan Old Style, serif"
+    font-size="58"
+    letter-spacing="7"
+  >
+    Perfume discovery. Simplified.
+  </text>
+</svg>
