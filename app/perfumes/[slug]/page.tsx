@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { Container } from "@/components/layout/Container";
-import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
@@ -210,10 +209,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             title="Compare current offers"
             subtitle="Best offer is calculated by total cost: price + shipping."
           />
-          <div className="grid gap-4 xl:grid-cols-[320px_1fr]">
-            <BestOfferCard bestOffer={bestOffer} title="Best offer summary" />
-            <OfferTable offers={perfume.offers} />
-          </div>
+          <OfferTable offers={perfume.offers} />
         </section>
 
         <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">

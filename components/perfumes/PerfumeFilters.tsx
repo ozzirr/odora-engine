@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/Button";
@@ -22,6 +22,7 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [isDesktopLayout, setIsDesktopLayout] = useState(false);
 
   const activeFiltersCount = useMemo(() => {
     let count = 0;
@@ -39,6 +40,18 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
     return count;
   }, [selectedFilters]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncLayout = () => setIsDesktopLayout(mediaQuery.matches);
+
+    syncLayout();
+    mediaQuery.addEventListener("change", syncLayout);
+
+    return () => mediaQuery.removeEventListener("change", syncLayout);
+  }, []);
+
+  const showFilters = isDesktopLayout || isOpen;
 
   const updateParam = (key: string, value?: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -58,13 +71,17 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   };
 
   return (
-    <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:sticky lg:top-24 lg:h-fit">
+    <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain">
       <div className="mb-4 flex items-center justify-between">
         <button
           type="button"
-          onClick={() => setIsOpen((current) => !current)}
+          onClick={() => {
+            if (!isDesktopLayout) {
+              setIsOpen((current) => !current);
+            }
+          }}
           className="flex items-center gap-2 text-left text-sm font-semibold uppercase tracking-[0.1em] text-[#7a6654]"
-          aria-expanded={isOpen}
+          aria-expanded={showFilters}
         >
           <span>Filters</span>
           {activeFiltersCount > 0 ? (
@@ -72,32 +89,31 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
               {activeFiltersCount}
             </span>
           ) : null}
-          <span className="text-xs">{isOpen ? "▲" : "▼"}</span>
+          {!isDesktopLayout ? <span className="text-xs">{isOpen ? "▲" : "▼"}</span> : null}
         </button>
-        {isOpen ? (
+        {showFilters ? (
           <Button variant="ghost" size="sm" onClick={clearFilters}>
             Reset
           </Button>
         ) : null}
       </div>
 
-      {!isOpen ? (
-        <p className="text-sm text-[#6a5847]">Open filters to refine gender, family, notes, price, and sorting.</p>
+      {!showFilters ? (
+        <p className="text-sm text-[#6a5847]">Open filters to refine sorting, family, price, notes, and gender.</p>
       ) : null}
 
-      {isOpen ? <div className="space-y-4">
+      {showFilters ? <div className="space-y-4">
         <div>
-          <label htmlFor="gender" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Gender
+          <label htmlFor="sort" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+            Sort
           </label>
           <select
-            id="gender"
-            value={selectedFilters.gender ?? ""}
-            onChange={(event) => updateParam("gender", event.target.value || undefined)}
+            id="sort"
+            value={selectedFilters.sort ?? "rating"}
+            onChange={(event) => updateParam("sort", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            <option value="">All</option>
-            {genderOptions.map((option) => (
+            {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
@@ -141,19 +157,6 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
               </option>
             ))}
           </select>
-        </div>
-
-        <div>
-          <label htmlFor="note" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Any note
-          </label>
-          <input
-            id="note"
-            value={selectedFilters.note ?? ""}
-            onChange={(event) => updateParam("note", event.target.value || undefined)}
-            placeholder="oud, vanilla, amber..."
-            className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
-          />
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -216,21 +219,35 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
         </div>
 
         <div>
-          <label htmlFor="sort" className="mb-2 block text-xs font-medium text-[#6e5a48]">
-            Sort
+          <label htmlFor="gender" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+            Gender
           </label>
           <select
-            id="sort"
-            value={selectedFilters.sort ?? "rating"}
-            onChange={(event) => updateParam("sort", event.target.value || undefined)}
+            id="gender"
+            value={selectedFilters.gender ?? ""}
+            onChange={(event) => updateParam("gender", event.target.value || undefined)}
             className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
           >
-            {sortOptions.map((option) => (
+            <option value="">All</option>
+            {genderOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
+        </div>
+
+        <div>
+          <label htmlFor="note" className="mb-2 block text-xs font-medium text-[#6e5a48]">
+            Any note
+          </label>
+          <input
+            id="note"
+            value={selectedFilters.note ?? ""}
+            onChange={(event) => updateParam("note", event.target.value || undefined)}
+            placeholder="oud, vanilla, amber..."
+            className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm text-[#2a2018] outline-none ring-[#bfa78f] focus:ring-2"
+          />
         </div>
 
         <div className="space-y-3 pt-1">

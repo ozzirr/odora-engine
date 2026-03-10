@@ -1,28 +1,57 @@
 import Link from "next/link";
 
+import { MoodIllustration } from "@/components/home/HomeIllustrations";
 import { Badge } from "@/components/ui/Badge";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import type { QuickFilterPreset } from "@/lib/sample-data";
 import { quickFilters } from "@/lib/sample-data";
+
+function buildFinderHref(preset: QuickFilterPreset) {
+  const params = new URLSearchParams();
+
+  Object.entries(preset).forEach(([key, value]) => {
+    if (value) {
+      params.set(key, value);
+    }
+  });
+
+  return `/finder?${params.toString()}`;
+}
 
 export function QuickFilters() {
   return (
-    <section className="mt-16 space-y-6">
+    <section className="mt-24 space-y-8">
       <SectionTitle
         eyebrow="Quick Start"
         title="Explore by mood and style"
-        subtitle="These shortcuts are ideal for quick discovery before using the full advisor flow."
+        subtitle="Visual pathways into the Finder for warm vanillas, polished office scents, bold Arabic signatures, and more."
       />
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {quickFilters.map((filter) => (
           <Link
             key={filter.label}
-            href={filter.href}
-            className="rounded-2xl border border-[#e2d6c6] bg-white p-4 transition-transform hover:-translate-y-0.5"
+            href={buildFinderHref(filter.preset)}
+            className={`premium-card group relative overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-gradient-to-br ${filter.gradientClass} p-6 shadow-[0_22px_45px_-34px_rgba(50,35,20,0.42)] transition-all duration-300 hover:-translate-y-1`}
           >
-            <p className="text-sm font-semibold text-[#1f1914]">{filter.label}</p>
-            <div className="mt-2">
-              <Badge variant="outline">{filter.tone}</Badge>
+            <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-white/30 blur-3xl transition-transform duration-500 group-hover:scale-110" />
+            <div className="relative flex h-full flex-col justify-between gap-6">
+              <div className="flex items-start justify-between gap-4">
+                <Badge variant="outline" className="border-white/60 bg-white/35 text-[#4b3d30]">
+                  {filter.tone}
+                </Badge>
+                <MoodIllustration illustration={filter.illustration} />
+              </div>
+
+              <div>
+                <p className="text-xl font-semibold text-[#1f1914]">{filter.label}</p>
+                <p className="mt-2 max-w-[22rem] text-sm leading-6 text-[#5b4c3f]">
+                  {filter.subtitle}
+                </p>
+                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7d6853]">
+                  Open in Finder
+                </p>
+              </div>
             </div>
           </Link>
         ))}

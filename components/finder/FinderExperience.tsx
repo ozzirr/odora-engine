@@ -6,6 +6,7 @@ import { CatalogGate } from "@/components/catalog/CatalogGate";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { Button } from "@/components/ui/Button";
 import {
+  defaultFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
   matchPerfumesFromPreferences,
@@ -14,6 +15,8 @@ import {
 type FinderExperienceProps = {
   perfumes: FinderPerfume[];
   isAuthenticated: boolean;
+  initialPreferences: FinderPreferences;
+  presetLabel?: string | null;
 };
 
 function toLabel(slug: string) {
@@ -23,20 +26,36 @@ function toLabel(slug: string) {
     .join(" ");
 }
 
-const initialPreferences: FinderPreferences = {
-  gender: "any",
-  mood: "",
-  season: "",
-  budget: "any",
-  preferredNote: "",
-  arabicOnly: false,
-  nicheOnly: false,
-};
+function withSelectedOption(options: string[], selectedValue: string) {
+  if (!selectedValue || options.includes(selectedValue)) {
+    return options;
+  }
+
+  return [selectedValue, ...options];
+}
+
+function hasConfiguredPreferences(preferences: FinderPreferences) {
+  return (
+    preferences.gender !== defaultFinderPreferences.gender ||
+    preferences.mood !== defaultFinderPreferences.mood ||
+    preferences.season !== defaultFinderPreferences.season ||
+    preferences.occasion !== defaultFinderPreferences.occasion ||
+    preferences.budget !== defaultFinderPreferences.budget ||
+    preferences.preferredNote !== defaultFinderPreferences.preferredNote ||
+    preferences.arabicOnly !== defaultFinderPreferences.arabicOnly ||
+    preferences.nicheOnly !== defaultFinderPreferences.nicheOnly
+  );
+}
 
 const FINDER_RESULTS_PAGE_SIZE = 20;
 const FREE_FINDER_PREVIEW_LIMIT = 25;
 
-export function FinderExperience({ perfumes, isAuthenticated }: FinderExperienceProps) {
+export function FinderExperience({
+  perfumes,
+  isAuthenticated,
+  initialPreferences,
+  presetLabel,
+}: FinderExperienceProps) {
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>([]);
   const [totalMatches, setTotalMatches] = useState(0);
@@ -46,22 +65,27 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const isAutoLoadingRef = useRef(false);
+  const hasAutoRunRef = useRef(false);
 
   const moodOptions = useMemo(
     () =>
-      Array.from(
+      withSelectedOption(
+        Array.from(
         new Set(
           perfumes.flatMap((perfume) =>
             (perfume.moods ?? []).map((mood) => mood.mood?.slug).filter((slug): slug is string => Boolean(slug)),
           ),
         ),
-      ).sort(),
-    [perfumes],
+        ).sort(),
+        preferences.mood,
+      ),
+    [perfumes, preferences.mood],
   );
 
   const seasonOptions = useMemo(
     () =>
-      Array.from(
+      withSelectedOption(
+        Array.from(
         new Set(
           perfumes.flatMap((perfume) =>
             (perfume.seasons ?? [])
@@ -69,8 +93,27 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
               .filter((slug): slug is string => Boolean(slug)),
           ),
         ),
-      ).sort(),
-    [perfumes],
+        ).sort(),
+        preferences.season,
+      ),
+    [perfumes, preferences.season],
+  );
+
+  const occasionOptions = useMemo(
+    () =>
+      withSelectedOption(
+        Array.from(
+          new Set(
+            perfumes.flatMap((perfume) =>
+              (perfume.occasions ?? [])
+                .map((occasion) => occasion.occasion?.slug)
+                .filter((slug): slug is string => Boolean(slug)),
+            ),
+          ),
+        ).sort(),
+        preferences.occasion,
+      ),
+    [perfumes, preferences.occasion],
   );
 
   const noteOptions = useMemo(() => {
@@ -86,14 +129,35 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
       }
     }
 
-    return Array.from(counts.entries())
+    const rankedNotes = Array.from(counts.entries())
       .sort((a, b) => b[1] - a[1])
       .map(([slug]) => slug)
       .slice(0, 14);
-  }, [perfumes]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    return withSelectedOption(rankedNotes, preferences.preferredNote);
+  }, [perfumes, preferences.preferredNote]);
+
+  const presetChips = useMemo(() => {
+    const chips: string[] = [];
+
+    if (preferences.mood) chips.push(`Mood: ${toLabel(preferences.mood)}`);
+    if (preferences.season) chips.push(`Season: ${toLabel(preferences.season)}`);
+    if (preferences.occasion) chips.push(`Occasion: ${toLabel(preferences.occasion)}`);
+    if (preferences.preferredNote) chips.push(`Note: ${toLabel(preferences.preferredNote)}`);
+    if (preferences.arabicOnly) chips.push("Arabic only");
+    if (preferences.nicheOnly) chips.push("Niche only");
+
+    return chips;
+  }, [
+    preferences.arabicOnly,
+    preferences.mood,
+    preferences.nicheOnly,
+    preferences.occasion,
+    preferences.preferredNote,
+    preferences.season,
+  ]);
+
+  const runFinderSearch = useCallback(async (nextPreferences: FinderPreferences) => {
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -103,7 +167,7 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(preferences),
+        body: JSON.stringify(nextPreferences),
         cache: "no-store",
       });
 
@@ -125,7 +189,7 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
       setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
       setSubmitted(true);
     } catch {
-      const fallbackResults = matchPerfumesFromPreferences(preferences, perfumes);
+      const fallbackResults = matchPerfumesFromPreferences(nextPreferences, perfumes);
       const maxVisible = isAuthenticated
         ? fallbackResults.length
         : Math.min(fallbackResults.length, FREE_FINDER_PREVIEW_LIMIT);
@@ -137,10 +201,15 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
     } finally {
       setIsLoading(false);
     }
+  }, [isAuthenticated, perfumes]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    await runFinderSearch(preferences);
   };
 
   const resetForm = () => {
-    setPreferences(initialPreferences);
+    setPreferences(defaultFinderPreferences);
     setResults([]);
     setTotalMatches(0);
     setVisibleCount(0);
@@ -149,12 +218,22 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    if (hasAutoRunRef.current || !hasConfiguredPreferences(initialPreferences)) {
+      return;
+    }
+
+    hasAutoRunRef.current = true;
+    void runFinderSearch(initialPreferences);
+  }, [initialPreferences, runFinderSearch]);
+
   const maxVisibleResults = isAuthenticated
     ? results.length
     : Math.min(results.length, FREE_FINDER_PREVIEW_LIMIT);
   const displayedResults = results.slice(0, visibleCount);
   const hasMoreVisibleResults = displayedResults.length < maxVisibleResults;
   const isCatalogLocked = !isAuthenticated && results.length > FREE_FINDER_PREVIEW_LIMIT && visibleCount >= FREE_FINDER_PREVIEW_LIMIT;
+  const showPresetBanner = Boolean(presetLabel) && hasConfiguredPreferences(preferences);
 
   const loadMoreResults = useCallback(() => {
     if (isAutoLoadingRef.current || !hasMoreVisibleResults || isCatalogLocked) {
@@ -192,6 +271,34 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
 
   return (
     <div className="space-y-8">
+      {showPresetBanner ? (
+        <div className="rounded-[1.75rem] border border-[#dfd1bf] bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(247,239,229,0.95))] p-5 shadow-[0_22px_46px_-36px_rgba(50,35,20,0.34)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+            Finder preset
+          </p>
+          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="font-display text-3xl text-[#1f1914]">
+                {presetLabel ? presetLabel : "Preconfigured discovery"}
+              </h2>
+              <p className="mt-1 text-sm text-[#635343]">
+                Finder is already configured from the homepage card you selected.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {presetChips.map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-[#dbcdb9] bg-white/75 px-3 py-1 text-xs text-[#5d4e3f]"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <form
         onSubmit={handleSubmit}
         className="rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.38)] sm:p-8"
@@ -249,6 +356,24 @@ export function FinderExperience({ perfumes, isAuthenticated }: FinderExperience
               {seasonOptions.map((season) => (
                 <option key={season} value={season}>
                   {toLabel(season)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="mb-2 block text-xs font-medium uppercase tracking-[0.1em] text-[#7a6654]">
+              Occasion
+            </label>
+            <select
+              value={preferences.occasion}
+              onChange={(event) => setPreferences((prev) => ({ ...prev, occasion: event.target.value }))}
+              className="h-11 w-full rounded-xl border border-[#d8cab7] bg-[#fdfbf7] px-3 text-sm"
+            >
+              <option value="">Any</option>
+              {occasionOptions.map((occasion) => (
+                <option key={occasion} value={occasion}>
+                  {toLabel(occasion)}
                 </option>
               ))}
             </select>

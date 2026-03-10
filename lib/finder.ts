@@ -6,6 +6,7 @@ export type FinderPreferences = {
   gender: "any" | "male" | "female" | "unisex";
   mood: string;
   season: string;
+  occasion: string;
   budget: "any" | "budget" | "mid" | "premium" | "luxury";
   preferredNote: string;
   arabicOnly: boolean;
@@ -43,6 +44,22 @@ export type FinderPerfume = {
       slug: string;
     };
   }>;
+  occasions: Array<{
+    occasion: {
+      slug: string;
+    };
+  }>;
+};
+
+export const defaultFinderPreferences: FinderPreferences = {
+  gender: "any",
+  mood: "",
+  season: "",
+  occasion: "",
+  budget: "any",
+  preferredNote: "",
+  arabicOnly: false,
+  nicheOnly: false,
 };
 
 const budgetRank: Record<"budget" | "mid" | "premium" | "luxury", number> = {
@@ -257,6 +274,28 @@ export function buildFinderWhere(filters: NormalizedFinderFilters): Prisma.Perfu
   };
 }
 
+export function buildFinderPreferencesFromInput(input: FinderQueryInput): FinderPreferences {
+  const gender = normalizeFinderFilter(input.gender);
+  const budget = normalizeFinderFilter(input.budget);
+
+  return {
+    gender:
+      gender === "male" || gender === "female" || gender === "unisex"
+        ? gender
+        : "any",
+    mood: normalizeFinderFilter(input.mood) ?? "",
+    season: normalizeFinderFilter(input.season) ?? "",
+    occasion: normalizeFinderFilter(input.occasion) ?? "",
+    budget:
+      budget === "budget" || budget === "mid" || budget === "premium" || budget === "luxury"
+        ? budget
+        : "any",
+    preferredNote: normalizeFinderFilter(input.preferredNote ?? input.note) ?? "",
+    arabicOnly: normalizeBooleanFilter(input.arabicOnly),
+    nicheOnly: normalizeBooleanFilter(input.nicheOnly),
+  };
+}
+
 export function matchPerfumesFromPreferences(
   preferences: FinderPreferences,
   perfumes: FinderPerfume[],
@@ -264,6 +303,7 @@ export function matchPerfumesFromPreferences(
   const genderTarget = mapGenderPreferenceToDb(preferences.gender);
   const preferredMood = normalizeFinderFilter(preferences.mood);
   const preferredSeason = normalizeFinderFilter(preferences.season);
+  const preferredOccasion = normalizeFinderFilter(preferences.occasion);
   const preferredNote = normalizeFinderFilter(preferences.preferredNote);
   const preferredBudget = normalizeFinderFilter(preferences.budget);
   const selectedBudget =
@@ -303,6 +343,15 @@ export function matchPerfumesFromPreferences(
         preferredSeason &&
         !(perfume.seasons ?? []).some(
           (season) => normalize(season.season?.slug ?? "") === preferredSeason,
+        )
+      ) {
+        return null;
+      }
+
+      if (
+        preferredOccasion &&
+        !(perfume.occasions ?? []).some(
+          (occasion) => normalize(occasion.occasion?.slug ?? "") === preferredOccasion,
         )
       ) {
         return null;

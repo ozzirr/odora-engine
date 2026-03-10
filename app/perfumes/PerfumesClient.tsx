@@ -59,12 +59,24 @@ export function PerfumesClient({
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const resultsScrollRef = useRef<HTMLElement | null>(null);
   const isFetchingRef = useRef(false);
+  const [isDesktopLayout, setIsDesktopLayout] = useState(false);
 
   const querySignature = useMemo(() => searchParams.toString(), [searchParams]);
   const maxVisiblePerfumes = isAuthenticated ? Number.MAX_SAFE_INTEGER : FREE_CATALOG_PREVIEW_LIMIT;
   const isCatalogLocked = !isAuthenticated && totalCount > perfumes.length && perfumes.length >= maxVisiblePerfumes;
   const canLoadMore = hasMoreResults && !isCatalogLocked;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const syncLayout = () => setIsDesktopLayout(mediaQuery.matches);
+
+    syncLayout();
+    mediaQuery.addEventListener("change", syncLayout);
+
+    return () => mediaQuery.removeEventListener("change", syncLayout);
+  }, []);
 
   useEffect(() => {
     setPerfumes(initialPerfumes);
@@ -142,19 +154,20 @@ export function PerfumesClient({
         }
       },
       {
+        root: isDesktopLayout ? resultsScrollRef.current : null,
         rootMargin: "320px 0px",
       },
     );
 
     observer.observe(loadMoreRef.current);
     return () => observer.disconnect();
-  }, [canLoadMore, loadMore]);
+  }, [canLoadMore, isDesktopLayout, loadMore]);
 
   return (
-    <div className="mt-8 grid gap-6 lg:grid-cols-[280px_1fr]">
+    <div className="mt-8 grid gap-6 lg:h-[calc(100vh-13.5rem)] lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:overflow-hidden">
       <PerfumeFilters selectedFilters={selectedFilters} />
 
-      <section className="space-y-4">
+      <section ref={resultsScrollRef} className="space-y-4 lg:h-full lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain lg:pr-2">
         <p className="text-sm text-[#615140]">
           Showing <span className="font-semibold text-[#2a2018]">{perfumes.length}</span> of{" "}
           <span className="font-semibold text-[#2a2018]">{totalCount}</span> fragrances

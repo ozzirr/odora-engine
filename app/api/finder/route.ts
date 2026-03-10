@@ -2,6 +2,7 @@ import { type Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 import {
+  buildFinderPreferencesFromInput,
   buildFinderWhere,
   matchPerfumesFromPreferences,
   normalizeFinderFilter,
@@ -50,6 +51,15 @@ const finderInclude = {
       },
     },
   },
+  occasions: {
+    include: {
+      occasion: {
+        select: {
+          slug: true,
+        },
+      },
+    },
+  },
 } satisfies Prisma.PerfumeInclude;
 
 function parsePreferenceBoolean(value: unknown) {
@@ -67,27 +77,18 @@ function parsePreferenceBoolean(value: unknown) {
 
 function parseFinderPreferences(payload: unknown): FinderPreferences {
   const source = payload && typeof payload === "object" ? (payload as Record<string, unknown>) : {};
-
-  const gender =
-    typeof source.gender === "string" ? (source.gender.toLowerCase() as FinderPreferences["gender"]) : "any";
-  const budget =
-    typeof source.budget === "string" ? (source.budget.toLowerCase() as FinderPreferences["budget"]) : "any";
-
-  return {
-    gender:
-      gender === "male" || gender === "female" || gender === "unisex"
-        ? gender
-        : "any",
-    mood: typeof source.mood === "string" ? source.mood : "",
-    season: typeof source.season === "string" ? source.season : "",
-    budget:
-      budget === "budget" || budget === "mid" || budget === "premium" || budget === "luxury"
-        ? budget
-        : "any",
-    preferredNote: typeof source.preferredNote === "string" ? source.preferredNote : "",
+  const normalized = buildFinderPreferencesFromInput({
+    gender: typeof source.gender === "string" ? source.gender : null,
+    mood: typeof source.mood === "string" ? source.mood : null,
+    season: typeof source.season === "string" ? source.season : null,
+    occasion: typeof source.occasion === "string" ? source.occasion : null,
+    budget: typeof source.budget === "string" ? source.budget : null,
+    preferredNote: typeof source.preferredNote === "string" ? source.preferredNote : null,
     arabicOnly: parsePreferenceBoolean(source.arabicOnly),
     nicheOnly: parsePreferenceBoolean(source.nicheOnly),
-  };
+  });
+
+  return normalized;
 }
 
 export async function POST(request: Request) {

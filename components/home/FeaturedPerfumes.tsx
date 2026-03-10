@@ -8,7 +8,7 @@ type FeaturedPerfumesProps = {
 
 export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
   return (
-    <section className="mt-16 space-y-6">
+    <section className="mt-24 space-y-8">
       <SectionTitle
         eyebrow="Featured"
         title="Curated perfumes to start your journey"

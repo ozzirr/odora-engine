@@ -8,6 +8,7 @@ import {
   logCatalogQueryError,
   mergePerfumeWhere,
 } from "@/lib/catalog";
+import { buildFinderPreferencesFromInput } from "@/lib/finder";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
@@ -61,6 +62,15 @@ async function getFinderPerfumes() {
             },
           },
         },
+        occasions: {
+          include: {
+            occasion: {
+              select: {
+                slug: true,
+              },
+            },
+          },
+        },
       },
     });
   } catch (error) {
@@ -69,9 +79,33 @@ async function getFinderPerfumes() {
   }
 }
 
-export default async function FinderPage() {
+type FinderPageProps = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+function readSearchParam(
+  searchParams: Record<string, string | string[] | undefined>,
+  key: string,
+) {
+  const value = searchParams[key];
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function FinderPage({ searchParams }: FinderPageProps) {
+  const resolvedSearchParams = await searchParams;
   const isAuthenticated = await getIsAuthenticated();
   const perfumes = await getFinderPerfumes();
+  const initialPreferences = buildFinderPreferencesFromInput({
+    gender: readSearchParam(resolvedSearchParams, "gender") ?? null,
+    mood: readSearchParam(resolvedSearchParams, "mood") ?? null,
+    season: readSearchParam(resolvedSearchParams, "season") ?? null,
+    occasion: readSearchParam(resolvedSearchParams, "occasion") ?? null,
+    budget: readSearchParam(resolvedSearchParams, "budget") ?? null,
+    preferredNote: readSearchParam(resolvedSearchParams, "preferredNote") ?? null,
+    arabicOnly: readSearchParam(resolvedSearchParams, "arabicOnly") ?? null,
+    nicheOnly: readSearchParam(resolvedSearchParams, "nicheOnly") ?? null,
+  });
+  const presetLabel = readSearchParam(resolvedSearchParams, "preset") ?? null;
 
   return (
     <Container className="space-y-8 pt-14">
@@ -81,7 +115,12 @@ export default async function FinderPage() {
         subtitle="Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
       />
 
-      <FinderExperience perfumes={perfumes} isAuthenticated={isAuthenticated} />
+      <FinderExperience
+        perfumes={perfumes}
+        isAuthenticated={isAuthenticated}
+        initialPreferences={initialPreferences}
+        presetLabel={presetLabel}
+      />
     </Container>
   );
 }

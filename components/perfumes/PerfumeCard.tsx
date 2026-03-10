@@ -29,6 +29,7 @@ type PerfumeCardProps = {
 export function PerfumeCard({ perfume }: PerfumeCardProps) {
   const brandName = perfume.brand?.name?.trim() || "Unknown brand";
   const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
+  const description = perfume.descriptionShort?.trim();
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
@@ -53,7 +54,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
               {perfume.name}
             </h3>
           </Link>
-          <p className="mt-2 text-sm text-[#5d4e3f]">{perfume.descriptionShort}</p>
+          {description ? <p className="mt-2 text-sm text-[#5d4e3f]">{description}</p> : null}
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -64,7 +65,9 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
               from {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency)}
             </Badge>
           ) : (
-            <Badge variant="outline">No offers</Badge>
+            <Badge variant="outline" className="bg-[#faf6ef]">
+              Offers coming soon
+            </Badge>
           )}
           {perfume.isArabic ? <Badge variant="soft">Arabic</Badge> : null}
           {perfume.isNiche ? <Badge variant="soft">Niche</Badge> : null}
