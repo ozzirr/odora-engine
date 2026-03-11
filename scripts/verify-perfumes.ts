@@ -71,6 +71,8 @@ async function main() {
   console.log(`malformed rows: ${prepared.summary.malformedRows}`);
   console.log(`warnings: ${prepared.summary.warnings}`);
   console.log(`errors: ${prepared.summary.errors}`);
+  console.log(`duplicate slugs: ${prepared.summary.duplicateSlugs}`);
+  console.log(`missing fields: ${prepared.summary.missingFields}`);
 
   if (prepared.validationIssues.length > 0) {
     console.log("");

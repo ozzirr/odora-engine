@@ -1,0 +1,2126 @@
+{
+  "summary": {
+    "rowsRead": 402,
+    "validRows": 402,
+    "invalidRows": 0,
+    "malformedRows": 0,
+    "warnings": 352,
+    "errors": 0,
+    "duplicateSlugs": 0,
+    "missingFields": 0
+  },
+  "issues": [
+    {
+      "rowIndex": 52,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 53,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 54,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 55,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 56,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 57,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 58,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 59,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 60,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 61,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 62,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 63,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 64,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 65,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 66,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 67,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 68,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 69,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 70,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 71,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 72,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 73,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 74,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 75,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 76,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 77,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 78,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 79,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 80,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 81,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 82,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 83,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 84,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 85,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 86,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 87,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 88,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 89,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 90,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 91,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 92,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 93,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 94,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 95,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 96,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 97,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 98,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 99,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 100,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 101,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 102,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 103,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 104,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 105,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 106,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 107,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 108,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 109,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 110,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 111,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 112,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 113,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 114,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 115,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 116,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 117,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 118,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 119,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 120,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 121,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 122,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 123,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 124,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 125,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 126,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 127,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 128,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 129,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 130,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 131,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 132,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 133,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 134,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 135,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 136,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 137,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 138,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 139,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 140,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 141,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 142,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 143,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 144,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 145,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 146,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 147,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 148,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 149,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 150,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 151,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 152,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 153,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 154,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 155,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 156,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 157,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 158,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 159,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 160,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 161,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 162,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 163,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 164,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 165,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 166,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 167,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 168,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 169,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 170,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 171,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 172,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 173,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 174,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 175,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 176,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 177,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 178,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 179,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 180,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 181,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 182,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 183,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 184,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 185,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 186,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 187,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 188,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 189,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 190,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 191,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 192,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 193,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 194,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 195,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 196,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 197,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 198,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 199,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 200,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 201,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 202,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 203,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 204,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 205,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 206,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 207,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 208,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 209,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 210,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 211,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 212,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 213,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 214,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 215,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 216,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 217,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 218,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 219,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 220,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 221,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 222,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 223,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 224,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 225,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 226,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 227,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 228,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 229,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 230,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 231,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 232,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 233,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 234,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 235,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 236,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 237,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 238,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 239,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 240,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 241,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 242,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 243,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 244,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 245,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 246,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 247,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 248,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 249,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 250,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 251,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 252,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 253,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 254,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 255,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 256,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 257,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 258,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 259,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 260,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 261,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 262,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 263,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 264,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 265,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 266,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 267,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 268,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 269,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 270,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 271,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 272,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 273,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 274,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 275,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 276,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 277,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 278,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 279,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 280,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 281,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 282,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 283,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 284,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 285,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 286,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 287,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 288,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 289,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 290,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 291,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 292,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 293,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 294,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 295,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 296,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 297,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 298,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 299,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 300,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 301,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 302,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 303,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 304,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 305,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 306,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 307,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 308,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 309,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 310,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 311,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 312,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 313,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 314,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 315,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 316,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 317,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 318,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 319,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 320,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 321,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 322,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 323,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 324,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 325,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 326,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 327,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 328,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 329,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 330,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 331,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 332,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 333,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 334,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 335,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 336,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 337,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 338,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 339,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 340,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 341,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 342,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 343,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 344,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 345,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 346,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 347,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 348,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 349,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 350,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 351,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 352,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 353,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 354,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 355,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 356,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 357,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 358,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 359,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 360,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 361,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 362,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 363,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 364,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 365,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 366,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 367,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 368,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 369,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 370,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 371,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 372,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 373,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 374,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 375,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 376,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 377,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 378,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 379,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 380,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 381,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 382,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 383,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 384,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 385,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 386,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 387,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 388,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 389,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 390,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 391,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 392,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 393,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 394,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 395,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 396,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 397,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 398,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 399,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 400,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 401,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 402,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    },
+    {
+      "rowIndex": 403,
+      "field": "notes",
+      "message": "Perfume has no normalized notes.",
+      "severity": "warning"
+    }
+  ]
+}

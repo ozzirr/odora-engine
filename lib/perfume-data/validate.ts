@@ -2,6 +2,8 @@ import { CatalogStatus, DataQuality } from "@prisma/client";
 
 import type { NormalizedPerfumeRecord, ValidationIssue } from "@/lib/perfume-data/types";
 
+const canonicalSlugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 export function validatePerfumeRecord(record: NormalizedPerfumeRecord): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
@@ -23,20 +25,64 @@ export function validatePerfumeRecord(record: NormalizedPerfumeRecord): Validati
     });
   }
 
-  if (record.notes.top.length === 0 && record.notes.heart.length === 0 && record.notes.base.length === 0) {
+  if (!record.perfumeSlug) {
     issues.push({
-      level: "warning",
-      field: "notes",
-      message: "Perfume has no normalized notes.",
+      level: "error",
+      field: "slug",
+      message: "Slug is required.",
+      sourceRow: record.sourceRow,
+    });
+  } else if (!canonicalSlugPattern.test(record.perfumeSlug)) {
+    issues.push({
+      level: "error",
+      field: "slug",
+      message: "Slug must be lowercase and dash-separated.",
+      sourceRow: record.sourceRow,
+    });
+  }
+
+  if (!record.fragranceFamily) {
+    issues.push({
+      level: "error",
+      field: "fragranceFamily",
+      message: "Fragrance family is required.",
       sourceRow: record.sourceRow,
     });
   }
 
   if (record.normalizedGender === "unknown") {
     issues.push({
-      level: "warning",
+      level: "error",
       field: "gender",
-      message: "Gender could not be normalized and fell back to UNISEX.",
+      message: "Gender must normalize to MEN, WOMEN, or UNISEX.",
+      sourceRow: record.sourceRow,
+    });
+  }
+
+  for (const [field, value] of [
+    ["longevityScore", record.longevityScore],
+    ["sillageScore", record.sillageScore],
+    ["versatilityScore", record.versatilityScore],
+  ] as const) {
+    if (value === undefined) {
+      continue;
+    }
+
+    if (!Number.isInteger(value) || value < 0 || value > 10) {
+      issues.push({
+        level: "error",
+        field,
+        message: "Score must be an integer between 0 and 10.",
+        sourceRow: record.sourceRow,
+      });
+    }
+  }
+
+  if (record.notes.top.length === 0 && record.notes.heart.length === 0 && record.notes.base.length === 0) {
+    issues.push({
+      level: "warning",
+      field: "notes",
+      message: "Perfume has no normalized notes.",
       sourceRow: record.sourceRow,
     });
   }

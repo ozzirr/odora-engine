@@ -32,6 +32,9 @@ export type NormalizedPerfumeRecord = {
   imageStoragePath?: string;
   imagePublicUrl?: string;
   ratingInternal?: number;
+  longevityScore?: number;
+  sillageScore?: number;
+  versatilityScore?: number;
   isArabic: boolean;
   isNiche: boolean;
   catalogStatus: CatalogStatus;
@@ -48,6 +51,18 @@ export type ValidationIssue = {
   field: string;
   message: string;
   sourceRow: number;
+};
+
+export type ValidationReportEntry = {
+  rowIndex: number;
+  field: string;
+  message: string;
+  severity: ValidationIssue["level"];
+};
+
+export type NormalizationResult = {
+  value?: NormalizedPerfumeRecord;
+  issues: ValidationIssue[];
 };
 
 export type LoadedInputRecord = {
@@ -68,6 +83,63 @@ export type VerificationSummary = {
   malformedRows: number;
   warnings: number;
   errors: number;
+  duplicateSlugs: number;
+  missingFields: number;
+};
+
+export type EnrichmentStatus =
+  | "matched_enriched"
+  | "matched_provenance_only"
+  | "low_confidence"
+  | "ambiguous"
+  | "unmatched";
+
+export type EnrichmentConfidenceLevel = "high" | "low" | "none";
+
+export type EnrichmentConflict = {
+  field: string;
+  currentValue: string;
+  sourceValue: string;
+  message: string;
+};
+
+export type EnrichmentRowReport = {
+  rowIndex: number;
+  brand: string;
+  name: string;
+  slug: string;
+  matched: boolean;
+  matchedSource: string | null;
+  matchedUrl: string | null;
+  matchedName: string | null;
+  confidenceScore: number | null;
+  confidenceLevel: EnrichmentConfidenceLevel;
+  enrichmentStatus: EnrichmentStatus;
+  fieldsEnriched: string[];
+  fieldsSkipped: string[];
+  conflictsDetected: EnrichmentConflict[];
+  notes: string[];
+};
+
+export type EnrichmentSummary = {
+  totalRowsProcessed: number;
+  totalMatched: number;
+  totalUnmatched: number;
+  lowConfidenceMatches: number;
+  ambiguousMatches: number;
+  rowsEnriched: number;
+  rowsUnchanged: number;
+  rowsWithCatalogFieldChanges: number;
+  rowsWithProvenanceOnlyChanges: number;
+  conflicts: number;
+  fieldsEnrichedByType: Record<string, number>;
+};
+
+export type EnrichmentSourceAuditEntry = {
+  path: string;
+  classification: "KEEP" | "REFACTOR" | "ARCHIVE";
+  trusted: boolean;
+  reason: string;
 };
 
 export type ImportMode = "upsert" | "notes";
