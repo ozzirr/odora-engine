@@ -411,8 +411,9 @@ export async function getHomepageData(): Promise<HomepageData> {
       ...featuredCandidates,
     ]).slice(0, 4);
 
-    const hero = heroSpotlights[0] ?? null;
-    const excludedHeroIds = new Set<number>(heroSpotlights.map((perfume) => perfume.id));
+    const hero =
+      heroCandidates[0] ?? trendingCandidates[0] ?? featuredCandidates[0] ?? heroSpotlights[0] ?? null;
+    const excludedHeroIds = new Set<number>(hero ? [hero.id] : []);
     const trending = minimizeDuplicates(trendingCandidates, excludedHeroIds, 4);
     const excludedFeaturedIds = new Set<number>([
       ...excludedHeroIds,
