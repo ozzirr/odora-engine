@@ -296,10 +296,36 @@ export function buildFinderPreferencesFromInput(input: FinderQueryInput): Finder
   };
 }
 
+export function hasConfiguredFinderPreferences(preferences: FinderPreferences) {
+  return (
+    preferences.gender !== defaultFinderPreferences.gender ||
+    preferences.mood !== defaultFinderPreferences.mood ||
+    preferences.season !== defaultFinderPreferences.season ||
+    preferences.occasion !== defaultFinderPreferences.occasion ||
+    preferences.budget !== defaultFinderPreferences.budget ||
+    preferences.preferredNote !== defaultFinderPreferences.preferredNote ||
+    preferences.arabicOnly !== defaultFinderPreferences.arabicOnly ||
+    preferences.nicheOnly !== defaultFinderPreferences.nicheOnly
+  );
+}
+
 export function matchPerfumesFromPreferences(
   preferences: FinderPreferences,
   perfumes: FinderPerfume[],
 ) {
+  if (!hasConfiguredFinderPreferences(preferences)) {
+    return [...perfumes].sort((a, b) => {
+      const left = a.ratingInternal ?? 0;
+      const right = b.ratingInternal ?? 0;
+
+      if (right !== left) {
+        return right - left;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }
+
   const genderTarget = mapGenderPreferenceToDb(preferences.gender);
   const preferredMood = normalizeFinderFilter(preferences.mood);
   const preferredSeason = normalizeFinderFilter(preferences.season);

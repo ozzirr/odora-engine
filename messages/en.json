@@ -337,6 +337,12 @@
       },
       "goToOffer": "Go to offer"
     },
+    "amazon": {
+      "eyebrow": "Prime member?",
+      "titlePrefix": "Buy on",
+      "subtitle": "Check availability, Prime delivery, and shipping timing on Amazon before moving on to cheaper alternatives.",
+      "cta": "Buy on Amazon"
+    },
     "offerTable": {
       "empty": "Offers will appear here as soon as pricing is available.",
       "columns": {

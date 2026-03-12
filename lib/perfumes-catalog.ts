@@ -40,8 +40,31 @@ const perfumeListInclude = {
   },
 } satisfies Prisma.PerfumeInclude;
 
+const perfumePriceSortSelect = {
+  id: true,
+  offers: {
+    select: {
+      priceAmount: true,
+      shippingCost: true,
+      currency: true,
+      availability: true,
+      affiliateUrl: true,
+      productUrl: true,
+      store: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  },
+} satisfies Prisma.PerfumeSelect;
+
 export type PerfumeListItem = Prisma.PerfumeGetPayload<{
   include: typeof perfumeListInclude;
+}>;
+
+type PerfumePriceSortCandidate = Prisma.PerfumeGetPayload<{
+  select: typeof perfumePriceSortSelect;
 }>;
 
 type GetPerfumesPageOptions = {
@@ -84,13 +107,15 @@ export async function getPerfumesPage(
       const { query } = applySorting(
         {
           where: mergedWhere,
-          include: perfumeListInclude,
+          select: perfumePriceSortSelect,
         },
         parsed.sort,
       );
 
-      const allPerfumes = (await prisma.perfume.findMany(query)) as PerfumeListItem[];
-      allPerfumes.sort((a, b) => {
+      const priceCandidates = (await prisma.perfume.findMany(
+        query as Prisma.PerfumeFindManyArgs,
+      )) as unknown as PerfumePriceSortCandidate[];
+      priceCandidates.sort((a, b) => {
         const aPrice = computeBestOffer(a.offers)?.bestTotalPrice;
         const bPrice = computeBestOffer(b.offers)?.bestTotalPrice;
 
@@ -106,13 +131,28 @@ export async function getPerfumesPage(
         return parsed.sort === "price_low" ? left - right : right - left;
       });
 
-      const perfumes = allPerfumes.slice(offset, offset + limit);
-      const total = allPerfumes.length;
+      const paginatedIds = priceCandidates.slice(offset, offset + limit).map((perfume) => perfume.id);
+      const total = priceCandidates.length;
+      const perfumes =
+        paginatedIds.length === 0
+          ? []
+          : await prisma.perfume.findMany({
+              where: {
+                id: {
+                  in: paginatedIds,
+                },
+              },
+              include: perfumeListInclude,
+            });
+      const perfumeById = new Map(perfumes.map((perfume) => [perfume.id, perfume]));
+      const orderedPerfumes = paginatedIds
+        .map((id) => perfumeById.get(id))
+        .filter((perfume): perfume is (typeof perfumes)[number] => Boolean(perfume));
 
       return {
-        perfumes,
+        perfumes: orderedPerfumes as PerfumeListItem[],
         total,
-        hasMore: offset + perfumes.length < total,
+        hasMore: offset + orderedPerfumes.length < total,
         selectedFilters: parsed,
         offset,
         limit,

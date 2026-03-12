@@ -9,6 +9,20 @@ import {
 import { updateSession } from "@/lib/supabase/middleware";
 
 const handleI18nRouting = createMiddleware(routing);
+const sessionAwareRoutes = [
+  "/en/login",
+  "/it/accedi",
+  "/en/signup",
+  "/it/registrati",
+  "/en/profile",
+  "/it/profilo",
+];
+
+function requiresSessionRefresh(pathname: string) {
+  return sessionAwareRoutes.some(
+    (route) => pathname === route || pathname.startsWith(`${route}/`),
+  );
+}
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -24,6 +38,10 @@ export async function middleware(request: NextRequest) {
   }
 
   const response = handleI18nRouting(request);
+  if (!requiresSessionRefresh(pathname)) {
+    return response;
+  }
+
   return updateSession(request, response);
 }
 

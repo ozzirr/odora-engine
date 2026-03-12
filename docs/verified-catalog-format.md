@@ -74,6 +74,8 @@ Default verified outputs:
 
 - `data/verified/perfumes.enriched.csv`
 - `data/verified/perfume-enrichment-report.json`
+- `data/verified/perfume-review-queue.json`
+- `data/verified/perfume-review-queue.csv`
 
 Validation currently enforces:
 
@@ -89,6 +91,10 @@ Verified enrichment currently uses only trusted local source snapshots:
 - `data/import/parfumo-top-women.csv`
 - `data/import/parfumo-top-unisex.csv`
 
+Synthetic or untrusted sources currently excluded from automatic enrichment:
+
+- `data/parfumo/perfumes.csv`
+
 The enriched CSV keeps the canonical import columns and appends record-level provenance columns:
 
 - `matched_source`
@@ -98,5 +104,104 @@ The enriched CSV keeps the canonical import columns and appends record-level pro
 - `enrichment_status`
 - `enrichment_notes`
 - `source_last_checked_at`
+
+## Source Adapter Architecture
+
+Current source adapter layout:
+
+```text
+lib/perfume-data/
+  enrich.ts
+  enrichment-policy.ts
+  sources/
+    base.ts
+    parfumo.ts
+    fragrantica.ts
+    official-brand.ts
+```
+
+Adapter responsibilities:
+
+- search candidates by perfume identity
+- fetch source records
+- map source fields to Odora fields
+- expose supported and planned fields explicitly
+- return candidate confidence and provenance metadata
+- surface unsupported fields without pretending they are available
+
+## Field Policy
+
+The canonical field policy lives in `lib/perfume-data/enrichment-policy.ts` and currently enforces:
+
+- VERIFIED curated values win by default
+- trusted external values may fill missing fields
+- trusted external values may replace invalid/generated placeholder values
+- conflicts are logged and preserved for review
+- low-confidence matches never auto-apply catalog field changes
+- unsupported fields remain empty and are marked as `unsupported_by_adapter` or `not_implemented` in the JSON report
+
+Current trusted-source priority:
+
+- `releaseYear`, `topNotes`, `middleNotes`, `baseNotes`, `fragranceFamily`: `official-brand` -> `fragrantica` -> `parfumo-top-lists`
+- `descriptionShort`, `descriptionLong`: `official-brand` -> `fragrantica`
+- `longevityScore`, `sillageScore`, `versatilityScore`: `fragrantica` -> `parfumo-top-lists`
+- `officialSourceUrl`: `official-brand`
+- `imageSourceUrl`: `official-brand` -> `parfumo-top-lists` -> `fragrantica`
+
+## Provenance Model
+
+Record-level provenance is written into the enriched CSV.
+
+Field-level provenance is written into `data/verified/perfume-enrichment-report.json` for every targeted enrichment field with:
+
+- source
+- source URL
+- source field
+- confidence
+- last checked at
+- overwrite decision
+- notes
+
+Overwrite decisions currently include:
+
+- `applied`
+- `replaced_invalid_value`
+- `preserved_curated_value`
+- `unsupported_by_adapter`
+- `not_implemented`
+- `low_confidence_match`
+- `no_source_match`
+- `conflict_logged`
+
+## Review Queue
+
+Rows that are low-confidence, ambiguous, unmatched, or conflicting are emitted into the review queue artifacts.
+
+Each review item includes:
+
+- row index
+- brand
+- name
+- slug
+- issue type
+- candidate matches
+- recommended next action
+- notes
+
+## Remaining Gaps
+
+The current architecture is ready for future trusted adapters, but only the Parfumo top-list adapter is implemented today. Real source-backed enrichment for the following fields still depends on new trusted integrations:
+
+- `releaseYear`
+- `topNotes`
+- `middleNotes`
+- `baseNotes`
+- `fragranceFamily`
+- `descriptionShort`
+- `descriptionLong`
+- `longevityScore`
+- `sillageScore`
+- `versatilityScore`
+- `officialSourceUrl`
 
 The shared normalization and validation rules for these commands live in `lib/perfume-data/`.

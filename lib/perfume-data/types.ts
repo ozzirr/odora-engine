@@ -96,6 +96,55 @@ export type EnrichmentStatus =
 
 export type EnrichmentConfidenceLevel = "high" | "low" | "none";
 
+export const enrichmentTargetFields = [
+  "releaseYear",
+  "topNotes",
+  "middleNotes",
+  "baseNotes",
+  "fragranceFamily",
+  "descriptionShort",
+  "descriptionLong",
+  "longevityScore",
+  "sillageScore",
+  "versatilityScore",
+  "officialSourceUrl",
+  "imageSourceUrl",
+] as const;
+
+export type EnrichmentTargetField = (typeof enrichmentTargetFields)[number];
+
+export type FieldOverwriteDecision =
+  | "applied"
+  | "preserved_curated_value"
+  | "replaced_invalid_value"
+  | "source_value_missing"
+  | "unsupported_by_adapter"
+  | "low_confidence_match"
+  | "no_source_match"
+  | "conflict_logged"
+  | "not_implemented";
+
+export type EnrichmentCandidate = {
+  source: string;
+  sourceId: string;
+  name: string;
+  url: string;
+  confidenceScore: number;
+  confidenceLevel: EnrichmentConfidenceLevel;
+  matchReason: string;
+};
+
+export type FieldProvenanceEntry = {
+  field: EnrichmentTargetField;
+  source: string | null;
+  sourceUrl: string | null;
+  sourceField: string | null;
+  confidence: number | null;
+  lastCheckedAt: string | null;
+  overwriteDecision: FieldOverwriteDecision;
+  notes: string[];
+};
+
 export type EnrichmentConflict = {
   field: string;
   currentValue: string;
@@ -115,9 +164,11 @@ export type EnrichmentRowReport = {
   confidenceScore: number | null;
   confidenceLevel: EnrichmentConfidenceLevel;
   enrichmentStatus: EnrichmentStatus;
+  candidateMatches: EnrichmentCandidate[];
   fieldsEnriched: string[];
   fieldsSkipped: string[];
   conflictsDetected: EnrichmentConflict[];
+  fieldProvenance: Record<EnrichmentTargetField, FieldProvenanceEntry>;
   notes: string[];
 };
 
@@ -140,6 +191,19 @@ export type EnrichmentSourceAuditEntry = {
   classification: "KEEP" | "REFACTOR" | "ARCHIVE";
   trusted: boolean;
   reason: string;
+};
+
+export type ReviewQueueIssueType = "low_confidence" | "ambiguous" | "unmatched" | "conflict";
+
+export type ReviewQueueItem = {
+  rowIndex: number;
+  brand: string;
+  name: string;
+  slug: string;
+  issueType: ReviewQueueIssueType;
+  candidateMatches: EnrichmentCandidate[];
+  recommendedNextAction: string;
+  notes: string[];
 };
 
 export type ImportMode = "upsert" | "notes";

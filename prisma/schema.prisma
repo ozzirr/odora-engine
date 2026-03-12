@@ -104,6 +104,7 @@ model Perfume {
   sourceName         String?
   sourceType         SourceType                 @default(INTERNAL_DEMO)
   officialSourceUrl  String?
+  amazonUrl          String?
   sourceConfidence   Float?
   dataQuality        DataQuality                @default(LOW)
   createdAt          DateTime                   @default(now())

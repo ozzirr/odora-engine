@@ -10,7 +10,12 @@ This audit covers the catalog and perfume data scripts that previously lived und
 | `scripts/verify-perfumes.ts` | KEEP | Canonical validation entrypoint. |
 | `scripts/import-perfumes.ts` | KEEP | Canonical DB import entrypoint for verified and Parfumo sources. |
 | `scripts/sync-prices.ts` | KEEP | Canonical offer-to-price-range sync entrypoint. |
-| `lib/perfume-data/enrich.ts` | KEEP | Canonical trusted-source enrichment, matching, provenance, and reporting logic for verified perfumes. |
+| `lib/perfume-data/enrich.ts` | KEEP | Canonical adapter-driven enrichment orchestrator with field policy, field-level provenance, and review queue output. |
+| `lib/perfume-data/enrichment-policy.ts` | KEEP | Canonical source-priority, overwrite, missing-value, and conflict policy map. |
+| `lib/perfume-data/sources/base.ts` | KEEP | Shared source-adapter contract and reusable matching primitives. |
+| `lib/perfume-data/sources/parfumo.ts` | KEEP | Implemented trusted Parfumo top-list adapter. |
+| `lib/perfume-data/sources/fragrantica.ts` | REFACTOR | Placeholder adapter; architecture-ready but not implemented because no trusted local integration exists yet. |
+| `lib/perfume-data/sources/official-brand.ts` | REFACTOR | Placeholder adapter for future official-site integrations. |
 | `scripts/import/import-verified-catalog.ts` | REFACTOR | Core verified import logic moved into `lib/perfume-data/normalize.ts`, `lib/perfume-data/import.ts`, and `scripts/import-perfumes.ts`. |
 | `scripts/import/import-parfumo.ts` | REFACTOR | Reusable Parfumo normalization/import logic moved into the same shared services and canonical import script. |
 | `scripts/import/lib/normalize.ts` | REFACTOR | CSV, note, rating, and year normalization moved into `lib/perfume-data/normalize.ts`. |
@@ -50,3 +55,26 @@ This audit covers the catalog and perfume data scripts that previously lived und
 - `lib/perfume-data/import.ts`
 - `lib/perfume-data/prices.ts`
 - `lib/perfume-data/enrich.ts`
+- `lib/perfume-data/enrichment-policy.ts`
+- `lib/perfume-data/sources/base.ts`
+- `lib/perfume-data/sources/parfumo.ts`
+- `lib/perfume-data/sources/fragrantica.ts`
+- `lib/perfume-data/sources/official-brand.ts`
+
+## Current Adapter Coverage
+
+- Real and trusted: `parfumo-top-lists`
+  Provides conservative identity matching and `imageSourceUrl`
+- Placeholder only: `fragrantica`
+  Planned for notes, family, descriptions, scores, and images once a trusted ingestion path exists
+- Placeholder only: `official-brand`
+  Planned for official URLs, release year, notes, descriptions, and images once a trusted ingestion path exists
+
+## Review Queue
+
+The enrichment pipeline now writes:
+
+- `data/verified/perfume-review-queue.json`
+- `data/verified/perfume-review-queue.csv`
+
+These contain rows that are low-confidence, ambiguous, unmatched, or conflicting and are intended for manual curation before adding broader source integrations.

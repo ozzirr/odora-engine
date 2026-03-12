@@ -17,6 +17,7 @@ type PerfumeSeed = {
   gender: Gender;
   descriptionShort: string;
   descriptionLong: string;
+  amazonUrl?: string;
   fragranceFamily: string;
   priceRange: PriceRange;
   releaseYear?: number;
@@ -1081,6 +1082,7 @@ async function main() {
         gender: perfume.gender,
         descriptionShort: perfume.descriptionShort,
         descriptionLong: perfume.descriptionLong,
+        amazonUrl: perfume.amazonUrl,
         fragranceFamily: perfume.fragranceFamily,
         priceRange: perfume.priceRange,
         releaseYear: perfume.releaseYear,

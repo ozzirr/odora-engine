@@ -1,0 +1,2 @@
+ALTER TABLE "Perfume"
+ADD COLUMN IF NOT EXISTS "amazonUrl" TEXT;

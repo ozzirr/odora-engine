@@ -5,6 +5,8 @@ import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
+import { getAmazonProductUrl } from "@/lib/amazon";
+import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
@@ -24,6 +26,7 @@ type PerfumeHeroProps = {
     longevityScore: number | null;
     sillageScore: number | null;
     versatilityScore: number | null;
+    amazonUrl?: string | null;
     brand: {
       name: string;
     };
@@ -65,10 +68,17 @@ function MetricItem({ label, value }: { label: string; value: number | null }) {
 
 export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
   const t = useTranslations("perfume.hero");
+  const amazonT = useTranslations("perfume.amazon");
   const commonT = useTranslations("common");
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const summary = getPerfumeShortText(perfume);
+  const amazonUrl = getAmazonProductUrl({
+    amazonUrl: perfume.amazonUrl,
+    brandName,
+    perfumeName: perfume.name,
+    locale,
+  });
 
   return (
     <section className="grid gap-6 lg:grid-cols-[1.05fr_1.35fr] lg:gap-8">
@@ -108,16 +118,30 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
 
         <BestOfferCard bestOffer={bestOffer} showButton={false} className="bg-[#f7efe2]" />
 
-        {bestOffer?.bestUrl ? (
+        <div className="space-y-3">
+          {bestOffer?.bestUrl ? (
+            <Link
+              href={bestOffer.bestUrl as unknown as LinkHref}
+              target="_blank"
+              rel="noreferrer"
+              className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
+            >
+              {t("goToOffer")}
+            </Link>
+          ) : null}
+
           <Link
-            href={bestOffer.bestUrl as unknown as LinkHref}
+            href={amazonUrl as unknown as LinkHref}
             target="_blank"
             rel="noreferrer"
-            className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
+            className={buttonStyles({
+              className:
+                "h-12 w-full bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c] sm:w-auto sm:px-6",
+            })}
           >
-            {t("goToOffer")}
+            {amazonT("cta")}
           </Link>
-        ) : null}
+        </div>
       </div>
     </section>
   );

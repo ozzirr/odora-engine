@@ -1,91 +1,52 @@
-import { stat } from "node:fs/promises";
-import path from "node:path";
-
-import { loadPerfumeInput } from "@/lib/perfume-data/csv";
-import { normalizeCsvHeader, toCatalogCsvRow } from "@/lib/perfume-data/normalize";
-import { preparePerfumeRecords } from "@/lib/perfume-data/workflow";
+import { canonicalCatalogHeaders, toCatalogCsvRow } from "@/lib/perfume-data/normalize";
+import { fieldPolicyByField } from "@/lib/perfume-data/enrichment-policy";
+import { createOfficialBrandAdapter } from "@/lib/perfume-data/sources/official-brand";
+import { createParfumoTopListAdapter } from "@/lib/perfume-data/sources/parfumo";
+import { createFragranticaAdapter } from "@/lib/perfume-data/sources/fragrantica";
+import type { PerfumeSourceAdapter, SourceRecordFieldValue, SourceRecordResult } from "@/lib/perfume-data/sources/base";
 import type {
+  EnrichmentCandidate,
   EnrichmentConflict,
-  EnrichmentConfidenceLevel,
   EnrichmentRowReport,
   EnrichmentSourceAuditEntry,
   EnrichmentStatus,
   EnrichmentSummary,
+  enrichmentTargetFields,
+  EnrichmentTargetField,
+  FieldOverwriteDecision,
+  FieldProvenanceEntry,
   NormalizedPerfumeRecord,
   PerfumeDataSource,
+  ReviewQueueItem,
 } from "@/lib/perfume-data/types";
-
-type TrustedSourceRecord = {
-  provider: string;
-  sourcePath: string;
-  sourceLastCheckedAt: string;
-  brand: string;
-  name: string;
-  parfumoUrl: string;
-  imageUrl?: string;
-  rating?: number;
-  votes?: number;
-  safeKey: string;
-  variantKey: string;
-};
-
-type MatchResult =
-  | {
-      matched: true;
-      confidenceScore: number;
-      confidenceLevel: EnrichmentConfidenceLevel;
-      source: TrustedSourceRecord;
-      strategy: "exact" | "normalized";
-    }
-  | {
-      matched: false;
-      confidenceScore: number | null;
-      confidenceLevel: EnrichmentConfidenceLevel;
-      strategy: "variant" | "ambiguous" | "none";
-      source?: TrustedSourceRecord;
-      notes: string[];
-    };
+import { preparePerfumeRecords } from "@/lib/perfume-data/workflow";
 
 type EnrichmentOutputRow = Record<string, string>;
 
-const parfumoTopListSources = [
-  "data/import/parfumo-top-men.csv",
-  "data/import/parfumo-top-women.csv",
-  "data/import/parfumo-top-unisex.csv",
-] as const;
+type AdapterCoverageEntry = {
+  id: string;
+  label: string;
+  trusted: boolean;
+  implemented: boolean;
+  supportedFields: EnrichmentTargetField[];
+  plannedFields: EnrichmentTargetField[];
+};
 
-const defaultProviderName = "Parfumo Top Lists";
+type CandidateClassification =
+  | {
+      status: "matched";
+      acceptedCandidates: EnrichmentCandidate[];
+      candidates: EnrichmentCandidate[];
+    }
+  | {
+      status: "low_confidence" | "ambiguous" | "unmatched";
+      acceptedCandidates: EnrichmentCandidate[];
+      candidates: EnrichmentCandidate[];
+      notes: string[];
+    };
 
 export const enrichmentCatalogHeaders = [
-  "brand",
-  "name",
-  "slug",
-  "gender",
-  "concentration",
-  "year",
-  "top_notes",
-  "heart_notes",
-  "base_notes",
-  "family",
-  "rating",
-  "longevity_score",
-  "sillage_score",
-  "versatility_score",
-  "imageUrl",
-  "image_source_url",
-  "image_storage_path",
-  "image_public_url",
-  "description_short",
-  "description_long",
-  "price_range",
-  "is_arabic",
-  "is_niche",
-  "catalog_status",
-  "source_name",
-  "source_type",
-  "official_source_url",
-  "source_confidence",
-  "data_quality",
+  ...canonicalCatalogHeaders,
   "matched_source",
   "matched_url",
   "matched_name",
@@ -95,7 +56,18 @@ export const enrichmentCatalogHeaders = [
   "source_last_checked_at",
 ] as const;
 
-const scoreNormalizationRules = {
+export const reviewQueueCsvHeaders = [
+  "row_index",
+  "brand",
+  "name",
+  "slug",
+  "issue_type",
+  "candidate_matches",
+  "recommended_next_action",
+  "notes",
+] as const;
+
+export const scoreNormalizationRules = {
   longevityScore: [
     "Numeric source values from 0-10 are kept as-is.",
     "Numeric source values from 0-5 are multiplied by 2.",
@@ -113,213 +85,124 @@ const scoreNormalizationRules = {
   ],
 } as const;
 
-function normalizeText(value: string) {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/['’`]/g, "")
-    .replace(/[^a-z0-9()]+/g, " ")
-    .trim()
-    .replace(/\s+/g, " ");
+const targetFields = [
+  "releaseYear",
+  "topNotes",
+  "middleNotes",
+  "baseNotes",
+  "fragranceFamily",
+  "descriptionShort",
+  "descriptionLong",
+  "longevityScore",
+  "sillageScore",
+  "versatilityScore",
+  "officialSourceUrl",
+  "imageSourceUrl",
+] as const satisfies readonly EnrichmentTargetField[];
+
+function createAdapters() {
+  return [
+    createParfumoTopListAdapter(),
+    createFragranticaAdapter(),
+    createOfficialBrandAdapter(),
+  ] satisfies PerfumeSourceAdapter[];
 }
 
-function normalizePerfumeNameForSafeMatch(value: string) {
-  return normalizeText(value).replace(/\(\d{4}\)/g, " ").trim().replace(/\s+/g, " ");
+function buildAdapterCoverage(adapters: PerfumeSourceAdapter[]): AdapterCoverageEntry[] {
+  return adapters.map((adapter) => ({
+    id: adapter.id,
+    label: adapter.label,
+    trusted: adapter.trusted,
+    implemented: adapter.implemented,
+    supportedFields: [...adapter.supportedFields],
+    plannedFields: [...adapter.plannedFields],
+  }));
 }
 
-function normalizePerfumeNameForVariantMatch(value: string) {
-  return normalizePerfumeNameForSafeMatch(value)
-    .replace(/\b(eau de parfum|eau de toilette|eau de cologne)\b/g, " ")
-    .trim()
-    .replace(/\s+/g, " ");
-}
+function buildAuditEntries(adapters: PerfumeSourceAdapter[]): EnrichmentSourceAuditEntry[] {
+  const entries: EnrichmentSourceAuditEntry[] = [
+    {
+      path: "scripts/enrich-perfumes.ts",
+      classification: "REFACTOR",
+      trusted: true,
+      reason: "Canonical verified enrichment entrypoint now delegates to adapters, field policy, provenance, and review queue generation.",
+    },
+    {
+      path: "lib/perfume-data/enrich.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical enrichment orchestrator applying adapter search results, field policy, provenance, and review queue output.",
+    },
+    {
+      path: "lib/perfume-data/enrichment-policy.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical field map, source priority, overwrite rules, and conflict policy.",
+    },
+    {
+      path: "lib/perfume-data/sources/base.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Shared adapter contract and reusable matching primitives.",
+    },
+    {
+      path: "lib/perfume-data/workflow.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Shared normalize and validate stage remains the base of the enrichment pipeline.",
+    },
+    {
+      path: "lib/perfume-data/normalize.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical row normalization and CSV export mapping remain authoritative.",
+    },
+    {
+      path: "lib/perfume-data/validate.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical validation rules are reused before enrichment and after export verification.",
+    },
+    {
+      path: "lib/perfume-data/import.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "DB import still accepts enriched CSVs because extra provenance columns are safely ignored.",
+    },
+    {
+      path: "lib/perfume-data/types.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Shared types now model adapter coverage, field-level provenance, and review queue items.",
+    },
+    {
+      path: "scripts/verify-perfumes.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical validation entrypoint remains unchanged.",
+    },
+    {
+      path: "scripts/import-perfumes.ts",
+      classification: "KEEP",
+      trusted: true,
+      reason: "Canonical DB import entrypoint remains the downstream consumer for verified catalog exports.",
+    },
+    {
+      path: "data/parfumo/perfumes.csv",
+      classification: "ARCHIVE",
+      trusted: false,
+      reason: "Synthetic dataset; excluded from trusted enrichment and left documented as untrusted.",
+    },
+  ];
 
-function buildMatchKey(brand: string, name: string, mode: "safe" | "variant") {
-  const normalizedBrand = normalizeText(brand);
-  const normalizedName =
-    mode === "safe"
-      ? normalizePerfumeNameForSafeMatch(name)
-      : normalizePerfumeNameForVariantMatch(name);
-  return `${normalizedBrand}::${normalizedName}`;
-}
-
-function parseNumber(value: unknown) {
-  const cleaned = String(value ?? "").trim().replace(",", ".");
-  if (!cleaned) {
-    return undefined;
+  for (const adapter of adapters) {
+    entries.push(...adapter.getAuditEntries());
   }
 
-  const parsed = Number.parseFloat(cleaned);
-  return Number.isFinite(parsed) ? parsed : undefined;
+  return entries;
 }
 
-function roundScore(value: number) {
-  return Math.round(value * 100) / 100;
-}
-
-// Numeric-only score normalization avoids inventing semantics for unsupported qualitative labels.
-export function normalizeExternalScoreToTenPointScale(value: unknown) {
-  const parsed = parseNumber(value);
-  if (parsed === undefined) {
-    return undefined;
-  }
-
-  if (parsed < 0) {
-    return undefined;
-  }
-
-  if (parsed <= 5) {
-    return roundScore(parsed * 2);
-  }
-
-  if (parsed <= 10) {
-    return roundScore(parsed);
-  }
-
-  return undefined;
-}
-
-async function loadParfumoTopListSourceRecords(sourcePath: string) {
-  const loaded = await loadPerfumeInput({
-    inputPath: sourcePath,
-    format: "csv",
-    normalizeHeader: normalizeCsvHeader,
-  });
-  const metadata = await stat(path.resolve(process.cwd(), sourcePath));
-  const sourceLastCheckedAt = metadata.mtime.toISOString();
-
-  const records: TrustedSourceRecord[] = loaded.records
-    .map(({ record }) => {
-      const brand = String(record.brand ?? "").trim();
-      const name = String(record.name ?? "").trim();
-      const parfumoUrl = String(record.parfumourl ?? "").trim();
-
-      if (!brand || !name || !parfumoUrl) {
-        return null;
-      }
-
-      return {
-        provider: defaultProviderName,
-        sourcePath,
-        sourceLastCheckedAt,
-        brand,
-        name,
-        parfumoUrl,
-        imageUrl: String(record.imageurl ?? "").trim() || undefined,
-        rating: normalizeExternalScoreToTenPointScale(record.rating),
-        votes: parseNumber(record.votes),
-        safeKey: buildMatchKey(brand, name, "safe"),
-        variantKey: buildMatchKey(brand, name, "variant"),
-      };
-    })
-    .filter((item): item is TrustedSourceRecord => item !== null);
-
-  return {
-    sourcePath,
-    sourceLastCheckedAt,
-    records,
-  };
-}
-
-async function loadTrustedSourceRecords() {
-  const loadedSources = await Promise.all(parfumoTopListSources.map((sourcePath) => loadParfumoTopListSourceRecords(sourcePath)));
-  const safeIndex = new Map<string, TrustedSourceRecord[]>();
-  const variantIndex = new Map<string, TrustedSourceRecord[]>();
-
-  for (const loaded of loadedSources) {
-    for (const record of loaded.records) {
-      const safeRecords = safeIndex.get(record.safeKey) ?? [];
-      safeRecords.push(record);
-      safeIndex.set(record.safeKey, safeRecords);
-
-      const variantRecords = variantIndex.get(record.variantKey) ?? [];
-      variantRecords.push(record);
-      variantIndex.set(record.variantKey, variantRecords);
-    }
-  }
-
-  return {
-    safeIndex,
-    variantIndex,
-  };
-}
-
-function selectUniqueCandidate(candidates: TrustedSourceRecord[]) {
-  const uniqueByUrl = new Map<string, TrustedSourceRecord>();
-  for (const candidate of candidates) {
-    uniqueByUrl.set(candidate.parfumoUrl, candidate);
-  }
-
-  return uniqueByUrl.size === 1 ? [...uniqueByUrl.values()][0] : null;
-}
-
-function matchTrustedSourceRecord(
-  record: NormalizedPerfumeRecord,
-  indexes: Awaited<ReturnType<typeof loadTrustedSourceRecords>>,
-): MatchResult {
-  const safeKey = buildMatchKey(record.brandName, record.perfumeName, "safe");
-  const safeCandidates = indexes.safeIndex.get(safeKey) ?? [];
-
-  if (safeCandidates.length > 0) {
-    const candidate = selectUniqueCandidate(safeCandidates);
-    if (!candidate) {
-      return {
-        matched: false,
-        confidenceScore: 0.6,
-        confidenceLevel: "low",
-        strategy: "ambiguous",
-        notes: ["Multiple trusted source candidates share the same normalized match key."],
-      };
-    }
-
-    return {
-      matched: true,
-      confidenceScore: candidate.brand === record.brandName && candidate.name === record.perfumeName ? 1 : 0.97,
-      confidenceLevel: "high",
-      source: candidate,
-      strategy: candidate.brand === record.brandName && candidate.name === record.perfumeName ? "exact" : "normalized",
-    };
-  }
-
-  const variantKey = buildMatchKey(record.brandName, record.perfumeName, "variant");
-  const variantCandidates = indexes.variantIndex.get(variantKey) ?? [];
-
-  if (variantCandidates.length > 0) {
-    const candidate = selectUniqueCandidate(variantCandidates);
-    if (!candidate) {
-      return {
-        matched: false,
-        confidenceScore: 0.55,
-        confidenceLevel: "low",
-        strategy: "ambiguous",
-        notes: ["Multiple source variants matched after concentration-stripping fallback."],
-      };
-    }
-
-    return {
-      matched: false,
-      confidenceScore: 0.84,
-      confidenceLevel: "low",
-      strategy: "variant",
-      source: candidate,
-      notes: [
-        "A variant-level match was found only after removing concentration qualifiers; no automatic enrichment was applied.",
-      ],
-    };
-  }
-
-  return {
-    matched: false,
-    confidenceScore: null,
-    confidenceLevel: "none",
-    strategy: "none",
-    notes: ["No trusted in-repo enrichment source matched this perfume with high confidence."],
-  };
-}
-
-function createEmptyEnrichmentRow(baseRow: Record<string, string>) {
+function createOutputRow(baseRow: Record<string, string>): EnrichmentOutputRow {
   return {
     ...baseRow,
     matched_source: "",
@@ -332,142 +215,312 @@ function createEmptyEnrichmentRow(baseRow: Record<string, string>) {
   };
 }
 
-function incrementFieldCount(fieldsEnrichedByType: Record<string, number>, field: string) {
-  fieldsEnrichedByType[field] = (fieldsEnrichedByType[field] ?? 0) + 1;
+function targetFieldToRowKey(field: EnrichmentTargetField) {
+  switch (field) {
+    case "releaseYear":
+      return "year";
+    case "topNotes":
+      return "top_notes";
+    case "middleNotes":
+      return "heart_notes";
+    case "baseNotes":
+      return "base_notes";
+    case "fragranceFamily":
+      return "family";
+    case "descriptionShort":
+      return "description_short";
+    case "descriptionLong":
+      return "description_long";
+    case "longevityScore":
+      return "longevity_score";
+    case "sillageScore":
+      return "sillage_score";
+    case "versatilityScore":
+      return "versatility_score";
+    case "officialSourceUrl":
+      return "official_source_url";
+    case "imageSourceUrl":
+      return "image_source_url";
+  }
+}
+
+function isBlankValue(value: string | undefined) {
+  return !String(value ?? "").trim();
+}
+
+function isGeneratedDescriptionShort(value: string) {
+  return /\sby\s.+,\s.+profile(?: with .+)?\.$/i.test(value);
+}
+
+function isGeneratedDescriptionLong(value: string) {
+  return /\sby\s.+ opens with .+ then moves through .+ and settles on .+\.$/i.test(value);
+}
+
+function isValidUrl(value: string) {
+  return /^https?:\/\//i.test(value);
+}
+
+function isInvalidCurrentValue(field: EnrichmentTargetField, row: EnrichmentOutputRow) {
+  const value = row[targetFieldToRowKey(field)] ?? "";
+  if (isBlankValue(value)) {
+    return true;
+  }
+
+  switch (field) {
+    case "releaseYear": {
+      const parsed = Number.parseInt(value, 10);
+      const maxYear = new Date().getFullYear() + 1;
+      return !Number.isFinite(parsed) || parsed < 1800 || parsed > maxYear;
+    }
+    case "topNotes":
+    case "middleNotes":
+    case "baseNotes":
+      return value.split(";").map((item) => item.trim()).filter(Boolean).length === 0;
+    case "descriptionShort":
+      return isGeneratedDescriptionShort(value);
+    case "descriptionLong":
+      return isGeneratedDescriptionLong(value);
+    case "longevityScore":
+    case "sillageScore":
+    case "versatilityScore": {
+      const parsed = Number.parseFloat(value);
+      return !Number.isFinite(parsed) || parsed < 0 || parsed > 10;
+    }
+    case "officialSourceUrl":
+    case "imageSourceUrl":
+      return !isValidUrl(value);
+    default:
+      return false;
+  }
+}
+
+function sourceFieldValueToRowValue(fieldValue: SourceRecordFieldValue) {
+  if (Array.isArray(fieldValue.value)) {
+    return fieldValue.value.join(";");
+  }
+
+  return String(fieldValue.value);
+}
+
+function createFieldProvenance(
+  field: EnrichmentTargetField,
+  decision: FieldOverwriteDecision,
+  params?: {
+    source?: string | null;
+    sourceUrl?: string | null;
+    sourceField?: string | null;
+    confidence?: number | null;
+    lastCheckedAt?: string | null;
+    notes?: string[];
+  },
+): FieldProvenanceEntry {
+  return {
+    field,
+    source: params?.source ?? null,
+    sourceUrl: params?.sourceUrl ?? null,
+    sourceField: params?.sourceField ?? null,
+    confidence: params?.confidence ?? null,
+    lastCheckedAt: params?.lastCheckedAt ?? null,
+    overwriteDecision: decision,
+    notes: params?.notes ?? [],
+  };
+}
+
+function compareRowAndSourceValue(field: EnrichmentTargetField, currentValue: string, sourceValue: string) {
+  if (field === "topNotes" || field === "middleNotes" || field === "baseNotes") {
+    const normalize = (value: string) =>
+      value
+        .split(";")
+        .map((item) => item.trim().toLowerCase())
+        .filter(Boolean)
+        .sort()
+        .join(";");
+    return normalize(currentValue) === normalize(sourceValue);
+  }
+
+  return currentValue.trim().toLowerCase() === sourceValue.trim().toLowerCase();
+}
+
+async function fetchAcceptedSourceRecords(params: {
+  acceptedCandidates: EnrichmentCandidate[];
+  adaptersById: Map<string, PerfumeSourceAdapter>;
+}) {
+  const sourceRecords = new Map<string, SourceRecordResult>();
+
+  for (const candidate of params.acceptedCandidates) {
+    const adapter = params.adaptersById.get(candidate.sourceId);
+    if (!adapter) {
+      continue;
+    }
+
+    const record = await adapter.fetchSourceRecord(candidate);
+    if (record) {
+      sourceRecords.set(candidate.sourceId, record);
+    }
+  }
+
+  return sourceRecords;
+}
+
+function classifyCandidates(candidates: EnrichmentCandidate[]): CandidateClassification {
+  const sorted = [...candidates].sort((left, right) => right.confidenceScore - left.confidenceScore);
+  const highCandidates = sorted.filter((candidate) => candidate.confidenceLevel === "high");
+
+  if (highCandidates.length > 0) {
+    return {
+      status: "matched",
+      acceptedCandidates: highCandidates,
+      candidates: sorted,
+    };
+  }
+
+  const lowCandidates = sorted.filter((candidate) => candidate.confidenceLevel === "low");
+  if (lowCandidates.length === 1) {
+    return {
+      status: "low_confidence",
+      acceptedCandidates: [],
+      candidates: sorted,
+      notes: [lowCandidates[0].matchReason],
+    };
+  }
+
+  if (lowCandidates.length > 1) {
+    return {
+      status: "ambiguous",
+      acceptedCandidates: [],
+      candidates: sorted,
+      notes: ["Multiple low-confidence candidates require manual disambiguation."],
+    };
+  }
+
+  return {
+    status: "unmatched",
+    acceptedCandidates: [],
+    candidates: [],
+    notes: ["No trusted adapter returned a usable source candidate for this perfume."],
+  };
 }
 
 function summarizeStatus(params: {
+  candidateStatus: CandidateClassification["status"];
   matched: boolean;
   catalogFieldsEnriched: string[];
-  provenanceFieldsEnriched: string[];
-  match: MatchResult;
-}): EnrichmentStatus {
+}) {
   if (!params.matched) {
-    if (params.match.strategy === "variant") {
-      return "low_confidence";
+    if (params.candidateStatus === "low_confidence") {
+      return "low_confidence" as const;
     }
-
-    if (params.match.strategy === "ambiguous") {
-      return "ambiguous";
+    if (params.candidateStatus === "ambiguous") {
+      return "ambiguous" as const;
     }
-
-    return "unmatched";
+    return "unmatched" as const;
   }
 
   return params.catalogFieldsEnriched.length > 0 ? "matched_enriched" : "matched_provenance_only";
 }
 
-function appendUnique(values: string[], value: string) {
-  if (!values.includes(value)) {
-    values.push(value);
+function incrementFieldCount(fieldsEnrichedByType: Record<string, number>, field: string) {
+  fieldsEnrichedByType[field] = (fieldsEnrichedByType[field] ?? 0) + 1;
+}
+
+function recommendedNextAction(status: EnrichmentStatus) {
+  switch (status) {
+    case "low_confidence":
+      return "Review the suggested candidate and approve or reject the match before any catalog fields are applied.";
+    case "ambiguous":
+      return "Choose the correct trusted source candidate manually or tighten the matching rules.";
+    case "unmatched":
+      return "Find a trusted source manually or add a new adapter that can search this perfume safely.";
+    default:
+      return "Review conflicting field values manually before applying any overwrite.";
   }
 }
 
-function buildAuditEntries(): EnrichmentSourceAuditEntry[] {
-  return [
-    {
-      path: "scripts/enrich-perfumes.ts",
-      classification: "REFACTOR",
-      trusted: true,
-      reason: "Canonical verified enrichment entrypoint now drives normalize -> validate -> match -> enrich -> export.",
-    },
-    {
-      path: "scripts/verify-perfumes.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Still the canonical validation-only entrypoint.",
-    },
-    {
-      path: "scripts/import-perfumes.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Canonical DB import entrypoint remains valid for the enriched CSV.",
-    },
-    {
-      path: "lib/perfume-data/enrich.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "New trusted-source matching, enrichment, provenance, and reporting module.",
-    },
-    {
-      path: "lib/perfume-data/workflow.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Shared normalize and validate stage remains the base of the enrichment pipeline.",
-    },
-    {
-      path: "lib/perfume-data/normalize.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Canonical export row builder and normalization utilities remain authoritative.",
-    },
-    {
-      path: "lib/perfume-data/validate.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Canonical validation rules remain unchanged and are reused before enrichment.",
-    },
-    {
-      path: "lib/perfume-data/import.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Import path still accepts the enriched CSV because extra provenance columns are ignored safely.",
-    },
-    {
-      path: "lib/perfume-data/types.ts",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Shared type definitions now include enrichment report metadata.",
-    },
-    {
-      path: "data/import/parfumo-top-men.csv",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Trusted in-repo Parfumo snapshot used for deterministic verified enrichment matches.",
-    },
-    {
-      path: "data/import/parfumo-top-women.csv",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Trusted in-repo Parfumo snapshot used for deterministic verified enrichment matches.",
-    },
-    {
-      path: "data/import/parfumo-top-unisex.csv",
-      classification: "KEEP",
-      trusted: true,
-      reason: "Trusted in-repo Parfumo snapshot used for deterministic verified enrichment matches.",
-    },
-    {
-      path: "data/parfumo/perfumes.csv",
-      classification: "ARCHIVE",
-      trusted: false,
-      reason: "Synthetic dataset; excluded from real-data enrichment.",
-    },
-    {
-      path: "scripts/archive/import/import-parfumo.ts",
-      classification: "ARCHIVE",
-      trusted: false,
-      reason: "Historical import path not used for trusted verified enrichment.",
-    },
-    {
-      path: "scripts/archive/import/import-parfumo-tops.ts",
-      classification: "ARCHIVE",
-      trusted: false,
-      reason: "Historical append workflow superseded by the shared enrichment module.",
-    },
-    {
-      path: "scripts/archive/import/fetch-parfumo-tops.ts",
-      classification: "ARCHIVE",
-      trusted: false,
-      reason: "Historical collection helper; not part of the maintained local enrichment pipeline.",
-    },
-    {
-      path: "scripts/archive/import/backfill-catalog-provenance.ts",
-      classification: "ARCHIVE",
-      trusted: false,
-      reason: "One-off DB backfill, not a reusable enrichment source integration.",
-    },
-  ];
+function buildReviewQueue(rows: EnrichmentRowReport[]) {
+  const items: ReviewQueueItem[] = [];
+
+  for (const row of rows) {
+    if (
+      row.enrichmentStatus !== "low_confidence" &&
+      row.enrichmentStatus !== "ambiguous" &&
+      row.enrichmentStatus !== "unmatched" &&
+      row.conflictsDetected.length === 0
+    ) {
+      continue;
+    }
+
+    const issueType =
+      row.conflictsDetected.length > 0
+        ? "conflict"
+        : row.enrichmentStatus === "ambiguous"
+          ? "ambiguous"
+          : row.enrichmentStatus === "low_confidence"
+            ? "low_confidence"
+            : "unmatched";
+
+    items.push({
+      rowIndex: row.rowIndex,
+      brand: row.brand,
+      name: row.name,
+      slug: row.slug,
+      issueType,
+      candidateMatches: row.candidateMatches,
+      recommendedNextAction: recommendedNextAction(row.enrichmentStatus),
+      notes: row.notes,
+    });
+  }
+
+  return items;
+}
+
+function reviewQueueItemToCsvRow(item: ReviewQueueItem) {
+  return {
+    row_index: String(item.rowIndex),
+    brand: item.brand,
+    name: item.name,
+    slug: item.slug,
+    issue_type: item.issueType,
+    candidate_matches: item.candidateMatches
+      .map((candidate) => `${candidate.source}:${candidate.name}:${candidate.url}:${candidate.confidenceScore}`)
+      .join(" | "),
+    recommended_next_action: item.recommendedNextAction,
+    notes: item.notes.join(" "),
+  };
+}
+
+function buildRowReport(params: {
+  record: NormalizedPerfumeRecord;
+  candidateMatches: EnrichmentCandidate[];
+  candidateStatus: CandidateClassification["status"];
+  matched: boolean;
+  matchedSourceRecord?: SourceRecordResult;
+  matchedCandidate?: EnrichmentCandidate;
+  fieldsEnriched: string[];
+  fieldsSkipped: string[];
+  conflictsDetected: EnrichmentConflict[];
+  fieldProvenance: Record<EnrichmentTargetField, FieldProvenanceEntry>;
+  notes: string[];
+  status: EnrichmentStatus;
+}): EnrichmentRowReport {
+  return {
+    rowIndex: params.record.sourceRow,
+    brand: params.record.brandName,
+    name: params.record.perfumeName,
+    slug: params.record.perfumeSlug,
+    matched: params.matched,
+    matchedSource: params.matchedSourceRecord?.sourceName ?? null,
+    matchedUrl: params.matchedSourceRecord?.matchedUrl ?? params.matchedCandidate?.url ?? null,
+    matchedName: params.matchedSourceRecord?.matchedName ?? params.matchedCandidate?.name ?? null,
+    confidenceScore: params.matchedCandidate?.confidenceScore ?? params.candidateMatches[0]?.confidenceScore ?? null,
+    confidenceLevel: params.matched ? "high" : params.candidateMatches[0]?.confidenceLevel ?? "none",
+    enrichmentStatus: params.status,
+    candidateMatches: params.candidateMatches,
+    fieldsEnriched: params.fieldsEnriched,
+    fieldsSkipped: params.fieldsSkipped,
+    conflictsDetected: params.conflictsDetected,
+    fieldProvenance: params.fieldProvenance,
+    notes: params.notes,
+  };
 }
 
 export async function enrichVerifiedPerfumes(params: {
@@ -483,7 +536,9 @@ export async function enrichVerifiedPerfumes(params: {
     limit: params.limit,
   });
 
-  const indexes = await loadTrustedSourceRecords();
+  const adapters = createAdapters();
+  const adaptersById = new Map(adapters.map((adapter) => [adapter.id, adapter]));
+  const adapterCoverage = buildAdapterCoverage(adapters);
   const rows: EnrichmentOutputRow[] = [];
   const reportRows: EnrichmentRowReport[] = [];
   const fieldsEnrichedByType: Record<string, number> = {};
@@ -497,22 +552,145 @@ export async function enrichVerifiedPerfumes(params: {
   let conflicts = 0;
 
   for (const record of prepared.normalizedRecords) {
-    const baseRow = createEmptyEnrichmentRow(toCatalogCsvRow(record));
-    const match = matchTrustedSourceRecord(record, indexes);
+    const outputRow = createOutputRow(toCatalogCsvRow(record));
+    const candidateLists = await Promise.all(adapters.map((adapter) => adapter.searchCandidates(record)));
+    const candidateMatches = candidateLists.flat().sort((left, right) => right.confidenceScore - left.confidenceScore);
+    const candidateClassification = classifyCandidates(candidateMatches);
+    const acceptedSourceRecords = await fetchAcceptedSourceRecords({
+      acceptedCandidates: candidateClassification.acceptedCandidates,
+      adaptersById,
+    });
+
     const fieldsEnriched: string[] = [];
     const fieldsSkipped: string[] = [];
     const conflictsDetected: EnrichmentConflict[] = [];
-    const notes: string[] = [];
+    const notes = [...("notes" in candidateClassification ? candidateClassification.notes : [])];
+    const fieldProvenance = Object.fromEntries(
+      targetFields.map((field) => [
+        field,
+        createFieldProvenance(
+          field,
+          candidateClassification.status === "unmatched"
+            ? "no_source_match"
+            : candidateClassification.status === "low_confidence" || candidateClassification.status === "ambiguous"
+              ? "low_confidence_match"
+              : "source_value_missing",
+        ),
+      ]),
+    ) as Record<EnrichmentTargetField, FieldProvenanceEntry>;
+
     const catalogFieldsEnriched: string[] = [];
     const provenanceFieldsEnriched: string[] = [];
 
-    if (match.matched) {
+    for (const field of targetFields) {
+      const policy = fieldPolicyByField[field];
+      const rowKey = targetFieldToRowKey(field);
+      const acceptedProviderRecord = policy.trustedSourcePriority
+        .map((sourceId) => acceptedSourceRecords.get(sourceId))
+        .find((item): item is SourceRecordResult => item !== undefined);
+
+      if (!acceptedProviderRecord) {
+        const missingAdapters = policy.trustedSourcePriority
+          .map((sourceId) => adaptersById.get(sourceId))
+          .filter((adapter): adapter is PerfumeSourceAdapter => Boolean(adapter))
+          .filter((adapter) => !adapter.implemented)
+          .map((adapter) => adapter.label);
+
+        if (missingAdapters.length > 0) {
+          fieldProvenance[field] = createFieldProvenance(field, "not_implemented", {
+            notes: [
+              `Awaiting implementation for trusted adapter(s): ${missingAdapters.join(", ")}.`,
+            ],
+          });
+          continue;
+        }
+
+        continue;
+      }
+
+      const sourceField = acceptedProviderRecord.fields[field];
+      if (!sourceField) {
+        fieldProvenance[field] = createFieldProvenance(
+          field,
+          acceptedProviderRecord.unsupportedFields.includes(field) ? "unsupported_by_adapter" : "source_value_missing",
+          {
+            source: acceptedProviderRecord.sourceName,
+            sourceUrl: acceptedProviderRecord.matchedUrl,
+            confidence: candidateClassification.acceptedCandidates[0]?.confidenceScore ?? null,
+            lastCheckedAt: acceptedProviderRecord.fields.imageSourceUrl?.lastCheckedAt ?? null,
+            notes: acceptedProviderRecord.notes,
+          },
+        );
+        continue;
+      }
+
+      const currentValue = outputRow[rowKey] ?? "";
+      const sourceValue = sourceFieldValueToRowValue(sourceField);
+      const currentValueMissing = isBlankValue(currentValue);
+      const currentValueInvalid = isInvalidCurrentValue(field, outputRow);
+
+      if (currentValueMissing || currentValueInvalid) {
+        outputRow[rowKey] = sourceValue;
+        fieldsEnriched.push(field);
+        catalogFieldsEnriched.push(field);
+        fieldProvenance[field] = createFieldProvenance(
+          field,
+          currentValueMissing ? "applied" : "replaced_invalid_value",
+          {
+            source: acceptedProviderRecord.sourceName,
+            sourceUrl: sourceField.sourceUrl,
+            sourceField: sourceField.sourceField,
+            confidence: sourceField.confidence,
+            lastCheckedAt: sourceField.lastCheckedAt,
+            notes: sourceField.notes,
+          },
+        );
+        continue;
+      }
+
+      if (compareRowAndSourceValue(field, currentValue, sourceValue)) {
+        fieldsSkipped.push(field);
+        fieldProvenance[field] = createFieldProvenance(field, "preserved_curated_value", {
+          source: acceptedProviderRecord.sourceName,
+          sourceUrl: sourceField.sourceUrl,
+          sourceField: sourceField.sourceField,
+          confidence: sourceField.confidence,
+          lastCheckedAt: sourceField.lastCheckedAt,
+          notes: ["Existing verified value already matches the trusted source."],
+        });
+        continue;
+      }
+
+      conflictsDetected.push({
+        field,
+        currentValue,
+        sourceValue,
+        message: "Trusted source value differs from the existing verified value and was not auto-applied.",
+      });
+      fieldsSkipped.push(field);
+      fieldProvenance[field] = createFieldProvenance(field, "conflict_logged", {
+        source: acceptedProviderRecord.sourceName,
+        sourceUrl: sourceField.sourceUrl,
+        sourceField: sourceField.sourceField,
+        confidence: sourceField.confidence,
+        lastCheckedAt: sourceField.lastCheckedAt,
+        notes: ["Existing verified value was preserved and the conflict was logged for manual review."],
+      });
+    }
+
+    const matchedCandidate = candidateClassification.acceptedCandidates[0];
+    const matchedSourceRecord = matchedCandidate
+      ? acceptedSourceRecords.get(matchedCandidate.sourceId)
+      : undefined;
+
+    if (matchedCandidate && matchedSourceRecord) {
       totalMatched += 1;
-      baseRow.matched_source = match.source.provider;
-      baseRow.matched_url = match.source.parfumoUrl;
-      baseRow.matched_name = match.source.name;
-      baseRow.matched_confidence = String(match.confidenceScore);
-      baseRow.source_last_checked_at = match.source.sourceLastCheckedAt;
+      outputRow.matched_source = matchedSourceRecord.sourceName;
+      outputRow.matched_url = matchedSourceRecord.matchedUrl;
+      outputRow.matched_name = matchedSourceRecord.matchedName;
+      outputRow.matched_confidence = String(matchedCandidate.confidenceScore);
+      outputRow.source_last_checked_at =
+        Object.values(matchedSourceRecord.fields)[0]?.lastCheckedAt ?? "";
       provenanceFieldsEnriched.push(
         "matched_source",
         "matched_url",
@@ -520,63 +698,23 @@ export async function enrichVerifiedPerfumes(params: {
         "matched_confidence",
         "source_last_checked_at",
       );
-
-      if (!baseRow.image_source_url && match.source.imageUrl) {
-        baseRow.image_source_url = match.source.imageUrl;
-        catalogFieldsEnriched.push("image_source_url");
-      } else if (!baseRow.image_source_url) {
-        appendUnique(fieldsSkipped, "image_source_url");
-      }
-
-      if (!baseRow.source_name) {
-        baseRow.source_name = match.source.provider;
-        catalogFieldsEnriched.push("source_name");
-      } else {
-        appendUnique(fieldsSkipped, "source_name");
-      }
-
-      if (!baseRow.source_confidence) {
-        baseRow.source_confidence = String(match.confidenceScore);
-        catalogFieldsEnriched.push("source_confidence");
-      } else {
-        appendUnique(fieldsSkipped, "source_confidence");
-      }
-
-      notes.push(`Matched to ${match.source.provider} using ${match.strategy} brand/name matching.`);
-      if (catalogFieldsEnriched.length === 0) {
-        notes.push("Trusted source evidence only added provenance metadata; no import fields were safely updated.");
-      }
-      notes.push(
-        "The local trusted source snapshot does not contain release year, note pyramid, family, descriptions, or auxiliary scores for these matches.",
-      );
-    } else {
-      if (match.strategy === "variant") {
-        lowConfidenceMatches += 1;
-      }
-      if (match.strategy === "ambiguous") {
-        ambiguousMatches += 1;
-      }
-
-      if (match.source) {
-        notes.push(...match.notes);
-        notes.push(`Potential candidate: ${match.source.name} (${match.source.parfumoUrl}).`);
-      } else {
-        notes.push(...match.notes);
-      }
+      notes.push(`Accepted trusted ${matchedSourceRecord.sourceName} candidate: ${matchedSourceRecord.matchedName}.`);
+    } else if (candidateClassification.status === "low_confidence") {
+      lowConfidenceMatches += 1;
+    } else if (candidateClassification.status === "ambiguous") {
+      ambiguousMatches += 1;
     }
 
     const status = summarizeStatus({
-      matched: match.matched,
+      candidateStatus: candidateClassification.status,
+      matched: Boolean(matchedCandidate && matchedSourceRecord),
       catalogFieldsEnriched,
-      provenanceFieldsEnriched,
-      match,
     });
 
-    baseRow.enrichment_status = status;
-    baseRow.enrichment_notes = notes.join(" ");
+    outputRow.enrichment_status = status;
+    outputRow.enrichment_notes = notes.join(" ");
 
-    fieldsEnriched.push(...catalogFieldsEnriched, ...provenanceFieldsEnriched);
-    if (fieldsEnriched.length > 0) {
+    if (catalogFieldsEnriched.length > 0 || provenanceFieldsEnriched.length > 0) {
       rowsEnriched += 1;
       if (catalogFieldsEnriched.length > 0) {
         rowsWithCatalogFieldChanges += 1;
@@ -584,31 +722,32 @@ export async function enrichVerifiedPerfumes(params: {
       if (catalogFieldsEnriched.length === 0 && provenanceFieldsEnriched.length > 0) {
         rowsWithProvenanceOnlyChanges += 1;
       }
-      for (const field of fieldsEnriched) {
+      for (const field of [...catalogFieldsEnriched, ...provenanceFieldsEnriched]) {
         incrementFieldCount(fieldsEnrichedByType, field);
       }
     }
 
     conflicts += conflictsDetected.length;
-    rows.push(baseRow);
-    reportRows.push({
-      rowIndex: record.sourceRow,
-      brand: record.brandName,
-      name: record.perfumeName,
-      slug: record.perfumeSlug,
-      matched: match.matched,
-      matchedSource: match.matched ? match.source.provider : null,
-      matchedUrl: match.matched ? match.source.parfumoUrl : match.source?.parfumoUrl ?? null,
-      matchedName: match.matched ? match.source.name : match.source?.name ?? null,
-      confidenceScore: match.confidenceScore,
-      confidenceLevel: match.confidenceLevel,
-      enrichmentStatus: status,
-      fieldsEnriched,
-      fieldsSkipped,
-      conflictsDetected,
-      notes,
-    });
+    rows.push(outputRow);
+    reportRows.push(
+      buildRowReport({
+        record,
+        candidateMatches,
+        candidateStatus: candidateClassification.status,
+        matched: Boolean(matchedCandidate && matchedSourceRecord),
+        matchedSourceRecord,
+        matchedCandidate,
+        fieldsEnriched: [...catalogFieldsEnriched, ...provenanceFieldsEnriched],
+        fieldsSkipped,
+        conflictsDetected,
+        fieldProvenance,
+        notes,
+        status,
+      }),
+    );
   }
+
+  const reviewQueue = buildReviewQueue(reportRows);
 
   const summary: EnrichmentSummary = {
     totalRowsProcessed: prepared.normalizedRecords.length,
@@ -627,10 +766,14 @@ export async function enrichVerifiedPerfumes(params: {
   return {
     prepared,
     rows,
+    reviewQueue,
+    reviewQueueCsvRows: reviewQueue.map((item) => reviewQueueItemToCsvRow(item)),
     report: {
       summary,
+      adapterCoverage,
+      fieldPolicy: fieldPolicyByField,
       scoreNormalizationRules,
-      sourceAudit: buildAuditEntries(),
+      sourceAudit: buildAuditEntries(adapters),
       rows: reportRows,
     },
   };

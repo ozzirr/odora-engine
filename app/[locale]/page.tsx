@@ -16,7 +16,7 @@ import {
 } from "@/lib/homepage";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 type HomePageProps = {
   params: Promise<{

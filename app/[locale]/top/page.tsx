@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { type Prisma } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
@@ -13,28 +14,112 @@ import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+const topPerfumeInclude = {
+  brand: true,
+  offers: {
+    include: {
+      store: true,
+    },
+  },
+} satisfies Prisma.PerfumeInclude;
+
+type TopPerfumeCard = Prisma.PerfumeGetPayload<{
+  include: typeof topPerfumeInclude;
+}>;
 
 async function getTopPageData() {
   if (!isDatabaseConfigured) {
-    return [];
+    return {
+      topArabic: [] as TopPerfumeCard[],
+      topNiche: [] as TopPerfumeCard[],
+      topLongLasting: [] as TopPerfumeCard[],
+      topValuePicks: [] as TopPerfumeCard[],
+    };
   }
 
   try {
-    return await prisma.perfume.findMany({
-      where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
-      include: {
-        brand: true,
-        offers: {
-          include: {
-            store: true,
+    const visibilityWhere = getCatalogVisibilityWhere();
+    const priceCap = 100;
+    const [topArabic, topNiche, topLongLasting, valueCandidates] = await Promise.all([
+      prisma.perfume.findMany({
+        where: mergePerfumeWhere({ isArabic: true }, visibilityWhere),
+        include: topPerfumeInclude,
+        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+        take: 4,
+      }),
+      prisma.perfume.findMany({
+        where: mergePerfumeWhere({ isNiche: true }, visibilityWhere),
+        include: topPerfumeInclude,
+        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+        take: 4,
+      }),
+      prisma.perfume.findMany({
+        where: mergePerfumeWhere(
+          {
+            longevityScore: {
+              not: null,
+            },
           },
-        },
-      },
-    });
+          visibilityWhere,
+        ),
+        include: topPerfumeInclude,
+        orderBy: [{ longevityScore: "desc" }, { ratingInternal: "desc" }, { updatedAt: "desc" }],
+        take: 4,
+      }),
+      prisma.perfume.findMany({
+        where: mergePerfumeWhere(
+          {
+            offers: {
+              some: {
+                priceAmount: {
+                  lte: priceCap,
+                },
+              },
+            },
+          },
+          visibilityWhere,
+        ),
+        include: topPerfumeInclude,
+        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+        take: 24,
+      }),
+    ]);
+
+    const topValuePicks = valueCandidates
+      .filter((perfume) => {
+        const bestOffer = computeBestOffer(perfume.offers);
+        return bestOffer != null && bestOffer.bestTotalPrice <= priceCap;
+      })
+      .sort((a, b) => {
+        const aScore = a.ratingInternal ?? 0;
+        const bScore = b.ratingInternal ?? 0;
+
+        if (bScore !== aScore) {
+          return bScore - aScore;
+        }
+
+        const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
+        const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
+        return aPrice - bPrice;
+      })
+      .slice(0, 4);
+
+    return {
+      topArabic: topArabic as TopPerfumeCard[],
+      topNiche: topNiche as TopPerfumeCard[],
+      topLongLasting: topLongLasting as TopPerfumeCard[],
+      topValuePicks,
+    };
   } catch (error) {
     logCatalogQueryError("top:list", error);
-    return [];
+    return {
+      topArabic: [] as TopPerfumeCard[],
+      topNiche: [] as TopPerfumeCard[],
+      topLongLasting: [] as TopPerfumeCard[],
+      topValuePicks: [] as TopPerfumeCard[],
+    };
   }
 }
 
@@ -63,41 +148,8 @@ export default async function TopPage({ params }: TopPageProps) {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "top.page" });
-  const perfumes = await getTopPageData();
-
-  const topArabic = perfumes
-    .filter((perfume) => perfume.isArabic)
-    .sort((a, b) => (b.ratingInternal ?? 0) - (a.ratingInternal ?? 0))
-    .slice(0, 4);
-
-  const topNiche = perfumes
-    .filter((perfume) => perfume.isNiche)
-    .sort((a, b) => (b.ratingInternal ?? 0) - (a.ratingInternal ?? 0))
-    .slice(0, 4);
-
-  const topLongLasting = [...perfumes]
-    .sort((a, b) => (b.longevityScore ?? 0) - (a.longevityScore ?? 0))
-    .slice(0, 4);
-
+  const { topArabic, topNiche, topLongLasting, topValuePicks } = await getTopPageData();
   const priceCap = 100;
-  const topValuePicks = perfumes
-    .filter((perfume) => {
-      const bestOffer = computeBestOffer(perfume.offers);
-      return bestOffer != null && bestOffer.bestTotalPrice <= priceCap;
-    })
-    .sort((a, b) => {
-      const aScore = a.ratingInternal ?? 0;
-      const bScore = b.ratingInternal ?? 0;
-
-      if (bScore !== aScore) {
-        return bScore - aScore;
-      }
-
-      const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-      const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-      return aPrice - bPrice;
-    })
-    .slice(0, 4);
 
   return (
     <Container className="space-y-12 pt-14 pb-8">

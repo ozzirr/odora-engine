@@ -1,0 +1,77 @@
+"use client";
+
+import type { ComponentProps } from "react";
+import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
+
+import { buttonStyles } from "@/components/ui/Button";
+import { type AppLocale } from "@/lib/i18n";
+import { Link } from "@/lib/navigation";
+import { getAmazonProductUrl } from "@/lib/amazon";
+import { cn } from "@/lib/utils";
+
+type AmazonCalloutCardProps = {
+  perfumeName: string;
+  brandName?: string | null;
+  amazonUrl?: string | null;
+  className?: string;
+};
+
+type LinkHref = ComponentProps<typeof Link>["href"];
+
+function AmazonWordmark({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logo_amazon.webp"
+      alt="Amazon"
+      width={110}
+      height={34}
+      className={className}
+    />
+  );
+}
+
+export function AmazonCalloutCard({
+  perfumeName,
+  brandName,
+  amazonUrl,
+  className,
+}: AmazonCalloutCardProps) {
+  const t = useTranslations("perfume.amazon");
+  const locale = useLocale() as AppLocale;
+  const targetUrl = getAmazonProductUrl({ amazonUrl, brandName, perfumeName, locale });
+
+  return (
+    <section
+      className={cn(
+        "rounded-[28px] border border-[#f1d19b] bg-[linear-gradient(135deg,#fff9ef_0%,#fff2d5_55%,#fde4b8_100%)] p-6 shadow-[0_20px_50px_-36px_rgba(88,52,8,0.48)]",
+        className,
+      )}
+    >
+      <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="space-y-2">
+          <div className="space-y-1">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#92631b]">{t("eyebrow")}</p>
+            <h2 className="flex flex-wrap items-center gap-2 font-display text-2xl text-[#23170c] sm:text-[2rem]">
+              <span>{t("titlePrefix")}</span>
+              <AmazonWordmark className="h-7 w-auto object-contain sm:h-8" />
+            </h2>
+            <p className="max-w-2xl text-sm text-[#5b4630]">{t("subtitle")}</p>
+          </div>
+        </div>
+
+        <Link
+          href={targetUrl as unknown as LinkHref}
+          target="_blank"
+          rel="noreferrer"
+          className={buttonStyles({
+            className:
+              "h-12 w-full min-w-[200px] bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c] lg:w-auto lg:px-6",
+          })}
+        >
+          {t("cta")}
+        </Link>
+      </div>
+    </section>
+  );
+}

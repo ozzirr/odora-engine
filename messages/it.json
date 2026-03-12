@@ -337,6 +337,12 @@
       },
       "goToOffer": "Vai all'offerta"
     },
+    "amazon": {
+      "eyebrow": "Sei cliente Prime?",
+      "titlePrefix": "Acquista su",
+      "subtitle": "Controlla disponibilita, spedizione Prime e tempi di consegna su Amazon prima di passare alle alternative piu economiche.",
+      "cta": "Acquista su Amazon"
+    },
     "offerTable": {
       "empty": "Le offerte appariranno qui non appena i prezzi saranno disponibili.",
       "columns": {
