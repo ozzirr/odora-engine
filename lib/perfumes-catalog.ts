@@ -1,7 +1,20 @@
 import type { Prisma } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 
-import { getCatalogVisibilityWhere, logCatalogQueryError, mergePerfumeWhere } from "@/lib/catalog";
-import { applySorting, buildPerfumeQuery, type SearchParamInput } from "@/lib/filters";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import {
+  getCatalogVisibilityWhereForMode,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
+} from "@/lib/catalog";
+import {
+  applySorting,
+  buildPerfumeQuery,
+  serializeParsedPerfumeFilters,
+  type SearchParamInput,
+} from "@/lib/filters";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const PERFUMES_PAGE_SIZE = 20;
@@ -41,9 +54,21 @@ function normalizePaginationValue(value: number | undefined, fallback: number) {
   return normalized >= 0 ? normalized : fallback;
 }
 
-export async function getPerfumesPage(
+function getEmptyPerfumesPageResult(offset: number, limit: number) {
+  return {
+    perfumes: [] as PerfumeListItem[],
+    total: 0,
+    hasMore: false,
+    selectedFilters: buildPerfumeQuery({}).parsed,
+    offset,
+    limit,
+  };
+}
+
+async function getPerfumesPageUncached(
   searchParams: SearchParamInput,
-  options: GetPerfumesPageOptions = {},
+  options: GetPerfumesPageOptions,
+  catalogMode: CatalogMode,
 ) {
   const offset = normalizePaginationValue(options.offset, 0);
   const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
@@ -51,16 +76,12 @@ export async function getPerfumesPage(
 
   if (!isDatabaseConfigured) {
     return {
-      perfumes: [] as PerfumeListItem[],
-      total: 0,
-      hasMore: false,
+      ...getEmptyPerfumesPageResult(offset, limit),
       selectedFilters: parsed,
-      offset,
-      limit,
     };
   }
 
-  const mergedWhere = mergePerfumeWhere(where, getCatalogVisibilityWhere());
+  const mergedWhere = mergePerfumeWhere(where, getCatalogVisibilityWhereForMode(catalogMode));
 
   try {
     const baseQuery: Prisma.PerfumeFindManyArgs = {
@@ -88,12 +109,28 @@ export async function getPerfumesPage(
   } catch (error) {
     logCatalogQueryError("perfumes:list", error);
     return {
-      perfumes: [] as PerfumeListItem[],
-      total: 0,
-      hasMore: false,
+      ...getEmptyPerfumesPageResult(offset, limit),
       selectedFilters: parsed,
-      offset,
-      limit,
     };
   }
+}
+
+export async function getPerfumesPage(
+  searchParams: SearchParamInput,
+  options: GetPerfumesPageOptions = {},
+) {
+  const offset = normalizePaginationValue(options.offset, 0);
+  const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
+  const { parsed } = buildPerfumeQuery(searchParams);
+  const catalogMode = resolveCatalogMode();
+  const serializedFilters = serializeParsedPerfumeFilters(parsed);
+
+  return unstable_cache(
+    async () => getPerfumesPageUncached(searchParams, { offset, limit }, catalogMode),
+    ["perfumes-page", catalogMode, serializedFilters, String(offset), String(limit)],
+    {
+      revalidate: 1800,
+      tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumesPage],
+    },
+  )();
 }

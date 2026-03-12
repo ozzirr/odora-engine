@@ -2,6 +2,9 @@ export const PUBLIC_CACHE_TAGS = {
   catalog: "catalog",
   homepage: "homepage",
   finderOptions: "finder-options",
+  finderResults: "finder-results",
+  perfumesPage: "perfumes-page",
+  topPage: "top-page",
   perfumeDetail: "perfume-detail",
 } as const;
 

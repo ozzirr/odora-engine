@@ -43,10 +43,13 @@ cp .env.example .env
 
 Required/optional variables:
 
-- `DATABASE_URL` (required for DB-backed routes and Prisma commands)
+- `DATABASE_URL` (required): runtime DB URL used by the web app
+- `DIRECT_URL` (recommended on Supabase/Vercel): direct or session-mode DB URL used by Prisma CLI commands
 - `ODORA_CATALOG_MODE` (optional): `all` | `no_demo` | `verified_only`
-- `NEXT_PUBLIC_SUPABASE_URL` (required for auth client/session middleware)
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for auth client/session middleware)
+- `ODORA_DB_CONNECTION_LIMIT` (optional): Prisma pool size override for runtime
+- `ODORA_DB_POOL_TIMEOUT` (optional): Prisma pool timeout override for runtime
+- `NEXT_PUBLIC_SUPABASE_URL` (required for auth client/session proxy)
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for auth client/session proxy)
 - `NEXT_PUBLIC_SITE_URL` (recommended, used for auth email callback links)
 - `SUPABASE_URL` (required for image upload/sync scripts)
 - `SUPABASE_SERVICE_ROLE_KEY` (required for image upload/sync scripts)
@@ -57,6 +60,21 @@ Important:
 - Do not quote `DATABASE_URL`
 - Do not commit secrets
 
+### Vercel + Supabase Recommended Setup
+
+For Vercel deployments, keep Prisma runtime on the Supabase pooled connection string and use a separate direct/session URL for Prisma CLI:
+
+- `DATABASE_URL`: Supabase transaction pooler (`6543`) with `pgbouncer=true`
+- `DIRECT_URL`: Supabase direct DB URL or session pooler (`5432`)
+- `ODORA_DB_CONNECTION_LIMIT=1`: recommended starting point on Vercel
+- `ODORA_DB_POOL_TIMEOUT=20`: safe default
+
+Recommended rollout:
+
+1. Start production with `ODORA_DB_CONNECTION_LIMIT=1`
+2. Only raise to `2` if you see real pool contention or request queuing
+3. Leave higher values alone unless you have measured evidence they help
+
 ### Auth (Email/Password) Setup
 
 Odora uses Supabase Auth (SSR) for email/password:
@@ -64,7 +82,7 @@ Odora uses Supabase Auth (SSR) for email/password:
 - `/login` -> real `signInWithPassword`
 - `/signup` -> real `signUp`
 - `/auth/callback` -> verifies callback tokens/codes
-- `middleware.ts` -> keeps auth session cookies refreshed
+- `proxy.ts` -> keeps auth session cookies refreshed on the protected auth/profile routes
 
 Social providers (Google/Apple/Facebook) are still placeholder buttons in UI until provider keys are configured.
 

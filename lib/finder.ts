@@ -299,6 +299,19 @@ export function buildFinderPreferencesFromInput(input: FinderQueryInput): Finder
   };
 }
 
+export function serializeFinderPreferences(preferences: FinderPreferences) {
+  return JSON.stringify({
+    gender: preferences.gender,
+    mood: preferences.mood || null,
+    season: preferences.season || null,
+    occasion: preferences.occasion || null,
+    budget: preferences.budget,
+    preferredNote: preferences.preferredNote || null,
+    arabicOnly: preferences.arabicOnly,
+    nicheOnly: preferences.nicheOnly,
+  });
+}
+
 export function hasConfiguredFinderPreferences(preferences: FinderPreferences) {
   return (
     preferences.gender !== defaultFinderPreferences.gender ||

@@ -150,6 +150,21 @@ function buildTypedNoteFilter(slugOrAlias: string, noteType: NoteType): Prisma.P
   };
 }
 
+export function serializeParsedPerfumeFilters(filters: ParsedPerfumeFilters) {
+  return JSON.stringify({
+    gender: filters.gender ?? null,
+    family: filters.family ?? null,
+    price: filters.price ?? null,
+    arabic: filters.arabic ?? null,
+    niche: filters.niche ?? null,
+    sort: filters.sort ?? null,
+    note: filters.note ?? null,
+    top: filters.top ?? null,
+    heart: filters.heart ?? null,
+    base: filters.base ?? null,
+  });
+}
+
 export function buildPerfumeQuery(searchParams: SearchParamInput) {
   const genderParam = readParamValue(searchParams.gender);
   const familyParam = readParamValue(searchParams.family);

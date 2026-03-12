@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import { type Prisma } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import {
-  getCatalogVisibilityWhere,
+  getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
   mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
 } from "@/lib/catalog";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
@@ -23,18 +27,22 @@ type TopPerfumeCard = Prisma.PerfumeGetPayload<{
   include: typeof topPerfumeInclude;
 }>;
 
-async function getTopPageData() {
+function getEmptyTopPageData() {
+  return {
+    topArabic: [] as TopPerfumeCard[],
+    topNiche: [] as TopPerfumeCard[],
+    topLongLasting: [] as TopPerfumeCard[],
+    topValuePicks: [] as TopPerfumeCard[],
+  };
+}
+
+async function getTopPageDataUncached(catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
-    return {
-      topArabic: [] as TopPerfumeCard[],
-      topNiche: [] as TopPerfumeCard[],
-      topLongLasting: [] as TopPerfumeCard[],
-      topValuePicks: [] as TopPerfumeCard[],
-    };
+    return getEmptyTopPageData();
   }
 
   try {
-    const visibilityWhere = getCatalogVisibilityWhere();
+    const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
     const priceCap = 100;
     const [topArabic, topNiche, topLongLasting, valueCandidates] = await Promise.all([
       prisma.perfume.findMany({
@@ -85,13 +93,21 @@ async function getTopPageData() {
     };
   } catch (error) {
     logCatalogQueryError("top:list", error);
-    return {
-      topArabic: [] as TopPerfumeCard[],
-      topNiche: [] as TopPerfumeCard[],
-      topLongLasting: [] as TopPerfumeCard[],
-      topValuePicks: [] as TopPerfumeCard[],
-    };
+    return getEmptyTopPageData();
   }
+}
+
+async function getTopPageData() {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getTopPageDataUncached(catalogMode),
+    ["top-page", catalogMode],
+    {
+      revalidate: 3600,
+      tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.topPage],
+    },
+  )();
 }
 
 type TopPageProps = {

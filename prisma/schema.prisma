@@ -132,6 +132,14 @@ model Perfume {
   @@index([dataQuality])
   @@index([bestTotalPriceAmount])
   @@index([hasAvailableOffer, bestTotalPriceAmount])
+  @@index([ratingInternal(sort: Desc), updatedAt(sort: Desc), name], map: "perfume_rating_updated_name_idx")
+  @@index([isArabic, ratingInternal(sort: Desc), updatedAt(sort: Desc)], map: "perfume_arabic_rating_updated_idx")
+  @@index([isNiche, ratingInternal(sort: Desc), updatedAt(sort: Desc)], map: "perfume_niche_rating_updated_idx")
+  @@index([longevityScore(sort: Desc), ratingInternal(sort: Desc), updatedAt(sort: Desc)], map: "perfume_longevity_rating_updated_idx")
+  @@index([hasAvailableOffer, bestTotalPriceAmount, ratingInternal(sort: Desc), name], map: "perfume_offer_price_rating_name_idx")
+  @@index([gender, ratingInternal(sort: Desc), name], map: "perfume_gender_rating_name_idx")
+  @@index([priceRange, ratingInternal(sort: Desc), name], map: "perfume_price_range_rating_name_idx")
+  @@index([fragranceFamily, ratingInternal(sort: Desc), name], map: "perfume_family_rating_name_idx")
 }
 
 model Note {

@@ -1,6 +1,8 @@
 import { type Prisma } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 import { NextResponse } from "next/server";
 
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import {
   buildFinderPreferencesFromInput,
   buildFinderWhere,
@@ -8,13 +10,16 @@ import {
   matchPerfumesFromPreferences,
   normalizeFinderFilter,
   normalizeFinderQueryFilters,
+  serializeFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
 } from "@/lib/finder";
 import {
-  getCatalogVisibilityWhere,
+  getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
   mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
 } from "@/lib/catalog";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
@@ -106,6 +111,38 @@ function parsePositiveInt(value: unknown, fallback: number) {
   return fallback;
 }
 
+async function runFinderSearchUncached(
+  preferences: FinderPreferences,
+  offset: number,
+  limit: number,
+  catalogMode: CatalogMode,
+) {
+  const normalizedFilters = normalizeFinderQueryFilters(preferences);
+  const finderWhere = buildFinderWhere(normalizedFilters);
+  const where = mergePerfumeWhere(finderWhere, getCatalogVisibilityWhereForMode(catalogMode));
+  const hasConfiguredPreferences = hasConfiguredFinderPreferences(preferences);
+  const candidateLimit = hasConfiguredPreferences
+    ? Math.min(Math.max(offset + limit + 80, FINDER_MIN_CANDIDATES), FINDER_FILTERED_CANDIDATE_CAP)
+    : FINDER_MIN_CANDIDATES;
+
+  const candidates = (await prisma.perfume.findMany({
+    where,
+    include: finderInclude,
+    orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }, { name: "asc" }],
+    take: candidateLimit,
+  })) as FinderPerfume[];
+
+  const results = matchPerfumesFromPreferences(preferences, candidates);
+  const paginatedResults = results.slice(offset, offset + limit);
+
+  return {
+    results: paginatedResults,
+    total: results.length,
+    hasMore: offset + paginatedResults.length < results.length,
+    nextOffset: offset + paginatedResults.length,
+  };
+}
+
 export async function POST(request: Request) {
   if (!isDatabaseConfigured) {
     return NextResponse.json({ results: [], total: 0, hasMore: false, nextOffset: 0 });
@@ -117,31 +154,20 @@ export async function POST(request: Request) {
   const preferences = parseFinderPreferences(payload);
   const offset = parsePositiveInt(payloadObject?.offset, 0);
   const limit = Math.min(parsePositiveInt(payloadObject?.limit, FINDER_RESULTS_PAGE_SIZE), 40);
-  const normalizedFilters = normalizeFinderQueryFilters(preferences);
-  const finderWhere = buildFinderWhere(normalizedFilters);
-  const where = mergePerfumeWhere(finderWhere, getCatalogVisibilityWhere());
-  const hasConfiguredPreferences = hasConfiguredFinderPreferences(preferences);
-  const candidateLimit = hasConfiguredPreferences
-    ? Math.min(Math.max(offset + limit + 80, FINDER_MIN_CANDIDATES), FINDER_FILTERED_CANDIDATE_CAP)
-    : FINDER_MIN_CANDIDATES;
+  const catalogMode = resolveCatalogMode();
+  const serializedPreferences = serializeFinderPreferences(preferences);
 
   try {
-    const candidates = (await prisma.perfume.findMany({
-      where,
-      include: finderInclude,
-      orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }, { name: "asc" }],
-      take: candidateLimit,
-    })) as FinderPerfume[];
+    const result = await unstable_cache(
+      async () => runFinderSearchUncached(preferences, offset, limit, catalogMode),
+      ["finder-search", catalogMode, serializedPreferences, String(offset), String(limit)],
+      {
+        revalidate: 1800,
+        tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.finderResults],
+      },
+    )();
 
-    const results = matchPerfumesFromPreferences(preferences, candidates);
-    const paginatedResults = results.slice(offset, offset + limit);
-
-    return NextResponse.json({
-      results: paginatedResults,
-      total: results.length,
-      hasMore: offset + paginatedResults.length < results.length,
-      nextOffset: offset + paginatedResults.length,
-    });
+    return NextResponse.json(result);
   } catch (error) {
     logCatalogQueryError("finder:search", error);
     return NextResponse.json(
