@@ -283,9 +283,22 @@ export function applySorting(
     return {
       query: {
         ...query,
-        orderBy: defaultOrderBy,
+        orderBy:
+          sortParam === "price_low"
+            ? [
+                { hasAvailableOffer: "desc" },
+                { bestTotalPriceAmount: "asc" },
+                { ratingInternal: "desc" },
+                { name: "asc" },
+              ]
+            : [
+                { hasAvailableOffer: "desc" },
+                { bestTotalPriceAmount: "desc" },
+                { ratingInternal: "desc" },
+                { name: "asc" },
+              ],
       },
-      postSort: sortParam,
+      postSort: undefined,
     };
   }
 

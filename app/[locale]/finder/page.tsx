@@ -1,10 +1,11 @@
-import { cache } from "react";
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
 import { buildFinderPreferencesFromInput } from "@/lib/finder";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
@@ -19,14 +20,18 @@ type FinderOptions = {
   notes: string[];
 };
 
-const getFinderOptions = cache(async (): Promise<FinderOptions> => {
+function getEmptyFinderOptions(): FinderOptions {
+  return {
+    moods: [],
+    seasons: [],
+    occasions: [],
+    notes: [],
+  };
+}
+
+const getCachedFinderOptions = unstable_cache(async (): Promise<FinderOptions> => {
   if (!isDatabaseConfigured) {
-    return {
-      moods: [],
-      seasons: [],
-      occasions: [],
-      notes: [],
-    };
+    return getEmptyFinderOptions();
   }
 
   try {
@@ -58,14 +63,16 @@ const getFinderOptions = cache(async (): Promise<FinderOptions> => {
     };
   } catch (error) {
     logCatalogQueryError("finder:options", error);
-    return {
-      moods: [],
-      seasons: [],
-      occasions: [],
-      notes: [],
-    };
+    return getEmptyFinderOptions();
   }
+}, ["finder-options"], {
+  revalidate: 21600,
+  tags: [PUBLIC_CACHE_TAGS.finderOptions],
 });
+
+async function getFinderOptions() {
+  return getCachedFinderOptions();
+}
 
 type FinderPageProps = {
   params: Promise<{

@@ -3,11 +3,18 @@ import {
   HomepageSection,
   type Prisma,
 } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
-import { getCatalogVisibilityWhere, logCatalogQueryError } from "@/lib/catalog";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import {
+  getCatalogVisibilityWhereForMode,
+  logCatalogQueryError,
+  resolveCatalogMode,
+  type CatalogMode,
+} from "@/lib/catalog";
 import { getPerfumeShortText } from "@/lib/perfume-text";
-import { computeBestOffer } from "@/lib/pricing";
+import { getBestOfferSummary } from "@/lib/pricing";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export type QuickFilterIllustration =
@@ -66,23 +73,6 @@ export type HomeCollectionCard = {
 
 export const homepagePerfumeInclude = {
   brand: true,
-  offers: {
-    select: {
-      id: true,
-      priceAmount: true,
-      currency: true,
-      shippingCost: true,
-      availability: true,
-      affiliateUrl: true,
-      productUrl: true,
-      lastCheckedAt: true,
-      store: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  },
   notes: {
     select: {
       intensity: true,
@@ -173,6 +163,17 @@ export type HomepageData = {
   collections: HomeCollectionCard[];
   trustedStores: string[];
 };
+
+function getEmptyHomepageData(): HomepageData {
+  return {
+    hero: null,
+    heroSpotlights: [],
+    trending: [],
+    featured: [],
+    collections: [],
+    trustedStores: [],
+  };
+}
 
 const homepageMoodCardConfig = [
   {
@@ -267,8 +268,8 @@ export const homepageMoodCards: HomepageMoodCard[] = homepageMoodCardConfig.map(
 }));
 
 function compareHomepagePerfumes(left: HomePerfumeRecord, right: HomePerfumeRecord) {
-  const leftHasOffer = computeBestOffer(left.offers) ? 1 : 0;
-  const rightHasOffer = computeBestOffer(right.offers) ? 1 : 0;
+  const leftHasOffer = left.hasAvailableOffer ? 1 : 0;
+  const rightHasOffer = right.hasAvailableOffer ? 1 : 0;
 
   if (rightHasOffer !== leftHasOffer) {
     return rightHasOffer - leftHasOffer;
@@ -312,8 +313,9 @@ function toUniquePerfumes(perfumes: HomePerfumeRecord[]) {
 async function getHomepageSectionPerfumes(
   section: HomepageSection,
   take: number | undefined,
+  catalogMode: CatalogMode,
 ): Promise<HomePerfumeRecord[]> {
-  const visibilityWhere = getCatalogVisibilityWhere();
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
 
   const placements = (await prisma.perfumeHomepagePlacement.findMany({
     where: {
@@ -379,22 +381,28 @@ function toCollectionCard(collection: HomeCollectionRecord): HomeCollectionCard 
 }
 
 export async function getHomepageData(): Promise<HomepageData> {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getHomepageDataUncached(catalogMode),
+    ["homepage-data", catalogMode],
+    {
+      revalidate: 3600,
+      tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.homepage],
+    },
+  )();
+}
+
+async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<HomepageData> {
   if (!isDatabaseConfigured) {
-    return {
-      hero: null,
-      heroSpotlights: [],
-      trending: [],
-      featured: [],
-      collections: [],
-      trustedStores: [],
-    };
+    return getEmptyHomepageData();
   }
 
   try {
     const [heroCandidates, trendingCandidates, featuredCandidates, collections] = await Promise.all([
-      getHomepageSectionPerfumes(HomepageSection.HERO, 4),
-      getHomepageSectionPerfumes(HomepageSection.TRENDING, 8),
-      getHomepageSectionPerfumes(HomepageSection.FEATURED, 12),
+      getHomepageSectionPerfumes(HomepageSection.HERO, 4, catalogMode),
+      getHomepageSectionPerfumes(HomepageSection.TRENDING, 8, catalogMode),
+      getHomepageSectionPerfumes(HomepageSection.FEATURED, 12, catalogMode),
       prisma.homepageCollection.findMany({
         where: {
           isHomepageVisible: true,
@@ -435,15 +443,91 @@ export async function getHomepageData(): Promise<HomepageData> {
     };
   } catch (error) {
     logCatalogQueryError("home:homepage", error);
+    return getEmptyHomepageData();
+  }
+}
 
-    return {
-      hero: null,
-      heroSpotlights: [],
-      trending: [],
-      featured: [],
-      collections: [],
-      trustedStores: [],
-    };
+export async function getPopularPerfumeSlugs(limit = 24): Promise<string[]> {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getPopularPerfumeSlugsUncached(catalogMode, limit),
+    ["popular-perfume-slugs", catalogMode, String(limit)],
+    {
+      revalidate: 3600,
+      tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumeDetail],
+    },
+  )();
+}
+
+async function getPopularPerfumeSlugsUncached(
+  catalogMode: CatalogMode,
+  limit: number,
+): Promise<string[]> {
+  if (!isDatabaseConfigured) {
+    return [];
+  }
+
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+
+  try {
+    const take = Math.max(limit, 12);
+    const [homepagePlacements, topRatedPerfumes] = await Promise.all([
+      prisma.perfumeHomepagePlacement.findMany({
+        where: visibilityWhere
+          ? {
+              perfume: {
+                is: visibilityWhere,
+              },
+            }
+          : undefined,
+        select: {
+          perfume: {
+            select: {
+              slug: true,
+            },
+          },
+        },
+        orderBy: [{ priority: "asc" }, { updatedAt: "desc" }],
+        take,
+      }),
+      prisma.perfume.findMany({
+        where: {
+          ...(visibilityWhere ?? {}),
+          ratingInternal: {
+            not: null,
+          },
+        },
+        select: {
+          slug: true,
+        },
+        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }, { name: "asc" }],
+        take,
+      }),
+    ]);
+
+    const dedupedSlugs = new Set<string>();
+
+    for (const record of homepagePlacements) {
+      if (record.perfume.slug) {
+        dedupedSlugs.add(record.perfume.slug);
+      }
+      if (dedupedSlugs.size >= limit) {
+        break;
+      }
+    }
+
+    for (const perfume of topRatedPerfumes) {
+      dedupedSlugs.add(perfume.slug);
+      if (dedupedSlugs.size >= limit) {
+        break;
+      }
+    }
+
+    return [...dedupedSlugs];
+  } catch (error) {
+    logCatalogQueryError("home:popular-slugs", error);
+    return [];
   }
 }
 
@@ -451,15 +535,13 @@ export function selectTrustedStores(perfumes: HomePerfumeRecord[], count = 4) {
   const counts = new Map<string, number>();
 
   for (const perfume of perfumes) {
-    for (const offer of perfume.offers) {
-      const rawName = offer.store?.name?.trim();
-      if (!rawName) {
-        continue;
-      }
-
-      const normalizedName = rawName.replace(/\s+italia$/i, "");
-      counts.set(normalizedName, (counts.get(normalizedName) ?? 0) + 1);
+    const rawName = perfume.bestStoreName?.trim();
+    if (!rawName) {
+      continue;
     }
+
+    const normalizedName = rawName.replace(/\s+italia$/i, "");
+    counts.set(normalizedName, (counts.get(normalizedName) ?? 0) + 1);
   }
 
   return [...counts.entries()]
@@ -472,7 +554,7 @@ export function toHomeSpotlight(
   perfume: HomePerfumeRecord,
   badgeKey: HomeSpotlightBadgeKey,
 ): HomePerfumeSpotlight {
-  const bestOffer = computeBestOffer(perfume.offers);
+  const bestOffer = getBestOfferSummary(perfume);
 
   return {
     href: `/perfumes/${perfume.slug}`,
@@ -501,7 +583,13 @@ export function toPerfumeCardItem(perfume: HomePerfumeRecord): PerfumeCardItem {
     isArabic: perfume.isArabic,
     isNiche: perfume.isNiche,
     brand: perfume.brand,
-    offers: perfume.offers,
+    bestPriceAmount: perfume.bestPriceAmount,
+    bestTotalPriceAmount: perfume.bestTotalPriceAmount,
+    bestCurrency: perfume.bestCurrency,
+    bestStoreName: perfume.bestStoreName,
+    bestOfferUrl: perfume.bestOfferUrl,
+    bestOfferUpdatedAt: perfume.bestOfferUpdatedAt,
+    hasAvailableOffer: perfume.hasAvailableOffer,
     notes: perfume.notes,
   };
 }

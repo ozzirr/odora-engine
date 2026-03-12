@@ -12,17 +12,11 @@ import {
 } from "@/lib/catalog";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
-import { computeBestOffer } from "@/lib/pricing";
 
 export const revalidate = 3600;
 
 const topPerfumeInclude = {
   brand: true,
-  offers: {
-    include: {
-      store: true,
-    },
-  },
 } satisfies Prisma.PerfumeInclude;
 
 type TopPerfumeCard = Prisma.PerfumeGetPayload<{
@@ -71,46 +65,23 @@ async function getTopPageData() {
       prisma.perfume.findMany({
         where: mergePerfumeWhere(
           {
-            offers: {
-              some: {
-                priceAmount: {
-                  lte: priceCap,
-                },
-              },
+            bestTotalPriceAmount: {
+              lte: priceCap,
             },
           },
           visibilityWhere,
         ),
         include: topPerfumeInclude,
-        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
-        take: 24,
+        orderBy: [{ ratingInternal: "desc" }, { bestTotalPriceAmount: "asc" }, { updatedAt: "desc" }],
+        take: 4,
       }),
     ]);
-
-    const topValuePicks = valueCandidates
-      .filter((perfume) => {
-        const bestOffer = computeBestOffer(perfume.offers);
-        return bestOffer != null && bestOffer.bestTotalPrice <= priceCap;
-      })
-      .sort((a, b) => {
-        const aScore = a.ratingInternal ?? 0;
-        const bScore = b.ratingInternal ?? 0;
-
-        if (bScore !== aScore) {
-          return bScore - aScore;
-        }
-
-        const aPrice = computeBestOffer(a.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-        const bPrice = computeBestOffer(b.offers)?.bestTotalPrice ?? Number.POSITIVE_INFINITY;
-        return aPrice - bPrice;
-      })
-      .slice(0, 4);
 
     return {
       topArabic: topArabic as TopPerfumeCard[],
       topNiche: topNiche as TopPerfumeCard[],
       topLongLasting: topLongLasting as TopPerfumeCard[],
-      topValuePicks,
+      topValuePicks: valueCandidates as TopPerfumeCard[],
     };
   } catch (error) {
     logCatalogQueryError("top:list", error);

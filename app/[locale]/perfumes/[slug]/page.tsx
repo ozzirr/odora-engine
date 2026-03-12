@@ -1,5 +1,5 @@
-import { cache } from "react";
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import { type Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -12,12 +12,16 @@ import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
 import {
-  getCatalogVisibilityWhere,
+  getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
   mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
+import { getPopularPerfumeSlugs } from "@/lib/homepage";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
@@ -90,26 +94,45 @@ const perfumeDiscoveryInclude = {
   },
 } satisfies Prisma.PerfumeInclude;
 
-const getPerfumeRecordBySlug = cache(async (slug: string) => {
+async function getPerfumeRecordBySlugUncached(slug: string, catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
     return null;
   }
+
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
 
   return prisma.perfume.findFirst({
-    where: mergePerfumeWhere({ slug }, getCatalogVisibilityWhere()),
+    where: mergePerfumeWhere({ slug }, visibilityWhere),
     include: perfumeDetailInclude,
   });
-});
+}
 
-async function getPerfumePageData(slug: string) {
+async function getPerfumeRecordBySlug(slug: string) {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getPerfumeRecordBySlugUncached(slug, catalogMode),
+    ["perfume-record", catalogMode, slug],
+    {
+      revalidate: 1800,
+      tags: [
+        PUBLIC_CACHE_TAGS.catalog,
+        PUBLIC_CACHE_TAGS.perfumeDetail,
+        getPerfumeDetailTag(slug),
+      ],
+    },
+  )();
+}
+
+async function getPerfumePageDataUncached(slug: string, catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
     return null;
   }
 
-  const visibilityWhere = getCatalogVisibilityWhere();
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
 
   try {
-    const perfume = await getPerfumeRecordBySlug(slug);
+    const perfume = await getPerfumeRecordBySlugUncached(slug, catalogMode);
 
     if (!perfume) {
       return null;
@@ -189,6 +212,29 @@ async function getPerfumePageData(slug: string) {
     logCatalogQueryError("perfumes:detail", error);
     return null;
   }
+}
+
+async function getPerfumePageData(slug: string) {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getPerfumePageDataUncached(slug, catalogMode),
+    ["perfume-page", catalogMode, slug],
+    {
+      revalidate: 1800,
+      tags: [
+        PUBLIC_CACHE_TAGS.catalog,
+        PUBLIC_CACHE_TAGS.perfumeDetail,
+        getPerfumeDetailTag(slug),
+      ],
+    },
+  )();
+}
+
+export async function generateStaticParams() {
+  const slugs = await getPopularPerfumeSlugs(24);
+
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {

@@ -1,7 +1,5 @@
 import { Gender, PriceRange, type Prisma } from "@prisma/client";
 
-import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
-
 export type FinderPreferences = {
   gender: "any" | "male" | "female" | "unisex";
   mood: string;
@@ -25,10 +23,15 @@ export type FinderPerfume = {
   isArabic: boolean;
   isNiche: boolean;
   ratingInternal?: number | null;
+  bestPriceAmount?: number | null;
+  bestTotalPriceAmount?: number | null;
+  bestCurrency?: string | null;
+  bestStoreName?: string | null;
+  bestOfferUrl?: string | null;
+  hasAvailableOffer?: boolean | null;
   brand: {
     name: string;
   };
-  offers: OfferForPricing[];
   notes: Array<{
     note: {
       slug: string;
@@ -437,13 +440,11 @@ export function matchPerfumesFromPreferences(
         score += 2;
       }
 
-      const bestOffer = computeBestOffer(perfume.offers);
-
       return {
         perfume,
         score,
         rating: perfume.ratingInternal ?? 0,
-        bestPrice: bestOffer?.bestTotalPrice ?? Number.POSITIVE_INFINITY,
+        bestPrice: perfume.bestTotalPriceAmount ?? Number.POSITIVE_INFINITY,
       };
     })
     .filter((item): item is NonNullable<typeof item> => item !== null)

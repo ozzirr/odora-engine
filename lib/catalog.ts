@@ -18,9 +18,9 @@ export function resolveCatalogMode(): CatalogMode {
   return "all";
 }
 
-export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefined {
-  const mode = resolveCatalogMode();
-
+export function getCatalogVisibilityWhereForMode(
+  mode: CatalogMode,
+): Prisma.PerfumeWhereInput | undefined {
   if (mode === "no_demo") {
     return {
       catalogStatus: {
@@ -36,6 +36,10 @@ export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefine
   }
 
   return undefined;
+}
+
+export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefined {
+  return getCatalogVisibilityWhereForMode(resolveCatalogMode());
 }
 
 export function mergePerfumeWhere(

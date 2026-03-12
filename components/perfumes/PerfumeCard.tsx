@@ -4,7 +4,7 @@ import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
-import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
+import { computeBestOffer, getBestOfferSummary, type OfferForPricing } from "@/lib/pricing";
 import { formatCurrency, formatGender } from "@/lib/utils";
 
 export type PerfumeCardItem = {
@@ -21,6 +21,13 @@ export type PerfumeCardItem = {
   brand: {
     name: string;
   };
+  bestPriceAmount?: number | null;
+  bestTotalPriceAmount?: number | null;
+  bestCurrency?: string | null;
+  bestStoreName?: string | null;
+  bestOfferUrl?: string | null;
+  bestOfferUpdatedAt?: Date | string | null;
+  hasAvailableOffer?: boolean | null;
   offers?: OfferForPricing[];
   notes?: Array<{
     intensity?: number | null;
@@ -40,7 +47,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
   const commonT = useTranslations("common");
   const locale = useLocale();
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
-  const bestOffer = perfume.offers?.length ? computeBestOffer(perfume.offers) : null;
+  const bestOffer = getBestOfferSummary(perfume) ?? (perfume.offers?.length ? computeBestOffer(perfume.offers) : null);
   const description = getPerfumeShortText(perfume);
 
   return (

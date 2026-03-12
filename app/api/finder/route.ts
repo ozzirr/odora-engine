@@ -24,11 +24,6 @@ const FINDER_FILTERED_CANDIDATE_CAP = 320;
 
 const finderInclude = {
   brand: true,
-  offers: {
-    include: {
-      store: true,
-    },
-  },
   notes: {
     include: {
       note: {

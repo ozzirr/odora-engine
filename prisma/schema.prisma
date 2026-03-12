@@ -107,6 +107,13 @@ model Perfume {
   amazonUrl          String?
   sourceConfidence   Float?
   dataQuality        DataQuality                @default(LOW)
+  bestPriceAmount    Float?
+  bestTotalPriceAmount Float?
+  bestCurrency       String?
+  bestStoreName      String?
+  bestOfferUrl       String?
+  bestOfferUpdatedAt DateTime?
+  hasAvailableOffer  Boolean                    @default(false)
   createdAt          DateTime                   @default(now())
   updatedAt          DateTime                   @updatedAt
   brand              Brand                      @relation(fields: [brandId], references: [id], onDelete: Restrict)
@@ -123,6 +130,8 @@ model Perfume {
   @@index([priceRange])
   @@index([catalogStatus])
   @@index([dataQuality])
+  @@index([bestTotalPriceAmount])
+  @@index([hasAvailableOffer, bestTotalPriceAmount])
 }
 
 model Note {
