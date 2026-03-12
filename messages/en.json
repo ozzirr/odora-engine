@@ -327,6 +327,19 @@
       "from": "from",
       "viewFragrance": "View fragrance"
     },
+    "transition": {
+      "eyebrow": "Live offer comparison",
+      "title": "We’re searching for the best offers",
+      "subtitle": "We’re comparing trusted retailers, shipping costs, and availability before showing the product page.",
+      "subtitleWithName": "We’re comparing trusted retailers, shipping costs, and availability for {name}.",
+      "status": "Checking Notino, Douglas, Amazon, Sephora, and more.",
+      "moreStores": "+ more",
+      "steps": {
+        "retailers": "Scanning retailers",
+        "pricing": "Ranking total price",
+        "availability": "Verifying availability"
+      }
+    },
     "hero": {
       "unknownBrand": "Unknown brand",
       "rating": "Rating {value}",
@@ -462,7 +475,7 @@
         "or": "or",
         "signupPrompt": "Don’t have an account yet?",
         "signupLink": "Create account",
-        "socialNotice": "Social login is coming soon. For now, you can log in with email and password.",
+        "socialNotice": "You can also log in with Google, Apple, or Facebook when the provider is configured.",
         "errors": {
           "authCallbackFailed": "Login was not completed. Try again.",
           "emailVerificationFailed": "Email verification was not completed. Request a new link.",
@@ -488,7 +501,7 @@
         "or": "or",
         "loginPrompt": "Already have an account?",
         "loginLink": "Log in",
-        "socialNotice": "Social signup is coming soon. For now, you can create your account with email and password.",
+        "socialNotice": "You can also create or recover your account with Google, Apple, or Facebook when the provider is configured.",
         "errors": {
           "fallback": "Sign-up was not completed. Try again."
         },
@@ -507,9 +520,9 @@
       }
     },
     "social": {
-      "loginPrefix": "Login",
-      "signupPrefix": "Signup",
-      "providerSoon": "{prefix} with {provider} coming soon"
+      "continueWith": "Continue with {provider}",
+      "redirecting": "Redirecting...",
+      "oauthFailed": "Could not start the {provider} sign-in flow. Check the provider configuration and try again."
     },
     "actions": {
       "login": {

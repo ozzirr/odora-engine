@@ -1,18 +1,18 @@
 import type { ComponentProps } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { PerfumeDetailLink } from "@/components/perfumes/PerfumeDetailLink";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
-import { Link } from "@/lib/navigation";
 import { formatCurrency } from "@/lib/utils";
 
 type TrendingNowProps = {
   perfumes: HomePerfumeSpotlight[];
 };
 
-type LinkHref = ComponentProps<typeof Link>["href"];
+type LinkHref = ComponentProps<typeof PerfumeDetailLink>["href"];
 
 export function TrendingNow({ perfumes }: TrendingNowProps) {
   const t = useTranslations("home.trending");
@@ -32,9 +32,10 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
 
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {perfumes.map((perfume) => (
-          <Link
+          <PerfumeDetailLink
             key={`${perfume.brandName}-${perfume.name}`}
             href={perfume.href as unknown as LinkHref}
+            perfumeName={perfume.name}
             className="premium-card group overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-white shadow-[0_24px_48px_-36px_rgba(50,35,20,0.44)] transition-all duration-300 hover:-translate-y-1"
           >
             <div className="relative h-64 overflow-hidden bg-[radial-gradient(circle_at_20%_16%,rgba(255,255,255,0.9),transparent_24%),linear-gradient(180deg,#f1e8dc_0%,#e7dbca_100%)]">
@@ -80,7 +81,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
                 </p>
               </div>
             </div>
-          </Link>
+          </PerfumeDetailLink>
         ))}
       </div>
     </section>

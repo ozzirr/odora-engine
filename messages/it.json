@@ -327,6 +327,19 @@
       "from": "da",
       "viewFragrance": "Vedi fragranza"
     },
+    "transition": {
+      "eyebrow": "Comparazione offerte live",
+      "title": "Stiamo cercando le migliori offerte",
+      "subtitle": "Confrontiamo retailer affidabili, costi di spedizione e disponibilita prima di mostrarti la scheda prodotto.",
+      "subtitleWithName": "Stiamo confrontando retailer affidabili, costi di spedizione e disponibilita per {name}.",
+      "status": "Controlliamo Notino, Douglas, Amazon, Sephora e altri store.",
+      "moreStores": "+ altri",
+      "steps": {
+        "retailers": "Analisi retailer",
+        "pricing": "Confronto del totale",
+        "availability": "Verifica disponibilita"
+      }
+    },
     "hero": {
       "unknownBrand": "Brand sconosciuto",
       "rating": "Valutazione {value}",
@@ -462,7 +475,7 @@
         "or": "oppure",
         "signupPrompt": "Non hai ancora un account?",
         "signupLink": "Crea account",
-        "socialNotice": "L'accesso social arrivera presto. Per ora puoi entrare con email e password.",
+        "socialNotice": "Puoi accedere anche con Google, Apple o Facebook se il provider e configurato.",
         "errors": {
           "authCallbackFailed": "Accesso non completato. Riprova.",
           "emailVerificationFailed": "Verifica email non completata. Richiedi un nuovo link.",
@@ -488,7 +501,7 @@
         "or": "oppure",
         "loginPrompt": "Hai gia un account?",
         "loginLink": "Accedi",
-        "socialNotice": "La registrazione social arrivera presto. Per ora puoi creare l'account con email e password.",
+        "socialNotice": "Puoi creare o recuperare l'account anche con Google, Apple o Facebook se il provider e configurato.",
         "errors": {
           "fallback": "Registrazione non completata. Riprova."
         },
@@ -507,9 +520,9 @@
       }
     },
     "social": {
-      "loginPrefix": "Accesso",
-      "signupPrefix": "Registrazione",
-      "providerSoon": "{prefix} {provider} presto disponibile"
+      "continueWith": "Continua con {provider}",
+      "redirecting": "Reindirizzamento...",
+      "oauthFailed": "Non sono riuscito ad avviare l'accesso con {provider}. Verifica la configurazione del provider e riprova."
     },
     "actions": {
       "login": {

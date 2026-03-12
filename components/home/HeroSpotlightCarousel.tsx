@@ -4,18 +4,18 @@ import { startTransition, useEffect, useState } from "react";
 import type { ComponentProps, CSSProperties } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { PerfumeDetailLink } from "@/components/perfumes/PerfumeDetailLink";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
-import { Link } from "@/lib/navigation";
 import { cn, formatCurrency } from "@/lib/utils";
 
 type HeroSpotlightCarouselProps = {
   previews: HomePerfumeSpotlight[];
 };
 
-type LinkHref = ComponentProps<typeof Link>["href"];
+type LinkHref = ComponentProps<typeof PerfumeDetailLink>["href"];
 
 function getStackCardStyle(offset: number): CSSProperties {
   if (offset === 0) {
@@ -178,8 +178,9 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
                     </p>
                   </div>
 
-                  <Link
+                  <PerfumeDetailLink
                     href={preview.href as unknown as LinkHref}
+                    perfumeName={preview.name}
                     className={buttonStyles({
                       variant: "secondary",
                       size: "lg",
@@ -187,7 +188,7 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
                     })}
                   >
                     {preview.hasOffer ? t("viewOffers") : t("seeProductDetails")}
-                  </Link>
+                  </PerfumeDetailLink>
                 </div>
               </div>
             </article>

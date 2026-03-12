@@ -8,6 +8,7 @@ import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PerfumeDetailNavigationProvider } from "@/components/perfumes/PerfumeDetailNavigation";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
@@ -143,18 +144,20 @@ export function LocaleShell({ children }: LocaleShellProps) {
   const isStandaloneAuthPage = activePathname === "/login" || activePathname === "/signup";
 
   return (
-    <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
-      <div
-        className={cn("min-h-screen transition duration-300 ease-out")}
-      >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </div>
+    <PerfumeDetailNavigationProvider>
+      <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
+        <div
+          className={cn("min-h-screen transition duration-300 ease-out")}
+        >
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
 
-      <Suspense fallback={null}>
-        <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
-      </Suspense>
-    </div>
+        <Suspense fallback={null}>
+          <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
+        </Suspense>
+      </div>
+    </PerfumeDetailNavigationProvider>
   );
 }

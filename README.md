@@ -75,16 +75,23 @@ Recommended rollout:
 2. Only raise to `2` if you see real pool contention or request queuing
 3. Leave higher values alone unless you have measured evidence they help
 
-### Auth (Email/Password) Setup
+### Auth Setup
 
-Odora uses Supabase Auth (SSR) for email/password:
+Odora uses Supabase Auth (SSR) for email/password and OAuth:
 
 - `/login` -> real `signInWithPassword`
 - `/signup` -> real `signUp`
-- `/auth/callback` -> verifies callback tokens/codes
+- `/auth/callback` -> verifies email tokens and exchanges OAuth codes for a session
 - `proxy.ts` -> keeps auth session cookies refreshed on the protected auth/profile routes
 
-Social providers (Google/Apple/Facebook) are still placeholder buttons in UI until provider keys are configured.
+Google, Apple, and Facebook buttons call `supabase.auth.signInWithOAuth(...)`. To make them work you must:
+
+1. Enable each provider in Supabase Auth and paste the provider client ID/secret there.
+2. Add your callback URL to each provider console:
+   - local: `http://localhost:3000/auth/callback`
+   - LAN/dev box: `http://<your-local-ip>:3000/auth/callback`
+   - production: `https://<your-domain>/auth/callback`
+3. Set `NEXT_PUBLIC_SITE_URL` to your canonical public origin for email links.
 
 ## Local Setup
 
