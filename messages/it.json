@@ -54,7 +54,7 @@
       "startFinder": "Apri Finder",
       "spotlight": "In evidenza",
       "badges": {
-        "heroPick": "Scelta hero",
+        "heroPick": "Scelta Odora",
         "spotlight": "In rotazione",
         "trending": "Trending"
       },
@@ -70,7 +70,7 @@
       "title": "Le scelte piu osservate del momento",
       "subtitle": "Una selezione curata di fragranze che le persone stanno scoprendo e riscoprendo in questo momento.",
       "badges": {
-        "heroPick": "Scelta hero",
+        "heroPick": "Scelta Odora",
         "trending": "Trending"
       },
       "bestPrice": "Miglior prezzo",
@@ -185,7 +185,7 @@
         "occasion": "Occasione",
         "budget": "Budget",
         "note": "Nota preferita",
-        "gender": "Preferenza genere"
+        "gender": "Genere"
       },
       "any": "Qualsiasi",
       "budget": {
@@ -245,12 +245,12 @@
     "page": {
       "eyebrow": "Catalogo",
       "title": "Scopri i profumi",
-      "subtitle": "Sfoglia il catalogo per famiglia, note, genere e prezzo, poi restringi il campo sulle bottiglie che meritano attenzione."
+      "subtitle": "Sfoglia il catalogo per famiglia, note e prezzo, poi restringi il campo sulle bottiglie che meritano attenzione."
     },
     "filters": {
       "title": "Filtri",
       "reset": "Reset",
-      "summary": "Apri i filtri per affinare ordinamento, famiglia, prezzo, note e genere.",
+      "summary": "Apri i filtri per affinare ordinamento, famiglia, prezzo e note.",
       "fields": {
         "sort": "Ordina",
         "family": "Famiglia olfattiva",
@@ -325,7 +325,8 @@
     "card": {
       "unknownBrand": "Brand sconosciuto",
       "from": "da",
-      "viewFragrance": "Vedi fragranza"
+      "viewFragrance": "Vedi fragranza",
+      "viewOffers": "Scopri le offerte"
     },
     "transition": {
       "eyebrow": "Comparazione offerte live",
@@ -352,9 +353,10 @@
     },
     "amazon": {
       "eyebrow": "Sei cliente Prime?",
-      "titlePrefix": "Acquista su",
+      "title": "Acquista su Amazon",
       "subtitle": "Controlla disponibilita, spedizione Prime e tempi di consegna su Amazon prima di passare alle alternative piu economiche.",
-      "cta": "Acquista su Amazon"
+      "cta": "Acquista su Amazon",
+      "ctaPrefix": "Acquista su"
     },
     "offerTable": {
       "empty": "Le offerte appariranno qui non appena i prezzi saranno disponibili.",
@@ -755,7 +757,7 @@
       },
       "perfumes": {
         "title": "Profumi | Odora",
-        "description": "Sfoglia i profumi per famiglia, note, genere e prezzo, poi confronta le offerte con chiarezza."
+        "description": "Sfoglia i profumi per famiglia, note e prezzo, poi confronta le offerte con chiarezza."
       },
       "top": {
         "title": "Top Fragranze | Odora",

@@ -2,14 +2,14 @@
 
 import { startTransition, useEffect, useState } from "react";
 import type { ComponentProps, CSSProperties } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 import { PerfumeDetailLink } from "@/components/perfumes/PerfumeDetailLink";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import type { HomePerfumeSpotlight } from "@/lib/homepage";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 type HeroSpotlightCarouselProps = {
   previews: HomePerfumeSpotlight[];
@@ -29,7 +29,7 @@ function getStackCardStyle(offset: number): CSSProperties {
   if (offset === 1) {
     return {
       opacity: 0.96,
-      transform: "translate3d(12px, 64px, 0) scale(0.968) rotate(1.2deg)",
+      transform: "translate3d(12px, 48px, 0) scale(0.968) rotate(1.2deg)",
       filter: "saturate(0.92)",
     };
   }
@@ -37,21 +37,20 @@ function getStackCardStyle(offset: number): CSSProperties {
   if (offset === 2) {
     return {
       opacity: 0.74,
-      transform: "translate3d(24px, 132px, 0) scale(0.936) rotate(2.3deg)",
+      transform: "translate3d(24px, 98px, 0) scale(0.936) rotate(2.3deg)",
       filter: "saturate(0.8)",
     };
   }
 
   return {
     opacity: 0,
-    transform: "translate3d(34px, 188px, 0) scale(0.9) rotate(3.4deg)",
+    transform: "translate3d(34px, 144px, 0) scale(0.9) rotate(3.4deg)",
     filter: "saturate(0.72)",
   };
 }
 
 export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) {
   const t = useTranslations("home.hero");
-  const locale = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -98,11 +97,11 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
 
   return (
     <div
-      className="relative h-[40rem] sm:h-[41rem] lg:h-[42rem]"
+      className="relative h-[31rem] sm:h-[32rem] lg:h-[33rem]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="absolute inset-x-0 top-0 h-[34.5rem] sm:h-[35.5rem]">
+      <div className="absolute inset-x-0 top-0 h-[28rem] sm:h-[29rem]">
         {stackedPreviews.map(({ preview, index, offset }) => {
           const isActive = offset === 0;
 
@@ -134,7 +133,7 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
                 </div>
 
                 <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#eadfce] bg-[#efe7dc]">
-                  <div className="h-60 sm:h-64">
+                  <div className="h-52 sm:h-56">
                     <PerfumeImage
                       imageUrl={preview.imageUrl}
                       perfumeName={preview.name}
@@ -150,32 +149,10 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
                   </div>
                 </div>
 
-                <div className="mt-5 flex flex-1 flex-col justify-between space-y-4">
+                <div className="mt-4 flex flex-1 flex-col justify-between">
                   <div>
-                    <h2 className="font-display text-3xl text-[#1f1914]">{preview.name}</h2>
+                    <h2 className="mt-2 font-display text-3xl text-[#1f1914]">{preview.name}</h2>
                     <p className="mt-1 text-sm text-[#6b5b4b]">{preview.fragranceFamily}</p>
-                  </div>
-
-                  <div className="flex items-end justify-between gap-4 rounded-[1.25rem] border border-[#e6d8c5] bg-white/75 px-4 py-3">
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                        {preview.bestPrice != null && preview.currency
-                          ? t("bestPriceToday")
-                          : t("discover")}
-                      </p>
-                      <p className="mt-1 font-display text-2xl text-[#1d1712]">
-                        {preview.bestPrice != null && preview.currency
-                          ? formatCurrency(
-                              preview.bestPrice,
-                              preview.currency,
-                              locale as "it" | "en",
-                            )
-                          : t("viewFragrance")}
-                      </p>
-                    </div>
-                    <p className="text-right text-sm text-[#5d4e3f]">
-                      {preview.storeName ?? t("fallbackStore")}
-                    </p>
                   </div>
 
                   <PerfumeDetailLink
@@ -187,7 +164,7 @@ export function HeroSpotlightCarousel({ previews }: HeroSpotlightCarouselProps) 
                       className: "w-full bg-[#efe6da] shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
                     })}
                   >
-                    {preview.hasOffer ? t("viewOffers") : t("seeProductDetails")}
+                    {t("seeProductDetails")}
                   </PerfumeDetailLink>
                 </div>
               </div>

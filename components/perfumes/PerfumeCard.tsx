@@ -3,9 +3,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { PerfumeDetailLink } from "@/components/perfumes/PerfumeDetailLink";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
-import { getPerfumeShortText } from "@/lib/perfume-text";
 import { computeBestOffer, getBestOfferSummary, type OfferForPricing } from "@/lib/pricing";
-import { formatCurrency, formatGender } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 export type PerfumeCardItem = {
   id: number;
@@ -40,15 +39,15 @@ export type PerfumeCardItem = {
 
 type PerfumeCardProps = {
   perfume: PerfumeCardItem;
+  variant?: "default" | "catalog";
 };
 
-export function PerfumeCard({ perfume }: PerfumeCardProps) {
+export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) {
   const t = useTranslations("perfume.card");
   const commonT = useTranslations("common");
   const locale = useLocale();
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const bestOffer = getBestOfferSummary(perfume) ?? (perfume.offers?.length ? computeBestOffer(perfume.offers) : null);
-  const description = getPerfumeShortText(perfume);
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
@@ -62,7 +61,7 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             perfumeName={perfume.name}
             brandName={brandName}
             fragranceFamily={perfume.fragranceFamily}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 1024px) 50vw, 25vw"
             imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
           />
         </div>
@@ -75,28 +74,29 @@ export function PerfumeCard({ perfume }: PerfumeCardProps) {
             href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}
             perfumeName={perfume.name}
           >
-            <h3 className="mt-1 font-display text-2xl text-[#1f1914] transition-colors hover:text-[#6c5946]">
+            <h3
+              className={`mt-1 font-display text-[#1f1914] transition-colors hover:text-[#6c5946] ${
+                variant === "catalog" ? "text-[1.7rem] leading-[1.12]" : "text-2xl"
+              }`}
+            >
               {perfume.name}
             </h3>
           </PerfumeDetailLink>
-          {description ? <p className="mt-2 text-sm text-[#5d4e3f]">{description}</p> : null}
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="outline">{perfume.fragranceFamily}</Badge>
-          <Badge>{formatGender(perfume.gender, locale as "it" | "en")}</Badge>
-          {bestOffer ? (
-            <Badge variant="default">
-              {t("from")} {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}
-            </Badge>
-          ) : (
-            <Badge variant="outline" className="bg-[#faf6ef]">
-              {t("viewFragrance")}
-            </Badge>
-          )}
-          {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
-          {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
-        </div>
+        {variant === "default" ? (
+          <div className="flex flex-wrap gap-2">
+            <Badge variant="outline">{perfume.fragranceFamily}</Badge>
+            <Badge variant="outline">{t("viewOffers")}</Badge>
+            {bestOffer ? (
+              <Badge variant="default">
+                {t("from")} {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}
+              </Badge>
+            ) : null}
+            {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
+            {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
+          </div>
+        ) : null}
       </div>
     </article>
   );

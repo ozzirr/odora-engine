@@ -12,6 +12,7 @@ type PendingPerfumeNavigation = {
 
 type PerfumeDetailNavigationContextValue = {
   startNavigation: (perfumeName?: string | null) => void;
+  completeNavigation: () => void;
 };
 
 const PerfumeDetailNavigationContext = createContext<PerfumeDetailNavigationContextValue | null>(null);
@@ -19,18 +20,6 @@ const PerfumeDetailNavigationContext = createContext<PerfumeDetailNavigationCont
 export function PerfumeDetailNavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [pendingNavigation, setPendingNavigation] = useState<PendingPerfumeNavigation | null>(null);
-
-  useEffect(() => {
-    if (!pendingNavigation || pathname === pendingNavigation.sourcePathname) {
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setPendingNavigation(null);
-    }, 180);
-
-    return () => window.clearTimeout(timeoutId);
-  }, [pathname, pendingNavigation]);
 
   useEffect(() => {
     if (!pendingNavigation) {
@@ -51,6 +40,15 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
           setPendingNavigation({
             perfumeName: perfumeName?.trim() || undefined,
             sourcePathname: pathname,
+          });
+        },
+        completeNavigation: () => {
+          setPendingNavigation((current) => {
+            if (!current) {
+              return null;
+            }
+
+            return pathname === current.sourcePathname ? current : null;
           });
         },
       }}

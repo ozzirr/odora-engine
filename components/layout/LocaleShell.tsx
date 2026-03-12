@@ -121,7 +121,7 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
           aria-modal="true"
           aria-labelledby="auth-modal-title"
           onClick={(event) => event.stopPropagation()}
-          className="w-full"
+          className="w-full max-w-md"
         >
           <AuthPanel
             mode={mode}

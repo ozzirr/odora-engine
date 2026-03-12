@@ -30,7 +30,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
         subtitle={t("subtitle")}
       />
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {perfumes.map((perfume) => (
           <PerfumeDetailLink
             key={`${perfume.brandName}-${perfume.name}`}
@@ -47,7 +47,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
                 perfumeName={perfume.name}
                 brandName={perfume.brandName}
                 fragranceFamily={perfume.fragranceFamily}
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                sizes="(max-width: 1024px) 50vw, 25vw"
                 imageClassName="transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </div>

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/Badge";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
-import { formatCurrency, formatGender } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 type PerfumeHeroProps = {
   perfume: {
@@ -59,7 +59,6 @@ export function PerfumeHero({ perfume }: PerfumeHeroProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge>{formatGender(perfume.gender)}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
           {bestOffer ? (
             <Badge variant="outline">

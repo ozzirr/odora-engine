@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
+import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
 import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
@@ -327,6 +328,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
   return (
     <>
+      <PerfumeDetailNavigationReady />
       <Container className="space-y-9 pt-8 pb-8 md:space-y-10 md:pt-10 md:pb-10">
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 

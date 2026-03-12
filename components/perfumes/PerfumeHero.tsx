@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
 import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
@@ -10,7 +11,6 @@ import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
-import { formatGender } from "@/lib/utils";
 
 type PerfumeHeroProps = {
   perfume: {
@@ -57,6 +57,18 @@ type PerfumeHeroProps = {
 
 type LinkHref = ComponentProps<typeof Link>["href"];
 
+function AmazonWordmark({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logo_amazon.webp"
+      alt="Amazon"
+      width={110}
+      height={34}
+      className={`brightness-0 invert ${className ?? ""}`}
+    />
+  );
+}
+
 function MetricItem({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="rounded-xl border border-[#deceb9] bg-white/70 px-3 py-2">
@@ -101,7 +113,6 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge>{formatGender(perfume.gender, locale as "it" | "en")}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
           {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
           {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
@@ -139,7 +150,10 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
                 "h-12 w-full bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c] sm:w-auto sm:px-6",
             })}
           >
-            {amazonT("cta")}
+            <span className="inline-flex items-center gap-2">
+              <span>{amazonT("ctaPrefix")}</span>
+              <AmazonWordmark className="h-5 w-auto object-contain" />
+            </span>
           </Link>
         </div>
       </div>

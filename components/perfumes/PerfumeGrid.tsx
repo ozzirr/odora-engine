@@ -4,9 +4,15 @@ import { PerfumeCard, type PerfumeCardItem } from "@/components/perfumes/Perfume
 
 type PerfumeGridProps = {
   perfumes: PerfumeCardItem[];
+  cardVariant?: "default" | "catalog";
+  desktopColumns?: 3 | 4;
 };
 
-export function PerfumeGrid({ perfumes }: PerfumeGridProps) {
+export function PerfumeGrid({
+  perfumes,
+  cardVariant = "default",
+  desktopColumns = 4,
+}: PerfumeGridProps) {
   const t = useTranslations("catalog.grid");
 
   if (perfumes.length === 0) {
@@ -18,9 +24,9 @@ export function PerfumeGrid({ perfumes }: PerfumeGridProps) {
   }
 
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    <div className={`grid grid-cols-2 gap-5 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
       {perfumes.map((perfume) => (
-        <PerfumeCard key={perfume.id} perfume={perfume} />
+        <PerfumeCard key={perfume.id} perfume={perfume} variant={cardVariant} />
       ))}
     </div>
   );

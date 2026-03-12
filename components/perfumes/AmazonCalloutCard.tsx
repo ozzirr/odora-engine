@@ -26,7 +26,7 @@ function AmazonWordmark({ className }: { className?: string }) {
       alt="Amazon"
       width={110}
       height={34}
-      className={className}
+      className={cn("brightness-0 invert", className)}
     />
   );
 }
@@ -52,10 +52,7 @@ export function AmazonCalloutCard({
         <div className="space-y-2">
           <div className="space-y-1">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#92631b]">{t("eyebrow")}</p>
-            <h2 className="flex flex-wrap items-center gap-2 font-display text-2xl text-[#23170c] sm:text-[2rem]">
-              <span>{t("titlePrefix")}</span>
-              <AmazonWordmark className="h-7 w-auto object-contain sm:h-8" />
-            </h2>
+            <h2 className="font-display text-2xl text-[#23170c] sm:text-[2rem]">{t("title")}</h2>
             <p className="max-w-2xl text-sm text-[#5b4630]">{t("subtitle")}</p>
           </div>
         </div>
@@ -69,7 +66,10 @@ export function AmazonCalloutCard({
               "h-12 w-full min-w-[200px] bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c] lg:w-auto lg:px-6",
           })}
         >
-          {t("cta")}
+          <span className="inline-flex items-center gap-2">
+            <span>{t("ctaPrefix")}</span>
+            <AmazonWordmark className="h-5 w-auto object-contain" />
+          </span>
         </Link>
       </div>
     </section>
