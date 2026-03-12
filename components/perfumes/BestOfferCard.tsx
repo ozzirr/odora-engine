@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
 import {
@@ -90,9 +91,15 @@ export function BestOfferCard({
       <p className="mt-2 font-display text-3xl text-[#1f1710]">
         {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency, locale as "it" | "en")}
       </p>
-      <p className="mt-1 text-sm text-[#5f4f40]">
-        {t("at")} <span className="font-semibold text-[#1f1710]">{storeName}</span>
-      </p>
+      <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-[#5f4f40]">
+        <span>{t("at")}</span>
+        <RetailerLogo
+          storeName={storeName}
+          showName
+          imageClassName="h-4"
+          nameClassName="font-semibold text-[#1f1710]"
+        />
+      </div>
 
       <div className="mt-3 grid gap-2 text-xs text-[#655546] sm:grid-cols-2">
         <p>{t("item")}: {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}</p>

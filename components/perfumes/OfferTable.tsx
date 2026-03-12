@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
@@ -69,7 +70,12 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                 >
                   <td className="px-4 py-3 font-medium text-[#2a2018]">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span>{offer.store.name}</span>
+                      <RetailerLogo
+                        storeName={offer.store.name}
+                        showName
+                        imageClassName="h-4"
+                        nameClassName="font-medium text-[#2a2018]"
+                      />
                       {isComputedBest ? <Badge variant="soft">{t("bestTotal")}</Badge> : null}
                     </div>
                   </td>

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLoadingState";
@@ -8,6 +8,7 @@ import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLo
 type PendingPerfumeNavigation = {
   perfumeName?: string;
   sourcePathname: string;
+  startedAt: number;
 };
 
 type PerfumeDetailNavigationContextValue = {
@@ -16,10 +17,20 @@ type PerfumeDetailNavigationContextValue = {
 };
 
 const PerfumeDetailNavigationContext = createContext<PerfumeDetailNavigationContextValue | null>(null);
+const MIN_LOADING_STATE_MS = 2500;
 
 export function PerfumeDetailNavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [pendingNavigation, setPendingNavigation] = useState<PendingPerfumeNavigation | null>(null);
+  const hideTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (hideTimeoutRef.current) {
+        window.clearTimeout(hideTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!pendingNavigation) {
@@ -37,9 +48,15 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
     <PerfumeDetailNavigationContext.Provider
       value={{
         startNavigation: (perfumeName) => {
+          if (hideTimeoutRef.current) {
+            window.clearTimeout(hideTimeoutRef.current);
+            hideTimeoutRef.current = null;
+          }
+
           setPendingNavigation({
             perfumeName: perfumeName?.trim() || undefined,
             sourcePathname: pathname,
+            startedAt: Date.now(),
           });
         },
         completeNavigation: () => {
@@ -48,7 +65,26 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
               return null;
             }
 
-            return pathname === current.sourcePathname ? current : null;
+            if (pathname === current.sourcePathname) {
+              return current;
+            }
+
+            const remainingMs = Math.max(0, MIN_LOADING_STATE_MS - (Date.now() - current.startedAt));
+
+            if (remainingMs === 0) {
+              return null;
+            }
+
+            if (hideTimeoutRef.current) {
+              window.clearTimeout(hideTimeoutRef.current);
+            }
+
+            hideTimeoutRef.current = window.setTimeout(() => {
+              setPendingNavigation(null);
+              hideTimeoutRef.current = null;
+            }, remainingMs);
+
+            return current;
           });
         },
       }}

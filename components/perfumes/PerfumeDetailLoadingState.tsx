@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
+import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
 import { cn } from "@/lib/utils";
 
 type PerfumeDetailLoadingStateProps = {
@@ -63,7 +64,12 @@ export function PerfumeDetailLoadingState({
               key={store}
               className="rounded-full border border-[#decfba] bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6a5a4a]"
             >
-              {store}
+              <RetailerLogo
+                storeName={store}
+                showName
+                imageClassName="h-4"
+                nameClassName="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6a5a4a]"
+              />
             </span>
           ))}
           <span className="rounded-full border border-dashed border-[#d9c9b5] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8a7763]">
