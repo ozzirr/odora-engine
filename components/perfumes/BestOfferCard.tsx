@@ -95,9 +95,7 @@ export function BestOfferCard({
         <span>{t("at")}</span>
         <RetailerLogo
           storeName={storeName}
-          showName
-          imageClassName="h-4"
-          nameClassName="font-semibold text-[#1f1710]"
+          imageClassName="h-5"
         />
       </div>
 

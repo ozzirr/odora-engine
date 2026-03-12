@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 
 type RetailerLogoProps = {
@@ -13,10 +11,16 @@ type RetailerLogoProps = {
 };
 
 const LOGO_MAP = [
-  { match: "amazon", src: "/images/logo_amazon.webp", width: 92, height: 28 },
-  { match: "notino", src: "/images/notino_logo.png", width: 92, height: 28 },
-  { match: "douglas", src: "/images/Douglas_Logo.png", width: 92, height: 28 },
-  { match: "sephora", src: "/images/Sephora_logo.png", width: 92, height: 28 },
+  { match: "amazon", src: "/images/logo_amazon.webp", width: 92, height: 28, imageClassName: "" },
+  {
+    match: "notino",
+    src: "/images/notino_logo.png?v=20260312-1821",
+    width: 92,
+    height: 28,
+    imageClassName: "scale-[2.15] origin-left",
+  },
+  { match: "douglas", src: "/images/Douglas_Logo.png", width: 92, height: 28, imageClassName: "" },
+  { match: "sephora", src: "/images/Sephora_logo.png", width: 92, height: 28, imageClassName: "" },
 ] as const;
 
 function getRetailerLogo(storeName: string) {
@@ -39,13 +43,17 @@ export function RetailerLogo({
 
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
-      <Image
-        src={logo.src}
-        alt={storeName}
-        width={logo.width}
-        height={logo.height}
-        className={cn("h-5 w-auto object-contain", imageClassName)}
-      />
+      <span className="inline-flex w-[96px] justify-start overflow-visible">
+        <img
+          src={logo.src}
+          alt={storeName}
+          width={logo.width}
+          height={logo.height}
+          className={cn("h-5 w-[96px] object-contain object-left", logo.imageClassName, imageClassName)}
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
       {showName ? <span className={nameClassName}>{storeName}</span> : null}
     </span>
   );

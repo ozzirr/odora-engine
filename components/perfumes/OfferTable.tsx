@@ -72,9 +72,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                     <div className="flex flex-wrap items-center gap-2">
                       <RetailerLogo
                         storeName={offer.store.name}
-                        showName
-                        imageClassName="h-4"
-                        nameClassName="font-medium text-[#2a2018]"
+                        imageClassName="h-5"
                       />
                       {isComputedBest ? <Badge variant="soft">{t("bestTotal")}</Badge> : null}
                     </div>

@@ -66,9 +66,7 @@ export function PerfumeDetailLoadingState({
             >
               <RetailerLogo
                 storeName={store}
-                showName
                 imageClassName="h-4"
-                nameClassName="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#6a5a4a]"
               />
             </span>
           ))}
