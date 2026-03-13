@@ -71,9 +71,9 @@ type ImportStats = {
 const DEFAULT_OUTPUT_PATH = "data/verified/perfumes.csv";
 
 const DEFAULT_SOURCES: Record<CategoryKey, string> = {
-  women: "data/import/parfumo-top-women.csv",
-  men: "data/import/parfumo-top-men.csv",
-  unisex: "data/import/parfumo-top-unisex.csv",
+  women: "data/sources/parfumo/top-women.csv",
+  men: "data/sources/parfumo/top-men.csv",
+  unisex: "data/sources/parfumo/top-unisex.csv",
 };
 
 const REQUIRED_HEADERS = [

@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import { importPerfumeRecords } from "@/lib/perfume-data/import";
+import { defaultImportInputPath } from "@/lib/perfume-data/paths";
 import { preparePerfumeRecords } from "@/lib/perfume-data/workflow";
 import type { ImportMode, PerfumeDataSource } from "@/lib/perfume-data/types";
 
@@ -13,10 +14,6 @@ type CliOptions = {
   batchSize: number;
   mode: ImportMode;
 };
-
-function defaultInputPath(source: PerfumeDataSource) {
-  return source === "verified" ? "data/verified/perfumes.csv" : "data/parfumo/perfumes.csv";
-}
 
 function parseCliOptions(argv: string[]): CliOptions {
   const options: CliOptions = {
@@ -85,7 +82,7 @@ async function main() {
   const options = parseCliOptions(process.argv.slice(2));
   const prisma = new PrismaClient();
   const prepared = await preparePerfumeRecords({
-    inputPath: options.inputPath ?? defaultInputPath(options.source),
+    inputPath: options.inputPath ?? defaultImportInputPath(options.source),
     format: options.format,
     source: options.source,
     limit: options.limit,

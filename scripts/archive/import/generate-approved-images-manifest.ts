@@ -16,7 +16,7 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..", "..");
 
 const DEFAULT_INPUT = "data/verified/perfumes.csv";
-const DEFAULT_OUTPUT = "data/verified/approved-images-manifest.csv";
+const DEFAULT_OUTPUT = "data/archive/verified/images/approved-images-manifest.csv";
 
 function parseCliOptions(argv: string[]): CliOptions {
   const options: CliOptions = {

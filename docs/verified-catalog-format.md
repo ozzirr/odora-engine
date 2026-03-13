@@ -9,6 +9,42 @@ Default verified catalog target:
 
 - `data/verified/perfumes.csv`
 
+Generated verified artifacts:
+
+- `data/generated/verified/perfumes.cleaned.csv`
+- `data/generated/verified/perfumes.enriched.csv`
+- `data/generated/verified/perfume-validation-report.json`
+- `data/generated/verified/perfume-enrichment-report.json`
+- `data/generated/verified/perfume-review-queue.json`
+- `data/generated/verified/perfume-review-queue.csv`
+
+Canonical folder layout:
+
+```text
+data/
+  verified/
+    perfumes.csv
+  generated/
+    verified/
+      perfumes.cleaned.csv
+      perfumes.enriched.csv
+      perfume-validation-report.json
+      perfume-enrichment-report.json
+      perfume-review-queue.json
+      perfume-review-queue.csv
+  sources/
+    parfumo/
+      top-men.csv
+      top-women.csv
+      top-unisex.csv
+  archive/
+    synthetic/
+      parfumo/
+        perfumes.csv
+    verified/
+      images/
+```
+
 ## CSV Header Example
 
 ```csv
@@ -70,12 +106,7 @@ npm run perfumes:import
 npm run perfumes:import -- --mode=notes
 ```
 
-Default verified outputs:
-
-- `data/verified/perfumes.enriched.csv`
-- `data/verified/perfume-enrichment-report.json`
-- `data/verified/perfume-review-queue.json`
-- `data/verified/perfume-review-queue.csv`
+`data/verified/` is intentionally kept as the manual input area only. Generated outputs live under `data/generated/verified/` so the verified folder stays easy to scan.
 
 Validation currently enforces:
 
@@ -87,13 +118,13 @@ Validation currently enforces:
 
 Verified enrichment currently uses only trusted local source snapshots:
 
-- `data/import/parfumo-top-men.csv`
-- `data/import/parfumo-top-women.csv`
-- `data/import/parfumo-top-unisex.csv`
+- `data/sources/parfumo/top-men.csv`
+- `data/sources/parfumo/top-women.csv`
+- `data/sources/parfumo/top-unisex.csv`
 
 Synthetic or untrusted sources currently excluded from automatic enrichment:
 
-- `data/parfumo/perfumes.csv`
+- `data/archive/synthetic/parfumo/perfumes.csv`
 
 The enriched CSV keeps the canonical import columns and appends record-level provenance columns:
 
@@ -152,7 +183,7 @@ Current trusted-source priority:
 
 Record-level provenance is written into the enriched CSV.
 
-Field-level provenance is written into `data/verified/perfume-enrichment-report.json` for every targeted enrichment field with:
+Field-level provenance is written into `data/generated/verified/perfume-enrichment-report.json` for every targeted enrichment field with:
 
 - source
 - source URL

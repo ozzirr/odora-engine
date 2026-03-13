@@ -68,7 +68,9 @@ export function AmazonCalloutCard({
         >
           <span className="inline-flex items-center gap-2">
             <span>{t("ctaPrefix")}</span>
-            <AmazonWordmark className="h-5 w-auto object-contain" />
+            <span className="inline-flex min-w-[86px] items-center justify-center">
+              <AmazonWordmark className="h-[22px] w-auto object-contain translate-y-[1px]" />
+            </span>
           </span>
         </Link>
       </div>

@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { loadPerfumeInput } from "@/lib/perfume-data/csv";
 import { normalizeCsvHeader } from "@/lib/perfume-data/normalize";
+import { PARFUMO_TOP_LIST_PATHS } from "@/lib/perfume-data/paths";
 import { enrichmentTargetFields } from "@/lib/perfume-data/types";
 import type { EnrichmentCandidate, EnrichmentSourceAuditEntry, NormalizedPerfumeRecord } from "@/lib/perfume-data/types";
 import { createCandidate, buildMatchKey, type PerfumeSourceAdapter, type SourceRecordResult } from "@/lib/perfume-data/sources/base";
@@ -20,11 +21,7 @@ type ParfumoSnapshotRecord = {
 
 const adapterId = "parfumo-top-lists";
 const adapterLabel = "Parfumo Top Lists";
-const sourcePaths = [
-  "data/import/parfumo-top-men.csv",
-  "data/import/parfumo-top-women.csv",
-  "data/import/parfumo-top-unisex.csv",
-] as const;
+const sourcePaths = PARFUMO_TOP_LIST_PATHS;
 
 const supportedFields = ["imageSourceUrl"] as const;
 const plannedFields = [...supportedFields] as const;

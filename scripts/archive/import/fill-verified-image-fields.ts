@@ -32,8 +32,8 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..", "..");
 
 const DEFAULT_INPUT_PATH = "data/verified/perfumes.csv";
-const DEFAULT_WORKLIST_CSV_PATH = "data/verified/worklists/image-sourcing-worklist.csv";
-const DEFAULT_WORKLIST_JSON_PATH = "data/verified/worklists/image-sourcing-worklist.json";
+const DEFAULT_WORKLIST_CSV_PATH = "data/archive/verified/images/worklists/image-sourcing-worklist.csv";
+const DEFAULT_WORKLIST_JSON_PATH = "data/archive/verified/images/worklists/image-sourcing-worklist.json";
 
 const WORKLIST_FIELDS: Array<keyof WorklistRow> = [
   "brand",

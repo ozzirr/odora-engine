@@ -82,7 +82,7 @@ type CachedNote = {
   name: string;
 };
 
-const DEFAULT_INPUT_PATH = "data/parfumo/perfumes.csv";
+const DEFAULT_INPUT_PATH = "data/archive/synthetic/parfumo/perfumes.csv";
 
 const CSV_COLUMNS = {
   brand: ["brand", "brandname", "house", "maker", "manufacturer"],

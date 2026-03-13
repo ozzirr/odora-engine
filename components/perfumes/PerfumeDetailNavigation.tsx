@@ -17,7 +17,7 @@ type PerfumeDetailNavigationContextValue = {
 };
 
 const PerfumeDetailNavigationContext = createContext<PerfumeDetailNavigationContextValue | null>(null);
-const MIN_LOADING_STATE_MS = 2500;
+const MIN_LOADING_STATE_MS = 1800;
 
 export function PerfumeDetailNavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

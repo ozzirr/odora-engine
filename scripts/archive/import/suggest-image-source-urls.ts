@@ -84,8 +84,8 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..", "..");
 
 const DEFAULT_INPUT_PATH = "data/verified/perfumes.csv";
-const DEFAULT_OUTPUT_CSV_PATH = "data/verified/worklists/image-source-suggestions.csv";
-const DEFAULT_OUTPUT_JSON_PATH = "data/verified/worklists/image-source-suggestions.json";
+const DEFAULT_OUTPUT_CSV_PATH = "data/archive/verified/images/worklists/image-source-suggestions.csv";
+const DEFAULT_OUTPUT_JSON_PATH = "data/archive/verified/images/worklists/image-source-suggestions.json";
 
 const REQUEST_TIMEOUT_MS = 12_000;
 const RETRY_COUNT = 2;

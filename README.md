@@ -168,6 +168,7 @@ ODORA_CATALOG_MODE=verified_only
 The catalog workflow now runs through four canonical commands:
 
 ```bash
+npm run perfumes:update
 npm run perfumes:enrich
 npm run perfumes:verify
 npm run perfumes:import
@@ -176,16 +177,21 @@ npm run prices:sync
 
 What each command does:
 
-- `perfumes:enrich` rewrites a source file into the canonical catalog shape with shared normalization for gender, family, notes, concentration, URLs, descriptions, and slugs.
+- `perfumes:update` runs `verify -> enrich -> import` in sequence for the current perfume source.
+- `perfumes:enrich` reads `data/verified/perfumes.csv`, keeps it untouched, and writes normalized/enriched artifacts into `data/generated/verified/`.
 - `perfumes:verify` checks the same normalization and validation rules without writing anything.
-- `perfumes:import` upserts the normalized catalog into PostgreSQL. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
+- `perfumes:import` upserts the import-ready catalog into PostgreSQL. By default it reads `data/generated/verified/perfumes.enriched.csv`. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
 - `prices:sync` recomputes `Perfume.priceRange` from current offers and refreshes `Offer.isBestPrice`.
 
 Defaults:
 
-- `perfumes:enrich`, `perfumes:verify`, `perfumes:import` target `data/verified/perfumes.csv`
-- `perfumes:import -- --source=parfumo` targets `data/parfumo/perfumes.csv`
+- `perfumes:update` runs the full verified flow with one command
+- `perfumes:verify` targets `data/verified/perfumes.csv`
+- `perfumes:enrich` writes `data/generated/verified/perfumes.cleaned.csv`, `data/generated/verified/perfumes.enriched.csv`, and the related reports
+- `perfumes:import` targets `data/generated/verified/perfumes.enriched.csv`
+- `perfumes:* -- --source=parfumo` targets the archived synthetic dataset at `data/archive/synthetic/parfumo/perfumes.csv`
 - all commands support `-- --dry-run`
+  For `perfumes:update`, `-- --dry-run` runs only `verify + enrich` and skips the DB import step.
 
 The single source of truth for perfume data normalization now lives in:
 
@@ -217,6 +223,20 @@ scripts/
 scripts/archive/import/
 data/verified/
   perfumes.csv
+data/generated/verified/
+  perfumes.cleaned.csv
+  perfumes.enriched.csv
+  perfume-validation-report.json
+  perfume-enrichment-report.json
+  perfume-review-queue.json
+  perfume-review-queue.csv
+data/sources/parfumo/
+  top-men.csv
+  top-women.csv
+  top-unisex.csv
+data/archive/
+  synthetic/parfumo/perfumes.csv
+  verified/images/
 ```
 
 ## Troubleshooting

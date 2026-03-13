@@ -42,7 +42,7 @@ type Stats = {
   failedDownload: number;
 };
 
-const DEFAULT_MANIFEST_PATH = "data/verified/approved-images-manifest.csv";
+const DEFAULT_MANIFEST_PATH = "data/archive/verified/images/approved-images-manifest.csv";
 const BRAVE_IMAGES_ENDPOINT = "https://api.search.brave.com/res/v1/images/search";
 const REQUEST_TIMEOUT_MS = 18_000;
 const SEARCH_RETRIES = 3;

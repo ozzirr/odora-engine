@@ -44,7 +44,7 @@ type ScriptRunResult = {
 const DEFAULT_LIMIT = 2000;
 const DEFAULT_BATCH_SIZE = 100;
 const DEFAULT_SLEEP_MS = 1500;
-const DEFAULT_MANIFEST_PATH = "data/verified/approved-images-manifest.csv";
+const DEFAULT_MANIFEST_PATH = "data/archive/verified/images/approved-images-manifest.csv";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..", "..");

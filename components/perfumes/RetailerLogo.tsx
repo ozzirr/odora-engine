@@ -8,19 +8,38 @@ type RetailerLogoProps = {
   imageClassName?: string;
   showName?: boolean;
   nameClassName?: string;
+  align?: "left" | "center";
 };
 
 const LOGO_MAP = [
-  { match: "amazon", src: "/images/logo_amazon.webp", width: 92, height: 28, imageClassName: "" },
+  {
+    match: "amazon",
+    src: "/images/logo_amazon.webp",
+    width: 92,
+    height: 28,
+    imageClassName: "w-[72px] translate-y-[1px]",
+  },
   {
     match: "notino",
     src: "/images/notino_logo.png?v=20260312-1821",
     width: 92,
     height: 28,
-    imageClassName: "scale-[2.15] origin-left",
+    imageClassName: "w-[92px] scale-[1.55] origin-center",
   },
-  { match: "douglas", src: "/images/Douglas_Logo.png", width: 92, height: 28, imageClassName: "" },
-  { match: "sephora", src: "/images/Sephora_logo.png", width: 92, height: 28, imageClassName: "" },
+  {
+    match: "douglas",
+    src: "/images/Douglas_Logo.png",
+    width: 92,
+    height: 28,
+    imageClassName: "w-[82px]",
+  },
+  {
+    match: "sephora",
+    src: "/images/Sephora_logo.png",
+    width: 92,
+    height: 28,
+    imageClassName: "w-[84px]",
+  },
 ] as const;
 
 function getRetailerLogo(storeName: string) {
@@ -34,6 +53,7 @@ export function RetailerLogo({
   imageClassName,
   showName = false,
   nameClassName,
+  align = "left",
 }: RetailerLogoProps) {
   const logo = getRetailerLogo(storeName);
 
@@ -43,13 +63,23 @@ export function RetailerLogo({
 
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
-      <span className="inline-flex w-[96px] justify-start overflow-visible">
+      <span
+        className={cn(
+          "inline-flex w-[96px] items-center overflow-visible",
+          align === "center" ? "justify-center" : "justify-start",
+        )}
+      >
         <img
           src={logo.src}
           alt={storeName}
           width={logo.width}
           height={logo.height}
-          className={cn("h-5 w-[96px] object-contain object-left", logo.imageClassName, imageClassName)}
+          className={cn(
+            "h-5 object-contain",
+            align === "center" ? "object-center" : "object-left",
+            logo.imageClassName,
+            imageClassName,
+          )}
           loading="lazy"
           decoding="async"
         />

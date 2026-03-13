@@ -44,6 +44,10 @@ function isUniqueConstraintError(error: unknown) {
   return error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002";
 }
 
+function preferredCatalogImageUrl(record: NormalizedPerfumeRecord) {
+  return record.imagePublicUrl ?? record.imageSourceUrl ?? record.imageUrl;
+}
+
 export async function importPerfumeRecords(params: {
   prisma: PrismaClient;
   records: NormalizedPerfumeRecord[];
@@ -369,7 +373,7 @@ export async function importPerfumeRecords(params: {
             releaseYear: record.releaseYear,
             isArabic: record.isArabic,
             isNiche: record.isNiche,
-            imageUrl: record.imagePublicUrl ?? record.imageUrl,
+            imageUrl: preferredCatalogImageUrl(record),
             ratingInternal: record.ratingInternal,
             longevityScore: record.longevityScore,
             sillageScore: record.sillageScore,
@@ -393,7 +397,7 @@ export async function importPerfumeRecords(params: {
             releaseYear: record.releaseYear,
             isArabic: record.isArabic,
             isNiche: record.isNiche,
-            imageUrl: record.imagePublicUrl ?? record.imageUrl,
+            imageUrl: preferredCatalogImageUrl(record),
             ratingInternal: record.ratingInternal,
             longevityScore: record.longevityScore,
             sillageScore: record.sillageScore,

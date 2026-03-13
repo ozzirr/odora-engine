@@ -13,6 +13,7 @@
     "homepage:bootstrap": "tsx scripts/homepage/bootstrap-content.ts",
     "perfumes:enrich": "node --import tsx scripts/enrich-perfumes.ts",
     "perfumes:verify": "node --import tsx scripts/verify-perfumes.ts",
+    "perfumes:update": "node --import tsx scripts/update-perfumes.ts",
     "perfumes:import": "node --import tsx scripts/import-perfumes.ts",
     "prices:sync": "node --import tsx scripts/sync-prices.ts"
   },

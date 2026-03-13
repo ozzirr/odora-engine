@@ -36,7 +36,7 @@ const CSV_HEADERS = [
 ] as const;
 
 const TOTAL_ROWS = 2_000;
-const OUTPUT_FILE = path.resolve(process.cwd(), "data/parfumo/perfumes.csv");
+const OUTPUT_FILE = path.resolve(process.cwd(), "data/archive/synthetic/parfumo/perfumes.csv");
 
 const BRANDS = [
   "Dior",
@@ -341,4 +341,3 @@ main().catch((error) => {
   console.error("[dataset] failed:", error);
   process.exitCode = 1;
 });
-

@@ -48,7 +48,7 @@ type Stats = {
   skippedDbExistingImageUrl: number;
 };
 
-const DEFAULT_MANIFEST_PATH = "data/verified/approved-images-manifest.csv";
+const DEFAULT_MANIFEST_PATH = "data/archive/verified/images/approved-images-manifest.csv";
 const DEFAULT_CATALOG_PATH = "data/verified/perfumes.csv";
 const DEFAULT_BUCKET = "perfumes";
 const REQUEST_TIMEOUT_MS = 20_000;

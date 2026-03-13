@@ -35,10 +35,10 @@ This audit covers the catalog and perfume data scripts that previously lived und
 | `scripts/import/run-overnight-image-pipeline.ts` | ARCHIVE | Orchestrator for the retired image pipeline. |
 | `scripts/import/suggest-image-source-urls.ts` | ARCHIVE | Operational image suggestion tool, not part of the canonical catalog flow. |
 | `scripts/import/sync-verified-images.ts` | ARCHIVE | Retired image sync pipeline. |
-| `data/import/parfumo-top-men.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
-| `data/import/parfumo-top-women.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
-| `data/import/parfumo-top-unisex.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
-| `data/parfumo/perfumes.csv` | ARCHIVE | Synthetic dataset; excluded from real-data verified enrichment. |
+| `data/sources/parfumo/top-men.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
+| `data/sources/parfumo/top-women.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
+| `data/sources/parfumo/top-unisex.csv` | KEEP | Trusted local Parfumo snapshot used for conservative verified enrichment matches. |
+| `data/archive/synthetic/parfumo/perfumes.csv` | ARCHIVE | Synthetic dataset; excluded from real-data verified enrichment. |
 
 ## Kept Commands
 
@@ -74,7 +74,7 @@ This audit covers the catalog and perfume data scripts that previously lived und
 
 The enrichment pipeline now writes:
 
-- `data/verified/perfume-review-queue.json`
-- `data/verified/perfume-review-queue.csv`
+- `data/generated/verified/perfume-review-queue.json`
+- `data/generated/verified/perfume-review-queue.csv`
 
 These contain rows that are low-confidence, ambiguous, unmatched, or conflicting and are intended for manual curation before adding broader source integrations.

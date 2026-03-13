@@ -1,4 +1,5 @@
 import { canonicalCatalogHeaders, toCatalogCsvRow } from "@/lib/perfume-data/normalize";
+import { ARCHIVED_SYNTHETIC_PARFUMO_PATH } from "@/lib/perfume-data/paths";
 import { fieldPolicyByField } from "@/lib/perfume-data/enrichment-policy";
 import { createOfficialBrandAdapter } from "@/lib/perfume-data/sources/official-brand";
 import { createParfumoTopListAdapter } from "@/lib/perfume-data/sources/parfumo";
@@ -188,7 +189,7 @@ function buildAuditEntries(adapters: PerfumeSourceAdapter[]): EnrichmentSourceAu
       reason: "Canonical DB import entrypoint remains the downstream consumer for verified catalog exports.",
     },
     {
-      path: "data/parfumo/perfumes.csv",
+      path: ARCHIVED_SYNTHETIC_PARFUMO_PATH,
       classification: "ARCHIVE",
       trusted: false,
       reason: "Synthetic dataset; excluded from trusted enrichment and left documented as untrusted.",

@@ -3,6 +3,15 @@ import path from "node:path";
 
 import { toCsv } from "@/lib/perfume-data/csv";
 import {
+  defaultCleanedOutputPath,
+  defaultEnrichInputPath,
+  defaultEnrichedOutputPath,
+  defaultEnrichmentReportPath,
+  defaultReviewQueueCsvPath,
+  defaultReviewQueueJsonPath,
+  defaultValidationReportPath,
+} from "@/lib/perfume-data/paths";
+import {
   enrichVerifiedPerfumes,
   enrichmentCatalogHeaders,
   reviewQueueCsvHeaders,
@@ -20,43 +29,6 @@ type CliOptions = {
   limit?: number;
   dryRun: boolean;
 };
-
-function defaultInputPath(source: PerfumeDataSource) {
-  return source === "verified" ? "data/verified/perfumes.csv" : "data/parfumo/perfumes.csv";
-}
-
-function defaultOutputPath(source: PerfumeDataSource, inputPath: string) {
-  if (source === "verified") {
-    const parsed = path.parse(inputPath);
-    return path.join(parsed.dir, `${parsed.name}.enriched.csv`);
-  }
-
-  const parsed = path.parse(inputPath);
-  return path.join(parsed.dir, `${parsed.name}.enriched.csv`);
-}
-
-function defaultReportPath(source: PerfumeDataSource, inputPath: string) {
-  const parsed = path.parse(inputPath);
-  if (source === "verified") {
-    return path.join(parsed.dir, "perfume-enrichment-report.json");
-  }
-
-  return path.join(parsed.dir, `${parsed.name}.validation-report.json`);
-}
-
-function defaultReviewQueueJsonPath(source: PerfumeDataSource, inputPath: string) {
-  const parsed = path.parse(inputPath);
-  return source === "verified"
-    ? path.join(parsed.dir, "perfume-review-queue.json")
-    : path.join(parsed.dir, `${parsed.name}.review-queue.json`);
-}
-
-function defaultReviewQueueCsvPath(source: PerfumeDataSource, inputPath: string) {
-  const parsed = path.parse(inputPath);
-  return source === "verified"
-    ? path.join(parsed.dir, "perfume-review-queue.csv")
-    : path.join(parsed.dir, `${parsed.name}.review-queue.csv`);
-}
 
 function parseCliOptions(argv: string[]): CliOptions {
   const options: CliOptions = {
@@ -115,9 +87,11 @@ function parseCliOptions(argv: string[]): CliOptions {
 
 async function main() {
   const options = parseCliOptions(process.argv.slice(2));
-  const inputPath = options.inputPath ?? defaultInputPath(options.source);
-  const outputPath = options.outputPath ?? defaultOutputPath(options.source, inputPath);
-  const reportPath = options.reportPath ?? defaultReportPath(options.source, inputPath);
+  const inputPath = options.inputPath ?? defaultEnrichInputPath(options.source);
+  const cleanedOutputPath = defaultCleanedOutputPath(options.source, inputPath);
+  const validationReportPath = defaultValidationReportPath(options.source, inputPath);
+  const outputPath = options.outputPath ?? defaultEnrichedOutputPath(options.source, inputPath);
+  const reportPath = options.reportPath ?? defaultEnrichmentReportPath(options.source, inputPath);
   const reviewQueueJsonPath = defaultReviewQueueJsonPath(options.source, inputPath);
   const reviewQueueCsvPath = defaultReviewQueueCsvPath(options.source, inputPath);
 
@@ -130,21 +104,39 @@ async function main() {
     });
 
     console.log(
-      `[perfumes:enrich] source=${options.source} dryRun=${options.dryRun} input=${enriched.prepared.inputPath} output=${path.resolve(process.cwd(), outputPath)} report=${path.resolve(process.cwd(), reportPath)} reviewQueue=${path.resolve(process.cwd(), reviewQueueJsonPath)}`,
+      `[perfumes:enrich] source=${options.source} dryRun=${options.dryRun} input=${enriched.prepared.inputPath} cleaned=${path.resolve(process.cwd(), cleanedOutputPath)} enriched=${path.resolve(process.cwd(), outputPath)} validation=${path.resolve(process.cwd(), validationReportPath)} report=${path.resolve(process.cwd(), reportPath)} reviewQueue=${path.resolve(process.cwd(), reviewQueueJsonPath)}`,
     );
     console.log(
       `[perfumes:enrich] valid=${enriched.prepared.summary.validRows} invalid=${enriched.prepared.summary.invalidRows} matched=${enriched.report.summary.totalMatched} lowConfidence=${enriched.report.summary.lowConfidenceMatches} ambiguous=${enriched.report.summary.ambiguousMatches} rowsEnriched=${enriched.report.summary.rowsEnriched} catalogFieldChanges=${enriched.report.summary.rowsWithCatalogFieldChanges}`,
     );
 
     if (!options.dryRun) {
+      const cleanedRows = enriched.prepared.normalizedRecords.map((record) => toCatalogCsvRow(record));
+      const resolvedCleanedOutputPath = path.resolve(process.cwd(), cleanedOutputPath);
+      const resolvedValidationReportPath = path.resolve(process.cwd(), validationReportPath);
       const resolvedOutputPath = path.resolve(process.cwd(), outputPath);
       const resolvedReportPath = path.resolve(process.cwd(), reportPath);
       const resolvedReviewQueueJsonPath = path.resolve(process.cwd(), reviewQueueJsonPath);
       const resolvedReviewQueueCsvPath = path.resolve(process.cwd(), reviewQueueCsvPath);
+      await mkdir(path.dirname(resolvedCleanedOutputPath), { recursive: true });
+      await mkdir(path.dirname(resolvedValidationReportPath), { recursive: true });
       await mkdir(path.dirname(resolvedOutputPath), { recursive: true });
       await mkdir(path.dirname(resolvedReportPath), { recursive: true });
       await mkdir(path.dirname(resolvedReviewQueueJsonPath), { recursive: true });
       await mkdir(path.dirname(resolvedReviewQueueCsvPath), { recursive: true });
+      await writeFile(resolvedCleanedOutputPath, toCsv([...canonicalCatalogHeaders], cleanedRows), "utf8");
+      await writeFile(
+        resolvedValidationReportPath,
+        `${JSON.stringify(
+          {
+            summary: enriched.prepared.summary,
+            issues: enriched.prepared.validationReportEntries,
+          },
+          null,
+          2,
+        )}\n`,
+        "utf8",
+      );
       await writeFile(resolvedOutputPath, toCsv([...enrichmentCatalogHeaders], enriched.rows), "utf8");
       await writeFile(resolvedReportPath, `${JSON.stringify(enriched.report, null, 2)}\n`, "utf8");
       await writeFile(

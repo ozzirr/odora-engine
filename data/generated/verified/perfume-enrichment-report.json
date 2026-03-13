@@ -271,25 +271,25 @@
       "reason": "Canonical DB import entrypoint remains the downstream consumer for verified catalog exports."
     },
     {
-      "path": "data/parfumo/perfumes.csv",
+      "path": "data/archive/synthetic/parfumo/perfumes.csv",
       "classification": "ARCHIVE",
       "trusted": false,
       "reason": "Synthetic dataset; excluded from trusted enrichment and left documented as untrusted."
     },
     {
-      "path": "data/import/parfumo-top-men.csv",
+      "path": "data/sources/parfumo/top-men.csv",
       "classification": "KEEP",
       "trusted": true,
       "reason": "Trusted local Parfumo snapshot used for conservative verified enrichment matches."
     },
     {
-      "path": "data/import/parfumo-top-women.csv",
+      "path": "data/sources/parfumo/top-women.csv",
       "classification": "KEEP",
       "trusted": true,
       "reason": "Trusted local Parfumo snapshot used for conservative verified enrichment matches."
     },
     {
-      "path": "data/import/parfumo-top-unisex.csv",
+      "path": "data/sources/parfumo/top-unisex.csv",
       "classification": "KEEP",
       "trusted": true,
       "reason": "Trusted local Parfumo snapshot used for conservative verified enrichment matches."
