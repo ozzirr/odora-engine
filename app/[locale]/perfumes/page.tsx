@@ -8,6 +8,8 @@ import { getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
 
 import { PerfumesClient } from "./PerfumesClient";
 
+export const dynamic = "force-dynamic";
+
 type PerfumesPageProps = {
   params: Promise<{
     locale: string;

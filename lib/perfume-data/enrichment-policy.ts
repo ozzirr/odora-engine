@@ -51,19 +51,19 @@ export const fieldPolicyByField: Record<EnrichmentTargetField, FieldPolicy> = {
     conflictPolicy: "log_keep_verified",
   },
   longevityScore: {
-    trustedSourcePriority: ["fragrantica", "parfumo-top-lists"],
+    trustedSourcePriority: ["fragrantica"],
     overwritePolicy: "fill_missing_or_invalid_only",
     missingValuePolicy: "leave_empty",
     conflictPolicy: "log_keep_verified",
   },
   sillageScore: {
-    trustedSourcePriority: ["fragrantica", "parfumo-top-lists"],
+    trustedSourcePriority: ["fragrantica"],
     overwritePolicy: "fill_missing_or_invalid_only",
     missingValuePolicy: "leave_empty",
     conflictPolicy: "log_keep_verified",
   },
   versatilityScore: {
-    trustedSourcePriority: ["fragrantica", "parfumo-top-lists"],
+    trustedSourcePriority: ["fragrantica"],
     overwritePolicy: "fill_missing_or_invalid_only",
     missingValuePolicy: "leave_empty",
     conflictPolicy: "log_keep_verified",

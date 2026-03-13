@@ -9,6 +9,7 @@ This audit covers the catalog and perfume data scripts that previously lived und
 | `scripts/enrich-perfumes.ts` | REFACTOR | Canonical verified enrichment entrypoint; now runs normalize, validate, match, enrich, verify, and export. |
 | `scripts/verify-perfumes.ts` | KEEP | Canonical validation entrypoint. |
 | `scripts/import-perfumes.ts` | KEEP | Canonical DB import entrypoint for verified and Parfumo sources. |
+| `scripts/audit-verified-scores.ts` | KEEP | Canonical score-gap audit entrypoint for verified perfumes. |
 | `scripts/sync-prices.ts` | KEEP | Canonical offer-to-price-range sync entrypoint. |
 | `lib/perfume-data/enrich.ts` | KEEP | Canonical adapter-driven enrichment orchestrator with field policy, field-level provenance, and review queue output. |
 | `lib/perfume-data/enrichment-policy.ts` | KEEP | Canonical source-priority, overwrite, missing-value, and conflict policy map. |
@@ -45,6 +46,7 @@ This audit covers the catalog and perfume data scripts that previously lived und
 - `npm run perfumes:enrich`
 - `npm run perfumes:verify`
 - `npm run perfumes:import`
+- `npm run perfumes:scores:audit`
 - `npm run prices:sync`
 
 ## New Single Source Of Truth
@@ -76,5 +78,10 @@ The enrichment pipeline now writes:
 
 - `data/generated/verified/perfume-review-queue.json`
 - `data/generated/verified/perfume-review-queue.csv`
+
+The score audit pipeline now writes:
+
+- `data/generated/verified/perfume-score-gap-report.json`
+- `data/generated/verified/perfume-score-worklist.csv`
 
 These contain rows that are low-confidence, ambiguous, unmatched, or conflicting and are intended for manual curation before adding broader source integrations.

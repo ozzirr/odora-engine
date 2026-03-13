@@ -11,6 +11,8 @@ export const VERIFIED_VALIDATION_REPORT_PATH = `${VERIFIED_GENERATED_DIR}/perfum
 export const VERIFIED_ENRICHMENT_REPORT_PATH = `${VERIFIED_GENERATED_DIR}/perfume-enrichment-report.json`;
 export const VERIFIED_REVIEW_QUEUE_JSON_PATH = `${VERIFIED_GENERATED_DIR}/perfume-review-queue.json`;
 export const VERIFIED_REVIEW_QUEUE_CSV_PATH = `${VERIFIED_GENERATED_DIR}/perfume-review-queue.csv`;
+export const VERIFIED_SCORE_GAP_REPORT_PATH = `${VERIFIED_GENERATED_DIR}/perfume-score-gap-report.json`;
+export const VERIFIED_SCORE_WORKLIST_CSV_PATH = `${VERIFIED_GENERATED_DIR}/perfume-score-worklist.csv`;
 
 export const PARFUMO_SOURCE_DIR = "data/sources/parfumo";
 export const PARFUMO_TOP_MEN_PATH = `${PARFUMO_SOURCE_DIR}/top-men.csv`;

@@ -172,6 +172,7 @@ npm run perfumes:update
 npm run perfumes:enrich
 npm run perfumes:verify
 npm run perfumes:import
+npm run perfumes:scores:audit
 npm run prices:sync
 ```
 
@@ -181,6 +182,7 @@ What each command does:
 - `perfumes:enrich` reads `data/verified/perfumes.csv`, keeps it untouched, and writes normalized/enriched artifacts into `data/generated/verified/`.
 - `perfumes:verify` checks the same normalization and validation rules without writing anything.
 - `perfumes:import` upserts the import-ready catalog into PostgreSQL. By default it reads `data/generated/verified/perfumes.enriched.csv`. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
+- `perfumes:scores:audit` writes a score-gap report and CSV worklist for verified perfumes missing `longevity`, `sillage`, or `versatility`.
 - `prices:sync` recomputes `Perfume.priceRange` from current offers and refreshes `Offer.isBestPrice`.
 
 Defaults:
@@ -189,6 +191,7 @@ Defaults:
 - `perfumes:verify` targets `data/verified/perfumes.csv`
 - `perfumes:enrich` writes `data/generated/verified/perfumes.cleaned.csv`, `data/generated/verified/perfumes.enriched.csv`, and the related reports
 - `perfumes:import` targets `data/generated/verified/perfumes.enriched.csv`
+- `perfumes:scores:audit` writes `data/generated/verified/perfume-score-gap-report.json` and `data/generated/verified/perfume-score-worklist.csv`
 - `perfumes:* -- --source=parfumo` targets the archived synthetic dataset at `data/archive/synthetic/parfumo/perfumes.csv`
 - all commands support `-- --dry-run`
   For `perfumes:update`, `-- --dry-run` runs only `verify + enrich` and skips the DB import step.

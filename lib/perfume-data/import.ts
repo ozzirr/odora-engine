@@ -48,6 +48,31 @@ function preferredCatalogImageUrl(record: NormalizedPerfumeRecord) {
   return record.imagePublicUrl ?? record.imageSourceUrl ?? record.imageUrl;
 }
 
+function getPendingNoteIds(
+  existingNoteIdsByPerfumeId: Map<number, Set<number>>,
+  perfumeId: number,
+  noteIds: Set<number>,
+) {
+  const existingSet = existingNoteIdsByPerfumeId.get(perfumeId) ?? new Set<number>();
+  return [...noteIds].filter((noteId) => !existingSet.has(noteId));
+}
+
+function registerPerfumeNoteIds(
+  existingNoteIdsByPerfumeId: Map<number, Set<number>>,
+  perfumeId: number,
+  noteIds: number[],
+) {
+  if (noteIds.length === 0) {
+    return;
+  }
+
+  const existingSet = existingNoteIdsByPerfumeId.get(perfumeId) ?? new Set<number>();
+  for (const noteId of noteIds) {
+    existingSet.add(noteId);
+  }
+  existingNoteIdsByPerfumeId.set(perfumeId, existingSet);
+}
+
 export async function importPerfumeRecords(params: {
   prisma: PrismaClient;
   records: NormalizedPerfumeRecord[];
@@ -136,6 +161,29 @@ export async function importPerfumeRecords(params: {
     const next = tempId;
     tempId -= 1;
     return next;
+  };
+
+  const syncPerfumeNotes = async (perfumeId: number, noteIds: Set<number>) => {
+    const pendingNoteIds = getPendingNoteIds(existingNoteIdsByPerfumeId, perfumeId, noteIds);
+    if (pendingNoteIds.length === 0) {
+      return 0;
+    }
+
+    if (params.dryRun) {
+      registerPerfumeNoteIds(existingNoteIdsByPerfumeId, perfumeId, pendingNoteIds);
+      return pendingNoteIds.length;
+    }
+
+    const result = await params.prisma.perfumeNote.createMany({
+      data: pendingNoteIds.map((noteId) => ({
+        perfumeId,
+        noteId,
+      })),
+      skipDuplicates: true,
+    });
+
+    registerPerfumeNoteIds(existingNoteIdsByPerfumeId, perfumeId, pendingNoteIds);
+    return result.count;
   };
 
   const ensureBrand = async (brandName: string, brandSlug: string): Promise<number> => {
@@ -309,28 +357,12 @@ export async function importPerfumeRecords(params: {
       }
 
       if (params.dryRun) {
-        const existingSet = existingNoteIdsByPerfumeId.get(matchedPerfumeId) ?? new Set<number>();
-        let wouldInsert = 0;
-        for (const noteId of noteIds) {
-          if (!existingSet.has(noteId)) {
-            existingSet.add(noteId);
-            wouldInsert += 1;
-          }
-        }
-        existingNoteIdsByPerfumeId.set(matchedPerfumeId, existingSet);
-        stats.insertedPerfumeNotes += wouldInsert;
+        stats.insertedPerfumeNotes += await syncPerfumeNotes(matchedPerfumeId, noteIds);
         stats.processedRows += 1;
         return;
       }
 
-      const result = await params.prisma.perfumeNote.createMany({
-        data: [...noteIds].map((noteId) => ({
-          perfumeId: matchedPerfumeId,
-          noteId,
-        })),
-        skipDuplicates: true,
-      });
-      stats.insertedPerfumeNotes += result.count;
+      stats.insertedPerfumeNotes += await syncPerfumeNotes(matchedPerfumeId, noteIds);
       stats.processedRows += 1;
       return;
     }
@@ -343,91 +375,80 @@ export async function importPerfumeRecords(params: {
     const brandId = await ensureBrand(record.brandName, record.brandSlug);
 
     if (params.dryRun) {
+      let perfumeId: number;
       if (params.source === "verified" && slugMatchedPerfumeId) {
         stats.updatedPerfumes += 1;
+        perfumeId = slugMatchedPerfumeId;
       } else {
-        const fakeId = createTempId();
-        perfumeIdsBySlug.set(record.perfumeSlug, fakeId);
+        perfumeId = createTempId();
+        perfumeIdsBySlug.set(record.perfumeSlug, perfumeId);
         stats.insertedPerfumes += 1;
       }
 
-      stats.insertedPerfumeNotes += noteIds.size;
+      stats.insertedPerfumeNotes += await syncPerfumeNotes(perfumeId, noteIds);
       stats.processedRows += 1;
       return;
     }
 
     if (params.source === "verified") {
-      const upserted = await params.prisma.$transaction(async (tx) => {
-        const perfume = await tx.perfume.upsert({
-          where: {
-            slug: record.perfumeSlug,
-          },
-          update: {
-            brandId,
-            name: record.perfumeName,
-            gender: record.gender,
-            descriptionShort: record.descriptionShort,
-            descriptionLong: record.descriptionLong,
-            fragranceFamily: record.fragranceFamily,
-            priceRange: record.priceRange,
-            releaseYear: record.releaseYear,
-            isArabic: record.isArabic,
-            isNiche: record.isNiche,
-            imageUrl: preferredCatalogImageUrl(record),
-            ratingInternal: record.ratingInternal,
-            longevityScore: record.longevityScore,
-            sillageScore: record.sillageScore,
-            versatilityScore: record.versatilityScore,
-            catalogStatus: record.catalogStatus,
-            sourceName: record.sourceName,
-            sourceType: record.sourceType,
-            officialSourceUrl: record.officialSourceUrl,
-            sourceConfidence: record.sourceConfidence,
-            dataQuality: record.dataQuality,
-          },
-          create: {
-            brandId,
-            name: record.perfumeName,
-            slug: record.perfumeSlug,
-            gender: record.gender,
-            descriptionShort: record.descriptionShort,
-            descriptionLong: record.descriptionLong,
-            fragranceFamily: record.fragranceFamily,
-            priceRange: record.priceRange,
-            releaseYear: record.releaseYear,
-            isArabic: record.isArabic,
-            isNiche: record.isNiche,
-            imageUrl: preferredCatalogImageUrl(record),
-            ratingInternal: record.ratingInternal,
-            longevityScore: record.longevityScore,
-            sillageScore: record.sillageScore,
-            versatilityScore: record.versatilityScore,
-            catalogStatus: record.catalogStatus,
-            sourceName: record.sourceName,
-            sourceType: record.sourceType,
-            officialSourceUrl: record.officialSourceUrl,
-            sourceConfidence: record.sourceConfidence,
-            dataQuality: record.dataQuality,
-          },
-          select: {
-            id: true,
-            slug: true,
-          },
-        });
-
-        if (noteIds.size > 0) {
-          const result = await tx.perfumeNote.createMany({
-            data: [...noteIds].map((noteId) => ({
-              perfumeId: perfume.id,
-              noteId,
-            })),
-            skipDuplicates: true,
-          });
-          stats.insertedPerfumeNotes += result.count;
-        }
-
-        return perfume;
+      const upserted = await params.prisma.perfume.upsert({
+        where: {
+          slug: record.perfumeSlug,
+        },
+        update: {
+          brandId,
+          name: record.perfumeName,
+          gender: record.gender,
+          descriptionShort: record.descriptionShort,
+          descriptionLong: record.descriptionLong,
+          fragranceFamily: record.fragranceFamily,
+          priceRange: record.priceRange,
+          releaseYear: record.releaseYear,
+          isArabic: record.isArabic,
+          isNiche: record.isNiche,
+          imageUrl: preferredCatalogImageUrl(record),
+          ratingInternal: record.ratingInternal,
+          longevityScore: record.longevityScore,
+          sillageScore: record.sillageScore,
+          versatilityScore: record.versatilityScore,
+          catalogStatus: record.catalogStatus,
+          sourceName: record.sourceName,
+          sourceType: record.sourceType,
+          officialSourceUrl: record.officialSourceUrl,
+          sourceConfidence: record.sourceConfidence,
+          dataQuality: record.dataQuality,
+        },
+        create: {
+          brandId,
+          name: record.perfumeName,
+          slug: record.perfumeSlug,
+          gender: record.gender,
+          descriptionShort: record.descriptionShort,
+          descriptionLong: record.descriptionLong,
+          fragranceFamily: record.fragranceFamily,
+          priceRange: record.priceRange,
+          releaseYear: record.releaseYear,
+          isArabic: record.isArabic,
+          isNiche: record.isNiche,
+          imageUrl: preferredCatalogImageUrl(record),
+          ratingInternal: record.ratingInternal,
+          longevityScore: record.longevityScore,
+          sillageScore: record.sillageScore,
+          versatilityScore: record.versatilityScore,
+          catalogStatus: record.catalogStatus,
+          sourceName: record.sourceName,
+          sourceType: record.sourceType,
+          officialSourceUrl: record.officialSourceUrl,
+          sourceConfidence: record.sourceConfidence,
+          dataQuality: record.dataQuality,
+        },
+        select: {
+          id: true,
+          slug: true,
+        },
       });
+
+      stats.insertedPerfumeNotes += await syncPerfumeNotes(upserted.id, noteIds);
 
       perfumeIdsBySlug.set(upserted.slug, upserted.id);
       if (slugMatchedPerfumeId) {
@@ -440,51 +461,38 @@ export async function importPerfumeRecords(params: {
     }
 
     try {
-      const createdPerfume = await params.prisma.$transaction(async (tx) => {
-        const created = await tx.perfume.create({
-          data: {
-            brandId,
-            name: record.perfumeName,
-            slug: record.perfumeSlug,
-            gender: record.gender,
-            descriptionShort: record.descriptionShort,
-            descriptionLong: record.descriptionLong,
-            fragranceFamily: record.fragranceFamily,
-            priceRange: record.priceRange,
-            releaseYear: record.releaseYear,
-            isArabic: record.isArabic,
-            isNiche: record.isNiche,
-            imageUrl: record.imageUrl,
-            ratingInternal: record.ratingInternal,
-            longevityScore: record.longevityScore,
-            sillageScore: record.sillageScore,
-            versatilityScore: record.versatilityScore,
-            catalogStatus: record.catalogStatus,
-            sourceName: record.sourceName,
-            sourceType: record.sourceType,
-            officialSourceUrl: record.officialSourceUrl,
-            sourceConfidence: record.sourceConfidence,
-            dataQuality: record.dataQuality,
-          },
-          select: {
-            id: true,
-            slug: true,
-          },
-        });
-
-        if (noteIds.size > 0) {
-          const result = await tx.perfumeNote.createMany({
-            data: [...noteIds].map((noteId) => ({
-              perfumeId: created.id,
-              noteId,
-            })),
-            skipDuplicates: true,
-          });
-          stats.insertedPerfumeNotes += result.count;
-        }
-
-        return created;
+      const createdPerfume = await params.prisma.perfume.create({
+        data: {
+          brandId,
+          name: record.perfumeName,
+          slug: record.perfumeSlug,
+          gender: record.gender,
+          descriptionShort: record.descriptionShort,
+          descriptionLong: record.descriptionLong,
+          fragranceFamily: record.fragranceFamily,
+          priceRange: record.priceRange,
+          releaseYear: record.releaseYear,
+          isArabic: record.isArabic,
+          isNiche: record.isNiche,
+          imageUrl: record.imageUrl,
+          ratingInternal: record.ratingInternal,
+          longevityScore: record.longevityScore,
+          sillageScore: record.sillageScore,
+          versatilityScore: record.versatilityScore,
+          catalogStatus: record.catalogStatus,
+          sourceName: record.sourceName,
+          sourceType: record.sourceType,
+          officialSourceUrl: record.officialSourceUrl,
+          sourceConfidence: record.sourceConfidence,
+          dataQuality: record.dataQuality,
+        },
+        select: {
+          id: true,
+          slug: true,
+        },
       });
+
+      stats.insertedPerfumeNotes += await syncPerfumeNotes(createdPerfume.id, noteIds);
 
       perfumeIdsBySlug.set(createdPerfume.slug, createdPerfume.id);
       stats.insertedPerfumes += 1;

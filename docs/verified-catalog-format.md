@@ -17,6 +17,8 @@ Generated verified artifacts:
 - `data/generated/verified/perfume-enrichment-report.json`
 - `data/generated/verified/perfume-review-queue.json`
 - `data/generated/verified/perfume-review-queue.csv`
+- `data/generated/verified/perfume-score-gap-report.json`
+- `data/generated/verified/perfume-score-worklist.csv`
 
 Canonical folder layout:
 
@@ -32,6 +34,8 @@ data/
       perfume-enrichment-report.json
       perfume-review-queue.json
       perfume-review-queue.csv
+      perfume-score-gap-report.json
+      perfume-score-worklist.csv
   sources/
     parfumo/
       top-men.csv
@@ -176,6 +180,7 @@ Current trusted-source priority:
 - `releaseYear`, `topNotes`, `middleNotes`, `baseNotes`, `fragranceFamily`: `official-brand` -> `fragrantica` -> `parfumo-top-lists`
 - `descriptionShort`, `descriptionLong`: `official-brand` -> `fragrantica`
 - `longevityScore`, `sillageScore`, `versatilityScore`: `fragrantica` -> `parfumo-top-lists`
+- `longevityScore`, `sillageScore`, `versatilityScore`: `fragrantica`
 - `officialSourceUrl`: `official-brand`
 - `imageSourceUrl`: `official-brand` -> `parfumo-top-lists` -> `fragrantica`
 
@@ -234,5 +239,12 @@ The current architecture is ready for future trusted adapters, but only the Parf
 - `sillageScore`
 - `versatilityScore`
 - `officialSourceUrl`
+
+Current score audit artifacts:
+
+- `data/generated/verified/perfume-score-gap-report.json`
+- `data/generated/verified/perfume-score-worklist.csv`
+
+These list every verified perfume still missing one or more score fields and make explicit that no implemented trusted adapter currently emits those scores.
 
 The shared normalization and validation rules for these commands live in `lib/perfume-data/`.

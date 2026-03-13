@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-
 import { importPerfumeRecords } from "@/lib/perfume-data/import";
 import { defaultImportInputPath } from "@/lib/perfume-data/paths";
+import { prisma } from "@/lib/prisma";
 import { preparePerfumeRecords } from "@/lib/perfume-data/workflow";
 import type { ImportMode, PerfumeDataSource } from "@/lib/perfume-data/types";
 
@@ -80,7 +79,6 @@ function parseCliOptions(argv: string[]): CliOptions {
 
 async function main() {
   const options = parseCliOptions(process.argv.slice(2));
-  const prisma = new PrismaClient();
   const prepared = await preparePerfumeRecords({
     inputPath: options.inputPath ?? defaultImportInputPath(options.source),
     format: options.format,
