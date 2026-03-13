@@ -191,7 +191,7 @@ export function buildPerfumeQuery(searchParams: SearchParamInput) {
     niche: parseBoolean(nicheParam),
     sort: sortOptions.some((option) => option.value === sortParam)
       ? (sortParam as SortParam)
-      : undefined,
+      : "rating",
     note: normalizeNoteInput(noteParam),
     top: normalizeNoteInput(topParam),
     heart: normalizeNoteInput(heartParam),
