@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { defaultLocale } from "@/lib/i18n";
 
 import "./globals.css";
@@ -9,7 +10,10 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang={defaultLocale}>
-      <body suppressHydrationWarning className="antialiased">{children}</body>
+      <body suppressHydrationWarning className="antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
