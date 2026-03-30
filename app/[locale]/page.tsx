@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
       : t("title"),
     description: isLaunchGateEnabled()
       ? resolvedLocale === "it"
-        ? "Coming soon privato con waiting list e accesso riservato."
-        : "Private coming soon page with waitlist and gated access."
+        ? "Coming soon privato con accesso riservato tramite password."
+        : "Private coming soon page with password-protected access."
       : t("description"),
     alternates: {
       canonical: getAlternateLinks("/")[resolvedLocale],

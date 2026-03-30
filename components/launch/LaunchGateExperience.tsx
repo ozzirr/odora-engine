@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
 import { type AppLocale } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
 type LaunchGateExperienceProps = {
   locale: AppLocale;
@@ -16,14 +16,6 @@ const copy = {
     title: "Perfume discovery is opening soon.",
     subtitle:
       "Odora is currently in a private pre-launch phase while we finish the catalog, pricing flows, and member experience.",
-    waitlistTitle: "Join the waitlist",
-    waitlistBody:
-      "Leave your email and we will let you know when the public launch is ready.",
-    emailLabel: "Email address",
-    emailPlaceholder: "you@example.com",
-    joinWaitlist: "Join waitlist",
-    waitlistSuccess: "You are on the list. We will be in touch when access opens.",
-    waitlistError: "We could not save your email right now. Try again in a moment.",
     accessTitle: "Private access",
     accessBody:
       "If you already have access, enter the password to continue into the current preview.",
@@ -34,7 +26,7 @@ const copy = {
     highlights: [
       "Coming soon page for public visitors",
       "Early-access preview behind password",
-      "Waitlist form with email input",
+      "Catalog access reserved during pre-launch",
     ],
   },
   it: {
@@ -42,14 +34,6 @@ const copy = {
     title: "La scoperta dei profumi apre presto.",
     subtitle:
       "Odora e in una fase di pre-lancio privata mentre chiudiamo catalogo, pricing e esperienza riservata ai membri.",
-    waitlistTitle: "Entra in waiting list",
-    waitlistBody:
-      "Lascia la tua email e ti avviseremo appena apriremo al pubblico.",
-    emailLabel: "Indirizzo email",
-    emailPlaceholder: "tuo@email.com",
-    joinWaitlist: "Entra in lista",
-    waitlistSuccess: "Sei in lista. Ti scriveremo appena apriamo l'accesso.",
-    waitlistError: "Non siamo riusciti a salvare la tua email adesso. Riprova tra poco.",
     accessTitle: "Accesso privato",
     accessBody:
       "Se hai gia accesso, inserisci la password per entrare nella preview corrente.",
@@ -60,7 +44,7 @@ const copy = {
     highlights: [
       "Coming soon per i visitatori pubblici",
       "Preview privata protetta da password",
-      "Waiting list con campo email",
+      "Accesso al catalogo riservato nel pre-lancio",
     ],
   },
 } as const;
@@ -92,39 +76,9 @@ function Card({
 
 export function LaunchGateExperience({ locale }: LaunchGateExperienceProps) {
   const text = copy[locale];
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isSubmittingWaitlist, setIsSubmittingWaitlist] = useState(false);
   const [isSubmittingAccess, setIsSubmittingAccess] = useState(false);
-  const [waitlistState, setWaitlistState] = useState<"idle" | "success" | "error">("idle");
   const [passwordError, setPasswordError] = useState<string | null>(null);
-
-  async function handleWaitlistSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsSubmittingWaitlist(true);
-    setWaitlistState("idle");
-
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ email, locale }),
-      });
-
-      if (!response.ok) {
-        throw new Error("waitlist_failed");
-      }
-
-      setEmail("");
-      setWaitlistState("success");
-    } catch {
-      setWaitlistState("error");
-    } finally {
-      setIsSubmittingWaitlist(false);
-    }
-  }
 
   async function handleAccessSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -183,34 +137,7 @@ export function LaunchGateExperience({ locale }: LaunchGateExperienceProps) {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(22rem,0.85fr)]">
-          <Card title={text.waitlistTitle} body={text.waitlistBody}>
-            <form className="space-y-4" onSubmit={handleWaitlistSubmit}>
-              <label className="block text-sm font-medium text-[#3a2e23]">
-                <span className="mb-2 block">{text.emailLabel}</span>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                  placeholder={text.emailPlaceholder}
-                  className="h-12 w-full rounded-2xl border border-[#d8cab7] bg-[#fdfaf6] px-4 text-sm text-[#1f1710] outline-none transition focus:border-[#1e4b3b] focus:ring-2 focus:ring-[#1e4b3b]/15"
-                />
-              </label>
-
-              <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={isSubmittingWaitlist}>
-                {isSubmittingWaitlist ? "..." : text.joinWaitlist}
-              </Button>
-
-              {waitlistState === "success" ? (
-                <p className="text-sm text-[#1e4b3b]">{text.waitlistSuccess}</p>
-              ) : null}
-              {waitlistState === "error" ? (
-                <p className="text-sm text-[#9a4236]">{text.waitlistError}</p>
-              ) : null}
-            </form>
-          </Card>
-
+        <div className="mt-10 max-w-xl">
           <Card title={text.accessTitle} body={text.accessBody} className="bg-[#fffaf2]/92">
             <form className="space-y-4" onSubmit={handleAccessSubmit}>
               <label className="block text-sm font-medium text-[#3a2e23]">
@@ -229,9 +156,7 @@ export function LaunchGateExperience({ locale }: LaunchGateExperienceProps) {
                 {isSubmittingAccess ? "..." : text.unlock}
               </Button>
 
-              {passwordError ? (
-                <p className="text-sm text-[#9a4236]">{passwordError}</p>
-              ) : null}
+              {passwordError ? <p className="text-sm text-[#9a4236]">{passwordError}</p> : null}
             </form>
           </Card>
         </div>
