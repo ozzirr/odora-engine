@@ -11,6 +11,7 @@ import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
+import { cn } from "@/lib/utils";
 
 type PerfumeHeroProps = {
   perfume: {
@@ -91,6 +92,11 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
     perfumeName: perfume.name,
     locale,
   });
+  const metrics = [
+    { label: t("metrics.longevity"), value: perfume.longevityScore },
+    { label: t("metrics.sillage"), value: perfume.sillageScore },
+    { label: t("metrics.versatility"), value: perfume.versatilityScore },
+  ].filter((metric) => metric.value !== null);
 
   return (
     <section className="grid gap-6 lg:grid-cols-[1.05fr_1.35fr] lg:gap-8">
@@ -121,11 +127,22 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
           ) : null}
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <MetricItem label={t("metrics.longevity")} value={perfume.longevityScore} />
-          <MetricItem label={t("metrics.sillage")} value={perfume.sillageScore} />
-          <MetricItem label={t("metrics.versatility")} value={perfume.versatilityScore} />
-        </div>
+        {metrics.length > 0 ? (
+          <div
+            className={cn(
+              "grid gap-2 sm:gap-3",
+              metrics.length === 1
+                ? "grid-cols-1"
+                : metrics.length === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-3",
+            )}
+          >
+            {metrics.map((metric) => (
+              <MetricItem key={metric.label} label={metric.label} value={metric.value} />
+            ))}
+          </div>
+        ) : null}
 
         <BestOfferCard bestOffer={bestOffer} showButton={false} className="bg-[#f7efe2]" />
 

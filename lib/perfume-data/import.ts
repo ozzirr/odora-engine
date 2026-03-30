@@ -45,8 +45,8 @@ function isUniqueConstraintError(error: unknown) {
 }
 
 function preferredCatalogImageUrl(record: NormalizedPerfumeRecord) {
-  // Prefer the original Parfumo asset when available so the catalog does not depend on mirrored storage copies.
-  return record.imageSourceUrl ?? record.imageUrl ?? record.imagePublicUrl;
+  // Prefer owned storage/public URLs first and only fall back to third-party hotlinks when needed.
+  return record.imagePublicUrl ?? record.imageUrl ?? record.imageSourceUrl;
 }
 
 function getPendingNoteIds(

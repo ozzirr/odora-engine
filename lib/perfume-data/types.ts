@@ -43,6 +43,7 @@ export type NormalizedPerfumeRecord = {
   officialSourceUrl?: string;
   sourceConfidence: number;
   dataQuality: DataQuality;
+  enrichmentStatus?: EnrichmentStatus;
   notes: NoteGroups;
 };
 

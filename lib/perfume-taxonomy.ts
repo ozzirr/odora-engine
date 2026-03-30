@@ -29,6 +29,15 @@ const genderKeywords: Array<{ gender: CanonicalGender; keywords: string[] }> = [
   { gender: "women", keywords: ["female", "women", "feminine", "for her"] },
 ];
 
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function hasKeywordPhrase(value: string, keyword: string) {
+  const pattern = new RegExp(`(^|[^a-z])${escapeRegExp(keyword)}([^a-z]|$)`);
+  return pattern.test(value);
+}
+
 const familyKeywords: Array<{ family: CanonicalFragranceFamily; keywords: string[] }> = [
   {
     family: "Woody",
@@ -106,7 +115,7 @@ export function normalizeGenderLabel(value: string) {
   }
 
   for (const entry of genderKeywords) {
-    if (entry.keywords.some((keyword) => normalized.includes(keyword))) {
+    if (entry.keywords.some((keyword) => hasKeywordPhrase(normalized, keyword))) {
       return entry.gender;
     }
   }

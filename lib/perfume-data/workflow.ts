@@ -12,6 +12,47 @@ import type {
 } from "@/lib/perfume-data/types";
 
 const requiredFieldNames = new Set(["brand", "name", "slug", "gender", "fragranceFamily"]);
+const acceptedVerifiedCatalogStatuses = new Set<CatalogStatus>([
+  CatalogStatus.VERIFIED,
+  CatalogStatus.IMPORTED_UNVERIFIED,
+]);
+
+function hasNormalizedNotes(record: NormalizedPerfumeRecord) {
+  return record.notes.top.length > 0 || record.notes.heart.length > 0 || record.notes.base.length > 0;
+}
+
+function hasGeneratedDescriptionShort(value: string) {
+  return /\sby\s.+,\s.+profile(?: with .+)?\.$/i.test(value);
+}
+
+function hasGeneratedDescriptionLong(value: string) {
+  return /\sby\s.+ opens with .+ then moves through .+ and settles on .+\.$/i.test(value);
+}
+
+function getVerifiedDowngradeReasons(record: NormalizedPerfumeRecord) {
+  const reasons: string[] = [];
+
+  if (
+    record.enrichmentStatus === "low_confidence" ||
+    record.enrichmentStatus === "ambiguous" ||
+    record.enrichmentStatus === "unmatched"
+  ) {
+    reasons.push(`enrichment_status=${record.enrichmentStatus}`);
+  }
+
+  if (!hasNormalizedNotes(record)) {
+    reasons.push("missing normalized notes");
+  }
+
+  if (
+    hasGeneratedDescriptionShort(record.descriptionShort) &&
+    hasGeneratedDescriptionLong(record.descriptionLong)
+  ) {
+    reasons.push("placeholder generated descriptions");
+  }
+
+  return reasons;
+}
 
 function addIssue(
   issuesByRow: Map<number, ValidationIssue[]>,
@@ -106,6 +147,20 @@ export async function preparePerfumeRecords(params: {
     }
 
     const record = normalized.value;
+    if (params.source === "verified" && record.catalogStatus === CatalogStatus.VERIFIED) {
+      const downgradeReasons = getVerifiedDowngradeReasons(record);
+
+      if (downgradeReasons.length > 0) {
+        record.catalogStatus = CatalogStatus.IMPORTED_UNVERIFIED;
+        addIssue(issuesByRow, validationIssues, {
+          level: "warning",
+          field: "catalog_status",
+          message: `Downgraded to IMPORTED_UNVERIFIED: ${downgradeReasons.join(", ")}.`,
+          sourceRow: record.sourceRow,
+        });
+      }
+    }
+
     const issues = validatePerfumeRecord(record);
     addIssues(issuesByRow, validationIssues, issues);
     candidateRecords.push(record);
@@ -113,14 +168,15 @@ export async function preparePerfumeRecords(params: {
 
   if (params.source === "verified") {
     for (const record of candidateRecords) {
-      if (record.catalogStatus === CatalogStatus.VERIFIED) {
+      if (acceptedVerifiedCatalogStatuses.has(record.catalogStatus)) {
         continue;
       }
 
       addIssue(issuesByRow, validationIssues, {
         level: "error",
         field: "catalog_status",
-        message: "Verified pipeline only accepts rows with catalog_status=VERIFIED.",
+        message:
+          "Verified pipeline only accepts rows with catalog_status=VERIFIED or IMPORTED_UNVERIFIED.",
         sourceRow: record.sourceRow,
       });
     }

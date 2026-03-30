@@ -1,4 +1,4 @@
-import { CatalogStatus, DataQuality, PriceRange, SourceType } from "@prisma/client";
+import { CatalogStatus, DataQuality, SourceType } from "@prisma/client";
 
 import {
   canonicalGenderToPrisma,
@@ -50,6 +50,7 @@ const fieldAliases = {
   officialSourceUrl: ["official_source_url", "officialsourceurl", "source_url", "sourceurl", "parfumo_url"],
   sourceConfidence: ["source_confidence", "sourceconfidence"],
   dataQuality: ["data_quality", "dataquality"],
+  enrichmentStatus: ["enrichment_status", "enrichmentstatus"],
 } as const;
 
 export const canonicalCatalogHeaders = [
@@ -339,6 +340,24 @@ function parseCatalogStatus(value: unknown, source: PerfumeDataSource) {
   return source === "verified" ? CatalogStatus.VERIFIED : CatalogStatus.IMPORTED_UNVERIFIED;
 }
 
+function parseEnrichmentStatus(
+  value: unknown,
+): NormalizedPerfumeRecord["enrichmentStatus"] {
+  const normalized = cleanString(String(value ?? "")).toLowerCase();
+
+  if (
+    normalized === "matched_enriched" ||
+    normalized === "matched_provenance_only" ||
+    normalized === "low_confidence" ||
+    normalized === "ambiguous" ||
+    normalized === "unmatched"
+  ) {
+    return normalized;
+  }
+
+  return undefined;
+}
+
 function parseSourceType(value: unknown, source: PerfumeDataSource) {
   const normalized = cleanString(String(value ?? "")).toUpperCase();
   if (normalized === "MANUAL_CURATION") {
@@ -602,6 +621,9 @@ export function normalizePerfumeRecord(params: {
       params.source,
     ),
     dataQuality: parseDataQuality(getRecordValue(params.record, fieldAliases.dataQuality), params.source),
+    enrichmentStatus: parseEnrichmentStatus(
+      getRecordValue(params.record, fieldAliases.enrichmentStatus),
+    ),
     notes,
   };
 
