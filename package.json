@@ -16,7 +16,11 @@
     "perfumes:update": "node --import tsx scripts/update-perfumes.ts",
     "perfumes:import": "node --import tsx scripts/import-perfumes.ts",
     "perfumes:scores:audit": "node --import tsx scripts/audit-verified-scores.ts",
-    "prices:sync": "node --import tsx scripts/sync-prices.ts"
+    "prices:sync": "node --import tsx scripts/sync-prices.ts",
+    "offers:backup": "node --import tsx scripts/backup-offers.ts",
+    "offers:restore": "node --import tsx scripts/restore-offers.ts",
+    "catalog:reset-db": "node --import tsx scripts/reset-catalog-db.ts",
+    "catalog:reset:verified": "node --import tsx scripts/reset-verified-catalog.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.2",

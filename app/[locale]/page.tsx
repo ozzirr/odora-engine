@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
 import { DiscoveryCollections } from "@/components/home/DiscoveryCollections";
 import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
 import { Hero } from "@/components/home/Hero";
@@ -14,7 +16,12 @@ import {
   toHomeSpotlight,
   toPerfumeCardItem,
 } from "@/lib/homepage";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
+import {
+  LAUNCH_GATE_ACCESS_COOKIE_NAME,
+  hasLaunchGateAccess,
+  isLaunchGateEnabled,
+} from "@/lib/launch-gate";
 
 export const revalidate = 3600;
 
@@ -30,16 +37,46 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.home" });
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: isLaunchGateEnabled()
+      ? resolvedLocale === "it"
+        ? "Odora apre presto"
+        : "Odora is opening soon"
+      : t("title"),
+    description: isLaunchGateEnabled()
+      ? resolvedLocale === "it"
+        ? "Coming soon privato con waiting list e accesso riservato."
+        : "Private coming soon page with waitlist and gated access."
+      : t("description"),
     alternates: {
       canonical: getAlternateLinks("/")[resolvedLocale],
       languages: getAlternateLinks("/"),
     },
+    ...(isLaunchGateEnabled()
+      ? {
+          robots: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {}),
   };
 }
 
-export default async function HomePage() {
+export default async function HomePage({ params }: HomePageProps) {
+  const { locale } = await params;
+  const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
+
+  if (isLaunchGateEnabled()) {
+    const cookieStore = await cookies();
+    const hasAccess = hasLaunchGateAccess(
+      cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value,
+    );
+
+    if (!hasAccess) {
+      return <LaunchGateExperience locale={resolvedLocale} />;
+    }
+  }
+
   const homepageData = await getHomepageData();
   const heroPreviews = homepageData.heroSpotlights.map((perfume, index) =>
     toHomeSpotlight(perfume, index === 0 ? "heroPick" : "spotlight"),

@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 
 type LocaleShellProps = {
   children: React.ReactNode;
+  hideChrome?: boolean;
 };
 
 type AuthMode = "login" | "signup";
@@ -139,7 +140,7 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   );
 }
 
-export function LocaleShell({ children }: LocaleShellProps) {
+export function LocaleShell({ children, hideChrome = false }: LocaleShellProps) {
   const activePathname = useActivePathname();
   const isStandaloneAuthPage = activePathname === "/login" || activePathname === "/signup";
 
@@ -149,14 +150,16 @@ export function LocaleShell({ children }: LocaleShellProps) {
         <div
           className={cn("min-h-screen transition duration-300 ease-out")}
         >
-          <Header />
+          {hideChrome ? null : <Header />}
           <main>{children}</main>
-          <Footer />
+          {hideChrome ? null : <Footer />}
         </div>
 
-        <Suspense fallback={null}>
-          <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
-        </Suspense>
+        {hideChrome ? null : (
+          <Suspense fallback={null}>
+            <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
+          </Suspense>
+        )}
       </div>
     </PerfumeDetailNavigationProvider>
   );

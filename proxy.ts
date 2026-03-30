@@ -1,11 +1,19 @@
 import createMiddleware from "next-intl/middleware";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
 import {
   getLocaleFromAcceptLanguage,
+  getLocalizedPathname,
   localeCookieName,
   routing,
 } from "@/lib/i18n";
+import {
+  LAUNCH_GATE_ACCESS_COOKIE_NAME,
+  getLaunchGateLocaleFromPathname,
+  hasLaunchGateAccess,
+  isLaunchGateEnabled,
+  isLaunchGateHomePath,
+} from "@/lib/launch-gate";
 import { updateSession } from "@/lib/supabase/middleware";
 
 const handleI18nRouting = createMiddleware(routing);
@@ -38,6 +46,17 @@ export async function proxy(request: NextRequest) {
   }
 
   const response = handleI18nRouting(request);
+
+  if (
+    isLaunchGateEnabled() &&
+    !hasLaunchGateAccess(request.cookies.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value) &&
+    hasLocalePrefix &&
+    !isLaunchGateHomePath(pathname)
+  ) {
+    const locale = getLaunchGateLocaleFromPathname(pathname);
+    return NextResponse.redirect(new URL(getLocalizedPathname(locale, "/"), request.url));
+  }
+
   if (!requiresSessionRefresh(pathname)) {
     return response;
   }

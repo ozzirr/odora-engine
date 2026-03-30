@@ -136,6 +136,11 @@ export async function syncPerfumePrices(params: {
           productUrl: true,
           lastCheckedAt: true,
           isBestPrice: true,
+          store: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
     },

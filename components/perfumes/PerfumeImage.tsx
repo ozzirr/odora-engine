@@ -17,6 +17,7 @@ type PerfumeImageProps = {
 const ALLOWED_EXTERNAL_IMAGE_HOSTS = new Set([
   "rmnbfnaapibtyfxuacde.supabase.co",
   "media.parfumo.com",
+  "fimgs.net",
 ]);
 
 function isRenderableImageUrl(value: string | null | undefined) {

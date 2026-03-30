@@ -91,11 +91,13 @@ export function BestOfferCard({
       <p className="mt-2 font-display text-3xl text-[#1f1710]">
         {formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency, locale as "it" | "en")}
       </p>
-      <div className="mt-1 flex flex-wrap items-center gap-2 text-sm text-[#5f4f40]">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-[#5f4f40]">
         <span>{t("at")}</span>
         <RetailerLogo
           storeName={storeName}
-          imageClassName="h-5"
+          surface="pill"
+          size="md"
+          align="center"
         />
       </div>
 
