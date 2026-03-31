@@ -59,6 +59,28 @@ body {
   will-change: transform, box-shadow;
 }
 
+.loading-bar-track {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+@keyframes loading-slide {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(220%);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .premium-card {
     transition:
@@ -69,5 +91,9 @@ body {
 
   .premium-card:hover {
     border-color: #d9c9b4;
+  }
+
+  .loading-bar-fill {
+    animation: loading-slide 1.35s ease-in-out infinite;
   }
 }

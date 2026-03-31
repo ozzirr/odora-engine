@@ -5,7 +5,6 @@ import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
-import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 import { PerfumesClient } from "./PerfumesClient";
 
@@ -38,7 +37,6 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "catalog.page" });
   const resolvedSearchParams = await searchParams;
-  const isAuthenticated = await getIsAuthenticated();
   const { perfumes, selectedFilters, total, hasMore } = await getPerfumesPage(resolvedSearchParams, {
     offset: 0,
     limit: PERFUMES_PAGE_SIZE,
@@ -57,7 +55,7 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         total={total}
         hasMore={hasMore}
         pageSize={PERFUMES_PAGE_SIZE}
-        isAuthenticated={isAuthenticated}
+        isAuthenticated={false}
       />
     </Container>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { usePathname as useActivePathname } from "@/lib/navigation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -8,11 +8,13 @@ import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { PerfumeDetailNavigationProvider } from "@/components/perfumes/PerfumeDetailNavigation";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
 type LocaleShellProps = {
   children: React.ReactNode;
+  hideChrome?: boolean;
 };
 
 type AuthMode = "login" | "signup";
@@ -30,13 +32,15 @@ function getBasePath(pathname: string, searchParams: URLSearchParams, hash: stri
   return `${pathname}${search ? `?${search}` : ""}${hash}`;
 }
 
-export function LocaleShell({ children }: LocaleShellProps) {
+type AuthModalOverlayProps = {
+  isStandaloneAuthPage: boolean;
+};
+
+function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   const t = useTranslations("auth.login.page");
   const router = useRouter();
   const pathname = usePathname();
-  const activePathname = useActivePathname();
   const searchParams = useSearchParams();
-  const isStandaloneAuthPage = activePathname === "/login" || activePathname === "/signup";
   const mode = isStandaloneAuthPage ? null : getAuthMode(searchParams.get("auth"));
   const modalOpen = mode !== null;
   const currentParams = new URLSearchParams(searchParams.toString());
@@ -103,47 +107,60 @@ export function LocaleShell({ children }: LocaleShellProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [modalOpen, pathname, router, searchParams]);
 
-  return (
-    <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
-      <div
-        aria-hidden={modalOpen}
-        className={cn(
-          "min-h-screen transition duration-300 ease-out",
-          modalOpen && "pointer-events-none select-none blur-[14px] saturate-[0.82] scale-[0.995]",
-        )}
-      >
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </div>
+  if (!mode) {
+    return null;
+  }
 
-      {mode ? (
+  return (
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto bg-[rgba(24,20,16,0.22)] px-4 py-6 backdrop-blur-[18px] sm:px-6 sm:py-10"
+      onClick={() => closeModal()}
+    >
+      <div className="flex min-h-full items-center justify-center">
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-[rgba(24,20,16,0.22)] px-4 py-6 backdrop-blur-[18px] sm:px-6 sm:py-10"
-          onClick={() => closeModal()}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="auth-modal-title"
+          onClick={(event) => event.stopPropagation()}
+          className="w-full max-w-md"
         >
-          <div className="flex min-h-full items-center justify-center">
-            <div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="auth-modal-title"
-              onClick={(event) => event.stopPropagation()}
-              className="w-full"
-            >
-              <AuthPanel
-                mode={mode}
-                nextPath={nextPath}
-                initialError={initialError}
-                titleId="auth-modal-title"
-                onClose={() => closeModal()}
-                onSwitchMode={(nextMode) => switchMode(nextMode)}
-                surface="glass"
-                className="relative overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.28),transparent_34%)] before:content-['']"
-              />
-            </div>
-          </div>
+          <AuthPanel
+            mode={mode}
+            nextPath={nextPath}
+            initialError={initialError}
+            titleId="auth-modal-title"
+            onClose={() => closeModal()}
+            onSwitchMode={(nextMode) => switchMode(nextMode)}
+            surface="glass"
+            className="relative overflow-hidden before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.28),transparent_34%)] before:content-['']"
+          />
         </div>
-      ) : null}
+      </div>
     </div>
+  );
+}
+
+export function LocaleShell({ children, hideChrome = false }: LocaleShellProps) {
+  const activePathname = useActivePathname();
+  const isStandaloneAuthPage = activePathname === "/login" || activePathname === "/signup";
+
+  return (
+    <PerfumeDetailNavigationProvider>
+      <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
+        <div
+          className={cn("min-h-screen transition duration-300 ease-out")}
+        >
+          {hideChrome ? null : <Header />}
+          <main>{children}</main>
+          {hideChrome ? null : <Footer />}
+        </div>
+
+        {hideChrome ? null : (
+          <Suspense fallback={null}>
+            <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
+          </Suspense>
+        )}
+      </div>
+    </PerfumeDetailNavigationProvider>
   );
 }

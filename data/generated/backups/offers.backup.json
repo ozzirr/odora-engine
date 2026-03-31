@@ -1,0 +1,2750 @@
+{
+  "version": 2,
+  "createdAt": "2026-03-24T15:42:39.399Z",
+  "offers": [
+    {
+      "perfumeSlug": "lattafa-khamrah",
+      "store": {
+        "slug": "notino",
+        "name": "Notino",
+        "websiteUrl": "https://www.notino.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Notinode_logo.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.notino.it/lattafa/khamrah-edp",
+      "affiliateUrl": "https://trk.odora.it/notino/lattafa-khamrah",
+      "priceAmount": 41.9,
+      "currency": "EUR",
+      "shippingCost": 4.9,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    },
+    {
+      "perfumeSlug": "lattafa-khamrah",
+      "store": {
+        "slug": "sephora",
+        "name": "Sephora ",
+        "websiteUrl": "https://www.sephora.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Sephora_logo.svg/1280px-Sephora_logo.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.sephora.it/p/lattafa-khamrah-edp",
+      "affiliateUrl": "https://trk.odora.it/sephora/lattafa-khamrah",
+      "priceAmount": 46,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "LIMITED",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": true
+    },
+    {
+      "perfumeSlug": "lattafa-khamrah",
+      "store": {
+        "slug": "douglas",
+        "name": "Douglas ",
+        "websiteUrl": "https://www.douglas.it",
+        "affiliateProgram": "Awin",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Douglas_Logo_06.2018.svg/1280px-Douglas_Logo_06.2018.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.douglas.it/it/p/lattafa-khamrah-edp",
+      "affiliateUrl": "https://trk.odora.it/douglas/lattafa-khamrah",
+      "priceAmount": 44.5,
+      "currency": "EUR",
+      "shippingCost": 3.5,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    },
+    {
+      "perfumeSlug": "dior-sauvage-elixir",
+      "store": {
+        "slug": "notino",
+        "name": "Notino",
+        "websiteUrl": "https://www.notino.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Notinode_logo.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.notino.it/dior/sauvage-elixir",
+      "affiliateUrl": "https://trk.odora.it/notino/sauvage-elixir",
+      "priceAmount": 129,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": true
+    },
+    {
+      "perfumeSlug": "dior-sauvage-elixir",
+      "store": {
+        "slug": "sephora",
+        "name": "Sephora ",
+        "websiteUrl": "https://www.sephora.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Sephora_logo.svg/1280px-Sephora_logo.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.sephora.it/p/dior-sauvage-elixir",
+      "affiliateUrl": "https://trk.odora.it/sephora/sauvage-elixir",
+      "priceAmount": 141,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    },
+    {
+      "perfumeSlug": "dior-sauvage-elixir",
+      "store": {
+        "slug": "douglas",
+        "name": "Douglas ",
+        "websiteUrl": "https://www.douglas.it",
+        "affiliateProgram": "Awin",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Douglas_Logo_06.2018.svg/1280px-Douglas_Logo_06.2018.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.douglas.it/it/p/dior-sauvage-elixir",
+      "affiliateUrl": "https://trk.odora.it/douglas/sauvage-elixir",
+      "priceAmount": 136,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "LIMITED",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    },
+    {
+      "perfumeSlug": "xerjoff-naxos",
+      "store": {
+        "slug": "notino",
+        "name": "Notino",
+        "websiteUrl": "https://www.notino.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Notinode_logo.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.notino.it/xerjoff/naxos",
+      "affiliateUrl": "https://trk.odora.it/notino/xerjoff-naxos",
+      "priceAmount": 188,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": true
+    },
+    {
+      "perfumeSlug": "xerjoff-naxos",
+      "store": {
+        "slug": "sephora",
+        "name": "Sephora ",
+        "websiteUrl": "https://www.sephora.it",
+        "affiliateProgram": "TBD",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Sephora_logo.svg/1280px-Sephora_logo.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.sephora.it/p/xerjoff-naxos",
+      "affiliateUrl": "https://trk.odora.it/sephora/xerjoff-naxos",
+      "priceAmount": 199,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "LIMITED",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    },
+    {
+      "perfumeSlug": "xerjoff-naxos",
+      "store": {
+        "slug": "douglas",
+        "name": "Douglas ",
+        "websiteUrl": "https://www.douglas.it",
+        "affiliateProgram": "Awin",
+        "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Douglas_Logo_06.2018.svg/1280px-Douglas_Logo_06.2018.svg.png",
+        "isActive": true
+      },
+      "productUrl": "https://www.douglas.it/it/p/xerjoff-naxos",
+      "affiliateUrl": "https://trk.odora.it/douglas/xerjoff-naxos",
+      "priceAmount": 194,
+      "currency": "EUR",
+      "shippingCost": 0,
+      "availability": "IN_STOCK",
+      "lastCheckedAt": "2026-03-09T17:27:07.975Z",
+      "isBestPrice": false
+    }
+  ],
+  "perfumeRelations": [
+    {
+      "perfumeSlug": "acqua-di-parma-fico-di-amalfi",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "acqua-di-parma-oud-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "afnan-perfumes-supremacy-collectors-edition",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "afnan-perfumes-supremacy-not-only-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "afnan-perfumes-turathi-blue",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "al-haramain-detour-noir",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "al-haramain-haramain-amber-oud-tobacco-edition",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-dia-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-epic-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-epic-woman-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-guidance",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-interlude-53",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-interlude-black-iris",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-journey-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-jubilation-40",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-jubilation-xxv-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-lyric-woman-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-memoir-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-memoir-woman-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-outlands",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-overture-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-reflection-45",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-reflection-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-sunshine-man",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "amouage-sunshine-woman",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "anfas-ishq",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "anfas-salam",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "arabiyat-prestige-marwa",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "argos-triumph-of-bacchus-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "argos-triumph-of-bacchus-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "armaf-club-de-nuit-intense-man-limited-edition",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "atkinsons-oud-save-the-king-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "attar-collection-khaltat-night-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "azzaro-the-most-wanted-eau-de-parfum-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "azzaro-the-most-wanted-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bdk-parfums-gris-charnel-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bdk-parfums-gris-charnel-extrait",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bdk-parfums-rouge-smoking-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bentley-bentley-for-men-absolute",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "boucheron-jaipur-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bvlgari-le-gemme-tygar-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "bvlgari-man-in-black",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "byredo-bal-dafrique-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "byredo-gypsy-water",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "carolina-herrera-ch-men-prive",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "carolina-herrera-good-girl",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-1888",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-bouquet-ideale-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-dama-bianca-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-dolce-amalfi-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-lira-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "casamorati-mefisto-gentiluomo",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "celine-black-tie-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-allure-homme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-allure-homme-edition-blanche-eau-de-toilette-concentree",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-allure-homme-sport",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-allure-homme-sport-eau-extreme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-antaeus-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-bleu-de-chanel-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-bleu-de-chanel-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-chance-eau-tendre",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-chance-eau-tendre-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-chance-eau-tendre-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-coco-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-coco-mademoiselle",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-coco-mademoiselle-eau-de-parfum-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-coromandel-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-coromandel-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-egoiste-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-n-5-eau-premiere",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-platinum-egoiste-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-pour-monsieur-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "chanel-sycomore-2008-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "clive-christian-1872-for-men",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "clive-christian-jump-up-and-kiss-me-hedonistic",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "clive-christian-x-for-men",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "clive-christian-xxi-art-deco-blonde-amber",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-absolu-aventus",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-aventus",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-aventus-cologne",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-bois-du-portugal",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-green-irish-tweed",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-royal-oud",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-silver-mountain-water",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "creed-virgin-island-water",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "daniel-josier-ambre-tabac-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-ambre-nuit-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-bois-dargent-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-addict-2002-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-addict-2014-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-homme-cologne-2013",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-homme-intense-2011",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-homme-original-2011-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-homme-parfum-2014",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-dior-homme-sport-2021",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-eau-sauvage-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-eau-sauvage-parfum-2017",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-fahrenheit",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-fahrenheit-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-feve-delicieuse",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-gris-dior-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-hypnotic-poison-2014-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-hypnotic-poison-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-jadore-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-midnight-poison-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-miss-dior-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dior-sauvage-elixir",
+      "moods": [
+        {
+          "slug": "confident",
+          "weight": 9
+        },
+        {
+          "slug": "bold",
+          "weight": 8
+        },
+        {
+          "slug": "elegant",
+          "weight": 6
+        }
+      ],
+      "seasons": [
+        {
+          "slug": "autumn",
+          "weight": 8
+        },
+        {
+          "slug": "winter",
+          "weight": 9
+        },
+        {
+          "slug": "spring",
+          "weight": 6
+        }
+      ],
+      "occasions": [
+        {
+          "slug": "evening",
+          "weight": 8
+        },
+        {
+          "slug": "special-event",
+          "weight": 8
+        },
+        {
+          "slug": "date-night",
+          "weight": 7
+        }
+      ]
+    },
+    {
+      "perfumeSlug": "diptyque-eau-duelle-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "diptyque-leau-papier-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "diptyque-philosykos",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "diptyque-philosykos-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "diptyque-philosykos-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dolce-and-gabbana-light-blue",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dolce-and-gabbana-light-blue-pour-homme-forever",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dolce-and-gabbana-the-one-for-men-2015-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "dolce-and-gabbana-the-one-for-men-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "editions-de-parfums-frederic-malle-musc-ravageur-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "editions-de-parfums-frederic-malle-portrait-of-a-lady-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "essential-parfums-bois-imperial-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "ex-nihilo-blue-talisman-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "frederic-malle-portrait-of-a-lady",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "french-avenue-liquid-brun",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-acqua-di-gio-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-acqua-di-gio-profumo",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-armani-code-2021-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-armani-code-absolu-pour-homme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-armani-code-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-emporio-armani-stronger-with-you-absolutely",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-emporio-armani-stronger-with-you-intensely",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "giorgio-armani-si-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "givenchy-gentleman-givenchy-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "givenchy-gentleman-givenchy-reserve-privee",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "givenchy-gentleman-reserve-privee",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "givenchy-l-interdit-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "givenchy-linterdit-eau-de-parfum-rouge",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "goldfield-and-banks-ingenious-ginger",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "goldfield-and-banks-pacific-rock-moss",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "gritti-duchessa",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "gritti-pomelo-sorrento",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "gucci-gucci-intense-oud",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "gucci-gucci-pour-homme-ii-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "gucci-guilty-elixir-de-parfum-pour-homme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-angelique-noire",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-apres-londee-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-cuir-beluga-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-gourmand-coquin",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-guerlain-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-habit-rouge-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-habit-rouge-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-heritage-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-jicky-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-lheure-bleue-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-lhomme-ideal-cologne",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-lhomme-ideal-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-lhomme-ideal-extreme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-linstant-magic-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-mitsouko-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-mon-guerlain",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-mon-guerlain-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-mon-guerlain-eau-de-parfum-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-mon-precieux-nectar",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-shalimar-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-shalimar-parfum-initial",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-spiritueuse-double-vanille",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-tonka-imperiale",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "guerlain-vol-de-nuit-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-ambre-narguile",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-bel-ami-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-terre-d-hermes",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-terre-dhermes-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-terre-dhermes-eau-givree",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hermes-terre-dhermes-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "houbigant-fougere-royale-2010-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hugo-boss-boss-bottled-absolu",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "hugo-boss-boss-bottled-intense-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-absolute-aphrodisiac",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-blessed-baraka",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-musk-therapy-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-oud-for-greatness",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-oud-for-greatness-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-paragon",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-rehab",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "initio-side-effect",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jean-paul-gaultier-la-belle",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jean-paul-gaultier-la-belle-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jean-paul-gaultier-le-beau-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jean-paul-gaultier-le-male-elixir",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jean-paul-gaultier-le-male-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jo-malone-myrrh-and-tonka-cologne-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jo-malone-wood-sage-and-sea-salt-cologne",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "jovoy-remember-me",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kayali-vanilla-28-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kenzo-kenzo-amour",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kilian-angels-share-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kilian-i-dont-need-a-prince-by-my-side-to-be-a-princess",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kilian-intoxicated",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kilian-paris-angels-share",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "kinetic-perfumes-sillage",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lancome-la-nuit-tresor-a-la-folie",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lancome-la-vie-est-belle",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lancome-poeme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lattafa-khamrah",
+      "moods": [
+        {
+          "slug": "cozy",
+          "weight": 9
+        },
+        {
+          "slug": "bold",
+          "weight": 7
+        },
+        {
+          "slug": "confident",
+          "weight": 7
+        }
+      ],
+      "seasons": [
+        {
+          "slug": "autumn",
+          "weight": 9
+        },
+        {
+          "slug": "winter",
+          "weight": 10
+        },
+        {
+          "slug": "spring",
+          "weight": 5
+        }
+      ],
+      "occasions": [
+        {
+          "slug": "evening",
+          "weight": 9
+        },
+        {
+          "slug": "date-night",
+          "weight": 8
+        },
+        {
+          "slug": "special-event",
+          "weight": 7
+        }
+      ]
+    },
+    {
+      "perfumeSlug": "lattafa-khamrah-qahwa",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lattafa-liam",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "lattafa-pride-art-of-arabia-i",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "le-labo-santal-33",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "ligne-st-barth-vanille-west-indies",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "liquides-imaginaires-blanche-bete",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "liquides-imaginaires-liquide-2022",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "loccitane-en-provence-cedre-encens",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "loewe-esencia-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-afternoon-swim",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-imagination",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-les-sables-roses",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-limmensite",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-nouveau-monde",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-ombre-nomade",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-orage",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "louis-vuitton-pacific-chill",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-crivelli-hibiscus-mahajad",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-crivelli-oud-maracuja",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-amyris-homme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-baccarat-rouge-540",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-baccarat-rouge-540-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-gentle-fluidity-gold",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-grand-soir",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-grand-soir-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-lumiere-noire-homme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-masculin-pluriel",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-oud-satin-mood-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-oud-satin-mood-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "marc-antoine-barrois-tilia",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "marc-gebauer-orange-flamingo",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "marc-gebauer-vendetta",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "memo-paris-african-leather-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mercedes-benz-club-black-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "missoni-missoni-wave",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mugler-a-men-pure-havane",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mugler-a-men-pure-malt",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mugler-alien",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mugler-alien-essence-absolue",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "mugler-angel",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "narciso-rodriguez-for-her-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "narciso-rodriguez-for-her-musc-noir-rose",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nasomatto-baraonda-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nasomatto-black-afgano-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nasomatto-duro-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nasomatto-pardon-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nicolai-new-york-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nishane-ani-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nishane-hacivat",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nishane-hundred-silent-ways-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nishane-nefs",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nishane-wulong-cha-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "nobile-1942-il-capriccio-del-maestro",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "ormonde-jayne-2-nawab-of-oudh-intensivo",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "ormonde-jayne-ormonde-man-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "paco-rabanne-1-million",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "pana-dora-aqua-de-dora",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "pana-dora-forever-love",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "pana-dora-moonlight",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "pana-dora-oud-republic",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-althair",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-carlisle",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-delina",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-delina-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-delina-exclusif",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-delina-la-rosee",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-habdan",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-haltane",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-herod",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-layton",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-layton-exclusif",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-oajan",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-de-marly-sedley",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-delmar-zaya",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-mdci-chypre-palatin",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "parfums-mdci-invasion-barbare",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-changing-constance",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-halfeti",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-luna-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-sartorial",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-the-blazing-mister-sam",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "penhaligons-the-tragedy-of-lord-george",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-lhomme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-lhomme-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-lhomme-leau",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-luna-rossa-black",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-luna-rossa-carbon",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-luna-rossa-sport",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "prada-paradoxe",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "profumum-roma-acqua-e-zucchero",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "rabanne-1-million-lucky",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "rasasi-la-yuqawam-pour-homme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "reyane-tradition-insurrection-ii-wild",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roberto-ugolini-17-rosso",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roberto-ugolini-marzocco-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roberto-ugolini-marzocco-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "rochas-moustache-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-a-midsummer-dream",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-amber-aoud-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-burlington-1819",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-diaghilev-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-elysium-pour-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-elysium-pour-homme-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-enigma-pour-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-enigma-pour-homme-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-isola-blu-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "roja-parfums-oceania-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "rosendo-mateu-olfactive-expressions-5-floral-amber-sensual-musk-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "serge-lutens-chergui-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "simone-andreoli-malibu-party-in-the-bay",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "sospiro-il-padrino",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "sospiro-vibrato",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "stephane-humbert-lucas-black-gemstone",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "stephane-humbert-lucas-god-of-fire",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "swiss-arabian-shaghaf-oud-tonka-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tauer-perfumes-02-lair-du-desert-marocain-eau-de-toilette-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tauer-perfumes-au-coeur-du-desert",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "thameen-carved-oud-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "the-house-of-oud-dates-delight",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "the-merchant-of-venice-arabesque",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "the-merchant-of-venice-la-fenice-pour-femme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-beau-de-jour-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-eau-de-soleil-blanc",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-fucking-fabulous-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-lost-cherry-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-mandarino-di-amalfi-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-noir-de-noir-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-noir-extreme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-noir-extreme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-noir-extreme-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-noir-pour-femme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-ombre-leather-2018-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-oud-wood-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-soleil-blanc-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-tobacco-vanille-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "tom-ford-tuscan-leather-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "une-nuit-nomade-sugar-leather",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "valentino-valentino-uomo-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "valentino-valentino-uomo-intense-2016",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "van-cleef-and-arpels-bois-dore",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "van-cleef-and-arpels-orchidee-vanille",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "versace-bright-crystal",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "versace-crystal-noir-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "versace-dylan-blue",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "versace-eros-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "viktor-and-rolf-flowerbomb",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "viktor-and-rolf-spicebomb-extreme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "viktor-and-rolf-spicebomb-infrared-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "widian-london-extrait-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "widian-sahara",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-40-knots",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-accento",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-accento-overdose",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-alexandria-ii-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-alexandria-iii",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-amber-star",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-erba-gold",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-fars",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-homme-anniversary",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-irisss",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-kbridge-club",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-la-capitale",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-naxos",
+      "moods": [
+        {
+          "slug": "elegant",
+          "weight": 8
+        },
+        {
+          "slug": "confident",
+          "weight": 8
+        },
+        {
+          "slug": "cozy",
+          "weight": 7
+        }
+      ],
+      "seasons": [
+        {
+          "slug": "autumn",
+          "weight": 9
+        },
+        {
+          "slug": "winter",
+          "weight": 8
+        },
+        {
+          "slug": "spring",
+          "weight": 6
+        }
+      ],
+      "occasions": [
+        {
+          "slug": "date-night",
+          "weight": 9
+        },
+        {
+          "slug": "special-event",
+          "weight": 8
+        },
+        {
+          "slug": "evening",
+          "weight": 8
+        }
+      ]
+    },
+    {
+      "perfumeSlug": "xerjoff-nio",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-opera",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-pikovaya-dama",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-renaissance",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-richwood",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-starlight",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-tony-iommi-monkey-special",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-torino21",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-torino22",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-uden",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "xerjoff-uden-overdose",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-babycat",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-black-opium-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-cinema-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-la-nuit-de-l-homme",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-la-nuit-de-lhomme-bleu-electrique",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-la-nuit-de-lhomme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-la-nuit-de-lhomme-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-lhomme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-libre-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-libre-eau-de-parfum-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-libre-le-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-manifesto-lelixir",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-opium-pour-homme-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-opium-pour-homme-eau-de-toilette",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "zara-sand-desert-at-sunset",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "zara-sunrise-on-the-red-sand-dunes-eau-de-parfum",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "zara-sunrise-on-the-red-sand-dunes-intense",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    },
+    {
+      "perfumeSlug": "zimaya-sharaf-blend",
+      "moods": [],
+      "seasons": [],
+      "occasions": []
+    }
+  ],
+  "homepagePlacements": [
+    {
+      "perfumeSlug": "xerjoff-naxos",
+      "section": "HERO",
+      "priority": 10
+    },
+    {
+      "perfumeSlug": "dior-sauvage-elixir",
+      "section": "TRENDING",
+      "priority": 10
+    },
+    {
+      "perfumeSlug": "kilian-paris-angels-share",
+      "section": "FEATURED",
+      "priority": 10
+    },
+    {
+      "perfumeSlug": "frederic-malle-portrait-of-a-lady",
+      "section": "FEATURED",
+      "priority": 20
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-baccarat-rouge-540",
+      "section": "FEATURED",
+      "priority": 30
+    },
+    {
+      "perfumeSlug": "amouage-guidance",
+      "section": "FEATURED",
+      "priority": 40
+    },
+    {
+      "perfumeSlug": "maison-francis-kurkdjian-grand-soir",
+      "section": "FEATURED",
+      "priority": 50
+    },
+    {
+      "perfumeSlug": "initio-oud-for-greatness",
+      "section": "FEATURED",
+      "priority": 60
+    }
+  ]
+}

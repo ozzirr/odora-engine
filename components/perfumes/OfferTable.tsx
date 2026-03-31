@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
+import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
@@ -68,9 +69,17 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                   }
                 >
                   <td className="px-4 py-3 font-medium text-[#2a2018]">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span>{offer.store.name}</span>
-                      {isComputedBest ? <Badge variant="soft">{t("bestTotal")}</Badge> : null}
+                    <div className="flex min-w-[156px] flex-col items-start gap-2 sm:min-w-0 sm:flex-row sm:items-center">
+                      <RetailerLogo
+                        storeName={offer.store.name}
+                        surface="pill"
+                        size="sm"
+                      />
+                      {isComputedBest ? (
+                        <Badge variant="soft" className="whitespace-nowrap">
+                          {t("bestTotal")}
+                        </Badge>
+                      ) : null}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-[#2a2018]">
@@ -95,7 +104,7 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                         href={targetUrl as unknown as LinkHref}
                         target="_blank"
                         rel="noreferrer"
-                        className={buttonStyles({ size: "sm", className: "w-full sm:w-auto" })}
+                        className={buttonStyles({ size: "sm", className: "whitespace-nowrap px-4" })}
                       >
                         {t("viewOffer")}
                       </Link>

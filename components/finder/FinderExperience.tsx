@@ -10,12 +10,18 @@ import {
   defaultFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
-  matchPerfumesFromPreferences,
 } from "@/lib/finder";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
+type FinderOptions = {
+  moods: string[];
+  seasons: string[];
+  occasions: string[];
+  notes: string[];
+};
+
 type FinderExperienceProps = {
-  perfumes: FinderPerfume[];
+  availableOptions: FinderOptions;
   isAuthenticated: boolean;
   initialPreferences: FinderPreferences;
   presetLabel?: string | null;
@@ -64,8 +70,15 @@ function hasConfiguredPreferences(preferences: FinderPreferences) {
 const FINDER_RESULTS_PAGE_SIZE = 20;
 const FREE_FINDER_PREVIEW_LIMIT = 25;
 
+type FinderSearchPayload = {
+  results: FinderPerfume[];
+  total: number;
+  hasMore: boolean;
+  nextOffset: number;
+};
+
 export function FinderExperience({
-  perfumes,
+  availableOptions,
   isAuthenticated,
   initialPreferences,
   presetLabel,
@@ -76,83 +89,35 @@ export function FinderExperience({
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>([]);
   const [totalMatches, setTotalMatches] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(0);
+  const [nextOffset, setNextOffset] = useState(0);
+  const [hasMoreResults, setHasMoreResults] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const isAutoLoadingRef = useRef(false);
+  const isFetchingMoreRef = useRef(false);
   const hasAutoRunRef = useRef(false);
 
   const moodOptions = useMemo(
-    () =>
-      withSelectedOption(
-        Array.from(
-        new Set(
-          perfumes.flatMap((perfume) =>
-            (perfume.moods ?? []).map((mood) => mood.mood?.slug).filter((slug): slug is string => Boolean(slug)),
-          ),
-        ),
-        ).sort(),
-        preferences.mood,
-      ),
-    [perfumes, preferences.mood],
+    () => withSelectedOption(availableOptions.moods, preferences.mood),
+    [availableOptions.moods, preferences.mood],
   );
 
   const seasonOptions = useMemo(
-    () =>
-      withSelectedOption(
-        Array.from(
-        new Set(
-          perfumes.flatMap((perfume) =>
-            (perfume.seasons ?? [])
-              .map((season) => season.season?.slug)
-              .filter((slug): slug is string => Boolean(slug)),
-          ),
-        ),
-        ).sort(),
-        preferences.season,
-      ),
-    [perfumes, preferences.season],
+    () => withSelectedOption(availableOptions.seasons, preferences.season),
+    [availableOptions.seasons, preferences.season],
   );
 
   const occasionOptions = useMemo(
-    () =>
-      withSelectedOption(
-        Array.from(
-          new Set(
-            perfumes.flatMap((perfume) =>
-              (perfume.occasions ?? [])
-                .map((occasion) => occasion.occasion?.slug)
-                .filter((slug): slug is string => Boolean(slug)),
-            ),
-          ),
-        ).sort(),
-        preferences.occasion,
-      ),
-    [perfumes, preferences.occasion],
+    () => withSelectedOption(availableOptions.occasions, preferences.occasion),
+    [availableOptions.occasions, preferences.occasion],
   );
 
-  const noteOptions = useMemo(() => {
-    const counts = new Map<string, number>();
-
-    for (const perfume of perfumes) {
-      for (const note of perfume.notes ?? []) {
-        const key = note.note?.slug;
-        if (!key) {
-          continue;
-        }
-        counts.set(key, (counts.get(key) ?? 0) + 1);
-      }
-    }
-
-    const rankedNotes = Array.from(counts.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([slug]) => slug)
-      .slice(0, 14);
-
-    return withSelectedOption(rankedNotes, preferences.preferredNote);
-  }, [perfumes, preferences.preferredNote]);
+  const noteOptions = useMemo(
+    () => withSelectedOption(availableOptions.notes, preferences.preferredNote),
+    [availableOptions.notes, preferences.preferredNote],
+  );
 
   const presetChips = useMemo(() => {
     const chips: string[] = [];
@@ -180,9 +145,43 @@ export function FinderExperience({
     taxonomyT,
   ]);
 
+  const applyFinderPage = useCallback(
+    (payload: FinderSearchPayload, mode: "replace" | "append") => {
+      setResults((current) => {
+        const remainingPreviewSlots = Math.max(
+          0,
+          FREE_FINDER_PREVIEW_LIMIT - (mode === "append" ? current.length : 0),
+        );
+        const fetchedResults =
+          mode === "append" && !authStatus
+            ? payload.results.slice(0, remainingPreviewSlots)
+            : authStatus
+              ? payload.results
+              : payload.results.slice(0, FREE_FINDER_PREVIEW_LIMIT);
+
+        if (mode === "replace") {
+          return fetchedResults;
+        }
+
+        const existingIds = new Set(current.map((item) => item.id));
+        const nextItems = fetchedResults.filter((item) => !existingIds.has(item.id));
+        return [...current, ...nextItems];
+      });
+
+      setTotalMatches(payload.total ?? payload.results.length);
+      setHasMoreResults(payload.hasMore);
+      setNextOffset(payload.nextOffset);
+    },
+    [authStatus],
+  );
+
   const runFinderSearch = useCallback(async (nextPreferences: FinderPreferences) => {
     setIsLoading(true);
     setErrorMessage(null);
+    setResults([]);
+    setTotalMatches(0);
+    setNextOffset(0);
+    setHasMoreResults(false);
 
     try {
       const response = await fetch("/api/finder", {
@@ -190,7 +189,11 @@ export function FinderExperience({
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify(nextPreferences),
+        body: JSON.stringify({
+          ...nextPreferences,
+          offset: 0,
+          limit: FINDER_RESULTS_PAGE_SIZE,
+        }),
         cache: "no-store",
       });
 
@@ -198,33 +201,20 @@ export function FinderExperience({
         throw new Error(`Finder request failed with status ${response.status}`);
       }
 
-      const payload = (await response.json()) as {
-        results: FinderPerfume[];
-        total: number;
-      };
-      const nextResults = payload.results ?? [];
-      const maxVisible = authStatus
-        ? nextResults.length
-        : Math.min(nextResults.length, FREE_FINDER_PREVIEW_LIMIT);
-
-      setResults(nextResults);
-      setTotalMatches(payload.total ?? nextResults.length);
-      setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
+      const payload = (await response.json()) as FinderSearchPayload;
+      applyFinderPage(payload, "replace");
       setSubmitted(true);
     } catch {
-      const fallbackResults = matchPerfumesFromPreferences(nextPreferences, perfumes);
-      const maxVisible = authStatus
-        ? fallbackResults.length
-        : Math.min(fallbackResults.length, FREE_FINDER_PREVIEW_LIMIT);
-      setResults(fallbackResults);
-      setTotalMatches(fallbackResults.length);
-      setVisibleCount(Math.min(FINDER_RESULTS_PAGE_SIZE, maxVisible));
+      setResults([]);
+      setTotalMatches(0);
+      setNextOffset(0);
+      setHasMoreResults(false);
       setSubmitted(true);
       setErrorMessage(t("fallbackError"));
     } finally {
       setIsLoading(false);
     }
-  }, [authStatus, perfumes, t]);
+  }, [applyFinderPage, t]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -235,10 +225,12 @@ export function FinderExperience({
     setPreferences(defaultFinderPreferences);
     setResults([]);
     setTotalMatches(0);
-    setVisibleCount(0);
+    setNextOffset(0);
+    setHasMoreResults(false);
     setSubmitted(false);
     setErrorMessage(null);
     setIsLoading(false);
+    setIsLoadingMore(false);
   };
 
   useEffect(() => {
@@ -250,30 +242,49 @@ export function FinderExperience({
     void runFinderSearch(initialPreferences);
   }, [initialPreferences, runFinderSearch]);
 
-  const maxVisibleResults = authStatus
-    ? results.length
-    : Math.min(results.length, FREE_FINDER_PREVIEW_LIMIT);
-  const displayedResults = results.slice(0, visibleCount);
-  const hasMoreVisibleResults = displayedResults.length < maxVisibleResults;
-  const isCatalogLocked = !authStatus && results.length > FREE_FINDER_PREVIEW_LIMIT && visibleCount >= FREE_FINDER_PREVIEW_LIMIT;
+  const isCatalogLocked = !authStatus && totalMatches > results.length && results.length >= FREE_FINDER_PREVIEW_LIMIT;
+  const canLoadMore = hasMoreResults && !isCatalogLocked;
   const showPresetBanner = Boolean(presetLabel) && hasConfiguredPreferences(preferences);
 
-  const loadMoreResults = useCallback(() => {
-    if (isAutoLoadingRef.current || !hasMoreVisibleResults || isCatalogLocked) {
+  const loadMoreResults = useCallback(async () => {
+    if (isFetchingMoreRef.current || !canLoadMore) {
       return;
     }
 
-    isAutoLoadingRef.current = true;
-    setVisibleCount((current) =>
-      Math.min(current + FINDER_RESULTS_PAGE_SIZE, maxVisibleResults),
-    );
-    queueMicrotask(() => {
-      isAutoLoadingRef.current = false;
-    });
-  }, [hasMoreVisibleResults, isCatalogLocked, maxVisibleResults]);
+    isFetchingMoreRef.current = true;
+    setIsLoadingMore(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/finder", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...preferences,
+          offset: nextOffset,
+          limit: FINDER_RESULTS_PAGE_SIZE,
+        }),
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Finder request failed with status ${response.status}`);
+      }
+
+      const payload = (await response.json()) as FinderSearchPayload;
+      applyFinderPage(payload, "append");
+    } catch {
+      setErrorMessage(t("fallbackError"));
+    } finally {
+      setIsLoadingMore(false);
+      isFetchingMoreRef.current = false;
+    }
+  }, [applyFinderPage, canLoadMore, nextOffset, preferences, t]);
 
   useEffect(() => {
-    if (!submitted || !loadMoreRef.current || !hasMoreVisibleResults || isCatalogLocked) {
+    if (!submitted || !loadMoreRef.current || !canLoadMore) {
       return;
     }
 
@@ -290,7 +301,7 @@ export function FinderExperience({
 
     observer.observe(loadMoreRef.current);
     return () => observer.disconnect();
-  }, [hasMoreVisibleResults, isCatalogLocked, loadMoreResults, submitted]);
+  }, [canLoadMore, loadMoreResults, submitted]);
 
   return (
     <div className="space-y-8">
@@ -493,9 +504,11 @@ export function FinderExperience({
               {errorMessage}
             </div>
           ) : null}
-          <PerfumeGrid perfumes={displayedResults} />
+          <PerfumeGrid perfumes={results} />
 
-          {hasMoreVisibleResults && !isCatalogLocked ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
+          {isLoadingMore ? <p className="text-sm text-[#7a6654]">{t("finding")}</p> : null}
+
+          {canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
 
           {isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_PREVIEW_LIMIT} /> : null}
         </section>

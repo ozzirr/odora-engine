@@ -15,7 +15,7 @@ export default function PerfumesLoading() {
           </div>
         </aside>
 
-        <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+        <section className="grid grid-cols-2 gap-5 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <div
               key={index}

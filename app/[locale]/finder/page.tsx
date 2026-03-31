@@ -1,78 +1,77 @@
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import {
-  getCatalogVisibilityWhere,
-  logCatalogQueryError,
-  mergePerfumeWhere,
-} from "@/lib/catalog";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import { logCatalogQueryError } from "@/lib/catalog";
 import { buildFinderPreferencesFromInput } from "@/lib/finder";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
-import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
-async function getFinderPerfumes() {
+type FinderOptions = {
+  moods: string[];
+  seasons: string[];
+  occasions: string[];
+  notes: string[];
+};
+
+function getEmptyFinderOptions(): FinderOptions {
+  return {
+    moods: [],
+    seasons: [],
+    occasions: [],
+    notes: [],
+  };
+}
+
+const getCachedFinderOptions = unstable_cache(async (): Promise<FinderOptions> => {
   if (!isDatabaseConfigured) {
-    return [];
+    return getEmptyFinderOptions();
   }
 
   try {
-    return await prisma.perfume.findMany({
-      where: mergePerfumeWhere(undefined, getCatalogVisibilityWhere()),
-      include: {
-        brand: true,
-        offers: {
-          include: {
-            store: true,
-          },
-        },
-        notes: {
-          include: {
-            note: {
-              select: {
-                slug: true,
-              },
-            },
-          },
-        },
-        moods: {
-          include: {
-            mood: {
-              select: {
-                slug: true,
-              },
-            },
-          },
-        },
-        seasons: {
-          include: {
-            season: {
-              select: {
-                slug: true,
-              },
-            },
-          },
-        },
-        occasions: {
-          include: {
-            occasion: {
-              select: {
-                slug: true,
-              },
-            },
-          },
-        },
-      },
-    });
+    const [moods, seasons, occasions, notes] = await Promise.all([
+      prisma.mood.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+      prisma.season.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+      prisma.occasion.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+      prisma.note.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+        take: 80,
+      }),
+    ]);
+
+    return {
+      moods: moods.map((item) => item.slug),
+      seasons: seasons.map((item) => item.slug),
+      occasions: occasions.map((item) => item.slug),
+      notes: notes.map((item) => item.slug),
+    };
   } catch (error) {
-    logCatalogQueryError("finder:list", error);
-    return [];
+    logCatalogQueryError("finder:options", error);
+    return getEmptyFinderOptions();
   }
+}, ["finder-options"], {
+  revalidate: 21600,
+  tags: [PUBLIC_CACHE_TAGS.finderOptions],
+});
+
+async function getFinderOptions() {
+  return getCachedFinderOptions();
 }
 
 type FinderPageProps = {
@@ -110,8 +109,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "finder.page" });
   const resolvedSearchParams = await searchParams;
-  const isAuthenticated = await getIsAuthenticated();
-  const perfumes = await getFinderPerfumes();
+  const finderOptions = await getFinderOptions();
   const initialPreferences = buildFinderPreferencesFromInput({
     gender: readSearchParam(resolvedSearchParams, "gender") ?? null,
     mood: readSearchParam(resolvedSearchParams, "mood") ?? null,
@@ -133,8 +131,8 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
       />
 
       <FinderExperience
-        perfumes={perfumes}
-        isAuthenticated={isAuthenticated}
+        availableOptions={finderOptions}
+        isAuthenticated={false}
         initialPreferences={initialPreferences}
         presetLabel={presetLabel}
       />

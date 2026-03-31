@@ -1,7 +1,5 @@
-import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
-
-import { defaultLocale, hasLocale, localeCookieName } from "@/lib/i18n";
+import { defaultLocale } from "@/lib/i18n";
 
 import "./globals.css";
 
@@ -10,12 +8,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const cookieLocale = cookieStore.get(localeCookieName)?.value;
-  const locale = cookieLocale && hasLocale(cookieLocale) ? cookieLocale : defaultLocale;
-
   return (
-    <html lang={locale}>
+    <html lang={defaultLocale}>
       <body suppressHydrationWarning className="antialiased">
         {children}
         <Analytics />

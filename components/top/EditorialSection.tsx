@@ -10,6 +10,10 @@ type EditorialSectionProps = {
 };
 
 export function EditorialSection({ eyebrow, title, subtitle, perfumes }: EditorialSectionProps) {
+  if (perfumes.length === 0) {
+    return null;
+  }
+
   return (
     <section className="space-y-5">
       <SectionTitle eyebrow={eyebrow} title={title} subtitle={subtitle} />

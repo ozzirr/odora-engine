@@ -7,6 +7,17 @@ const globalForPrisma = globalThis as unknown as {
 export const isDatabaseConfigured =
   typeof process.env.DATABASE_URL === "string" && process.env.DATABASE_URL.length > 0;
 
+function readPositiveIntEnv(name: string) {
+  const raw = process.env[name]?.trim();
+
+  if (!raw) {
+    return undefined;
+  }
+
+  const parsed = Number.parseInt(raw, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
 function getRuntimeDatabaseUrl() {
   const raw = process.env.DATABASE_URL?.trim();
   if (!raw) {
@@ -16,17 +27,19 @@ function getRuntimeDatabaseUrl() {
   try {
     const url = new URL(raw);
     const isPostgres = url.protocol === "postgresql:" || url.protocol === "postgres:";
+    const configuredConnectionLimit = readPositiveIntEnv("ODORA_DB_CONNECTION_LIMIT");
+    const configuredPoolTimeout = readPositiveIntEnv("ODORA_DB_POOL_TIMEOUT");
 
     if (!isPostgres) {
       return raw;
     }
 
     if (!url.searchParams.has("connection_limit")) {
-      url.searchParams.set("connection_limit", "1");
+      url.searchParams.set("connection_limit", String(configuredConnectionLimit ?? 1));
     }
 
     if (!url.searchParams.has("pool_timeout")) {
-      url.searchParams.set("pool_timeout", "20");
+      url.searchParams.set("pool_timeout", String(configuredPoolTimeout ?? 20));
     }
 
     return url.toString();

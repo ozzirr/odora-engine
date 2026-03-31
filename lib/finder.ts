@@ -1,7 +1,5 @@
 import { Gender, PriceRange, type Prisma } from "@prisma/client";
 
-import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
-
 export type FinderPreferences = {
   gender: "any" | "male" | "female" | "unisex";
   mood: string;
@@ -25,10 +23,15 @@ export type FinderPerfume = {
   isArabic: boolean;
   isNiche: boolean;
   ratingInternal?: number | null;
+  bestPriceAmount?: number | null;
+  bestTotalPriceAmount?: number | null;
+  bestCurrency?: string | null;
+  bestStoreName?: string | null;
+  bestOfferUrl?: string | null;
+  hasAvailableOffer?: boolean | null;
   brand: {
     name: string;
   };
-  offers: OfferForPricing[];
   notes: Array<{
     note: {
       slug: string;
@@ -296,10 +299,49 @@ export function buildFinderPreferencesFromInput(input: FinderQueryInput): Finder
   };
 }
 
+export function serializeFinderPreferences(preferences: FinderPreferences) {
+  return JSON.stringify({
+    gender: preferences.gender,
+    mood: preferences.mood || null,
+    season: preferences.season || null,
+    occasion: preferences.occasion || null,
+    budget: preferences.budget,
+    preferredNote: preferences.preferredNote || null,
+    arabicOnly: preferences.arabicOnly,
+    nicheOnly: preferences.nicheOnly,
+  });
+}
+
+export function hasConfiguredFinderPreferences(preferences: FinderPreferences) {
+  return (
+    preferences.gender !== defaultFinderPreferences.gender ||
+    preferences.mood !== defaultFinderPreferences.mood ||
+    preferences.season !== defaultFinderPreferences.season ||
+    preferences.occasion !== defaultFinderPreferences.occasion ||
+    preferences.budget !== defaultFinderPreferences.budget ||
+    preferences.preferredNote !== defaultFinderPreferences.preferredNote ||
+    preferences.arabicOnly !== defaultFinderPreferences.arabicOnly ||
+    preferences.nicheOnly !== defaultFinderPreferences.nicheOnly
+  );
+}
+
 export function matchPerfumesFromPreferences(
   preferences: FinderPreferences,
   perfumes: FinderPerfume[],
 ) {
+  if (!hasConfiguredFinderPreferences(preferences)) {
+    return [...perfumes].sort((a, b) => {
+      const left = a.ratingInternal ?? 0;
+      const right = b.ratingInternal ?? 0;
+
+      if (right !== left) {
+        return right - left;
+      }
+
+      return a.name.localeCompare(b.name);
+    });
+  }
+
   const genderTarget = mapGenderPreferenceToDb(preferences.gender);
   const preferredMood = normalizeFinderFilter(preferences.mood);
   const preferredSeason = normalizeFinderFilter(preferences.season);
@@ -411,13 +453,11 @@ export function matchPerfumesFromPreferences(
         score += 2;
       }
 
-      const bestOffer = computeBestOffer(perfume.offers);
-
       return {
         perfume,
         score,
         rating: perfume.ratingInternal ?? 0,
-        bestPrice: bestOffer?.bestTotalPrice ?? Number.POSITIVE_INFINITY,
+        bestPrice: perfume.bestTotalPriceAmount ?? Number.POSITIVE_INFINITY,
       };
     })
     .filter((item): item is NonNullable<typeof item> => item !== null)

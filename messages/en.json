@@ -54,7 +54,7 @@
       "startFinder": "Start Finder",
       "spotlight": "Spotlight",
       "badges": {
-        "heroPick": "Hero pick",
+        "heroPick": "Odora pick",
         "spotlight": "Rotating pick",
         "trending": "Trending"
       },
@@ -70,7 +70,7 @@
       "title": "Trending picks right now",
       "subtitle": "A curated edit of fragrances people are discovering and revisiting right now.",
       "badges": {
-        "heroPick": "Hero pick",
+        "heroPick": "Odora pick",
         "trending": "Trending"
       },
       "bestPrice": "Best price",
@@ -185,7 +185,7 @@
         "occasion": "Occasion",
         "budget": "Budget",
         "note": "Preferred note",
-        "gender": "Gender preference"
+        "gender": "Gender"
       },
       "any": "Any",
       "budget": {
@@ -245,12 +245,12 @@
     "page": {
       "eyebrow": "Catalog",
       "title": "Discover perfumes",
-      "subtitle": "Browse the catalog by family, notes, gender, and price, then narrow in on the bottles worth your attention."
+      "subtitle": "Browse the catalog by family, notes, and price, then narrow in on the bottles worth your attention."
     },
     "filters": {
       "title": "Filters",
       "reset": "Reset",
-      "summary": "Open filters to refine sorting, family, price, notes, and gender.",
+      "summary": "Open filters to refine sorting, family, price, and notes.",
       "fields": {
         "sort": "Sort",
         "family": "Fragrance family",
@@ -325,7 +325,21 @@
     "card": {
       "unknownBrand": "Unknown brand",
       "from": "from",
-      "viewFragrance": "View fragrance"
+      "viewFragrance": "View fragrance",
+      "viewOffers": "Discover offers"
+    },
+    "transition": {
+      "eyebrow": "Live offer comparison",
+      "title": "We’re searching for the best offers",
+      "subtitle": "We’re comparing trusted retailers, shipping costs, and availability before showing the product page.",
+      "subtitleWithName": "We’re comparing trusted retailers, shipping costs, and availability for {name}.",
+      "status": "Checking Notino, Douglas, Amazon, Sephora, and more.",
+      "moreStores": "+ more",
+      "steps": {
+        "retailers": "Scanning retailers",
+        "pricing": "Ranking total price",
+        "availability": "Verifying availability"
+      }
     },
     "hero": {
       "unknownBrand": "Unknown brand",
@@ -336,6 +350,13 @@
         "versatility": "Versatility"
       },
       "goToOffer": "Go to offer"
+    },
+    "amazon": {
+      "eyebrow": "Prime member?",
+      "title": "Buy on Amazon",
+      "subtitle": "Check availability, Prime delivery, and shipping timing on Amazon before moving on to cheaper alternatives.",
+      "cta": "Buy on Amazon",
+      "ctaPrefix": "Buy on"
     },
     "offerTable": {
       "empty": "Offers will appear here as soon as pricing is available.",
@@ -456,7 +477,7 @@
         "or": "or",
         "signupPrompt": "Don’t have an account yet?",
         "signupLink": "Create account",
-        "socialNotice": "Social login is coming soon. For now, you can log in with email and password.",
+        "socialNotice": "You can also log in with Google, Apple, or Facebook when the provider is configured.",
         "errors": {
           "authCallbackFailed": "Login was not completed. Try again.",
           "emailVerificationFailed": "Email verification was not completed. Request a new link.",
@@ -482,7 +503,7 @@
         "or": "or",
         "loginPrompt": "Already have an account?",
         "loginLink": "Log in",
-        "socialNotice": "Social signup is coming soon. For now, you can create your account with email and password.",
+        "socialNotice": "You can also create or recover your account with Google, Apple, or Facebook when the provider is configured.",
         "errors": {
           "fallback": "Sign-up was not completed. Try again."
         },
@@ -501,9 +522,9 @@
       }
     },
     "social": {
-      "loginPrefix": "Login",
-      "signupPrefix": "Signup",
-      "providerSoon": "{prefix} with {provider} coming soon"
+      "continueWith": "Continue with {provider}",
+      "redirecting": "Redirecting...",
+      "oauthFailed": "Could not start the {provider} sign-in flow. Check the provider configuration and try again."
     },
     "actions": {
       "login": {
@@ -736,7 +757,7 @@
       },
       "perfumes": {
         "title": "Perfumes | Odora",
-        "description": "Browse perfumes by family, notes, gender, and price, then compare offers with clarity."
+        "description": "Browse perfumes by family, notes, and price, then compare offers with clarity."
       },
       "top": {
         "title": "Top Fragrances | Odora",

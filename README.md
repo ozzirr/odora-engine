@@ -43,10 +43,13 @@ cp .env.example .env
 
 Required/optional variables:
 
-- `DATABASE_URL` (required for DB-backed routes and Prisma commands)
+- `DATABASE_URL` (required): runtime DB URL used by the web app
+- `DIRECT_URL` (recommended on Supabase/Vercel): direct or session-mode DB URL used by Prisma CLI commands
 - `ODORA_CATALOG_MODE` (optional): `all` | `no_demo` | `verified_only`
-- `NEXT_PUBLIC_SUPABASE_URL` (required for auth client/session middleware)
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for auth client/session middleware)
+- `ODORA_DB_CONNECTION_LIMIT` (optional): Prisma pool size override for runtime
+- `ODORA_DB_POOL_TIMEOUT` (optional): Prisma pool timeout override for runtime
+- `NEXT_PUBLIC_SUPABASE_URL` (required for auth client/session proxy)
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for auth client/session proxy)
 - `NEXT_PUBLIC_SITE_URL` (recommended, used for auth email callback links)
 - `SUPABASE_URL` (required for image upload/sync scripts)
 - `SUPABASE_SERVICE_ROLE_KEY` (required for image upload/sync scripts)
@@ -57,16 +60,38 @@ Important:
 - Do not quote `DATABASE_URL`
 - Do not commit secrets
 
-### Auth (Email/Password) Setup
+### Vercel + Supabase Recommended Setup
 
-Odora uses Supabase Auth (SSR) for email/password:
+For Vercel deployments, keep Prisma runtime on the Supabase pooled connection string and use a separate direct/session URL for Prisma CLI:
+
+- `DATABASE_URL`: Supabase transaction pooler (`6543`) with `pgbouncer=true`
+- `DIRECT_URL`: Supabase direct DB URL or session pooler (`5432`)
+- `ODORA_DB_CONNECTION_LIMIT=1`: recommended starting point on Vercel
+- `ODORA_DB_POOL_TIMEOUT=20`: safe default
+
+Recommended rollout:
+
+1. Start production with `ODORA_DB_CONNECTION_LIMIT=1`
+2. Only raise to `2` if you see real pool contention or request queuing
+3. Leave higher values alone unless you have measured evidence they help
+
+### Auth Setup
+
+Odora uses Supabase Auth (SSR) for email/password and OAuth:
 
 - `/login` -> real `signInWithPassword`
 - `/signup` -> real `signUp`
-- `/auth/callback` -> verifies callback tokens/codes
-- `middleware.ts` -> keeps auth session cookies refreshed
+- `/auth/callback` -> verifies email tokens and exchanges OAuth codes for a session
+- `proxy.ts` -> keeps auth session cookies refreshed on the protected auth/profile routes
 
-Social providers (Google/Apple/Facebook) are still placeholder buttons in UI until provider keys are configured.
+Google, Apple, and Facebook buttons call `supabase.auth.signInWithOAuth(...)`. To make them work you must:
+
+1. Enable each provider in Supabase Auth and paste the provider client ID/secret there.
+2. Add your callback URL to each provider console:
+   - local: `http://localhost:3000/auth/callback`
+   - LAN/dev box: `http://<your-local-ip>:3000/auth/callback`
+   - production: `https://<your-domain>/auth/callback`
+3. Set `NEXT_PUBLIC_SITE_URL` to your canonical public origin for email links.
 
 ## Local Setup
 
@@ -143,24 +168,33 @@ ODORA_CATALOG_MODE=verified_only
 The catalog workflow now runs through four canonical commands:
 
 ```bash
+npm run perfumes:update
 npm run perfumes:enrich
 npm run perfumes:verify
 npm run perfumes:import
+npm run perfumes:scores:audit
 npm run prices:sync
 ```
 
 What each command does:
 
-- `perfumes:enrich` rewrites a source file into the canonical catalog shape with shared normalization for gender, family, notes, concentration, URLs, descriptions, and slugs.
+- `perfumes:update` runs `verify -> enrich -> import` in sequence for the current perfume source.
+- `perfumes:enrich` reads `data/verified/perfumes.csv`, keeps it untouched, and writes normalized/enriched artifacts into `data/generated/verified/`.
 - `perfumes:verify` checks the same normalization and validation rules without writing anything.
-- `perfumes:import` upserts the normalized catalog into PostgreSQL. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
+- `perfumes:import` upserts the import-ready catalog into PostgreSQL. By default it reads `data/generated/verified/perfumes.enriched.csv`. Use `-- --source=verified|parfumo` and `-- --mode=upsert|notes` when needed.
+- `perfumes:scores:audit` writes a score-gap report and CSV worklist for verified perfumes missing `longevity`, `sillage`, or `versatility`.
 - `prices:sync` recomputes `Perfume.priceRange` from current offers and refreshes `Offer.isBestPrice`.
 
 Defaults:
 
-- `perfumes:enrich`, `perfumes:verify`, `perfumes:import` target `data/verified/perfumes.csv`
-- `perfumes:import -- --source=parfumo` targets `data/parfumo/perfumes.csv`
+- `perfumes:update` runs the full verified flow with one command
+- `perfumes:verify` targets `data/verified/perfumes.csv`
+- `perfumes:enrich` writes `data/generated/verified/perfumes.cleaned.csv`, `data/generated/verified/perfumes.enriched.csv`, and the related reports
+- `perfumes:import` targets `data/generated/verified/perfumes.enriched.csv`
+- `perfumes:scores:audit` writes `data/generated/verified/perfume-score-gap-report.json` and `data/generated/verified/perfume-score-worklist.csv`
+- `perfumes:* -- --source=parfumo` targets the archived synthetic dataset at `data/archive/synthetic/parfumo/perfumes.csv`
 - all commands support `-- --dry-run`
+  For `perfumes:update`, `-- --dry-run` runs only `verify + enrich` and skips the DB import step.
 
 The single source of truth for perfume data normalization now lives in:
 
@@ -192,6 +226,20 @@ scripts/
 scripts/archive/import/
 data/verified/
   perfumes.csv
+data/generated/verified/
+  perfumes.cleaned.csv
+  perfumes.enriched.csv
+  perfume-validation-report.json
+  perfume-enrichment-report.json
+  perfume-review-queue.json
+  perfume-review-queue.csv
+data/sources/parfumo/
+  top-men.csv
+  top-women.csv
+  top-unisex.csv
+data/archive/
+  synthetic/parfumo/perfumes.csv
+  verified/images/
 ```
 
 ## Troubleshooting

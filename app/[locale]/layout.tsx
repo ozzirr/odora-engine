@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { LocaleShell } from "@/components/layout/LocaleShell";
 import { getAlternateLinks, hasLocale, locales } from "@/lib/i18n";
+import {
+  LAUNCH_GATE_ACCESS_COOKIE_NAME,
+  hasLaunchGateAccess,
+  isLaunchGateEnabled,
+} from "@/lib/launch-gate";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -30,6 +36,14 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
       canonical: getAlternateLinks("/")[locale],
       languages: getAlternateLinks("/"),
     },
+    ...(isLaunchGateEnabled()
+      ? {
+          robots: {
+            index: false,
+            follow: false,
+          },
+        }
+      : {}),
   };
 }
 
@@ -41,11 +55,15 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   setRequestLocale(locale);
+  const cookieStore = await cookies();
+  const hideChrome =
+    isLaunchGateEnabled() &&
+    !hasLaunchGateAccess(cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value);
   const messages = await getMessages();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <LocaleShell>{children}</LocaleShell>
+      <LocaleShell hideChrome={hideChrome}>{children}</LocaleShell>
     </NextIntlClientProvider>
   );
 }

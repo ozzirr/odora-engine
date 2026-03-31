@@ -26,9 +26,9 @@ const rootEnvPath = path.join(repoRoot, ".env");
 
 const DEFAULT_CSV_PATHS = [
   "data/verified/perfumes.csv",
-  "data/verified/approved-images-manifest.csv",
-  "data/verified/worklists/image-sourcing-worklist.csv",
-  "data/verified/worklists/image-source-suggestions.csv",
+  "data/archive/verified/images/approved-images-manifest.csv",
+  "data/archive/verified/images/worklists/image-sourcing-worklist.csv",
+  "data/archive/verified/images/worklists/image-source-suggestions.csv",
 ];
 
 function parseCliOptions(argv: string[]): CliOptions {

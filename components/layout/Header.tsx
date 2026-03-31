@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
@@ -61,9 +61,17 @@ export function Header() {
             </Link>
           ))}
           {canOpenAuthModal ? (
-            <AuthModalTrigger mode="login" className={buttonStyles({ variant: "secondary", size: "sm" })}>
-              {accountLabel}
-            </AuthModalTrigger>
+            <Suspense
+              fallback={
+                <Link href={accountHref} className={buttonStyles({ variant: "secondary", size: "sm" })}>
+                  {accountLabel}
+                </Link>
+              }
+            >
+              <AuthModalTrigger mode="login" className={buttonStyles({ variant: "secondary", size: "sm" })}>
+                {accountLabel}
+              </AuthModalTrigger>
+            </Suspense>
           ) : (
             <Link href={accountHref} className={buttonStyles({ variant: "secondary", size: "sm" })}>
               {accountLabel}
@@ -99,13 +107,25 @@ export function Header() {
               </Link>
             ))}
             {canOpenAuthModal ? (
-              <AuthModalTrigger
-                mode="login"
-                onOpen={() => setMenuOpen(false)}
-                className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+              <Suspense
+                fallback={
+                  <Link
+                    href={accountHref}
+                    onClick={() => setMenuOpen(false)}
+                    className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+                  >
+                    {accountLabel}
+                  </Link>
+                }
               >
-                {accountLabel}
-              </AuthModalTrigger>
+                <AuthModalTrigger
+                  mode="login"
+                  onOpen={() => setMenuOpen(false)}
+                  className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+                >
+                  {accountLabel}
+                </AuthModalTrigger>
+              </Suspense>
             ) : (
               <Link
                 href={accountHref}

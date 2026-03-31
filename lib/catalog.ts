@@ -7,6 +7,10 @@ export type CatalogMode = (typeof catalogModeOptions)[number];
 export function resolveCatalogMode(): CatalogMode {
   const rawValue = process.env.ODORA_CATALOG_MODE?.trim().toLowerCase();
 
+  if (rawValue === "all") {
+    return "all";
+  }
+
   if (rawValue === "no_demo") {
     return "no_demo";
   }
@@ -15,12 +19,12 @@ export function resolveCatalogMode(): CatalogMode {
     return "verified_only";
   }
 
-  return "all";
+  return "verified_only";
 }
 
-export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefined {
-  const mode = resolveCatalogMode();
-
+export function getCatalogVisibilityWhereForMode(
+  mode: CatalogMode,
+): Prisma.PerfumeWhereInput | undefined {
   if (mode === "no_demo") {
     return {
       catalogStatus: {
@@ -36,6 +40,10 @@ export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefine
   }
 
   return undefined;
+}
+
+export function getCatalogVisibilityWhere(): Prisma.PerfumeWhereInput | undefined {
+  return getCatalogVisibilityWhereForMode(resolveCatalogMode());
 }
 
 export function mergePerfumeWhere(

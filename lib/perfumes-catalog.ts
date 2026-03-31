@@ -1,30 +1,26 @@
 import type { Prisma } from "@prisma/client";
+import { unstable_cache } from "next/cache";
 
-import { getCatalogVisibilityWhere, logCatalogQueryError, mergePerfumeWhere } from "@/lib/catalog";
-import { applySorting, buildPerfumeQuery, type SearchParamInput } from "@/lib/filters";
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import {
+  getCatalogVisibilityWhereForMode,
+  logCatalogQueryError,
+  mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
+} from "@/lib/catalog";
+import {
+  applySorting,
+  buildPerfumeQuery,
+  serializeParsedPerfumeFilters,
+  type SearchParamInput,
+} from "@/lib/filters";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
-import { computeBestOffer } from "@/lib/pricing";
 
 export const PERFUMES_PAGE_SIZE = 20;
 
 const perfumeListInclude = {
   brand: true,
-  offers: {
-    select: {
-      id: true,
-      priceAmount: true,
-      currency: true,
-      shippingCost: true,
-      availability: true,
-      affiliateUrl: true,
-      productUrl: true,
-      store: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  },
   notes: {
     select: {
       intensity: true,
@@ -58,9 +54,21 @@ function normalizePaginationValue(value: number | undefined, fallback: number) {
   return normalized >= 0 ? normalized : fallback;
 }
 
-export async function getPerfumesPage(
+function getEmptyPerfumesPageResult(offset: number, limit: number) {
+  return {
+    perfumes: [] as PerfumeListItem[],
+    total: 0,
+    hasMore: false,
+    selectedFilters: buildPerfumeQuery({}).parsed,
+    offset,
+    limit,
+  };
+}
+
+async function getPerfumesPageUncached(
   searchParams: SearchParamInput,
-  options: GetPerfumesPageOptions = {},
+  options: GetPerfumesPageOptions,
+  catalogMode: CatalogMode,
 ) {
   const offset = normalizePaginationValue(options.offset, 0);
   const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
@@ -68,57 +76,14 @@ export async function getPerfumesPage(
 
   if (!isDatabaseConfigured) {
     return {
-      perfumes: [] as PerfumeListItem[],
-      total: 0,
-      hasMore: false,
+      ...getEmptyPerfumesPageResult(offset, limit),
       selectedFilters: parsed,
-      offset,
-      limit,
     };
   }
 
-  const mergedWhere = mergePerfumeWhere(where, getCatalogVisibilityWhere());
+  const mergedWhere = mergePerfumeWhere(where, getCatalogVisibilityWhereForMode(catalogMode));
 
   try {
-    if (parsed.sort === "price_low" || parsed.sort === "price_high") {
-      const { query } = applySorting(
-        {
-          where: mergedWhere,
-          include: perfumeListInclude,
-        },
-        parsed.sort,
-      );
-
-      const allPerfumes = (await prisma.perfume.findMany(query)) as PerfumeListItem[];
-      allPerfumes.sort((a, b) => {
-        const aPrice = computeBestOffer(a.offers)?.bestTotalPrice;
-        const bPrice = computeBestOffer(b.offers)?.bestTotalPrice;
-
-        const left =
-          parsed.sort === "price_low"
-            ? (aPrice ?? Number.POSITIVE_INFINITY)
-            : (aPrice ?? Number.NEGATIVE_INFINITY);
-        const right =
-          parsed.sort === "price_low"
-            ? (bPrice ?? Number.POSITIVE_INFINITY)
-            : (bPrice ?? Number.NEGATIVE_INFINITY);
-
-        return parsed.sort === "price_low" ? left - right : right - left;
-      });
-
-      const perfumes = allPerfumes.slice(offset, offset + limit);
-      const total = allPerfumes.length;
-
-      return {
-        perfumes,
-        total,
-        hasMore: offset + perfumes.length < total,
-        selectedFilters: parsed,
-        offset,
-        limit,
-      };
-    }
-
     const baseQuery: Prisma.PerfumeFindManyArgs = {
       where: mergedWhere,
       include: perfumeListInclude,
@@ -144,12 +109,28 @@ export async function getPerfumesPage(
   } catch (error) {
     logCatalogQueryError("perfumes:list", error);
     return {
-      perfumes: [] as PerfumeListItem[],
-      total: 0,
-      hasMore: false,
+      ...getEmptyPerfumesPageResult(offset, limit),
       selectedFilters: parsed,
-      offset,
-      limit,
     };
   }
+}
+
+export async function getPerfumesPage(
+  searchParams: SearchParamInput,
+  options: GetPerfumesPageOptions = {},
+) {
+  const offset = normalizePaginationValue(options.offset, 0);
+  const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
+  const { parsed } = buildPerfumeQuery(searchParams);
+  const catalogMode = resolveCatalogMode();
+  const serializedFilters = serializeParsedPerfumeFilters(parsed);
+
+  return unstable_cache(
+    async () => getPerfumesPageUncached(searchParams, { offset, limit }, catalogMode),
+    ["perfumes-page", catalogMode, serializedFilters, String(offset), String(limit)],
+    {
+      revalidate: 1800,
+      tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumesPage],
+    },
+  )();
 }

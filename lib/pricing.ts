@@ -23,6 +23,26 @@ export type ComputedBestOffer<T extends OfferForPricing = OfferForPricing> = {
   offer: T;
 };
 
+export type BestOfferSummary = {
+  bestStore: string | null;
+  bestPrice: number;
+  bestCurrency: string;
+  bestTotalPrice: number;
+  bestUrl: string | null;
+  bestOfferUpdatedAt?: Date | string | null;
+  hasAvailableOffer: boolean;
+};
+
+export type BestOfferSnapshotSource = Partial<{
+  bestPriceAmount: number | null;
+  bestTotalPriceAmount: number | null;
+  bestCurrency: string | null;
+  bestStoreName: string | null;
+  bestOfferUrl: string | null;
+  bestOfferUpdatedAt: Date | string | null;
+  hasAvailableOffer: boolean | null;
+}>;
+
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
 }
@@ -119,5 +139,28 @@ export function computeBestOffer<T extends OfferForPricing>(
     bestTotalPrice: bestOffer.priceAmount + (bestOffer.shippingCost ?? 0),
     bestUrl: getOfferUrl(bestOffer.affiliateUrl, bestOffer.productUrl),
     offer: bestOffer,
+  };
+}
+
+export function getBestOfferSummary(
+  source: BestOfferSnapshotSource | null | undefined,
+): BestOfferSummary | null {
+  if (
+    !source ||
+    !isFiniteNumber(source.bestPriceAmount) ||
+    !isFiniteNumber(source.bestTotalPriceAmount) ||
+    !isSupportedCurrency(source.bestCurrency)
+  ) {
+    return null;
+  }
+
+  return {
+    bestStore: source.bestStoreName?.trim() || null,
+    bestPrice: source.bestPriceAmount,
+    bestCurrency: source.bestCurrency,
+    bestTotalPrice: source.bestTotalPriceAmount,
+    bestUrl: getOfferUrl(source.bestOfferUrl),
+    bestOfferUpdatedAt: source.bestOfferUpdatedAt ?? null,
+    hasAvailableOffer: Boolean(source.hasAvailableOffer),
   };
 }

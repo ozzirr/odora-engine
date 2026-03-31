@@ -1,0 +1,906 @@
+{
+  "summary": {
+    "totalItems": 41
+  },
+  "items": [
+    {
+      "rowIndex": 3,
+      "brand": "Dior",
+      "name": "Fahrenheit",
+      "slug": "dior-fahrenheit",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Fahrenheit Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Fahrenheit_Eau_de_Toilette",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 5,
+      "brand": "Chanel",
+      "name": "Allure Homme Sport",
+      "slug": "chanel-allure-homme-sport",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Allure Homme Sport Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Allure_Homme_Sport_Eau_de_Toilette",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 6,
+      "brand": "Yves Saint Laurent",
+      "name": "La Nuit de L Homme",
+      "slug": "yves-saint-laurent-la-nuit-de-l-homme",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 7,
+      "brand": "Giorgio Armani",
+      "name": "Acqua di Gio Profumo",
+      "slug": "giorgio-armani-acqua-di-gio-profumo",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 9,
+      "brand": "Prada",
+      "name": "Luna Rossa Carbon",
+      "slug": "prada-luna-rossa-carbon",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Luna Rossa Carbon Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Prada/luna-rossa-carbon-eau-de-toilette",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 10,
+      "brand": "Hermes",
+      "name": "Terre d Hermes",
+      "slug": "hermes-terre-d-hermes",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 11,
+      "brand": "Versace",
+      "name": "Dylan Blue",
+      "slug": "versace-dylan-blue",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 12,
+      "brand": "Paco Rabanne",
+      "name": "1 Million",
+      "slug": "paco-rabanne-1-million",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 14,
+      "brand": "Givenchy",
+      "name": "Gentleman Reserve Privee",
+      "slug": "givenchy-gentleman-reserve-privee",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 15,
+      "brand": "Tom Ford",
+      "name": "Noir Extreme",
+      "slug": "tom-ford-noir-extreme",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Noir Extreme Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/noir-extreme-eau-de-parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 16,
+      "brand": "Bvlgari",
+      "name": "Man in Black",
+      "slug": "bvlgari-man-in-black",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 19,
+      "brand": "Chanel",
+      "name": "Coco Mademoiselle",
+      "slug": "chanel-coco-mademoiselle",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Coco Mademoiselle Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Coco_Mademoiselle",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Coco Mademoiselle Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Coco_Mademoiselle_Eau_de_Toilette",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 20,
+      "brand": "Chanel",
+      "name": "Chance Eau Tendre",
+      "slug": "chanel-chance-eau-tendre",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Chance Eau Tendre Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Chance_Eau_Tendre_Eau_deToilette",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Chance Eau Tendre Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Chance_Eau_Tendre_Eau_de_Parfum",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 22,
+      "brand": "Dior",
+      "name": "Miss Dior Eau de Parfum",
+      "slug": "dior-miss-dior-eau-de-parfum",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Miss Dior (2021) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/miss-dior-2021-eau-de-parfum",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Miss Dior (2012) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Miss_Dior_Eau_de_Parfum_2012",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 25,
+      "brand": "Prada",
+      "name": "Paradoxe",
+      "slug": "prada-paradoxe",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Paradoxe Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Prada/paradoxe-eau-de-parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 26,
+      "brand": "Lancome",
+      "name": "La Vie Est Belle",
+      "slug": "lancome-la-vie-est-belle",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 27,
+      "brand": "Carolina Herrera",
+      "name": "Good Girl",
+      "slug": "carolina-herrera-good-girl",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Good Girl Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Carolina_Herrera/Good_Girl_Eau_de_Parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 28,
+      "brand": "Viktor and Rolf",
+      "name": "Flowerbomb",
+      "slug": "viktor-and-rolf-flowerbomb",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Flowerbomb Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Viktor_Rolf/Flowerbomb",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 30,
+      "brand": "Mugler",
+      "name": "Alien",
+      "slug": "mugler-alien",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Alien Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/mugler/Alien",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 31,
+      "brand": "Mugler",
+      "name": "Angel",
+      "slug": "mugler-angel",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Angel Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/mugler/Angel",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 32,
+      "brand": "Guerlain",
+      "name": "Mon Guerlain",
+      "slug": "guerlain-mon-guerlain",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mon Guerlain Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Guerlain/Mon_Guerlain",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 33,
+      "brand": "Dolce and Gabbana",
+      "name": "Light Blue",
+      "slug": "dolce-and-gabbana-light-blue",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Light Blue Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Dolce_Gabbana/light-blue-eau-de-toilette",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 34,
+      "brand": "Versace",
+      "name": "Bright Crystal",
+      "slug": "versace-bright-crystal",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 35,
+      "brand": "Givenchy",
+      "name": "L Interdit Eau de Parfum",
+      "slug": "givenchy-l-interdit-eau-de-parfum",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 36,
+      "brand": "Maison Francis Kurkdjian",
+      "name": "Baccarat Rouge 540",
+      "slug": "maison-francis-kurkdjian-baccarat-rouge-540",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Baccarat Rouge 540 Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Maison_Francis_Kurkdjian/Baccarat_Rouge_540_Eau_de_Parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 37,
+      "brand": "Maison Francis Kurkdjian",
+      "name": "Grand Soir",
+      "slug": "maison-francis-kurkdjian-grand-soir",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Grand Soir Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Maison_Francis_Kurkdjian/grand-soir-eau-de-parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 38,
+      "brand": "Le Labo",
+      "name": "Santal 33",
+      "slug": "le-labo-santal-33",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Santal 33 Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Le_Labo/Santal_33_Eau_de_Parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 39,
+      "brand": "Byredo",
+      "name": "Gypsy Water",
+      "slug": "byredo-gypsy-water",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Gypsy Water Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Byredo/Gypsy_Water_Eau_de_Parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 40,
+      "brand": "Diptyque",
+      "name": "Philosykos",
+      "slug": "diptyque-philosykos",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Philosykos Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Diptyque/Philosykos_Eau_de_Parfum",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Philosykos Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Diptyque/Philosykos",
+          "confidenceScore": 0.55,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple Parfumo variant candidates matched after concentration-stripping fallback."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 45,
+      "brand": "Parfums de Marly",
+      "name": "Delina",
+      "slug": "parfums-de-marly-delina",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Delina Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Parfums_de_Marly/Delina",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 47,
+      "brand": "Amouage",
+      "name": "Guidance",
+      "slug": "amouage-guidance",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Guidance Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Amouage/guidance-eau-de-parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 49,
+      "brand": "Initio",
+      "name": "Oud for Greatness",
+      "slug": "initio-oud-for-greatness",
+      "issueType": "low_confidence",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Oud for Greatness Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Initio/oud-for-greatness-eau-de-parfum",
+          "confidenceScore": 0.84,
+          "confidenceLevel": "low",
+          "matchReason": "Variant-only match after concentration-stripping fallback; manual review required."
+        }
+      ],
+      "recommendedNextAction": "Review the suggested candidate and approve or reject the match before any catalog fields are applied.",
+      "notes": [
+        "Variant-only match after concentration-stripping fallback; manual review required."
+      ]
+    },
+    {
+      "rowIndex": 50,
+      "brand": "Frederic Malle",
+      "name": "Portrait of a Lady",
+      "slug": "frederic-malle-portrait-of-a-lady",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 51,
+      "brand": "Kilian Paris",
+      "name": "Angels Share",
+      "slug": "kilian-paris-angels-share",
+      "issueType": "unmatched",
+      "candidateMatches": [],
+      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "notes": [
+        "No trusted adapter returned a usable source candidate for this perfume."
+      ]
+    },
+    {
+      "rowIndex": 66,
+      "brand": "Dior",
+      "name": "Dior Addict (2014) Eau de Parfum",
+      "slug": "dior-dior-addict-2014-eau-de-parfum",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2014) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict_2014",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2002) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2012) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict_2012",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 97,
+      "brand": "Dior",
+      "name": "Dior Addict (2002) Eau de Parfum",
+      "slug": "dior-dior-addict-2002-eau-de-parfum",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2014) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict_2014",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2002) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Addict (2012) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Addict_2012",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 114,
+      "brand": "Dior",
+      "name": "Dior Homme Intense (2011)",
+      "slug": "dior-dior-homme-intense-2011",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Homme Intense (2011)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Homme_Intense_2011",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Homme Intense (2007)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Homme_Intense",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 137,
+      "brand": "Valentino",
+      "name": "Valentino Uomo Intense (2016)",
+      "slug": "valentino-valentino-uomo-intense-2016",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Valentino Uomo Intense (2016)",
+          "url": "https://www.parfumo.com/Perfumes/Valentino/valentino-uomo-intense-2016",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Valentino Uomo Intense",
+          "url": "https://www.parfumo.com/Perfumes/Valentino/valentino-uomo-intense",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 179,
+      "brand": "Valentino",
+      "name": "Valentino Uomo Intense",
+      "slug": "valentino-valentino-uomo-intense",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Valentino Uomo Intense (2016)",
+          "url": "https://www.parfumo.com/Perfumes/Valentino/valentino-uomo-intense-2016",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Valentino Uomo Intense",
+          "url": "https://www.parfumo.com/Perfumes/Valentino/valentino-uomo-intense",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 185,
+      "brand": "Dior",
+      "name": "Eau Sauvage Parfum (2017)",
+      "slug": "dior-eau-sauvage-parfum-2017",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Eau Sauvage Parfum (2017)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Eau_Sauvage_Parfum_2017",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Eau Sauvage Parfum (2012)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Eau_Sauvage_Parfum",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 251,
+      "brand": "Giorgio Armani",
+      "name": "Armani Code (2021) Eau de Parfum",
+      "slug": "giorgio-armani-armani-code-2021-eau-de-parfum",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Armani Code (2021) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Giorgio_Armani/armani-code-2021-eau-de-parfum",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Armani Code (2024) Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Giorgio_Armani/armani-code-2024-eau-de-parfum",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    }
+  ]
+}

@@ -1,17 +1,21 @@
 import type { ComponentProps } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
 import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
+import { getAmazonProductUrl } from "@/lib/amazon";
+import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
-import { formatGender } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 type PerfumeHeroProps = {
   perfume: {
+    slug: string;
     name: string;
     descriptionShort: string;
     descriptionLong?: string;
@@ -24,6 +28,7 @@ type PerfumeHeroProps = {
     longevityScore: number | null;
     sillageScore: number | null;
     versatilityScore: number | null;
+    amazonUrl?: string | null;
     brand: {
       name: string;
     };
@@ -54,6 +59,18 @@ type PerfumeHeroProps = {
 
 type LinkHref = ComponentProps<typeof Link>["href"];
 
+function AmazonWordmark({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logo_amazon.webp"
+      alt="Amazon"
+      width={110}
+      height={34}
+      className={`brightness-0 invert ${className ?? ""}`}
+    />
+  );
+}
+
 function MetricItem({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="rounded-xl border border-[#deceb9] bg-white/70 px-3 py-2">
@@ -65,10 +82,23 @@ function MetricItem({ label, value }: { label: string; value: number | null }) {
 
 export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
   const t = useTranslations("perfume.hero");
+  const amazonT = useTranslations("perfume.amazon");
   const commonT = useTranslations("common");
-  const locale = useLocale();
+  const locale = useLocale() as AppLocale;
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const summary = getPerfumeShortText(perfume);
+  const amazonUrl = getAmazonProductUrl({
+    amazonUrl: perfume.amazonUrl,
+    brandName,
+    perfumeName: perfume.name,
+    locale,
+    perfumeSlug: perfume.slug,
+  });
+  const metrics = [
+    { label: t("metrics.longevity"), value: perfume.longevityScore },
+    { label: t("metrics.sillage"), value: perfume.sillageScore },
+    { label: t("metrics.versatility"), value: perfume.versatilityScore },
+  ].filter((metric) => metric.value !== null);
 
   return (
     <section className="grid gap-6 lg:grid-cols-[1.05fr_1.35fr] lg:gap-8">
@@ -91,7 +121,6 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge>{formatGender(perfume.gender, locale as "it" | "en")}</Badge>
           <Badge variant="outline">{perfume.fragranceFamily}</Badge>
           {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
           {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
@@ -100,24 +129,54 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
           ) : null}
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
-          <MetricItem label={t("metrics.longevity")} value={perfume.longevityScore} />
-          <MetricItem label={t("metrics.sillage")} value={perfume.sillageScore} />
-          <MetricItem label={t("metrics.versatility")} value={perfume.versatilityScore} />
-        </div>
+        {metrics.length > 0 ? (
+          <div
+            className={cn(
+              "grid gap-2 sm:gap-3",
+              metrics.length === 1
+                ? "grid-cols-1"
+                : metrics.length === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-3",
+            )}
+          >
+            {metrics.map((metric) => (
+              <MetricItem key={metric.label} label={metric.label} value={metric.value} />
+            ))}
+          </div>
+        ) : null}
 
         <BestOfferCard bestOffer={bestOffer} showButton={false} className="bg-[#f7efe2]" />
 
-        {bestOffer?.bestUrl ? (
-          <Link
-            href={bestOffer.bestUrl as unknown as LinkHref}
+        <div className="space-y-3">
+          {bestOffer?.bestUrl ? (
+            <Link
+              href={bestOffer.bestUrl as unknown as LinkHref}
+              target="_blank"
+              rel="noreferrer"
+              className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
+            >
+              {t("goToOffer")}
+            </Link>
+          ) : null}
+
+          <a
+            href={amazonUrl}
             target="_blank"
             rel="noreferrer"
-            className={buttonStyles({ className: "h-12 w-full sm:w-auto sm:px-6" })}
+            className={buttonStyles({
+              className:
+                "h-12 w-full bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c] sm:w-auto sm:px-6",
+            })}
           >
-            {t("goToOffer")}
-          </Link>
-        ) : null}
+            <span className="inline-flex items-center gap-2">
+              <span>{amazonT("ctaPrefix")}</span>
+              <span className="inline-flex min-w-[86px] items-center justify-center">
+                <AmazonWordmark className="h-[22px] w-auto object-contain translate-y-[1px]" />
+              </span>
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );

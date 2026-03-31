@@ -82,7 +82,7 @@ export function AuthPanel({
         <span className="h-px flex-1 bg-[#e4d8c9]" />
       </div>
 
-      <AuthSocialButtons mode={mode} />
+      <AuthSocialButtons nextPath={nextPath} />
 
       <p className="mt-6 text-sm text-[#675545]">
         {switchPrompt}{" "}

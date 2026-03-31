@@ -1,4 +1,5 @@
 import { preparePerfumeRecords } from "@/lib/perfume-data/workflow";
+import { defaultVerifyInputPath } from "@/lib/perfume-data/paths";
 import type { PerfumeDataSource } from "@/lib/perfume-data/types";
 
 type CliOptions = {
@@ -7,10 +8,6 @@ type CliOptions = {
   format: "auto" | "csv" | "json";
   limit?: number;
 };
-
-function defaultInputPath(source: PerfumeDataSource) {
-  return source === "verified" ? "data/verified/perfumes.csv" : "data/parfumo/perfumes.csv";
-}
 
 function parseCliOptions(argv: string[]): CliOptions {
   const options: CliOptions = {
@@ -54,7 +51,7 @@ function parseCliOptions(argv: string[]): CliOptions {
 async function main() {
   const options = parseCliOptions(process.argv.slice(2));
   const prepared = await preparePerfumeRecords({
-    inputPath: options.inputPath ?? defaultInputPath(options.source),
+    inputPath: options.inputPath ?? defaultVerifyInputPath(options.source),
     format: options.format,
     source: options.source,
     limit: options.limit,
@@ -71,6 +68,8 @@ async function main() {
   console.log(`malformed rows: ${prepared.summary.malformedRows}`);
   console.log(`warnings: ${prepared.summary.warnings}`);
   console.log(`errors: ${prepared.summary.errors}`);
+  console.log(`duplicate slugs: ${prepared.summary.duplicateSlugs}`);
+  console.log(`missing fields: ${prepared.summary.missingFields}`);
 
   if (prepared.validationIssues.length > 0) {
     console.log("");

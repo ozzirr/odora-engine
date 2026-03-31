@@ -1,0 +1,51 @@
+brand,name,slug,official_source_url,image_source_url,image_storage_path,image_public_url,catalog_status,data_quality
+Dior,Sauvage Elixir,dior-sauvage-elixir,https://www.dior.com/en_int/beauty/products/sauvage-elixir,,dior/dior-sauvage-elixir.jpg,,VERIFIED,HIGH
+Dior,Fahrenheit,dior-fahrenheit,https://www.dior.com/en_int/beauty/products/fahrenheit,,dior/dior-fahrenheit.jpg,,VERIFIED,HIGH
+Chanel,Bleu de Chanel Eau de Parfum,chanel-bleu-de-chanel-eau-de-parfum,https://www.chanel.com/us/fragrance/p/107360/bleu-de-chanel-eau-de-parfum-spray/,,chanel/chanel-bleu-de-chanel-eau-de-parfum.jpg,,VERIFIED,HIGH
+Chanel,Allure Homme Sport,chanel-allure-homme-sport,https://www.chanel.com/us/fragrance/p/123560/allure-homme-sport-eau-de-toilette-spray/,,chanel/chanel-allure-homme-sport.jpg,,VERIFIED,HIGH
+Yves Saint Laurent,La Nuit de L Homme,yves-saint-laurent-la-nuit-de-l-homme,https://www.yslbeautyus.com/fragrance/mens-fragrance/la-nuit-de-lhomme/,,yves-saint-laurent/yves-saint-laurent-la-nuit-de-l-homme.jpg,,VERIFIED,HIGH
+Giorgio Armani,Acqua di Gio Profumo,giorgio-armani-acqua-di-gio-profumo,https://www.armani.com/en-us/fragrances/acqua-di-gio-profumo,,giorgio-armani/giorgio-armani-acqua-di-gio-profumo.jpg,,VERIFIED,HIGH
+Giorgio Armani,Armani Code Parfum,giorgio-armani-armani-code-parfum,https://www.armani.com/en-us/fragrances/armani-code-parfum,,giorgio-armani/giorgio-armani-armani-code-parfum.jpg,,VERIFIED,HIGH
+Prada,Luna Rossa Carbon,prada-luna-rossa-carbon,https://www.prada.com/us/en/prada-beauty/fragrances/luna-rossa-carbon,,prada/prada-luna-rossa-carbon.jpg,,VERIFIED,HIGH
+Hermes,Terre d Hermes,hermes-terre-d-hermes,https://www.hermes.com/us/en/product/terre-d-hermes-eau-de-toilette-V111111/,,hermes/hermes-terre-d-hermes.jpg,,VERIFIED,HIGH
+Versace,Dylan Blue,versace-dylan-blue,https://www.versace.com/us/en-us/men/accessories/fragrances/dylan-blue-pour-homme/,,versace/versace-dylan-blue.jpg,,VERIFIED,HIGH
+Paco Rabanne,1 Million,paco-rabanne-1-million,https://www.rabanne.com/us/en_US/fragrance/p/1-million-eau-de-toilette,,paco-rabanne/paco-rabanne-1-million.jpg,,VERIFIED,HIGH
+Jean Paul Gaultier,Le Male Le Parfum,jean-paul-gaultier-le-male-le-parfum,https://www.jeanpaulgaultier.com/us/en/fragrances/le-male-le-parfum,,jean-paul-gaultier/jean-paul-gaultier-le-male-le-parfum.jpg,,VERIFIED,HIGH
+Givenchy,Gentleman Reserve Privee,givenchy-gentleman-reserve-privee,https://www.givenchybeauty.com/us/p/gentleman-reserve-privee/,,givenchy/givenchy-gentleman-reserve-privee.jpg,,VERIFIED,HIGH
+Tom Ford,Noir Extreme,tom-ford-noir-extreme,https://www.tomfordbeauty.com/product/noir-extreme-eau-de-parfum,,tom-ford/tom-ford-noir-extreme.jpg,,VERIFIED,HIGH
+Bvlgari,Man in Black,bvlgari-man-in-black,https://www.bulgari.com/en-us/fragrances/mens/man-in-black,,bvlgari/bvlgari-man-in-black.jpg,,VERIFIED,HIGH
+Dolce and Gabbana,The One for Men Eau de Parfum,dolce-and-gabbana-the-one-for-men-eau-de-parfum,https://www.dolcegabbana.com/en/beauty/perfumes/the-one-for-men-eau-de-parfum/,,dolce-and-gabbana/dolce-and-gabbana-the-one-for-men-eau-de-parfum.jpg,,VERIFIED,HIGH
+Viktor and Rolf,Spicebomb Extreme,viktor-and-rolf-spicebomb-extreme,https://www.viktor-rolf.com/fragrance/spicebomb-extreme/,,viktor-and-rolf/viktor-and-rolf-spicebomb-extreme.jpg,,VERIFIED,HIGH
+Chanel,Coco Mademoiselle,chanel-coco-mademoiselle,https://www.chanel.com/us/fragrance/p/116520/coco-mademoiselle-eau-de-parfum-spray/,,chanel/chanel-coco-mademoiselle.jpg,,VERIFIED,HIGH
+Chanel,Chance Eau Tendre,chanel-chance-eau-tendre,https://www.chanel.com/us/fragrance/p/126260/chance-eau-tendre-eau-de-parfum-spray/,,chanel/chanel-chance-eau-tendre.jpg,,VERIFIED,HIGH
+Dior,Jadore Eau de Parfum,dior-jadore-eau-de-parfum,https://www.dior.com/en_int/beauty/products/jadore-eau-de-parfum,,dior/dior-jadore-eau-de-parfum.jpg,,VERIFIED,HIGH
+Dior,Miss Dior Eau de Parfum,dior-miss-dior-eau-de-parfum,https://www.dior.com/en_int/beauty/products/miss-dior-eau-de-parfum,,dior/dior-miss-dior-eau-de-parfum.jpg,,VERIFIED,HIGH
+Yves Saint Laurent,Libre Eau de Parfum,yves-saint-laurent-libre-eau-de-parfum,https://www.yslbeautyus.com/fragrance/womens-fragrance/libre-eau-de-parfum/,,yves-saint-laurent/yves-saint-laurent-libre-eau-de-parfum.jpg,,VERIFIED,HIGH
+Giorgio Armani,Si Eau de Parfum,giorgio-armani-si-eau-de-parfum,https://www.armani.com/en-us/fragrances/si-eau-de-parfum,,giorgio-armani/giorgio-armani-si-eau-de-parfum.jpg,,VERIFIED,HIGH
+Prada,Paradoxe,prada-paradoxe,https://www.prada.com/us/en/prada-beauty/fragrances/paradoxe,,prada/prada-paradoxe.jpg,,VERIFIED,HIGH
+Lancome,La Vie Est Belle,lancome-la-vie-est-belle,https://www.lancome-usa.com/fragrance/womens-perfume/la-vie-est-belle/,,lancome/lancome-la-vie-est-belle.jpg,,VERIFIED,HIGH
+Carolina Herrera,Good Girl,carolina-herrera-good-girl,https://www.carolinaherrera.com/us/en/p-fragrance/good-girl-eau-de-parfum/,,carolina-herrera/carolina-herrera-good-girl.jpg,,VERIFIED,HIGH
+Viktor and Rolf,Flowerbomb,viktor-and-rolf-flowerbomb,https://www.viktor-rolf.com/fragrance/flowerbomb/,,viktor-and-rolf/viktor-and-rolf-flowerbomb.jpg,,VERIFIED,HIGH
+Narciso Rodriguez,For Her Eau de Parfum,narciso-rodriguez-for-her-eau-de-parfum,https://www.narcisorodriguezparfums.com/us/fragrance/for-her-eau-de-parfum,,narciso-rodriguez/narciso-rodriguez-for-her-eau-de-parfum.jpg,,VERIFIED,HIGH
+Mugler,Alien,mugler-alien,https://www.mugler.com/fragrance/alien/,,mugler/mugler-alien.jpg,,VERIFIED,HIGH
+Mugler,Angel,mugler-angel,https://www.mugler.com/fragrance/angel/,,mugler/mugler-angel.jpg,,VERIFIED,HIGH
+Guerlain,Mon Guerlain,guerlain-mon-guerlain,https://www.guerlain.com/us/en-us/p/mon-guerlain-eau-de-parfum-P013006.html,,guerlain/guerlain-mon-guerlain.jpg,,VERIFIED,HIGH
+Dolce and Gabbana,Light Blue,dolce-and-gabbana-light-blue,https://www.dolcegabbana.com/en/beauty/perfumes/light-blue-eau-de-toilette/,,dolce-and-gabbana/dolce-and-gabbana-light-blue.jpg,,VERIFIED,HIGH
+Versace,Bright Crystal,versace-bright-crystal,https://www.versace.com/us/en-us/women/accessories/fragrances/bright-crystal-eau-de-toilette/,,versace/versace-bright-crystal.jpg,,VERIFIED,HIGH
+Givenchy,L Interdit Eau de Parfum,givenchy-l-interdit-eau-de-parfum,https://www.givenchybeauty.com/us/p/l-interdit-eau-de-parfum/,,givenchy/givenchy-l-interdit-eau-de-parfum.jpg,,VERIFIED,HIGH
+Maison Francis Kurkdjian,Baccarat Rouge 540,maison-francis-kurkdjian-baccarat-rouge-540,https://www.maisonfranciskurkdjian.com/us-en/p/baccarat-rouge-540-eau-de-parfum-RA1B540E.html,,maison-francis-kurkdjian/maison-francis-kurkdjian-baccarat-rouge-540.jpg,,VERIFIED,HIGH
+Maison Francis Kurkdjian,Grand Soir,maison-francis-kurkdjian-grand-soir,https://www.maisonfranciskurkdjian.com/us-en/p/grand-soir-eau-de-parfum-RA1GSE15.html,,maison-francis-kurkdjian/maison-francis-kurkdjian-grand-soir.jpg,,VERIFIED,HIGH
+Le Labo,Santal 33,le-labo-santal-33,https://www.lelabofragrances.com/santal-33-147.html,,le-labo/le-labo-santal-33.jpg,,VERIFIED,HIGH
+Byredo,Gypsy Water,byredo-gypsy-water,https://www.byredo.com/us_en/gypsy-water-eau-de-parfum-50ml,,byredo/byredo-gypsy-water.jpg,,VERIFIED,HIGH
+Diptyque,Philosykos,diptyque-philosykos,https://www.diptyqueparis.com/en_us/p/philosykos-eau-de-parfum-75ml.html,,diptyque/diptyque-philosykos.jpg,,VERIFIED,HIGH
+Diptyque,Eau Duelle Eau de Parfum,diptyque-eau-duelle-eau-de-parfum,https://www.diptyqueparis.com/en_us/p/eau-duelle-eau-de-parfum-75ml.html,,diptyque/diptyque-eau-duelle-eau-de-parfum.jpg,,VERIFIED,HIGH
+Creed,Aventus,creed-aventus,https://creedboutique.com/products/aventus,,creed/creed-aventus.jpg,,VERIFIED,HIGH
+Creed,Silver Mountain Water,creed-silver-mountain-water,https://creedboutique.com/products/silver-mountain-water,,creed/creed-silver-mountain-water.jpg,,VERIFIED,HIGH
+Xerjoff,Naxos,xerjoff-naxos,https://xerjoff.com/product/naxos/,,xerjoff/xerjoff-naxos.jpg,,VERIFIED,HIGH
+Parfums de Marly,Delina,parfums-de-marly-delina,https://parfums-de-marly.com/products/delina,,parfums-de-marly/parfums-de-marly-delina.jpg,,VERIFIED,HIGH
+Amouage,Reflection Man,amouage-reflection-man,https://www.amouage.com/products/reflection-man-eau-de-parfum,,amouage/amouage-reflection-man.jpg,,VERIFIED,HIGH
+Amouage,Guidance,amouage-guidance,https://www.amouage.com/products/guidance-eau-de-parfum,,amouage/amouage-guidance.jpg,,VERIFIED,HIGH
+Nishane,Hacivat,nishane-hacivat,https://nishane.com/products/hacivat,,nishane/nishane-hacivat.jpg,,VERIFIED,HIGH
+Initio,Oud for Greatness,initio-oud-for-greatness,https://us.initio-parfums.com/products/oud-for-greatness,,initio/initio-oud-for-greatness.jpg,,VERIFIED,HIGH
+Frederic Malle,Portrait of a Lady,frederic-malle-portrait-of-a-lady,https://www.fredericmalle.com/product/19566/50217/parfums/portrait-of-a-lady/by-dominique-ropion,,frederic-malle/frederic-malle-portrait-of-a-lady.jpg,,VERIFIED,HIGH
+Kilian Paris,Angels Share,kilian-paris-angels-share,https://www.bykilian.com/product/19797/83995/perfume/angels-share/the-liquors,,kilian-paris/kilian-paris-angels-share.jpg,,VERIFIED,HIGH

@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
+import { type Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
+import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
 import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
 import {
-  getCatalogVisibilityWhere,
+  getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
   mergePerfumeWhere,
+  resolveCatalogMode,
+  type CatalogMode,
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
+import { getPopularPerfumeSlugs } from "@/lib/homepage";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
@@ -28,60 +36,159 @@ type PerfumeDetailPageProps = {
   }>;
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 1800;
 
-async function getPerfumePageData(slug: string) {
+const perfumeDetailInclude = {
+  brand: true,
+  notes: {
+    include: {
+      note: true,
+    },
+  },
+  moods: {
+    include: {
+      mood: true,
+    },
+    orderBy: {
+      weight: "desc",
+    },
+  },
+  seasons: {
+    include: {
+      season: true,
+    },
+    orderBy: {
+      weight: "desc",
+    },
+  },
+  occasions: {
+    include: {
+      occasion: true,
+    },
+    orderBy: {
+      weight: "desc",
+    },
+  },
+  offers: {
+    include: {
+      store: true,
+    },
+  },
+} satisfies Prisma.PerfumeInclude;
+
+const perfumeDiscoveryInclude = {
+  brand: true,
+  notes: {
+    include: {
+      note: true,
+    },
+  },
+  moods: {
+    include: {
+      mood: true,
+    },
+  },
+  offers: {
+    include: {
+      store: true,
+    },
+  },
+} satisfies Prisma.PerfumeInclude;
+
+async function getPerfumeRecordBySlugUncached(slug: string, catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
     return null;
   }
 
-  const visibilityWhere = getCatalogVisibilityWhere();
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+
+  return prisma.perfume.findFirst({
+    where: mergePerfumeWhere({ slug }, visibilityWhere),
+    include: perfumeDetailInclude,
+  });
+}
+
+async function getPerfumeRecordBySlug(slug: string) {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getPerfumeRecordBySlugUncached(slug, catalogMode),
+    ["perfume-record", catalogMode, slug],
+    {
+      revalidate: 1800,
+      tags: [
+        PUBLIC_CACHE_TAGS.catalog,
+        PUBLIC_CACHE_TAGS.perfumeDetail,
+        getPerfumeDetailTag(slug),
+      ],
+    },
+  )();
+}
+
+async function getPerfumePageDataUncached(slug: string, catalogMode: CatalogMode) {
+  if (!isDatabaseConfigured) {
+    return null;
+  }
+
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
 
   try {
-    const perfume = await prisma.perfume.findFirst({
-      where: mergePerfumeWhere({ slug }, visibilityWhere),
-      include: {
-        brand: true,
-        notes: {
-          include: {
-            note: true,
-          },
-        },
-        moods: {
-          include: {
-            mood: true,
-          },
-          orderBy: {
-            weight: "desc",
-          },
-        },
-        seasons: {
-          include: {
-            season: true,
-          },
-          orderBy: {
-            weight: "desc",
-          },
-        },
-        occasions: {
-          include: {
-            occasion: true,
-          },
-          orderBy: {
-            weight: "desc",
-          },
-        },
-        offers: {
-          include: {
-            store: true,
-          },
-        },
-      },
-    });
+    const perfume = await getPerfumeRecordBySlugUncached(slug, catalogMode);
 
     if (!perfume) {
       return null;
     }
+
+    const noteSlugs = Array.from(
+      new Set(
+        perfume.notes
+          .map((item) => item.note?.slug)
+          .filter((value): value is string => Boolean(value)),
+      ),
+    ).slice(0, 8);
+    const moodSlugs = Array.from(
+      new Set(
+        perfume.moods
+          .map((item) => item.mood?.slug)
+          .filter((value): value is string => Boolean(value)),
+      ),
+    ).slice(0, 5);
+    const discoveryClauses: Prisma.PerfumeWhereInput[] = [
+      { fragranceFamily: perfume.fragranceFamily },
+      { gender: perfume.gender },
+      { isArabic: perfume.isArabic },
+      { isNiche: perfume.isNiche },
+      ...(moodSlugs.length > 0
+        ? [
+            {
+              moods: {
+                some: {
+                  mood: {
+                    slug: {
+                      in: moodSlugs,
+                    },
+                  },
+                },
+              },
+            } satisfies Prisma.PerfumeWhereInput,
+          ]
+        : []),
+      ...(noteSlugs.length > 0
+        ? [
+            {
+              notes: {
+                some: {
+                  note: {
+                    slug: {
+                      in: noteSlugs,
+                    },
+                  },
+                },
+              },
+            } satisfies Prisma.PerfumeWhereInput,
+          ]
+        : []),
+    ];
 
     const allPerfumes = await prisma.perfume.findMany({
       where: mergePerfumeWhere(
@@ -89,27 +196,13 @@ async function getPerfumePageData(slug: string) {
           id: {
             not: perfume.id,
           },
+          OR: discoveryClauses,
         },
         visibilityWhere,
       ),
-      include: {
-        brand: true,
-        notes: {
-          include: {
-            note: true,
-          },
-        },
-        moods: {
-          include: {
-            mood: true,
-          },
-        },
-        offers: {
-          include: {
-            store: true,
-          },
-        },
-      },
+      include: perfumeDiscoveryInclude,
+      orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+      take: 120,
     });
 
     return {
@@ -120,6 +213,29 @@ async function getPerfumePageData(slug: string) {
     logCatalogQueryError("perfumes:detail", error);
     return null;
   }
+}
+
+async function getPerfumePageData(slug: string) {
+  const catalogMode = resolveCatalogMode();
+
+  return unstable_cache(
+    async () => getPerfumePageDataUncached(slug, catalogMode),
+    ["perfume-page", catalogMode, slug],
+    {
+      revalidate: 1800,
+      tags: [
+        PUBLIC_CACHE_TAGS.catalog,
+        PUBLIC_CACHE_TAGS.perfumeDetail,
+        getPerfumeDetailTag(slug),
+      ],
+    },
+  )();
+}
+
+export async function generateStaticParams() {
+  const slugs = await getPopularPerfumeSlugs(24);
+
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
@@ -135,32 +251,7 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
   }
 
   try {
-    const perfume = await prisma.perfume.findFirst({
-      where: mergePerfumeWhere({ slug }, getCatalogVisibilityWhere()),
-      select: {
-        name: true,
-        descriptionShort: true,
-        fragranceFamily: true,
-        notes: {
-          select: {
-            intensity: true,
-            note: {
-              select: {
-                name: true,
-                slug: true,
-              },
-            },
-          },
-          orderBy: [{ intensity: "desc" }, { id: "asc" }],
-          take: 5,
-        },
-        brand: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
+    const perfume = await getPerfumeRecordBySlug(slug);
 
     if (!perfume) {
       return {
@@ -237,6 +328,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
   return (
     <>
+      <PerfumeDetailNavigationReady />
       <Container className="space-y-9 pt-8 pb-8 md:space-y-10 md:pt-10 md:pb-10">
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
@@ -285,6 +377,13 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             }))}
           />
         </section>
+
+        <AmazonCalloutCard
+          perfumeName={perfume.name}
+          brandName={perfume.brand?.name}
+          amazonUrl={perfume.amazonUrl}
+          perfumeSlug={perfume.slug}
+        />
 
         <section className="space-y-4">
           <SectionTitle

@@ -1,4 +1,4 @@
-import { CatalogStatus, DataQuality, PriceRange, SourceType } from "@prisma/client";
+import { CatalogStatus, DataQuality, SourceType } from "@prisma/client";
 
 import {
   canonicalGenderToPrisma,
@@ -9,10 +9,12 @@ import {
   normalizeNoteLabel,
 } from "@/lib/perfume-taxonomy";
 import type {
+  NormalizationResult,
   NormalizedPerfumeRecord,
   NoteGroups,
   PerfumeDataSource,
   RawPerfumeRecord,
+  ValidationIssue,
 } from "@/lib/perfume-data/types";
 
 const notePrefixPattern = /^(top|middle|heart|base)\s*notes?\s*:/i;
@@ -30,6 +32,9 @@ const fieldAliases = {
   baseNotes: ["base_notes", "basenotes", "base", "notes_base", "drydown"],
   allNotes: ["notes", "allnotes", "note", "noteslist", "note_list"],
   rating: ["rating_internal", "rating", "score", "community_rating", "communityrating", "avg_rating"],
+  longevityScore: ["longevity_score", "longevityscore", "longevity"],
+  sillageScore: ["sillage_score", "sillagescore", "sillage"],
+  versatilityScore: ["versatility_score", "versatilityscore", "versatility"],
   imageUrl: ["image_url", "imageurl", "image", "photo", "picture", "img"],
   imageSourceUrl: ["image_source_url", "imagesourceurl"],
   imageStoragePath: ["image_storage_path", "imagestoragepath"],
@@ -45,6 +50,7 @@ const fieldAliases = {
   officialSourceUrl: ["official_source_url", "officialsourceurl", "source_url", "sourceurl", "parfumo_url"],
   sourceConfidence: ["source_confidence", "sourceconfidence"],
   dataQuality: ["data_quality", "dataquality"],
+  enrichmentStatus: ["enrichment_status", "enrichmentstatus"],
 } as const;
 
 export const canonicalCatalogHeaders = [
@@ -59,6 +65,9 @@ export const canonicalCatalogHeaders = [
   "base_notes",
   "family",
   "rating",
+  "longevity_score",
+  "sillage_score",
+  "versatility_score",
   "imageUrl",
   "image_source_url",
   "image_storage_path",
@@ -158,6 +167,38 @@ export function normalizeRating(value: unknown) {
   }
 
   return Math.round(normalized * 100) / 100;
+}
+
+function createIssue(
+  sourceRow: number,
+  field: string,
+  message: string,
+  level: ValidationIssue["level"] = "error",
+): ValidationIssue {
+  return {
+    level,
+    field,
+    message,
+    sourceRow,
+  };
+}
+
+function normalizeTenPointScore(value: unknown) {
+  const cleaned = cleanString(String(value ?? ""));
+  if (!cleaned) {
+    return { value: undefined };
+  }
+
+  const parsed = Number.parseFloat(cleaned.replace(",", "."));
+  if (!Number.isFinite(parsed) || !Number.isInteger(parsed)) {
+    return { issue: "Score must be an integer between 0 and 10." };
+  }
+
+  if (parsed < 0 || parsed > 10) {
+    return { issue: "Score must be between 0 and 10." };
+  }
+
+  return { value: parsed };
 }
 
 function parseArrayLike(rawValue: string) {
@@ -299,6 +340,24 @@ function parseCatalogStatus(value: unknown, source: PerfumeDataSource) {
   return source === "verified" ? CatalogStatus.VERIFIED : CatalogStatus.IMPORTED_UNVERIFIED;
 }
 
+function parseEnrichmentStatus(
+  value: unknown,
+): NormalizedPerfumeRecord["enrichmentStatus"] {
+  const normalized = cleanString(String(value ?? "")).toLowerCase();
+
+  if (
+    normalized === "matched_enriched" ||
+    normalized === "matched_provenance_only" ||
+    normalized === "low_confidence" ||
+    normalized === "ambiguous" ||
+    normalized === "unmatched"
+  ) {
+    return normalized;
+  }
+
+  return undefined;
+}
+
 function parseSourceType(value: unknown, source: PerfumeDataSource) {
   const normalized = cleanString(String(value ?? "")).toUpperCase();
   if (normalized === "MANUAL_CURATION") {
@@ -435,19 +494,42 @@ export function normalizePerfumeRecord(params: {
   source: PerfumeDataSource;
   sourceRow: number;
   record: RawPerfumeRecord;
-}) {
+}): NormalizationResult {
+  const issues: ValidationIssue[] = [];
   const brandName = cleanString(String(getRecordValue(params.record, fieldAliases.brand) ?? ""));
   const perfumeName = cleanString(String(getRecordValue(params.record, fieldAliases.perfumeName) ?? ""));
+  const rawSlug = cleanString(String(getRecordValue(params.record, fieldAliases.perfumeSlug) ?? ""));
+  const rawGender = cleanString(String(getRecordValue(params.record, fieldAliases.gender) ?? ""));
+  const rawFamily = cleanString(String(getRecordValue(params.record, fieldAliases.family) ?? ""));
+
+  if (!brandName) {
+    issues.push(createIssue(params.sourceRow, "brand", "Brand is required."));
+  }
+
+  if (!perfumeName) {
+    issues.push(createIssue(params.sourceRow, "name", "Perfume name is required."));
+  }
+
+  if (!rawSlug) {
+    issues.push(createIssue(params.sourceRow, "slug", "Slug is required."));
+  }
+
+  if (!rawGender) {
+    issues.push(createIssue(params.sourceRow, "gender", "Gender is required."));
+  }
+
+  if (!rawFamily) {
+    issues.push(createIssue(params.sourceRow, "fragranceFamily", "Fragrance family is required."));
+  }
 
   if (!brandName || !perfumeName) {
-    return { reason: "missing brand or perfume name" } as const;
+    return { issues };
   }
 
   const notes = collectNotes(params.record);
   const uniqueNotes = collectUniqueNotes(notes);
-  const inputFamily = cleanString(String(getRecordValue(params.record, fieldAliases.family) ?? ""));
-  const normalizedGender = normalizeGenderLabel(cleanString(String(getRecordValue(params.record, fieldAliases.gender) ?? "")));
-  const family = normalizeFragranceFamily(inputFamily, uniqueNotes);
+  const normalizedGender = normalizeGenderLabel(rawGender);
+  const family = normalizeFragranceFamily(rawFamily, uniqueNotes);
   const concentration =
     normalizeConcentration(cleanString(String(getRecordValue(params.record, fieldAliases.concentration) ?? ""))) ??
     normalizeConcentration(perfumeName);
@@ -469,6 +551,36 @@ export function normalizePerfumeRecord(params: {
       heart: notes.heart,
       base: notes.base,
     });
+  const perfumeSlug = slugify(rawSlug || `${brandName}-${perfumeName}`);
+
+  if (!perfumeSlug || perfumeSlug === "unknown") {
+    issues.push(createIssue(params.sourceRow, "slug", "Slug could not be normalized."));
+  }
+
+  if (normalizedGender === "unknown") {
+    issues.push(
+      createIssue(
+        params.sourceRow,
+        "gender",
+        "Gender must normalize to one of MEN, WOMEN, or UNISEX.",
+      ),
+    );
+  }
+
+  const longevityScore = normalizeTenPointScore(getRecordValue(params.record, fieldAliases.longevityScore));
+  if (longevityScore.issue) {
+    issues.push(createIssue(params.sourceRow, "longevityScore", longevityScore.issue));
+  }
+
+  const sillageScore = normalizeTenPointScore(getRecordValue(params.record, fieldAliases.sillageScore));
+  if (sillageScore.issue) {
+    issues.push(createIssue(params.sourceRow, "sillageScore", sillageScore.issue));
+  }
+
+  const versatilityScore = normalizeTenPointScore(getRecordValue(params.record, fieldAliases.versatilityScore));
+  if (versatilityScore.issue) {
+    issues.push(createIssue(params.sourceRow, "versatilityScore", versatilityScore.issue));
+  }
 
   const imagePublicUrl = normalizeUrl(getRecordValue(params.record, fieldAliases.imagePublicUrl));
   const imageUrl = normalizeUrl(getRecordValue(params.record, fieldAliases.imageUrl)) ?? imagePublicUrl;
@@ -479,9 +591,7 @@ export function normalizePerfumeRecord(params: {
     brandName,
     brandSlug: slugify(brandName),
     perfumeName,
-    perfumeSlug:
-      cleanString(String(getRecordValue(params.record, fieldAliases.perfumeSlug) ?? "")) ||
-      slugify(`${brandName}-${perfumeName}`),
+    perfumeSlug,
     gender: canonicalGenderToPrisma(normalizedGender),
     normalizedGender,
     concentration,
@@ -495,6 +605,9 @@ export function normalizePerfumeRecord(params: {
     imageStoragePath: normalizeStoragePath(getRecordValue(params.record, fieldAliases.imageStoragePath)),
     imagePublicUrl,
     ratingInternal: normalizeRating(getRecordValue(params.record, fieldAliases.rating)),
+    longevityScore: longevityScore.value,
+    sillageScore: sillageScore.value,
+    versatilityScore: versatilityScore.value,
     isArabic: normalizeBoolean(getRecordValue(params.record, fieldAliases.isArabic), false),
     isNiche: normalizeBoolean(getRecordValue(params.record, fieldAliases.isNiche), false),
     catalogStatus: parseCatalogStatus(getRecordValue(params.record, fieldAliases.catalogStatus), params.source),
@@ -508,10 +621,13 @@ export function normalizePerfumeRecord(params: {
       params.source,
     ),
     dataQuality: parseDataQuality(getRecordValue(params.record, fieldAliases.dataQuality), params.source),
+    enrichmentStatus: parseEnrichmentStatus(
+      getRecordValue(params.record, fieldAliases.enrichmentStatus),
+    ),
     notes,
   };
 
-  return { value } as const;
+  return { value, issues };
 }
 
 export function toCatalogCsvRow(record: NormalizedPerfumeRecord): Record<string, string> {
@@ -526,7 +642,10 @@ export function toCatalogCsvRow(record: NormalizedPerfumeRecord): Record<string,
     heart_notes: record.notes.heart.join(";"),
     base_notes: record.notes.base.join(";"),
     family: record.fragranceFamily,
-    rating: record.ratingInternal ? String(record.ratingInternal) : "",
+    rating: record.ratingInternal !== undefined ? String(record.ratingInternal) : "",
+    longevity_score: record.longevityScore !== undefined ? String(record.longevityScore) : "",
+    sillage_score: record.sillageScore !== undefined ? String(record.sillageScore) : "",
+    versatility_score: record.versatilityScore !== undefined ? String(record.versatilityScore) : "",
     imageUrl: record.imageUrl ?? "",
     image_source_url: record.imageSourceUrl ?? "",
     image_storage_path: record.imageStoragePath ?? "",

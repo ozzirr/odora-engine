@@ -150,6 +150,21 @@ function buildTypedNoteFilter(slugOrAlias: string, noteType: NoteType): Prisma.P
   };
 }
 
+export function serializeParsedPerfumeFilters(filters: ParsedPerfumeFilters) {
+  return JSON.stringify({
+    gender: filters.gender ?? null,
+    family: filters.family ?? null,
+    price: filters.price ?? null,
+    arabic: filters.arabic ?? null,
+    niche: filters.niche ?? null,
+    sort: filters.sort ?? null,
+    note: filters.note ?? null,
+    top: filters.top ?? null,
+    heart: filters.heart ?? null,
+    base: filters.base ?? null,
+  });
+}
+
 export function buildPerfumeQuery(searchParams: SearchParamInput) {
   const genderParam = readParamValue(searchParams.gender);
   const familyParam = readParamValue(searchParams.family);
@@ -176,7 +191,7 @@ export function buildPerfumeQuery(searchParams: SearchParamInput) {
     niche: parseBoolean(nicheParam),
     sort: sortOptions.some((option) => option.value === sortParam)
       ? (sortParam as SortParam)
-      : undefined,
+      : "rating",
     note: normalizeNoteInput(noteParam),
     top: normalizeNoteInput(topParam),
     heart: normalizeNoteInput(heartParam),
@@ -283,9 +298,22 @@ export function applySorting(
     return {
       query: {
         ...query,
-        orderBy: defaultOrderBy,
+        orderBy:
+          sortParam === "price_low"
+            ? [
+                { hasAvailableOffer: "desc" },
+                { bestTotalPriceAmount: "asc" },
+                { ratingInternal: "desc" },
+                { name: "asc" },
+              ]
+            : [
+                { hasAvailableOffer: "desc" },
+                { bestTotalPriceAmount: "desc" },
+                { ratingInternal: "desc" },
+                { name: "asc" },
+              ],
       },
-      postSort: sortParam,
+      postSort: undefined,
     };
   }
 

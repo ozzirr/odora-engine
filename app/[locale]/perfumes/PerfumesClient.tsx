@@ -24,7 +24,7 @@ const FREE_CATALOG_PREVIEW_LIMIT = 25;
 
 function PerfumeGridSkeleton({ count = 6 }: { count?: number }) {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-2 gap-5 lg:grid-cols-3">
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={`perfume-skeleton-${index}`}
@@ -162,7 +162,7 @@ export function PerfumesClient({
         <p className="text-sm text-[#615140]">
           {t("showing", { visible: perfumes.length, total: totalCount })}
         </p>
-        <PerfumeGrid perfumes={perfumes} />
+        <PerfumeGrid perfumes={perfumes} cardVariant="catalog" desktopColumns={3} />
 
         {loadError ? (
           <div className="rounded-xl border border-[#e3d5c4] bg-[#fcf7f0] px-4 py-3 text-sm text-[#654f3f]">
