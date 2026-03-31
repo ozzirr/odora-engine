@@ -1,12 +1,10 @@
 "use client";
 
-import type { ComponentProps } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
 import { type AppLocale } from "@/lib/i18n";
-import { Link } from "@/lib/navigation";
 import { getAmazonProductUrl } from "@/lib/amazon";
 import { cn } from "@/lib/utils";
 
@@ -14,10 +12,9 @@ type AmazonCalloutCardProps = {
   perfumeName: string;
   brandName?: string | null;
   amazonUrl?: string | null;
+  perfumeSlug?: string | null;
   className?: string;
 };
-
-type LinkHref = ComponentProps<typeof Link>["href"];
 
 function AmazonWordmark({ className }: { className?: string }) {
   return (
@@ -35,11 +32,12 @@ export function AmazonCalloutCard({
   perfumeName,
   brandName,
   amazonUrl,
+  perfumeSlug,
   className,
 }: AmazonCalloutCardProps) {
   const t = useTranslations("perfume.amazon");
   const locale = useLocale() as AppLocale;
-  const targetUrl = getAmazonProductUrl({ amazonUrl, brandName, perfumeName, locale });
+  const targetUrl = getAmazonProductUrl({ amazonUrl, brandName, perfumeName, locale, perfumeSlug });
 
   return (
     <section
@@ -57,8 +55,8 @@ export function AmazonCalloutCard({
           </div>
         </div>
 
-        <Link
-          href={targetUrl as unknown as LinkHref}
+        <a
+          href={targetUrl}
           target="_blank"
           rel="noreferrer"
           className={buttonStyles({
@@ -72,7 +70,7 @@ export function AmazonCalloutCard({
               <AmazonWordmark className="h-[22px] w-auto object-contain translate-y-[1px]" />
             </span>
           </span>
-        </Link>
+        </a>
       </div>
     </section>
   );

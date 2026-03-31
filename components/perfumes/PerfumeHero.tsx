@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 
 type PerfumeHeroProps = {
   perfume: {
+    slug: string;
     name: string;
     descriptionShort: string;
     descriptionLong?: string;
@@ -91,6 +92,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
     brandName,
     perfumeName: perfume.name,
     locale,
+    perfumeSlug: perfume.slug,
   });
   const metrics = [
     { label: t("metrics.longevity"), value: perfume.longevityScore },
@@ -158,8 +160,8 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
             </Link>
           ) : null}
 
-          <Link
-            href={amazonUrl as unknown as LinkHref}
+          <a
+            href={amazonUrl}
             target="_blank"
             rel="noreferrer"
             className={buttonStyles({
@@ -173,7 +175,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
                 <AmazonWordmark className="h-[22px] w-auto object-contain translate-y-[1px]" />
               </span>
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

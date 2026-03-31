@@ -283,3 +283,16 @@ model Offer {
   @@index([storeId])
   @@index([isBestPrice])
 }
+
+model AffiliateClick {
+  id          Int      @id @default(autoincrement())
+  perfumeSlug String?
+  destination String
+  targetUrl   String
+  locale      String?
+  createdAt   DateTime @default(now())
+
+  @@index([perfumeSlug])
+  @@index([destination])
+  @@index([createdAt])
+}

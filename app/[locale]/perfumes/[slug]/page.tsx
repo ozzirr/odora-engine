@@ -382,6 +382,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
           perfumeName={perfume.name}
           brandName={perfume.brand?.name}
           amazonUrl={perfume.amazonUrl}
+          perfumeSlug={perfume.slug}
         />
 
         <section className="space-y-4">

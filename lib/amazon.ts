@@ -1,14 +1,27 @@
 import { defaultLocale, type AppLocale } from "@/lib/i18n";
 
+const AFFILIATE_TAG = process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG ?? "2erre-21";
+
 type AmazonTargetInput = {
   amazonUrl?: string | null;
   brandName?: string | null;
   perfumeName: string;
   locale?: AppLocale;
+  perfumeSlug?: string | null;
 };
 
 function getAmazonDomain(locale: AppLocale) {
   return locale === "it" ? "www.amazon.it" : "www.amazon.com";
+}
+
+function appendAffiliateTag(url: string): string {
+  try {
+    const parsed = new URL(url);
+    parsed.searchParams.set("tag", AFFILIATE_TAG);
+    return parsed.toString();
+  } catch {
+    return url;
+  }
 }
 
 function getValidatedAmazonUrl(value?: string | null) {
@@ -38,15 +51,24 @@ export function getAmazonProductUrl({
   brandName,
   perfumeName,
   locale = defaultLocale,
+  perfumeSlug,
 }: AmazonTargetInput) {
   const directUrl = getValidatedAmazonUrl(amazonUrl);
-  if (directUrl) {
-    return directUrl;
+
+  const finalUrl = directUrl
+    ? appendAffiliateTag(directUrl)
+    : appendAffiliateTag(
+        `https://${getAmazonDomain(locale)}/s?k=${encodeURIComponent(
+          [brandName?.trim(), perfumeName.trim(), locale === "it" ? "profumo" : "perfume"]
+            .filter(Boolean)
+            .join(" "),
+        )}`,
+      );
+
+  if (!perfumeSlug) {
+    return finalUrl;
   }
 
-  const query = [brandName?.trim(), perfumeName.trim(), locale === "it" ? "profumo" : "perfume"]
-    .filter(Boolean)
-    .join(" ");
-
-  return `https://${getAmazonDomain(locale)}/s?k=${encodeURIComponent(query)}`;
+  const params = new URLSearchParams({ url: finalUrl, slug: perfumeSlug, type: "amazon", locale });
+  return `/api/track?${params.toString()}`;
 }
