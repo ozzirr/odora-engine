@@ -38,7 +38,7 @@
       "navigation": "Navigation",
       "legal": "Legal",
       "privacyControlsTitle": "Privacy preferences",
-      "privacyControlsDescription": "Review active technical cookies, analytics, and quick links to the related policies at any time.",
+      "privacyControlsDescription": "Review technical cookies, analytics, and optional advertising preferences at any time.",
       "copyright": "© {year} Odora. All rights reserved.",
       "nav": {
         "home": "Home",
@@ -58,12 +58,12 @@
     "openButton": "Privacy preferences",
     "eyebrow": "Privacy",
     "title": "Privacy preferences",
-    "description": "We only use what is truly needed to run Odora and read aggregate metrics. No marketing or profiling cookies are active at the moment.",
+    "description": "We use what is needed to run Odora, read aggregate metrics, and, only with your consent, enable Google AdSense advertising.",
     "closeAriaLabel": "Close privacy preferences",
     "technicalIdentifiersPrefix": "Technical cookies / identifiers:",
     "emptyCategory": "No active tools in this category.",
     "summaryTitle": "In short",
-    "summaryDescription": "If we add optional advanced analytics, marketing, or remarketing tools in the future, we will update this interface and ask for explicit consent before loading them.",
+    "summaryDescription": "Technical cookies stay active, analytics remain privacy-friendly, and Google AdSense stays blocked until you explicitly allow marketing cookies.",
     "links": {
       "privacyPolicy": "Privacy Policy",
       "cookiePolicy": "Cookie Policy"
@@ -82,8 +82,9 @@
       },
       "marketing": {
         "title": "Marketing / profiling cookies",
-        "description": "At the moment there are no advertising pixels, marketing tag managers, chat widgets, or remarketing tools active in the frontend.",
-        "statusLabel": "Not active"
+        "description": "Google AdSense can load only if you allow marketing cookies. Without consent, advertising scripts stay disabled.",
+        "enabledStatusLabel": "Allowed",
+        "disabledStatusLabel": "Disabled by default"
       }
     },
     "services": {
@@ -106,7 +107,27 @@
         "label": "Vercel Web Analytics",
         "purpose": "Helps understand, in aggregate form, which pages are used most and how the overall experience can be improved.",
         "storage": "Aggregate measurements provided by Vercel Analytics; no marketing or remarketing cookies are active in the project."
+      },
+      "google-adsense": {
+        "label": "Google AdSense",
+        "purpose": "Loads advertising only after explicit marketing consent so Odora can show ads in eligible placements.",
+        "storage": "Google may use cookies or similar identifiers for ad serving and measurement only when marketing consent is enabled."
       }
+    },
+    "controls": {
+      "title": "Advertising controls",
+      "description": "Choose whether Odora may load Google AdSense in this browser. You can change this choice again at any time.",
+      "allowMarketing": "Allow advertising",
+      "disableMarketing": "Keep disabled",
+      "currentEnabled": "Google AdSense is currently allowed in this browser.",
+      "currentDisabled": "Google AdSense is currently blocked in this browser."
+    },
+    "banner": {
+      "eyebrow": "Consent",
+      "title": "Allow marketing cookies?",
+      "description": "Odora can load advertising technologies only with your marketing consent. If you decline, advertising scripts stay disabled.",
+      "rejectButton": "Reject marketing",
+      "acceptButton": "Accept marketing"
     }
   },
   "home": {
@@ -667,7 +688,7 @@
       "eyebrow": "Legal",
       "title": "Privacy Policy",
       "intro": "This Privacy Policy explains how Odora handles personal information when you browse the site, create an account, use discovery features, or click through to external retailers. For the operational detail on cookies, technical identifiers, and active analytics, see Odora's Cookie Policy as well.",
-      "effectiveDate": "March 10, 2026",
+      "effectiveDate": "April 1, 2026",
       "sections": [
         {
           "title": "What We Collect",
@@ -687,7 +708,7 @@
           "title": "Cookies, Sessions, and Similar Technologies",
           "paragraphs": [
             "Odora uses technical cookies and similar technologies to keep you signed in, remember session state, store language preference, and support essential site functionality.",
-            "We also use Vercel Web Analytics to read aggregate usage trends and improve the experience, without loading marketing, remarketing, or advertising profiling tools in the frontend.",
+            "We also use Vercel Web Analytics to read aggregate usage trends and improve the experience. Separately, Google AdSense may load only after you explicitly allow marketing cookies in this browser.",
             "For the operational detail on cookies and the categories currently active on the site, see the Cookie Policy linked in the footer and on its dedicated page."
           ]
         },
@@ -731,14 +752,14 @@
     "cookiePolicy": {
       "eyebrow": "Legal",
       "title": "Cookie Policy",
-      "intro": "This Cookie Policy explains in simple terms which cookies and similar technologies Odora currently uses. The goal is to keep the setup essential: technical cookies for site functionality and privacy-friendly analytics, with no active marketing or profiling tools.",
+      "intro": "This Cookie Policy explains in simple terms which cookies and similar technologies Odora currently uses. The setup includes technical cookies for site functionality, privacy-friendly analytics, and an optional Google AdSense integration that stays disabled until you allow marketing cookies.",
       "effectiveDate": "April 1, 2026",
       "sections": [
         {
           "title": "Overview",
           "paragraphs": [
             "Odora uses a limited set of browser-side technologies to handle login, sessions, site language, and, when needed, access to a private preview.",
-            "Vercel Web Analytics is also active in the project to read aggregate usage trends. The repository does not include Google Analytics, Google Tag Manager, Meta Pixel, Hotjar, Microsoft Clarity, chat widgets, or frontend remarketing tags."
+            "Vercel Web Analytics is active to read aggregate usage trends. Google AdSense is available as an optional advertising integration, but its script stays blocked until you explicitly allow marketing cookies."
           ]
         },
         {
@@ -760,14 +781,14 @@
         {
           "title": "Marketing and profiling cookies",
           "paragraphs": [
-            "At the moment Odora does not load marketing or profiling cookies or scripts on the site. No advertising pixel or marketing tag manager runs before or after a user action, because those tools are not present in the project.",
-            "If optional tools such as non-essential analytics, remarketing, or third-party promotional widgets are introduced in the future, the privacy setup will be updated before activation with a dedicated consent flow."
+            "Odora can load Google AdSense only after explicit marketing consent from the browser-side privacy controls. If you refuse or do not provide consent, the AdSense script does not run.",
+            "Google AdSense (Google): may use cookies or similar identifiers for ad serving and measurement only after consent. Odora also publishes the Google publisher declaration in /ads.txt."
           ]
         },
         {
           "title": "Preferences and controls",
           "paragraphs": [
-            "In the site footer you can always find the Privacy preferences control, which summarizes active categories and links to this Cookie Policy and the Privacy Policy.",
+            "In the site footer you can always find the Privacy preferences control, which summarizes active categories, lets you allow or block Google AdSense, and links to this Cookie Policy and the Privacy Policy.",
             "You can also manage or delete cookies from your browser. Keep in mind that blocking technical cookies may affect login, session continuity, language switching, or other essential site functions."
           ]
         },

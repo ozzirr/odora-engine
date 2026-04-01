@@ -38,7 +38,7 @@
       "navigation": "Navigazione",
       "legal": "Legale",
       "privacyControlsTitle": "Preferenze privacy",
-      "privacyControlsDescription": "Gestisci in qualsiasi momento cookie tecnici, analytics attivi e riferimenti alle policy dedicate.",
+      "privacyControlsDescription": "Gestisci in qualsiasi momento cookie tecnici, analytics attivi e preferenze pubblicitarie opzionali.",
       "copyright": "© {year} Odora. Tutti i diritti riservati.",
       "nav": {
         "home": "Home",
@@ -58,12 +58,12 @@
     "openButton": "Preferenze privacy",
     "eyebrow": "Privacy",
     "title": "Preferenze privacy",
-    "description": "Usiamo solo cio che serve davvero per far funzionare Odora e leggere metriche aggregate. Nessun cookie di marketing o profilazione e attivo al momento.",
+    "description": "Usiamo cio che serve per far funzionare Odora, leggere metriche aggregate e, solo con il tuo consenso, attivare Google AdSense.",
     "closeAriaLabel": "Chiudi preferenze privacy",
     "technicalIdentifiersPrefix": "Cookie / identificativi tecnici:",
     "emptyCategory": "Nessuno strumento attivo in questa categoria.",
     "summaryTitle": "In breve",
-    "summaryDescription": "Se in futuro attiveremo strumenti opzionali di analytics avanzati, marketing o remarketing, aggiorneremo questa interfaccia e chiederemo un consenso esplicito prima del caricamento.",
+    "summaryDescription": "I cookie tecnici restano attivi, gli analytics restano privacy-friendly e Google AdSense rimane bloccato finche non abiliti esplicitamente i cookie marketing.",
     "links": {
       "privacyPolicy": "Informativa privacy",
       "cookiePolicy": "Cookie Policy"
@@ -82,8 +82,9 @@
       },
       "marketing": {
         "title": "Cookie di marketing / profilazione",
-        "description": "Al momento non sono attivi pixel pubblicitari, tag manager marketing, chat widget o strumenti di remarketing nel frontend.",
-        "statusLabel": "Non attivi"
+        "description": "Google AdSense puo essere caricato solo se abiliti i cookie marketing. Senza consenso, gli script pubblicitari restano disattivati.",
+        "enabledStatusLabel": "Consentiti",
+        "disabledStatusLabel": "Disattivati di default"
       }
     },
     "services": {
@@ -106,7 +107,27 @@
         "label": "Vercel Web Analytics",
         "purpose": "Aiuta a capire in forma aggregata quali pagine vengono usate di piu e come migliora l'esperienza complessiva del sito.",
         "storage": "Misurazioni aggregate fornite da Vercel Analytics; nessun cookie di marketing o remarketing e attivo nel progetto."
+      },
+      "google-adsense": {
+        "label": "Google AdSense",
+        "purpose": "Carica pubblicita solo dopo un consenso marketing esplicito, cosi Odora puo mostrare annunci negli spazi idonei.",
+        "storage": "Google puo usare cookie o identificativi simili per erogazione e misurazione annunci solo quando il consenso marketing e abilitato."
       }
+    },
+    "controls": {
+      "title": "Controlli pubblicitari",
+      "description": "Scegli se Odora puo caricare Google AdSense in questo browser. Puoi cambiare idea in qualsiasi momento.",
+      "allowMarketing": "Consenti pubblicita",
+      "disableMarketing": "Mantieni disattivato",
+      "currentEnabled": "Google AdSense e attualmente consentito in questo browser.",
+      "currentDisabled": "Google AdSense e attualmente bloccato in questo browser."
+    },
+    "banner": {
+      "eyebrow": "Consenso",
+      "title": "Vuoi abilitare i cookie marketing?",
+      "description": "Odora puo caricare tecnologie pubblicitarie solo con il tuo consenso marketing. Se rifiuti, gli script pubblicitari restano disattivati.",
+      "rejectButton": "Rifiuta marketing",
+      "acceptButton": "Accetta marketing"
     }
   },
   "home": {
@@ -667,7 +688,7 @@
       "eyebrow": "Legale",
       "title": "Informativa privacy",
       "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni. Per il dettaglio operativo su cookie, identificativi tecnici e analytics attivi, consulta anche la Cookie Policy di Odora.",
-      "effectiveDate": "10 marzo 2026",
+      "effectiveDate": "1 aprile 2026",
       "sections": [
         {
           "title": "Quali dati raccogliamo",
@@ -687,7 +708,7 @@
           "title": "Cookie, sessioni e tecnologie simili",
           "paragraphs": [
             "Odora usa cookie tecnici e tecnologie simili per mantenerti autenticato, ricordare lo stato della sessione, salvare la preferenza lingua e supportare le funzioni essenziali del sito.",
-            "Usiamo anche Vercel Web Analytics per leggere in forma aggregata come viene usato il sito e migliorare l'esperienza, senza attivare nel frontend strumenti di marketing, remarketing o profilazione pubblicitaria.",
+            "Usiamo anche Vercel Web Analytics per leggere in forma aggregata come viene usato il sito e migliorare l'esperienza. Separatamente, Google AdSense puo essere caricato solo dopo che abiliti esplicitamente i cookie marketing in questo browser.",
             "Per un dettaglio operativo sui cookie e sulle categorie oggi attive, consulta anche la Cookie Policy disponibile nel footer e nella pagina dedicata."
           ]
         },
@@ -731,14 +752,14 @@
     "cookiePolicy": {
       "eyebrow": "Legale",
       "title": "Cookie Policy",
-      "intro": "Questa Cookie Policy descrive in modo semplice quali cookie e tecnologie simili usa Odora oggi. L'obiettivo e mantenere il setup essenziale: cookie tecnici per il funzionamento del sito e analytics privacy-friendly, senza strumenti di marketing o profilazione attivi.",
+      "intro": "Questa Cookie Policy descrive in modo semplice quali cookie e tecnologie simili usa Odora oggi. Il setup include cookie tecnici per il funzionamento del sito, analytics privacy-friendly e un'integrazione Google AdSense opzionale che resta disattivata finche non abiliti i cookie marketing.",
       "effectiveDate": "1 aprile 2026",
       "sections": [
         {
           "title": "Panoramica",
           "paragraphs": [
             "Odora usa un set ridotto di tecnologie lato browser per far funzionare login, sessioni, lingua del sito e, quando necessario, l'accesso a una preview privata.",
-            "Nel progetto e attivo anche Vercel Web Analytics per leggere trend aggregati di utilizzo. Non risultano nel repository Google Analytics, Google Tag Manager, Meta Pixel, Hotjar, Microsoft Clarity, widget chat o tag di remarketing caricati nel frontend."
+            "Nel progetto e attivo anche Vercel Web Analytics per leggere trend aggregati di utilizzo. Google AdSense e disponibile come integrazione pubblicitaria opzionale, ma il suo script resta bloccato finche non abiliti esplicitamente i cookie marketing."
           ]
         },
         {
@@ -760,14 +781,14 @@
         {
           "title": "Cookie di marketing e profilazione",
           "paragraphs": [
-            "Al momento Odora non carica cookie o script di marketing/profilazione nel sito. Nessun pixel pubblicitario o tag manager marketing viene eseguito prima o dopo un'azione dell'utente, perche questi strumenti non sono presenti nel progetto.",
-            "Se in futuro verranno introdotti strumenti opzionali come analytics non essenziali, remarketing o widget terzi con finalita promozionali, il setup privacy verra aggiornato prima dell'attivazione con un meccanismo di consenso dedicato."
+            "Odora puo caricare Google AdSense solo dopo un consenso marketing esplicito dai controlli privacy lato browser. Se rifiuti o non fornisci il consenso, lo script AdSense non viene eseguito.",
+            "Google AdSense (Google): puo usare cookie o identificativi simili per erogazione e misurazione annunci solo dopo il consenso. Odora pubblica anche la dichiarazione del publisher Google in /ads.txt."
           ]
         },
         {
           "title": "Preferenze e controlli",
           "paragraphs": [
-            "Nel footer del sito trovi sempre il controllo Preferenze privacy, che riassume le categorie attive e rimanda a questa Cookie Policy e alla Privacy Policy.",
+            "Nel footer del sito trovi sempre il controllo Preferenze privacy, che riassume le categorie attive, ti permette di consentire o bloccare Google AdSense e rimanda a questa Cookie Policy e alla Privacy Policy.",
             "Puoi anche gestire o cancellare i cookie dal browser. Tieni presente che bloccare i cookie tecnici puo compromettere accesso, sessione, cambio lingua o altre funzioni essenziali del sito."
           ]
         },
