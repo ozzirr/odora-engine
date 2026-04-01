@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Script from "next/script";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
 import {
-  ADSENSE_CLIENT_ID,
   CONSENT_COOKIE_NAME,
   PRIVACY_CONSENT_UPDATED_EVENT,
   persistConsentInBrowser,
@@ -69,15 +67,6 @@ export function PrivacyConsentManager() {
 
   return (
     <>
-      {consent.marketing ? (
-        <Script
-          id="google-adsense"
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
-      ) : null}
-
       {hasStoredConsent ? null : (
         <div className="fixed inset-x-0 bottom-0 z-40 px-4 pb-4 sm:px-6">
           <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#dfcfbc] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] p-4 shadow-[0_28px_70px_-40px_rgba(43,32,22,0.45)] backdrop-blur">
