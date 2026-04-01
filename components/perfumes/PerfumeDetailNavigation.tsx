@@ -95,7 +95,7 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
     >
       {children}
       {pendingNavigation ? (
-        <div className="pointer-events-auto fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:px-6">
+        <div className="pointer-events-auto fixed inset-x-0 bottom-0 top-[4.5rem] z-30 flex items-start justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:items-center sm:px-6 sm:py-8">
           <PerfumeDetailLoadingState
             variant="overlay"
             perfumeName={pendingNavigation.perfumeName}

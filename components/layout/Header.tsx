@@ -29,11 +29,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   ];
   const menuTags = [
     {
-      key: "bestseller",
-      href: { pathname: "/perfumes", query: { sort: "rating" } } as const,
-      label: t("featuredTags.bestseller"),
-    },
-    {
       key: "niche",
       href: { pathname: "/perfumes", query: { niche: "true", sort: "rating" } } as const,
       label: t("featuredTags.niche"),
@@ -222,7 +217,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
         <div
           id="mobile-navigation-panel"
           className={cn(
-            "relative mx-4 mt-3 overflow-hidden rounded-[2rem] border border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(248,242,234,0.76))] shadow-[0_42px_120px_-42px_rgba(29,22,16,0.62)] backdrop-blur-[26px] backdrop-saturate-125 transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.58),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.22),transparent_34%)] before:content-['']",
+            "relative mx-4 mt-3 max-h-[calc(100dvh-5.5rem-env(safe-area-inset-bottom))] overflow-y-auto overflow-x-hidden overscroll-contain rounded-[2rem] border border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(248,242,234,0.76))] shadow-[0_42px_120px_-42px_rgba(29,22,16,0.62)] backdrop-blur-[26px] backdrop-saturate-125 transition-all duration-300 [-webkit-overflow-scrolling:touch] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.58),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.22),transparent_34%)] before:content-['']",
             menuOpen ? "translate-y-0 scale-100 opacity-100" : "-translate-y-4 scale-[0.98] opacity-0",
           )}
         >
@@ -311,7 +306,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               })}
             </div>
 
-            <div className="mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(245,238,229,0.92))] p-3">
+            <div className="sticky bottom-0 mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,238,229,0.98))] p-3 shadow-[0_-20px_35px_-30px_rgba(31,25,20,0.45)] backdrop-blur-xl before:pointer-events-none before:absolute before:inset-x-0 before:-top-4 before:h-4 before:bg-[linear-gradient(180deg,rgba(248,242,234,0),rgba(248,242,234,0.92))] before:content-['']">
               {canOpenAuthModal ? (
                 <Suspense
                   fallback={

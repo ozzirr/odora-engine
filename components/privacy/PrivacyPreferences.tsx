@@ -69,19 +69,19 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
 
       {open ? (
         <div
-          className="fixed inset-0 z-50 overflow-y-auto bg-[rgba(24,20,16,0.24)] px-4 py-5 backdrop-blur-[18px] sm:px-6 sm:py-10"
+          className="fixed inset-0 z-50 overflow-hidden bg-[rgba(24,20,16,0.24)] px-4 py-5 backdrop-blur-[18px] sm:px-6 sm:py-10"
           onClick={() => setOpen(false)}
         >
-          <div className="flex min-h-full items-end justify-center sm:items-center">
+          <div className="flex min-h-full items-start justify-center sm:items-center">
             <div
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
               aria-describedby={descriptionId}
               onClick={(event) => event.stopPropagation()}
-              className="w-full max-w-3xl overflow-hidden rounded-[2rem] border border-[#ded0bf] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] shadow-[0_36px_110px_-48px_rgba(34,25,18,0.5)]"
+              className="flex max-h-[calc(100dvh-2.5rem)] w-full max-w-3xl flex-col overflow-hidden rounded-[2rem] border border-[#ded0bf] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] shadow-[0_36px_110px_-48px_rgba(34,25,18,0.5)]"
             >
-              <div className="border-b border-[#eadfce] px-5 py-5 sm:px-6 sm:py-6">
+              <div className="shrink-0 border-b border-[#eadfce] px-5 py-5 sm:px-6 sm:py-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="max-w-2xl">
                     <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#8a7763]">
@@ -114,80 +114,84 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                 </div>
               </div>
 
-              <div className="space-y-4 px-5 py-5 sm:px-6 sm:py-6">
-                <div className="grid gap-3">
-                  {privacyCategories.map((category) => {
-                    const services = getPrivacyServices(category.key);
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 [-webkit-overflow-scrolling:touch] sm:px-6 sm:py-6">
+                <div className="space-y-4">
+                  <div className="grid gap-3">
+                    {privacyCategories.map((category) => {
+                      const services = getPrivacyServices(category.key);
 
-                    return (
-                      <section
-                        key={category.key}
-                        className="rounded-[1.5rem] border border-[#e7dac9] bg-white/78 p-4 shadow-[0_20px_48px_-40px_rgba(47,35,24,0.42)]"
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div className="max-w-2xl">
-                            <h3 className="text-base font-semibold text-[#261d16]">{category.title}</h3>
-                            <p className="mt-2 text-sm leading-7 text-[#685747]">
-                              {category.description}
-                            </p>
-                          </div>
-                          <span
-                            className={cn(
-                              "rounded-full border px-3 py-1 text-xs font-semibold",
-                              statusClasses[category.key],
-                            )}
-                          >
-                            {category.statusLabel}
-                          </span>
-                        </div>
-
-                        <div className="mt-4 space-y-2">
-                          {services.length ? (
-                            services.map((service) => (
-                              <div
-                                key={service.id}
-                                className="rounded-[1.1rem] border border-[#efe5d8] bg-[#fcfaf6] px-4 py-3"
-                              >
-                                <p className="text-sm font-medium text-[#2b2119]">
-                                  {service.label}
-                                  <span className="ml-1 text-[#7e6854]">· {service.provider}</span>
-                                </p>
-                                <p className="mt-1 text-sm leading-6 text-[#6c5948]">
-                                  {service.purpose}
-                                </p>
-                                <p className="mt-2 text-xs leading-5 text-[#7c6653]">
-                                  {service.storage}
-                                </p>
-                                {service.cookieNames.length ? (
-                                  <p className="mt-1 text-xs leading-5 text-[#7c6653]">
-                                    Cookie / identificativi tecnici: {service.cookieNames.join(", ")}
-                                  </p>
-                                ) : null}
-                              </div>
-                            ))
-                          ) : (
-                            <div className="rounded-[1.1rem] border border-dashed border-[#eadfcf] bg-[#fcfaf6] px-4 py-3 text-sm leading-6 text-[#6c5948]">
-                              Nessuno strumento attivo in questa categoria.
+                      return (
+                        <section
+                          key={category.key}
+                          className="rounded-[1.5rem] border border-[#e7dac9] bg-white/78 p-4 shadow-[0_20px_48px_-40px_rgba(47,35,24,0.42)]"
+                        >
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div className="max-w-2xl">
+                              <h3 className="text-base font-semibold text-[#261d16]">{category.title}</h3>
+                              <p className="mt-2 text-sm leading-7 text-[#685747]">
+                                {category.description}
+                              </p>
                             </div>
-                          )}
-                        </div>
-                      </section>
-                    );
-                  })}
-                </div>
+                            <span
+                              className={cn(
+                                "rounded-full border px-3 py-1 text-xs font-semibold",
+                                statusClasses[category.key],
+                              )}
+                            >
+                              {category.statusLabel}
+                            </span>
+                          </div>
 
-                <div className="rounded-[1.5rem] border border-[#e7dac9] bg-[linear-gradient(180deg,rgba(253,249,243,0.94),rgba(247,240,231,0.98))] p-4">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#8a7763]">
-                    In breve
-                  </p>
-                  <p className="mt-2 text-sm leading-7 text-[#685747]">
-                    Se in futuro attiveremo strumenti opzionali di analytics avanzati, marketing o
-                    remarketing, aggiorneremo questa interfaccia e chiederemo un consenso esplicito
-                    prima del caricamento.
-                  </p>
-                </div>
+                          <div className="mt-4 space-y-2">
+                            {services.length ? (
+                              services.map((service) => (
+                                <div
+                                  key={service.id}
+                                  className="rounded-[1.1rem] border border-[#efe5d8] bg-[#fcfaf6] px-4 py-3"
+                                >
+                                  <p className="text-sm font-medium text-[#2b2119]">
+                                    {service.label}
+                                    <span className="ml-1 text-[#7e6854]">· {service.provider}</span>
+                                  </p>
+                                  <p className="mt-1 text-sm leading-6 text-[#6c5948]">
+                                    {service.purpose}
+                                  </p>
+                                  <p className="mt-2 text-xs leading-5 text-[#7c6653]">
+                                    {service.storage}
+                                  </p>
+                                  {service.cookieNames.length ? (
+                                    <p className="mt-1 text-xs leading-5 text-[#7c6653]">
+                                      Cookie / identificativi tecnici: {service.cookieNames.join(", ")}
+                                    </p>
+                                  ) : null}
+                                </div>
+                              ))
+                            ) : (
+                              <div className="rounded-[1.1rem] border border-dashed border-[#eadfcf] bg-[#fcfaf6] px-4 py-3 text-sm leading-6 text-[#6c5948]">
+                                Nessuno strumento attivo in questa categoria.
+                              </div>
+                            )}
+                          </div>
+                        </section>
+                      );
+                    })}
+                  </div>
 
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  <div className="rounded-[1.5rem] border border-[#e7dac9] bg-[linear-gradient(180deg,rgba(253,249,243,0.94),rgba(247,240,231,0.98))] p-4">
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#8a7763]">
+                      In breve
+                    </p>
+                    <p className="mt-2 text-sm leading-7 text-[#685747]">
+                      Se in futuro attiveremo strumenti opzionali di analytics avanzati, marketing o
+                      remarketing, aggiorneremo questa interfaccia e chiederemo un consenso esplicito
+                      prima del caricamento.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="shrink-0 border-t border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,252,247,0.96),rgba(246,238,228,0.98))] px-5 py-4 sm:px-6 sm:py-5">
+                <div className="grid gap-3">
                   <Link
                     href="/privacy"
                     onClick={() => setOpen(false)}
@@ -204,7 +208,7 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                   </Link>
                   <Button
                     variant="secondary"
-                    className="sm:ml-auto"
+                    className="w-full sm:ml-auto sm:w-auto"
                     onClick={() => setOpen(false)}
                   >
                     Chiudi
