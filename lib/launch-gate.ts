@@ -12,7 +12,7 @@ const DEFAULT_LAUNCH_GATE_PASSWORD = "odora";
 
 export function isLaunchGateEnabled() {
   const raw = process.env.ODORA_PRELAUNCH_MODE?.trim().toLowerCase();
-  return !(raw === "false" || raw === "0" || raw === "off");
+  return raw === "true" || raw === "1" || raw === "on";
 }
 
 export function hasLaunchGateAccess(value: string | null | undefined) {

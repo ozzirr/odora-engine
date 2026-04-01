@@ -48,6 +48,31 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
     return () => window.clearTimeout(timeoutId);
   }, [pendingNavigation]);
 
+  useEffect(() => {
+    if (!pendingNavigation) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const { body } = document;
+    const previousRootOverflow = root.style.overflow;
+    const previousRootOverscrollBehavior = root.style.overscrollBehavior;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyOverscrollBehavior = body.style.overscrollBehavior;
+
+    root.style.overflow = "hidden";
+    root.style.overscrollBehavior = "none";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+
+    return () => {
+      root.style.overflow = previousRootOverflow;
+      root.style.overscrollBehavior = previousRootOverscrollBehavior;
+      body.style.overflow = previousBodyOverflow;
+      body.style.overscrollBehavior = previousBodyOverscrollBehavior;
+    };
+  }, [pendingNavigation]);
+
   return (
     <PerfumeDetailNavigationContext.Provider
       value={{
