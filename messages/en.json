@@ -21,12 +21,23 @@
         "login": "Log in"
       },
       "cta": "Explore perfumes",
-      "menu": "Menu"
+      "menu": "Menu",
+      "close": "Close",
+      "eyebrow": "Menu",
+      "introTitle": "Quick access",
+      "introDescription": "Access the full Odora catalog, discover the finest fragrances, and unlock exclusive offers reserved for members.",
+      "featuredTags": {
+        "bestseller": "Bestsellers",
+        "niche": "Niche",
+        "arab": "Arab",
+        "onSale": "On sale"
+      }
     },
     "footer": {
       "description": "Discover perfumes, compare notes and prices, and find the right bottle faster.",
       "navigation": "Navigation",
       "legal": "Legal",
+      "copyright": "© {year} Odora. All rights reserved.",
       "nav": {
         "home": "Home",
         "perfumes": "Perfumes",
@@ -572,12 +583,16 @@
   },
   "legal": {
     "common": {
-      "effectiveDate": "Effective date: {date}"
+      "effectiveDate": "Effective date: {date}",
+      "relatedLinks": {
+        "privacyPolicy": "Privacy Policy",
+        "cookiePolicy": "Cookie Policy"
+      }
     },
     "privacy": {
       "eyebrow": "Legal",
       "title": "Privacy Policy",
-      "intro": "This Privacy Policy explains how Odora handles personal information when you browse the site, create an account, use discovery features, or click through to external retailers.",
+      "intro": "This Privacy Policy explains how Odora handles personal information when you browse the site, create an account, use discovery features, or click through to external retailers. For the operational detail on cookies, technical identifiers, and active analytics, see Odora's Cookie Policy as well.",
       "effectiveDate": "March 10, 2026",
       "sections": [
         {
@@ -597,8 +612,9 @@
         {
           "title": "Cookies, Sessions, and Similar Technologies",
           "paragraphs": [
-            "Odora uses cookies and similar technologies to keep you signed in, remember session state, and support essential site functionality.",
-            "If analytics, affiliate tracking, or third-party scripts are added, this page should be updated to reflect those technologies and any choices available to users."
+            "Odora uses technical cookies and similar technologies to keep you signed in, remember session state, store language preference, and support essential site functionality.",
+            "We also use Vercel Web Analytics to read aggregate usage trends and improve the experience, without loading marketing, remarketing, or advertising profiling tools in the frontend.",
+            "For the operational detail on cookies and the categories currently active on the site, see the Cookie Policy linked in the footer and on its dedicated page."
           ]
         },
         {

@@ -106,16 +106,22 @@ function uniqueCandidates(candidates: HomepageCandidate[]) {
   });
 }
 
+function mergeUniqueCandidates(...candidateGroups: HomepageCandidate[][]) {
+  return uniqueCandidates(candidateGroups.flat());
+}
+
 function pickPlacements(candidates: HomepageCandidate[]) {
   const withImage = candidates.filter((candidate) => Boolean(candidate.imageUrl));
   const withImageAndOffer = withImage.filter((candidate) => candidate.offers.length > 0);
-  const orderedPool = withImageAndOffer.length > 0 ? withImageAndOffer : withImage;
+  const orderedPool =
+    withImageAndOffer.length > 0 ? withImageAndOffer : withImage.length > 0 ? withImage : candidates;
   const fallbackPool = withImage.length > 0 ? withImage : candidates;
 
   const hero = orderedPool[0] ?? fallbackPool[0] ?? null;
   const heroId = hero?.id ?? null;
-  const trending = uniqueCandidates(
-    orderedPool.filter((candidate) => candidate.id !== heroId),
+  const trending = mergeUniqueCandidates(
+    withImageAndOffer.filter((candidate) => candidate.id !== heroId),
+    fallbackPool.filter((candidate) => candidate.id !== heroId),
   ).slice(0, 4);
   const featuredBase = uniqueCandidates(
     fallbackPool.filter(

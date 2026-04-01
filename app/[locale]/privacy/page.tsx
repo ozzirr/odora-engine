@@ -27,15 +27,27 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
 
 export default async function PrivacyPage() {
   const messages = await getMessages();
-  const content = (messages as { legal: { privacy: Parameters<typeof LegalPage>[0] } }).legal.privacy;
+  const content = (
+    messages as {
+      legal: {
+        common: {
+          relatedLinks: {
+            cookiePolicy: string;
+          };
+        };
+        privacy: Parameters<typeof LegalPage>[0];
+      };
+    }
+  ).legal;
 
   return (
     <LegalPage
-      eyebrow={content.eyebrow}
-      title={content.title}
-      intro={content.intro}
-      effectiveDate={content.effectiveDate}
-      sections={content.sections}
+      eyebrow={content.privacy.eyebrow}
+      title={content.privacy.title}
+      intro={content.privacy.intro}
+      effectiveDate={content.privacy.effectiveDate}
+      sections={content.privacy.sections}
+      relatedLinks={[{ href: "/cookie-policy", label: content.common.relatedLinks.cookiePolicy }]}
     />
   );
 }

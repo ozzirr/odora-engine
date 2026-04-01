@@ -152,10 +152,11 @@ export function LocaleShell({
   return (
     <PerfumeDetailNavigationProvider>
       <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
+        {hideChrome ? null : <Header initialIsAuthenticated={initialIsAuthenticated} />}
         <div
-          className={cn("min-h-screen transition duration-300 ease-out")}
+          data-mobile-menu-content="true"
+          className={cn("min-h-screen transition-[filter,opacity,transform] duration-300 ease-out")}
         >
-          {hideChrome ? null : <Header initialIsAuthenticated={initialIsAuthenticated} />}
           <main>{children}</main>
           {hideChrome ? null : <Footer />}
         </div>

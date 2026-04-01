@@ -1,10 +1,18 @@
 import { useTranslations } from "next-intl";
 
 import { Container } from "@/components/layout/Container";
+import { Link } from "@/lib/navigation";
 
 type LegalSection = {
   title: string;
   paragraphs: string[];
+};
+
+type LegalRelatedPathname = "/privacy" | "/cookie-policy" | "/terms" | "/affiliate-disclosure";
+
+type LegalRelatedLink = {
+  href: LegalRelatedPathname;
+  label: string;
 };
 
 type LegalPageProps = {
@@ -13,9 +21,17 @@ type LegalPageProps = {
   intro: string;
   effectiveDate: string;
   sections: LegalSection[];
+  relatedLinks?: LegalRelatedLink[];
 };
 
-export function LegalPage({ eyebrow, title, intro, effectiveDate, sections }: LegalPageProps) {
+export function LegalPage({
+  eyebrow,
+  title,
+  intro,
+  effectiveDate,
+  sections,
+  relatedLinks = [],
+}: LegalPageProps) {
   const t = useTranslations("legal.common");
 
   return (
@@ -28,6 +44,19 @@ export function LegalPage({ eyebrow, title, intro, effectiveDate, sections }: Le
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">
             {t("effectiveDate", { date: effectiveDate })}
           </p>
+          {relatedLinks.length ? (
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {relatedLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-[#dfcfbc] bg-[#fcfaf6] px-4 py-2.5 text-sm text-[#3f3126] transition-all hover:border-[#ceb89d] hover:bg-white hover:text-[#1f1914]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </header>
 
         <div className="space-y-4">

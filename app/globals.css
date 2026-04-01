@@ -5,6 +5,7 @@
   --foreground: #211a14;
   --font-body: "Avenir Next", "Segoe UI", "Noto Sans", sans-serif;
   --font-heading: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --mobile-perfume-cta-offset: 0px;
 }
 
 @theme inline {
@@ -26,6 +27,28 @@ body {
   background-image:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+}
+
+[data-mobile-menu-content="true"] {
+  will-change: filter, opacity, transform;
+}
+
+html[data-mobile-menu-open="true"] [data-mobile-menu-content="true"] {
+  filter: blur(22px) saturate(0.82);
+  opacity: 0.45;
+  transform: scale(1.01);
+}
+
+html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(100% + env(safe-area-inset-bottom)));
+}
+
+@media (max-width: 639px) {
+  html[data-mobile-perfume-cta-active="true"] [data-mobile-menu-content="true"] {
+    padding-bottom: calc(var(--mobile-perfume-cta-offset) + 0.75rem);
+  }
 }
 
 .font-display {

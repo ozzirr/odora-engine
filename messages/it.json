@@ -21,12 +21,23 @@
         "login": "Accedi"
       },
       "cta": "Esplora profumi",
-      "menu": "Menu"
+      "menu": "Menu",
+      "close": "Chiudi",
+      "eyebrow": "Menu",
+      "introTitle": "Accesso rapido",
+      "introDescription": "Accedi all'intero catalogo Odora, scopri le migliori fragranze e approfitta di offerte esclusive riservate ai membri.",
+      "featuredTags": {
+        "bestseller": "Bestseller",
+        "niche": "Niche",
+        "arab": "Arab",
+        "onSale": "In offerta"
+      }
     },
     "footer": {
       "description": "Scopri profumi, confronta note e prezzi e trova la bottiglia giusta piu velocemente.",
       "navigation": "Navigazione",
       "legal": "Legale",
+      "copyright": "© {year} Odora. Tutti i diritti riservati.",
       "nav": {
         "home": "Home",
         "perfumes": "Profumi",
@@ -572,12 +583,16 @@
   },
   "legal": {
     "common": {
-      "effectiveDate": "Data di efficacia: {date}"
+      "effectiveDate": "Data di efficacia: {date}",
+      "relatedLinks": {
+        "privacyPolicy": "Informativa privacy",
+        "cookiePolicy": "Cookie Policy"
+      }
     },
     "privacy": {
       "eyebrow": "Legale",
       "title": "Informativa privacy",
-      "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni.",
+      "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni. Per il dettaglio operativo su cookie, identificativi tecnici e analytics attivi, consulta anche la Cookie Policy di Odora.",
       "effectiveDate": "10 marzo 2026",
       "sections": [
         {
@@ -597,8 +612,9 @@
         {
           "title": "Cookie, sessioni e tecnologie simili",
           "paragraphs": [
-            "Odora usa cookie e tecnologie simili per mantenerti autenticato, ricordare lo stato della sessione e supportare le funzioni essenziali del sito.",
-            "Se verranno aggiunti analytics, tracking affiliato o script di terze parti, questa pagina dovrebbe essere aggiornata per riflettere tali tecnologie e le eventuali scelte disponibili agli utenti."
+            "Odora usa cookie tecnici e tecnologie simili per mantenerti autenticato, ricordare lo stato della sessione, salvare la preferenza lingua e supportare le funzioni essenziali del sito.",
+            "Usiamo anche Vercel Web Analytics per leggere in forma aggregata come viene usato il sito e migliorare l'esperienza, senza attivare nel frontend strumenti di marketing, remarketing o profilazione pubblicitaria.",
+            "Per un dettaglio operativo sui cookie e sulle categorie oggi attive, consulta anche la Cookie Policy disponibile nel footer e nella pagina dedicata."
           ]
         },
         {

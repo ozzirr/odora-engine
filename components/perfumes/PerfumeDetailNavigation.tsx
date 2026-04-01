@@ -18,6 +18,10 @@ type PerfumeDetailNavigationContextValue = {
 
 const PerfumeDetailNavigationContext = createContext<PerfumeDetailNavigationContextValue | null>(null);
 const MIN_LOADING_STATE_MS = 1800;
+const noopNavigationContext: PerfumeDetailNavigationContextValue = {
+  startNavigation: () => {},
+  completeNavigation: () => {},
+};
 
 export function PerfumeDetailNavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -104,10 +108,5 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
 
 export function usePerfumeDetailNavigation() {
   const context = useContext(PerfumeDetailNavigationContext);
-
-  if (!context) {
-    throw new Error("usePerfumeDetailNavigation must be used within PerfumeDetailNavigationProvider");
-  }
-
-  return context;
+  return context ?? noopNavigationContext;
 }

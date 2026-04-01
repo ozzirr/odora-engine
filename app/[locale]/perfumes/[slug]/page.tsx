@@ -329,7 +329,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   return (
     <>
       <PerfumeDetailNavigationReady />
-      <Container className="space-y-9 pt-8 pb-8 md:space-y-10 md:pt-10 md:pb-10">
+      <Container className="space-y-9 pt-8 pb-40 md:space-y-10 md:pt-10 md:pb-10">
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
         <section className="space-y-4">

@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -69,6 +70,8 @@ export async function signupWithPassword(
   }
 
   if (data.session) {
+    revalidatePath("/", "layout");
+    revalidatePath(nextPath);
     redirect(nextPath);
   }
 

@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
@@ -17,6 +18,7 @@ type HeaderProps = {
 export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const t = useTranslations("layout.header");
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [menuOpen, setMenuOpen] = useState(false);
   const isAuthenticated = useAuthStatus(initialIsAuthenticated, { refreshOnChange: true });
   const navItems = [
@@ -25,9 +27,33 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/top" as const, label: t("nav.top") },
   ];
+  const menuTags = [
+    {
+      key: "bestseller",
+      href: { pathname: "/perfumes", query: { sort: "rating" } } as const,
+      label: t("featuredTags.bestseller"),
+    },
+    {
+      key: "niche",
+      href: { pathname: "/perfumes", query: { niche: "true", sort: "rating" } } as const,
+      label: t("featuredTags.niche"),
+    },
+    {
+      key: "arab",
+      href: { pathname: "/perfumes", query: { arabic: "true", sort: "rating" } } as const,
+      label: t("featuredTags.arab"),
+    },
+    {
+      key: "on-sale",
+      href: { pathname: "/perfumes", query: { sort: "price_low" } } as const,
+      label: t("featuredTags.onSale"),
+    },
+  ];
   const accountHref = isAuthenticated ? "/profile" : "/login";
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
   const canOpenAuthModal = !isAuthenticated && pathname !== "/login" && pathname !== "/signup";
+  const authParam = searchParams.get("auth");
+  const authModalOpen = authParam === "login" || authParam === "signup";
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -36,6 +62,56 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
     return pathname.startsWith(href);
   };
+
+  useEffect(() => {
+    if (!menuOpen || authModalOpen) {
+      return;
+    }
+
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+
+    body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen, authModalOpen]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (menuOpen) {
+      root.setAttribute("data-mobile-menu-open", "true");
+    } else {
+      root.removeAttribute("data-mobile-menu-open");
+    }
+
+    return () => {
+      root.removeAttribute("data-mobile-menu-open");
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen || !authModalOpen) {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setMenuOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [menuOpen, authModalOpen]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur">
@@ -87,68 +163,207 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
         </nav>
 
         <button
+          type="button"
           onClick={() => setMenuOpen((prev) => !prev)}
-          className="inline-flex items-center rounded-md border border-[#d8cbb9] px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#3e3025] md:hidden"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation-panel"
+          className={cn(
+            "inline-flex h-11 items-center gap-3 rounded-full border px-3.5 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_18px_40px_-28px_rgba(31,25,20,0.9)] backdrop-blur-sm transition-all md:hidden",
+            menuOpen
+              ? "border-[#204f3f] bg-[#1e4b3b] text-white"
+              : "border-[#d8cbb9] bg-white/70 text-[#3e3025] hover:border-[#cfbda5] hover:bg-white",
+          )}
         >
-          {t("menu")}
+          <span
+            className={cn(
+              "flex h-7 w-7 items-center justify-center rounded-full border transition-colors",
+              menuOpen ? "border-white/20 bg-white/10" : "border-[#dccbb4] bg-[#f4ece1]",
+            )}
+            aria-hidden="true"
+          >
+            <span className="relative flex h-3.5 w-4 flex-col justify-between">
+              <span
+                className={cn(
+                  "h-[1.5px] w-full rounded-full bg-current transition-transform duration-200",
+                  menuOpen && "translate-y-[6px] rotate-45",
+                )}
+              />
+              <span
+                className={cn(
+                  "h-[1.5px] w-full rounded-full bg-current transition-opacity duration-200",
+                  menuOpen && "opacity-0",
+                )}
+              />
+              <span
+                className={cn(
+                  "h-[1.5px] w-full rounded-full bg-current transition-transform duration-200",
+                  menuOpen && "-translate-y-[6px] -rotate-45",
+                )}
+              />
+            </span>
+          </span>
+          <span>{menuOpen ? t("close") : t("menu")}</span>
         </button>
       </div>
 
-      {menuOpen ? (
-        <div className="border-t border-[#e8dfd2] bg-[#fbf8f2] px-4 py-4 md:hidden">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium text-[#554636]",
-                  isActivePath(item.href) && "bg-[#ece4d8] text-[#1f1914]",
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            {canOpenAuthModal ? (
-              <Suspense
-                fallback={
+      <div
+        className={cn(
+          "fixed inset-x-0 bottom-0 top-[4.5rem] z-30 transition-opacity duration-300 md:hidden",
+          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+        )}
+      >
+        <button
+          type="button"
+          aria-label={t("close")}
+          onClick={() => setMenuOpen(false)}
+          className="absolute inset-0 bg-[rgba(24,20,16,0.26)] backdrop-blur-[22px]"
+        />
+
+        <div
+          id="mobile-navigation-panel"
+          className={cn(
+            "relative mx-4 mt-3 overflow-hidden rounded-[2rem] border border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(248,242,234,0.76))] shadow-[0_42px_120px_-42px_rgba(29,22,16,0.62)] backdrop-blur-[26px] backdrop-saturate-125 transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.58),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.22),transparent_34%)] before:content-['']",
+            menuOpen ? "translate-y-0 scale-100 opacity-100" : "-translate-y-4 scale-[0.98] opacity-0",
+          )}
+        >
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.95),transparent_42%),linear-gradient(135deg,rgba(225,212,192,0.7),rgba(255,255,255,0.05))]" />
+
+          <div className="relative px-5 pb-5 pt-5">
+            <div className="mb-5 border-b border-[#eadfce] pb-4">
+              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#8c745c]">
+                {t("eyebrow")}
+              </p>
+              <div className="relative mt-3 pr-16 sm:pr-18">
+                <p className="min-w-0 whitespace-nowrap font-display text-[1.72rem] leading-[0.95] text-[#2b2119] sm:text-[1.95rem]">
+                  {t("introTitle")}
+                </p>
+                <div
+                  aria-hidden="true"
+                  className="absolute right-0 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border border-[#e6d9c8] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.85),rgba(231,217,198,0.9))] shadow-[0_18px_32px_-24px_rgba(31,25,20,0.6)] sm:h-12 sm:w-12"
+                />
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {menuTags.map((tag) => (
                   <Link
-                    href={accountHref}
+                    key={tag.key}
+                    href={tag.href}
                     onClick={() => setMenuOpen(false)}
-                    className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+                    className="rounded-full border border-[#dfcfbc] bg-white/80 px-3.5 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#6e5947] transition-all hover:border-[#cbb59a] hover:bg-[#fffaf3] hover:text-[#2e241c]"
+                  >
+                    {tag.label}
+                  </Link>
+                ))}
+              </div>
+              <p className="mt-4 text-sm leading-6 text-[#705b49]">{t("introDescription")}</p>
+            </div>
+
+            <div className="space-y-2.5">
+              {navItems.map((item, index) => {
+                const active = isActivePath(item.href);
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "group flex items-center justify-between rounded-[1.4rem] border px-4 py-3.5 transition-all",
+                      active
+                        ? "border-[#204f3f]/15 bg-[#1e4b3b] text-white shadow-[0_18px_45px_-28px_rgba(30,75,59,0.95)]"
+                        : "border-[#eadfce] bg-white/80 text-[#3d3026] hover:border-[#d6c3ac] hover:bg-[#fffdf9]",
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={cn(
+                          "flex h-10 w-10 items-center justify-center rounded-full text-[0.72rem] font-semibold tracking-[0.14em]",
+                          active ? "bg-white/12 text-white" : "bg-[#f3eadf] text-[#8b735d]",
+                        )}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-base font-medium">{item.label}</span>
+                    </div>
+
+                    <span
+                      className={cn(
+                        "transition-transform group-hover:translate-x-0.5",
+                        active ? "text-white/80" : "text-[#9f876f]",
+                      )}
+                      aria-hidden="true"
+                    >
+                      <svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        className="h-4 w-4"
+                      >
+                        <path
+                          d="M4 12L12 4M6 4H12V10"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(245,238,229,0.92))] p-3">
+              {canOpenAuthModal ? (
+                <Suspense
+                  fallback={
+                    <Link
+                      href={accountHref}
+                      onClick={() => setMenuOpen(false)}
+                      className={buttonStyles({
+                        size: "md",
+                        variant: "secondary",
+                        className: "w-full justify-center",
+                      })}
+                    >
+                      {accountLabel}
+                    </Link>
+                  }
+                >
+                  <AuthModalTrigger
+                    mode="login"
+                    className={buttonStyles({
+                      size: "md",
+                      variant: "secondary",
+                      className: "w-full justify-center",
+                    })}
                   >
                     {accountLabel}
-                  </Link>
-                }
-              >
-                <AuthModalTrigger
-                  mode="login"
-                  onOpen={() => setMenuOpen(false)}
-                  className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+                  </AuthModalTrigger>
+                </Suspense>
+              ) : (
+                <Link
+                  href={accountHref}
+                  onClick={() => setMenuOpen(false)}
+                  className={buttonStyles({
+                    size: "md",
+                    variant: "secondary",
+                    className: "w-full justify-center",
+                  })}
                 >
                   {accountLabel}
-                </AuthModalTrigger>
-              </Suspense>
-            ) : (
+                </Link>
+              )}
+
               <Link
-                href={accountHref}
+                href="/perfumes"
                 onClick={() => setMenuOpen(false)}
-                className={buttonStyles({ size: "sm", variant: "secondary", className: "mt-2 w-fit" })}
+                className={buttonStyles({ size: "md", className: "w-full justify-center" })}
               >
-                {accountLabel}
+                {t("cta")}
               </Link>
-            )}
-            <Link
-              href="/perfumes"
-              onClick={() => setMenuOpen(false)}
-              className={buttonStyles({ size: "sm", className: "w-fit" })}
-            >
-              {t("cta")}
-            </Link>
+            </div>
           </div>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }

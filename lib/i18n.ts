@@ -28,6 +28,10 @@ export const pathnames = {
     en: "/privacy",
     it: "/privacy",
   },
+  "/cookie-policy": {
+    en: "/cookie-policy",
+    it: "/cookie-policy",
+  },
   "/terms": {
     en: "/terms",
     it: "/termini",

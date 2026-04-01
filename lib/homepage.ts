@@ -338,6 +338,25 @@ async function getHomepageSectionPerfumes(
   );
 }
 
+async function getHomepageFallbackPerfumes(
+  take: number,
+  catalogMode: CatalogMode,
+): Promise<HomePerfumeRecord[]> {
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+
+  return (await prisma.perfume.findMany({
+    where: visibilityWhere ?? undefined,
+    include: homepagePerfumeInclude,
+    orderBy: [
+      { hasAvailableOffer: "desc" },
+      { ratingInternal: "desc" },
+      { updatedAt: "desc" },
+      { name: "asc" },
+    ],
+    take,
+  })) as HomePerfumeRecord[];
+}
+
 function minimizeDuplicates(
   perfumes: HomePerfumeRecord[],
   excludedIds: Set<number>,
@@ -383,6 +402,10 @@ function toCollectionCard(collection: HomeCollectionRecord): HomeCollectionCard 
 export async function getHomepageData(): Promise<HomepageData> {
   const catalogMode = resolveCatalogMode();
 
+  if (process.env.NODE_ENV === "development") {
+    return getHomepageDataUncached(catalogMode);
+  }
+
   return unstable_cache(
     async () => getHomepageDataUncached(catalogMode),
     ["homepage-data", catalogMode],
@@ -399,10 +422,12 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
   }
 
   try {
-    const [heroCandidates, trendingCandidates, featuredCandidates, collections] = await Promise.all([
+    const [heroCandidates, trendingCandidates, featuredCandidates, fallbackCandidates, collections] =
+      await Promise.all([
       getHomepageSectionPerfumes(HomepageSection.HERO, 4, catalogMode),
       getHomepageSectionPerfumes(HomepageSection.TRENDING, 8, catalogMode),
       getHomepageSectionPerfumes(HomepageSection.FEATURED, 12, catalogMode),
+      getHomepageFallbackPerfumes(24, catalogMode),
       prisma.homepageCollection.findMany({
         where: {
           isHomepageVisible: true,
@@ -411,23 +436,36 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
         orderBy: [{ homepagePriority: "asc" }, { title: "asc" }],
         take: 6,
       }),
-    ]);
+      ]);
 
     const heroSpotlights = toUniquePerfumes([
       ...heroCandidates,
       ...trendingCandidates,
       ...featuredCandidates,
+      ...fallbackCandidates,
     ]).slice(0, 4);
 
     const hero =
-      heroCandidates[0] ?? trendingCandidates[0] ?? featuredCandidates[0] ?? heroSpotlights[0] ?? null;
+      heroCandidates[0] ??
+      trendingCandidates[0] ??
+      featuredCandidates[0] ??
+      fallbackCandidates[0] ??
+      heroSpotlights[0] ??
+      null;
     const excludedHeroIds = new Set<number>(hero ? [hero.id] : []);
-    const trending = minimizeDuplicates(trendingCandidates, excludedHeroIds, 4);
+    const trending = minimizeDuplicates(
+      [...trendingCandidates, ...fallbackCandidates],
+      excludedHeroIds,
+      4,
+    );
     const excludedFeaturedIds = new Set<number>([
       ...excludedHeroIds,
       ...trending.map((perfume) => perfume.id),
     ]);
-    const featured = minimizeDuplicates(featuredCandidates, excludedFeaturedIds);
+    const featured = minimizeDuplicates(
+      [...featuredCandidates, ...fallbackCandidates],
+      excludedFeaturedIds,
+    );
     const trustedStores = selectTrustedStores(
       toUniquePerfumes([...heroSpotlights, ...trending, ...featured]),
       4,
