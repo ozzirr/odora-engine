@@ -13,7 +13,7 @@ type MobilePerfumeCtaBarProps = {
   amazonUrl?: string | null;
 };
 
-const CTA_REVEAL_DELAY_MS = 3000;
+const CTA_REVEAL_DELAY_MS = 6000;
 
 function AmazonWordmark({ className }: { className?: string }) {
   return (
