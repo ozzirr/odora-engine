@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { sanitizeAuthNextPath } from "@/lib/auth-navigation";
 import { defaultLocale, getLocalizedPathname, hasLocale, localeCookieName } from "@/lib/i18n";
-import { createClient } from "@/lib/supabase/server";
+import { createRouteHandlerClient } from "@/lib/supabase/server";
 
 function getFallbackLocale(request: NextRequest, nextPath?: string | null) {
   const pathLocale = nextPath?.split("/")[1];
@@ -47,10 +47,11 @@ export async function GET(request: NextRequest) {
   const rawNextPath = requestUrl.searchParams.get("next");
   const fallbackLocale = getFallbackLocale(request, rawNextPath);
   const nextPath = sanitizeAuthNextPath(rawNextPath, getLocalizedPathname(fallbackLocale, "/perfumes"));
+  const successRedirect = NextResponse.redirect(new URL(nextPath, requestUrl.origin));
 
   let supabase;
   try {
-    supabase = await createClient();
+    supabase = createRouteHandlerClient(request, successRedirect);
   } catch {
     return NextResponse.redirect(
       buildAuthErrorRedirect(requestUrl, fallbackLocale, rawNextPath, nextPath, "auth_not_configured"),
@@ -65,7 +66,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.redirect(new URL(nextPath, requestUrl.origin));
+    return successRedirect;
   }
 
   if (tokenHash && isOtpType(type)) {
@@ -80,7 +81,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    return NextResponse.redirect(new URL(nextPath, requestUrl.origin));
+    return successRedirect;
   }
 
   return NextResponse.redirect(
