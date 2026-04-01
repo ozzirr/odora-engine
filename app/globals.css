@@ -36,6 +36,11 @@ html[data-mobile-menu-open="true"] [data-mobile-menu-content="true"] {
   transform: scale(1.01);
 }
 
+html[data-mobile-menu-open="true"],
+html[data-mobile-menu-open="true"] body {
+  overscroll-behavior: none;
+}
+
 html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   opacity: 0;
   pointer-events: none;

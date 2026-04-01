@@ -36,7 +36,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
             key={`${perfume.brandName}-${perfume.name}`}
             href={perfume.href as unknown as LinkHref}
             perfumeName={perfume.name}
-            className="premium-card group overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-white shadow-[0_24px_48px_-36px_rgba(50,35,20,0.44)] transition-all duration-300 hover:-translate-y-1"
+            className="premium-card group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-white shadow-[0_24px_48px_-36px_rgba(50,35,20,0.44)] transition-all duration-300 hover:-translate-y-1"
           >
             <div className="relative h-64 overflow-hidden bg-[radial-gradient(circle_at_20%_16%,rgba(255,255,255,0.9),transparent_24%),linear-gradient(180deg,#f1e8dc_0%,#e7dbca_100%)]">
               <div className="absolute right-4 top-4 z-10">
@@ -52,7 +52,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
               />
             </div>
 
-            <div className="space-y-4 p-5">
+            <div className="flex flex-1 flex-col justify-between gap-4 p-5">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
                   {perfume.brandName}
@@ -63,23 +63,49 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
                 <p className="mt-2 text-sm text-[#635343]">{perfume.fragranceFamily}</p>
               </div>
 
-              <div className="flex items-end justify-between gap-4 rounded-[1.2rem] border border-[#e8dccb] bg-[#fbf8f2] px-4 py-3">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
-                    {perfume.bestPrice != null && perfume.currency ? t("bestPrice") : t("offers")}
-                  </p>
-                  {perfume.bestPrice != null && perfume.currency ? (
-                    <p className="mt-1 text-lg font-semibold text-[#1d1712]">
-                      {formatCurrency(perfume.bestPrice, perfume.currency, locale as "it" | "en")}
+              {(() => {
+                const hasBestPrice = perfume.bestPrice != null && perfume.currency;
+                const footerAction = perfume.hasOffer ? t("viewOffers") : t("seeProductDetails");
+
+                if (hasBestPrice) {
+                  return (
+                    <div className="flex items-end justify-between gap-3 rounded-[1.2rem] border border-[#e8dccb] bg-[#fbf8f2] px-4 py-3">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+                          {t("bestPrice")}
+                        </p>
+                        <p className="mt-1 text-lg font-semibold leading-none text-[#1d1712] sm:leading-tight">
+                          {formatCurrency(perfume.bestPrice, perfume.currency, locale as "it" | "en")}
+                        </p>
+                      </div>
+                      <p
+                        className="min-w-0 max-w-[42%] truncate text-right text-sm text-[#5d4e3f]"
+                        title={perfume.storeName ?? footerAction}
+                      >
+                        {perfume.storeName ?? footerAction}
+                      </p>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="rounded-[1.2rem] border border-[#e8dccb] bg-[#fbf8f2] px-4 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+                      {t("offers")}
                     </p>
-                  ) : (
-                    <p className="mt-1 text-sm text-[#5d4e3f]">{t("seeProductDetails")}</p>
-                  )}
-                </div>
-                <p className="text-right text-sm text-[#5d4e3f]">
-                  {perfume.storeName ?? (perfume.hasOffer ? t("viewOffers") : t("seeProductDetails"))}
-                </p>
-              </div>
+                    <div className="mt-1.5 flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                      <p className="min-w-0 text-sm font-medium leading-snug text-[#5d4e3f]">
+                        {footerAction}
+                      </p>
+                      {perfume.storeName ? (
+                        <p className="min-w-0 text-sm leading-snug text-[#5d4e3f] sm:text-right">
+                          {perfume.storeName}
+                        </p>
+                      ) : null}
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </PerfumeDetailLink>
         ))}

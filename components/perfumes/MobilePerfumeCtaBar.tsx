@@ -13,6 +13,8 @@ type MobilePerfumeCtaBarProps = {
   amazonUrl?: string | null;
 };
 
+const CTA_REVEAL_DELAY_MS = 3000;
+
 function AmazonWordmark({ className }: { className?: string }) {
   return (
     <Image
@@ -47,7 +49,7 @@ export function MobilePerfumeCtaBar({
 
     const timerId = window.setTimeout(() => {
       setIsVisible(true);
-    }, 2000);
+    }, CTA_REVEAL_DELAY_MS);
 
     return () => {
       window.clearTimeout(timerId);
