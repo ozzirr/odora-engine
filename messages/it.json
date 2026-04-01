@@ -477,7 +477,7 @@
         "or": "oppure",
         "signupPrompt": "Non hai ancora un account?",
         "signupLink": "Crea account",
-        "socialNotice": "Puoi accedere anche con Google, Apple o Facebook se il provider e configurato.",
+        "socialNotice": "Puoi accedere con Google.",
         "errors": {
           "authCallbackFailed": "Accesso non completato. Riprova.",
           "emailVerificationFailed": "Verifica email non completata. Richiedi un nuovo link.",
@@ -503,7 +503,7 @@
         "or": "oppure",
         "loginPrompt": "Hai gia un account?",
         "loginLink": "Accedi",
-        "socialNotice": "Puoi creare o recuperare l'account anche con Google, Apple o Facebook se il provider e configurato.",
+        "socialNotice": "Puoi creare o recuperare l'account con Google.",
         "errors": {
           "fallback": "Registrazione non completata. Riprova."
         },
@@ -522,9 +522,9 @@
       }
     },
     "social": {
-      "continueWith": "Continua con {provider}",
+      "continueWithGoogle": "Continua con Google",
       "redirecting": "Reindirizzamento...",
-      "oauthFailed": "Non sono riuscito ad avviare l'accesso con {provider}. Verifica la configurazione del provider e riprova."
+      "oauthFailed": "Non sono riuscito ad avviare l'accesso con Google. Verifica la configurazione del provider e riprova."
     },
     "actions": {
       "login": {
@@ -552,7 +552,8 @@
         "title": "Accesso attivo",
         "authenticatedAs": "Sei autenticato come"
       },
-      "logout": "Logout"
+      "logout": "Logout",
+      "logoutPending": "Uscita in corso..."
     },
     "form": {
       "name": "Nome",

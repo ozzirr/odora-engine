@@ -14,6 +14,7 @@ import {
   isLaunchGateEnabled,
   isLaunchGateHomePath,
 } from "@/lib/launch-gate";
+import { getBaseSiteHost } from "@/lib/site-url";
 import { updateSession } from "@/lib/supabase/middleware";
 
 const handleI18nRouting = createMiddleware(routing);
@@ -34,9 +35,22 @@ function requiresSessionRefresh(pathname: string) {
 
 export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const canonicalHost = getBaseSiteHost();
+  const requestHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ?? request.headers.get("host");
   const hasLocalePrefix = routing.locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
+
+  if (
+    canonicalHost &&
+    requestHost &&
+    requestHost === `www.${canonicalHost}` &&
+    request.nextUrl.protocol === "https:"
+  ) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.host = canonicalHost;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
 
   if (!hasLocalePrefix) {
     request.cookies.set(

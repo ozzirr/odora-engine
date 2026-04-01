@@ -477,7 +477,7 @@
         "or": "or",
         "signupPrompt": "Don’t have an account yet?",
         "signupLink": "Create account",
-        "socialNotice": "You can also log in with Google, Apple, or Facebook when the provider is configured.",
+        "socialNotice": "You can also log in with Google.",
         "errors": {
           "authCallbackFailed": "Login was not completed. Try again.",
           "emailVerificationFailed": "Email verification was not completed. Request a new link.",
@@ -503,7 +503,7 @@
         "or": "or",
         "loginPrompt": "Already have an account?",
         "loginLink": "Log in",
-        "socialNotice": "You can also create or recover your account with Google, Apple, or Facebook when the provider is configured.",
+        "socialNotice": "You can also create or recover your account with Google.",
         "errors": {
           "fallback": "Sign-up was not completed. Try again."
         },
@@ -522,9 +522,9 @@
       }
     },
     "social": {
-      "continueWith": "Continue with {provider}",
+      "continueWithGoogle": "Continue with Google",
       "redirecting": "Redirecting...",
-      "oauthFailed": "Could not start the {provider} sign-in flow. Check the provider configuration and try again."
+      "oauthFailed": "Could not start the Google sign-in flow. Check the provider configuration and try again."
     },
     "actions": {
       "login": {
@@ -552,7 +552,8 @@
         "title": "Active login",
         "authenticatedAs": "You are authenticated as"
       },
-      "logout": "Log out"
+      "logout": "Log out",
+      "logoutPending": "Logging out..."
     },
     "form": {
       "name": "Name",

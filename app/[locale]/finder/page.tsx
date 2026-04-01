@@ -10,6 +10,7 @@ import { logCatalogQueryError } from "@/lib/catalog";
 import { buildFinderPreferencesFromInput } from "@/lib/finder";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 export const revalidate = 3600;
 
@@ -110,6 +111,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   const t = await getTranslations({ locale: resolvedLocale, namespace: "finder.page" });
   const resolvedSearchParams = await searchParams;
   const finderOptions = await getFinderOptions();
+  const isAuthenticated = await getIsAuthenticated();
   const initialPreferences = buildFinderPreferencesFromInput({
     gender: readSearchParam(resolvedSearchParams, "gender") ?? null,
     mood: readSearchParam(resolvedSearchParams, "mood") ?? null,
@@ -132,7 +134,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
 
       <FinderExperience
         availableOptions={finderOptions}
-        isAuthenticated={false}
+        isAuthenticated={isAuthenticated}
         initialPreferences={initialPreferences}
         presetLabel={presetLabel}
       />

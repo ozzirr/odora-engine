@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 type LocaleShellProps = {
   children: React.ReactNode;
   hideChrome?: boolean;
+  initialIsAuthenticated?: boolean;
 };
 
 type AuthMode = "login" | "signup";
@@ -140,7 +141,11 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   );
 }
 
-export function LocaleShell({ children, hideChrome = false }: LocaleShellProps) {
+export function LocaleShell({
+  children,
+  hideChrome = false,
+  initialIsAuthenticated = false,
+}: LocaleShellProps) {
   const activePathname = useActivePathname();
   const isStandaloneAuthPage = activePathname === "/login" || activePathname === "/signup";
 
@@ -150,7 +155,7 @@ export function LocaleShell({ children, hideChrome = false }: LocaleShellProps) 
         <div
           className={cn("min-h-screen transition duration-300 ease-out")}
         >
-          {hideChrome ? null : <Header />}
+          {hideChrome ? null : <Header initialIsAuthenticated={initialIsAuthenticated} />}
           <main>{children}</main>
           {hideChrome ? null : <Footer />}
         </div>

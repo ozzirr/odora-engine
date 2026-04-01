@@ -84,14 +84,24 @@ Odora uses Supabase Auth (SSR) for email/password and OAuth:
 - `/auth/callback` -> verifies email tokens and exchanges OAuth codes for a session
 - `proxy.ts` -> keeps auth session cookies refreshed on the protected auth/profile routes
 
-Google, Apple, and Facebook buttons call `supabase.auth.signInWithOAuth(...)`. To make them work you must:
+The Google button calls `supabase.auth.signInWithOAuth(...)`. For Google with Supabase SSR/PKCE, configure both Google Cloud and Supabase:
 
-1. Enable each provider in Supabase Auth and paste the provider client ID/secret there.
-2. Add your callback URL to each provider console:
-   - local: `http://localhost:3000/auth/callback`
-   - LAN/dev box: `http://<your-local-ip>:3000/auth/callback`
-   - production: `https://<your-domain>/auth/callback`
-3. Set `NEXT_PUBLIC_SITE_URL` to your canonical public origin for email links.
+1. In Google Cloud -> Google Auth Platform -> Clients, create a `Web application` OAuth client.
+2. Under `Authorized JavaScript origins`, add your app origins:
+   - local: `http://localhost:3000`
+   - LAN/dev box: `http://<your-local-ip>:3000`
+   - production: `https://<your-domain>`
+3. Under `Authorized redirect URIs`, add your Supabase callback URL, not your app callback:
+   - hosted Supabase: `https://<your-project-ref>.supabase.co/auth/v1/callback`
+   - local Supabase CLI: `http://127.0.0.1:54321/auth/v1/callback`
+4. In Supabase Dashboard -> Auth -> Providers -> Google, enable the provider and paste the Google client ID/secret.
+5. In Supabase Dashboard -> Auth -> URL Configuration, set:
+   - `Site URL`: your canonical site origin, for example `https://<your-domain>`
+   - `Redirect URLs`: your app callback URLs, for example:
+     - `http://localhost:3000/auth/callback`
+     - `http://<your-local-ip>:3000/auth/callback`
+     - `https://<your-domain>/auth/callback`
+6. Set `NEXT_PUBLIC_SITE_URL` to your canonical public origin for email links and fallback redirects.
 
 ## Local Setup
 

@@ -11,6 +11,8 @@ import {
   hasLaunchGateAccess,
   isLaunchGateEnabled,
 } from "@/lib/launch-gate";
+import { getIsAuthenticated } from "@/lib/supabase/auth-state";
+import { getBaseSiteUrl } from "@/lib/site-url";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -31,7 +33,7 @@ export async function generateMetadata({ params }: LocaleLayoutProps): Promise<M
   }
 
   return {
-    metadataBase: new URL("https://odora.app"),
+    metadataBase: new URL(getBaseSiteUrl()),
     alternates: {
       canonical: getAlternateLinks("/")[locale],
       languages: getAlternateLinks("/"),
@@ -60,10 +62,13 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     isLaunchGateEnabled() &&
     !hasLaunchGateAccess(cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value);
   const messages = await getMessages();
+  const initialIsAuthenticated = await getIsAuthenticated();
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <LocaleShell hideChrome={hideChrome}>{children}</LocaleShell>
+      <LocaleShell hideChrome={hideChrome} initialIsAuthenticated={initialIsAuthenticated}>
+        {children}
+      </LocaleShell>
     </NextIntlClientProvider>
   );
 }

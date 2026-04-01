@@ -4,8 +4,8 @@ import { getTranslations } from "next-intl/server";
 
 import { signOut } from "@/app/profile/actions";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import { LogoutButton } from "@/components/profile/LogoutButton";
 import { Container } from "@/components/layout/Container";
-import { buttonStyles } from "@/components/ui/Button";
 import { getAlternateLinks, getLocalizedPathname, hasLocale } from "@/lib/i18n";
 import { getCurrentUserSummary } from "@/lib/supabase/auth-state";
 
@@ -68,9 +68,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
           <form action={signOut} className="mt-6">
             <input type="hidden" name="locale" value={resolvedLocale} />
-            <button type="submit" className={buttonStyles({ variant: "secondary", className: "w-full" })}>
-              {t("logout")}
-            </button>
+            <LogoutButton />
           </form>
         </aside>
       </div>

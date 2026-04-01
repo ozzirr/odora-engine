@@ -1,3 +1,5 @@
+export { getBaseSiteUrl } from "@/lib/site-url";
+
 function readSupabaseUrl() {
   const value = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
   if (!value) {
@@ -40,18 +42,4 @@ export function getSupabaseEnvOrNull() {
     url,
     publishableKey,
   };
-}
-
-export function getBaseSiteUrl() {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (explicit) {
-    return explicit.replace(/\/+$/, "");
-  }
-
-  const vercelUrl = process.env.VERCEL_URL?.trim();
-  if (vercelUrl) {
-    return `https://${vercelUrl.replace(/\/+$/, "")}`;
-  }
-
-  return "http://localhost:3000";
 }

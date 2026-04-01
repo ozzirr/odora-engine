@@ -10,11 +10,15 @@ import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
 
-export function Header() {
+type HeaderProps = {
+  initialIsAuthenticated?: boolean;
+};
+
+export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const t = useTranslations("layout.header");
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isAuthenticated = useAuthStatus(false, { refreshOnChange: true });
+  const isAuthenticated = useAuthStatus(initialIsAuthenticated, { refreshOnChange: true });
   const navItems = [
     { href: "/" as const, label: t("nav.home") },
     { href: "/perfumes" as const, label: t("nav.perfumes") },

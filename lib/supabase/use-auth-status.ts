@@ -43,13 +43,16 @@ export function useAuthStatus(
       }
     };
 
-    void supabase.auth.getUser().then(({ data, error }) => {
+    const syncAuthState = async () => {
+      const { data, error } = await supabase.auth.getUser();
       if (error) {
         return;
       }
 
       applyAuthState(Boolean(data.user));
-    });
+    };
+
+    void syncAuthState();
 
     const {
       data: { subscription },
@@ -57,9 +60,24 @@ export function useAuthStatus(
       applyAuthState(Boolean(session?.user));
     });
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void syncAuthState();
+      }
+    };
+
+    const handleFocus = () => {
+      void syncAuthState();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", handleFocus);
+
     return () => {
       isMounted = false;
       subscription.unsubscribe();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", handleFocus);
     };
   }, [pathname, refreshOnChange, router]);
 
