@@ -29,11 +29,8 @@ body {
     linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
 }
 
-[data-mobile-menu-content="true"] {
-  will-change: filter, opacity, transform;
-}
-
 html[data-mobile-menu-open="true"] [data-mobile-menu-content="true"] {
+  will-change: filter, opacity, transform;
   filter: blur(22px) saturate(0.82);
   opacity: 0.45;
   transform: scale(1.01);

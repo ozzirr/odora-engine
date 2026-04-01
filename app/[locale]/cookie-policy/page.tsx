@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { getMessages } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 
 import { LegalPage } from "@/components/legal/LegalPage";
-import { cookiePolicyContent } from "@/lib/privacy/cookie-policy";
 import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 
 type CookiePolicyPageProps = {
@@ -13,12 +12,12 @@ type CookiePolicyPageProps = {
 
 export async function generateMetadata({ params }: CookiePolicyPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const resolvedLocale = hasLocale(locale) ? locale : "it";
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.cookiePolicy" });
 
   return {
-    title: "Cookie Policy | Odora",
-    description:
-      "Informazioni chiare sui cookie tecnici, sulle sessioni Supabase e sugli analytics privacy-friendly attivi su Odora.",
+    title: t("title"),
+    description: t("description"),
     alternates: {
       canonical: getAlternateLinks("/cookie-policy")[resolvedLocale],
       languages: getAlternateLinks("/cookie-policy"),
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: CookiePolicyPageProps): Promi
 
 export default async function CookiePolicyPage() {
   const messages = await getMessages();
-  const legalCommon = (
+  const content = (
     messages as {
       legal: {
         common: {
@@ -36,18 +35,19 @@ export default async function CookiePolicyPage() {
             privacyPolicy: string;
           };
         };
+        cookiePolicy: Parameters<typeof LegalPage>[0];
       };
     }
-  ).legal.common;
+  ).legal;
 
   return (
     <LegalPage
-      eyebrow={cookiePolicyContent.eyebrow}
-      title={cookiePolicyContent.title}
-      intro={cookiePolicyContent.intro}
-      effectiveDate={cookiePolicyContent.effectiveDate}
-      sections={cookiePolicyContent.sections}
-      relatedLinks={[{ href: "/privacy", label: legalCommon.relatedLinks.privacyPolicy }]}
+      eyebrow={content.cookiePolicy.eyebrow}
+      title={content.cookiePolicy.title}
+      intro={content.cookiePolicy.intro}
+      effectiveDate={content.cookiePolicy.effectiveDate}
+      sections={content.cookiePolicy.sections}
+      relatedLinks={[{ href: "/privacy", label: content.common.relatedLinks.privacyPolicy }]}
     />
   );
 }

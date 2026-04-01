@@ -1,7 +1,7 @@
 "use client";
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 type AuthMode = "login" | "signup";
 
@@ -28,7 +28,6 @@ export function AuthModalTrigger({
   type = "button",
   ...props
 }: AuthModalTriggerProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -48,7 +47,7 @@ export function AuthModalTrigger({
         currentParams.delete("error");
         currentParams.set("auth", mode);
         currentParams.set("authNext", nextPath);
-        router.push(`${pathname}?${currentParams.toString()}${hash}`, { scroll: false });
+        window.history.pushState(null, "", `${pathname}?${currentParams.toString()}${hash}`);
         onOpen?.();
       }}
     >

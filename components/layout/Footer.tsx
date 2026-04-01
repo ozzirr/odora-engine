@@ -17,7 +17,7 @@ export function Footer() {
   ];
   const legalLinks = [
     { href: "/privacy" as const, label: t("legalLinks.privacy") },
-    { href: "/cookie-policy" as const, label: "Cookie Policy" },
+    { href: "/cookie-policy" as const, label: t("legalLinks.cookiePolicy") },
     { href: "/terms" as const, label: t("legalLinks.terms") },
     { href: "/affiliate-disclosure" as const, label: t("legalLinks.affiliateDisclosure") },
   ];
@@ -72,7 +72,18 @@ export function Footer() {
                     {link.label}
                   </Link>
                 ))}
-                <PrivacyPreferences className="text-left" />
+              </div>
+
+              <div className="mt-5 border-t border-[#e3d6c6] pt-4">
+                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#8a7763]">
+                  {t("privacyControlsTitle")}
+                </p>
+                <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm leading-6 text-[#685747]">
+                    {t("privacyControlsDescription")}
+                  </p>
+                  <PrivacyPreferences className="w-full shrink-0 text-left sm:w-auto" />
+                </div>
               </div>
             </div>
           </div>

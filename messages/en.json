@@ -37,6 +37,8 @@
       "description": "Discover perfumes, compare notes and prices, and find the right bottle faster.",
       "navigation": "Navigation",
       "legal": "Legal",
+      "privacyControlsTitle": "Privacy preferences",
+      "privacyControlsDescription": "Review active technical cookies, analytics, and quick links to the related policies at any time.",
       "copyright": "© {year} Odora. All rights reserved.",
       "nav": {
         "home": "Home",
@@ -46,8 +48,64 @@
       },
       "legalLinks": {
         "privacy": "Privacy",
+        "cookiePolicy": "Cookie Policy",
         "terms": "Terms",
         "affiliateDisclosure": "Affiliate Disclosure"
+      }
+    }
+  },
+  "privacyPreferences": {
+    "openButton": "Privacy preferences",
+    "eyebrow": "Privacy",
+    "title": "Privacy preferences",
+    "description": "We only use what is truly needed to run Odora and read aggregate metrics. No marketing or profiling cookies are active at the moment.",
+    "closeAriaLabel": "Close privacy preferences",
+    "technicalIdentifiersPrefix": "Technical cookies / identifiers:",
+    "emptyCategory": "No active tools in this category.",
+    "summaryTitle": "In short",
+    "summaryDescription": "If we add optional advanced analytics, marketing, or remarketing tools in the future, we will update this interface and ask for explicit consent before loading them.",
+    "links": {
+      "privacyPolicy": "Privacy Policy",
+      "cookiePolicy": "Cookie Policy"
+    },
+    "closeButton": "Close",
+    "categories": {
+      "necessary": {
+        "title": "Technical / necessary cookies",
+        "description": "They are used for login, session handling, language preference, and protection of restricted areas. They stay active because they are required for the site to work.",
+        "statusLabel": "Always active"
+      },
+      "analytics": {
+        "title": "Privacy-friendly analytics",
+        "description": "We use Vercel Web Analytics to read aggregate usage trends, without remarketing or advertising profiling tools.",
+        "statusLabel": "Active"
+      },
+      "marketing": {
+        "title": "Marketing / profiling cookies",
+        "description": "At the moment there are no advertising pixels, marketing tag managers, chat widgets, or remarketing tools active in the frontend.",
+        "statusLabel": "Not active"
+      }
+    },
+    "services": {
+      "supabase-auth": {
+        "label": "Supabase Auth / session",
+        "purpose": "Keeps the account signed in, refreshes the session, and protects authenticated areas.",
+        "storage": "HTTP-only session cookies managed by Supabase SSR for authentication and token refresh."
+      },
+      "locale": {
+        "label": "Language preference",
+        "purpose": "Remembers the selected language so the site can stay consistent across pages and localized redirects.",
+        "storage": "First-party cookie storing language preference."
+      },
+      "launch-gate": {
+        "label": "Preview access",
+        "purpose": "Used only when private preview mode is active, to remember that protected access has been granted.",
+        "storage": "First-party technical cookie set only in preview mode."
+      },
+      "vercel-analytics": {
+        "label": "Vercel Web Analytics",
+        "purpose": "Helps understand, in aggregate form, which pages are used most and how the overall experience can be improved.",
+        "storage": "Aggregate measurements provided by Vercel Analytics; no marketing or remarketing cookies are active in the project."
       }
     }
   },
@@ -654,6 +712,58 @@
         }
       ]
     },
+    "cookiePolicy": {
+      "eyebrow": "Legal",
+      "title": "Cookie Policy",
+      "intro": "This Cookie Policy explains in simple terms which cookies and similar technologies Odora currently uses. The goal is to keep the setup essential: technical cookies for site functionality and privacy-friendly analytics, with no active marketing or profiling tools.",
+      "effectiveDate": "April 1, 2026",
+      "sections": [
+        {
+          "title": "Overview",
+          "paragraphs": [
+            "Odora uses a limited set of browser-side technologies to handle login, sessions, site language, and, when needed, access to a private preview.",
+            "Vercel Web Analytics is also active in the project to read aggregate usage trends. The repository does not include Google Analytics, Google Tag Manager, Meta Pixel, Hotjar, Microsoft Clarity, chat widgets, or frontend remarketing tags."
+          ]
+        },
+        {
+          "title": "Technical and necessary cookies",
+          "paragraphs": [
+            "These cookies always remain active because they are required to provide user-requested features such as authentication, session continuity, language selection, and protection of restricted areas.",
+            "Supabase Auth / session (Supabase): keeps the account signed in, refreshes the session, and protects authenticated areas. Technical identifiers: sb-*-auth-token*.",
+            "Language preference (Odora / next-intl): remembers the selected language so the site stays consistent across pages and localized redirects. Technical identifier: NEXT_LOCALE.",
+            "Preview access (Odora): used only when private preview mode is active, to remember that protected access has been granted. Technical identifier: odora_preview_access."
+          ]
+        },
+        {
+          "title": "Privacy-friendly analytics",
+          "paragraphs": [
+            "We use Vercel Web Analytics to understand, in aggregate form, which pages are viewed and where the experience can be improved. This setup is not used for behavioral advertising, audience building, or remarketing.",
+            "Vercel Web Analytics (Vercel): provides aggregate measurements of traffic and site usage. The project does not include marketing or remarketing cookies tied to this tool."
+          ]
+        },
+        {
+          "title": "Marketing and profiling cookies",
+          "paragraphs": [
+            "At the moment Odora does not load marketing or profiling cookies or scripts on the site. No advertising pixel or marketing tag manager runs before or after a user action, because those tools are not present in the project.",
+            "If optional tools such as non-essential analytics, remarketing, or third-party promotional widgets are introduced in the future, the privacy setup will be updated before activation with a dedicated consent flow."
+          ]
+        },
+        {
+          "title": "Preferences and controls",
+          "paragraphs": [
+            "In the site footer you can always find the Privacy preferences control, which summarizes active categories and links to this Cookie Policy and the Privacy Policy.",
+            "You can also manage or delete cookies from your browser. Keep in mind that blocking technical cookies may affect login, session continuity, language switching, or other essential site functions."
+          ]
+        },
+        {
+          "title": "External links and retailers",
+          "paragraphs": [
+            "When you leave Odora and visit a retailer or third-party site, that party's cookies and policies apply. Odora does not control cookies set by external sites after you click through.",
+            "This Cookie Policy reflects the technical setup reviewed on April 1, 2026."
+          ]
+        }
+      ]
+    },
     "terms": {
       "eyebrow": "Legal",
       "title": "Terms of Use",
@@ -795,6 +905,10 @@
       "privacy": {
         "title": "Privacy Policy | Odora",
         "description": "Learn how Odora collects, uses, and protects personal information."
+      },
+      "cookiePolicy": {
+        "title": "Cookie Policy | Odora",
+        "description": "Clear information about the technical cookies, Supabase sessions, and privacy-friendly analytics active on Odora."
       },
       "terms": {
         "title": "Terms of Use | Odora",

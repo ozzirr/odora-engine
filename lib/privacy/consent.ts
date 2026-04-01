@@ -19,20 +19,16 @@ export type ConsentState = {
 
 export type PrivacyCategoryDefinition = {
   key: ConsentCategory;
-  title: string;
-  description: string;
-  statusLabel: string;
   active: boolean;
   alwaysOn?: boolean;
 };
 
+export type PrivacyServiceId = "supabase-auth" | "locale" | "launch-gate" | "vercel-analytics";
+
 export type PrivacyServiceDefinition = {
-  id: string;
+  id: PrivacyServiceId;
   category: ConsentCategory;
-  label: string;
   provider: string;
-  purpose: string;
-  storage: string;
   cookieNames: string[];
   active: boolean;
   alwaysOn?: boolean;
@@ -60,27 +56,15 @@ function getSupabaseCookiePattern() {
 export const privacyCategories: PrivacyCategoryDefinition[] = [
   {
     key: "necessary",
-    title: "Cookie tecnici / necessari",
-    description:
-      "Servono per login, sessione, lingua e protezione delle aree riservate. Restano sempre attivi perché richiesti dal funzionamento del sito.",
-    statusLabel: "Sempre attivi",
     active: true,
     alwaysOn: true,
   },
   {
     key: "analytics",
-    title: "Analytics privacy-friendly",
-    description:
-      "Usiamo Vercel Web Analytics per leggere trend aggregati di utilizzo, senza strumenti di remarketing o profilazione pubblicitaria.",
-    statusLabel: "Attivi",
     active: true,
   },
   {
     key: "marketing",
-    title: "Cookie di marketing / profilazione",
-    description:
-      "Al momento non sono attivi pixel pubblicitari, tag manager marketing, chat widget o strumenti di remarketing nel frontend.",
-    statusLabel: "Non attivi",
     active: false,
   },
 ];
@@ -89,12 +73,7 @@ export const privacyServices: PrivacyServiceDefinition[] = [
   {
     id: "supabase-auth",
     category: "necessary",
-    label: "Supabase Auth / sessione",
     provider: "Supabase",
-    purpose:
-      "Mantiene l'accesso all'account, rinnova la sessione e protegge le aree che richiedono autenticazione.",
-    storage:
-      "Cookie HTTP-only di sessione gestiti da Supabase SSR per autenticazione e refresh del token.",
     cookieNames: [getSupabaseCookiePattern()],
     active: true,
     alwaysOn: true,
@@ -102,11 +81,7 @@ export const privacyServices: PrivacyServiceDefinition[] = [
   {
     id: "locale",
     category: "necessary",
-    label: "Preferenza lingua",
     provider: "Odora / next-intl",
-    purpose:
-      "Ricorda la lingua selezionata così il sito può restare coerente tra pagine e redirect locali.",
-    storage: "Cookie first-party con preferenza di lingua.",
     cookieNames: [localeCookieName],
     active: true,
     alwaysOn: true,
@@ -114,11 +89,7 @@ export const privacyServices: PrivacyServiceDefinition[] = [
   {
     id: "launch-gate",
     category: "necessary",
-    label: "Accesso preview",
     provider: "Odora",
-    purpose:
-      "Viene usato solo quando la preview privata è attiva, per ricordare che l'accesso protetto è stato autorizzato.",
-    storage: "Cookie first-party tecnico impostato solo in modalità preview.",
     cookieNames: [LAUNCH_GATE_ACCESS_COOKIE_NAME],
     active: true,
     alwaysOn: true,
@@ -126,12 +97,7 @@ export const privacyServices: PrivacyServiceDefinition[] = [
   {
     id: "vercel-analytics",
     category: "analytics",
-    label: "Vercel Web Analytics",
     provider: "Vercel",
-    purpose:
-      "Aiuta a capire in forma aggregata quali pagine vengono usate di più e come migliora l'esperienza complessiva del sito.",
-    storage:
-      "Misurazioni aggregate fornite da Vercel Analytics; nessun cookie di marketing o remarketing è attivo nel progetto.",
     cookieNames: [],
     active: true,
   },

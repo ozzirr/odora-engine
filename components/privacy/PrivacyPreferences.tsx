@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
+import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
@@ -22,6 +24,7 @@ const statusClasses: Record<ConsentCategory, string> = {
 };
 
 export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
+  const t = useTranslations("privacyPreferences");
   const [open, setOpen] = useState(false);
   const titleId = useId();
   const descriptionId = useId();
@@ -64,10 +67,11 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
           className,
         )}
       >
-        Preferenze privacy
+        {t("openButton")}
       </button>
 
-      {open ? (
+      {open && typeof document !== "undefined"
+        ? createPortal(
         <div
           className="fixed inset-0 z-50 overflow-hidden bg-[rgba(24,20,16,0.24)] px-4 py-5 backdrop-blur-[18px] sm:px-6 sm:py-10"
           onClick={() => setOpen(false)}
@@ -85,21 +89,20 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                 <div className="flex items-start justify-between gap-4">
                   <div className="max-w-2xl">
                     <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#8a7763]">
-                      Privacy
+                      {t("eyebrow")}
                     </p>
                     <h2 id={titleId} className="mt-2 font-display text-3xl text-[#21180f]">
-                      Preferenze privacy
+                      {t("title")}
                     </h2>
                     <p id={descriptionId} className="mt-3 text-sm leading-7 text-[#685747]">
-                      Usiamo solo ciò che serve davvero per far funzionare Odora e leggere metriche
-                      aggregate. Nessun cookie di marketing o profilazione è attivo al momento.
+                      {t("description")}
                     </p>
                   </div>
 
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    aria-label="Chiudi preferenze privacy"
+                    aria-label={t("closeAriaLabel")}
                     className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#decfbd] bg-white/80 text-[#3a2e24] transition-colors hover:bg-white"
                   >
                     <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5">
@@ -127,9 +130,11 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                         >
                           <div className="flex flex-wrap items-start justify-between gap-3">
                             <div className="max-w-2xl">
-                              <h3 className="text-base font-semibold text-[#261d16]">{category.title}</h3>
+                              <h3 className="text-base font-semibold text-[#261d16]">
+                                {t(`categories.${category.key}.title`)}
+                              </h3>
                               <p className="mt-2 text-sm leading-7 text-[#685747]">
-                                {category.description}
+                                {t(`categories.${category.key}.description`)}
                               </p>
                             </div>
                             <span
@@ -138,7 +143,7 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                                 statusClasses[category.key],
                               )}
                             >
-                              {category.statusLabel}
+                              {t(`categories.${category.key}.statusLabel`)}
                             </span>
                           </div>
 
@@ -150,25 +155,25 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                                   className="rounded-[1.1rem] border border-[#efe5d8] bg-[#fcfaf6] px-4 py-3"
                                 >
                                   <p className="text-sm font-medium text-[#2b2119]">
-                                    {service.label}
+                                    {t(`services.${service.id}.label`)}
                                     <span className="ml-1 text-[#7e6854]">· {service.provider}</span>
                                   </p>
                                   <p className="mt-1 text-sm leading-6 text-[#6c5948]">
-                                    {service.purpose}
+                                    {t(`services.${service.id}.purpose`)}
                                   </p>
                                   <p className="mt-2 text-xs leading-5 text-[#7c6653]">
-                                    {service.storage}
+                                    {t(`services.${service.id}.storage`)}
                                   </p>
                                   {service.cookieNames.length ? (
                                     <p className="mt-1 text-xs leading-5 text-[#7c6653]">
-                                      Cookie / identificativi tecnici: {service.cookieNames.join(", ")}
+                                      {t("technicalIdentifiersPrefix")} {service.cookieNames.join(", ")}
                                     </p>
                                   ) : null}
                                 </div>
                               ))
                             ) : (
                               <div className="rounded-[1.1rem] border border-dashed border-[#eadfcf] bg-[#fcfaf6] px-4 py-3 text-sm leading-6 text-[#6c5948]">
-                                Nessuno strumento attivo in questa categoria.
+                                {t("emptyCategory")}
                               </div>
                             )}
                           </div>
@@ -179,12 +184,10 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
 
                   <div className="rounded-[1.5rem] border border-[#e7dac9] bg-[linear-gradient(180deg,rgba(253,249,243,0.94),rgba(247,240,231,0.98))] p-4">
                     <p className="text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-[#8a7763]">
-                      In breve
+                      {t("summaryTitle")}
                     </p>
                     <p className="mt-2 text-sm leading-7 text-[#685747]">
-                      Se in futuro attiveremo strumenti opzionali di analytics avanzati, marketing o
-                      remarketing, aggiorneremo questa interfaccia e chiederemo un consenso esplicito
-                      prima del caricamento.
+                      {t("summaryDescription")}
                     </p>
                   </div>
                 </div>
@@ -197,28 +200,30 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
                     onClick={() => setOpen(false)}
                     className="rounded-full border border-[#dfcfbc] bg-white/72 px-4 py-3 text-sm text-[#3f3126] transition-all hover:border-[#ceb89d] hover:bg-white hover:text-[#1f1914]"
                   >
-                    Privacy Policy
+                    {t("links.privacyPolicy")}
                   </Link>
                   <Link
                     href="/cookie-policy"
                     onClick={() => setOpen(false)}
                     className="rounded-full border border-[#dfcfbc] bg-white/72 px-4 py-3 text-sm text-[#3f3126] transition-all hover:border-[#ceb89d] hover:bg-white hover:text-[#1f1914]"
                   >
-                    Cookie Policy
+                    {t("links.cookiePolicy")}
                   </Link>
                   <Button
                     variant="secondary"
                     className="w-full sm:ml-auto sm:w-auto"
                     onClick={() => setOpen(false)}
                   >
-                    Chiudi
+                    {t("closeButton")}
                   </Button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : null}
+        </div>,
+        document.body,
+      )
+        : null}
     </>
   );
 }

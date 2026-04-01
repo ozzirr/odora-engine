@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect } from "react";
 import { usePathname as useActivePathname } from "@/lib/navigation";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
@@ -39,7 +39,6 @@ type AuthModalOverlayProps = {
 
 function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   const t = useTranslations("auth.login.page");
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const mode = isStandaloneAuthPage ? null : getAuthMode(searchParams.get("auth"));
@@ -64,7 +63,11 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
     }
 
     const search = params.toString();
-    router.replace(`${pathname}${search ? `?${search}` : ""}${window.location.hash}`, { scroll: false });
+    window.history.replaceState(
+      null,
+      "",
+      `${pathname}${search ? `?${search}` : ""}${window.location.hash}`,
+    );
   };
 
   const closeModal = () => {
@@ -100,13 +103,17 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
         params.delete("authNext");
         params.delete("error");
         const search = params.toString();
-        router.replace(`${pathname}${search ? `?${search}` : ""}${window.location.hash}`, { scroll: false });
+        window.history.replaceState(
+          null,
+          "",
+          `${pathname}${search ? `?${search}` : ""}${window.location.hash}`,
+        );
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, pathname, router, searchParams]);
+  }, [modalOpen, pathname, searchParams]);
 
   if (!mode) {
     return null;
