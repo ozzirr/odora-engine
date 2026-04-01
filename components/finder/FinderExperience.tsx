@@ -8,9 +8,12 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { Button } from "@/components/ui/Button";
 import {
   defaultFinderPreferences,
+  hasConfiguredFinderPreferences,
+  serializeFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
 } from "@/lib/finder";
+import { useRouter } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type FinderOptions = {
@@ -24,6 +27,11 @@ type FinderExperienceProps = {
   availableOptions: FinderOptions;
   isAuthenticated: boolean;
   initialPreferences: FinderPreferences;
+  initialResults: FinderPerfume[];
+  initialTotal: number;
+  initialHasMore: boolean;
+  initialNextOffset: number;
+  initialSubmitted: boolean;
   presetLabel?: string | null;
 };
 
@@ -81,23 +89,29 @@ export function FinderExperience({
   availableOptions,
   isAuthenticated,
   initialPreferences,
+  initialResults,
+  initialTotal,
+  initialHasMore,
+  initialNextOffset,
+  initialSubmitted,
   presetLabel,
 }: FinderExperienceProps) {
   const t = useTranslations("finder.experience");
   const taxonomyT = useTranslations("taxonomy");
+  const finderPathname = "/finder" as const;
+  const router = useRouter();
   const authStatus = useAuthStatus(isAuthenticated);
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
-  const [results, setResults] = useState<FinderPerfume[]>([]);
-  const [totalMatches, setTotalMatches] = useState(0);
-  const [nextOffset, setNextOffset] = useState(0);
-  const [hasMoreResults, setHasMoreResults] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [results, setResults] = useState<FinderPerfume[]>(initialResults);
+  const [totalMatches, setTotalMatches] = useState(initialTotal);
+  const [nextOffset, setNextOffset] = useState(initialNextOffset);
+  const [hasMoreResults, setHasMoreResults] = useState(initialHasMore);
+  const [submitted, setSubmitted] = useState(initialSubmitted);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const isFetchingMoreRef = useRef(false);
-  const hasAutoRunRef = useRef(false);
 
   const moodOptions = useMemo(
     () => withSelectedOption(availableOptions.moods, preferences.mood),
@@ -145,6 +159,15 @@ export function FinderExperience({
     taxonomyT,
   ]);
 
+  const initialPreferenceSignature = useMemo(
+    () => serializeFinderPreferences(initialPreferences),
+    [initialPreferences],
+  );
+  const currentPreferenceSignature = useMemo(
+    () => serializeFinderPreferences(preferences),
+    [preferences],
+  );
+
   const applyFinderPage = useCallback(
     (payload: FinderSearchPayload, mode: "replace" | "append") => {
       setResults((current) => {
@@ -175,53 +198,72 @@ export function FinderExperience({
     [authStatus],
   );
 
-  const runFinderSearch = useCallback(async (nextPreferences: FinderPreferences) => {
-    setIsLoading(true);
+  useEffect(() => {
+    setPreferences(initialPreferences);
+    setResults(initialResults);
+    setTotalMatches(initialTotal);
+    setNextOffset(initialNextOffset);
+    setHasMoreResults(initialHasMore);
+    setSubmitted(initialSubmitted);
     setErrorMessage(null);
-    setResults([]);
-    setTotalMatches(0);
-    setNextOffset(0);
-    setHasMoreResults(false);
+    setIsLoading(false);
+    setIsLoadingMore(false);
+    isFetchingMoreRef.current = false;
+  }, [
+    initialHasMore,
+    initialNextOffset,
+    initialPreferences,
+    initialResults,
+    initialSubmitted,
+    initialTotal,
+  ]);
 
-    try {
-      const response = await fetch("/api/finder", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          ...nextPreferences,
-          offset: 0,
-          limit: FINDER_RESULTS_PAGE_SIZE,
-        }),
-        cache: "no-store",
-      });
+  const buildFinderHref = useCallback(
+    (nextPreferences: FinderPreferences, nextPresetLabel?: string | null) => {
+      const params = new URLSearchParams();
 
-      if (!response.ok) {
-        throw new Error(`Finder request failed with status ${response.status}`);
-      }
+      if (nextPreferences.gender !== "any") params.set("gender", nextPreferences.gender);
+      if (nextPreferences.mood) params.set("mood", nextPreferences.mood);
+      if (nextPreferences.season) params.set("season", nextPreferences.season);
+      if (nextPreferences.occasion) params.set("occasion", nextPreferences.occasion);
+      if (nextPreferences.budget !== "any") params.set("budget", nextPreferences.budget);
+      if (nextPreferences.preferredNote) params.set("preferredNote", nextPreferences.preferredNote);
+      if (nextPreferences.arabicOnly) params.set("arabicOnly", "true");
+      if (nextPreferences.nicheOnly) params.set("nicheOnly", "true");
+      if (nextPresetLabel) params.set("preset", nextPresetLabel);
 
-      const payload = (await response.json()) as FinderSearchPayload;
-      applyFinderPage(payload, "replace");
-      setSubmitted(true);
-    } catch {
-      setResults([]);
-      setTotalMatches(0);
-      setNextOffset(0);
-      setHasMoreResults(false);
-      setSubmitted(true);
-      setErrorMessage(t("fallbackError"));
-    } finally {
-      setIsLoading(false);
-    }
-  }, [applyFinderPage, t]);
+      return params.size > 0
+        ? ({
+            pathname: finderPathname,
+            query: Object.fromEntries(params.entries()),
+          } as const)
+        : finderPathname;
+    },
+    [finderPathname],
+  );
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await runFinderSearch(preferences);
+    setIsLoading(true);
+    setErrorMessage(null);
+    setSubmitted(hasConfiguredFinderPreferences(preferences));
+
+    const preservePreset =
+      presetLabel && currentPreferenceSignature === initialPreferenceSignature
+        ? presetLabel
+        : null;
+
+    router.push(buildFinderHref(preferences, preservePreset));
   };
 
   const resetForm = () => {
+    if (initialSubmitted || presetLabel) {
+      setIsLoading(true);
+      setErrorMessage(null);
+      router.push(finderPathname);
+      return;
+    }
+
     setPreferences(defaultFinderPreferences);
     setResults([]);
     setTotalMatches(0);
@@ -231,16 +273,8 @@ export function FinderExperience({
     setErrorMessage(null);
     setIsLoading(false);
     setIsLoadingMore(false);
+    isFetchingMoreRef.current = false;
   };
-
-  useEffect(() => {
-    if (hasAutoRunRef.current || !hasConfiguredPreferences(initialPreferences)) {
-      return;
-    }
-
-    hasAutoRunRef.current = true;
-    void runFinderSearch(initialPreferences);
-  }, [initialPreferences, runFinderSearch]);
 
   const isCatalogLocked = !authStatus && totalMatches > results.length && results.length >= FREE_FINDER_PREVIEW_LIMIT;
   const canLoadMore = hasMoreResults && !isCatalogLocked;

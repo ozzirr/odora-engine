@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getMessages, getTranslations } from "next-intl/server";
 
 import { LegalPage } from "@/components/legal/LegalPage";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type PrivacyPageProps = {
   params: Promise<{
@@ -15,14 +16,12 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.privacy" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/privacy")[resolvedLocale],
-      languages: getAlternateLinks("/privacy"),
-    },
-  };
+    locale: resolvedLocale,
+    pathname: "/privacy",
+  });
 }
 
 export default async function PrivacyPage() {

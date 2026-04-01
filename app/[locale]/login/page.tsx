@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Container } from "@/components/layout/Container";
-import { getAlternateLinks, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type LoginPageProps = {
   params: Promise<{
@@ -25,14 +26,16 @@ export async function generateMetadata({ params }: LoginPageProps): Promise<Meta
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.login" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/login")[resolvedLocale],
-      languages: getAlternateLinks("/login"),
+    locale: resolvedLocale,
+    pathname: "/login",
+    robots: {
+      index: false,
+      follow: true,
     },
-  };
+  });
 }
 
 export default async function LoginPage({ params, searchParams }: LoginPageProps) {

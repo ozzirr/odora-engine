@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { LocaleShell } from "@/components/layout/LocaleShell";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { getAlternateLinks, hasLocale, locales } from "@/lib/i18n";
 import {
   LAUNCH_GATE_ACCESS_COOKIE_NAME,
@@ -12,6 +13,7 @@ import {
   isLaunchGateEnabled,
 } from "@/lib/launch-gate";
 import { getIsAuthenticated } from "@/lib/supabase/auth-state";
+import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
 import { getBaseSiteUrl } from "@/lib/site-url";
 
 type LocaleLayoutProps = {
@@ -66,6 +68,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
+      <StructuredData
+        data={[
+          buildOrganizationSchema(),
+          buildWebsiteSchema(locale),
+        ]}
+      />
       <LocaleShell hideChrome={hideChrome} initialIsAuthenticated={initialIsAuthenticated}>
         {children}
       </LocaleShell>

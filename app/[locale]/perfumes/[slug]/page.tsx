@@ -12,6 +12,8 @@ import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
 import {
@@ -23,10 +25,12 @@ import {
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
 import { getPopularPerfumeSlugs } from "@/lib/homepage";
+import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
-import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
+import { buildBreadcrumbSchema, buildProductSchema } from "@/lib/structured-data";
 import { formatCurrency } from "@/lib/utils";
 
 type PerfumeDetailPageProps = {
@@ -244,38 +248,47 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.perfumeDetail" });
 
   if (!isDatabaseConfigured) {
-    return {
+    return buildPageMetadata({
       title: t("fallbackTitle"),
       description: t("fallbackDescription"),
-    };
+      locale: resolvedLocale,
+      pathname: "/perfumes/[slug]",
+      params: { slug },
+    });
   }
 
   try {
     const perfume = await getPerfumeRecordBySlug(slug);
 
     if (!perfume) {
-      return {
+      return buildPageMetadata({
         title: t("notFoundTitle"),
-      };
+        locale: resolvedLocale,
+        pathname: "/perfumes/[slug]",
+        params: { slug },
+      });
     }
 
-    return {
+    return buildPageMetadata({
       title: t("title", {
         name: perfume.name,
         brand: perfume.brand?.name ?? t("unknownBrand"),
       }),
       description: getPerfumeShortText(perfume),
-      alternates: {
-        canonical: getAlternateLinks("/perfumes/[slug]", { slug })[resolvedLocale],
-        languages: getAlternateLinks("/perfumes/[slug]", { slug }),
-      },
-    };
+      locale: resolvedLocale,
+      pathname: "/perfumes/[slug]",
+      params: { slug },
+      image: perfume.imageUrl,
+    });
   } catch (error) {
     logCatalogQueryError("perfumes:metadata", error);
-    return {
+    return buildPageMetadata({
       title: t("fallbackTitle"),
       description: t("fallbackDescription"),
-    };
+      locale: resolvedLocale,
+      pathname: "/perfumes/[slug]",
+      params: { slug },
+    });
   }
 }
 
@@ -283,6 +296,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const { locale, slug } = await params;
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
   const t = await getTranslations({ locale: resolvedLocale, namespace: "perfume.detail" });
+  const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const data = await getPerfumePageData(slug);
 
   if (!data) {
@@ -325,11 +339,41 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     moods: t("overviewLabels.moods"),
     occasions: t("overviewLabels.occasions"),
   });
+  const detailPath = getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug });
+  const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
+  const brandName = perfume.brand?.name ?? t("unknown");
+  const breadcrumbItems = [
+    { label: navT("home"), href: "/" as const },
+    { label: navT("perfumes"), href: "/perfumes" as const },
+    { label: perfume.name },
+  ];
 
   return (
     <>
+      <StructuredData
+        data={[
+          buildBreadcrumbSchema([
+            { name: navT("home"), path: getLocalizedPathname(resolvedLocale, "/") },
+            { name: navT("perfumes"), path: perfumesPath },
+            { name: perfume.name, path: detailPath },
+          ]),
+          buildProductSchema({
+            name: perfume.name,
+            description: overviewText,
+            path: detailPath,
+            image: perfume.imageUrl,
+            brandName,
+            category: perfume.fragranceFamily,
+            currency: bestOffer?.bestCurrency ?? null,
+            price: bestOffer?.bestTotalPrice ?? null,
+            availability: bestOffer?.offer.availability ?? null,
+            offerUrl: bestOffer?.bestUrl ?? null,
+          }),
+        ]}
+      />
       <PerfumeDetailNavigationReady />
       <Container className="space-y-9 pt-8 pb-40 md:space-y-10 md:pt-10 md:pb-10">
+        <Breadcrumbs items={breadcrumbItems} />
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
         <section className="space-y-4">

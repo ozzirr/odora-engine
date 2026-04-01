@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server";
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapSignupAuthError } from "@/components/auth/auth-errors";
 import { Container } from "@/components/layout/Container";
-import { getAlternateLinks, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type SignupPageProps = {
   params: Promise<{
@@ -25,14 +26,16 @@ export async function generateMetadata({ params }: SignupPageProps): Promise<Met
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.signup" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/signup")[resolvedLocale],
-      languages: getAlternateLinks("/signup"),
+    locale: resolvedLocale,
+    pathname: "/signup",
+    robots: {
+      index: false,
+      follow: true,
     },
-  };
+  });
 }
 
 export default async function SignupPage({ params, searchParams }: SignupPageProps) {

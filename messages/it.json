@@ -230,8 +230,12 @@
   "finder": {
     "page": {
       "eyebrow": "Finder",
-      "title": "Trova la tua prossima fragranza in pochi minuti",
-      "subtitle": "Imposta le preferenze per mood, stagione, budget e note e scopri profumi in linea con il tuo stile."
+      "title": "Trova il profumo giusto per note, mood e budget",
+      "subtitle": "Usa il finder per partire da gusti reali e restringere il catalogo in base a note, stagione, occasione e fascia prezzo.",
+      "bodyOne": "Odora Finder ti aiuta a trasformare preferenze vaghe come profumo caldo, profumo da ufficio o profumo con vaniglia in una selezione piu utile di fragranze compatibili.",
+      "bodyTwo": "Puoi usare il finder come punto di partenza per scoprire nuove bottiglie, confrontare alternative arabe o niche e poi passare alle schede prodotto per verificare note, performance e prezzi aggiornati.",
+      "primaryCta": "Esplora il catalogo",
+      "secondaryCta": "Vedi le classifiche"
     },
     "experience": {
       "chips": {
@@ -313,8 +317,12 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalogo",
-      "title": "Scopri i profumi",
-      "subtitle": "Sfoglia il catalogo per famiglia, note e prezzo, poi restringi il campo sulle bottiglie che meritano attenzione."
+      "title": "Catalogo profumi per note, famiglia olfattiva e prezzo",
+      "subtitle": "Esplora il catalogo Odora per confrontare profumi in base a famiglia olfattiva, note principali, fascia prezzo e stile.",
+      "bodyOne": "Questa pagina raccoglie le fragranze del catalogo in una struttura pensata per confrontare piu bottiglie senza saltare tra schede dispersive. Puoi filtrare per famiglia, prezzo, note e ordinamento per arrivare piu rapidamente ai profumi davvero rilevanti.",
+      "bodyTwo": "Se sai gia che tipo di profumo vuoi, puoi usare i filtri. Se invece stai ancora cercando direzione, conviene partire dal finder o dalle classifiche curate e poi tornare qui per affinare il confronto.",
+      "primaryCta": "Usa il finder",
+      "secondaryCta": "Apri le classifiche"
     },
     "filters": {
       "title": "Filtri",
@@ -377,7 +385,11 @@
     "client": {
       "loadError": "Impossibile caricare altri profumi. Riprova tra poco.",
       "showing": "Stai vedendo {visible} fragranze su {total}",
-      "end": "Fine catalogo"
+      "end": "Fine catalogo",
+      "paginationLabel": "Paginazione catalogo",
+      "previousPage": "Pagina precedente",
+      "nextPage": "Pagina successiva",
+      "page": "Pagina {page}"
     },
     "grid": {
       "empty": "Nessuna fragranza trovata. Prova a modificare i filtri."
@@ -511,8 +523,12 @@
   "top": {
     "page": {
       "eyebrow": "Editoriale",
-      "title": "Classifiche curate di fragranze",
-      "subtitle": "Un modo piu nitido di esplorare il catalogo attraverso scelte forti per stile, performance e valore.",
+      "title": "Migliori profumi e classifiche fragranze curate",
+      "subtitle": "Esplora classifiche editoriali pensate per confrontare i migliori profumi per stile, durata, valore e identita olfattiva.",
+      "bodyOne": "Le classifiche Odora non sono semplici liste casuali: servono a orientare la scoperta quando vuoi partire da un criterio chiaro, come profumi arabi, profumi niche, profumi longevi o migliori fragranze sotto una certa soglia di prezzo.",
+      "bodyTwo": "Ogni sezione ti porta poi alle singole schede prodotto, dove puoi verificare note, impressione olfattiva e offerte disponibili. Usa questa pagina come hub editoriale e il catalogo come strumento di confronto finale.",
+      "primaryCta": "Vai al catalogo",
+      "secondaryCta": "Apri il finder",
       "sections": {
         "arabic": {
           "eyebrow": "Arabi",
@@ -875,20 +891,20 @@
   "metadata": {
     "pages": {
       "home": {
-        "title": "Odora",
-        "description": "Scoperta fragranze e confronto prezzi per aiutarti a scegliere meglio."
+        "title": "Scopri profumi, note e prezzi | Odora",
+        "description": "Confronta profumi per note, famiglia olfattiva e prezzo. Usa Odora per scoprire fragranze, confrontare offerte e trovare alternative migliori."
       },
       "finder": {
-        "title": "Fragrance Finder | Odora",
-        "description": "Usa Odora Finder per abbinare profumi per mood, stagione, budget, preferenze di note e stile."
+        "title": "Trova il profumo giusto per note, mood e budget | Odora",
+        "description": "Usa Odora Finder per trovare profumi in base a note, mood, stagione, occasione e budget, poi confronta le fragranze piu adatte al tuo stile."
       },
       "perfumes": {
-        "title": "Profumi | Odora",
-        "description": "Sfoglia i profumi per famiglia, note e prezzo, poi confronta le offerte con chiarezza."
+        "title": "Catalogo profumi per note, famiglia e prezzo | Odora",
+        "description": "Sfoglia il catalogo profumi di Odora per famiglia olfattiva, note, prezzo e stile, con accesso rapido a schede prodotto e confronto offerte."
       },
       "top": {
-        "title": "Top Fragranze | Odora",
-        "description": "Esplora le classifiche curate di Odora per stile, performance e valore."
+        "title": "Migliori profumi e classifiche fragranze | Odora",
+        "description": "Esplora classifiche di profumi curate per stile, performance, durata e valore, con selezioni dedicate a niche, arabi e best buy."
       },
       "login": {
         "title": "Accedi | Odora",
@@ -922,7 +938,7 @@
         "fallbackTitle": "Profumo | Odora",
         "fallbackDescription": "Dettagli fragranza, note e confronto prezzi su Odora.",
         "notFoundTitle": "Profumo non trovato | Odora",
-        "title": "{name} di {brand} | Odora",
+        "title": "{name} di {brand}: note, prezzo e alternative | Odora",
         "unknownBrand": "Brand sconosciuto"
       }
     }

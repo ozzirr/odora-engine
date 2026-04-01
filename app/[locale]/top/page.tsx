@@ -4,8 +4,11 @@ import { type Prisma } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { buttonStyles } from "@/components/ui/Button";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import {
   getCatalogVisibilityWhereForMode,
@@ -14,8 +17,15 @@ import {
   resolveCatalogMode,
   type CatalogMode,
 } from "@/lib/catalog";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
+import { Link } from "@/lib/navigation";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+  buildItemListSchema,
+} from "@/lib/structured-data";
 
 export const revalidate = 3600;
 
@@ -121,31 +131,78 @@ export async function generateMetadata({ params }: TopPageProps): Promise<Metada
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.top" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/top")[resolvedLocale],
-      languages: getAlternateLinks("/top"),
-    },
-  };
+    locale: resolvedLocale,
+    pathname: "/top",
+  });
 }
 
 export default async function TopPage({ params }: TopPageProps) {
   const { locale } = await params;
-  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
   const t = await getTranslations({ locale: resolvedLocale, namespace: "top.page" });
+  const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const { topArabic, topNiche, topLongLasting, topValuePicks } = await getTopPageData();
   const priceCap = 100;
+  const topPath = getLocalizedPathname(resolvedLocale, "/top");
+  const rankedPerfumes = Array.from(
+    new Map(
+      [...topArabic, ...topNiche, ...topValuePicks, ...topLongLasting].map((perfume) => [perfume.id, perfume]),
+    ).values(),
+  );
+  const breadcrumbItems = [
+    { label: navT("home"), href: "/" as const },
+    { label: navT("top") },
+  ];
 
   return (
     <Container className="space-y-12 pt-14 pb-8">
+      <StructuredData
+        data={[
+          buildCollectionPageSchema({
+            name: t("title"),
+            description: t("subtitle"),
+            path: topPath,
+            locale: resolvedLocale,
+          }),
+          buildBreadcrumbSchema([
+            { name: navT("home"), path: getLocalizedPathname(resolvedLocale, "/") },
+            { name: navT("top"), path: topPath },
+          ]),
+          buildItemListSchema({
+            name: t("title"),
+            path: topPath,
+            items: rankedPerfumes.map((perfume) => ({
+              name: `${perfume.name} ${perfume.brand?.name ?? ""}`.trim(),
+              path: getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug: perfume.slug }),
+            })),
+          }),
+        ]}
+      />
+
+      <Breadcrumbs items={breadcrumbItems} />
+
       <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
         <SectionTitle
+          as="h1"
           eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
         />
+        <div className="mt-4 max-w-3xl space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
+          <p>{t("bodyOne")}</p>
+          <p>{t("bodyTwo")}</p>
+        </div>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
+            {t("primaryCta")}
+          </Link>
+          <Link href="/finder" className={buttonStyles({ variant: "secondary", size: "sm" })}>
+            {t("secondaryCta")}
+          </Link>
+        </div>
       </div>
 
       <EditorialSection

@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { defaultLocale } from "@/lib/i18n";
+import { getBaseSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(getBaseSiteUrl()),
+};
 
 export default async function RootLayout({
   children,

@@ -4,12 +4,25 @@ import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { buttonStyles } from "@/components/ui/Button";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
-import { buildFinderPreferencesFromInput } from "@/lib/finder";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import {
+  buildFinderPreferencesFromInput,
+  hasConfiguredFinderPreferences,
+} from "@/lib/finder";
+import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
+import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
+import { Link } from "@/lib/navigation";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import {
+  buildBreadcrumbSchema,
+  buildCollectionPageSchema,
+} from "@/lib/structured-data";
 import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 export const revalidate = 3600;
@@ -90,25 +103,42 @@ function readSearchParam(
   return Array.isArray(value) ? value[0] : value;
 }
 
-export async function generateMetadata({ params }: FinderPageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: FinderPageProps): Promise<Metadata> {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.finder" });
+  const resolvedSearchParams = await searchParams;
+  const initialPreferences = buildFinderPreferencesFromInput({
+    gender: readSearchParam(resolvedSearchParams, "gender") ?? null,
+    mood: readSearchParam(resolvedSearchParams, "mood") ?? null,
+    season: readSearchParam(resolvedSearchParams, "season") ?? null,
+    occasion: readSearchParam(resolvedSearchParams, "occasion") ?? null,
+    budget: readSearchParam(resolvedSearchParams, "budget") ?? null,
+    preferredNote: readSearchParam(resolvedSearchParams, "preferredNote") ?? null,
+    arabicOnly: readSearchParam(resolvedSearchParams, "arabicOnly") ?? null,
+    nicheOnly: readSearchParam(resolvedSearchParams, "nicheOnly") ?? null,
+  });
+  const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/finder")[resolvedLocale],
-      languages: getAlternateLinks("/finder"),
-    },
-  };
+    locale: resolvedLocale,
+    pathname: "/finder",
+    robots: hasConfiguredPreferences
+      ? {
+          index: false,
+          follow: true,
+        }
+      : undefined,
+  });
 }
 
 export default async function FinderPage({ params, searchParams }: FinderPageProps) {
   const { locale } = await params;
-  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
   const t = await getTranslations({ locale: resolvedLocale, namespace: "finder.page" });
+  const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const resolvedSearchParams = await searchParams;
   const finderOptions = await getFinderOptions();
   const isAuthenticated = await getIsAuthenticated();
@@ -123,19 +153,72 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
     nicheOnly: readSearchParam(resolvedSearchParams, "nicheOnly") ?? null,
   });
   const presetLabel = readSearchParam(resolvedSearchParams, "preset") ?? null;
+  const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
+  const initialSearchResult = hasConfiguredPreferences
+    ? await getFinderSearch(initialPreferences, 0, FINDER_RESULTS_PAGE_SIZE)
+    : {
+        results: [],
+        total: 0,
+        hasMore: false,
+        nextOffset: 0,
+      };
+  const finderPath = getLocalizedPathname(resolvedLocale, "/finder");
+  const breadcrumbItems = [
+    { label: navT("home"), href: "/" as const },
+    { label: navT("finder") },
+  ];
 
   return (
     <Container className="space-y-8 pt-14">
-      <SectionTitle
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
-      />
+      {!hasConfiguredPreferences ? (
+        <StructuredData
+          data={[
+            buildCollectionPageSchema({
+              name: t("title"),
+              description: t("subtitle"),
+              path: finderPath,
+              locale: resolvedLocale,
+            }),
+            buildBreadcrumbSchema([
+              { name: navT("home"), path: getLocalizedPathname(resolvedLocale, "/") },
+              { name: navT("finder"), path: finderPath },
+            ]),
+          ]}
+        />
+      ) : null}
+
+      <Breadcrumbs items={breadcrumbItems} />
+
+      <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
+        <SectionTitle
+          as="h1"
+          eyebrow={t("eyebrow")}
+          title={t("title")}
+          subtitle={t("subtitle")}
+        />
+        <div className="max-w-3xl space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
+          <p>{t("bodyOne")}</p>
+          <p>{t("bodyTwo")}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
+            {t("primaryCta")}
+          </Link>
+          <Link href="/top" className={buttonStyles({ variant: "secondary", size: "sm" })}>
+            {t("secondaryCta")}
+          </Link>
+        </div>
+      </section>
 
       <FinderExperience
         availableOptions={finderOptions}
         isAuthenticated={isAuthenticated}
         initialPreferences={initialPreferences}
+        initialResults={initialSearchResult.results}
+        initialTotal={initialSearchResult.total}
+        initialHasMore={initialSearchResult.hasMore}
+        initialNextOffset={initialSearchResult.nextOffset}
+        initialSubmitted={hasConfiguredPreferences}
         presetLabel={presetLabel}
       />
     </Container>

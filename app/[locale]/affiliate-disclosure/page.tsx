@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getMessages, getTranslations } from "next-intl/server";
 
 import { LegalPage } from "@/components/legal/LegalPage";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type AffiliateDisclosurePageProps = {
   params: Promise<{
@@ -18,14 +19,12 @@ export async function generateMetadata({ params }: AffiliateDisclosurePageProps)
     namespace: "metadata.pages.affiliateDisclosure",
   });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/affiliate-disclosure")[resolvedLocale],
-      languages: getAlternateLinks("/affiliate-disclosure"),
-    },
-  };
+    locale: resolvedLocale,
+    pathname: "/affiliate-disclosure",
+  });
 }
 
 export default async function AffiliateDisclosurePage() {

@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 
 import { isLaunchGateEnabled } from "@/lib/launch-gate";
+import { toAbsoluteUrl } from "@/lib/metadata";
+import { getBaseSiteUrl } from "@/lib/site-url";
 
 export default function robots(): MetadataRoute.Robots {
   if (isLaunchGateEnabled()) {
@@ -9,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         disallow: "/",
       },
+      sitemap: toAbsoluteUrl("/sitemap.xml"),
+      host: getBaseSiteUrl(),
     };
   }
 
@@ -17,5 +21,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
+    sitemap: toAbsoluteUrl("/sitemap.xml"),
+    host: getBaseSiteUrl(),
   };
 }

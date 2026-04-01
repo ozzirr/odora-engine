@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getMessages, getTranslations } from "next-intl/server";
 
 import { LegalPage } from "@/components/legal/LegalPage";
-import { getAlternateLinks, hasLocale } from "@/lib/i18n";
+import { hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 
 type CookiePolicyPageProps = {
   params: Promise<{
@@ -15,14 +16,12 @@ export async function generateMetadata({ params }: CookiePolicyPageProps): Promi
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.cookiePolicy" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/cookie-policy")[resolvedLocale],
-      languages: getAlternateLinks("/cookie-policy"),
-    },
-  };
+    locale: resolvedLocale,
+    pathname: "/cookie-policy",
+  });
 }
 
 export default async function CookiePolicyPage() {

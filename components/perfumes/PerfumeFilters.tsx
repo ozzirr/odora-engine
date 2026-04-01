@@ -66,6 +66,8 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
       params.set(key, value);
     }
 
+    params.delete("page");
+
     const query = Object.fromEntries(params.entries());
     const nextHref = (
       params.size > 0 ? { pathname: filtersPathname, query } : filtersPathname

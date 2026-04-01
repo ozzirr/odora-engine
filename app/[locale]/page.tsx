@@ -16,7 +16,8 @@ import {
   toHomeSpotlight,
   toPerfumeCardItem,
 } from "@/lib/homepage";
-import { getAlternateLinks, hasLocale, type AppLocale } from "@/lib/i18n";
+import { hasLocale, type AppLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 import {
   LAUNCH_GATE_ACCESS_COOKIE_NAME,
   hasLaunchGateAccess,
@@ -35,31 +36,29 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.home" });
+  const title = isLaunchGateEnabled()
+    ? resolvedLocale === "it"
+      ? "Odora apre presto"
+      : "Odora is opening soon"
+    : t("title");
+  const description = isLaunchGateEnabled()
+    ? resolvedLocale === "it"
+      ? "Coming soon privato con accesso riservato tramite password."
+      : "Private coming soon page with password-protected access."
+    : t("description");
 
-  return {
-    title: isLaunchGateEnabled()
-      ? resolvedLocale === "it"
-        ? "Odora apre presto"
-        : "Odora is opening soon"
-      : t("title"),
-    description: isLaunchGateEnabled()
-      ? resolvedLocale === "it"
-        ? "Coming soon privato con accesso riservato tramite password."
-        : "Private coming soon page with password-protected access."
-      : t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/")[resolvedLocale],
-      languages: getAlternateLinks("/"),
-    },
-    ...(isLaunchGateEnabled()
+  return buildPageMetadata({
+    title,
+    description,
+    locale: resolvedLocale,
+    pathname: "/",
+    robots: isLaunchGateEnabled()
       ? {
-          robots: {
-            index: false,
-            follow: false,
-          },
+          index: false,
+          follow: false,
         }
-      : {}),
-  };
+      : undefined,
+  });
 }
 
 export default async function HomePage({ params }: HomePageProps) {

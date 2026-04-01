@@ -230,8 +230,12 @@
   "finder": {
     "page": {
       "eyebrow": "Finder",
-      "title": "Find your next fragrance in minutes",
-      "subtitle": "Set your preferences across mood, season, budget, and notes to discover perfumes that match your style."
+      "title": "Find the right perfume by notes, mood, and budget",
+      "subtitle": "Use the finder to narrow the catalog by real fragrance preferences including notes, season, occasion, and price range.",
+      "bodyOne": "Odora Finder helps turn broad ideas such as warm perfume, office fragrance, or vanilla perfume into a more useful shortlist of matching scents.",
+      "bodyTwo": "You can use Finder as a discovery starting point, compare Arabic or niche options, and then move into product pages to inspect notes, performance, and current pricing.",
+      "primaryCta": "Browse the catalog",
+      "secondaryCta": "View rankings"
     },
     "experience": {
       "chips": {
@@ -313,8 +317,12 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalog",
-      "title": "Discover perfumes",
-      "subtitle": "Browse the catalog by family, notes, and price, then narrow in on the bottles worth your attention."
+      "title": "Perfume catalog by notes, fragrance family, and price",
+      "subtitle": "Explore the Odora catalog to compare perfumes by fragrance family, key notes, price range, and style.",
+      "bodyOne": "This page organizes the catalog so you can compare multiple fragrances without bouncing across scattered product pages. Filter by family, price, notes, and sort order to get to the perfumes that actually deserve attention.",
+      "bodyTwo": "If you already know what kind of perfume you want, start with the filters. If you still need direction, use Finder or the curated rankings first and then return here to refine the comparison.",
+      "primaryCta": "Use Finder",
+      "secondaryCta": "Open rankings"
     },
     "filters": {
       "title": "Filters",
@@ -377,7 +385,11 @@
     "client": {
       "loadError": "Unable to load more fragrances. Retry in a moment.",
       "showing": "Showing {visible} of {total} fragrances",
-      "end": "End of catalog"
+      "end": "End of catalog",
+      "paginationLabel": "Catalog pagination",
+      "previousPage": "Previous page",
+      "nextPage": "Next page",
+      "page": "Page {page}"
     },
     "grid": {
       "empty": "No fragrances found. Try adjusting your filters."
@@ -511,8 +523,12 @@
   "top": {
     "page": {
       "eyebrow": "Editorial",
-      "title": "Curated fragrance rankings",
-      "subtitle": "A sharper way to explore the catalog through standout picks for style, performance, and value.",
+      "title": "Best perfumes and curated fragrance rankings",
+      "subtitle": "Explore editorial rankings built to compare the best perfumes by style, longevity, value, and fragrance identity.",
+      "bodyOne": "Odora rankings are not generic listicles. They are built to guide discovery when you want a clear starting point such as Arabic perfumes, niche perfumes, long-lasting fragrances, or the best perfumes under a target budget.",
+      "bodyTwo": "Each section leads into individual product pages where you can inspect notes, scent profile, and available offers. Use this page as your editorial hub and the catalog as your final comparison layer.",
+      "primaryCta": "Go to catalog",
+      "secondaryCta": "Open Finder",
       "sections": {
         "arabic": {
           "eyebrow": "Arabic",
@@ -875,20 +891,20 @@
   "metadata": {
     "pages": {
       "home": {
-        "title": "Odora",
-        "description": "Fragrance discovery and price comparison to help you choose better."
+        "title": "Discover perfumes, notes, and prices | Odora",
+        "description": "Compare perfumes by notes, fragrance family, and price. Use Odora to discover fragrances, compare offers, and find better alternatives."
       },
       "finder": {
-        "title": "Fragrance Finder | Odora",
-        "description": "Use Odora Finder to match perfumes by mood, season, budget, note preferences, and fragrance style."
+        "title": "Find the right perfume by notes, mood, and budget | Odora",
+        "description": "Use Odora Finder to discover perfumes by notes, mood, season, occasion, and budget, then compare the fragrances that best match your style."
       },
       "perfumes": {
-        "title": "Perfumes | Odora",
-        "description": "Browse perfumes by family, notes, and price, then compare offers with clarity."
+        "title": "Perfume catalog by notes, family, and price | Odora",
+        "description": "Browse the Odora perfume catalog by fragrance family, notes, price, and style, with direct access to product pages and offer comparison."
       },
       "top": {
-        "title": "Top Fragrances | Odora",
-        "description": "Explore Odora’s curated fragrance rankings by style, performance, and value."
+        "title": "Best perfumes and fragrance rankings | Odora",
+        "description": "Explore curated perfume rankings by style, performance, longevity, and value, including niche, Arabic, and best-buy fragrance picks."
       },
       "login": {
         "title": "Log in | Odora",
@@ -922,7 +938,7 @@
         "fallbackTitle": "Perfume | Odora",
         "fallbackDescription": "Fragrance details, notes, and price comparison on Odora.",
         "notFoundTitle": "Perfume not found | Odora",
-        "title": "{name} by {brand} | Odora",
+        "title": "{name} by {brand}: notes, price, and alternatives | Odora",
         "unknownBrand": "Unknown brand"
       }
     }

@@ -64,10 +64,11 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
               </div>
 
               {(() => {
-                const hasBestPrice = perfume.bestPrice != null && perfume.currency;
+                const bestPrice = perfume.bestPrice;
+                const currency = perfume.currency;
                 const footerAction = perfume.hasOffer ? t("viewOffers") : t("seeProductDetails");
 
-                if (hasBestPrice) {
+                if (bestPrice != null && currency != null) {
                   return (
                     <div className="flex items-end justify-between gap-3 rounded-[1.2rem] border border-[#e8dccb] bg-[#fbf8f2] px-4 py-3">
                       <div className="min-w-0 flex-1">
@@ -75,7 +76,7 @@ export function TrendingNow({ perfumes }: TrendingNowProps) {
                           {t("bestPrice")}
                         </p>
                         <p className="mt-1 text-lg font-semibold leading-none text-[#1d1712] sm:leading-tight">
-                          {formatCurrency(perfume.bestPrice, perfume.currency, locale as "it" | "en")}
+                          {formatCurrency(bestPrice, currency, locale as "it" | "en")}
                         </p>
                       </div>
                       <p

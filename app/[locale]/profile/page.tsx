@@ -6,7 +6,8 @@ import { signOut } from "@/app/profile/actions";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { LogoutButton } from "@/components/profile/LogoutButton";
 import { Container } from "@/components/layout/Container";
-import { getAlternateLinks, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { buildPageMetadata } from "@/lib/metadata";
 import { getCurrentUserSummary } from "@/lib/supabase/auth-state";
 
 export const dynamic = "force-dynamic";
@@ -22,14 +23,16 @@ export async function generateMetadata({ params }: ProfilePageProps): Promise<Me
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.profile" });
 
-  return {
+  return buildPageMetadata({
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: getAlternateLinks("/profile")[resolvedLocale],
-      languages: getAlternateLinks("/profile"),
+    locale: resolvedLocale,
+    pathname: "/profile",
+    robots: {
+      index: false,
+      follow: true,
     },
-  };
+  });
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
