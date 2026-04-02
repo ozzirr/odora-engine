@@ -95,7 +95,7 @@ export async function runPrismaOperations<const T extends readonly unknown[]>(
   factories: { [K in keyof T]: AsyncOperationFactory<T[K]> },
 ): Promise<T> {
   if (!shouldSerializePrismaOperations) {
-    return Promise.all(factories.map((factory) => factory())) as Promise<T>;
+    return Promise.all(factories.map((factory) => factory())) as unknown as Promise<T>;
   }
 
   const results: unknown[] = [];
@@ -104,7 +104,7 @@ export async function runPrismaOperations<const T extends readonly unknown[]>(
     results.push(await factory());
   }
 
-  return results as T;
+  return results as unknown as T;
 }
 
 function createPrismaClient() {

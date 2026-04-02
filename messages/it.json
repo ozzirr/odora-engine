@@ -247,6 +247,32 @@
       "cta": "Esplora collezione"
     }
   },
+  "notFound": {
+    "eyebrow": "Pagina non disponibile",
+    "title": "Quello che stavi cercando non e piu qui, ma la prossima fragranza potrebbe esserlo.",
+    "description": "La pagina puo essere stata rimossa, aggiornata o non essere piu disponibile. Intanto puoi ripartire dal Finder, sfogliare il catalogo e continuare da una selezione reale di profumi Odora.",
+    "primaryCta": "Apri Finder",
+    "secondaryCta": "Sfoglia catalogo",
+    "helperCards": {
+      "finder": {
+        "title": "Riparti da note e mood",
+        "description": "Usa il Finder per restringere il catalogo con preferenze reali, budget e stile."
+      },
+      "catalog": {
+        "title": "Scopri alternative vere",
+        "description": "Apri altri profumi del catalogo senza ricominciare da zero e continua la ricerca da qui."
+      },
+      "compare": {
+        "title": "Confronta con piu chiarezza",
+        "description": "Tieni insieme famiglia olfattiva, retailer e prezzo in un flusso piu pulito."
+      }
+    },
+    "alternatives": {
+      "eyebrow": "Alternative da scoprire",
+      "title": "Altri profumi da cui ripartire",
+      "subtitle": "Se questo percorso si interrompe qui, continua da una selezione attuale del catalogo Odora."
+    }
+  },
   "finder": {
     "page": {
       "eyebrow": "Finder",

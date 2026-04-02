@@ -77,16 +77,13 @@ export default async function HomePage({ params }: HomePageProps) {
   }
 
   const homepageData = await getHomepageData();
-  const heroPreviews = homepageData.heroSpotlights.map((perfume, index) =>
-    toHomeSpotlight(perfume, index === 0 ? "heroPick" : "spotlight"),
-  );
   const trendingPerfumes = homepageData.trending.map((perfume) =>
     toHomeSpotlight(perfume, "trending"),
   );
 
   return (
     <>
-      <Hero previews={heroPreviews} />
+      <Hero />
 
       <Container>
         <TrendingNow perfumes={trendingPerfumes} />

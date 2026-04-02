@@ -135,65 +135,64 @@ async function getPerfumePageDataUncached(slug: string, catalogMode: CatalogMode
   }
 
   const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+  const perfume = await getPerfumeRecordBySlugUncached(slug, catalogMode);
+
+  if (!perfume) {
+    return null;
+  }
+
+  const noteSlugs = Array.from(
+    new Set(
+      perfume.notes
+        .map((item) => item.note?.slug)
+        .filter((value): value is string => Boolean(value)),
+    ),
+  ).slice(0, 8);
+  const moodSlugs = Array.from(
+    new Set(
+      perfume.moods
+        .map((item) => item.mood?.slug)
+        .filter((value): value is string => Boolean(value)),
+    ),
+  ).slice(0, 5);
+  const discoveryClauses: Prisma.PerfumeWhereInput[] = [
+    { fragranceFamily: perfume.fragranceFamily },
+    { gender: perfume.gender },
+    { isArabic: perfume.isArabic },
+    { isNiche: perfume.isNiche },
+    ...(moodSlugs.length > 0
+      ? [
+          {
+            moods: {
+              some: {
+                mood: {
+                  slug: {
+                    in: moodSlugs,
+                  },
+                },
+              },
+            },
+          } satisfies Prisma.PerfumeWhereInput,
+        ]
+      : []),
+    ...(noteSlugs.length > 0
+      ? [
+          {
+            notes: {
+              some: {
+                note: {
+                  slug: {
+                    in: noteSlugs,
+                  },
+                },
+              },
+            },
+          } satisfies Prisma.PerfumeWhereInput,
+        ]
+      : []),
+  ];
 
   try {
-    const perfume = await getPerfumeRecordBySlugUncached(slug, catalogMode);
-
-    if (!perfume) {
-      return null;
-    }
-
-    const noteSlugs = Array.from(
-      new Set(
-        perfume.notes
-          .map((item) => item.note?.slug)
-          .filter((value): value is string => Boolean(value)),
-      ),
-    ).slice(0, 8);
-    const moodSlugs = Array.from(
-      new Set(
-        perfume.moods
-          .map((item) => item.mood?.slug)
-          .filter((value): value is string => Boolean(value)),
-      ),
-    ).slice(0, 5);
-    const discoveryClauses: Prisma.PerfumeWhereInput[] = [
-      { fragranceFamily: perfume.fragranceFamily },
-      { gender: perfume.gender },
-      { isArabic: perfume.isArabic },
-      { isNiche: perfume.isNiche },
-      ...(moodSlugs.length > 0
-        ? [
-            {
-              moods: {
-                some: {
-                  mood: {
-                    slug: {
-                      in: moodSlugs,
-                    },
-                  },
-                },
-              },
-            } satisfies Prisma.PerfumeWhereInput,
-          ]
-        : []),
-      ...(noteSlugs.length > 0
-        ? [
-            {
-              notes: {
-                some: {
-                  note: {
-                    slug: {
-                      in: noteSlugs,
-                    },
-                  },
-                },
-              },
-            } satisfies Prisma.PerfumeWhereInput,
-          ]
-        : []),
-    ];
-
     const allPerfumes = await prisma.perfume.findMany({
       where: mergePerfumeWhere(
         {
@@ -214,8 +213,11 @@ async function getPerfumePageDataUncached(slug: string, catalogMode: CatalogMode
       allPerfumes,
     };
   } catch (error) {
-    logCatalogQueryError("perfumes:detail", error);
-    return null;
+    logCatalogQueryError("perfumes:detail:discovery", error);
+    return {
+      perfume,
+      allPerfumes: [],
+    };
   }
 }
 

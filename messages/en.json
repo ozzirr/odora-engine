@@ -247,6 +247,32 @@
       "cta": "Explore collection"
     }
   },
+  "notFound": {
+    "eyebrow": "Page unavailable",
+    "title": "What you were looking for is no longer here, but the next fragrance still might be.",
+    "description": "This page may have been removed, updated, or may no longer be available. In the meantime you can jump back into Finder, browse the catalog, and continue from a real edit of perfumes on Odora.",
+    "primaryCta": "Open Finder",
+    "secondaryCta": "Browse catalog",
+    "helperCards": {
+      "finder": {
+        "title": "Restart from notes and mood",
+        "description": "Use Finder to narrow the catalog with real preferences, budget, and style."
+      },
+      "catalog": {
+        "title": "Explore real alternatives",
+        "description": "Open other perfumes from the catalog without starting the search from scratch."
+      },
+      "compare": {
+        "title": "Compare with more clarity",
+        "description": "Keep fragrance family, retailer, and price in one cleaner flow."
+      }
+    },
+    "alternatives": {
+      "eyebrow": "Alternatives worth exploring",
+      "title": "Other perfumes to continue from",
+      "subtitle": "If this path ends here, continue from a current selection inside the Odora catalog."
+    }
+  },
   "finder": {
     "page": {
       "eyebrow": "Finder",
