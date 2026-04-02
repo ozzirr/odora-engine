@@ -23,19 +23,23 @@ type PerfumesClientProps = {
 
 function PerfumeGridSkeleton({ count = 6 }: { count?: number }) {
   return (
-    <div className="grid grid-cols-2 gap-5 lg:grid-cols-3">
+    <div className="space-y-3">
       {Array.from({ length: count }).map((_, index) => (
         <div
           key={`perfume-skeleton-${index}`}
-          className="overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white"
+          className="grid min-h-[12.5rem] grid-cols-[8.5rem_minmax(0,1fr)] overflow-hidden rounded-[1.75rem] border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.16)] sm:grid-cols-[11rem_minmax(0,1fr)]"
         >
-          <div className="h-56 animate-pulse bg-[#f1e8dd]" />
-          <div className="space-y-3 p-5">
-            <div className="h-3 w-28 animate-pulse rounded bg-[#ede1d3]" />
-            <div className="h-6 w-2/3 animate-pulse rounded bg-[#ece0d1]" />
+          <div className="animate-pulse bg-[#f0e7da]" />
+          <div className="space-y-3 p-4 sm:p-5">
+            <div className="h-3 w-24 animate-pulse rounded-full bg-[#ede1d3]" />
             <div className="space-y-2">
-              <div className="h-4 w-full animate-pulse rounded bg-[#f0e5d8]" />
-              <div className="h-4 w-5/6 animate-pulse rounded bg-[#f0e5d8]" />
+              <div className="h-8 w-3/4 animate-pulse rounded-full bg-[#ece0d1]" />
+              <div className="h-4 w-full animate-pulse rounded-full bg-[#f0e5d8]" />
+              <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#f0e5d8]" />
+            </div>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <div className="h-8 w-24 animate-pulse rounded-full bg-[#efe3d2]" />
+              <div className="h-8 w-32 animate-pulse rounded-full bg-[#efe3d2]" />
             </div>
           </div>
         </div>
@@ -161,7 +165,7 @@ export function PerfumesClient({
         <p className="text-sm text-[#615140]">
           {t("showing", { visible: perfumes.length, total: totalCount })}
         </p>
-        <PerfumeGrid perfumes={perfumes} cardVariant="catalog" desktopColumns={3} />
+        <PerfumeGrid perfumes={perfumes} cardVariant="finder" layout="list" />
 
         {loadError ? (
           <div className="rounded-xl border border-[#e3d5c4] bg-[#fcf7f0] px-4 py-3 text-sm text-[#654f3f]">
@@ -169,7 +173,7 @@ export function PerfumesClient({
           </div>
         ) : null}
 
-        {isLoadingMore ? <PerfumeGridSkeleton count={Math.min(6, pageSize)} /> : null}
+        {isLoadingMore ? <PerfumeGridSkeleton count={Math.min(3, pageSize)} /> : null}
 
         {isCatalogLocked ? <CatalogGate previewLimit={FREE_CATALOG_PREVIEW_LIMIT} /> : null}
 

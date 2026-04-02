@@ -106,14 +106,14 @@ export function BestOfferCard({
         </div>
 
         <div className="mt-3 rounded-[1.45rem] border border-[#ded0bf] bg-[linear-gradient(135deg,rgba(255,255,255,0.88),rgba(250,242,232,0.9))] px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_16px_38px_-34px_rgba(56,40,25,0.32)]">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-4">
             <div className="min-w-0">
-              <p className="mt-1.5 font-display text-[2.55rem] leading-none text-[#1f1710] sm:text-[2.9rem]">
+              <p className="mt-1.5 font-display text-[2.25rem] leading-none text-[#1f1710] sm:text-[2.9rem]">
                 {totalPrice}
               </p>
             </div>
 
-            <div className="flex flex-col items-end gap-1.5 text-right">
+            <div className="flex flex-col items-start gap-1.5 text-left sm:items-end sm:text-right">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
                 {t("selectedRetailer")}
               </p>

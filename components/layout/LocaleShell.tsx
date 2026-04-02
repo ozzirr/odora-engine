@@ -9,7 +9,6 @@ import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PerfumeDetailNavigationProvider } from "@/components/perfumes/PerfumeDetailNavigation";
-import { PrivacyConsentManager } from "@/components/privacy/PrivacyConsentManager";
 import {
   buildAuthModalUrl,
   buildPathWithoutAuthModal,
@@ -200,8 +199,6 @@ export function LocaleShell({
           <main>{children}</main>
           {hideChrome ? null : <Footer />}
         </div>
-
-        <PrivacyConsentManager />
 
         {hideChrome ? null : (
           <Suspense fallback={null}>

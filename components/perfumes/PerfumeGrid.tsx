@@ -8,6 +8,8 @@ type PerfumeGridProps = {
   cardVariant?: "default" | "catalog" | "finder";
   desktopColumns?: 3 | 4;
   layout?: "grid" | "list";
+  animateItems?: boolean;
+  itemAnimationKey?: number | string;
 };
 
 export function PerfumeGrid({
@@ -15,6 +17,8 @@ export function PerfumeGrid({
   cardVariant = "default",
   desktopColumns = 4,
   layout = "grid",
+  animateItems = false,
+  itemAnimationKey = "default",
 }: PerfumeGridProps) {
   const t = useTranslations("catalog.grid");
 
@@ -35,8 +39,24 @@ export function PerfumeGrid({
           : `grid-cols-2 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`,
       )}
     >
-      {perfumes.map((perfume) => (
-        <PerfumeCard key={perfume.id} perfume={perfume} variant={cardVariant} />
+      {perfumes.map((perfume, index) => (
+        <div
+          key={animateItems ? `${itemAnimationKey}-${perfume.id}` : perfume.id}
+          className={cn(
+            animateItems
+              ? "finder-card-animate opacity-0 translate-y-5 [animation:finder-card-in_480ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
+              : undefined,
+          )}
+          style={
+            animateItems
+              ? {
+                  animationDelay: `${Math.min(index, 8) * 70}ms`,
+                }
+              : undefined
+          }
+        >
+          <PerfumeCard perfume={perfume} variant={cardVariant} />
+        </div>
       ))}
     </div>
   );

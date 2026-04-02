@@ -14,6 +14,7 @@ const staticPathnames: AppPathname[] = [
   "/cookie-policy",
   "/terms",
   "/affiliate-disclosure",
+  "/contact",
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

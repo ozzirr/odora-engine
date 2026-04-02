@@ -1,0 +1,4012 @@
+{
+  "generatedAt": "2026-04-02T13:52:57.908Z",
+  "summary": {
+    "totalMissingRows": 50,
+    "rowsFromSeed": 7,
+    "longevityFromNeighbors": 43,
+    "sillageFromNeighbors": 43,
+    "versatilityFromNeighbors": 43
+  },
+  "rows": [
+    {
+      "id": 4865,
+      "slug": "amouage-guidance",
+      "brand": "Amouage",
+      "name": "Guidance",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 5.775,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 5.758333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 5.679761904761905,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 5.6647435897435905,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 5.658333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 5.658333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 5.646428571428571,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4864,
+      "slug": "amouage-reflection-man",
+      "brand": "Amouage",
+      "name": "Reflection Man",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Amouage/Reflection_Man",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.257051282051282,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.217307692307692,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 7.217307692307692,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.175,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 7.141666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.117307692307692,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 7.117307692307692,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4834,
+      "slug": "bvlgari-man-in-black",
+      "brand": "Bvlgari",
+      "name": "Man in Black",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 8.775,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 8.775,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 8.765625,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 8.765625,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.757352941176471,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 8.741666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 8.732291666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4857,
+      "slug": "byredo-gypsy-water",
+      "brand": "Byredo",
+      "name": "Gypsy Water",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: liquides-imaginaires-liquide-2022 (7/7/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: liquides-imaginaires-liquide-2022 (7/7/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: liquides-imaginaires-liquide-2022 (7/7/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.5,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.466666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.433333333333334,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.433333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.366666666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.346428571428571,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.346428571428571,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4845,
+      "slug": "carolina-herrera-good-girl",
+      "brand": "Carolina Herrera",
+      "name": "Good Girl",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); parfums-de-marly-althair (8/7/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.291666666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.196428571428571,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.175,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 7.175,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.163095238095238,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 7.163095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 7.141666666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4823,
+      "slug": "chanel-allure-homme-sport",
+      "brand": "Chanel",
+      "name": "Allure Homme Sport",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.65625,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 8.51474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 8.51474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.500641025641025,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 8.48452380952381,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-pour-monsieur-eau-de-toilette",
+          "name": "Pour Monsieur Eau de Toilette",
+          "similarity": 8.481410256410257,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 8.448076923076924,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4822,
+      "slug": "chanel-bleu-de-chanel-eau-de-parfum",
+      "brand": "Chanel",
+      "name": "Bleu de Chanel Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Chanel/Bleu_de_Chanel_Eau_de_Parfum",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Bleu de Chanel Eau de Parfum"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Bleu de Chanel Eau de Parfum"
+      },
+      "proposedVersatility": {
+        "value": 9,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Bleu de Chanel Eau de Parfum"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 8.65,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 8.583333333333334,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-pour-monsieur-eau-de-toilette",
+          "name": "Pour Monsieur Eau de Toilette",
+          "similarity": 8.549999999999999,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.522916666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 8.516666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-platinum-egoiste-eau-de-toilette",
+          "name": "Platinum Égoïste Eau de Toilette",
+          "similarity": 8.516666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-eau-de-toilette",
+          "name": "Allure Homme Eau de Toilette",
+          "similarity": 8.483333333333333,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4838,
+      "slug": "chanel-chance-eau-tendre",
+      "brand": "Chanel",
+      "name": "Chance Eau Tendre",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); chanel-allure-homme-edition-blanche-eau-de-parfum (7/7/8); chanel-allure-homme-sport-eau-extreme (7/7/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 7.65625,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 7.51474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 7.51474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.484523809523809,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-pour-monsieur-eau-de-toilette",
+          "name": "Pour Monsieur Eau de Toilette",
+          "similarity": 7.481410256410256,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 7.448076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-platinum-egoiste-eau-de-toilette",
+          "name": "Platinum Égoïste Eau de Toilette",
+          "similarity": 7.448076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4837,
+      "slug": "chanel-coco-mademoiselle",
+      "brand": "Chanel",
+      "name": "Coco Mademoiselle",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Coco Mademoiselle Eau de Parfum"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Coco Mademoiselle Eau de Parfum"
+      },
+      "proposedVersatility": {
+        "value": 9,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Chanel Coco Mademoiselle Eau de Parfum"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 7.448076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 7.381410256410256,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 7.374019607843137,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-pour-monsieur-eau-de-toilette",
+          "name": "Pour Monsieur Eau de Toilette",
+          "similarity": 7.348076923076923,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 7.31474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-platinum-egoiste-eau-de-toilette",
+          "name": "Platinum Égoïste Eau de Toilette",
+          "similarity": 7.31474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-eau-de-toilette",
+          "name": "Allure Homme Eau de Toilette",
+          "similarity": 7.281410256410257,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4860,
+      "slug": "creed-aventus",
+      "brand": "Creed",
+      "name": "Aventus",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Creed/aventus",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.213095238095238,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.172916666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.172916666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.1656249999999995,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 7.1656249999999995,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 7.131410256410256,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.075,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4861,
+      "slug": "creed-silver-mountain-water",
+      "brand": "Creed",
+      "name": "Silver Mountain Water",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Creed/Silver_Mountain_Water",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); liquides-imaginaires-liquide-2022 (7/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); liquides-imaginaires-liquide-2022 (7/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); liquides-imaginaires-liquide-2022 (7/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.346428571428571,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.324999999999999,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.298076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.26474358974359,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.231410256410257,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.231410256410256,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.175,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4821,
+      "slug": "dior-fahrenheit",
+      "brand": "Dior",
+      "name": "Fahrenheit",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 9.140384615384615,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 9.03397435897436,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-fahrenheit-parfum",
+          "name": "Fahrenheit Parfum",
+          "similarity": 8.821969696969697,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 8.558333333333334,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 8.533974358974358,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 8.525,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 8.500641025641027,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4839,
+      "slug": "dior-jadore-eau-de-parfum",
+      "brand": "Dior",
+      "name": "Jadore Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Dior/J_Adore",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-bois-dargent-eau-de-parfum (8/7/7); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-bois-dargent-eau-de-parfum (8/7/7); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-bois-dargent-eau-de-parfum (8/7/7); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.55625,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.508333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.482291666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-fahrenheit-parfum",
+          "name": "Fahrenheit Parfum",
+          "similarity": 7.381410256410256,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.2942307692307695,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.290476190476191,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.2250000000000005,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4840,
+      "slug": "dior-miss-dior-eau-de-parfum",
+      "brand": "Dior",
+      "name": "Miss Dior Eau de Parfum",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-bois-dargent-eau-de-parfum (8/7/7); dior-eau-sauvage-parfum-2017 (8/7/8); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-bois-dargent-eau-de-parfum (8/7/7); dior-eau-sauvage-parfum-2017 (8/7/8); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-bois-dargent-eau-de-parfum (8/7/7); dior-eau-sauvage-parfum-2017 (8/7/8); dior-fahrenheit-parfum (9/8/6)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.641666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.622916666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-fahrenheit-parfum",
+          "name": "Fahrenheit Parfum",
+          "similarity": 7.51474358974359,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.360897435897435,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.348958333333333,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.291666666666666,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.291666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4820,
+      "slug": "dior-sauvage-elixir",
+      "brand": "Dior",
+      "name": "Sauvage Elixir",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Dior/sauvage-elixir",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Dior Sauvage Elixir"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Dior Sauvage Elixir"
+      },
+      "proposedVersatility": {
+        "value": 6,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Dior Sauvage Elixir"
+      },
+      "neighbors": [
+        {
+          "slug": "yves-saint-laurent-la-nuit-de-lhomme-eau-de-toilette",
+          "name": "La Nuit de L'Homme Eau de Toilette",
+          "similarity": 7.1390468227424755,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "louis-vuitton-orage",
+          "name": "Orage",
+          "similarity": 7.005713489409143,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "yves-saint-laurent-la-nuit-de-lhomme-bleu-electrique",
+          "name": "La Nuit de L'Homme Bleu Électrique",
+          "similarity": 6.999303232998885,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "hermes-terre-dhermes-parfum",
+          "name": "Terre d'Hermès Parfum",
+          "similarity": 6.530072463768117,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dolce-and-gabbana-the-one-for-men-2015-eau-de-parfum",
+          "name": "The One for Men (2015) Eau de Parfum",
+          "similarity": 6.350167224080268,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "clive-christian-jump-up-and-kiss-me-hedonistic",
+          "name": "Jump Up and Kiss Me Hedonistic",
+          "similarity": 6.265085638998682,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 6.24672619047619,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4859,
+      "slug": "diptyque-eau-duelle-eau-de-parfum",
+      "brand": "Diptyque",
+      "name": "Eau Duelle Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Diptyque/Eau_Duelle_Eau_de_Parfum",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Eau Duelle Eau de Parfum"
+      },
+      "proposedSillage": {
+        "value": 6,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Eau Duelle Eau de Parfum"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Eau Duelle Eau de Parfum"
+      },
+      "neighbors": [
+        {
+          "slug": "al-haramain-haramain-amber-oud-tobacco-edition",
+          "name": "Haramain Amber Oud Tobacco Edition",
+          "similarity": 7.444230769230769,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "ormonde-jayne-2-nawab-of-oudh-intensivo",
+          "name": "2. Nawab of Oudh Intensivo",
+          "similarity": 7.285714285714286,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "pana-dora-oud-republic",
+          "name": "Oud Republic",
+          "similarity": 7.252380952380952,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "maison-francis-kurkdjian-oud-satin-mood-eau-de-parfum",
+          "name": "Oud Satin Mood Eau de Parfum",
+          "similarity": 7.246428571428571,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "attar-collection-khaltat-night-eau-de-parfum",
+          "name": "Khaltat Night Eau de Parfum",
+          "similarity": 7.208333333333333,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "widian-sahara",
+          "name": "Sahara",
+          "similarity": 7.208333333333333,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "xerjoff-alexandria-ii-parfum",
+          "name": "Alexandria II Parfum",
+          "similarity": 7.190686274509804,
+          "longevityScore": 10,
+          "sillageScore": 10,
+          "versatilityScore": 5
+        }
+      ]
+    },
+    {
+      "id": 4858,
+      "slug": "diptyque-philosykos",
+      "brand": "Diptyque",
+      "name": "Philosykos",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 6,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Philosykos Eau de Toilette"
+      },
+      "proposedSillage": {
+        "value": 5,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Philosykos Eau de Toilette"
+      },
+      "proposedVersatility": {
+        "value": 8,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Diptyque Philosykos Eau de Toilette"
+      },
+      "neighbors": [
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.433333333333334,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.366666666666666,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.344230769230769,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.333333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.307142857142858,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.3,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.233333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4851,
+      "slug": "dolce-and-gabbana-light-blue",
+      "brand": "Dolce and Gabbana",
+      "name": "Light Blue",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-lumiere-noire-homme (7/7/7); maison-francis-kurkdjian-amyris-homme-eau-de-toilette (7/6/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-lumiere-noire-homme (7/7/7); maison-francis-kurkdjian-amyris-homme-eau-de-toilette (7/6/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-lumiere-noire-homme (7/7/7); maison-francis-kurkdjian-amyris-homme-eau-de-toilette (7/6/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 8.075,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 8.007142857142858,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-eau-de-toilette",
+          "name": "Amyris Homme Eau de Toilette",
+          "similarity": 7.946428571428571,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.913095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.913095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.858333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 7.846428571428571,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4835,
+      "slug": "dolce-and-gabbana-the-one-for-men-eau-de-parfum",
+      "brand": "Dolce and Gabbana",
+      "name": "The One for Men Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Dolce_Gabbana/the-one-for-men-eau-de-parfum-2015",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 9.457051282051282,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 9.267857142857142,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 9.250641025641027,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 9.217307692307694,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 9.14423076923077,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 9.110897435897437,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 9.107142857142858,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4868,
+      "slug": "frederic-malle-portrait-of-a-lady",
+      "brand": "Frederic Malle",
+      "name": "Portrait of a Lady",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 6.208333333333334,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 6.191666666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 6.113095238095238,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 6.098076923076923,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 6.091666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 6.091666666666667,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 6.079761904761905,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4825,
+      "slug": "giorgio-armani-acqua-di-gio-profumo",
+      "brand": "Giorgio Armani",
+      "name": "Acqua di Gio Profumo",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); giorgio-armani-acqua-di-gio-parfum (8/8/8); prada-lhomme (7/6/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); giorgio-armani-acqua-di-gio-parfum (8/8/8); prada-lhomme (7/6/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); giorgio-armani-acqua-di-gio-parfum (8/8/8); prada-lhomme (7/6/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 9.073717948717949,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 8.958333333333334,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 8.223809523809525,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 8.158333333333333,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.157142857142857,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 8.141666666666666,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 8.141666666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4826,
+      "slug": "giorgio-armani-armani-code-parfum",
+      "brand": "Giorgio Armani",
+      "name": "Armani Code Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Giorgio_Armani/armani-code-parfum",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); dior-dior-homme-parfum-2014 (9/8/7); giorgio-armani-acqua-di-gio-parfum (8/8/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); dior-dior-homme-parfum-2014 (9/8/7); giorgio-armani-acqua-di-gio-parfum (8/8/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); dior-dior-homme-parfum-2014 (9/8/7); giorgio-armani-acqua-di-gio-parfum (8/8/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.740384615384615,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 8.7125,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 8.663095238095238,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 8.622916666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 8.533974358974358,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.500641025641025,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 8.467307692307692,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4842,
+      "slug": "giorgio-armani-si-eau-de-parfum",
+      "brand": "Giorgio Armani",
+      "name": "Si Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Giorgio_Armani/Si",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.663095238095238,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.622916666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.122916666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.048076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.025,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.025,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.015625,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4832,
+      "slug": "givenchy-gentleman-reserve-privee",
+      "brand": "Givenchy",
+      "name": "Gentleman Reserve Privee",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 8.779166666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.673717948717949,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 8.533974358974358,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 8.467307692307692,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.433974358974359,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 8.327564102564104,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 8.317857142857143,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4853,
+      "slug": "givenchy-l-interdit-eau-de-parfum",
+      "brand": "Givenchy",
+      "name": "L Interdit Eau de Parfum",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7); giorgio-armani-acqua-di-gio-parfum (8/8/8); dior-bois-dargent-eau-de-parfum (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7); giorgio-armani-acqua-di-gio-parfum (8/8/8); dior-bois-dargent-eau-de-parfum (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7); giorgio-armani-acqua-di-gio-parfum (8/8/8); dior-bois-dargent-eau-de-parfum (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.175,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.163095238095237,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.141666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.122916666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.122916666666666,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.122916666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 7.089583333333333,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4850,
+      "slug": "guerlain-mon-guerlain",
+      "brand": "Guerlain",
+      "name": "Mon Guerlain",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-guerlain-homme-eau-de-parfum (7/7/8); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 7.691666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.625,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.625,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.622916666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.6083333333333325,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 7.591666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.5673076923076925,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4828,
+      "slug": "hermes-terre-d-hermes",
+      "brand": "Hermes",
+      "name": "Terre d Hermes",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-bleu-de-chanel-parfum (9/8/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.125,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 8.091666666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.09047619047619,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 8.075,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 7.941666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 7.881410256410256,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 7.822916666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4867,
+      "slug": "initio-oud-for-greatness",
+      "brand": "Initio",
+      "name": "Oud for Greatness",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 6,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); marc-antoine-barrois-ganymede-eau-de-parfum (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.231410256410257,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.16474358974359,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.146428571428571,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.131410256410256,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.098076923076923,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-uden",
+          "name": "Uden",
+          "similarity": 7.095833333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "widian-london-extrait-de-parfum",
+          "name": "London Extrait de Parfum",
+          "similarity": 7.041666666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        }
+      ]
+    },
+    {
+      "id": 4831,
+      "slug": "jean-paul-gaultier-le-male-le-parfum",
+      "brand": "Jean Paul Gaultier",
+      "name": "Le Male Le Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/le-male-le-parfum",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 9.28397435897436,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 9.241666666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 9.241666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-kbridge-club",
+          "name": "K'Bridge Club",
+          "similarity": 9.208333333333334,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 9.18397435897436,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 9.18397435897436,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 9.138636363636364,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4869,
+      "slug": "kilian-paris-angels-share",
+      "brand": "Kilian Paris",
+      "name": "Angels Share",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-tilia (7/7/7); bdk-parfums-gris-charnel-extrait (8/8/6); casamorati-lira-eau-de-parfum (7/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-tilia (7/7/7); bdk-parfums-gris-charnel-extrait (8/8/6); casamorati-lira-eau-de-parfum (7/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: marc-antoine-barrois-tilia (7/7/7); bdk-parfums-gris-charnel-extrait (8/8/6); casamorati-lira-eau-de-parfum (7/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "marc-antoine-barrois-tilia",
+          "name": "Tilia",
+          "similarity": 7.638095238095238,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "bdk-parfums-gris-charnel-extrait",
+          "name": "Gris Charnel Extrait",
+          "similarity": 7.2,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "casamorati-lira-eau-de-parfum",
+          "name": "Lira Eau de Parfum",
+          "similarity": 7.2,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "pana-dora-forever-love",
+          "name": "Forever Love",
+          "similarity": 7.2,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "roja-parfums-isola-blu-parfum",
+          "name": "Isola Blu Parfum",
+          "similarity": 7.191666666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "casamorati-bouquet-ideale-eau-de-parfum",
+          "name": "Bouquet Ideale Eau de Parfum",
+          "similarity": 7.133333333333334,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "creed-virgin-island-water",
+          "name": "Virgin Island Water",
+          "similarity": 7.133333333333334,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4844,
+      "slug": "lancome-la-vie-est-belle",
+      "brand": "Lancome",
+      "name": "La Vie Est Belle",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); xerjoff-homme-anniversary (8/7/7); maison-francis-kurkdjian-amyris-homme-extrait-de-parfum (9/8/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.141666666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 7.141666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.129761904761905,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.129761904761905,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.108333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 7.108333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.0964285714285715,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4856,
+      "slug": "le-labo-santal-33",
+      "brand": "Le Labo",
+      "name": "Santal 33",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7); yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6)"
+      },
+      "neighbors": [
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.5,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.433333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.3999999999999995,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.373809523809524,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.366666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.3,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.213095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4854,
+      "slug": "maison-francis-kurkdjian-baccarat-rouge-540",
+      "brand": "Maison Francis Kurkdjian",
+      "name": "Baccarat Rouge 540",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Maison Francis Kurkdjian Baccarat Rouge 540"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Maison Francis Kurkdjian Baccarat Rouge 540"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Maison Francis Kurkdjian Baccarat Rouge 540"
+      },
+      "neighbors": [
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.513095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.098076923076923,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.031410256410257,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.013095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 6.9980769230769235,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 6.991666666666666,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 6.96474358974359,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4855,
+      "slug": "maison-francis-kurkdjian-grand-soir",
+      "brand": "Maison Francis Kurkdjian",
+      "name": "Grand Soir",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-gentle-fluidity-silver (8/7/7); nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-gentle-fluidity-silver (8/7/7); nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: maison-francis-kurkdjian-gentle-fluidity-silver (8/7/7); nishane-nefs (8/7/6); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.408333333333334,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.366666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.3,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.266666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.233333333333333,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.166666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.079761904761905,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4848,
+      "slug": "mugler-alien",
+      "brand": "Mugler",
+      "name": "Alien",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-dior-homme-parfum-2014 (9/8/7); chanel-bleu-de-chanel-parfum (9/8/8); xerjoff-homme-anniversary (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.779166666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 7.6737179487179485,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 7.533974358974359,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-lumiere-noire-homme",
+          "name": "Lumière Noire Homme",
+          "similarity": 7.467307692307693,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.433974358974359,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.327564102564103,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 7.317857142857142,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4849,
+      "slug": "mugler-angel",
+      "brand": "Mugler",
+      "name": "Angel",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: lancome-poeme-eau-de-parfum (7/7/6); the-merchant-of-venice-la-fenice-pour-femme (7/6/7); penhaligons-changing-constance (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 6,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: lancome-poeme-eau-de-parfum (7/7/6); the-merchant-of-venice-la-fenice-pour-femme (7/6/7); penhaligons-changing-constance (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: lancome-poeme-eau-de-parfum (7/7/6); the-merchant-of-venice-la-fenice-pour-femme (7/6/7); penhaligons-changing-constance (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "lancome-poeme-eau-de-parfum",
+          "name": "Poême Eau de Parfum",
+          "similarity": 7.948809523809524,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "the-merchant-of-venice-la-fenice-pour-femme",
+          "name": "La Fenice pour Femme",
+          "similarity": 7.875,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "penhaligons-changing-constance",
+          "name": "Changing Constance",
+          "similarity": 7.841666666666667,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "penhaligons-luna-eau-de-toilette",
+          "name": "Luna Eau de Toilette",
+          "similarity": 7.808333333333334,
+          "longevityScore": 6,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-tilia",
+          "name": "Tilia",
+          "similarity": 7.788095238095238,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-n-5-eau-premiere",
+          "name": "N°5 Eau Première",
+          "similarity": 7.78125,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "guerlain-linstant-magic-eau-de-parfum",
+          "name": "L'Instant Magic Eau de Parfum",
+          "similarity": 7.357142857142858,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4847,
+      "slug": "narciso-rodriguez-for-her-eau-de-parfum",
+      "brand": "Narciso Rodriguez",
+      "name": "For Her Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Narciso_Rodriguez/For_Her_Eau_de_Parfum",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: dior-eau-sauvage-parfum-2017 (8/7/8); dior-dior-homme-parfum-2014 (9/8/7); prada-lhomme-intense (8/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.351190476190475,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 7.3238095238095235,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.260897435897435,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.25,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.227564102564102,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 7.191666666666666,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.183333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4866,
+      "slug": "nishane-hacivat",
+      "brand": "Nishane",
+      "name": "Hacivat",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Nishane/Hacivat",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); nishane-wulong-cha-extrait-de-parfum (8/7/7); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); nishane-wulong-cha-extrait-de-parfum (8/7/7); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: nishane-nefs (8/7/6); nishane-wulong-cha-extrait-de-parfum (8/7/7); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 8,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "nishane-wulong-cha-extrait-de-parfum",
+          "name": "Wūlóng Chá Extrait de Parfum",
+          "similarity": 7.8,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.433333333333333,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.410897435897436,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.3999999999999995,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 7.373809523809524,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.366666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4830,
+      "slug": "paco-rabanne-1-million",
+      "brand": "Paco Rabanne",
+      "name": "1 Million",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: rasasi-la-yuqawam-pour-homme (9/9/5); parfums-de-marly-habdan (9/9/5); afnan-perfumes-supremacy-collectors-edition (8/8/5)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: rasasi-la-yuqawam-pour-homme (9/9/5); parfums-de-marly-habdan (9/9/5); afnan-perfumes-supremacy-collectors-edition (8/8/5)"
+      },
+      "proposedVersatility": {
+        "value": 5,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: rasasi-la-yuqawam-pour-homme (9/9/5); parfums-de-marly-habdan (9/9/5); afnan-perfumes-supremacy-collectors-edition (8/8/5)"
+      },
+      "neighbors": [
+        {
+          "slug": "rasasi-la-yuqawam-pour-homme",
+          "name": "La Yuqawam pour Homme",
+          "similarity": 8.765625,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "parfums-de-marly-habdan",
+          "name": "Habdan",
+          "similarity": 8.724019607843138,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "afnan-perfumes-supremacy-collectors-edition",
+          "name": "Supremacy Collector's Edition",
+          "similarity": 8.719047619047618,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "lattafa-pride-art-of-arabia-i",
+          "name": "Art of Arabia I",
+          "similarity": 8.719047619047618,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "acqua-di-parma-oud-eau-de-parfum",
+          "name": "Oud Eau de Parfum",
+          "similarity": 8.708333333333334,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "stephane-humbert-lucas-black-gemstone",
+          "name": "Black Gemstone",
+          "similarity": 8.698958333333334,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "atkinsons-oud-save-the-king-eau-de-parfum",
+          "name": "Oud Save the King Eau de Parfum",
+          "similarity": 8.685714285714285,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        }
+      ]
+    },
+    {
+      "id": 4863,
+      "slug": "parfums-de-marly-delina",
+      "brand": "Parfums de Marly",
+      "name": "Delina",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: parfums-de-marly-althair (8/7/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-eau-sauvage-parfum-2017 (8/7/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: parfums-de-marly-althair (8/7/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-eau-sauvage-parfum-2017 (8/7/8)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: parfums-de-marly-althair (8/7/8); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-eau-sauvage-parfum-2017 (8/7/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 6.725,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 6.534523809523809,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 6.341666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 6.340476190476191,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 6.324999999999999,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 6.324999999999999,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 6.307142857142858,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4827,
+      "slug": "prada-luna-rossa-carbon",
+      "brand": "Prada",
+      "name": "Luna Rossa Carbon",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); chanel-pour-monsieur-eau-de-toilette (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); chanel-pour-monsieur-eau-de-toilette (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); chanel-pour-monsieur-eau-de-toilette (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 9.540476190476191,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 9.379761904761905,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-pour-monsieur-eau-de-toilette",
+          "name": "Pour Monsieur Eau de Toilette",
+          "similarity": 9.238636363636363,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 9.20530303030303,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 9.20530303030303,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-platinum-egoiste-eau-de-toilette",
+          "name": "Platinum Égoïste Eau de Toilette",
+          "similarity": 9.20530303030303,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-fahrenheit-parfum",
+          "name": "Fahrenheit Parfum",
+          "similarity": 9.20530303030303,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        }
+      ]
+    },
+    {
+      "id": 4843,
+      "slug": "prada-paradoxe",
+      "brand": "Prada",
+      "name": "Paradoxe",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: prada-lhomme (7/6/8); prada-lhomme-intense (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 7.6083333333333325,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 7.458333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.291666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.175,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.163095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.163095238095238,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.163095238095237,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4833,
+      "slug": "tom-ford-noir-extreme",
+      "brand": "Tom Ford",
+      "name": "Noir Extreme",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "proposedVersatility": {
+        "value": 5,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "neighbors": [
+        {
+          "slug": "atkinsons-oud-save-the-king-eau-de-parfum",
+          "name": "Oud Save the King Eau de Parfum",
+          "similarity": 7.869047619047619,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "afnan-perfumes-supremacy-collectors-edition",
+          "name": "Supremacy Collector's Edition",
+          "similarity": 7.835714285714285,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "lattafa-pride-art-of-arabia-i",
+          "name": "Art of Arabia I",
+          "similarity": 7.835714285714285,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "acqua-di-parma-oud-eau-de-parfum",
+          "name": "Oud Eau de Parfum",
+          "similarity": 7.825,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "stephane-humbert-lucas-black-gemstone",
+          "name": "Black Gemstone",
+          "similarity": 7.815625,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "parfums-de-marly-habdan",
+          "name": "Habdan",
+          "similarity": 7.774019607843138,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "rasasi-la-yuqawam-pour-homme",
+          "name": "La Yuqawam pour Homme",
+          "similarity": 7.748958333333333,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        }
+      ]
+    },
+    {
+      "id": 4852,
+      "slug": "versace-bright-crystal",
+      "brand": "Versace",
+      "name": "Bright Crystal",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); dior-bois-dargent-eau-de-parfum (8/7/7); guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 8.101190476190474,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-bois-dargent-eau-de-parfum",
+          "name": "Bois d'Argent Eau de Parfum",
+          "similarity": 8.007142857142858,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 7.973809523809525,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "dior-eau-sauvage-parfum-2017",
+          "name": "Eau Sauvage Parfum (2017)",
+          "similarity": 7.908333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-eau-de-toilette",
+          "name": "Amyris Homme Eau de Toilette",
+          "similarity": 7.879761904761905,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "maison-francis-kurkdjian-gentle-fluidity-silver",
+          "name": "Gentle Fluidity (Silver)",
+          "similarity": 7.8464285714285715,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "marc-antoine-barrois-ganymede-eau-de-parfum",
+          "name": "Ganymede Eau de Parfum",
+          "similarity": 7.8464285714285715,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4829,
+      "slug": "versace-dylan-blue",
+      "brand": "Versace",
+      "name": "Dylan Blue",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-allure-homme-eau-de-toilette (7/7/8); chanel-allure-homme-edition-blanche-eau-de-toilette-concentree (7/7/8); gucci-gucci-pour-homme-ii-eau-de-toilette (6/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-allure-homme-eau-de-toilette (7/7/8); chanel-allure-homme-edition-blanche-eau-de-toilette-concentree (7/7/8); gucci-gucci-pour-homme-ii-eau-de-toilette (6/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: chanel-allure-homme-eau-de-toilette (7/7/8); chanel-allure-homme-edition-blanche-eau-de-toilette-concentree (7/7/8); gucci-gucci-pour-homme-ii-eau-de-toilette (6/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "chanel-allure-homme-eau-de-toilette",
+          "name": "Allure Homme Eau de Toilette",
+          "similarity": 9.238636363636363,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-toilette-concentree",
+          "name": "Allure Homme Édition Blanche Eau de Toilette Concentrée",
+          "similarity": 9.238636363636363,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "gucci-gucci-pour-homme-ii-eau-de-toilette",
+          "name": "Gucci pour Homme II Eau de Toilette",
+          "similarity": 9.238636363636363,
+          "longevityScore": 6,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "loccitane-en-provence-cedre-encens",
+          "name": "Cèdre Encens",
+          "similarity": 9.238636363636363,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "ormonde-jayne-ormonde-man-eau-de-parfum",
+          "name": "Ormonde Man Eau de Parfum",
+          "similarity": 9.238636363636363,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "yves-saint-laurent-lhomme-eau-de-toilette",
+          "name": "L'Homme Eau de Toilette",
+          "similarity": 9.238636363636363,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "chanel-egoiste-eau-de-toilette",
+          "name": "Égoïste Eau de Toilette",
+          "similarity": 9.20530303030303,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4846,
+      "slug": "viktor-and-rolf-flowerbomb",
+      "brand": "Viktor and Rolf",
+      "name": "Flowerbomb",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); parfums-de-marly-althair (8/7/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); parfums-de-marly-althair (8/7/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8)"
+      },
+      "proposedVersatility": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: giorgio-armani-acqua-di-gio-parfum (8/8/8); parfums-de-marly-althair (8/7/8); giorgio-armani-acqua-di-gio-profumo-parfum (9/8/8)"
+      },
+      "neighbors": [
+        {
+          "slug": "giorgio-armani-acqua-di-gio-parfum",
+          "name": "Acqua di Giò Parfum",
+          "similarity": 7.360897435897436,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "parfums-de-marly-althair",
+          "name": "Althaïr",
+          "similarity": 7.357142857142858,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "giorgio-armani-acqua-di-gio-profumo-parfum",
+          "name": "Acqua di Giò Profumo Parfum",
+          "similarity": 7.291666666666667,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 7.291666666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "maison-francis-kurkdjian-amyris-homme-extrait-de-parfum",
+          "name": "Amyris Homme Extrait de Parfum",
+          "similarity": 7.196428571428571,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "guerlain-guerlain-homme-eau-de-parfum",
+          "name": "Guerlain Homme Eau de Parfum",
+          "similarity": 7.191666666666666,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "prada-lhomme",
+          "name": "L'Homme",
+          "similarity": 7.175,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        }
+      ]
+    },
+    {
+      "id": 4836,
+      "slug": "viktor-and-rolf-spicebomb-extreme",
+      "brand": "Viktor and Rolf",
+      "name": "Spicebomb Extreme",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Viktor_Rolf/Spicebomb_Extreme",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "proposedVersatility": {
+        "value": 5,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: atkinsons-oud-save-the-king-eau-de-parfum (9/8/5); afnan-perfumes-supremacy-collectors-edition (8/8/5); lattafa-pride-art-of-arabia-i (8/8/5)"
+      },
+      "neighbors": [
+        {
+          "slug": "atkinsons-oud-save-the-king-eau-de-parfum",
+          "name": "Oud Save the King Eau de Parfum",
+          "similarity": 7.802380952380952,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "afnan-perfumes-supremacy-collectors-edition",
+          "name": "Supremacy Collector's Edition",
+          "similarity": 7.769047619047619,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "lattafa-pride-art-of-arabia-i",
+          "name": "Art of Arabia I",
+          "similarity": 7.769047619047619,
+          "longevityScore": 8,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "acqua-di-parma-oud-eau-de-parfum",
+          "name": "Oud Eau de Parfum",
+          "similarity": 7.758333333333334,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "stephane-humbert-lucas-black-gemstone",
+          "name": "Black Gemstone",
+          "similarity": 7.748958333333333,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "parfums-de-marly-habdan",
+          "name": "Habdan",
+          "similarity": 7.707352941176471,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        },
+        {
+          "slug": "rasasi-la-yuqawam-pour-homme",
+          "name": "La Yuqawam pour Homme",
+          "similarity": 7.682291666666667,
+          "longevityScore": 9,
+          "sillageScore": 9,
+          "versatilityScore": 5
+        }
+      ]
+    },
+    {
+      "id": 4862,
+      "slug": "xerjoff-naxos",
+      "brand": "Xerjoff",
+      "name": "Naxos",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Xerjoff/naxos",
+      "proposedLongevity": {
+        "value": 9,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Xerjoff Naxos"
+      },
+      "proposedSillage": {
+        "value": 8,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Xerjoff Naxos"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "seed-curated",
+        "detail": "Matched existing curated seed scores for Xerjoff Naxos"
+      },
+      "neighbors": [
+        {
+          "slug": "marc-antoine-barrois-tilia",
+          "name": "Tilia",
+          "similarity": 5.343398020716569,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-la-capitale",
+          "name": "La Capitale",
+          "similarity": 5.251731354049903,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "xerjoff-starlight",
+          "name": "Starlight",
+          "similarity": 5.230302782621331,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "xerjoff-renaissance",
+          "name": "Renaissance",
+          "similarity": 5.196969449287998,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "xerjoff-opera",
+          "name": "Opera",
+          "similarity": 5.144886115954665,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "parfums-delmar-zaya",
+          "name": "Zaya",
+          "similarity": 5.039393691712241,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "sospiro-vibrato",
+          "name": "Vibrato",
+          "similarity": 5.039393691712241,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        }
+      ]
+    },
+    {
+      "id": 4824,
+      "slug": "yves-saint-laurent-la-nuit-de-l-homme",
+      "brand": "Yves Saint Laurent",
+      "name": "La Nuit de L Homme",
+      "matchedUrl": "",
+      "proposedLongevity": {
+        "value": 8,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum (7/7/7); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); dior-dior-homme-parfum-2014 (9/8/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-parfum",
+          "name": "L'Instant de Guerlain pour Homme Eau de Parfum",
+          "similarity": 8.640384615384615,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "yves-saint-laurent-lhomme-eau-de-toilette",
+          "name": "L'Homme Eau de Toilette",
+          "similarity": 8.55,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "dior-dior-homme-parfum-2014",
+          "name": "Dior Homme Parfum (2014)",
+          "similarity": 8.533974358974358,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-bleu-de-chanel-parfum",
+          "name": "Bleu de Chanel Parfum",
+          "similarity": 8.451190476190476,
+          "longevityScore": 9,
+          "sillageScore": 8,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "guerlain-linstant-de-guerlain-pour-homme-eau-de-toilette",
+          "name": "L'Instant de Guerlain pour Homme Eau de Toilette",
+          "similarity": 8.433974358974359,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "prada-lhomme-intense",
+          "name": "L'Homme Intense",
+          "similarity": 8.327564102564104,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "xerjoff-homme-anniversary",
+          "name": "Homme Anniversary",
+          "similarity": 8.323809523809524,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        }
+      ]
+    },
+    {
+      "id": 4841,
+      "slug": "yves-saint-laurent-libre-eau-de-parfum",
+      "brand": "Yves Saint Laurent",
+      "name": "Libre Eau de Parfum",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/libre-eau-de-parfum",
+      "proposedLongevity": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedSillage": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "proposedVersatility": {
+        "value": 7,
+        "source": "catalog-neighbors",
+        "detail": "Nearest scored perfumes: yves-saint-laurent-tuxedo-eau-de-parfum (8/7/6); yves-saint-laurent-lhomme-eau-de-toilette (7/6/8); kinetic-perfumes-sillage (7/6/7)"
+      },
+      "neighbors": [
+        {
+          "slug": "yves-saint-laurent-tuxedo-eau-de-parfum",
+          "name": "Tuxedo Eau de Parfum",
+          "similarity": 7.716666666666667,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "yves-saint-laurent-lhomme-eau-de-toilette",
+          "name": "L'Homme Eau de Toilette",
+          "similarity": 7.55,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "kinetic-perfumes-sillage",
+          "name": "Sillage",
+          "similarity": 7.25,
+          "longevityScore": 7,
+          "sillageScore": 6,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "chanel-allure-homme-edition-blanche-eau-de-parfum",
+          "name": "Allure Homme Édition Blanche Eau de Parfum",
+          "similarity": 7.216666666666667,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        },
+        {
+          "slug": "liquides-imaginaires-liquide-2022",
+          "name": "Liquide (2022)",
+          "similarity": 7.183333333333334,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 7
+        },
+        {
+          "slug": "nishane-nefs",
+          "name": "Nefs",
+          "similarity": 7.183333333333333,
+          "longevityScore": 8,
+          "sillageScore": 7,
+          "versatilityScore": 6
+        },
+        {
+          "slug": "chanel-allure-homme-sport-eau-extreme",
+          "name": "Allure Homme Sport Eau Extrême",
+          "similarity": 7.15,
+          "longevityScore": 7,
+          "sillageScore": 7,
+          "versatilityScore": 8
+        }
+      ]
+    }
+  ]
+}

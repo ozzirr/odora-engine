@@ -106,6 +106,18 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   }
 }
 
+@keyframes finder-card-in {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .premium-card {
     transition:
@@ -120,5 +132,13 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
 
   .loading-bar-fill {
     animation: loading-slide 1.35s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .finder-card-animate {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

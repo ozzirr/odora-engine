@@ -20,6 +20,7 @@ export function Footer() {
     { href: "/cookie-policy" as const, label: t("legalLinks.cookiePolicy") },
     { href: "/terms" as const, label: t("legalLinks.terms") },
     { href: "/affiliate-disclosure" as const, label: t("legalLinks.affiliateDisclosure") },
+    { href: "/contact" as const, label: t("legalLinks.contact") },
   ];
 
   return (

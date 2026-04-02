@@ -11,6 +11,7 @@ import {
   defaultReviewQueueJsonPath,
   defaultValidationReportPath,
 } from "@/lib/perfume-data/paths";
+import { applyScoreBackfillToCatalog } from "@/lib/perfume-data/score-backfill";
 import {
   enrichVerifiedPerfumes,
   enrichmentCatalogHeaders,
@@ -158,6 +159,11 @@ async function main() {
         toCsv([...reviewQueueCsvHeaders], enriched.reviewQueueCsvRows),
         "utf8",
       );
+      const syncedScores = await applyScoreBackfillToCatalog({
+        inputPath: outputPath,
+        outputPath,
+      });
+      console.log(`[perfumes:enrich] scoreBackfill updatedRows=${syncedScores.updatedRows}`);
 
       const verifiedOutput = await preparePerfumeRecords({
         inputPath: outputPath,

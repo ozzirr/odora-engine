@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
+import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
 import { NotesList } from "@/components/perfumes/NotesList";
@@ -426,7 +427,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       />
       <PerfumeDetailNavigationReady />
       <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
-        <Breadcrumbs items={breadcrumbItems} className="mb-0" />
+        <Breadcrumbs items={breadcrumbItems} className="mb-3 sm:mb-4" />
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
         <section className="space-y-4">
@@ -435,6 +436,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             title={t("prices.title")}
             subtitle={t("prices.subtitle")}
           />
+          {bestOffer ? <BestOfferCard bestOffer={bestOffer} showButton={false} /> : null}
           <OfferTable offers={perfume.offers} />
         </section>
 

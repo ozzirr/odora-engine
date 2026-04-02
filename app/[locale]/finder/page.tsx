@@ -105,6 +105,11 @@ function readSearchParam(
   return Array.isArray(value) ? value[0] : value;
 }
 
+function isFinderSubmitted(searchParams: Record<string, string | string[] | undefined>) {
+  const raw = readSearchParam(searchParams, "submitted");
+  return raw === "1" || raw === "true";
+}
+
 export async function generateMetadata({ params, searchParams }: FinderPageProps): Promise<Metadata> {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
@@ -121,13 +126,15 @@ export async function generateMetadata({ params, searchParams }: FinderPageProps
     nicheOnly: readSearchParam(resolvedSearchParams, "nicheOnly") ?? null,
   });
   const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
+  const hasSubmittedSearch = isFinderSubmitted(resolvedSearchParams);
+  const shouldLoadResults = hasConfiguredPreferences || hasSubmittedSearch;
 
   return buildPageMetadata({
     title: t("title"),
     description: t("description"),
     locale: resolvedLocale,
     pathname: "/finder",
-    robots: hasConfiguredPreferences
+    robots: shouldLoadResults
       ? {
           index: false,
           follow: true,
@@ -156,7 +163,9 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   });
   const presetLabel = readSearchParam(resolvedSearchParams, "preset") ?? null;
   const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
-  const initialSearchResult = hasConfiguredPreferences
+  const hasSubmittedSearch = isFinderSubmitted(resolvedSearchParams);
+  const shouldLoadResults = hasConfiguredPreferences || hasSubmittedSearch;
+  const initialSearchResult = shouldLoadResults
     ? await getFinderSearch(initialPreferences, 0, FINDER_RESULTS_PAGE_SIZE)
     : {
         results: [],
@@ -172,7 +181,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
 
   return (
     <Container className="space-y-6 pt-6 sm:space-y-8 sm:pt-8">
-      {!hasConfiguredPreferences ? (
+      {!shouldLoadResults ? (
         <StructuredData
           data={[
             buildCollectionPageSchema({
@@ -210,7 +219,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
         initialTotal={initialSearchResult.total}
         initialHasMore={initialSearchResult.hasMore}
         initialNextOffset={initialSearchResult.nextOffset}
-        initialSubmitted={hasConfiguredPreferences}
+        initialSubmitted={shouldLoadResults}
         presetLabel={presetLabel}
       />
     </Container>

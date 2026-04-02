@@ -54,7 +54,8 @@
         "privacy": "Privacy",
         "cookiePolicy": "Cookie Policy",
         "terms": "Terms",
-        "affiliateDisclosure": "Affiliate Disclosure"
+        "affiliateDisclosure": "Affiliate Disclosure",
+        "contact": "Contact"
       }
     }
   },
@@ -714,6 +715,13 @@
       "updated": "Profile updated."
     }
   },
+  "contact": {
+    "eyebrow": "Support",
+    "title": "Contact us",
+    "intro": "For any question, feedback, or report, write to us at the address below. We'll get back to you as soon as possible.",
+    "emailTitle": "Email",
+    "emailDescription": "For general inquiries, reports, or feedback about the site."
+  },
   "legal": {
     "common": {
       "effectiveDate": "Effective date: {date}",
@@ -992,6 +1000,10 @@
       "affiliateDisclosure": {
         "title": "Affiliate Disclosure | Odora",
         "description": "Understand how affiliate links work on Odora."
+      },
+      "contact": {
+        "title": "Contact | Odora",
+        "description": "Get in touch with the Odora team."
       },
       "perfumeDetail": {
         "fallbackTitle": "Perfume | Odora",

@@ -40,6 +40,10 @@ export const pathnames = {
     en: "/affiliate-disclosure",
     it: "/trasparenza-affiliazione",
   },
+  "/contact": {
+    en: "/contact",
+    it: "/contatti",
+  },
   "/login": {
     en: "/login",
     it: "/accedi",

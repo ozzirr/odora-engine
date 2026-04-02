@@ -8,12 +8,10 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { Button } from "@/components/ui/Button";
 import {
   defaultFinderPreferences,
-  hasConfiguredFinderPreferences,
   serializeFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
 } from "@/lib/finder";
-import { useRouter } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 
@@ -67,6 +65,34 @@ type FinderSearchPayload = {
   nextOffset: number;
 };
 
+function FinderResultsSkeleton({ label }: { label: string }) {
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-[#7a6654]">{label}</p>
+      {Array.from({ length: 3 }).map((_, index) => (
+        <div
+          key={`finder-results-skeleton-${index}`}
+          className="grid min-h-[12.5rem] grid-cols-[8.5rem_minmax(0,1fr)] overflow-hidden rounded-[1.75rem] border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.16)] sm:grid-cols-[11rem_minmax(0,1fr)]"
+        >
+          <div className="animate-pulse bg-[#f0e7da]" />
+          <div className="space-y-3 p-4 sm:p-5">
+            <div className="h-3 w-24 animate-pulse rounded-full bg-[#ede1d3]" />
+            <div className="space-y-2">
+              <div className="h-8 w-3/4 animate-pulse rounded-full bg-[#ece0d1]" />
+              <div className="h-4 w-full animate-pulse rounded-full bg-[#f0e5d8]" />
+              <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#f0e5d8]" />
+            </div>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <div className="h-8 w-24 animate-pulse rounded-full bg-[#efe3d2]" />
+              <div className="h-8 w-32 animate-pulse rounded-full bg-[#efe3d2]" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function FinderExperience({
   availableOptions,
   isAuthenticated,
@@ -80,8 +106,6 @@ export function FinderExperience({
 }: FinderExperienceProps) {
   const t = useTranslations("finder.experience");
   const taxonomyT = useTranslations("taxonomy");
-  const finderPathname = "/finder" as const;
-  const router = useRouter();
   const authStatus = useAuthStatus(isAuthenticated);
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>(initialResults);
@@ -89,9 +113,11 @@ export function FinderExperience({
   const [nextOffset, setNextOffset] = useState(initialNextOffset);
   const [hasMoreResults, setHasMoreResults] = useState(initialHasMore);
   const [submitted, setSubmitted] = useState(initialSubmitted);
+  const [activePresetLabel, setActivePresetLabel] = useState<string | null>(presetLabel ?? null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [resultAnimationKey, setResultAnimationKey] = useState(0);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const isFetchingMoreRef = useRef(false);
 
@@ -195,9 +221,13 @@ export function FinderExperience({
     setNextOffset(initialNextOffset);
     setHasMoreResults(initialHasMore);
     setSubmitted(initialSubmitted);
+    setActivePresetLabel(presetLabel ?? null);
     setErrorMessage(null);
     setIsLoading(false);
     setIsLoadingMore(false);
+    if (initialSubmitted) {
+      setResultAnimationKey((current) => current + 1);
+    }
     isFetchingMoreRef.current = false;
   }, [
     initialHasMore,
@@ -206,12 +236,18 @@ export function FinderExperience({
     initialResults,
     initialSubmitted,
     initialTotal,
+    presetLabel,
   ]);
 
-  const buildFinderHref = useCallback(
-    (nextPreferences: FinderPreferences, nextPresetLabel?: string | null) => {
+  const buildFinderQueryParams = useCallback(
+    (
+      nextPreferences: FinderPreferences,
+      nextPresetLabel?: string | null,
+      nextSubmitted = true,
+    ) => {
       const params = new URLSearchParams();
 
+      if (nextSubmitted) params.set("submitted", "1");
       if (nextPreferences.gender !== "any") params.set("gender", nextPreferences.gender);
       if (nextPreferences.mood) params.set("mood", nextPreferences.mood);
       if (nextPreferences.season) params.set("season", nextPreferences.season);
@@ -222,53 +258,81 @@ export function FinderExperience({
       if (nextPreferences.nicheOnly) params.set("nicheOnly", "true");
       if (nextPresetLabel) params.set("preset", nextPresetLabel);
 
-      return params.size > 0
-        ? ({
-            pathname: finderPathname,
-            query: Object.fromEntries(params.entries()),
-          } as const)
-        : finderPathname;
+      return params;
     },
-    [finderPathname],
+    [],
   );
+
+  const syncFinderHistory = useCallback((params: URLSearchParams) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const nextQuery = params.toString();
+    const nextUrl = nextQuery ? `${window.location.pathname}?${nextQuery}` : window.location.pathname;
+    window.history.replaceState(window.history.state, "", nextUrl);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     setErrorMessage(null);
-    setSubmitted(hasConfiguredFinderPreferences(preferences));
+    setSubmitted(true);
 
     const preservePreset =
       presetLabel && currentPreferenceSignature === initialPreferenceSignature
         ? presetLabel
         : null;
+    const nextParams = buildFinderQueryParams(preferences, preservePreset, true);
 
-    router.push(buildFinderHref(preferences, preservePreset));
+    try {
+      const response = await fetch("/api/finder", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...preferences,
+          offset: 0,
+          limit: FINDER_RESULTS_PAGE_SIZE,
+        }),
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Finder request failed with status ${response.status}`);
+      }
+
+      const payload = (await response.json()) as FinderSearchPayload;
+      applyFinderPage(payload, "replace");
+      setActivePresetLabel(preservePreset);
+      setResultAnimationKey((current) => current + 1);
+      syncFinderHistory(nextParams);
+    } catch {
+      setErrorMessage(t("fallbackError"));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const resetForm = () => {
-    if (initialSubmitted || presetLabel) {
-      setIsLoading(true);
-      setErrorMessage(null);
-      router.push(finderPathname);
-      return;
-    }
-
     setPreferences(defaultFinderPreferences);
     setResults([]);
     setTotalMatches(0);
     setNextOffset(0);
     setHasMoreResults(false);
     setSubmitted(false);
+    setActivePresetLabel(null);
     setErrorMessage(null);
     setIsLoading(false);
     setIsLoadingMore(false);
+    syncFinderHistory(buildFinderQueryParams(defaultFinderPreferences, null, false));
     isFetchingMoreRef.current = false;
   };
 
   const isCatalogLocked = !authStatus && totalMatches > results.length && results.length >= FREE_FINDER_PREVIEW_LIMIT;
   const canLoadMore = hasMoreResults && !isCatalogLocked;
-  const showPresetBanner = Boolean(presetLabel) && hasConfiguredPreferences(preferences);
+  const showPresetBanner = Boolean(activePresetLabel) && hasConfiguredPreferences(preferences);
 
   const loadMoreResults = useCallback(async () => {
     if (isFetchingMoreRef.current || !canLoadMore) {
@@ -337,7 +401,7 @@ export function FinderExperience({
           <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h2 className="font-display text-3xl text-[#1f1914]">
-                {presetLabel ? presetLabel : t("preset.fallbackTitle")}
+                {activePresetLabel ? activePresetLabel : t("preset.fallbackTitle")}
               </h2>
               <p className="mt-1 text-sm text-[#635343]">
                 {t("preset.description")}
@@ -528,13 +592,23 @@ export function FinderExperience({
               {errorMessage}
             </div>
           ) : null}
-          <PerfumeGrid perfumes={results} cardVariant="finder" layout="list" />
+          {isLoading ? (
+            <FinderResultsSkeleton label={t("finding")} />
+          ) : (
+            <PerfumeGrid
+              perfumes={results}
+              cardVariant="finder"
+              layout="list"
+              animateItems
+              itemAnimationKey={resultAnimationKey}
+            />
+          )}
 
           {isLoadingMore ? <p className="text-sm text-[#7a6654]">{t("finding")}</p> : null}
 
-          {canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
+          {!isLoading && canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
 
-          {isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_PREVIEW_LIMIT} /> : null}
+          {!isLoading && isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_PREVIEW_LIMIT} /> : null}
         </section>
       ) : (
         <div className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-8 text-sm text-[#655444]">
