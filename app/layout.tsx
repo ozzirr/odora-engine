@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { defaultLocale } from "@/lib/i18n";
+import { getLocale } from "next-intl/server";
 import { ADSENSE_CLIENT_ID } from "@/lib/privacy/consent";
 import { getBaseSiteUrl } from "@/lib/site-url";
 
@@ -15,8 +15,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang={defaultLocale}>
+    <html lang={locale}>
       <head>
         <script
           async

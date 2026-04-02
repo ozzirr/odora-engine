@@ -12,6 +12,7 @@ import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { Link } from "@/lib/navigation";
 import { type ComputedBestOffer } from "@/lib/pricing";
+import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { cn } from "@/lib/utils";
 
 type PerfumeHeroProps = {
@@ -85,9 +86,14 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
   const t = useTranslations("perfume.hero");
   const amazonT = useTranslations("perfume.amazon");
   const commonT = useTranslations("common");
+  const taxonomyT = useTranslations("taxonomy");
   const locale = useLocale() as AppLocale;
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
-  const summary = getPerfumeShortText(perfume);
+  const localizedFragranceFamily = getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT);
+  const summary = getPerfumeShortText({
+    ...perfume,
+    fragranceFamily: localizedFragranceFamily,
+  });
   const amazonUrl = getAmazonProductUrl({
     amazonUrl: perfume.amazonUrl,
     brandName,
@@ -109,7 +115,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
             imageUrl={perfume.imageUrl}
             perfumeName={perfume.name}
             brandName={brandName}
-            fragranceFamily={perfume.fragranceFamily}
+            fragranceFamily={localizedFragranceFamily}
             priority
             sizes="(max-width: 1024px) 100vw, 42vw"
           />
@@ -123,7 +129,7 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline">{perfume.fragranceFamily}</Badge>
+            <Badge variant="outline">{localizedFragranceFamily}</Badge>
             {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
             {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
             {perfume.ratingInternal ? (

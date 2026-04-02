@@ -3,6 +3,10 @@
     "label": "Switch language"
   },
   "common": {
+    "actions": {
+      "showMore": "Show more",
+      "showLess": "Show less"
+    },
     "badges": {
       "arabic": "Arabic",
       "niche": "Niche"
@@ -328,6 +332,16 @@
     }
   },
   "taxonomy": {
+    "families": {
+      "woody": "Woody",
+      "fresh": "Fresh",
+      "oriental": "Oriental",
+      "gourmand": "Gourmand",
+      "citrus": "Citrus",
+      "aromatic": "Aromatic",
+      "floral": "Floral",
+      "amber": "Amber"
+    },
     "moods": {
       "cozy": "Cozy",
       "fresh": "Fresh",
@@ -452,6 +466,7 @@
     "card": {
       "unknownBrand": "Unknown brand",
       "from": "from",
+      "ratingShort": "Odora {value}",
       "viewFragrance": "View fragrance",
       "viewOffers": "Discover offers"
     },

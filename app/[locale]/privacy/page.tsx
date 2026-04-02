@@ -24,8 +24,10 @@ export async function generateMetadata({ params }: PrivacyPageProps): Promise<Me
   });
 }
 
-export default async function PrivacyPage() {
-  const messages = await getMessages();
+export default async function PrivacyPage({ params }: PrivacyPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const messages = await getMessages({ locale: resolvedLocale });
   const content = (
     messages as {
       legal: {

@@ -63,11 +63,11 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const hideChrome =
     isLaunchGateEnabled() &&
     !hasLaunchGateAccess(cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value);
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
   const initialIsAuthenticated = await getIsAuthenticated();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
       <StructuredData
         data={[
           buildOrganizationSchema(),

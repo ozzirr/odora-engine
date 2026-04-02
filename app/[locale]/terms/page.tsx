@@ -24,8 +24,10 @@ export async function generateMetadata({ params }: TermsPageProps): Promise<Meta
   });
 }
 
-export default async function TermsPage() {
-  const messages = await getMessages();
+export default async function TermsPage({ params }: TermsPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const messages = await getMessages({ locale: resolvedLocale });
   const content = (messages as { legal: { terms: Parameters<typeof LegalPage>[0] } }).legal.terms;
 
   return (

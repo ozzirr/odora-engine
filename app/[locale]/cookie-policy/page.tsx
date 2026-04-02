@@ -24,8 +24,10 @@ export async function generateMetadata({ params }: CookiePolicyPageProps): Promi
   });
 }
 
-export default async function CookiePolicyPage() {
-  const messages = await getMessages();
+export default async function CookiePolicyPage({ params }: CookiePolicyPageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const messages = await getMessages({ locale: resolvedLocale });
   const content = (
     messages as {
       legal: {

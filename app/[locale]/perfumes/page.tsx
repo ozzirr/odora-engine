@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { buttonStyles } from "@/components/ui/Button";
 import { buildPerfumeQuery, type ParsedPerfumeFilters } from "@/lib/filters";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
@@ -135,7 +135,7 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
   ];
 
   return (
-    <Container className="pt-10">
+    <Container className="pt-5 sm:pt-6">
       {!hasFilters ? (
         <StructuredData
           data={[
@@ -163,27 +163,17 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         />
       ) : null}
 
-      <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+      <Breadcrumbs items={breadcrumbItems} className="mb-4" />
 
       <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-        <SectionTitle
-          as="h1"
+        <ExpandableSeoIntro
           eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
+          body={[t("bodyOne"), t("bodyTwo")]}
+          primaryCta={{ href: "/finder", label: t("primaryCta") }}
+          secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
         />
-        <div className="max-w-3xl space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
-          <p>{t("bodyOne")}</p>
-          <p>{t("bodyTwo")}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/finder" className={buttonStyles({ size: "sm" })}>
-            {t("primaryCta")}
-          </Link>
-          <Link href="/top" className={buttonStyles({ variant: "secondary", size: "sm" })}>
-            {t("secondaryCta")}
-          </Link>
-        </div>
       </section>
 
       <PerfumesClient

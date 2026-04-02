@@ -15,6 +15,7 @@ import {
 } from "@/lib/finder";
 import { useRouter } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
+import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 
 type FinderOptions = {
   moods: string[];
@@ -34,25 +35,6 @@ type FinderExperienceProps = {
   initialSubmitted: boolean;
   presetLabel?: string | null;
 };
-
-function toLabel(
-  slug: string,
-  type: "moods" | "seasons" | "occasions" | "notes",
-  t: {
-    has: (key: string) => boolean;
-    (key: string): string;
-  },
-) {
-  const key = `${type}.${slug}`;
-  if (t.has(key)) {
-    return t(key);
-  }
-
-  return slug
-    .split("-")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
 
 function withSelectedOption(options: string[], selectedValue: string) {
   if (!selectedValue || options.includes(selectedValue)) {
@@ -136,13 +118,21 @@ export function FinderExperience({
   const presetChips = useMemo(() => {
     const chips: string[] = [];
 
-    if (preferences.mood) chips.push(t("chips.mood", { value: toLabel(preferences.mood, "moods", taxonomyT) }));
-    if (preferences.season) chips.push(t("chips.season", { value: toLabel(preferences.season, "seasons", taxonomyT) }));
+    if (preferences.mood) {
+      chips.push(t("chips.mood", { value: getLocalizedTaxonomyLabel(preferences.mood, "moods", taxonomyT) }));
+    }
+    if (preferences.season) {
+      chips.push(t("chips.season", { value: getLocalizedTaxonomyLabel(preferences.season, "seasons", taxonomyT) }));
+    }
     if (preferences.occasion) {
-      chips.push(t("chips.occasion", { value: toLabel(preferences.occasion, "occasions", taxonomyT) }));
+      chips.push(
+        t("chips.occasion", { value: getLocalizedTaxonomyLabel(preferences.occasion, "occasions", taxonomyT) }),
+      );
     }
     if (preferences.preferredNote) {
-      chips.push(t("chips.note", { value: toLabel(preferences.preferredNote, "notes", taxonomyT) }));
+      chips.push(
+        t("chips.note", { value: getLocalizedTaxonomyLabel(preferences.preferredNote, "notes", taxonomyT) }),
+      );
     }
     if (preferences.arabicOnly) chips.push(t("arabicOnly"));
     if (preferences.nicheOnly) chips.push(t("nicheOnly"));
@@ -384,7 +374,7 @@ export function FinderExperience({
               <option value="">{t("any")}</option>
               {moodOptions.map((mood) => (
                 <option key={mood} value={mood}>
-                  {toLabel(mood, "moods", taxonomyT)}
+                  {getLocalizedTaxonomyLabel(mood, "moods", taxonomyT)}
                 </option>
               ))}
             </select>
@@ -402,7 +392,7 @@ export function FinderExperience({
               <option value="">{t("any")}</option>
               {seasonOptions.map((season) => (
                 <option key={season} value={season}>
-                  {toLabel(season, "seasons", taxonomyT)}
+                  {getLocalizedTaxonomyLabel(season, "seasons", taxonomyT)}
                 </option>
               ))}
             </select>
@@ -420,7 +410,7 @@ export function FinderExperience({
               <option value="">{t("any")}</option>
               {occasionOptions.map((occasion) => (
                 <option key={occasion} value={occasion}>
-                  {toLabel(occasion, "occasions", taxonomyT)}
+                  {getLocalizedTaxonomyLabel(occasion, "occasions", taxonomyT)}
                 </option>
               ))}
             </select>
@@ -462,7 +452,7 @@ export function FinderExperience({
               <option value="">{t("any")}</option>
               {noteOptions.map((note) => (
                 <option key={note} value={note}>
-                  {toLabel(note, "notes", taxonomyT)}
+                  {getLocalizedTaxonomyLabel(note, "notes", taxonomyT)}
                 </option>
               ))}
             </select>
@@ -538,7 +528,7 @@ export function FinderExperience({
               {errorMessage}
             </div>
           ) : null}
-          <PerfumeGrid perfumes={results} />
+          <PerfumeGrid perfumes={results} cardVariant="finder" layout="list" />
 
           {isLoadingMore ? <p className="text-sm text-[#7a6654]">{t("finding")}</p> : null}
 

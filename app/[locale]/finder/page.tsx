@@ -6,8 +6,7 @@ import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { buttonStyles } from "@/components/ui/Button";
+import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
 import {
@@ -17,7 +16,6 @@ import {
 import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
-import { Link } from "@/lib/navigation";
 import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 import {
   buildBreadcrumbSchema,
@@ -173,7 +171,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   ];
 
   return (
-    <Container className="space-y-8 pt-14">
+    <Container className="space-y-6 pt-6 sm:space-y-8 sm:pt-8">
       {!hasConfiguredPreferences ? (
         <StructuredData
           data={[
@@ -191,27 +189,17 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
         />
       ) : null}
 
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} className="mb-0" />
 
       <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-        <SectionTitle
-          as="h1"
+        <ExpandableSeoIntro
           eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
+          body={[t("bodyOne"), t("bodyTwo")]}
+          primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
+          secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
         />
-        <div className="max-w-3xl space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
-          <p>{t("bodyOne")}</p>
-          <p>{t("bodyTwo")}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
-            {t("primaryCta")}
-          </Link>
-          <Link href="/top" className={buttonStyles({ variant: "secondary", size: "sm" })}>
-            {t("secondaryCta")}
-          </Link>
-        </div>
       </section>
 
       <FinderExperience

@@ -1,17 +1,20 @@
 import { useTranslations } from "next-intl";
 
 import { PerfumeCard, type PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
+import { cn } from "@/lib/utils";
 
 type PerfumeGridProps = {
   perfumes: PerfumeCardItem[];
-  cardVariant?: "default" | "catalog";
+  cardVariant?: "default" | "catalog" | "finder";
   desktopColumns?: 3 | 4;
+  layout?: "grid" | "list";
 };
 
 export function PerfumeGrid({
   perfumes,
   cardVariant = "default",
   desktopColumns = 4,
+  layout = "grid",
 }: PerfumeGridProps) {
   const t = useTranslations("catalog.grid");
 
@@ -24,7 +27,14 @@ export function PerfumeGrid({
   }
 
   return (
-    <div className={`grid grid-cols-2 gap-5 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
+    <div
+      className={cn(
+        "grid gap-5",
+        layout === "list"
+          ? "grid-cols-1"
+          : `grid-cols-2 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`,
+      )}
+    >
       {perfumes.map((perfume) => (
         <PerfumeCard key={perfume.id} perfume={perfume} variant={cardVariant} />
       ))}

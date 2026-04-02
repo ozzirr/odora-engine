@@ -108,7 +108,7 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
       {pendingNavigation ? (
         <div
           className={cn(
-            `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} flex items-start justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:items-center sm:px-6 sm:py-8`,
+            `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} flex items-center justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:px-6 sm:py-8`,
             APP_OVERLAY_LAYER_CLASS,
           )}
         >

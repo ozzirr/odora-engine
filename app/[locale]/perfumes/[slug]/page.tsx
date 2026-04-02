@@ -31,6 +31,7 @@ import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text"
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { buildBreadcrumbSchema, buildProductSchema } from "@/lib/structured-data";
+import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { formatCurrency } from "@/lib/utils";
 
 type PerfumeDetailPageProps = {
@@ -247,7 +248,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
-  const t = await getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.perfumeDetail" });
+  const [t, taxonomyT] = await Promise.all([
+    getTranslations({ locale: resolvedLocale, namespace: "metadata.pages.perfumeDetail" }),
+    getTranslations({ locale: resolvedLocale, namespace: "taxonomy" }),
+  ]);
 
   if (!isDatabaseConfigured) {
     return buildPageMetadata({
@@ -276,7 +280,20 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
         name: perfume.name,
         brand: perfume.brand?.name ?? t("unknownBrand"),
       }),
-      description: getPerfumeShortText(perfume),
+      description: getPerfumeShortText({
+        ...perfume,
+        fragranceFamily:
+          getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT) || perfume.fragranceFamily,
+        notes: perfume.notes?.map((item) => ({
+          ...item,
+          note: item.note
+            ? {
+                ...item.note,
+                name: getLocalizedTaxonomyLabel(item.note.slug, "notes", taxonomyT) || item.note.name,
+              }
+            : item.note,
+        })),
+      }),
       locale: resolvedLocale,
       pathname: "/perfumes/[slug]",
       params: { slug },
@@ -299,6 +316,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
   const t = await getTranslations({ locale: resolvedLocale, namespace: "perfume.detail" });
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
+  const taxonomyT = await getTranslations({ locale: resolvedLocale, namespace: "taxonomy" });
   const data = await getPerfumePageData(slug);
 
   if (!data) {
@@ -315,7 +333,10 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     ...groupedNotes.top.map((note) => ({ ...note, noteType: "TOP" })),
     ...groupedNotes.heart.map((note) => ({ ...note, noteType: "HEART" })),
     ...groupedNotes.base.map((note) => ({ ...note, noteType: "BASE" })),
-  ];
+  ].map((note) => ({
+    ...note,
+    name: getLocalizedTaxonomyLabel(note.slug, "notes", taxonomyT) || note.name,
+  }));
 
   const currentTotal = bestOffer?.bestTotalPrice ?? null;
   const alternativeSavings = cheaperAlternatives
@@ -335,7 +356,38 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         savings: formatCurrency(topSavings, bestOffer?.bestCurrency ?? "EUR", resolvedLocale),
       })
     : t("cheaperAlternativesSubtitle");
-  const overviewText = getPerfumeOverviewText(perfume, {
+  const localizedPerfume = {
+    ...perfume,
+    fragranceFamily: getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT) || perfume.fragranceFamily,
+    notes: perfume.notes?.map((item) => ({
+      ...item,
+      note: item.note
+        ? {
+            ...item.note,
+            name: getLocalizedTaxonomyLabel(item.note.slug, "notes", taxonomyT) || item.note.name,
+          }
+        : item.note,
+    })),
+    moods: perfume.moods?.map((item) => ({
+      ...item,
+      mood: item.mood
+        ? {
+            ...item.mood,
+            name: getLocalizedTaxonomyLabel(item.mood.slug, "moods", taxonomyT) || item.mood.name,
+          }
+        : item.mood,
+    })),
+    occasions: perfume.occasions?.map((item) => ({
+      ...item,
+      occasion: item.occasion
+        ? {
+            ...item.occasion,
+            name: getLocalizedTaxonomyLabel(item.occasion.slug, "occasions", taxonomyT) || item.occasion.name,
+          }
+        : item.occasion,
+    })),
+  };
+  const overviewText = getPerfumeOverviewText(localizedPerfume, {
     family: t("overviewLabels.family"),
     notes: t("overviewLabels.notes"),
     moods: t("overviewLabels.moods"),
@@ -373,8 +425,8 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         ]}
       />
       <PerfumeDetailNavigationReady />
-      <Container className="space-y-9 pt-8 pb-40 md:space-y-10 md:pt-10 md:pb-10">
-        <Breadcrumbs items={breadcrumbItems} />
+      <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
+        <Breadcrumbs items={breadcrumbItems} className="mb-0" />
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
         <section className="space-y-4">
@@ -403,21 +455,25 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
           <MoodBadges
             title={t("badges.moods")}
             items={(perfume.moods ?? []).map((item) => ({
-              name: item.mood?.name ?? t("unknown"),
+              name: getLocalizedTaxonomyLabel(item.mood?.slug, "moods", taxonomyT) || item.mood?.name || t("unknown"),
               weight: item.weight,
             }))}
           />
           <MoodBadges
             title={t("badges.seasons")}
             items={(perfume.seasons ?? []).map((item) => ({
-              name: item.season?.name ?? t("unknown"),
+              name:
+                getLocalizedTaxonomyLabel(item.season?.slug, "seasons", taxonomyT) || item.season?.name || t("unknown"),
               weight: item.weight,
             }))}
           />
           <MoodBadges
             title={t("badges.occasions")}
             items={(perfume.occasions ?? []).map((item) => ({
-              name: item.occasion?.name ?? t("unknown"),
+              name:
+                getLocalizedTaxonomyLabel(item.occasion?.slug, "occasions", taxonomyT) ||
+                item.occasion?.name ||
+                t("unknown"),
               weight: item.weight,
             }))}
           />

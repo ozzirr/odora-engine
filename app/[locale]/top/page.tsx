@@ -7,8 +7,7 @@ import { Container } from "@/components/layout/Container";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { EditorialSection } from "@/components/top/EditorialSection";
-import { SectionTitle } from "@/components/ui/SectionTitle";
-import { buttonStyles } from "@/components/ui/Button";
+import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import {
   getCatalogVisibilityWhereForMode,
@@ -19,7 +18,6 @@ import {
 } from "@/lib/catalog";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
-import { Link } from "@/lib/navigation";
 import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 import {
   buildBreadcrumbSchema,
@@ -162,7 +160,7 @@ export default async function TopPage({ params }: TopPageProps) {
   ];
 
   return (
-    <Container className="space-y-12 pt-14 pb-8">
+    <Container className="space-y-10 pt-6 pb-8 sm:space-y-12 sm:pt-8">
       <StructuredData
         data={[
           buildCollectionPageSchema({
@@ -186,27 +184,17 @@ export default async function TopPage({ params }: TopPageProps) {
         ]}
       />
 
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs items={breadcrumbItems} className="mb-0" />
 
       <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
-        <SectionTitle
-          as="h1"
+        <ExpandableSeoIntro
           eyebrow={t("eyebrow")}
           title={t("title")}
           subtitle={t("subtitle")}
+          body={[t("bodyOne"), t("bodyTwo")]}
+          primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
+          secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
         />
-        <div className="mt-4 max-w-3xl space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
-          <p>{t("bodyOne")}</p>
-          <p>{t("bodyTwo")}</p>
-        </div>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
-            {t("primaryCta")}
-          </Link>
-          <Link href="/finder" className={buttonStyles({ variant: "secondary", size: "sm" })}>
-            {t("secondaryCta")}
-          </Link>
-        </div>
       </div>
 
       <EditorialSection

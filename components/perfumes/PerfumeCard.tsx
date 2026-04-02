@@ -3,7 +3,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { PerfumeDetailLink } from "@/components/perfumes/PerfumeDetailLink";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
+import { getPerfumeShortText } from "@/lib/perfume-text";
 import { computeBestOffer, getBestOfferSummary, type OfferForPricing } from "@/lib/pricing";
+import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { formatCurrency } from "@/lib/utils";
 
 export type PerfumeCardItem = {
@@ -17,6 +19,7 @@ export type PerfumeCardItem = {
   priceRange: string;
   isArabic: boolean;
   isNiche: boolean;
+  ratingInternal?: number | null;
   brand: {
     name: string;
   };
@@ -39,15 +42,106 @@ export type PerfumeCardItem = {
 
 type PerfumeCardProps = {
   perfume: PerfumeCardItem;
-  variant?: "default" | "catalog";
+  variant?: "default" | "catalog" | "finder";
 };
 
 export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) {
   const t = useTranslations("perfume.card");
   const commonT = useTranslations("common");
+  const taxonomyT = useTranslations("taxonomy");
   const locale = useLocale();
   const brandName = perfume.brand?.name?.trim() || t("unknownBrand");
   const bestOffer = getBestOfferSummary(perfume) ?? (perfume.offers?.length ? computeBestOffer(perfume.offers) : null);
+  const fragranceFamilyLabel = getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT);
+  const summary = getPerfumeShortText({
+    ...perfume,
+    fragranceFamily: fragranceFamilyLabel,
+    notes: (perfume.notes ?? []).map((item) => ({
+      ...item,
+      note: item.note
+        ? {
+            ...item.note,
+            name: getLocalizedTaxonomyLabel(item.note.slug, "notes", taxonomyT) || item.note.name,
+          }
+        : item.note,
+    })),
+  });
+  const ratingValue =
+    typeof perfume.ratingInternal === "number" && Number.isFinite(perfume.ratingInternal)
+      ? perfume.ratingInternal.toFixed(1)
+      : null;
+
+  if (variant === "finder") {
+    return (
+      <article className="group relative overflow-hidden rounded-[1.75rem] border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
+        <div className="grid min-h-[12.5rem] grid-cols-[8.5rem_minmax(0,1fr)] sm:grid-cols-[11rem_minmax(0,1fr)]">
+          <div className="relative h-full min-h-[12.5rem] overflow-hidden bg-white">
+            <PerfumeImage
+              imageUrl={perfume.imageUrl}
+              perfumeName={perfume.name}
+              brandName={brandName}
+              fragranceFamily={fragranceFamilyLabel}
+              sizes="(max-width: 640px) 8.5rem, 11rem"
+              imageClassName="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+          </div>
+
+          <div className="flex min-w-0 flex-col justify-between p-4 sm:p-5">
+            <div className="space-y-3">
+              <div className="flex items-start justify-between gap-3">
+                <p className="min-w-0 text-[11px] uppercase tracking-[0.16em] text-[#8a7763] sm:text-xs">
+                  {brandName}
+                </p>
+                {ratingValue ? (
+                  <span className="shrink-0 rounded-full bg-[#1f1914] px-3 py-1 text-[11px] font-semibold text-[#f8f4ed]">
+                    {t("ratingShort", { value: ratingValue })}
+                  </span>
+                ) : null}
+              </div>
+
+              <div>
+                <h3 className="font-display text-[2rem] leading-[0.98] text-[#1f1914] sm:text-[2.2rem]">
+                  {perfume.name}
+                </h3>
+                {summary ? (
+                  <p className="mt-2 text-sm leading-5 text-[#635343]">
+                    {summary}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline">{fragranceFamilyLabel}</Badge>
+                {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
+                {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
+                {bestOffer ? (
+                  <Badge variant="default">
+                    {t("from")} {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}
+                  </Badge>
+                ) : null}
+              </div>
+
+              <p className="inline-flex items-center text-sm font-medium text-[#4f3f31]">
+                {t("viewOffers")}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <PerfumeDetailLink
+          href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}
+          perfumeName={perfume.name}
+          className="absolute inset-0 z-10 rounded-[1.75rem]"
+        >
+          <span className="sr-only">
+            {t("viewFragrance")} {perfume.name}
+          </span>
+        </PerfumeDetailLink>
+      </article>
+    );
+  }
 
   return (
     <article className="group overflow-hidden rounded-2xl border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
@@ -60,7 +154,7 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
             imageUrl={perfume.imageUrl}
             perfumeName={perfume.name}
             brandName={brandName}
-            fragranceFamily={perfume.fragranceFamily}
+            fragranceFamily={fragranceFamilyLabel}
             sizes="(max-width: 1024px) 50vw, 25vw"
             imageClassName="transition-transform duration-300 group-hover:scale-[1.03]"
           />
@@ -86,7 +180,7 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
 
         {variant === "default" ? (
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline">{perfume.fragranceFamily}</Badge>
+            <Badge variant="outline">{fragranceFamilyLabel}</Badge>
             <Badge variant="outline">{t("viewOffers")}</Badge>
             {bestOffer ? (
               <Badge variant="default">

@@ -3,6 +3,10 @@
     "label": "Cambia lingua"
   },
   "common": {
+    "actions": {
+      "showMore": "Mostra di più",
+      "showLess": "Mostra meno"
+    },
     "badges": {
       "arabic": "Arabo",
       "niche": "Niche"
@@ -48,7 +52,7 @@
       },
       "legalLinks": {
         "privacy": "Privacy",
-        "cookiePolicy": "Cookie Policy",
+        "cookiePolicy": "Informativa cookie",
         "terms": "Termini",
         "affiliateDisclosure": "Trasparenza affiliazione"
       }
@@ -66,7 +70,7 @@
     "summaryDescription": "I cookie tecnici restano attivi, gli analytics restano privacy-friendly e Google AdSense rimane bloccato finche non abiliti esplicitamente i cookie marketing.",
     "links": {
       "privacyPolicy": "Informativa privacy",
-      "cookiePolicy": "Cookie Policy"
+      "cookiePolicy": "Informativa cookie"
     },
     "closeButton": "Chiudi",
     "categories": {
@@ -322,12 +326,22 @@
       },
       "finding": "Ricerca in corso...",
       "submit": "Trova fragranze",
-      "reset": "Reset",
+      "reset": "Reimposta",
       "results": "Trovate {total} fragranze compatibili",
       "empty": "Scegli alcune preferenze e avvia Finder per vedere le fragranze piu adatte ai tuoi gusti."
     }
   },
   "taxonomy": {
+    "families": {
+      "woody": "Legnoso",
+      "fresh": "Fresco",
+      "oriental": "Orientale",
+      "gourmand": "Gourmand",
+      "citrus": "Agrumato",
+      "aromatic": "Aromatico",
+      "floral": "Floreale",
+      "amber": "Ambrato"
+    },
     "moods": {
       "cozy": "Avvolgente",
       "fresh": "Fresco",
@@ -372,7 +386,7 @@
     },
     "filters": {
       "title": "Filtri",
-      "reset": "Reset",
+      "reset": "Reimposta",
       "summary": "Apri i filtri per affinare ordinamento, famiglia, prezzo e note.",
       "fields": {
         "sort": "Ordina",
@@ -452,6 +466,7 @@
     "card": {
       "unknownBrand": "Brand sconosciuto",
       "from": "da",
+      "ratingShort": "Odora {value}",
       "viewFragrance": "Vedi fragranza",
       "viewOffers": "Scopri le offerte"
     },
@@ -704,13 +719,13 @@
       "effectiveDate": "Data di efficacia: {date}",
       "relatedLinks": {
         "privacyPolicy": "Informativa privacy",
-        "cookiePolicy": "Cookie Policy"
+        "cookiePolicy": "Informativa cookie"
       }
     },
     "privacy": {
       "eyebrow": "Legale",
       "title": "Informativa privacy",
-      "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni. Per il dettaglio operativo su cookie, identificativi tecnici e analytics attivi, consulta anche la Cookie Policy di Odora.",
+      "intro": "Questa informativa privacy spiega come Odora gestisce le informazioni personali quando navighi il sito, crei un account, usi le funzioni di scoperta o clicchi verso retailer esterni. Per il dettaglio operativo su cookie, identificativi tecnici e analytics attivi, consulta anche l'informativa cookie di Odora.",
       "effectiveDate": "1 aprile 2026",
       "sections": [
         {
@@ -732,7 +747,7 @@
           "paragraphs": [
             "Odora usa cookie tecnici e tecnologie simili per mantenerti autenticato, ricordare lo stato della sessione, salvare la preferenza lingua e supportare le funzioni essenziali del sito.",
             "Usiamo anche Vercel Web Analytics per leggere in forma aggregata come viene usato il sito e migliorare l'esperienza. Separatamente, Google AdSense puo essere caricato solo dopo che abiliti esplicitamente i cookie marketing in questo browser.",
-            "Per un dettaglio operativo sui cookie e sulle categorie oggi attive, consulta anche la Cookie Policy disponibile nel footer e nella pagina dedicata."
+            "Per un dettaglio operativo sui cookie e sulle categorie oggi attive, consulta anche l'informativa cookie disponibile nel footer e nella pagina dedicata."
           ]
         },
         {
@@ -774,8 +789,8 @@
     },
     "cookiePolicy": {
       "eyebrow": "Legale",
-      "title": "Cookie Policy",
-      "intro": "Questa Cookie Policy descrive in modo semplice quali cookie e tecnologie simili usa Odora oggi. Il setup include cookie tecnici per il funzionamento del sito, analytics privacy-friendly e un'integrazione Google AdSense opzionale che resta disattivata finche non abiliti i cookie marketing.",
+      "title": "Informativa cookie",
+      "intro": "Questa informativa cookie descrive in modo semplice quali cookie e tecnologie simili usa Odora oggi. Il setup include cookie tecnici per il funzionamento del sito, analytics privacy-friendly e un'integrazione Google AdSense opzionale che resta disattivata finche non abiliti i cookie marketing.",
       "effectiveDate": "1 aprile 2026",
       "sections": [
         {
@@ -811,7 +826,7 @@
         {
           "title": "Preferenze e controlli",
           "paragraphs": [
-            "Nel footer del sito trovi sempre il controllo Preferenze privacy, che riassume le categorie attive, ti permette di consentire o bloccare Google AdSense e rimanda a questa Cookie Policy e alla Privacy Policy.",
+            "Nel footer del sito trovi sempre il controllo Preferenze privacy, che riassume le categorie attive, ti permette di consentire o bloccare Google AdSense e rimanda a questa informativa cookie e all'informativa privacy.",
             "Puoi anche gestire o cancellare i cookie dal browser. Tieni presente che bloccare i cookie tecnici puo compromettere accesso, sessione, cambio lingua o altre funzioni essenziali del sito."
           ]
         },
@@ -819,7 +834,7 @@
           "title": "Link esterni e retailer",
           "paragraphs": [
             "Quando lasci Odora e visiti un retailer o un sito terzo, si applicano i cookie e le policy di quel soggetto. Odora non controlla i cookie impostati da siti esterni dopo il click in uscita.",
-            "Questa Cookie Policy riflette il setup tecnico revisionato il 1 aprile 2026."
+            "Questa informativa cookie riflette il setup tecnico revisionato il 1 aprile 2026."
           ]
         }
       ]
@@ -967,7 +982,7 @@
         "description": "Scopri come Odora raccoglie, usa e protegge le informazioni personali."
       },
       "cookiePolicy": {
-        "title": "Cookie Policy | Odora",
+        "title": "Informativa cookie | Odora",
         "description": "Informazioni chiare sui cookie tecnici, sulle sessioni Supabase e sugli analytics privacy-friendly attivi su Odora."
       },
       "terms": {

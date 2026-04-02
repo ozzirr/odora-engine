@@ -27,8 +27,10 @@ export async function generateMetadata({ params }: AffiliateDisclosurePageProps)
   });
 }
 
-export default async function AffiliateDisclosurePage() {
-  const messages = await getMessages();
+export default async function AffiliateDisclosurePage({ params }: AffiliateDisclosurePageProps) {
+  const { locale } = await params;
+  const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const messages = await getMessages({ locale: resolvedLocale });
   const content = (messages as { legal: { affiliateDisclosure: Parameters<typeof LegalPage>[0] } }).legal.affiliateDisclosure;
 
   return (
