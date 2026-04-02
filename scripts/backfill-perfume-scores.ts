@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 import { loadPerfumeInput, toCsv } from "@/lib/perfume-data/csv";
 import { normalizeCsvHeader } from "@/lib/perfume-data/normalize";
@@ -82,6 +82,34 @@ type SeedScoreEntry = {
   sillageScore: number;
   versatilityScore: number;
 };
+
+const perfumeProfileArgs = Prisma.validator<Prisma.PerfumeDefaultArgs>()({
+  include: {
+    brand: true,
+    notes: {
+      include: {
+        note: true,
+      },
+    },
+    moods: {
+      include: {
+        mood: true,
+      },
+    },
+    seasons: {
+      include: {
+        season: true,
+      },
+    },
+    occasions: {
+      include: {
+        occasion: true,
+      },
+    },
+  },
+});
+
+type PerfumeWithProfileRelations = Prisma.PerfumeGetPayload<typeof perfumeProfileArgs>;
 
 function parseCliOptions(argv: string[]): CliOptions {
   const options: CliOptions = {
@@ -293,7 +321,7 @@ async function loadSeedScores() {
 }
 
 function toProfile(
-  perfume: Awaited<ReturnType<PrismaClient["perfume"]["findMany"]>>[number],
+  perfume: PerfumeWithProfileRelations,
   matchedUrlBySlug: Map<string, string>,
 ): PerfumeProfile {
   return {
@@ -377,29 +405,7 @@ async function main() {
     const matchedUrlBySlug = await loadMatchedUrlBySlug();
     const seedScores = await loadSeedScores();
     const perfumes = await prisma.perfume.findMany({
-      include: {
-        brand: true,
-        notes: {
-          include: {
-            note: true,
-          },
-        },
-        moods: {
-          include: {
-            mood: true,
-          },
-        },
-        seasons: {
-          include: {
-            season: true,
-          },
-        },
-        occasions: {
-          include: {
-            occasion: true,
-          },
-        },
-      },
+      ...perfumeProfileArgs,
       orderBy: {
         slug: "asc",
       },
