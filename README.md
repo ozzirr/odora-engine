@@ -103,6 +103,16 @@ The Google button calls `supabase.auth.signInWithOAuth(...)`. For Google with Su
      - `https://<your-domain>/auth/callback`
 6. Set `NEXT_PUBLIC_SITE_URL` to your canonical public origin for email links and fallback redirects.
 
+### Data API Security
+
+Odora does not use Supabase's Data API for catalog reads or writes. Application data flows through Prisma and the server-side `DATABASE_URL` connection instead.
+
+For Supabase projects backing this repo:
+
+- keep Row Level Security enabled on every `public` table
+- do not grant `anon` or `authenticated` direct access to `public` tables, sequences, or routines unless you intentionally expose them
+- if you add a new `public` table later, treat `ENABLE ROW LEVEL SECURITY` as mandatory before exposing it to any client key
+
 ## Local Setup
 
 1. Install dependencies:

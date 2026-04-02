@@ -18,7 +18,7 @@ import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Link } from "@/lib/navigation";
-import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -49,24 +49,28 @@ const getCachedFinderOptions = unstable_cache(async (): Promise<FinderOptions> =
   }
 
   try {
-    const [moods, seasons, occasions, notes] = await Promise.all([
-      prisma.mood.findMany({
-        select: { slug: true },
-        orderBy: { slug: "asc" },
-      }),
-      prisma.season.findMany({
-        select: { slug: true },
-        orderBy: { slug: "asc" },
-      }),
-      prisma.occasion.findMany({
-        select: { slug: true },
-        orderBy: { slug: "asc" },
-      }),
-      prisma.note.findMany({
-        select: { slug: true },
-        orderBy: { slug: "asc" },
-        take: 80,
-      }),
+    const [moods, seasons, occasions, notes] = await runPrismaOperations([
+      () =>
+        prisma.mood.findMany({
+          select: { slug: true },
+          orderBy: { slug: "asc" },
+        }),
+      () =>
+        prisma.season.findMany({
+          select: { slug: true },
+          orderBy: { slug: "asc" },
+        }),
+      () =>
+        prisma.occasion.findMany({
+          select: { slug: true },
+          orderBy: { slug: "asc" },
+        }),
+      () =>
+        prisma.note.findMany({
+          select: { slug: true },
+          orderBy: { slug: "asc" },
+          take: 80,
+        }),
     ]);
 
     return {

@@ -15,7 +15,7 @@ import {
   serializeParsedPerfumeFilters,
   type SearchParamInput,
 } from "@/lib/filters";
-import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 
 export const PERFUMES_PAGE_SIZE = 20;
 export const FREE_CATALOG_PREVIEW_LIMIT = 25;
@@ -100,9 +100,9 @@ async function getPerfumesPageUncached(
 
     const { query } = applySorting(baseQuery, parsed.sort);
 
-    const [total, perfumes] = await Promise.all([
-      prisma.perfume.count({ where: mergedWhere }),
-      queryLimit > 0 ? prisma.perfume.findMany(query) : Promise.resolve([]),
+    const [total, perfumes] = await runPrismaOperations([
+      () => prisma.perfume.count({ where: mergedWhere }),
+      () => (queryLimit > 0 ? prisma.perfume.findMany(query) : Promise.resolve([])),
     ]);
     const accessibleTotal = accessMode === "preview" ? Math.min(total, FREE_CATALOG_PREVIEW_LIMIT) : total;
 

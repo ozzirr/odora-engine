@@ -15,7 +15,7 @@ import {
 } from "@/lib/catalog";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { getBestOfferSummary } from "@/lib/pricing";
-import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 
 export type QuickFilterIllustration =
   | "vanilla"
@@ -423,19 +423,20 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
 
   try {
     const [heroCandidates, trendingCandidates, featuredCandidates, fallbackCandidates, collections] =
-      await Promise.all([
-      getHomepageSectionPerfumes(HomepageSection.HERO, 4, catalogMode),
-      getHomepageSectionPerfumes(HomepageSection.TRENDING, 8, catalogMode),
-      getHomepageSectionPerfumes(HomepageSection.FEATURED, 12, catalogMode),
-      getHomepageFallbackPerfumes(24, catalogMode),
-      prisma.homepageCollection.findMany({
-        where: {
-          isHomepageVisible: true,
-        },
-        select: homepageCollectionSelect,
-        orderBy: [{ homepagePriority: "asc" }, { title: "asc" }],
-        take: 6,
-      }),
+      await runPrismaOperations([
+        () => getHomepageSectionPerfumes(HomepageSection.HERO, 4, catalogMode),
+        () => getHomepageSectionPerfumes(HomepageSection.TRENDING, 8, catalogMode),
+        () => getHomepageSectionPerfumes(HomepageSection.FEATURED, 12, catalogMode),
+        () => getHomepageFallbackPerfumes(24, catalogMode),
+        () =>
+          prisma.homepageCollection.findMany({
+            where: {
+              isHomepageVisible: true,
+            },
+            select: homepageCollectionSelect,
+            orderBy: [{ homepagePriority: "asc" }, { title: "asc" }],
+            take: 6,
+          }),
       ]);
 
     const heroSpotlights = toUniquePerfumes([
@@ -510,38 +511,40 @@ async function getPopularPerfumeSlugsUncached(
 
   try {
     const take = Math.max(limit, 12);
-    const [homepagePlacements, topRatedPerfumes] = await Promise.all([
-      prisma.perfumeHomepagePlacement.findMany({
-        where: visibilityWhere
-          ? {
-              perfume: {
-                is: visibilityWhere,
+    const [homepagePlacements, topRatedPerfumes] = await runPrismaOperations([
+      () =>
+        prisma.perfumeHomepagePlacement.findMany({
+          where: visibilityWhere
+            ? {
+                perfume: {
+                  is: visibilityWhere,
+                },
+              }
+            : undefined,
+          select: {
+            perfume: {
+              select: {
+                slug: true,
               },
-            }
-          : undefined,
-        select: {
-          perfume: {
-            select: {
-              slug: true,
             },
           },
-        },
-        orderBy: [{ priority: "asc" }, { updatedAt: "desc" }],
-        take,
-      }),
-      prisma.perfume.findMany({
-        where: {
-          ...(visibilityWhere ?? {}),
-          ratingInternal: {
-            not: null,
+          orderBy: [{ priority: "asc" }, { updatedAt: "desc" }],
+          take,
+        }),
+      () =>
+        prisma.perfume.findMany({
+          where: {
+            ...(visibilityWhere ?? {}),
+            ratingInternal: {
+              not: null,
+            },
           },
-        },
-        select: {
-          slug: true,
-        },
-        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }, { name: "asc" }],
-        take,
-      }),
+          select: {
+            slug: true,
+          },
+          orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }, { name: "asc" }],
+          take,
+        }),
     ]);
 
     const dedupedSlugs = new Set<string>();

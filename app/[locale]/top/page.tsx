@@ -20,7 +20,7 @@ import {
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Link } from "@/lib/navigation";
-import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -54,45 +54,49 @@ async function getTopPageDataUncached(catalogMode: CatalogMode) {
   try {
     const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
     const priceCap = 100;
-    const [topArabic, topNiche, topLongLasting, valueCandidates] = await Promise.all([
-      prisma.perfume.findMany({
-        where: mergePerfumeWhere({ isArabic: true }, visibilityWhere),
-        include: topPerfumeInclude,
-        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
-        take: 4,
-      }),
-      prisma.perfume.findMany({
-        where: mergePerfumeWhere({ isNiche: true }, visibilityWhere),
-        include: topPerfumeInclude,
-        orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
-        take: 4,
-      }),
-      prisma.perfume.findMany({
-        where: mergePerfumeWhere(
-          {
-            longevityScore: {
-              not: null,
+    const [topArabic, topNiche, topLongLasting, valueCandidates] = await runPrismaOperations([
+      () =>
+        prisma.perfume.findMany({
+          where: mergePerfumeWhere({ isArabic: true }, visibilityWhere),
+          include: topPerfumeInclude,
+          orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+          take: 4,
+        }),
+      () =>
+        prisma.perfume.findMany({
+          where: mergePerfumeWhere({ isNiche: true }, visibilityWhere),
+          include: topPerfumeInclude,
+          orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
+          take: 4,
+        }),
+      () =>
+        prisma.perfume.findMany({
+          where: mergePerfumeWhere(
+            {
+              longevityScore: {
+                not: null,
+              },
             },
-          },
-          visibilityWhere,
-        ),
-        include: topPerfumeInclude,
-        orderBy: [{ longevityScore: "desc" }, { ratingInternal: "desc" }, { updatedAt: "desc" }],
-        take: 4,
-      }),
-      prisma.perfume.findMany({
-        where: mergePerfumeWhere(
-          {
-            bestTotalPriceAmount: {
-              lte: priceCap,
+            visibilityWhere,
+          ),
+          include: topPerfumeInclude,
+          orderBy: [{ longevityScore: "desc" }, { ratingInternal: "desc" }, { updatedAt: "desc" }],
+          take: 4,
+        }),
+      () =>
+        prisma.perfume.findMany({
+          where: mergePerfumeWhere(
+            {
+              bestTotalPriceAmount: {
+                lte: priceCap,
+              },
             },
-          },
-          visibilityWhere,
-        ),
-        include: topPerfumeInclude,
-        orderBy: [{ ratingInternal: "desc" }, { bestTotalPriceAmount: "asc" }, { updatedAt: "desc" }],
-        take: 4,
-      }),
+            visibilityWhere,
+          ),
+          include: topPerfumeInclude,
+          orderBy: [{ ratingInternal: "desc" }, { bestTotalPriceAmount: "asc" }, { updatedAt: "desc" }],
+          take: 4,
+        }),
     ]);
 
     return {
