@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
 import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
+import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { Link } from "@/lib/navigation";
 import {
   CONSENT_COOKIE_NAME,
@@ -42,12 +43,7 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
       return;
     }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
+    return lockDocumentScroll();
   }, [open]);
 
   useEffect(() => {

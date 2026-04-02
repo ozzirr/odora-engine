@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
+import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLoadingState";
 import { cn } from "@/lib/utils";
 
@@ -55,24 +56,7 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
       return;
     }
 
-    const root = document.documentElement;
-    const { body } = document;
-    const previousRootOverflow = root.style.overflow;
-    const previousRootOverscrollBehavior = root.style.overscrollBehavior;
-    const previousBodyOverflow = body.style.overflow;
-    const previousBodyOverscrollBehavior = body.style.overscrollBehavior;
-
-    root.style.overflow = "hidden";
-    root.style.overscrollBehavior = "none";
-    body.style.overflow = "hidden";
-    body.style.overscrollBehavior = "none";
-
-    return () => {
-      root.style.overflow = previousRootOverflow;
-      root.style.overscrollBehavior = previousRootOverscrollBehavior;
-      body.style.overflow = previousBodyOverflow;
-      body.style.overscrollBehavior = previousBodyOverscrollBehavior;
-    };
+    return lockDocumentScroll({ lockRoot: true, disableOverscroll: true });
   }, [pendingNavigation]);
 
   return (

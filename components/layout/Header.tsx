@@ -13,6 +13,7 @@ import {
   APP_HEADER_LAYER_CLASS,
   APP_HEADER_OFFSET_CLASS,
 } from "@/lib/chrome";
+import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
@@ -68,10 +69,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
       return;
     }
 
-    const { body } = document;
-    const previousOverflow = body.style.overflow;
-
-    body.style.overflow = "hidden";
+    const releaseScrollLock = lockDocumentScroll();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -82,7 +80,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      body.style.overflow = previousOverflow;
+      releaseScrollLock();
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [menuOpen, authModalOpen]);

@@ -17,6 +17,7 @@ import {
   type AuthMode,
 } from "@/lib/auth-modal";
 import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
+import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
@@ -116,12 +117,7 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
       return;
     }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
+    return lockDocumentScroll();
   }, [renderedMode]);
 
   useEffect(() => {
