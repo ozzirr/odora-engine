@@ -43,9 +43,7 @@ function buildBestOfferSnapshot(
   offers: PerfumeOfferForSync[] | null | undefined,
 ): BestOfferSnapshot {
   const bestOffer = computeBestOffer(offers);
-  const hasAvailableOffer = Boolean(
-    offers?.some((offer) => offer.availability && offer.availability !== "OUT_OF_STOCK"),
-  );
+  const hasAvailableOffer = Boolean(offers?.length);
 
   if (!bestOffer) {
     return {
@@ -131,7 +129,6 @@ export async function syncPerfumePrices(params: {
           priceAmount: true,
           shippingCost: true,
           currency: true,
-          availability: true,
           affiliateUrl: true,
           productUrl: true,
           lastCheckedAt: true,

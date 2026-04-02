@@ -38,7 +38,6 @@ async function main() {
       priceAmount: true,
       currency: true,
       shippingCost: true,
-      availability: true,
       lastCheckedAt: true,
       isBestPrice: true,
       perfume: {
@@ -115,7 +114,7 @@ async function main() {
   });
 
   const payload: OffersBackupFile = {
-    version: 2,
+    version: 3,
     createdAt: new Date().toISOString(),
     offers: offers.map((offer) => ({
       perfumeSlug: offer.perfume.slug,
@@ -132,7 +131,6 @@ async function main() {
       priceAmount: offer.priceAmount,
       currency: offer.currency,
       shippingCost: offer.shippingCost,
-      availability: offer.availability,
       lastCheckedAt: offer.lastCheckedAt.toISOString(),
       isBestPrice: offer.isBestPrice,
     })),

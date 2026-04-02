@@ -18,6 +18,9 @@ import {
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const PERFUMES_PAGE_SIZE = 20;
+export const FREE_CATALOG_PREVIEW_LIMIT = 25;
+
+export type CatalogAccessMode = "full" | "preview";
 
 const perfumeListInclude = {
   brand: true,
@@ -43,6 +46,7 @@ export type PerfumeListItem = Prisma.PerfumeGetPayload<{
 type GetPerfumesPageOptions = {
   offset?: number;
   limit?: number;
+  accessMode?: CatalogAccessMode;
 };
 
 function normalizePaginationValue(value: number | undefined, fallback: number) {
@@ -72,6 +76,7 @@ async function getPerfumesPageUncached(
 ) {
   const offset = normalizePaginationValue(options.offset, 0);
   const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
+  const accessMode = options.accessMode ?? "preview";
   const { parsed, where } = buildPerfumeQuery(searchParams);
 
   if (!isDatabaseConfigured) {
@@ -82,26 +87,29 @@ async function getPerfumesPageUncached(
   }
 
   const mergedWhere = mergePerfumeWhere(where, getCatalogVisibilityWhereForMode(catalogMode));
+  const queryLimit =
+    accessMode === "preview" ? Math.max(0, Math.min(limit, FREE_CATALOG_PREVIEW_LIMIT - offset)) : limit;
 
   try {
     const baseQuery: Prisma.PerfumeFindManyArgs = {
       where: mergedWhere,
       include: perfumeListInclude,
       skip: offset,
-      take: limit,
+      take: queryLimit,
     };
 
     const { query } = applySorting(baseQuery, parsed.sort);
 
     const [total, perfumes] = await Promise.all([
       prisma.perfume.count({ where: mergedWhere }),
-      prisma.perfume.findMany(query),
+      queryLimit > 0 ? prisma.perfume.findMany(query) : Promise.resolve([]),
     ]);
+    const accessibleTotal = accessMode === "preview" ? Math.min(total, FREE_CATALOG_PREVIEW_LIMIT) : total;
 
     return {
       perfumes: perfumes as PerfumeListItem[],
       total,
-      hasMore: offset + perfumes.length < total,
+      hasMore: offset + perfumes.length < accessibleTotal,
       selectedFilters: parsed,
       offset,
       limit,
@@ -121,13 +129,14 @@ export async function getPerfumesPage(
 ) {
   const offset = normalizePaginationValue(options.offset, 0);
   const limit = normalizePaginationValue(options.limit, PERFUMES_PAGE_SIZE);
+  const accessMode = options.accessMode ?? "preview";
   const { parsed } = buildPerfumeQuery(searchParams);
   const catalogMode = resolveCatalogMode();
   const serializedFilters = serializeParsedPerfumeFilters(parsed);
 
   return unstable_cache(
-    async () => getPerfumesPageUncached(searchParams, { offset, limit }, catalogMode),
-    ["perfumes-page", catalogMode, serializedFilters, String(offset), String(limit)],
+    async () => getPerfumesPageUncached(searchParams, { offset, limit, accessMode }, catalogMode),
+    ["perfumes-page", catalogMode, accessMode, serializedFilters, String(offset), String(limit)],
     {
       revalidate: 1800,
       tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumesPage],

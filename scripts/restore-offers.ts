@@ -56,7 +56,6 @@ function isOfferBackupRow(value: unknown): value is OfferBackupRow {
     typeof row.productUrl === "string" &&
     typeof row.currency === "string" &&
     typeof row.priceAmount === "number" &&
-    typeof row.availability === "string" &&
     typeof row.lastCheckedAt === "string" &&
     typeof row.isBestPrice === "boolean" &&
     Boolean(row.store) &&
@@ -101,7 +100,7 @@ function parseBackupFile(raw: string): OffersBackupFile {
   };
 
   if (
-    ![1, 2].includes(parsed.version ?? 0) ||
+    ![1, 2, 3].includes(parsed.version ?? 0) ||
     !Array.isArray(parsed.offers) ||
     !parsed.offers.every(isOfferBackupRow)
   ) {
@@ -109,7 +108,7 @@ function parseBackupFile(raw: string): OffersBackupFile {
   }
 
   return {
-    version: 2,
+    version: 3,
     createdAt: typeof parsed.createdAt === "string" ? parsed.createdAt : new Date().toISOString(),
     offers: parsed.offers,
     perfumeRelations:
@@ -249,11 +248,6 @@ async function main() {
         priceAmount: offer.priceAmount,
         currency: offer.currency,
         shippingCost: offer.shippingCost,
-        availability: offer.availability as
-          | "IN_STOCK"
-          | "LIMITED"
-          | "OUT_OF_STOCK"
-          | "PREORDER",
         lastCheckedAt: toDate(offer.lastCheckedAt),
         isBestPrice: offer.isBestPrice,
       },

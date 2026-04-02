@@ -3,22 +3,13 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-type AuthMode = "login" | "signup";
+import { buildAuthModalUrl, type AuthMode } from "@/lib/auth-modal";
 
 type AuthModalTriggerProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
   children: ReactNode;
   mode: AuthMode;
   onOpen?: () => void;
 };
-
-function buildBasePath(pathname: string, searchParams: URLSearchParams, hash: string) {
-  const params = new URLSearchParams(searchParams);
-  params.delete("auth");
-  params.delete("authNext");
-  params.delete("error");
-  const search = params.toString();
-  return `${pathname}${search ? `?${search}` : ""}${hash}`;
-}
 
 export function AuthModalTrigger({
   children,
@@ -42,12 +33,7 @@ export function AuthModalTrigger({
         }
 
         const hash = window.location.hash;
-        const currentParams = new URLSearchParams(searchParams.toString());
-        const nextPath = buildBasePath(pathname, currentParams, hash);
-        currentParams.delete("error");
-        currentParams.set("auth", mode);
-        currentParams.set("authNext", nextPath);
-        window.history.pushState(null, "", `${pathname}?${currentParams.toString()}${hash}`);
+        window.history.pushState(null, "", buildAuthModalUrl(pathname, searchParams, mode, hash));
         onOpen?.();
       }}
     >

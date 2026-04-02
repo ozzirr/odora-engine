@@ -9,6 +9,7 @@ import { PerfumeFilters } from "@/components/perfumes/PerfumeFilters";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import type { ParsedPerfumeFilters } from "@/lib/filters";
+import { FREE_CATALOG_PREVIEW_LIMIT } from "@/lib/perfumes-catalog";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type PerfumesClientProps = {
@@ -19,8 +20,6 @@ type PerfumesClientProps = {
   pageSize: number;
   isAuthenticated: boolean;
 };
-
-const FREE_CATALOG_PREVIEW_LIMIT = 25;
 
 function PerfumeGridSkeleton({ count = 6 }: { count?: number }) {
   return (

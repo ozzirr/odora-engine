@@ -33,7 +33,6 @@ type ProductSchemaParams = {
   category?: string | null;
   currency?: string | null;
   price?: number | null;
-  availability?: string | null;
   offerUrl?: string | null;
 };
 
@@ -42,22 +41,6 @@ function withContext<T extends Record<string, unknown>>(schema: T) {
     "@context": "https://schema.org",
     ...schema,
   };
-}
-
-function toSchemaAvailability(value?: string | null) {
-  if (value === "OUT_OF_STOCK") {
-    return "https://schema.org/OutOfStock";
-  }
-
-  if (value === "PREORDER") {
-    return "https://schema.org/PreOrder";
-  }
-
-  if (value === "LIMITED") {
-    return "https://schema.org/LimitedAvailability";
-  }
-
-  return "https://schema.org/InStock";
 }
 
 export function buildOrganizationSchema() {
@@ -133,7 +116,6 @@ export function buildProductSchema({
   category,
   currency,
   price,
-  availability,
   offerUrl,
 }: ProductSchemaParams) {
   const offerPath = offerUrl?.startsWith("/") ? toAbsoluteUrl(offerUrl) : offerUrl ?? toAbsoluteUrl(path);
@@ -150,12 +132,11 @@ export function buildProductSchema({
     },
     ...(category ? { category } : {}),
     ...(currency && typeof price === "number"
-      ? {
+        ? {
           offers: {
             "@type": "Offer",
             priceCurrency: currency,
             price,
-            availability: toSchemaAvailability(availability),
             url: offerPath,
             itemCondition: "https://schema.org/NewCondition",
           },

@@ -1,11 +1,8 @@
-import { defaultLocale, type AppLocale } from "@/lib/i18n";
-
 export type OfferForPricing = {
   id?: number;
   priceAmount: number;
   shippingCost?: number | null;
   currency: string;
-  availability?: string;
   affiliateUrl?: string | null;
   productUrl?: string | null;
   lastCheckedAt?: Date | string | null;
@@ -77,28 +74,6 @@ export function getOfferUrl(affiliateUrl?: string | null, productUrl?: string | 
   return null;
 }
 
-export function formatAvailabilityLabel(
-  value: string | undefined,
-  locale: AppLocale = defaultLocale,
-) {
-  const availabilityLabel: Record<AppLocale, Record<string, string>> = {
-    en: {
-      IN_STOCK: "In stock",
-      LIMITED: "Limited",
-      OUT_OF_STOCK: "Out of stock",
-      PREORDER: "Preorder",
-    },
-    it: {
-      IN_STOCK: "Disponibile",
-      LIMITED: "Limitato",
-      OUT_OF_STOCK: "Esaurito",
-      PREORDER: "Preordine",
-    },
-  };
-
-  return availabilityLabel[locale][value ?? ""] ?? (locale === "it" ? "Verifica in negozio" : "Check in store");
-}
-
 export function computeBestOffer<T extends OfferForPricing>(
   offers: T[] | null | undefined,
 ): ComputedBestOffer<T> | null {
@@ -114,10 +89,7 @@ export function computeBestOffer<T extends OfferForPricing>(
     return null;
   }
 
-  const availableOffers = normalizedOffers.filter((offer) => offer.availability !== "OUT_OF_STOCK");
-  const candidates = availableOffers.length > 0 ? availableOffers : normalizedOffers;
-
-  const bestOffer = candidates.reduce((currentBest, currentOffer) => {
+  const bestOffer = normalizedOffers.reduce((currentBest, currentOffer) => {
     const bestTotal = currentBest.priceAmount + (currentBest.shippingCost ?? 0);
     const currentTotal = currentOffer.priceAmount + (currentOffer.shippingCost ?? 0);
 

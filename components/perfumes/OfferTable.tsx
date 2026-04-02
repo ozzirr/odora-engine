@@ -5,7 +5,7 @@ import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
-import { computeBestOffer, formatAvailabilityLabel, getOfferUrl } from "@/lib/pricing";
+import { computeBestOffer, getOfferUrl } from "@/lib/pricing";
 import { formatCurrency } from "@/lib/utils";
 
 export type OfferTableItem = {
@@ -18,7 +18,6 @@ export type OfferTableItem = {
   priceAmount: number;
   currency: string;
   shippingCost: number | null;
-  availability: string;
   isBestPrice: boolean;
   lastCheckedAt: Date;
 };
@@ -49,7 +48,6 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
               <th className="px-4 py-3">{t("columns.price")}</th>
               <th className="px-4 py-3">{t("columns.shipping")}</th>
               <th className="px-4 py-3">{t("columns.total")}</th>
-              <th className="px-4 py-3">{t("columns.availability")}</th>
               <th className="px-4 py-3">{t("columns.action")}</th>
             </tr>
           </thead>
@@ -92,11 +90,6 @@ export function OfferTable({ offers }: { offers: OfferTableItem[] }) {
                   </td>
                   <td className="px-4 py-3 text-[#2a2018]">
                     {formatCurrency(total, offer.currency, locale as "it" | "en")}
-                  </td>
-                  <td className="px-4 py-3">
-                    <Badge variant="outline">
-                      {formatAvailabilityLabel(offer.availability, locale as "it" | "en")}
-                    </Badge>
                   </td>
                   <td className="px-4 py-3">
                     {targetUrl ? (

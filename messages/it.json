@@ -123,11 +123,10 @@
       "currentDisabled": "Google AdSense e attualmente bloccato in questo browser."
     },
     "banner": {
-      "eyebrow": "Consenso",
-      "title": "Vuoi abilitare i cookie marketing?",
-      "description": "Odora puo caricare tecnologie pubblicitarie solo con il tuo consenso marketing. Se rifiuti, gli script pubblicitari restano disattivati.",
-      "rejectButton": "Rifiuta marketing",
-      "acceptButton": "Accetta marketing"
+      "title": "Cookie facoltativi",
+      "description": "Usiamo cookie facoltativi solo con il tuo consenso.",
+      "acceptButton": "Consenti",
+      "closeAriaLabel": "Chiudi banner cookie"
     }
   },
   "home": {
@@ -235,7 +234,7 @@
     "trustedStores": {
       "eyebrow": "Negozi affidabili",
       "title": "Confronta i prezzi dei negozi affidabili",
-      "subtitle": "Mostriamo i retailer in una vista di confronto pulita cosi prezzo, spedizione e disponibilita restano facili da leggere."
+      "subtitle": "Mostriamo i retailer in una vista di confronto pulita cosi prezzo, spedizione e link prodotto restano facili da leggere."
     },
     "discoveryCollections": {
       "eyebrow": "Collezioni",
@@ -433,14 +432,14 @@
     "transition": {
       "eyebrow": "Comparazione offerte live",
       "title": "Stiamo cercando le migliori offerte",
-      "subtitle": "Confrontiamo retailer affidabili, costi di spedizione e disponibilita prima di mostrarti la scheda prodotto.",
-      "subtitleWithName": "Stiamo confrontando retailer affidabili, costi di spedizione e disponibilita per {name}.",
+      "subtitle": "Confrontiamo retailer affidabili, costi di spedizione e link prodotto prima di mostrarti la scheda prodotto.",
+      "subtitleWithName": "Stiamo confrontando retailer affidabili, costi di spedizione e link prodotto per {name}.",
       "status": "Controlliamo Notino, Douglas, Amazon, Sephora e altri store.",
       "moreStores": "+ altri",
       "steps": {
         "retailers": "Analisi retailer",
         "pricing": "Confronto del totale",
-        "availability": "Verifica disponibilita"
+        "offers": "Validazione link offerta"
       }
     },
     "hero": {
@@ -456,7 +455,7 @@
     "amazon": {
       "eyebrow": "Sei cliente Prime?",
       "title": "Acquista su Amazon",
-      "subtitle": "Controlla disponibilita, spedizione Prime e tempi di consegna su Amazon prima di passare alle alternative piu economiche.",
+      "subtitle": "Controlla spedizione Prime e tempi di consegna su Amazon prima di passare alle alternative piu economiche.",
       "cta": "Acquista su Amazon",
       "ctaPrefix": "Acquista su"
     },
@@ -467,7 +466,6 @@
         "price": "Prezzo",
         "shipping": "Spedizione",
         "total": "Totale",
-        "availability": "Disponibilita",
         "action": "Azione"
       },
       "bestTotal": "Miglior totale",
@@ -487,7 +485,6 @@
       "item": "Prodotto",
       "shipping": "Spedizione",
       "shippingIncluded": "inclusa / n.d.",
-      "availability": "Disponibilita",
       "viewOffer": "Vedi offerta"
     },
     "notes": {

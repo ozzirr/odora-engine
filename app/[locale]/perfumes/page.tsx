@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
@@ -109,9 +110,15 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
   const currentPage = parsePageParam(resolvedSearchParams.page);
   const flatQuery = toFlatQuery(resolvedSearchParams, { excludePage: true });
   const isAuthenticated = await getIsAuthenticated();
+
+  if (!isAuthenticated && currentPage > 1) {
+    redirect(getLocalizedPathname(resolvedLocale, "/perfumes", undefined, flatQuery));
+  }
+
   const { perfumes, selectedFilters, total, hasMore } = await getPerfumesPage(resolvedSearchParams, {
     offset: (currentPage - 1) * PERFUMES_PAGE_SIZE,
     limit: PERFUMES_PAGE_SIZE,
+    accessMode: isAuthenticated ? "full" : "preview",
   });
   const hasFilters = hasActiveCatalogFilters(selectedFilters);
   const totalPages = Math.max(1, Math.ceil(total / PERFUMES_PAGE_SIZE));
@@ -188,7 +195,7 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         isAuthenticated={isAuthenticated}
       />
 
-      {totalPages > 1 ? (
+      {isAuthenticated && totalPages > 1 ? (
         <nav aria-label={clientT("paginationLabel")} className="mt-8 flex flex-wrap items-center gap-2 pb-10">
           {currentPage > 1 ? (
             <Link

@@ -123,11 +123,10 @@
       "currentDisabled": "Google AdSense is currently blocked in this browser."
     },
     "banner": {
-      "eyebrow": "Consent",
-      "title": "Allow marketing cookies?",
-      "description": "Odora can load advertising technologies only with your marketing consent. If you decline, advertising scripts stay disabled.",
-      "rejectButton": "Reject marketing",
-      "acceptButton": "Accept marketing"
+      "title": "Optional cookies",
+      "description": "We use optional cookies only with your consent.",
+      "acceptButton": "Allow",
+      "closeAriaLabel": "Close cookie banner"
     }
   },
   "home": {
@@ -235,7 +234,7 @@
     "trustedStores": {
       "eyebrow": "Trusted Stores",
       "title": "Compare prices from trusted stores",
-      "subtitle": "We surface retailers in a clean comparison view so prices, shipping, and availability stay easy to read."
+      "subtitle": "We surface retailers in a clean comparison view so prices, shipping, and product links stay easy to read."
     },
     "discoveryCollections": {
       "eyebrow": "Collections",
@@ -433,14 +432,14 @@
     "transition": {
       "eyebrow": "Live offer comparison",
       "title": "We’re searching for the best offers",
-      "subtitle": "We’re comparing trusted retailers, shipping costs, and availability before showing the product page.",
-      "subtitleWithName": "We’re comparing trusted retailers, shipping costs, and availability for {name}.",
+      "subtitle": "We’re comparing trusted retailers, shipping costs, and product links before showing the product page.",
+      "subtitleWithName": "We’re comparing trusted retailers, shipping costs, and product links for {name}.",
       "status": "Checking Notino, Douglas, Amazon, Sephora, and more.",
       "moreStores": "+ more",
       "steps": {
         "retailers": "Scanning retailers",
         "pricing": "Ranking total price",
-        "availability": "Verifying availability"
+        "offers": "Validating offer links"
       }
     },
     "hero": {
@@ -456,7 +455,7 @@
     "amazon": {
       "eyebrow": "Prime member?",
       "title": "Buy on Amazon",
-      "subtitle": "Check availability, Prime delivery, and shipping timing on Amazon before moving on to cheaper alternatives.",
+      "subtitle": "Check Prime delivery and shipping timing on Amazon before moving on to cheaper alternatives.",
       "cta": "Buy on Amazon",
       "ctaPrefix": "Buy on"
     },
@@ -467,7 +466,6 @@
         "price": "Price",
         "shipping": "Shipping",
         "total": "Total",
-        "availability": "Availability",
         "action": "Action"
       },
       "bestTotal": "Best total",
@@ -487,7 +485,6 @@
       "item": "Item",
       "shipping": "Shipping",
       "shippingIncluded": "included / n.a.",
-      "availability": "Availability",
       "viewOffer": "View offer"
     },
     "notes": {

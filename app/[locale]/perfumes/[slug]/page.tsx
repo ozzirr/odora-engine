@@ -366,7 +366,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             category: perfume.fragranceFamily,
             currency: bestOffer?.bestCurrency ?? null,
             price: bestOffer?.bestTotalPrice ?? null,
-            availability: bestOffer?.offer.availability ?? null,
             offerUrl: bestOffer?.bestUrl ?? null,
           }),
         ]}

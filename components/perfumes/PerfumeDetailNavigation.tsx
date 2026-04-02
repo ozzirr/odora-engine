@@ -3,7 +3,9 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
+import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
 import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLoadingState";
+import { cn } from "@/lib/utils";
 
 type PendingPerfumeNavigation = {
   perfumeName?: string;
@@ -120,7 +122,12 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
     >
       {children}
       {pendingNavigation ? (
-        <div className="pointer-events-auto fixed inset-x-0 bottom-0 top-[4.5rem] z-30 flex items-start justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:items-center sm:px-6 sm:py-8">
+        <div
+          className={cn(
+            `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} flex items-start justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:items-center sm:px-6 sm:py-8`,
+            APP_OVERLAY_LAYER_CLASS,
+          )}
+        >
           <PerfumeDetailLoadingState
             variant="overlay"
             perfumeName={pendingNavigation.perfumeName}

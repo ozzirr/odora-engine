@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
+import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
 import { Link } from "@/lib/navigation";
 import {
   CONSENT_COOKIE_NAME,
@@ -114,7 +115,10 @@ export function PrivacyPreferences({ className }: PrivacyPreferencesProps) {
       {open && typeof document !== "undefined"
         ? createPortal(
             <div
-              className="fixed inset-0 z-50 overflow-hidden bg-[rgba(24,20,16,0.24)] px-4 py-5 backdrop-blur-[18px] sm:px-6 sm:py-10"
+              className={cn(
+                `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-hidden bg-[rgba(24,20,16,0.24)] px-4 py-5 backdrop-blur-[18px] sm:px-6 sm:py-10`,
+                APP_OVERLAY_LAYER_CLASS,
+              )}
               onClick={() => setOpen(false)}
             >
               <div className="flex min-h-full items-start justify-center sm:items-center">

@@ -17,7 +17,6 @@ export type OfferBackupRow = {
   priceAmount: number;
   currency: string;
   shippingCost: number | null;
-  availability: string;
   lastCheckedAt: string;
   isBestPrice: boolean;
 };
@@ -45,7 +44,7 @@ export type HomepagePlacementBackupRow = {
 };
 
 export type OffersBackupFile = {
-  version: 2;
+  version: 3;
   createdAt: string;
   offers: OfferBackupRow[];
   perfumeRelations: PerfumeRelationBackupRow[];

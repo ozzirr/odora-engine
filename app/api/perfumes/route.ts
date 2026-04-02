@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
+import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 function parsePositiveInt(value: string | null | undefined, fallback: number) {
   if (!value) {
@@ -33,10 +34,12 @@ export async function GET(request: Request) {
   const offset = parsePositiveInt(url.searchParams.get("offset"), 0);
   const limit = parsePositiveInt(url.searchParams.get("limit"), PERFUMES_PAGE_SIZE);
   const searchParams = toSearchParamsObject(url.searchParams);
+  const isAuthenticated = await getIsAuthenticated();
 
   const result = await getPerfumesPage(searchParams, {
     offset,
     limit,
+    accessMode: isAuthenticated ? "full" : "preview",
   });
 
   return NextResponse.json({

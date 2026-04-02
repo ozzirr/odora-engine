@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
+import { APP_FLOATING_LAYER_CLASS } from "@/lib/chrome";
 import {
   CONSENT_COOKIE_NAME,
   PRIVACY_CONSENT_UPDATED_EVENT,
@@ -65,32 +66,46 @@ export function PrivacyConsentManager() {
     setHasStoredConsent(true);
   };
 
+  const dismissBanner = () => {
+    updateMarketingConsent(false);
+  };
+
   return (
     <>
       {hasStoredConsent ? null : (
-        <div className="fixed inset-x-0 bottom-0 z-40 px-4 pb-4 sm:px-6">
-          <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#dfcfbc] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] p-4 shadow-[0_28px_70px_-40px_rgba(43,32,22,0.45)] backdrop-blur">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-3xl">
-                <p className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[#8a7763]">
-                  {t("eyebrow")}
-                </p>
-                <h2 className="mt-2 text-lg font-semibold text-[#21180f]">{t("title")}</h2>
-                <p className="mt-2 text-sm leading-6 text-[#685747]">{t("description")}</p>
+        <div className={`fixed inset-x-0 bottom-0 ${APP_FLOATING_LAYER_CLASS} px-4 pb-4 sm:px-6`}>
+          <div className="mx-auto max-w-4xl rounded-[1.75rem] border border-[#dfcfbc] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] p-4 shadow-[0_28px_70px_-40px_rgba(43,32,22,0.45)] backdrop-blur">
+            <div className="flex items-start justify-between gap-3">
+              <div className="max-w-2xl">
+                <h2 className="text-base font-semibold text-[#21180f]">{t("title")}</h2>
+                <p className="mt-1 text-sm leading-6 text-[#685747]">{t("description")}</p>
               </div>
 
-              <div className="flex flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                aria-label={t("closeAriaLabel")}
+                onClick={dismissBanner}
+                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[#8a7763] transition-colors hover:bg-white/70 hover:text-[#3a2e24]"
+              >
+                <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4">
+                  <path
+                    d="M6 6L14 14M14 6L6 14"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div className="mt-3 flex justify-start">
                 <Button
-                  variant="secondary"
-                  className="w-full sm:w-auto"
-                  onClick={() => updateMarketingConsent(false)}
+                  size="sm"
+                  className="min-w-[110px]"
+                  onClick={() => updateMarketingConsent(true)}
                 >
-                  {t("rejectButton")}
-                </Button>
-                <Button className="w-full sm:w-auto" onClick={() => updateMarketingConsent(true)}>
                   {t("acceptButton")}
                 </Button>
-              </div>
             </div>
           </div>
         </div>

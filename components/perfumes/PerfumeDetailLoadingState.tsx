@@ -11,7 +11,7 @@ type PerfumeDetailLoadingStateProps = {
 };
 
 const FEATURED_STORES = ["Notino", "Douglas", "Amazon", "Sephora"];
-const STEP_KEYS = ["retailers", "pricing", "availability"] as const;
+const STEP_KEYS = ["retailers", "pricing", "offers"] as const;
 const STEP_PROGRESS_WIDTHS = ["w-[42%]", "w-[34%]", "w-[38%]"] as const;
 
 export function PerfumeDetailLoadingState({

@@ -26,13 +26,6 @@ enum PriceRange {
   LUXURY
 }
 
-enum Availability {
-  IN_STOCK
-  LIMITED
-  OUT_OF_STOCK
-  PREORDER
-}
-
 enum CatalogStatus {
   DEMO
   IMPORTED_UNVERIFIED
@@ -271,7 +264,6 @@ model Offer {
   priceAmount   Float
   currency      String
   shippingCost  Float?
-  availability  Availability
   lastCheckedAt DateTime
   isBestPrice   Boolean      @default(false)
   createdAt     DateTime     @default(now())

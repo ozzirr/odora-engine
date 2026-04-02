@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
+import { getAuthMode } from "@/lib/auth-modal";
+import { APP_FLOATING_LAYER_CLASS } from "@/lib/chrome";
 import { cn } from "@/lib/utils";
 
 type MobilePerfumeCtaBarProps = {
@@ -13,7 +16,7 @@ type MobilePerfumeCtaBarProps = {
   amazonUrl?: string | null;
 };
 
-const CTA_REVEAL_DELAY_MS = 3000;
+const CTA_REVEAL_SCROLL_THRESHOLD_PX = 24;
 
 function AmazonWordmark({ className }: { className?: string }) {
   return (
@@ -33,6 +36,7 @@ export function MobilePerfumeCtaBar({
 }: MobilePerfumeCtaBarProps) {
   const heroT = useTranslations("perfume.hero");
   const amazonT = useTranslations("perfume.amazon");
+  const searchParams = useSearchParams();
   const barRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const isClient = useSyncExternalStore(
@@ -41,23 +45,39 @@ export function MobilePerfumeCtaBar({
     () => false,
   );
   const hasAnyCta = Boolean(bestOfferUrl || amazonUrl);
+  const authModalOpen = getAuthMode(searchParams.get("auth")) !== null;
+  const isBarActive = isVisible && !authModalOpen;
 
   useEffect(() => {
     if (!isClient || !hasAnyCta) {
       return;
     }
 
-    const timerId = window.setTimeout(() => {
-      setIsVisible(true);
-    }, CTA_REVEAL_DELAY_MS);
+    let lastScrollY = window.scrollY;
+
+    const updateVisibility = () => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      if (currentScrollY <= CTA_REVEAL_SCROLL_THRESHOLD_PX) {
+        setIsVisible(false);
+      } else if (isScrollingDown) {
+        setIsVisible(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
 
     return () => {
-      window.clearTimeout(timerId);
+      window.removeEventListener("scroll", updateVisibility);
     };
-  }, [hasAnyCta, isClient, bestOfferUrl, amazonUrl]);
+  }, [hasAnyCta, isClient]);
 
   useEffect(() => {
-    if (!isClient || !hasAnyCta || !isVisible) {
+    if (!isClient || !hasAnyCta || !isBarActive) {
       return;
     }
 
@@ -88,7 +108,7 @@ export function MobilePerfumeCtaBar({
       root.removeAttribute("data-mobile-perfume-cta-active");
       root.style.removeProperty("--mobile-perfume-cta-offset");
     };
-  }, [amazonUrl, bestOfferUrl, hasAnyCta, isClient, isVisible]);
+  }, [amazonUrl, bestOfferUrl, hasAnyCta, isBarActive, isClient]);
 
   if (!isClient || !hasAnyCta) {
     return null;
@@ -99,8 +119,11 @@ export function MobilePerfumeCtaBar({
       ref={barRef}
       data-mobile-perfume-cta="true"
       className={cn(
-        "fixed inset-x-0 bottom-0 z-[70] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden",
-        isVisible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[calc(100%+env(safe-area-inset-bottom))] opacity-0",
+        "fixed inset-x-0 bottom-0 z-[70] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden",
+        APP_FLOATING_LAYER_CLASS,
+        isBarActive
+          ? "translate-y-0"
+          : "pointer-events-none translate-y-[calc(100%+env(safe-area-inset-bottom))]",
       )}
     >
       <div className="border-t border-[#ddcfbc] bg-[#fbf8f2]/96 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] shadow-[0_-18px_40px_-28px_rgba(50,35,20,0.45)] backdrop-blur-sm">

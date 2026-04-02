@@ -1,5 +1,4 @@
 import {
-  Availability,
   Gender,
   NoteType,
   PriceRange,
@@ -39,7 +38,6 @@ type PerfumeSeed = {
     priceAmount: number;
     currency: string;
     shippingCost?: number;
-    availability: Availability;
   }>;
 };
 
@@ -214,7 +212,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 41.9,
         currency: "EUR",
         shippingCost: 4.9,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -223,7 +220,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 46,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -232,7 +228,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 44.5,
         currency: "EUR",
         shippingCost: 3.5,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -285,7 +280,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 36.9,
         currency: "EUR",
         shippingCost: 4.9,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -294,7 +288,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 42,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.OUT_OF_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -303,7 +296,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 39.9,
         currency: "EUR",
         shippingCost: 3.5,
-        availability: Availability.LIMITED,
       },
     ],
   },
@@ -356,7 +348,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 129,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -365,7 +356,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 141,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -374,7 +364,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 136,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
     ],
   },
@@ -427,7 +416,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 152,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "sephora-italia",
@@ -436,7 +424,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 159,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -445,7 +432,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 155,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -498,7 +484,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 248,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -507,7 +492,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 265,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -516,7 +500,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 254,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -569,7 +552,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 239,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -578,7 +560,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 249,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -587,7 +568,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 245,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
     ],
   },
@@ -641,7 +621,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 188,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -650,7 +629,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 199,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -659,7 +637,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 194,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -712,7 +689,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 169,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -721,7 +697,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 179,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -730,7 +705,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 173,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -785,7 +759,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 112,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -794,7 +767,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 118,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -803,7 +775,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 115,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
     ],
   },
@@ -858,7 +829,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 109,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -867,7 +837,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 115,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "douglas-italia",
@@ -876,7 +845,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 112,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
     ],
   },
@@ -928,7 +896,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 132,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -937,7 +904,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 139,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -946,7 +912,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 135,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -999,7 +964,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 145,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
       {
         storeSlug: "sephora-italia",
@@ -1008,7 +972,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 151,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.LIMITED,
       },
       {
         storeSlug: "douglas-italia",
@@ -1017,7 +980,6 @@ const perfumes: PerfumeSeed[] = [
         priceAmount: 148,
         currency: "EUR",
         shippingCost: 0,
-        availability: Availability.IN_STOCK,
       },
     ],
   },
@@ -1164,7 +1126,6 @@ async function main() {
               priceAmount: offer.priceAmount,
               currency: offer.currency,
               shippingCost: offer.shippingCost,
-              availability: offer.availability,
               lastCheckedAt,
               isBestPrice: offer.priceAmount === bestPrice,
             };

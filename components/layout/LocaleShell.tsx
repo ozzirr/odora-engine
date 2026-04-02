@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname as useActivePathname } from "@/lib/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -10,6 +10,13 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PerfumeDetailNavigationProvider } from "@/components/perfumes/PerfumeDetailNavigation";
 import { PrivacyConsentManager } from "@/components/privacy/PrivacyConsentManager";
+import {
+  buildAuthModalUrl,
+  buildPathWithoutAuthModal,
+  getAuthMode,
+  type AuthMode,
+} from "@/lib/auth-modal";
+import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
@@ -19,56 +26,31 @@ type LocaleShellProps = {
   initialIsAuthenticated?: boolean;
 };
 
-type AuthMode = "login" | "signup";
-
-function getAuthMode(value: string | null): AuthMode | null {
-  return value === "login" || value === "signup" ? value : null;
-}
-
-function getBasePath(pathname: string, searchParams: URLSearchParams, hash: string) {
-  const params = new URLSearchParams(searchParams);
-  params.delete("auth");
-  params.delete("authNext");
-  params.delete("error");
-  const search = params.toString();
-  return `${pathname}${search ? `?${search}` : ""}${hash}`;
-}
-
 type AuthModalOverlayProps = {
   isStandaloneAuthPage: boolean;
 };
+
+const AUTH_MODAL_TRANSITION_MS = 260;
 
 function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   const t = useTranslations("auth.login.page");
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const mode = isStandaloneAuthPage ? null : getAuthMode(searchParams.get("auth"));
-  const modalOpen = mode !== null;
-  const currentParams = new URLSearchParams(searchParams.toString());
+  const [renderedMode, setRenderedMode] = useState<AuthMode | null>(mode);
+  const [isVisible, setIsVisible] = useState(Boolean(mode));
+  const closeTimeoutRef = useRef<number | null>(null);
   const authNext = searchParams.get("authNext");
-  const nextPath = authNext || getBasePath(pathname, currentParams, "");
-  const initialError = mode === "login" ? mapLoginAuthError(searchParams.get("error") ?? undefined, t) : undefined;
+  const nextPath = authNext || buildPathWithoutAuthModal(pathname, searchParams, "");
+  const initialError =
+    renderedMode === "login" ? mapLoginAuthError(searchParams.get("error") ?? undefined, t) : undefined;
 
   const updateUrl = (nextMode: AuthMode | null) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const nextUrl = nextMode
+      ? buildAuthModalUrl(pathname, searchParams, nextMode, window.location.hash)
+      : buildPathWithoutAuthModal(pathname, searchParams, window.location.hash);
 
-    if (nextMode) {
-      const preservedNext = params.get("authNext") || getBasePath(pathname, params, window.location.hash);
-      params.delete("error");
-      params.set("auth", nextMode);
-      params.set("authNext", preservedNext);
-    } else {
-      params.delete("auth");
-      params.delete("authNext");
-      params.delete("error");
-    }
-
-    const search = params.toString();
-    window.history.replaceState(
-      null,
-      "",
-      `${pathname}${search ? `?${search}` : ""}${window.location.hash}`,
-    );
+    window.history.replaceState(null, "", nextUrl);
   };
 
   const closeModal = () => {
@@ -80,7 +62,57 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   };
 
   useEffect(() => {
-    if (!modalOpen) {
+    return () => {
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+
+    if (mode) {
+      const frameId = window.requestAnimationFrame(() => {
+        setRenderedMode(mode);
+        setIsVisible(true);
+      });
+
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
+    if (!renderedMode) {
+      const frameId = window.requestAnimationFrame(() => {
+        setIsVisible(false);
+      });
+
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      setIsVisible(false);
+    });
+
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setRenderedMode(null);
+      closeTimeoutRef.current = null;
+    }, AUTH_MODAL_TRANSITION_MS);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+
+      if (closeTimeoutRef.current) {
+        window.clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    };
+  }, [mode, renderedMode]);
+
+  useEffect(() => {
+    if (!renderedMode) {
       return;
     }
 
@@ -90,39 +122,40 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [modalOpen]);
+  }, [renderedMode]);
 
   useEffect(() => {
-    if (!modalOpen) {
+    if (!renderedMode) {
       return;
     }
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        const params = new URLSearchParams(searchParams.toString());
-        params.delete("auth");
-        params.delete("authNext");
-        params.delete("error");
-        const search = params.toString();
         window.history.replaceState(
           null,
           "",
-          `${pathname}${search ? `?${search}` : ""}${window.location.hash}`,
+          buildPathWithoutAuthModal(pathname, searchParams, window.location.hash),
         );
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalOpen, pathname, searchParams]);
+  }, [pathname, renderedMode, searchParams]);
 
-  if (!mode) {
+  if (!renderedMode) {
     return null;
   }
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[rgba(24,20,16,0.22)] px-4 py-6 backdrop-blur-[18px] sm:px-6 sm:py-10"
+      className={cn(
+        `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-y-auto px-4 py-6 transition-[background-color,opacity,backdrop-filter] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-10`,
+        APP_OVERLAY_LAYER_CLASS,
+        isVisible
+          ? "bg-[rgba(24,20,16,0.22)] opacity-100 backdrop-blur-[18px]"
+          : "pointer-events-none bg-[rgba(24,20,16,0)] opacity-0 backdrop-blur-none",
+      )}
       onClick={() => closeModal()}
     >
       <div className="flex min-h-full items-center justify-center">
@@ -131,10 +164,13 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
           aria-modal="true"
           aria-labelledby="auth-modal-title"
           onClick={(event) => event.stopPropagation()}
-          className="w-full max-w-md"
+          className={cn(
+            "w-full max-w-md transition-[opacity,transform] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+            isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-[0.985] opacity-0",
+          )}
         >
           <AuthPanel
-            mode={mode}
+            mode={renderedMode}
             nextPath={nextPath}
             initialError={initialError}
             titleId="auth-modal-title"

@@ -7,6 +7,12 @@ import { useTranslations } from "next-intl";
 
 import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { buttonStyles } from "@/components/ui/Button";
+import { buildPathWithoutAuthModal, getAuthMode } from "@/lib/auth-modal";
+import {
+  APP_HEADER_HEIGHT_CLASS,
+  APP_HEADER_LAYER_CLASS,
+  APP_HEADER_OFFSET_CLASS,
+} from "@/lib/chrome";
 import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
@@ -47,8 +53,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const accountHref = isAuthenticated ? "/profile" : "/login";
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
   const canOpenAuthModal = !isAuthenticated && pathname !== "/login" && pathname !== "/signup";
-  const authParam = searchParams.get("auth");
-  const authModalOpen = authParam === "login" || authParam === "signup";
+  const authModalOpen = getAuthMode(searchParams.get("auth")) !== null;
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -108,9 +113,26 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     return () => window.cancelAnimationFrame(frameId);
   }, [menuOpen, authModalOpen]);
 
+  const handleMenuToggle = () => {
+    if (authModalOpen) {
+      window.history.replaceState(
+        null,
+        "",
+        buildPathWithoutAuthModal(pathname, searchParams, window.location.hash),
+      );
+
+      window.requestAnimationFrame(() => {
+        setMenuOpen(true);
+      });
+      return;
+    }
+
+    setMenuOpen((prev) => !prev);
+  };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur">
-      <div className="mx-auto flex h-[4.5rem] w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className={cn("sticky top-0 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur", APP_HEADER_LAYER_CLASS)}>
+      <div className={cn("mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8", APP_HEADER_HEIGHT_CLASS)}>
         <Link
           href="/"
           onClick={() => setMenuOpen(false)}
@@ -163,7 +185,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
         <button
           type="button"
-          onClick={() => setMenuOpen((prev) => !prev)}
+          onClick={handleMenuToggle}
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation-panel"
           className={cn(
@@ -207,7 +229,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
       <div
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[4.5rem] z-30 transition-opacity duration-300 md:hidden",
+          `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} z-30 transition-opacity duration-300 md:hidden`,
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
       >
@@ -215,7 +237,12 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           type="button"
           aria-label={t("close")}
           onClick={() => setMenuOpen(false)}
-          className="absolute inset-0 bg-[rgba(24,20,16,0.26)] backdrop-blur-[22px]"
+          className={cn(
+            "absolute inset-0 transition-[background-color,opacity,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            menuOpen
+              ? "bg-[rgba(24,20,16,0.26)] opacity-100 backdrop-blur-[22px]"
+              : "bg-[rgba(24,20,16,0.02)] opacity-0 backdrop-blur-none",
+          )}
         />
 
         <div
@@ -329,6 +356,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
                 >
                   <AuthModalTrigger
                     mode="login"
+                    onOpen={() => setMenuOpen(false)}
                     className={buttonStyles({
                       size: "md",
                       variant: "secondary",
