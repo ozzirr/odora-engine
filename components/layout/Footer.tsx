@@ -14,6 +14,7 @@ export function Footer() {
     { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/top" as const, label: t("nav.top") },
+    { href: "/blog" as const, label: t("nav.blog") },
   ];
   const legalLinks = [
     { href: "/privacy" as const, label: t("legalLinks.privacy") },

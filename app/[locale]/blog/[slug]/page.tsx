@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { Container } from "@/components/layout/Container";
 import { getBlogPost } from "@/lib/blog";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
-import { buildPageMetadata } from "@/lib/metadata";
+import { buildPageMetadata, toAbsoluteUrl } from "@/lib/metadata";
 
 export const revalidate = 3600;
 
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     locale: resolvedLocale,
     pathname: "/blog/[slug]",
     params: { slug },
+    image: post.coverImageUrl ?? undefined,
   });
 }
 
@@ -50,8 +51,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const backLabel = resolvedLocale === "it" ? "← Torna al Blog" : "← Back to Blog";
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt.toISOString(),
+    dateModified: post.publishedAt.toISOString(),
+    inLanguage: resolvedLocale === "it" ? "it-IT" : "en-GB",
+    author: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
+    publisher: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
+    mainEntityOfPage: { "@type": "WebPage", "@id": toAbsoluteUrl(`/${resolvedLocale}/blog/${slug}`) },
+    ...(post.coverImageUrl ? { image: post.coverImageUrl } : {}),
+    keywords: post.tags.join(", "),
+  };
+
   return (
     <Container>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="mx-auto mt-12 max-w-2xl">
         <Link
           href={`/${resolvedLocale}/blog`}

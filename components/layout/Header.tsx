@@ -33,6 +33,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/top" as const, label: t("nav.top") },
+    { href: "/blog" as const, label: t("nav.blog") },
   ];
   const menuTags = [
     {

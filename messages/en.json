@@ -18,7 +18,8 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Finder",
-        "top": "Top"
+        "top": "Top",
+        "blog": "Blog"
       },
       "account": {
         "profile": "Your profile",
@@ -48,7 +49,8 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Finder",
-        "top": "Top"
+        "top": "Top",
+        "blog": "Blog"
       },
       "legalLinks": {
         "privacy": "Privacy",
