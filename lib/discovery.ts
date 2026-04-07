@@ -178,6 +178,7 @@ export function getCheaperAlternatives(
   perfume: DiscoveryPerfume,
   allPerfumes: DiscoveryPerfume[],
   limit = 4,
+  exclude: Set<number> = new Set(),
 ) {
   const targetBestPrice = computeBestOffer(perfume.offers)?.bestTotalPrice;
 
@@ -186,7 +187,7 @@ export function getCheaperAlternatives(
   }
 
   return allPerfumes
-    .filter((candidate) => candidate.id !== perfume.id)
+    .filter((candidate) => candidate.id !== perfume.id && !exclude.has(candidate.id))
     .map((candidate) => {
       const similarity = scoreSimilarity(perfume, candidate);
       const best = computeBestOffer(candidate.offers);

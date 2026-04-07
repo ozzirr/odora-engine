@@ -56,6 +56,14 @@ export const pathnames = {
     en: "/profile",
     it: "/profilo",
   },
+  "/blog": {
+    en: "/blog",
+    it: "/blog",
+  },
+  "/blog/[slug]": {
+    en: "/blog/[slug]",
+    it: "/blog/[slug]",
+  },
 } as const;
 
 export type AppPathname = keyof typeof pathnames;

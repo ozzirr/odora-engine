@@ -206,8 +206,6 @@ const homepageMoodCardConfig = [
     illustration: "oud" as const,
     preset: {
       preset: "Arabic Signature",
-      mood: "bold",
-      preferredNote: "oud",
       arabicOnly: "true",
     },
   },
@@ -572,23 +570,10 @@ async function getPopularPerfumeSlugsUncached(
   }
 }
 
-export function selectTrustedStores(perfumes: HomePerfumeRecord[], count = 4) {
-  const counts = new Map<string, number>();
+const FEATURED_STORES = ["Notino", "Douglas", "Sephora", "Amazon"];
 
-  for (const perfume of perfumes) {
-    const rawName = perfume.bestStoreName?.trim();
-    if (!rawName) {
-      continue;
-    }
-
-    const normalizedName = rawName.replace(/\s+italia$/i, "");
-    counts.set(normalizedName, (counts.get(normalizedName) ?? 0) + 1);
-  }
-
-  return [...counts.entries()]
-    .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
-    .slice(0, count)
-    .map(([name]) => name);
+export function selectTrustedStores(_perfumes: HomePerfumeRecord[], count = 4) {
+  return FEATURED_STORES.slice(0, count);
 }
 
 export function toHomeSpotlight(

@@ -328,7 +328,8 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
 
   const bestOffer = computeBestOffer(perfume.offers);
   const similarPerfumes = getSimilarPerfumes(perfume, allPerfumes, 4);
-  const cheaperAlternatives = getCheaperAlternatives(perfume, allPerfumes, 4);
+  const similarIds = new Set(similarPerfumes.map((p) => p.id));
+  const cheaperAlternatives = getCheaperAlternatives(perfume, allPerfumes, 4, similarIds);
   const groupedNotes = getPerfumeNotes(perfume);
   const notesForRender = [
     ...groupedNotes.top.map((note) => ({ ...note, noteType: "TOP" })),

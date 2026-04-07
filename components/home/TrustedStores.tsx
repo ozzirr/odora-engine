@@ -1,5 +1,7 @@
 import { useTranslations } from "next-intl";
 
+import { RetailerLogo } from "@/components/perfumes/RetailerLogo";
+
 type TrustedStoresProps = {
   stores: string[];
 };
@@ -32,9 +34,7 @@ export function TrustedStores({ stores }: TrustedStoresProps) {
               key={store}
               className="premium-card flex min-h-24 items-center justify-center rounded-[1.5rem] border border-[#ddd2c3] bg-white/70 px-6 py-5 text-center shadow-[0_20px_44px_-38px_rgba(50,35,20,0.35)] transition-all duration-300 hover:-translate-y-1"
             >
-              <span className="text-xl font-semibold tracking-[0.18em] text-[#8f877e] grayscale">
-                {store}
-              </span>
+              <RetailerLogo storeName={store} align="center" size="md" />
             </div>
           ))}
         </div>

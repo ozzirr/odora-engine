@@ -250,6 +250,13 @@
         "catalogRoute": "Percorso catalogo"
       },
       "cta": "Esplora collezione"
+    },
+    "latestPosts": {
+      "eyebrow": "Odora Journal",
+      "title": "Dal blog",
+      "subtitle": "Guide olfattive, consigli di stile e approfondimenti sul mondo dei profumi.",
+      "cta": "Leggi articolo",
+      "allPosts": "Tutti gli articoli"
     }
   },
   "notFound": {

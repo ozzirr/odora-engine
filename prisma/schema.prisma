@@ -288,3 +288,28 @@ model AffiliateClick {
   @@index([destination])
   @@index([createdAt])
 }
+
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model BlogPost {
+  id             Int            @id @default(autoincrement())
+  slug           String
+  locale         String
+  status         BlogPostStatus @default(PUBLISHED)
+  title          String
+  excerpt        String
+  content        String
+  coverImageUrl  String?
+  seoTitle       String?
+  seoDescription String?
+  tags           String[]
+  publishedAt    DateTime       @default(now())
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@unique([slug, locale])
+  @@index([locale, status, publishedAt])
+}

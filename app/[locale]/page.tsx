@@ -4,13 +4,14 @@ import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
 import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
-import { DiscoveryCollections } from "@/components/home/DiscoveryCollections";
 import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { LatestPosts } from "@/components/home/LatestPosts";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import { TrendingNow } from "@/components/home/TrendingNow";
 import { TrustedStores } from "@/components/home/TrustedStores";
+import { getLatestBlogPosts } from "@/lib/blog";
 import {
   getHomepageData,
   toHomeSpotlight,
@@ -77,6 +78,7 @@ export default async function HomePage({ params }: HomePageProps) {
   }
 
   const homepageData = await getHomepageData();
+  const latestPosts = await getLatestBlogPosts(resolvedLocale, 3).catch(() => []);
   const trendingPerfumes = homepageData.trending.map((perfume) =>
     toHomeSpotlight(perfume, "trending"),
   );
@@ -91,7 +93,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <QuickFilters />
         <HowItWorks />
         <TrustedStores stores={homepageData.trustedStores} />
-        <DiscoveryCollections collections={homepageData.collections} />
+        <LatestPosts posts={latestPosts} locale={resolvedLocale} />
       </Container>
     </>
   );
