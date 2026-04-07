@@ -39,8 +39,12 @@
       },
       "search": {
         "label": "Cerca",
-        "placeholder": "Cerca per nome, brand, famiglia...",
+        "eyebrow": "Ricerca rapida",
+        "title": "Cerca un profumo",
+        "placeholder": "Nome, brand, famiglia olfattiva...",
+        "hint": "Inizia a digitare per cercare",
         "noResults": "Nessun risultato per \"{query}\"",
+        "close": "Chiudi ricerca",
         "loginPrompt": "Accedi per cercare tra tutti i profumi",
         "loginCta": "Accedi o registrati"
       }

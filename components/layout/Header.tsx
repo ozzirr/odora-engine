@@ -23,6 +23,55 @@ type HeaderProps = {
   initialIsAuthenticated?: boolean;
 };
 
+const SEARCH_BTN_CLASS =
+  "flex w-full items-center gap-3 rounded-[1.4rem] border border-[#eadfce] bg-white/80 px-4 py-3.5 text-[#3d3026] transition-all hover:border-[#d6c3ac] hover:bg-[#fffdf9]";
+
+const SearchIcon = () => (
+  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f3eadf] text-[#8b735d]">
+    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
+      <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  </span>
+);
+
+function MobileSearchButton({
+  isAuthenticated,
+  label,
+  onOpenSearch,
+  onCloseMenu,
+}: {
+  isAuthenticated: boolean;
+  label: string;
+  onOpenSearch: () => void;
+  onCloseMenu: () => void;
+}) {
+  if (isAuthenticated) {
+    return (
+      <button type="button" onClick={onOpenSearch} className={SEARCH_BTN_CLASS}>
+        <SearchIcon />
+        <span className="text-base font-medium">{label}</span>
+      </button>
+    );
+  }
+
+  return (
+    <Suspense
+      fallback={
+        <button type="button" className={SEARCH_BTN_CLASS}>
+          <SearchIcon />
+          <span className="text-base font-medium">{label}</span>
+        </button>
+      }
+    >
+      <AuthModalTrigger mode="login" onOpen={onCloseMenu} className={SEARCH_BTN_CLASS}>
+        <SearchIcon />
+        <span className="text-base font-medium">{label}</span>
+      </AuthModalTrigger>
+    </Suspense>
+  );
+}
+
 export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const t = useTranslations("layout.header");
   const searchT = useTranslations("layout.header.search");
@@ -133,6 +182,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   };
 
   return (
+    <>
     <header className={cn("sticky top-0 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur", APP_HEADER_LAYER_CLASS)}>
       <div className={cn("mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8", APP_HEADER_HEIGHT_CLASS)}>
         <Link
@@ -180,7 +230,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           ) : (
             <Suspense fallback={null}>
               <AuthModalTrigger
-                mode="signup"
+                mode="login"
                 aria-label={searchT("label")}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ddd0bf] bg-white/60 text-[#7a6a58] transition-colors hover:border-[#c9b89e] hover:text-[#3d2e22]"
               >
@@ -370,37 +420,12 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
             {/* Search — mobile */}
             <div className="mt-4">
-              {isAuthenticated ? (
-                <button
-                  type="button"
-                  onClick={() => { setMenuOpen(false); setSearchOpen(true); }}
-                  className="flex w-full items-center gap-3 rounded-[1.4rem] border border-[#eadfce] bg-white/80 px-4 py-3.5 text-[#3d3026] transition-all hover:border-[#d6c3ac] hover:bg-[#fffdf9]"
-                >
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f3eadf] text-[#8b735d]">
-                    <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
-                      <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
-                      <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                    </svg>
-                  </span>
-                  <span className="text-base font-medium">{searchT("label")}</span>
-                </button>
-              ) : (
-                <Suspense fallback={null}>
-                  <AuthModalTrigger
-                    mode="signup"
-                    onOpen={() => setMenuOpen(false)}
-                    className="flex w-full items-center gap-3 rounded-[1.4rem] border border-[#eadfce] bg-white/80 px-4 py-3.5 text-[#3d3026] transition-all hover:border-[#d6c3ac] hover:bg-[#fffdf9]"
-                  >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f3eadf] text-[#8b735d]">
-                      <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
-                        <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
-                        <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                    <span className="text-base font-medium">{searchT("loginPrompt")}</span>
-                  </AuthModalTrigger>
-                </Suspense>
-              )}
+              <MobileSearchButton
+                isAuthenticated={isAuthenticated}
+                label={searchT("label")}
+                onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
+                onCloseMenu={() => setMenuOpen(false)}
+              />
             </div>
 
             <div className="mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,238,229,0.98))] p-3 shadow-[0_18px_35px_-30px_rgba(31,25,20,0.45)] backdrop-blur-xl">
@@ -458,7 +483,8 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
         </div>
       </div>
 
-      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
+    <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }

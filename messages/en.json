@@ -39,8 +39,12 @@
       },
       "search": {
         "label": "Search",
-        "placeholder": "Search by name, brand, family...",
+        "eyebrow": "Quick search",
+        "title": "Find a fragrance",
+        "placeholder": "Name, brand, fragrance family...",
+        "hint": "Start typing to search",
         "noResults": "No results for \"{query}\"",
+        "close": "Close search",
         "loginPrompt": "Log in to search the full catalog",
         "loginCta": "Log in or sign up"
       }
