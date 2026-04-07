@@ -107,6 +107,36 @@ export async function runPrismaOperations<const T extends readonly unknown[]>(
   return results as unknown as T;
 }
 
+function isRetryablePrismaError(error: unknown): boolean {
+  if (!error || typeof error !== "object") return false;
+  const name = (error as { name?: string }).name ?? "";
+  const code = (error as { code?: string }).code ?? "";
+  // PrismaClientInitializationError = can't connect (cold start)
+  // P1001/P1002/P1008/P1017 = connection / timeout errors
+  return (
+    name === "PrismaClientInitializationError" ||
+    code === "P1001" ||
+    code === "P1002" ||
+    code === "P1008" ||
+    code === "P1017"
+  );
+}
+
+export async function withDatabaseRetry<T>(
+  operation: () => Promise<T>,
+  retries = 2,
+): Promise<T> {
+  try {
+    return await operation();
+  } catch (error) {
+    if (retries > 0 && isRetryablePrismaError(error)) {
+      await new Promise<void>((resolve) => setTimeout(resolve, 150));
+      return withDatabaseRetry(operation, retries - 1);
+    }
+    throw error;
+  }
+}
+
 function createPrismaClient() {
   return new PrismaClient({
     log: process.env.NODE_ENV === "development" ? ["warn", "error"] : ["error"],

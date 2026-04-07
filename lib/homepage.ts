@@ -7,6 +7,7 @@ import { unstable_cache } from "next/cache";
 
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import { DEPLOY_ID } from "@/lib/deploy-id";
 import {
   getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
@@ -15,7 +16,7 @@ import {
 } from "@/lib/catalog";
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { getBestOfferSummary } from "@/lib/pricing";
-import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations, withDatabaseRetry } from "@/lib/prisma";
 
 export type QuickFilterIllustration =
   | "vanilla"
@@ -407,8 +408,8 @@ export async function getHomepageData(): Promise<HomepageData> {
   }
 
   return unstable_cache(
-    async () => getHomepageDataUncached(catalogMode),
-    ["homepage-data", catalogMode],
+    async () => withDatabaseRetry(() => getHomepageDataUncached(catalogMode)),
+    [DEPLOY_ID, "homepage-data", catalogMode],
     {
       revalidate: 3600,
       tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.homepage],
@@ -490,8 +491,8 @@ export async function getPopularPerfumeSlugs(limit = 24): Promise<string[]> {
   const catalogMode = resolveCatalogMode();
 
   return unstable_cache(
-    async () => getPopularPerfumeSlugsUncached(catalogMode, limit),
-    ["popular-perfume-slugs", catalogMode, String(limit)],
+    async () => withDatabaseRetry(() => getPopularPerfumeSlugsUncached(catalogMode, limit)),
+    [DEPLOY_ID, "popular-perfume-slugs", catalogMode, String(limit)],
     {
       revalidate: 3600,
       tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumeDetail],

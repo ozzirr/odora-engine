@@ -2,6 +2,7 @@ import type { Prisma } from "@prisma/client";
 import { unstable_cache } from "next/cache";
 
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import { DEPLOY_ID } from "@/lib/deploy-id";
 import {
   getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
@@ -15,7 +16,7 @@ import {
   serializeParsedPerfumeFilters,
   type SearchParamInput,
 } from "@/lib/filters";
-import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, runPrismaOperations, withDatabaseRetry } from "@/lib/prisma";
 
 export const PERFUMES_PAGE_SIZE = 20;
 export const FREE_CATALOG_PREVIEW_LIMIT = 10;
@@ -132,8 +133,11 @@ export async function getPerfumesPage(
   const serializedFilters = serializeParsedPerfumeFilters(parsed);
 
   return unstable_cache(
-    async () => getPerfumesPageUncached(searchParams, { offset, limit, accessMode }, catalogMode),
-    ["perfumes-page", catalogMode, accessMode, serializedFilters, String(offset), String(limit)],
+    async () =>
+      withDatabaseRetry(() =>
+        getPerfumesPageUncached(searchParams, { offset, limit, accessMode }, catalogMode),
+      ),
+    [DEPLOY_ID, "perfumes-page", catalogMode, accessMode, serializedFilters, String(offset), String(limit)],
     {
       revalidate: 1800,
       tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.perfumesPage],

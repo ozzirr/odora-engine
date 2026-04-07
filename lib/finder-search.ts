@@ -2,6 +2,7 @@ import { type Prisma } from "@prisma/client";
 import { unstable_cache } from "next/cache";
 
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import { DEPLOY_ID } from "@/lib/deploy-id";
 import {
   hasConfiguredFinderPreferences,
   buildFinderWhere,
@@ -17,7 +18,7 @@ import {
   mergePerfumeWhere,
   resolveCatalogMode,
 } from "@/lib/catalog";
-import { isDatabaseConfigured, prisma } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, withDatabaseRetry } from "@/lib/prisma";
 
 export const FINDER_RESULTS_PAGE_SIZE = 20;
 const FINDER_MIN_CANDIDATES = 120;
@@ -121,8 +122,11 @@ export async function getFinderSearch(
 
   try {
     return await unstable_cache(
-      async () => runFinderSearchUncached(preferences, normalizedOffset, normalizedLimit),
-      ["finder-search", catalogMode, serializedPreferences, String(normalizedOffset), String(normalizedLimit)],
+      async () =>
+        withDatabaseRetry(() =>
+          runFinderSearchUncached(preferences, normalizedOffset, normalizedLimit),
+        ),
+      [DEPLOY_ID, "finder-search", catalogMode, serializedPreferences, String(normalizedOffset), String(normalizedLimit)],
       {
         revalidate: 1800,
         tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.finderResults],
