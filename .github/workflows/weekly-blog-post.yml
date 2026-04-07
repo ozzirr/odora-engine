@@ -6,8 +6,8 @@ on:
     - cron: "0 8 * * 1"
   workflow_dispatch:
     inputs:
-      topic:
-        description: "Override topic (optional, uses weekly rotation if empty)"
+      index:
+        description: "Topic index to generate (0-24, leave empty for weekly rotation)"
         required: false
         default: ""
       dry_run:
@@ -48,8 +48,8 @@ jobs:
       - name: Generate blog post
         run: |
           ARGS=""
-          if [ -n "${{ github.event.inputs.topic }}" ]; then
-            ARGS="--topic=${{ github.event.inputs.topic }}"
+          if [ -n "${{ github.event.inputs.index }}" ]; then
+            ARGS="--index=${{ github.event.inputs.index }}"
           fi
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
