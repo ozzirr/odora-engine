@@ -153,6 +153,8 @@ export type HomePerfumeSpotlight = {
   storeName: string | null;
   badgeKey: HomeSpotlightBadgeKey;
   hasOffer: boolean;
+  isArabic: boolean;
+  isNiche: boolean;
 };
 
 export type HomepageData = {
@@ -455,7 +457,7 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
     const trending = minimizeDuplicates(
       [...trendingCandidates, ...fallbackCandidates],
       excludedHeroIds,
-      4,
+      5,
     );
     const excludedFeaturedIds = new Set<number>([
       ...excludedHeroIds,
@@ -593,6 +595,8 @@ export function toHomeSpotlight(
     storeName: bestOffer?.bestStore ?? null,
     badgeKey,
     hasOffer: bestOffer != null,
+    isArabic: perfume.isArabic,
+    isNiche: perfume.isNiche,
   };
 }
 

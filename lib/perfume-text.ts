@@ -38,6 +38,7 @@ const syntheticDescriptionPatterns = [
   /^.+ by .+ is a .+ fragrance from parfumo top lists\.$/i,
   /^.+ by .+ belongs to the .+ family with top notes of .+, (?:a heart of|heart notes of) .+, and (?:a base of|base notes of) .+\.$/i,
   /^.+ by .+ belongs to the .+ family, opening with .+, evolving through .+, and finishing with .+\.$/i,
+  /^.+ by .+ opens with .+ then moves through .+ and settles on .+\.$/i,
 ] as const;
 
 function toDisplayLabel(value: PerfumeTextRelation | null | undefined) {

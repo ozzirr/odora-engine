@@ -181,7 +181,6 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
         {variant === "default" ? (
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline">{fragranceFamilyLabel}</Badge>
-            <Badge variant="outline">{t("viewOffers")}</Badge>
             {bestOffer ? (
               <Badge variant="default">
                 {t("from")} {formatCurrency(bestOffer.bestPrice, bestOffer.bestCurrency, locale as "it" | "en")}

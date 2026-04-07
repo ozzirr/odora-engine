@@ -179,7 +179,7 @@ export function PerfumesClient({
 
         {canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
 
-        {!hasMoreResults && perfumes.length > 0 ? (
+        {!hasMoreResults && !isCatalogLocked && perfumes.length > 0 ? (
           <p className="pt-2 text-center text-xs uppercase tracking-[0.1em] text-[#8a7763]">
             {t("end")}
           </p>

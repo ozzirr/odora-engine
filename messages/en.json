@@ -36,6 +36,13 @@
         "niche": "Niche",
         "arab": "Arab",
         "onSale": "On sale"
+      },
+      "search": {
+        "label": "Search",
+        "placeholder": "Search by name, brand, family...",
+        "noResults": "No results for \"{query}\"",
+        "loginPrompt": "Log in to search the full catalog",
+        "loginCta": "Log in or sign up"
       }
     },
     "footer": {
@@ -259,6 +266,19 @@
       "subtitle": "Fragrance guides, style tips, and in-depth coverage of the perfume world.",
       "cta": "Read article",
       "allPosts": "All articles"
+    },
+    "valueStrip": {
+      "curated": "Curated fragrances",
+      "stores": "Trusted stores",
+      "guides": "Editorial guides",
+      "compare": "Easy comparison"
+    },
+    "finalCta": {
+      "eyebrow": "Start discovering",
+      "title": "Not sure where to begin?",
+      "subtitle": "Try the Finder — it guides you to the right fragrance based on your style, mood, and occasion.",
+      "primaryCta": "Open the Finder",
+      "secondaryCta": "Browse catalog"
     }
   },
   "notFound": {

@@ -119,7 +119,12 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
     offset: (currentPage - 1) * PERFUMES_PAGE_SIZE,
     limit: PERFUMES_PAGE_SIZE,
     accessMode: isAuthenticated ? "full" : "preview",
-  });
+  }).catch(() => ({
+    perfumes: [],
+    selectedFilters: buildPerfumeQuery(resolvedSearchParams).parsed,
+    total: 0,
+    hasMore: false,
+  }));
   const hasFilters = hasActiveCatalogFilters(selectedFilters);
   const totalPages = Math.max(1, Math.ceil(total / PERFUMES_PAGE_SIZE));
   const visiblePages = buildPageList(currentPage, totalPages);

@@ -5,12 +5,14 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
 import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
+import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { LatestPosts } from "@/components/home/LatestPosts";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import { TrendingNow } from "@/components/home/TrendingNow";
 import { TrustedStores } from "@/components/home/TrustedStores";
+import { ValueStrip } from "@/components/home/ValueStrip";
 import { getLatestBlogPosts } from "@/lib/blog";
 import {
   getHomepageData,
@@ -86,6 +88,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <>
       <Hero />
+      <ValueStrip />
 
       <Container>
         <TrendingNow perfumes={trendingPerfumes} />
@@ -94,6 +97,8 @@ export default async function HomePage({ params }: HomePageProps) {
         <HowItWorks />
         <TrustedStores stores={homepageData.trustedStores} />
         <LatestPosts posts={latestPosts} locale={resolvedLocale} />
+        <FinalCTA />
+        <div className="pb-24" />
       </Container>
     </>
   );

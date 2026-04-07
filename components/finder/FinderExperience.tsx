@@ -56,7 +56,7 @@ function hasConfiguredPreferences(preferences: FinderPreferences) {
 }
 
 const FINDER_RESULTS_PAGE_SIZE = 20;
-const FREE_FINDER_PREVIEW_LIMIT = 25;
+const FREE_FINDER_PREVIEW_LIMIT = 10;
 
 type FinderSearchPayload = {
   results: FinderPerfume[];
@@ -108,7 +108,9 @@ export function FinderExperience({
   const taxonomyT = useTranslations("taxonomy");
   const authStatus = useAuthStatus(isAuthenticated);
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
-  const [results, setResults] = useState<FinderPerfume[]>(initialResults);
+  const [results, setResults] = useState<FinderPerfume[]>(
+    isAuthenticated ? initialResults : initialResults.slice(0, FREE_FINDER_PREVIEW_LIMIT),
+  );
   const [totalMatches, setTotalMatches] = useState(initialTotal);
   const [nextOffset, setNextOffset] = useState(initialNextOffset);
   const [hasMoreResults, setHasMoreResults] = useState(initialHasMore);
@@ -216,7 +218,7 @@ export function FinderExperience({
 
   useEffect(() => {
     setPreferences(initialPreferences);
-    setResults(initialResults);
+    setResults(authStatus ? initialResults : initialResults.slice(0, FREE_FINDER_PREVIEW_LIMIT));
     setTotalMatches(initialTotal);
     setNextOffset(initialNextOffset);
     setHasMoreResults(initialHasMore);

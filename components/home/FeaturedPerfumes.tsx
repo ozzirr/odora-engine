@@ -22,7 +22,7 @@ export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
         title={t("title")}
         subtitle={t("subtitle")}
       />
-      <PerfumeGrid perfumes={perfumes} />
+      <PerfumeGrid perfumes={perfumes} desktopColumns={3} />
     </section>
   );
 }

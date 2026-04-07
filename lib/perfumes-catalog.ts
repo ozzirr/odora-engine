@@ -18,7 +18,7 @@ import {
 import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
 
 export const PERFUMES_PAGE_SIZE = 20;
-export const FREE_CATALOG_PREVIEW_LIMIT = 25;
+export const FREE_CATALOG_PREVIEW_LIMIT = 10;
 
 export type CatalogAccessMode = "full" | "preview";
 
@@ -116,10 +116,7 @@ async function getPerfumesPageUncached(
     };
   } catch (error) {
     logCatalogQueryError("perfumes:list", error);
-    return {
-      ...getEmptyPerfumesPageResult(offset, limit),
-      selectedFilters: parsed,
-    };
+    throw error;
   }
 }
 

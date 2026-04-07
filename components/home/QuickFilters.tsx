@@ -20,29 +20,41 @@ export function QuickFilters() {
         subtitle={t("subtitle")}
       />
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {homepageMoodCards.map((filter) => (
           <Link
             key={filter.id}
             href={filter.href as unknown as LinkHref}
-            className={`premium-card group relative overflow-hidden rounded-[1.75rem] border border-[#e2d6c6] bg-gradient-to-br ${filter.gradientClass} p-6 shadow-[0_22px_45px_-34px_rgba(50,35,20,0.42)] transition-all duration-300 hover:-translate-y-1`}
+            className={`premium-card group relative overflow-hidden rounded-[1.75rem] border border-[#e2d6c6]/80 bg-gradient-to-br ${filter.gradientClass} p-6 shadow-[0_18px_40px_-30px_rgba(50,35,20,0.36)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(50,35,20,0.44)]`}
           >
-            <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-white/30 blur-3xl transition-transform duration-500 group-hover:scale-110" />
-            <div className="relative flex h-full flex-col justify-between gap-6">
-              <div className="flex items-start justify-between gap-4">
-                <Badge variant="outline" className="border-white/60 bg-white/35 text-[#4b3d30]">
+            {/* Glow */}
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/25 blur-3xl transition-transform duration-500 group-hover:scale-125" />
+
+            <div className="relative flex h-full min-h-[13rem] flex-col justify-between gap-4">
+              {/* Top row: tone badge + illustration */}
+              <div className="flex items-start justify-between gap-3">
+                <Badge
+                  variant="outline"
+                  className="border-white/55 bg-white/30 text-[#4a3c2f] backdrop-blur-[2px]"
+                >
                   {t(`tones.${filter.toneKey}`)}
                 </Badge>
                 <MoodIllustration illustration={filter.illustration} />
               </div>
 
+              {/* Bottom: label, subtitle, CTA */}
               <div>
-                <p className="text-xl font-semibold text-[#1f1914]">{t(`cards.${filter.id}.label`)}</p>
-                <p className="mt-2 max-w-[22rem] text-sm leading-6 text-[#5b4c3f]">
+                <p className="font-display text-[1.35rem] leading-tight text-[#1f1914]">
+                  {t(`cards.${filter.id}.label`)}
+                </p>
+                <p className="mt-1.5 max-w-[22rem] text-[13px] leading-[1.65] text-[#5b4c3f]">
                   {t(`cards.${filter.id}.subtitle`)}
                 </p>
-                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7d6853]">
+                <p className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7d6853] transition-colors group-hover:text-[#3d2e22]">
                   {t("openInFinder")}
+                  <span className="translate-x-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
+                    →
+                  </span>
                 </p>
               </div>
             </div>
