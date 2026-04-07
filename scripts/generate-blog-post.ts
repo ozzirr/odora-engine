@@ -1,23 +1,41 @@
 /**
  * scripts/generate-blog-post.ts
  *
- * Generates a bilingual (IT + EN) SEO-optimised blog post using Claude
- * and saves it directly to the BlogPost table in Supabase.
+ * Generates a bilingual (IT + EN) SEO-optimised blog post using Claude,
+ * then generates a cover image via fal.ai (Flux) and uploads it to Supabase Storage.
  *
  * Usage:
  *   npx tsx scripts/generate-blog-post.ts
  *   npx tsx scripts/generate-blog-post.ts --dry-run
  *   npx tsx scripts/generate-blog-post.ts --index=3
+ *   npx tsx scripts/generate-blog-post.ts --no-image   (skip image generation)
  */
 
 import { config } from "dotenv";
 config({ override: true });
 
 import Anthropic from "@anthropic-ai/sdk";
+import { fal } from "@fal-ai/client";
+import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const anthropic = new Anthropic();
+
+// ---------------------------------------------------------------------------
+// fal.ai + Supabase clients (lazy — only used when not --no-image / --dry-run)
+// ---------------------------------------------------------------------------
+function getFalClient() {
+  fal.config({ credentials: process.env.FAL_KEY! });
+  return fal;
+}
+
+function getSupabaseClient() {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Internal link anchors Claude can reference in the article
@@ -114,6 +132,114 @@ const TOPIC_POOL_EN: Topic[] = [
   { title: "The best men's fragrances for every season", primaryKeyword: "best men's fragrances 2025", secondaryKeywords: ["men's perfume spring summer autumn winter", "top fragrances for men", "men's fragrance guide"], tags: ["men", "guide", "seasonal"] },
 ];
 
+// ---------------------------------------------------------------------------
+// Image prompt builder — crafts an elegant perfume photo prompt per topic
+// ---------------------------------------------------------------------------
+function buildImagePrompt(tags: string[]): string {
+  const t = tags.map((tag) => tag.toLowerCase());
+
+  // Subject is always a luxury perfume bottle
+  const base =
+    "luxury perfume bottle, high-end fragrance product photography, editorial style, photorealistic, sharp focus, no text, no watermark, no people";
+
+  // Background / mood / colour palette per category
+  if (t.some((x) => ["oud", "arabo", "arabic", "orientale", "oriental"].includes(x))) {
+    return `${base}, draped on rich burgundy silk fabric with scattered rose petals and incense smoke, warm candlelight glow, deep jewel tones, cinematic dark luxury atmosphere`;
+  }
+  if (t.some((x) => ["vaniglia", "vanilla", "gourmand", "dolce", "sweet"].includes(x))) {
+    return `${base}, placed on warm cream marble with soft cashmere fabric and dried vanilla pods, golden hour window light, warm amber and caramel colour palette, cozy inviting mood`;
+  }
+  if (t.some((x) => ["floreale", "floral", "primavera", "spring"].includes(x))) {
+    return `${base}, surrounded by fresh peony and rose petals on a white marble surface, soft natural daylight, pastel pink and blush tones, delicate airy atmosphere`;
+  }
+  if (t.some((x) => ["legnoso", "woody", "patchouli", "terroso", "earthy"].includes(x))) {
+    return `${base}, resting on aged dark walnut wood with autumn leaves and cedar bark, warm amber sidelight, deep forest tones, moody sophisticated atmosphere`;
+  }
+  if (t.some((x) => ["acquatico", "marine", "acqua", "fresco", "fresh", "estate", "summer"].includes(x))) {
+    return `${base}, on white stone surface with translucent water droplets and citrus slices, bright natural Mediterranean light, clean blue-white colour palette, airy refreshing mood`;
+  }
+  if (t.some((x) => ["inverno", "winter", "autunno", "autumn", "speziato", "spicy"].includes(x))) {
+    return `${base}, on dark slate with cinnamon sticks, star anise and amber resin, dramatic chiaroscuro studio lighting, deep warm ochre and chocolate tones, bold moody atmosphere`;
+  }
+  if (t.some((x) => ["sera", "evening", "lusso", "luxury", "niche", "iconico", "iconic"].includes(x))) {
+    return `${base}, on black velvet with scattered gold leaf and crystal elements, dramatic spotlight studio lighting, deep shadow contrast, ultra-luxury opulent aesthetic`;
+  }
+  if (t.some((x) => ["muschio", "musk", "pulito", "clean", "unisex"].includes(x))) {
+    return `${base}, on minimalist white surface with soft linen fabric and a single white orchid, diffused studio light, neutral clean palette, modern elegant mood`;
+  }
+  if (t.some((x) => ["regalo", "gift", "occasione", "occasion"].includes(x))) {
+    return `${base}, inside an open luxury gift box with satin ribbon and tissue paper on a marble table, soft warm studio light, cream and champagne gold tones, celebratory mood`;
+  }
+
+  // Generic fallback — always beautiful
+  return `${base}, on white Carrara marble with a single fresh gardenia flower, soft side window light, warm ivory and gold tones, timeless luxury aesthetic`;
+}
+
+// ---------------------------------------------------------------------------
+// Generate + upload cover image via fal.ai → Supabase Storage
+// ---------------------------------------------------------------------------
+async function generateAndUploadCoverImage(
+  tags: string[],
+  slug: string,
+): Promise<string | null> {
+  try {
+    const falClient = getFalClient();
+    const prompt = buildImagePrompt(tags);
+    console.log(`[blog:image] prompt: "${prompt.slice(0, 90)}..."`);
+
+    // Generate with Flux Pro v1.1 — best quality for editorial photography
+    const result = await falClient.subscribe("fal-ai/flux-pro/v1.1", {
+      input: {
+        prompt,
+        image_size: "landscape_16_9", // 1024×576 — perfect for 16:9 blog cards
+        num_images: 1,
+        safety_tolerance: "2",
+      },
+      logs: false,
+    }) as { data: { images: Array<{ url: string }> } };
+
+    const generatedUrl = result.data.images[0]?.url;
+    if (!generatedUrl) throw new Error("fal.ai returned no image URL");
+    console.log(`[blog:image] generated: ${generatedUrl}`);
+
+    // Download image bytes
+    const imageResponse = await fetch(generatedUrl);
+    if (!imageResponse.ok) throw new Error(`fetch failed: ${imageResponse.status}`);
+    const buffer = await imageResponse.arrayBuffer();
+
+    // Upload to Supabase Storage `blog-images` bucket
+    const supabase = getSupabaseClient();
+    const filename = `${slug}-${Date.now()}.webp`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("blog-images")
+      .upload(filename, buffer, {
+        contentType: "image/webp",
+        upsert: false,
+        cacheControl: "31536000", // 1 year
+      });
+
+    if (uploadError) {
+      console.error("[blog:image] upload error:", uploadError.message);
+      // Fallback: return the fal.ai URL directly (works but may expire)
+      return generatedUrl;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from("blog-images")
+      .getPublicUrl(filename);
+
+    console.log(`[blog:image] ✓ stored: ${publicUrl}`);
+    return publicUrl;
+  } catch (err) {
+    console.error("[blog:image] generation failed (post will publish without image):", err);
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Text generation via Claude
+// ---------------------------------------------------------------------------
 function getWeeklyTopicIndex(): number {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 1);
@@ -228,8 +354,12 @@ Reply with this exact JSON (no text outside):
   return JSON.parse(jsonMatch[0]) as GeneratedPost;
 }
 
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
+  const noImage = process.argv.includes("--no-image");
   const indexArg = process.argv.find((a) => a.startsWith("--index="));
   const idx = indexArg ? parseInt(indexArg.replace("--index=", "")) : getWeeklyTopicIndex();
 
@@ -242,9 +372,11 @@ async function main() {
     return;
   }
 
-  console.log(`[blog:generate] week-index=${idx} topic="${topicIt.title}" dryRun=${dryRun}`);
+  console.log(`[blog:generate] week-index=${idx} topic="${topicIt.title}" dryRun=${dryRun} noImage=${noImage}`);
   console.log(`[blog:generate] primary-keyword-it="${topicIt.primaryKeyword}"`);
 
+  // 1. Generate text content for both locales in parallel
+  console.log(`[blog:generate] generating text content (IT + EN)...`);
   const [postIt, postEn] = await Promise.all([
     generatePost(topicIt, "it"),
     generatePost(topicEn, "en"),
@@ -271,19 +403,29 @@ async function main() {
     return;
   }
 
+  // 2. Generate cover image (single image shared between IT + EN)
+  let coverImageUrl: string | null = null;
+  if (!noImage) {
+    console.log(`[blog:generate] generating cover image...`);
+    coverImageUrl = await generateAndUploadCoverImage(topicIt.tags, slug);
+  } else {
+    console.log(`[blog:generate] skipping image generation (--no-image)`);
+  }
+
+  // 3. Save both locales to DB
   await prisma.blogPost.upsert({
     where: { slug_locale: { slug, locale: "it" } },
-    create: { slug, locale: "it", publishedAt, ...postIt },
-    update: { publishedAt, ...postIt },
+    create: { slug, locale: "it", publishedAt, coverImageUrl, ...postIt },
+    update: { publishedAt, coverImageUrl, ...postIt },
   });
 
   await prisma.blogPost.upsert({
     where: { slug_locale: { slug, locale: "en" } },
-    create: { slug, locale: "en", publishedAt, ...postEn },
-    update: { publishedAt, ...postEn },
+    create: { slug, locale: "en", publishedAt, coverImageUrl, ...postEn },
+    update: { publishedAt, coverImageUrl, ...postEn },
   });
 
-  console.log(`[blog:generate] ✓ published slug="${slug}" (it + en)`);
+  console.log(`[blog:generate] ✓ published slug="${slug}" (it + en) coverImage=${coverImageUrl ? "yes" : "none"}`);
   await prisma.$disconnect();
 }
 

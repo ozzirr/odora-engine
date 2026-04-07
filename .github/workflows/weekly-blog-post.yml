@@ -15,12 +15,17 @@ on:
         type: boolean
         required: false
         default: false
+      no_image:
+        description: "Skip AI image generation"
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   generate:
     name: Generate & publish blog post
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
@@ -49,7 +54,13 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
+          if [ "${{ github.event.inputs.no_image }}" = "true" ]; then
+            ARGS="$ARGS --no-image"
+          fi
           npm run blog:generate -- $ARGS
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
