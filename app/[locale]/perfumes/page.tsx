@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { buttonStyles } from "@/components/ui/Button";
@@ -134,13 +133,8 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
     undefined,
     currentPage > 1 ? { page: currentPage } : undefined,
   );
-  const breadcrumbItems = [
-    { label: navT("home"), href: "/" as const },
-    { label: navT("perfumes") },
-  ];
-
   return (
-    <Container className="pt-5 sm:pt-6">
+    <Container className="pt-6 sm:pt-8">
       {!hasFilters ? (
         <StructuredData
           data={[
@@ -167,8 +161,6 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
           ]}
         />
       ) : null}
-
-      <Breadcrumbs items={breadcrumbItems} className="mb-4" />
 
       <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
         <ExpandableSeoIntro

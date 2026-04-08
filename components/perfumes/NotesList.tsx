@@ -1,8 +1,7 @@
 import { useTranslations } from "next-intl";
 
-import { Badge } from "@/components/ui/Badge";
 import { Link } from "@/lib/navigation";
-import { cn } from "@/lib/utils";
+import { NoteIcon } from "@/components/perfumes/NoteIcons";
 
 export type NoteListItem = {
   name: string;
@@ -12,22 +11,6 @@ export type NoteListItem = {
 };
 
 const orderedTypes = ["TOP", "HEART", "BASE"];
-
-const noteBadgeStyles = [
-  "border-[#e3d2a1] bg-[#f8f1dd] text-[#75572d] font-semibold",
-  "border-[#ccdcbc] bg-[#edf4e9] text-[#4f6845] font-medium",
-  "border-[#c8dce1] bg-[#e9f4f6] text-[#42626f] font-medium",
-  "border-[#e2c8cf] bg-[#f7ecef] text-[#7c4d5c] font-medium",
-  "border-[#deccb7] bg-[#f5ede4] text-[#6f4e36] font-display text-[1.02rem]",
-  "border-[#d8cbe8] bg-[#f1ecf7] text-[#5d4a78] font-medium",
-  "border-[#d9d1c7] bg-[#f2efea] text-[#5a5044] font-semibold",
-  "border-[#ccdece] bg-[#edf5ee] text-[#4b6651] font-medium",
-] as const;
-
-function getNoteBadgeStyle(slug: string) {
-  const hash = Array.from(slug).reduce((total, char) => total + char.charCodeAt(0), 0);
-  return noteBadgeStyles[hash % noteBadgeStyles.length];
-}
 
 export function NotesList({ notes }: { notes: NoteListItem[] }) {
   const t = useTranslations("perfume.notes");
@@ -42,26 +25,23 @@ export function NotesList({ notes }: { notes: NoteListItem[] }) {
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
               {t(`types.${type}`)}
             </p>
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-4 grid grid-cols-3 gap-3">
               {items.map((item) => (
                 <Link
                   key={`${type}-${item.slug}`}
                   href={{ pathname: "/perfumes", query: { note: item.slug } }}
-                  className="group"
+                  className="flex min-h-[5.5rem] flex-col items-center justify-center gap-2 rounded-[1.8rem] border border-[#ddcfbc] bg-[#f8f4ed] px-3 py-3 text-center text-[#3f3125] shadow-[0_1px_0_rgba(84,62,38,0.03)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#ccb79a] hover:bg-[#f2e9dc] hover:text-[#2e231a]"
                 >
-                  <Badge
-                    variant="outline"
-                    className={cn(
-                      "cursor-pointer px-4 py-2.5 text-[0.97rem] tracking-[0.01em] shadow-[0_1px_0_rgba(84,62,38,0.03)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-[0.98] group-focus-visible:brightness-[0.98]",
-                      getNoteBadgeStyle(item.slug),
-                    )}
-                  >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/75 text-[#9a8266]">
+                    <NoteIcon slug={item.slug} className="h-[18px] w-[18px]" />
+                  </span>
+                  <span className="text-balance font-display text-[1.08rem] leading-[1.02] tracking-[-0.02em] sm:text-[1.14rem]">
                     {item.name}
                     {item.intensity ? ` ${item.intensity}/10` : ""}
-                  </Badge>
+                  </span>
                 </Link>
               ))}
-              {items.length === 0 ? <p className="text-sm text-[#6b5948]">{t("empty")}</p> : null}
+              {items.length === 0 ? <p className="col-span-3 text-sm text-[#6b5948]">{t("empty")}</p> : null}
             </div>
           </div>
         );

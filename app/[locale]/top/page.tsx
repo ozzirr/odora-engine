@@ -4,7 +4,6 @@ import { type Prisma } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
@@ -154,11 +153,6 @@ export default async function TopPage({ params }: TopPageProps) {
       [...topArabic, ...topNiche, ...topValuePicks, ...topLongLasting].map((perfume) => [perfume.id, perfume]),
     ).values(),
   );
-  const breadcrumbItems = [
-    { label: navT("home"), href: "/" as const },
-    { label: navT("top") },
-  ];
-
   return (
     <Container className="space-y-10 pt-6 pb-8 sm:space-y-12 sm:pt-8">
       <StructuredData
@@ -183,8 +177,6 @@ export default async function TopPage({ params }: TopPageProps) {
           }),
         ]}
       />
-
-      <Breadcrumbs items={breadcrumbItems} className="mb-0" />
 
       <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
         <ExpandableSeoIntro

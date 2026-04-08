@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { Container } from "@/components/layout/Container";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
@@ -174,11 +173,6 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
         nextOffset: 0,
       };
   const finderPath = getLocalizedPathname(resolvedLocale, "/finder");
-  const breadcrumbItems = [
-    { label: navT("home"), href: "/" as const },
-    { label: navT("finder") },
-  ];
-
   return (
     <Container className="space-y-6 pt-6 sm:space-y-8 sm:pt-8">
       {!shouldLoadResults ? (
@@ -197,8 +191,6 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
           ]}
         />
       ) : null}
-
-      <Breadcrumbs items={breadcrumbItems} className="mb-0" />
 
       <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
         <ExpandableSeoIntro

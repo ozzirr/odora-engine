@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
-import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { getBlogPostList } from "@/lib/blog";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -17,17 +17,14 @@ type BlogPageProps = {
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "blog.page" });
 
-  const title =
-    resolvedLocale === "it"
-      ? "Blog – Guide e consigli sui profumi | Odora"
-      : "Blog – Fragrance guides and tips | Odora";
-  const description =
-    resolvedLocale === "it"
-      ? "Approfondimenti, guide olfattive e consigli per scegliere il tuo prossimo profumo."
-      : "In-depth guides, olfactory tips and advice to help you find your next fragrance.";
-
-  return buildPageMetadata({ title, description, locale: resolvedLocale, pathname: "/blog" });
+  return buildPageMetadata({
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    locale: resolvedLocale,
+    pathname: "/blog",
+  });
 }
 
 function formatDate(date: Date, locale: string) {
@@ -41,24 +38,27 @@ function formatDate(date: Date, locale: string) {
 export default async function BlogPage({ params }: BlogPageProps) {
   const { locale } = await params;
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "blog.page" });
 
   const posts = await getBlogPostList(resolvedLocale);
 
-  const heading = resolvedLocale === "it" ? "Blog" : "Blog";
-  const subtitle =
-    resolvedLocale === "it"
-      ? "Guide olfattive, consigli di stile e approfondimenti sul mondo dei profumi."
-      : "Fragrance guides, style tips, and in-depth coverage of the perfume world.";
-  const emptyMsg =
-    resolvedLocale === "it" ? "Nessun articolo ancora. Torna presto." : "No articles yet. Check back soon.";
-
   return (
-    <Container>
-      <div className="mt-12 space-y-10">
-        <SectionTitle eyebrow="ODORA JOURNAL" title={heading} subtitle={subtitle} as="h1" />
+    <Container className="pt-6 sm:pt-8">
+      <div className="space-y-10">
+        <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
+          <ExpandableSeoIntro
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            subtitle={t("subtitle")}
+            body={[t("bodyOne"), t("bodyTwo")]}
+            primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
+            secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
+            headingAs="h1"
+          />
+        </section>
 
         {posts.length === 0 ? (
-          <p className="text-sm text-[#8a7763]">{emptyMsg}</p>
+          <p className="text-sm text-[#8a7763]">{t("empty")}</p>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (

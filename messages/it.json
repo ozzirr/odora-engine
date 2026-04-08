@@ -157,7 +157,7 @@
         "explore": "Esplora profumi per note, mood e stile",
         "choose": "Scegli con piu sicurezza"
       },
-      "browseCatalog": "Accedi o registrati",
+      "browseCatalog": "Sei nuovo? Registrati",
       "startFinder": "Avvia ricerca personalizzata",
       "spotlight": "In evidenza",
       "badges": {
@@ -420,6 +420,7 @@
     },
     "filters": {
       "title": "Filtri",
+      "activeSearch": "Ricerca attiva",
       "reset": "Reimposta",
       "summary": "Apri i filtri per affinare ordinamento, famiglia, prezzo e note.",
       "fields": {
@@ -644,6 +645,20 @@
           "subtitle": "Fragranze selezionate per il tipo di persistenza che le persone notano davvero."
         }
       }
+    }
+  },
+  "blog": {
+    "page": {
+      "metaTitle": "Blog – Guide e consigli sui profumi | Odora",
+      "metaDescription": "Approfondimenti, guide olfattive e consigli per scegliere il tuo prossimo profumo.",
+      "eyebrow": "Odora Journal",
+      "title": "Blog, guide e consigli sul mondo dei profumi",
+      "subtitle": "Guide olfattive, consigli di stile e approfondimenti per orientarti meglio nella scelta della prossima fragranza.",
+      "bodyOne": "Il blog Odora raccoglie articoli pensati per chiarire dubbi pratici, migliorare la scoperta e dare contesto a note, famiglie olfattive e modi d'uso che spesso nelle normali schede prodotto restano impliciti.",
+      "bodyTwo": "Usa questa pagina per leggere guide, poi passa al catalogo o al finder quando vuoi trasformare l'ispirazione in una selezione concreta di profumi da confrontare.",
+      "primaryCta": "Vai al catalogo",
+      "secondaryCta": "Apri il finder",
+      "empty": "Nessun articolo ancora. Torna presto."
     }
   },
   "auth": {

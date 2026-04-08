@@ -13,7 +13,6 @@ import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
-import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
@@ -398,12 +397,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const detailPath = getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug });
   const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
   const brandName = perfume.brand?.name ?? t("unknown");
-  const breadcrumbItems = [
-    { label: navT("home"), href: "/" as const },
-    { label: navT("perfumes"), href: "/perfumes" as const },
-    { label: perfume.name },
-  ];
-
   return (
     <>
       <StructuredData
@@ -428,7 +421,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       />
       <PerfumeDetailNavigationReady />
       <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
-        <Breadcrumbs items={breadcrumbItems} className="mb-3 sm:mb-4" />
         <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
         <section className="space-y-4">

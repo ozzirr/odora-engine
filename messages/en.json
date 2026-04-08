@@ -420,6 +420,7 @@
     },
     "filters": {
       "title": "Filters",
+      "activeSearch": "Active search",
       "reset": "Reset",
       "summary": "Open filters to refine sorting, family, price, and notes.",
       "fields": {
@@ -644,6 +645,20 @@
           "subtitle": "Fragrances selected for the kind of staying power people actually notice."
         }
       }
+    }
+  },
+  "blog": {
+    "page": {
+      "metaTitle": "Blog – Fragrance guides and tips | Odora",
+      "metaDescription": "In-depth guides, olfactory tips and advice to help you find your next fragrance.",
+      "eyebrow": "Odora Journal",
+      "title": "Blog, guides, and advice from the fragrance world",
+      "subtitle": "Fragrance guides, style tips, and deeper editorial context to help you choose your next scent with more clarity.",
+      "bodyOne": "The Odora blog collects practical articles designed to clarify common questions, improve discovery, and add context around notes, fragrance families, and usage patterns that product pages often leave implicit.",
+      "bodyTwo": "Use this page to read guides first, then move into the catalog or Finder when you want to turn inspiration into a concrete shortlist of fragrances to compare.",
+      "primaryCta": "Go to catalog",
+      "secondaryCta": "Open Finder",
+      "empty": "No articles yet. Check back soon."
     }
   },
   "auth": {

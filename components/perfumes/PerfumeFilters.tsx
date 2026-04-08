@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 
+import { NoteIcon } from "@/components/perfumes/NoteIcons";
 import { Button } from "@/components/ui/Button";
 import {
   familyOptions,
@@ -13,6 +14,7 @@ import {
   sortOptions,
   type ParsedPerfumeFilters,
 } from "@/lib/filters";
+import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { usePathname, useRouter } from "@/lib/navigation";
 
 type PerfumeFiltersProps = {
@@ -21,6 +23,7 @@ type PerfumeFiltersProps = {
 
 export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
   const t = useTranslations("catalog.filters");
+  const taxonomyT = useTranslations("taxonomy");
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,6 +47,38 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
     return count;
   }, [selectedFilters]);
+
+  const activeNoteFilter = useMemo(() => {
+    if (selectedFilters.note) {
+      return {
+        typeLabel: t("fields.note"),
+        value: selectedFilters.note,
+      };
+    }
+
+    if (selectedFilters.top) {
+      return {
+        typeLabel: t("fields.top"),
+        value: selectedFilters.top,
+      };
+    }
+
+    if (selectedFilters.heart) {
+      return {
+        typeLabel: t("fields.heart"),
+        value: selectedFilters.heart,
+      };
+    }
+
+    if (selectedFilters.base) {
+      return {
+        typeLabel: t("fields.base"),
+        value: selectedFilters.base,
+      };
+    }
+
+    return null;
+  }, [selectedFilters.base, selectedFilters.heart, selectedFilters.note, selectedFilters.top, t]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
@@ -81,6 +116,27 @@ export function PerfumeFilters({ selectedFilters }: PerfumeFiltersProps) {
 
   return (
     <aside className="rounded-2xl border border-[#dfd1bf] bg-white p-5 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto">
+      {activeNoteFilter ? (
+        <div className="mb-4 rounded-[1.7rem] border border-[#ddcfbc] bg-[#faf6ef] p-3.5">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8b7661]">
+            {t("activeSearch")}
+          </p>
+          <div className="mt-3 flex items-center gap-3 rounded-[1.5rem] border border-[#e6d8c6] bg-white px-3 py-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f6efe5] text-[#9a8266]">
+              <NoteIcon slug={activeNoteFilter.value} className="h-5 w-5" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#9a846d]">
+                {activeNoteFilter.typeLabel}
+              </p>
+              <p className="mt-1 font-display text-[1.3rem] leading-[1.02] tracking-[-0.02em] text-[#31251b]">
+                {getLocalizedTaxonomyLabel(activeNoteFilter.value, "notes", taxonomyT)}
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="mb-4 flex items-center justify-between">
         <button
           type="button"
