@@ -1,10 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { usePathname as useActivePathname } from "@/lib/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
-import { AuthPanel } from "@/components/auth/AuthPanel";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -19,6 +19,18 @@ import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
 import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+
+const AuthPanel = dynamic(
+  () => import("@/components/auth/AuthPanel").then((module) => module.AuthPanel),
+);
+
+function HeaderFallback() {
+  return (
+    <div className="sticky top-0 z-40 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125">
+      <div className="mx-auto h-16 w-full max-w-6xl px-4 sm:h-18 sm:px-6 lg:px-8" />
+    </div>
+  );
+}
 
 type LocaleShellProps = {
   children: React.ReactNode;
@@ -191,7 +203,11 @@ export function LocaleShell({
   return (
     <PerfumeDetailNavigationProvider>
       <div className="min-h-screen bg-[#fbf8f2] text-[#211a14]">
-        {hideChrome ? null : <Header initialIsAuthenticated={initialIsAuthenticated} />}
+        {hideChrome ? null : (
+          <Suspense fallback={<HeaderFallback />}>
+            <Header initialIsAuthenticated={initialIsAuthenticated} />
+          </Suspense>
+        )}
         <div
           data-mobile-menu-content="true"
           className={cn("min-h-screen transition-[filter,opacity,transform] duration-300 ease-out")}

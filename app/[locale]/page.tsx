@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
 import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -88,7 +89,9 @@ export default async function HomePage({ params }: HomePageProps) {
       <Container>
         <FeaturedPerfumes perfumes={homepageData.featured.slice(0, 6).map(toPerfumeCardItem)} />
         <QuickFilters />
-        <HowItWorks />
+        <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
+          <HowItWorks />
+        </ScopedIntlProvider>
         <TrustedStores stores={homepageData.trustedStores} />
         <LatestPosts posts={latestPosts} locale={resolvedLocale} />
         <FinalCTA />

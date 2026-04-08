@@ -4,6 +4,7 @@ import { type Prisma } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
 import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
@@ -82,23 +83,46 @@ const perfumeDetailInclude = {
 } satisfies Prisma.PerfumeInclude;
 
 const perfumeDiscoveryInclude = {
+  id: true,
+  slug: true,
+  name: true,
+  descriptionShort: true,
+  imageUrl: true,
+  fragranceFamily: true,
+  gender: true,
+  priceRange: true,
+  isArabic: true,
+  isNiche: true,
+  ratingInternal: true,
+  bestPriceAmount: true,
+  bestTotalPriceAmount: true,
+  bestCurrency: true,
+  bestStoreName: true,
+  bestOfferUrl: true,
+  hasAvailableOffer: true,
   brand: true,
   notes: {
-    include: {
-      note: true,
+    select: {
+      intensity: true,
+      note: {
+        select: {
+          name: true,
+          slug: true,
+          noteType: true,
+        },
+      },
     },
   },
   moods: {
-    include: {
-      mood: true,
+    select: {
+      mood: {
+        select: {
+          slug: true,
+        },
+      },
     },
   },
-  offers: {
-    include: {
-      store: true,
-    },
-  },
-} satisfies Prisma.PerfumeInclude;
+} satisfies Prisma.PerfumeSelect;
 
 async function getPerfumeRecordBySlugUncached(slug: string, catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
@@ -204,9 +228,9 @@ async function getPerfumePageDataUncached(slug: string, catalogMode: CatalogMode
         },
         visibilityWhere,
       ),
-      include: perfumeDiscoveryInclude,
+      select: perfumeDiscoveryInclude,
       orderBy: [{ ratingInternal: "desc" }, { updatedAt: "desc" }],
-      take: 120,
+      take: 48,
     });
 
     return {
@@ -419,86 +443,91 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
           }),
         ]}
       />
-      <PerfumeDetailNavigationReady />
-      <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
-        <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
+      <ScopedIntlProvider
+        locale={resolvedLocale}
+        namespaces={["catalog", "common", "perfume", "taxonomy"]}
+      >
+        <PerfumeDetailNavigationReady />
+        <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
+          <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
 
-        <section className="space-y-4">
-          <SectionTitle
-            eyebrow={t("prices.eyebrow")}
-            title={t("prices.title")}
-            subtitle={t("prices.subtitle")}
-          />
-          {bestOffer ? <BestOfferCard bestOffer={bestOffer} showButton={false} /> : null}
-          <OfferTable offers={perfume.offers} />
-        </section>
+          <section className="space-y-4">
+            <SectionTitle
+              eyebrow={t("prices.eyebrow")}
+              title={t("prices.title")}
+              subtitle={t("prices.subtitle")}
+            />
+            {bestOffer ? <BestOfferCard bestOffer={bestOffer} showButton={false} /> : null}
+            <OfferTable offers={perfume.offers} />
+          </section>
 
-        <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
-          <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
-        </section>
+          <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
+            <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
+          </section>
 
-        <section className="space-y-4">
-          <SectionTitle
-            eyebrow={t("notes.eyebrow")}
-            title={t("notes.title")}
-            subtitle={t("notes.subtitle")}
-          />
-          <NotesList notes={notesForRender} />
-        </section>
+          <section className="space-y-4">
+            <SectionTitle
+              eyebrow={t("notes.eyebrow")}
+              title={t("notes.title")}
+              subtitle={t("notes.subtitle")}
+            />
+            <NotesList notes={notesForRender} />
+          </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
-          <MoodBadges
-            title={t("badges.moods")}
-            items={(perfume.moods ?? []).map((item) => ({
-              name: getLocalizedTaxonomyLabel(item.mood?.slug, "moods", taxonomyT) || item.mood?.name || t("unknown"),
-              weight: item.weight,
-            }))}
-          />
-          <MoodBadges
-            title={t("badges.seasons")}
-            items={(perfume.seasons ?? []).map((item) => ({
-              name:
-                getLocalizedTaxonomyLabel(item.season?.slug, "seasons", taxonomyT) || item.season?.name || t("unknown"),
-              weight: item.weight,
-            }))}
-          />
-          <MoodBadges
-            title={t("badges.occasions")}
-            items={(perfume.occasions ?? []).map((item) => ({
-              name:
-                getLocalizedTaxonomyLabel(item.occasion?.slug, "occasions", taxonomyT) ||
-                item.occasion?.name ||
-                t("unknown"),
-              weight: item.weight,
-            }))}
-          />
-        </section>
+          <section className="grid gap-4 md:grid-cols-3">
+            <MoodBadges
+              title={t("badges.moods")}
+              items={(perfume.moods ?? []).map((item) => ({
+                name: getLocalizedTaxonomyLabel(item.mood?.slug, "moods", taxonomyT) || item.mood?.name || t("unknown"),
+                weight: item.weight,
+              }))}
+            />
+            <MoodBadges
+              title={t("badges.seasons")}
+              items={(perfume.seasons ?? []).map((item) => ({
+                name:
+                  getLocalizedTaxonomyLabel(item.season?.slug, "seasons", taxonomyT) || item.season?.name || t("unknown"),
+                weight: item.weight,
+              }))}
+            />
+            <MoodBadges
+              title={t("badges.occasions")}
+              items={(perfume.occasions ?? []).map((item) => ({
+                name:
+                  getLocalizedTaxonomyLabel(item.occasion?.slug, "occasions", taxonomyT) ||
+                  item.occasion?.name ||
+                  t("unknown"),
+                weight: item.weight,
+              }))}
+            />
+          </section>
 
-        <AmazonCalloutCard
-          perfumeName={perfume.name}
-          brandName={perfume.brand?.name}
-          amazonUrl={perfume.amazonUrl}
-          perfumeSlug={perfume.slug}
-        />
-
-        <section className="space-y-4">
-          <SectionTitle
-            eyebrow={t("value.eyebrow")}
-            title={t("value.title")}
-            subtitle={cheaperAlternativesSubtitle}
+          <AmazonCalloutCard
+            perfumeName={perfume.name}
+            brandName={perfume.brand?.name}
+            amazonUrl={perfume.amazonUrl}
+            perfumeSlug={perfume.slug}
           />
-          <PerfumeGrid perfumes={cheaperAlternatives} />
-        </section>
 
-        <section className="space-y-4 pb-4 md:pb-6">
-          <SectionTitle
-            eyebrow={t("discovery.eyebrow")}
-            title={t("discovery.title")}
-            subtitle={t("discovery.subtitle")}
-          />
-          <PerfumeGrid perfumes={similarPerfumes} />
-        </section>
-      </Container>
+          <section className="space-y-4">
+            <SectionTitle
+              eyebrow={t("value.eyebrow")}
+              title={t("value.title")}
+              subtitle={cheaperAlternativesSubtitle}
+            />
+            <PerfumeGrid perfumes={cheaperAlternatives} />
+          </section>
+
+          <section className="space-y-4 pb-4 md:pb-6">
+            <SectionTitle
+              eyebrow={t("discovery.eyebrow")}
+              title={t("discovery.title")}
+              subtitle={t("discovery.subtitle")}
+            />
+            <PerfumeGrid perfumes={similarPerfumes} />
+          </section>
+        </Container>
+      </ScopedIntlProvider>
     </>
   );
 }

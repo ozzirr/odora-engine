@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { signOut } from "@/app/profile/actions";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { LogoutButton } from "@/components/profile/LogoutButton";
 import { Container } from "@/components/layout/Container";
@@ -58,7 +59,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <p className="mt-2 max-w-2xl text-sm text-[#685747]">{t("subtitle")}</p>
 
           <div className="mt-8">
-            <ProfileForm email={user.email} initialName={user.displayName ?? ""} />
+            <ScopedIntlProvider locale={resolvedLocale} namespaces={["profile"]}>
+              <ProfileForm email={user.email} initialName={user.displayName ?? ""} />
+            </ScopedIntlProvider>
           </div>
         </section>
 
@@ -71,7 +74,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
           <form action={signOut} className="mt-6">
             <input type="hidden" name="locale" value={resolvedLocale} />
-            <LogoutButton />
+            <ScopedIntlProvider locale={resolvedLocale} namespaces={["profile"]}>
+              <LogoutButton />
+            </ScopedIntlProvider>
           </form>
         </aside>
       </div>

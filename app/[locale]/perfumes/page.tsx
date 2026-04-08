@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { buttonStyles } from "@/components/ui/Button";
@@ -162,24 +163,29 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         />
       ) : null}
 
-      <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-        <ExpandableSeoIntro
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
-          body={[t("bodyOne"), t("bodyTwo")]}
-          primaryCta={{ href: "/finder", label: t("primaryCta") }}
-          secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
-        />
-      </section>
+      <ScopedIntlProvider
+        locale={resolvedLocale}
+        namespaces={["common", "catalog", "perfume", "taxonomy"]}
+      >
+        <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
+          <ExpandableSeoIntro
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            subtitle={t("subtitle")}
+            body={[t("bodyOne"), t("bodyTwo")]}
+            primaryCta={{ href: "/finder", label: t("primaryCta") }}
+            secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
+          />
+        </section>
 
-      <PerfumesClient
-        initialPerfumes={perfumes}
-        selectedFilters={selectedFilters}
-        total={total}
-        hasMore={hasMore}
-        isAuthenticated={isAuthenticated}
-      />
+        <PerfumesClient
+          initialPerfumes={perfumes}
+          selectedFilters={selectedFilters}
+          total={total}
+          hasMore={hasMore}
+          isAuthenticated={isAuthenticated}
+        />
+      </ScopedIntlProvider>
 
       {isAuthenticated && totalPages > 1 ? (
         <nav aria-label={clientT("paginationLabel")} className="mt-8 flex flex-wrap items-center gap-2 pb-10">

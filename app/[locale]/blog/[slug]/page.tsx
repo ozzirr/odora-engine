@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 import { Container } from "@/components/layout/Container";
-import { getBlogPost } from "@/lib/blog";
-import { hasLocale, type AppLocale } from "@/lib/i18n";
+import { getAllPublishedBlogSlugs, getBlogPost } from "@/lib/blog";
+import { hasLocale, locales, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata, toAbsoluteUrl } from "@/lib/metadata";
 
 export const revalidate = 3600;
@@ -14,6 +15,18 @@ type BlogPostPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const localizedSlugs = await Promise.all(
+    locales.map(async (locale) => ({
+      locale,
+      slugs: await getAllPublishedBlogSlugs(locale),
+    })),
+  );
+
+  return localizedSlugs.flatMap(({ locale, slugs }) =>
+    slugs.map((slug) => ({ locale, slug })),
+  );
+}
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -34,8 +47,8 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   });
 }
 
-function formatDate(date: Date, locale: string) {
-  return date.toLocaleDateString(locale === "it" ? "it-IT" : "en-GB", {
+function formatDate(date: Date | string, locale: string) {
+  return new Date(date).toLocaleDateString(locale === "it" ? "it-IT" : "en-GB", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -56,8 +69,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    datePublished: post.publishedAt.toISOString(),
-    dateModified: post.publishedAt.toISOString(),
+    datePublished: new Date(post.publishedAt).toISOString(),
+    dateModified: new Date(post.publishedAt).toISOString(),
     inLanguage: resolvedLocale === "it" ? "it-IT" : "en-GB",
     author: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
     publisher: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
@@ -83,9 +96,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mt-8">
           {post.coverImageUrl ? (
             <div className="mb-8 aspect-[16/9] w-full overflow-hidden rounded-[1.2rem] bg-[#f4ece0]">
-              <img
+              <Image
                 src={post.coverImageUrl}
                 alt={post.title}
+                width={1280}
+                height={720}
+                sizes="(max-width: 1024px) 100vw, 768px"
                 className="h-full w-full object-cover"
               />
             </div>

@@ -1,4 +1,4 @@
-import { computeBestOffer, type OfferForPricing } from "@/lib/pricing";
+import { computeBestOffer, getBestOfferSummary, type OfferForPricing } from "@/lib/pricing";
 
 type DiscoveryNote = {
   intensity?: number | null;
@@ -27,10 +27,16 @@ export type DiscoveryPerfume = {
   isArabic: boolean;
   isNiche: boolean;
   ratingInternal?: number | null;
+  bestPriceAmount?: number | null;
+  bestTotalPriceAmount?: number | null;
+  bestCurrency?: string | null;
+  bestStoreName?: string | null;
+  bestOfferUrl?: string | null;
+  hasAvailableOffer?: boolean | null;
   brand: {
     name: string;
   };
-  offers: OfferForPricing[];
+  offers?: OfferForPricing[];
   notes: DiscoveryNote[];
   moods: DiscoveryMood[];
 };
@@ -145,7 +151,7 @@ export function getSimilarPerfumes(
     .filter((candidate) => candidate.id !== perfume.id)
     .map((candidate) => {
       const similarity = scoreSimilarity(perfume, candidate);
-      const best = computeBestOffer(candidate.offers);
+      const best = getBestOfferSummary(candidate) ?? computeBestOffer(candidate.offers);
 
       return {
         candidate,
@@ -180,7 +186,8 @@ export function getCheaperAlternatives(
   limit = 4,
   exclude: Set<number> = new Set(),
 ) {
-  const targetBestPrice = computeBestOffer(perfume.offers)?.bestTotalPrice;
+  const targetBestPrice =
+    (getBestOfferSummary(perfume)?.bestTotalPrice ?? computeBestOffer(perfume.offers)?.bestTotalPrice);
 
   if (targetBestPrice == null) {
     return [];
@@ -190,7 +197,7 @@ export function getCheaperAlternatives(
     .filter((candidate) => candidate.id !== perfume.id && !exclude.has(candidate.id))
     .map((candidate) => {
       const similarity = scoreSimilarity(perfume, candidate);
-      const best = computeBestOffer(candidate.offers);
+      const best = getBestOfferSummary(candidate) ?? computeBestOffer(candidate.offers);
       const bestTotal = best?.bestTotalPrice;
 
       return {

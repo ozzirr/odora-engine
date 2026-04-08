@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
-import { getAuthMode } from "@/lib/auth-modal";
 import { APP_FLOATING_LAYER_CLASS } from "@/lib/chrome";
 import { cn } from "@/lib/utils";
 
@@ -36,7 +34,6 @@ export function MobilePerfumeCtaBar({
 }: MobilePerfumeCtaBarProps) {
   const heroT = useTranslations("perfume.hero");
   const amazonT = useTranslations("perfume.amazon");
-  const searchParams = useSearchParams();
   const barRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const isClient = useSyncExternalStore(
@@ -45,8 +42,7 @@ export function MobilePerfumeCtaBar({
     () => false,
   );
   const hasAnyCta = Boolean(bestOfferUrl || amazonUrl);
-  const authModalOpen = getAuthMode(searchParams.get("auth")) !== null;
-  const isBarActive = isVisible && !authModalOpen;
+  const isBarActive = isVisible;
 
   useEffect(() => {
     if (!isClient || !hasAnyCta) {

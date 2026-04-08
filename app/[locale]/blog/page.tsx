@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { getBlogPostList } from "@/lib/blog";
@@ -27,8 +29,8 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   });
 }
 
-function formatDate(date: Date, locale: string) {
-  return date.toLocaleDateString(locale === "it" ? "it-IT" : "en-GB", {
+function formatDate(date: Date | string, locale: string) {
+  return new Date(date).toLocaleDateString(locale === "it" ? "it-IT" : "en-GB", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -45,17 +47,19 @@ export default async function BlogPage({ params }: BlogPageProps) {
   return (
     <Container className="pt-6 sm:pt-8">
       <div className="space-y-10">
-        <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-          <ExpandableSeoIntro
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            subtitle={t("subtitle")}
-            body={[t("bodyOne"), t("bodyTwo")]}
-            primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
-            secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
-            headingAs="h1"
-          />
-        </section>
+        <ScopedIntlProvider locale={resolvedLocale} namespaces={["common"]}>
+          <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
+            <ExpandableSeoIntro
+              eyebrow={t("eyebrow")}
+              title={t("title")}
+              subtitle={t("subtitle")}
+              body={[t("bodyOne"), t("bodyTwo")]}
+              primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
+              secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
+              headingAs="h1"
+            />
+          </section>
+        </ScopedIntlProvider>
 
         {posts.length === 0 ? (
           <p className="text-sm text-[#8a7763]">{t("empty")}</p>
@@ -69,9 +73,12 @@ export default async function BlogPage({ params }: BlogPageProps) {
               >
                 {post.coverImageUrl ? (
                   <div className="aspect-[16/9] w-full overflow-hidden bg-[#f4ece0]">
-                    <img
+                    <Image
                       src={post.coverImageUrl}
                       alt={post.title}
+                      width={720}
+                      height={405}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>

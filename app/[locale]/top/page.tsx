@@ -4,6 +4,7 @@ import { type Prisma } from "@prisma/client";
 import { getTranslations } from "next-intl/server";
 
 import { Container } from "@/components/layout/Container";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { EditorialSection } from "@/components/top/EditorialSection";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
@@ -178,16 +179,18 @@ export default async function TopPage({ params }: TopPageProps) {
         ]}
       />
 
-      <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
-        <ExpandableSeoIntro
-          eyebrow={t("eyebrow")}
-          title={t("title")}
-          subtitle={t("subtitle")}
-          body={[t("bodyOne"), t("bodyTwo")]}
-          primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
-          secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
-        />
-      </div>
+      <ScopedIntlProvider locale={resolvedLocale} namespaces={["common"]}>
+        <div className="rounded-3xl border border-[#dfd1bf] bg-white p-8 sm:p-10">
+          <ExpandableSeoIntro
+            eyebrow={t("eyebrow")}
+            title={t("title")}
+            subtitle={t("subtitle")}
+            body={[t("bodyOne"), t("bodyTwo")]}
+            primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
+            secondaryCta={{ href: "/finder", label: t("secondaryCta"), variant: "secondary" }}
+          />
+        </div>
+      </ScopedIntlProvider>
 
       <EditorialSection
         eyebrow={t("sections.arabic.eyebrow")}

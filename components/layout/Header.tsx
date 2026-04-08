@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
-import { SearchDialog } from "@/components/search/SearchDialog";
 import { buttonStyles } from "@/components/ui/Button";
 import { buildPathWithoutAuthModal, getAuthMode } from "@/lib/auth-modal";
 import {
@@ -18,6 +18,10 @@ import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
+
+const SearchDialog = dynamic(
+  () => import("@/components/search/SearchDialog").then((module) => module.SearchDialog),
+);
 
 type HeaderProps = {
   initialIsAuthenticated?: boolean;
@@ -453,7 +457,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
       </div>
 
     </header>
-    <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+    {searchOpen ? <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} /> : null}
     </>
   );
 }

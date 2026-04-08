@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { AuthPanel } from "@/components/auth/AuthPanel";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
 import { Container } from "@/components/layout/Container";
 import { getLocalizedPathname, hasLocale } from "@/lib/i18n";
@@ -48,7 +49,14 @@ export default async function LoginPage({ params, searchParams }: LoginPageProps
 
   return (
     <Container className="py-14 sm:py-18">
-      <AuthPanel mode="login" nextPath={nextPath} initialError={mapLoginAuthError(errorCode, t)} switchHref="/signup" />
+      <ScopedIntlProvider locale={resolvedLocale} namespaces={["auth"]}>
+        <AuthPanel
+          mode="login"
+          nextPath={nextPath}
+          initialError={mapLoginAuthError(errorCode, t)}
+          switchHref="/signup"
+        />
+      </ScopedIntlProvider>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleShell } from "@/components/layout/LocaleShell";
 import { NotFoundExperience } from "@/components/not-found/NotFoundExperience";
@@ -12,8 +12,8 @@ import {
   localeCookieName,
   type AppLocale,
 } from "@/lib/i18n";
+import { getScopedMessages } from "@/lib/messages";
 import { pickAlternativePerfumes } from "@/lib/not-found";
-import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 export default async function RootNotFoundPage() {
   const cookieStore = await cookies();
@@ -26,9 +26,8 @@ export default async function RootNotFoundPage() {
 
   setRequestLocale(locale);
 
-  const [messages, isAuthenticated, homepageData, t] = await Promise.all([
-    getMessages({ locale }),
-    getIsAuthenticated(),
+  const [messages, homepageData, t] = await Promise.all([
+    getScopedMessages(locale, ["layout", "privacyPreferences", "auth"]),
     getHomepageData(),
     getTranslations({ locale, namespace: "notFound" }),
   ]);
@@ -41,7 +40,7 @@ export default async function RootNotFoundPage() {
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <LocaleShell initialIsAuthenticated={isAuthenticated}>
+      <LocaleShell>
         <NotFoundExperience
           copy={{
             eyebrow: t("eyebrow"),

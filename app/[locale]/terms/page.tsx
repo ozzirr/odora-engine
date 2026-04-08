@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 import { LegalPage } from "@/components/legal/LegalPage";
 import { hasLocale } from "@/lib/i18n";
+import { getScopedMessages } from "@/lib/messages";
 import { buildPageMetadata } from "@/lib/metadata";
 
 type TermsPageProps = {
@@ -27,8 +28,8 @@ export async function generateMetadata({ params }: TermsPageProps): Promise<Meta
 export default async function TermsPage({ params }: TermsPageProps) {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
-  const messages = await getMessages({ locale: resolvedLocale });
-  const content = (messages as { legal: { terms: Parameters<typeof LegalPage>[0] } }).legal.terms;
+  const messages = await getScopedMessages(resolvedLocale, ["legal"]);
+  const content = (messages as unknown as { legal: { terms: Parameters<typeof LegalPage>[0] } }).legal.terms;
 
   return (
     <LegalPage

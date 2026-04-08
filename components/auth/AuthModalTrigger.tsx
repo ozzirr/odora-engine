@@ -1,7 +1,6 @@
 "use client";
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
 
 import { buildAuthModalUrl, type AuthMode } from "@/lib/auth-modal";
 
@@ -19,9 +18,6 @@ export function AuthModalTrigger({
   type = "button",
   ...props
 }: AuthModalTriggerProps) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   return (
     <button
       {...props}
@@ -32,8 +28,12 @@ export function AuthModalTrigger({
           return;
         }
 
-        const hash = window.location.hash;
-        window.history.pushState(null, "", buildAuthModalUrl(pathname, searchParams, mode, hash));
+        const { pathname, search, hash } = window.location;
+        window.history.pushState(
+          null,
+          "",
+          buildAuthModalUrl(pathname, new URLSearchParams(search), mode, hash),
+        );
         onOpen?.();
       }}
     >

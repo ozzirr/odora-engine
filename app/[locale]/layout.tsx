@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
+import { HtmlLangSync } from "@/components/i18n/HtmlLangSync";
+import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { LocaleShell } from "@/components/layout/LocaleShell";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { getAlternateLinks, hasLocale, locales } from "@/lib/i18n";
-import {
-  LAUNCH_GATE_ACCESS_COOKIE_NAME,
-  hasLaunchGateAccess,
-  isLaunchGateEnabled,
-} from "@/lib/launch-gate";
-import { getIsAuthenticated } from "@/lib/supabase/auth-state";
+import { isLaunchGateEnabled } from "@/lib/launch-gate";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
 import { getBaseSiteUrl } from "@/lib/site-url";
 
@@ -59,24 +54,22 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   setRequestLocale(locale);
-  const cookieStore = await cookies();
-  const hideChrome =
-    isLaunchGateEnabled() &&
-    !hasLaunchGateAccess(cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value);
-  const messages = await getMessages({ locale });
-  const initialIsAuthenticated = await getIsAuthenticated();
 
   return (
-    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+    <ScopedIntlProvider
+      locale={locale}
+      namespaces={["layout", "privacyPreferences", "auth", "perfume.transition"]}
+    >
+      <HtmlLangSync />
       <StructuredData
         data={[
           buildOrganizationSchema(),
           buildWebsiteSchema(locale),
         ]}
       />
-      <LocaleShell hideChrome={hideChrome} initialIsAuthenticated={initialIsAuthenticated}>
+      <LocaleShell>
         {children}
       </LocaleShell>
-    </NextIntlClientProvider>
+    </ScopedIntlProvider>
   );
 }
