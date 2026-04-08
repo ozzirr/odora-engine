@@ -149,16 +149,16 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Fragrance Discovery",
+      "eyebrow": "Smart fragrance discovery",
       "title": "Find the fragrance that feels like you.",
-      "subtitle": "Browse standout perfumes, understand their character, and compare offers in one calm, elegant flow.",
+      "subtitle": "Explore selected perfumes, understand their character, and compare the best available offers.",
       "valueProps": {
         "compare": "Compare prices across trusted retailers",
         "explore": "Explore perfumes by notes, mood, and style",
         "choose": "Choose with more confidence"
       },
-      "browseCatalog": "Browse catalog",
-      "startFinder": "Start Finder",
+      "browseCatalog": "Log in or sign up",
+      "startFinder": "Start personalized search",
       "spotlight": "Spotlight",
       "badges": {
         "heroPick": "Odora pick",
@@ -186,8 +186,8 @@
       "seeProductDetails": "See product details"
     },
     "featured": {
-      "eyebrow": "Featured",
-      "title": "Featured perfumes",
+      "eyebrow": "Odora selection",
+      "title": "Selected perfumes",
       "subtitle": "A considered edit of bottles worth knowing, from easy daily signatures to richer statement scents."
     },
     "quickFilters": {
@@ -251,8 +251,8 @@
     },
     "trustedStores": {
       "eyebrow": "Trusted Stores",
-      "title": "Compare prices from trusted stores",
-      "subtitle": "We surface retailers in a clean comparison view so prices, shipping, and product links stay easy to read."
+      "title": "Best offers from trusted retailers",
+      "subtitle": "Compare selected retailers in a cleaner, easier-to-read flow."
     },
     "discoveryCollections": {
       "eyebrow": "Collections",

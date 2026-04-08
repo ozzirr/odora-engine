@@ -4,8 +4,8 @@ import type { QuickFilterIllustration } from "@/lib/homepage";
 
 function IllustrationFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex h-28 w-28 items-center justify-center rounded-[1.75rem] border border-white/55 bg-white/40 shadow-[0_18px_30px_-24px_rgba(44,31,20,0.45)] backdrop-blur-[2px]">
-      <div className="absolute inset-3 rounded-[1.35rem] border border-[#fff8ef]/70" />
+    <div className="relative flex h-24 w-24 items-center justify-center rounded-[1.5rem] border border-white/55 bg-white/40 shadow-[0_18px_30px_-24px_rgba(44,31,20,0.45)] backdrop-blur-[2px] sm:h-[6.5rem] sm:w-[6.5rem]">
+      <div className="absolute inset-3 rounded-[1.15rem] border border-[#fff8ef]/70" />
       <div className="relative z-10">{children}</div>
     </div>
   );

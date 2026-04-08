@@ -186,7 +186,6 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         selectedFilters={selectedFilters}
         total={total}
         hasMore={hasMore}
-        pageSize={PERFUMES_PAGE_SIZE}
         isAuthenticated={isAuthenticated}
       />
 

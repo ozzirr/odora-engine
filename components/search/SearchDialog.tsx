@@ -132,7 +132,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
   return (
     <div
       className={cn(
-        `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-y-auto px-4 py-6 transition-[background-color,opacity,backdrop-filter] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-10`,
+        `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-y-auto px-3 py-4 transition-[background-color,opacity,backdrop-filter] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:py-8 lg:px-8`,
         APP_OVERLAY_LAYER_CLASS,
         isVisible
           ? "bg-[rgba(24,20,16,0.22)] opacity-100 backdrop-blur-[18px]"
@@ -140,25 +140,25 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
       )}
       onClick={onClose}
     >
-      <div className="flex min-h-full items-start justify-center pt-2 sm:items-center sm:pt-0">
+      <div className="flex min-h-full items-start justify-center pt-1 sm:items-center sm:pt-0">
         <div
           role="dialog"
           aria-modal="true"
           aria-label={t("label")}
           onClick={(e) => e.stopPropagation()}
           className={cn(
-            "w-full max-w-md transition-[opacity,transform] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
+            "w-full max-w-[58rem] transition-[opacity,transform] duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
             isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-[0.985] opacity-0",
           )}
         >
           {/* Glass panel — same style as AuthPanel surface="glass" */}
-          <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(248,242,234,0.52))] p-6 shadow-[0_40px_120px_-40px_rgba(29,22,16,0.62)] backdrop-blur-[28px] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.28),transparent_34%)] before:content-[''] sm:p-8">
+          <div className="relative isolate overflow-hidden rounded-[2rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,0.74),rgba(248,242,234,0.58))] p-5 shadow-[0_40px_120px_-40px_rgba(29,22,16,0.62)] backdrop-blur-[28px] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.42),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(226,211,192,0.28),transparent_34%)] before:content-[''] sm:p-7 lg:p-8">
             {/* Close button — same as AuthPanel */}
             <button
               type="button"
               onClick={onClose}
               aria-label={t("close")}
-              className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/45 bg-white/40 text-xl leading-none text-[#47372a] transition hover:bg-white/60"
+              className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/45 bg-white/50 text-xl leading-none text-[#47372a] transition hover:bg-white/70 sm:right-5 sm:top-5 sm:h-11 sm:w-11"
             >
               <span aria-hidden="true">×</span>
             </button>
@@ -167,14 +167,16 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-1 pr-10 font-display text-3xl text-[#21180f]">{t("title")}</h2>
+            <h2 className="mt-1 pr-12 font-display text-[2.6rem] leading-[0.94] text-[#21180f] sm:text-[3.2rem]">
+              {t("title")}
+            </h2>
 
             {/* Search input */}
-            <div className="mt-5 flex items-center gap-3 rounded-[1.2rem] border border-[#ddd0be] bg-white/70 px-4 py-3 shadow-[inset_0_1px_3px_rgba(30,22,14,0.06)] focus-within:border-[#c0aa8e] focus-within:ring-2 focus-within:ring-[#c0aa8e]/20">
+            <div className="mt-5 flex items-center gap-3 rounded-[1.4rem] border border-[#ddd0be] bg-white/80 px-4 py-3.5 shadow-[inset_0_1px_3px_rgba(30,22,14,0.06)] focus-within:border-[#c0aa8e] focus-within:ring-2 focus-within:ring-[#c0aa8e]/20 sm:px-5 sm:py-4">
               <svg
                 viewBox="0 0 20 20"
                 fill="none"
-                className="h-5 w-5 shrink-0 text-[#9a8570]"
+                className="h-5 w-5 shrink-0 text-[#9a8570] sm:h-6 sm:w-6"
                 aria-hidden="true"
               >
                 <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
@@ -186,46 +188,46 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("placeholder")}
-                className="min-w-0 flex-1 bg-transparent text-[15px] text-[#1c1712] placeholder:text-[#b0a090] focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent text-[1.55rem] leading-none text-[#1c1712] placeholder:text-[#b0a090] focus:outline-none sm:text-[1.8rem]"
               />
               {isLoading && (
-                <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-[#d4c8b8] border-t-[#8a7060]" />
+                <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-[#d4c8b8] border-t-[#8a7060] sm:h-5 sm:w-5" />
               )}
             </div>
 
             {/* Results list */}
             {results.length > 0 && (
-              <ul className="mt-3 max-h-[320px] overflow-y-auto rounded-[1.2rem] border border-[#e8ddd0] bg-white/60">
+              <ul className="mt-4 max-h-[min(62dvh,38rem)] overflow-y-auto rounded-[1.35rem] border border-[#e8ddd0] bg-white/70">
                 {results.map((perfume, i) => (
                   <li key={perfume.id} className={i > 0 ? "border-t border-[#f0e8de]" : ""}>
                     <button
                       type="button"
                       onClick={() => handleSelect(perfume.slug, perfume.name)}
-                      className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-[#fdf6ee]"
+                      className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition-colors hover:bg-[#fdf6ee] sm:gap-4 sm:px-5 sm:py-4"
                     >
-                      <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded-xl bg-[#f5ede3]">
+                      <div className="relative h-14 w-12 shrink-0 overflow-hidden rounded-xl bg-[#f5ede3] sm:h-16 sm:w-14">
                         {perfume.imageUrl ? (
                           <Image
                             src={perfume.imageUrl}
                             alt={perfume.name}
                             fill
-                            sizes="40px"
-                            className="object-contain p-1"
+                            sizes="56px"
+                            className="object-contain p-1.5"
                           />
                         ) : null}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-[13px] font-semibold text-[#1c1712]">
+                        <p className="truncate text-[1.05rem] font-semibold leading-[1.2] text-[#1c1712] sm:text-[1.2rem]">
                           {perfume.name}
                         </p>
-                        <p className="truncate text-[12px] text-[#7a6a58]">
+                        <p className="truncate text-[0.95rem] text-[#7a6a58] sm:text-[1rem]">
                           {perfume.brand.name}
                           {perfume.fragranceFamily ? (
                             <span className="ml-1.5 opacity-60">· {perfume.fragranceFamily}</span>
                           ) : null}
                         </p>
                       </div>
-                      <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5 shrink-0 text-[#b0a090]" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4 shrink-0 text-[#b0a090] sm:h-5 sm:w-5" aria-hidden="true">
                         <path d="M4 12L12 4M6 4H12V10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </button>
@@ -235,13 +237,13 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             )}
 
             {searched && results.length === 0 && query.length >= 2 && (
-              <p className="mt-4 text-center text-sm text-[#9a8570]">
+              <p className="mt-5 text-center text-sm text-[#9a8570]">
                 {t("noResults", { query })}
               </p>
             )}
 
             {!searched && query.length < 2 && (
-              <p className="mt-4 text-center text-[12px] text-[#b0a090]">
+              <p className="mt-5 text-center text-[12px] text-[#b0a090] sm:text-[13px]">
                 {t("hint")}
               </p>
             )}

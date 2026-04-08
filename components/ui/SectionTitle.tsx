@@ -9,14 +9,14 @@ export function SectionTitle({ eyebrow, title, subtitle, as = "h2" }: SectionTit
   const HeadingTag = as;
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
           {eyebrow}
         </p>
       ) : null}
-      <HeadingTag className="font-display text-3xl text-[#1e1813] sm:text-4xl">{title}</HeadingTag>
-      {subtitle ? <p className="max-w-2xl text-sm text-[#685848]">{subtitle}</p> : null}
+      <HeadingTag className="font-display text-[1.85rem] leading-[1.1] text-[#1e1813] sm:text-[2.2rem] lg:text-[2.5rem]">{title}</HeadingTag>
+      {subtitle ? <p className="max-w-xl text-[14.5px] leading-[1.7] text-[#6b5a49]">{subtitle}</p> : null}
     </div>
   );
 }

@@ -9,11 +9,14 @@ export function ValueStrip() {
 
   return (
     <Container>
-      <div className="mt-4 py-1">
-        <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5">
-          {STRIP_ITEMS.map((key) => (
-            <li key={key}>
-              <span className="text-[12px] font-medium tracking-[0.04em] text-[#7a6a58]">
+      <div className="mt-5 py-2">
+        <ul className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
+          {STRIP_ITEMS.map((key, i) => (
+            <li key={key} className="flex items-center gap-2">
+              {i > 0 && (
+                <span className="h-[3px] w-[3px] rounded-full bg-[#c8bba8]" aria-hidden="true" />
+              )}
+              <span className="text-[11.5px] font-medium tracking-[0.06em] text-[#8a7a68]">
                 {t(key)}
               </span>
             </li>

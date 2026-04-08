@@ -389,6 +389,45 @@ function minimizeDuplicates(
   return fallback.slice(0, desiredCount);
 }
 
+function diversifyByFragranceFamily(
+  perfumes: HomePerfumeRecord[],
+  desiredCount: number,
+  maxPerFamily = 2,
+) {
+  const selected: HomePerfumeRecord[] = [];
+  const familyCounts = new Map<string, number>();
+
+  for (const perfume of perfumes) {
+    const familyKey = (perfume.fragranceFamily || "").trim().toLowerCase();
+    const currentCount = familyCounts.get(familyKey) ?? 0;
+
+    if (currentCount >= maxPerFamily) {
+      continue;
+    }
+
+    selected.push(perfume);
+    familyCounts.set(familyKey, currentCount + 1);
+
+    if (selected.length >= desiredCount) {
+      return selected;
+    }
+  }
+
+  for (const perfume of perfumes) {
+    if (selected.some((item) => item.id === perfume.id)) {
+      continue;
+    }
+
+    selected.push(perfume);
+
+    if (selected.length >= desiredCount) {
+      break;
+    }
+  }
+
+  return selected.slice(0, desiredCount);
+}
+
 function toCollectionCard(collection: HomeCollectionRecord): HomeCollectionCard {
   return {
     title: collection.title,
@@ -458,16 +497,14 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
     const trending = minimizeDuplicates(
       [...trendingCandidates, ...fallbackCandidates],
       excludedHeroIds,
-      5,
+      3,
     );
-    const excludedFeaturedIds = new Set<number>([
-      ...excludedHeroIds,
-      ...trending.map((perfume) => perfume.id),
-    ]);
-    const featured = minimizeDuplicates(
+    const excludedFeaturedIds = new Set<number>(excludedHeroIds);
+    const featuredCandidatesWithoutOverlap = minimizeDuplicates(
       [...featuredCandidates, ...fallbackCandidates],
       excludedFeaturedIds,
     );
+    const featured = diversifyByFragranceFamily(featuredCandidatesWithoutOverlap, 6, 2);
     const trustedStores = selectTrustedStores(
       toUniquePerfumes([...heroSpotlights, ...trending, ...featured]),
       4,

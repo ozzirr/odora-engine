@@ -87,23 +87,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     { href: "/top" as const, label: t("nav.top") },
     { href: "/blog" as const, label: t("nav.blog") },
   ];
-  const menuTags = [
-    {
-      key: "niche",
-      href: { pathname: "/perfumes", query: { niche: "true", sort: "rating" } } as const,
-      label: t("featuredTags.niche"),
-    },
-    {
-      key: "arab",
-      href: { pathname: "/perfumes", query: { arabic: "true", sort: "rating" } } as const,
-      label: t("featuredTags.arab"),
-    },
-    {
-      key: "on-sale",
-      href: { pathname: "/perfumes", query: { sort: "price_low" } } as const,
-      label: t("featuredTags.onSale"),
-    },
-  ];
   const accountHref = isAuthenticated ? "/profile" : "/login";
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
   const canOpenAuthModal = !isAuthenticated && pathname !== "/login" && pathname !== "/signup";
@@ -183,7 +166,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
   return (
     <>
-    <header className={cn("sticky top-0 border-b border-[#e8dfd2] bg-[#fbf8f2]/95 backdrop-blur", APP_HEADER_LAYER_CLASS)}>
+    <header className={cn("sticky top-0 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125", APP_HEADER_LAYER_CLASS)}>
       <div className={cn("mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8", APP_HEADER_HEIGHT_CLASS)}>
         <Link
           href="/"
@@ -200,14 +183,14 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium text-[#554636] transition-colors hover:text-[#1f1914]",
-                isActivePath(item.href) && "text-[#1f1914]",
+                "text-[13.5px] font-medium text-[#6b5a49] transition-colors hover:text-[#1e1813]",
+                isActivePath(item.href) && "text-[#1e1813]",
               )}
             >
               {item.label}
@@ -349,19 +332,15 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
                   className="absolute right-0 top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border border-[#e6d9c8] bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.85),rgba(231,217,198,0.9))] shadow-[0_18px_32px_-24px_rgba(31,25,20,0.6)] sm:h-12 sm:w-12"
                 />
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {menuTags.map((tag) => (
-                  <Link
-                    key={tag.key}
-                    href={tag.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="rounded-full border border-[#dfcfbc] bg-white/80 px-3.5 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-[#6e5947] transition-all hover:border-[#cbb59a] hover:bg-[#fffaf3] hover:text-[#2e241c]"
-                  >
-                    {tag.label}
-                  </Link>
-                ))}
-              </div>
               <p className="mt-4 text-sm leading-6 text-[#705b49]">{t("introDescription")}</p>
+              <div className="mt-4">
+                <MobileSearchButton
+                  isAuthenticated={isAuthenticated}
+                  label={searchT("label")}
+                  onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
+                  onCloseMenu={() => setMenuOpen(false)}
+                />
+              </div>
             </div>
 
             <div className="space-y-2.5">
@@ -416,16 +395,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
                   </Link>
                 );
               })}
-            </div>
-
-            {/* Search — mobile */}
-            <div className="mt-4">
-              <MobileSearchButton
-                isAuthenticated={isAuthenticated}
-                label={searchT("label")}
-                onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
-                onCloseMenu={() => setMenuOpen(false)}
-              />
             </div>
 
             <div className="mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,238,229,0.98))] p-3 shadow-[0_18px_35px_-30px_rgba(31,25,20,0.45)] backdrop-blur-xl">

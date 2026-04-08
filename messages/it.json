@@ -149,16 +149,16 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Scoperta fragranze",
+      "eyebrow": "Scoperta fragranze smart",
       "title": "Trova la fragranza che ti rappresenta.",
-      "subtitle": "Esplora profumi selezionati, capiscine il carattere e confronta le offerte in un unico flusso chiaro ed elegante.",
+      "subtitle": "Esplora profumi selezionati, capiscine il carattere e confronta le migliori offerte disponibili.",
       "valueProps": {
         "compare": "Confronta i prezzi tra retailer affidabili",
         "explore": "Esplora profumi per note, mood e stile",
         "choose": "Scegli con piu sicurezza"
       },
-      "browseCatalog": "Sfoglia catalogo",
-      "startFinder": "Apri Finder",
+      "browseCatalog": "Accedi o registrati",
+      "startFinder": "Avvia ricerca personalizzata",
       "spotlight": "In evidenza",
       "badges": {
         "heroPick": "Scelta Odora",
@@ -186,8 +186,8 @@
       "seeProductDetails": "Vedi dettagli prodotto"
     },
     "featured": {
-      "eyebrow": "In evidenza",
-      "title": "Profumi in evidenza",
+      "eyebrow": "Selezione Odora",
+      "title": "Profumi selezionati",
       "subtitle": "Una selezione ragionata di bottiglie da conoscere, dalle firme quotidiane facili alle fragranze piu intense."
     },
     "quickFilters": {
@@ -251,8 +251,8 @@
     },
     "trustedStores": {
       "eyebrow": "Negozi affidabili",
-      "title": "Confronta i prezzi dei negozi affidabili",
-      "subtitle": "Mostriamo i retailer in una vista di confronto pulita cosi prezzo, spedizione e link prodotto restano facili da leggere."
+      "title": "Le migliori offerte dai retailer affidabili",
+      "subtitle": "Confronta retailer selezionati in un flusso piu pulito, chiaro e facile da leggere."
     },
     "discoveryCollections": {
       "eyebrow": "Collezioni",

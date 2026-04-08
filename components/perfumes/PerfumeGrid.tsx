@@ -5,7 +5,8 @@ import { cn } from "@/lib/utils";
 
 type PerfumeGridProps = {
   perfumes: PerfumeCardItem[];
-  cardVariant?: "default" | "catalog" | "finder";
+  cardVariant?: "default" | "catalog" | "featured" | "finder";
+  mobileColumns?: 2 | 3;
   desktopColumns?: 3 | 4;
   layout?: "grid" | "list";
   animateItems?: boolean;
@@ -15,6 +16,7 @@ type PerfumeGridProps = {
 export function PerfumeGrid({
   perfumes,
   cardVariant = "default",
+  mobileColumns = 2,
   desktopColumns = 4,
   layout = "grid",
   animateItems = false,
@@ -36,7 +38,9 @@ export function PerfumeGrid({
         "grid gap-5",
         layout === "list"
           ? "grid-cols-1"
-          : `grid-cols-2 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`,
+          : `${mobileColumns === 3 ? "grid-cols-3" : "grid-cols-2"} ${
+              desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"
+            }`,
       )}
     >
       {perfumes.map((perfume, index) => (

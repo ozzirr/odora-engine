@@ -9,6 +9,12 @@ type LatestPostsProps = {
   locale: string;
 };
 
+const BAND_GRADIENTS = [
+  "linear-gradient(90deg,#c4a060,#ddb870)",
+  "linear-gradient(90deg,#a0907a,#bfb09a)",
+  "linear-gradient(90deg,#7a9a80,#a0c0a8)",
+];
+
 export function LatestPosts({ posts, locale }: LatestPostsProps) {
   const t = useTranslations("home.latestPosts");
 
@@ -17,7 +23,7 @@ export function LatestPosts({ posts, locale }: LatestPostsProps) {
   }
 
   return (
-    <section className="mt-24 space-y-6">
+    <section className="section-gap space-y-8">
       <div className="flex items-end justify-between gap-4">
         <SectionTitle
           eyebrow={t("eyebrow")}
@@ -26,7 +32,7 @@ export function LatestPosts({ posts, locale }: LatestPostsProps) {
         />
         <Link
           href={`/${locale}/blog`}
-          className="shrink-0 text-xs font-semibold uppercase tracking-[0.14em] text-[#816f5c] hover:text-[#1f1914] transition-colors"
+          className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#907b66] hover:text-[#1e1813] transition-colors"
         >
           {t("allPosts")} →
         </Link>
@@ -37,31 +43,25 @@ export function LatestPosts({ posts, locale }: LatestPostsProps) {
           <Link
             key={post.slug}
             href={`/${locale}/blog/${post.slug}`}
-            className="group flex flex-col rounded-[1.4rem] border border-[#e0d5c6] bg-white overflow-hidden shadow-[0_18px_40px_-34px_rgba(50,35,20,0.28)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.44)]"
+            className="group flex flex-col rounded-[var(--radius-card)] border border-[#ede4d8] bg-white overflow-hidden shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
           >
             {/* Decorative top band */}
             <div
-              className="h-1.5 w-full"
-              style={{
-                background: index === 0
-                  ? "linear-gradient(90deg,#c9a96e,#e8c98a)"
-                  : index === 1
-                  ? "linear-gradient(90deg,#a8937a,#c9b49a)"
-                  : "linear-gradient(90deg,#8a9e8c,#b0c4b2)",
-              }}
+              className="h-1 w-full"
+              style={{ background: BAND_GRADIENTS[index] ?? BAND_GRADIENTS[0] }}
             />
 
             <div className="flex flex-1 flex-col gap-3 p-5 sm:p-6">
               {post.tags.length > 0 ? (
-                <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8a7763]">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#907b66]">
                   {post.tags[0]}
                 </p>
               ) : null}
-              <h3 className="font-display text-[1.35rem] leading-snug text-[#1f1914] transition-colors group-hover:text-[#6c5946]">
+              <h3 className="font-display text-[1.25rem] leading-[1.2] text-[#1e1813] transition-colors group-hover:text-[#6c5946]">
                 {post.title}
               </h3>
-              <p className="text-sm text-[#625243] leading-[1.7] line-clamp-3">{post.excerpt}</p>
-              <p className="mt-auto pt-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763] transition-colors group-hover:text-[#1f1914]">
+              <p className="text-[13.5px] text-[#6b5a49] leading-[1.7] line-clamp-3">{post.excerpt}</p>
+              <p className="mt-auto pt-4 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#907b66] transition-colors group-hover:text-[#1e1813]">
                 {t("cta")} →
               </p>
             </div>

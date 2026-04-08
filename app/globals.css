@@ -2,10 +2,26 @@
 
 :root {
   --background: #fbf8f2;
-  --foreground: #211a14;
+  --foreground: #1e1813;
   --font-body: "Avenir Next", "Segoe UI", "Noto Sans", sans-serif;
   --font-heading: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
   --mobile-perfume-cta-offset: 0px;
+
+  /* Design tokens */
+  --color-text-primary: #1e1813;
+  --color-text-secondary: #5a4a3a;
+  --color-text-tertiary: #8a7763;
+  --color-text-muted: #a69580;
+  --color-border: #e5d9c8;
+  --color-border-subtle: #ede4d8;
+  --color-surface: #ffffff;
+  --color-surface-warm: #f8f3ea;
+  --color-accent: #1E4B3B;
+  --radius-card: 1.5rem;
+  --radius-card-lg: 2rem;
+  --shadow-card: 0 2px 20px -8px rgba(50,35,20,0.12);
+  --shadow-card-hover: 0 8px 32px -12px rgba(50,35,20,0.2);
+  --shadow-elevated: 0 16px 48px -20px rgba(50,35,20,0.22);
 }
 
 @theme inline {
@@ -16,7 +32,7 @@
 }
 
 * {
-  border-color: #e5d9c8;
+  border-color: var(--color-border);
 }
 
 body {
@@ -24,6 +40,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-image:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.6), transparent 30%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
@@ -82,6 +100,23 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
 
 .premium-card {
   will-change: transform, box-shadow;
+  border-radius: var(--radius-card);
+}
+
+.section-gap {
+  margin-top: 6rem;
+}
+
+@media (min-width: 640px) {
+  .section-gap {
+    margin-top: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-gap {
+    margin-top: 8rem;
+  }
 }
 
 .loading-bar-track {
@@ -118,16 +153,41 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   }
 }
 
+@keyframes trusted-stores-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.trusted-stores-marquee {
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black 8%, black 92%, transparent 100%);
+}
+
+.trusted-stores-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: trusted-stores-marquee 22s linear infinite;
+  will-change: transform;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .premium-card {
     transition:
-      transform 220ms ease,
-      box-shadow 220ms ease,
-      border-color 220ms ease;
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 260ms ease;
   }
 
   .premium-card:hover {
-    border-color: #d9c9b4;
+    border-color: #d4c4ae;
+    box-shadow: var(--shadow-card-hover);
   }
 
   .loading-bar-fill {
@@ -136,6 +196,10 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .trusted-stores-track {
+    animation: none;
+  }
+
   .finder-card-animate {
     animation: none !important;
     opacity: 1 !important;

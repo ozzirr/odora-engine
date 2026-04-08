@@ -16,13 +16,13 @@ export function FeaturedPerfumes({ perfumes }: FeaturedPerfumesProps) {
   }
 
   return (
-    <section className="mt-24 space-y-8">
+    <section className="section-gap space-y-10">
       <SectionTitle
         eyebrow={t("eyebrow")}
         title={t("title")}
         subtitle={t("subtitle")}
       />
-      <PerfumeGrid perfumes={perfumes} desktopColumns={3} />
+      <PerfumeGrid perfumes={perfumes} cardVariant="featured" mobileColumns={2} desktopColumns={3} />
     </section>
   );
 }

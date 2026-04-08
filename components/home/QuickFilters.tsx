@@ -13,7 +13,7 @@ export function QuickFilters() {
   const t = useTranslations("home.quickFilters");
 
   return (
-    <section className="mt-24 space-y-8">
+    <section className="section-gap space-y-10">
       <SectionTitle
         eyebrow={t("eyebrow")}
         title={t("title")}
@@ -25,32 +25,37 @@ export function QuickFilters() {
           <Link
             key={filter.id}
             href={filter.href as unknown as LinkHref}
-            className={`premium-card group relative overflow-hidden rounded-[1.75rem] border border-[#e2d6c6]/80 bg-gradient-to-br ${filter.gradientClass} p-6 shadow-[0_18px_40px_-30px_rgba(50,35,20,0.36)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgba(50,35,20,0.44)]`}
+            className={`premium-card group relative overflow-hidden rounded-[var(--radius-card)] border border-[#e2d6c6]/60 bg-gradient-to-br ${filter.gradientClass} p-5 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] sm:p-[1.375rem]`}
           >
-            {/* Glow */}
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-white/25 blur-3xl transition-transform duration-500 group-hover:scale-125" />
+            {/* Subtle glow */}
+            <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/20 blur-[56px] transition-transform duration-500 group-hover:scale-125" />
 
-            <div className="relative flex h-full min-h-[13rem] flex-col justify-between gap-4">
-              {/* Top row: tone badge + illustration */}
-              <div className="flex items-start justify-between gap-3">
+            <div className="relative grid min-h-[10.25rem] grid-cols-[minmax(0,1fr)_auto] items-start gap-x-4 gap-y-3">
+              <div className="min-w-0">
                 <Badge
                   variant="outline"
-                  className="border-white/55 bg-white/30 text-[#4a3c2f] backdrop-blur-[2px]"
+                  className="border-white/45 bg-white/25 text-[#4a3c2f] backdrop-blur-[2px]"
                 >
                   {t(`tones.${filter.toneKey}`)}
                 </Badge>
+              </div>
+              <div className="justify-self-end">
                 <MoodIllustration illustration={filter.illustration} />
               </div>
 
-              {/* Bottom: label, subtitle, CTA */}
-              <div>
-                <p className="font-display text-[1.35rem] leading-tight text-[#1f1914]">
-                  {t(`cards.${filter.id}.label`)}
-                </p>
-                <p className="mt-1.5 max-w-[22rem] text-[13px] leading-[1.65] text-[#5b4c3f]">
-                  {t(`cards.${filter.id}.subtitle`)}
-                </p>
-                <p className="mt-4 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7d6853] transition-colors group-hover:text-[#3d2e22]">
+              <div className="col-span-2 grid grid-cols-[minmax(0,1fr)_auto] gap-x-4">
+                <div className="min-w-0">
+                  <p className="max-w-[11ch] text-balance font-display text-[2rem] leading-[0.96] text-[#1e1813] sm:max-w-[9ch] sm:text-[1.7rem] lg:text-[1.82rem]">
+                    {t(`cards.${filter.id}.label`)}
+                  </p>
+                  <p className="mt-2 max-w-[22rem] text-[13px] leading-[1.6] text-[#5b4c3f]">
+                    {t(`cards.${filter.id}.subtitle`)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="col-span-2 mt-1">
+                <p className="flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#7d6853] transition-colors group-hover:text-[#3d2e22]">
                   {t("openInFinder")}
                   <span className="translate-x-0 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
                     →

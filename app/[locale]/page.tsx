@@ -10,13 +10,11 @@ import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { LatestPosts } from "@/components/home/LatestPosts";
 import { QuickFilters } from "@/components/home/QuickFilters";
-import { TrendingNow } from "@/components/home/TrendingNow";
 import { TrustedStores } from "@/components/home/TrustedStores";
 import { ValueStrip } from "@/components/home/ValueStrip";
 import { getLatestBlogPosts } from "@/lib/blog";
 import {
   getHomepageData,
-  toHomeSpotlight,
   toPerfumeCardItem,
 } from "@/lib/homepage";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
@@ -81,9 +79,6 @@ export default async function HomePage({ params }: HomePageProps) {
 
   const homepageData = await getHomepageData();
   const latestPosts = await getLatestBlogPosts(resolvedLocale, 3).catch(() => []);
-  const trendingPerfumes = homepageData.trending.map((perfume) =>
-    toHomeSpotlight(perfume, "trending"),
-  );
 
   return (
     <>
@@ -91,14 +86,13 @@ export default async function HomePage({ params }: HomePageProps) {
       <ValueStrip />
 
       <Container>
-        <TrendingNow perfumes={trendingPerfumes} />
         <FeaturedPerfumes perfumes={homepageData.featured.slice(0, 6).map(toPerfumeCardItem)} />
         <QuickFilters />
         <HowItWorks />
         <TrustedStores stores={homepageData.trustedStores} />
         <LatestPosts posts={latestPosts} locale={resolvedLocale} />
         <FinalCTA />
-        <div className="pb-24" />
+        <div className="pb-16 lg:pb-20" />
       </Container>
     </>
   );

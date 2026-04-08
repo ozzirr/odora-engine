@@ -11,16 +11,16 @@ type BadgeProps = {
 };
 
 const badgeVariantClasses: Record<BadgeVariant, string> = {
-  default: "bg-[#1f1914] text-[#f8f4ed]",
-  soft: "bg-[#ece4d8] text-[#2c231b]",
-  outline: "border border-[#d7c9b5] text-[#3a2d22]",
+  default: "bg-[#1e1813] text-[#f8f4ed]",
+  soft: "bg-[#f0e8dc] text-[#3a2d22]",
+  outline: "border border-[#ddd0be] text-[#4a3c2e]",
 };
 
 export function Badge({ children, variant = "soft", className }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium",
+        "inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-medium tracking-[0.01em]",
         badgeVariantClasses[variant],
         className,
       )}
