@@ -1,3 +1,5 @@
+import type { ComponentType } from "react";
+
 type NoteIconProps = {
   className?: string;
 };
@@ -119,7 +121,7 @@ function getNoteIconKind(slug: string): NoteIconKind {
   return "generic";
 }
 
-const iconMap: Record<NoteIconKind, (props: NoteIconProps) => JSX.Element> = {
+const iconMap: Record<NoteIconKind, ComponentType<NoteIconProps>> = {
   citrus: CitrusIcon,
   flower: FlowerIcon,
   leaf: LeafIcon,
