@@ -170,7 +170,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
   return (
     <>
-    <header className={cn("sticky top-0 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125", APP_HEADER_LAYER_CLASS)}>
+    <header className={cn("fixed inset-x-0 top-0 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125", APP_HEADER_LAYER_CLASS)}>
       <div className={cn("mx-auto flex w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8", APP_HEADER_HEIGHT_CLASS)}>
         <Link
           href="/"

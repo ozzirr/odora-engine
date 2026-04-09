@@ -27,7 +27,15 @@ export default async function RootNotFoundPage() {
   setRequestLocale(locale);
 
   const [messages, homepageData, t] = await Promise.all([
-    getScopedMessages(locale, ["layout", "privacyPreferences", "auth"]),
+    getScopedMessages(locale, [
+      "layout",
+      "privacyPreferences",
+      "auth",
+      "catalog",
+      "common",
+      "perfume",
+      "taxonomy",
+    ]),
     getHomepageData(),
     getTranslations({ locale, namespace: "notFound" }),
   ]);

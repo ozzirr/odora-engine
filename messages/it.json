@@ -30,7 +30,7 @@
       "close": "Chiudi",
       "eyebrow": "Menu",
       "introTitle": "Accesso rapido",
-      "introDescription": "Accedi all'intero catalogo Odora, scopri le migliori fragranze e approfitta di offerte esclusive riservate ai membri.",
+      "introDescription": "Accedi al catalogo completo e confronta le migliori offerte.",
       "featuredTags": {
         "bestseller": "Bestseller",
         "niche": "Niche",
@@ -151,7 +151,7 @@
     "hero": {
       "eyebrow": "Scoperta fragranze smart",
       "title": "Trova la fragranza che ti rappresenta.",
-      "subtitle": "Esplora profumi selezionati, capiscine il carattere e confronta le migliori offerte disponibili.",
+      "subtitle": "Esplora il catalogo, scopri le note e confronta i prezzi migliori.",
       "valueProps": {
         "compare": "Confronta i prezzi tra retailer affidabili",
         "explore": "Esplora profumi per note, mood e stile",
@@ -175,7 +175,7 @@
     "trending": {
       "eyebrow": "Trending ora",
       "title": "Le scelte piu osservate del momento",
-      "subtitle": "Una selezione curata di fragranze che le persone stanno scoprendo e riscoprendo in questo momento.",
+      "subtitle": "Le fragranze piu cercate e apprezzate in questo momento.",
       "badges": {
         "heroPick": "Scelta Odora",
         "trending": "Trending"
@@ -188,7 +188,7 @@
     "featured": {
       "eyebrow": "Selezione Odora",
       "title": "Profumi selezionati",
-      "subtitle": "Una selezione ragionata di bottiglie da conoscere, dalle firme quotidiane facili alle fragranze piu intense."
+      "subtitle": "Profumi da conoscere: dai classici di tutti i giorni alle fragranze piu intense."
     },
     "quickFilters": {
       "eyebrow": "Partenza rapida",
@@ -205,27 +205,27 @@
       "cards": {
         "vanillaLovers": {
           "label": "Amanti della vaniglia",
-          "subtitle": "Preset Finder per profumi cremosi guidati dalla vaniglia con calore avvolgente."
+          "subtitle": "Profumi caldi e cremosi con vaniglia in primo piano."
         },
         "freshDaily": {
           "label": "Fresco quotidiano",
-          "subtitle": "Match da tutti i giorni con mood fresco, uso daily-wear e note luminose."
+          "subtitle": "Fragranze leggere e fresche, perfette per tutti i giorni."
         },
         "arabicSignature": {
           "label": "Firma araba",
-          "subtitle": "Profili arabi ricchi filtrati per mood deciso, nota oud e catalogo solo arabo."
+          "subtitle": "Fragranze arabe intense, con oud e carattere deciso."
         },
         "officeSafe": {
           "label": "Perfetto per ufficio",
-          "subtitle": "Scorciatoia Finder per profumi eleganti da ufficio con struttura muschiata morbida."
+          "subtitle": "Profumi eleganti e discreti, ideali per l'ufficio."
         },
         "dateNight": {
           "label": "Serata romantica",
-          "subtitle": "Match serali romantici calibrati su date-night e firme ambrate calde."
+          "subtitle": "Fragranze romantiche e avvolgenti per la sera."
         },
         "summerCitrus": {
           "label": "Agrumi estivi",
-          "subtitle": "Preset freschi per l'estate centrati su note agrumate brillanti."
+          "subtitle": "Fragranze fresche e agrumate, pensate per l'estate."
         }
       },
       "openInFinder": "Apri nel Finder"
@@ -251,13 +251,12 @@
     },
     "trustedStores": {
       "eyebrow": "Negozi affidabili",
-      "title": "Le migliori offerte dai retailer affidabili",
-      "subtitle": "Confronta retailer selezionati in un flusso piu pulito, chiaro e facile da leggere."
+      "title": "Confronta i prezzi dei migliori negozi in un unico posto"
     },
     "discoveryCollections": {
       "eyebrow": "Collezioni",
       "title": "Collezioni di scoperta",
-      "subtitle": "Esplora il catalogo attraverso selezioni ragionate costruite attorno a stile, mood e a cio che vuoi trovare dopo.",
+      "subtitle": "Selezioni tematiche per esplorare il catalogo per stile, mood e occasione.",
       "type": {
         "finderPreset": "Preset Finder",
         "catalogRoute": "Percorso catalogo"
@@ -287,8 +286,8 @@
   },
   "notFound": {
     "eyebrow": "Pagina non disponibile",
-    "title": "Quello che stavi cercando non e piu qui, ma la prossima fragranza potrebbe esserlo.",
-    "description": "La pagina puo essere stata rimossa, aggiornata o non essere piu disponibile. Intanto puoi ripartire dal Finder, sfogliare il catalogo e continuare da una selezione reale di profumi Odora.",
+    "title": "Questa pagina non esiste piu.",
+    "description": "La pagina potrebbe essere stata rimossa o aggiornata. Riparti dal Finder o sfoglia il catalogo.",
     "primaryCta": "Apri Finder",
     "secondaryCta": "Sfoglia catalogo",
     "helperCards": {
@@ -308,7 +307,7 @@
     "alternatives": {
       "eyebrow": "Alternative da scoprire",
       "title": "Altri profumi da cui ripartire",
-      "subtitle": "Se questo percorso si interrompe qui, continua da una selezione attuale del catalogo Odora."
+      "subtitle": "Continua la ricerca con questi profumi dal catalogo."
     }
   },
   "finder": {
@@ -316,8 +315,8 @@
       "eyebrow": "Finder",
       "title": "Trova il profumo giusto per note, mood e budget",
       "subtitle": "Usa il finder per partire da gusti reali e restringere il catalogo in base a note, stagione, occasione e fascia prezzo.",
-      "bodyOne": "Odora Finder ti aiuta a trasformare preferenze vaghe come profumo caldo, profumo da ufficio o profumo con vaniglia in una selezione piu utile di fragranze compatibili.",
-      "bodyTwo": "Puoi usare il finder come punto di partenza per scoprire nuove bottiglie, confrontare alternative arabe o niche e poi passare alle schede prodotto per verificare note, performance e prezzi aggiornati.",
+      "bodyOne": "Parti da un'idea — profumo caldo, da ufficio, con vaniglia — e il Finder ti mostra le fragranze piu adatte nel catalogo.",
+      "bodyTwo": "Scopri nuove bottiglie, confronta alternative arabe o niche, poi vai alla scheda prodotto per note, performance e prezzi.",
       "primaryCta": "Esplora il catalogo",
       "secondaryCta": "Vedi le classifiche"
     },
@@ -413,8 +412,8 @@
       "eyebrow": "Catalogo",
       "title": "Catalogo profumi per note, famiglia olfattiva e prezzo",
       "subtitle": "Esplora il catalogo Odora per confrontare profumi in base a famiglia olfattiva, note principali, fascia prezzo e stile.",
-      "bodyOne": "Questa pagina raccoglie le fragranze del catalogo in una struttura pensata per confrontare piu bottiglie senza saltare tra schede dispersive. Puoi filtrare per famiglia, prezzo, note e ordinamento per arrivare piu rapidamente ai profumi davvero rilevanti.",
-      "bodyTwo": "Se sai gia che tipo di profumo vuoi, puoi usare i filtri. Se invece stai ancora cercando direzione, conviene partire dal finder o dalle classifiche curate e poi tornare qui per affinare il confronto.",
+      "bodyOne": "Filtra per famiglia olfattiva, prezzo, note e ordinamento per trovare rapidamente i profumi che cerchi.",
+      "bodyTwo": "Se sai cosa cerchi, usa i filtri. Se vuoi esplorare, parti dal Finder o dalle classifiche.",
       "primaryCta": "Usa il finder",
       "secondaryCta": "Apri le classifiche"
     },
@@ -508,8 +507,8 @@
     "transition": {
       "eyebrow": "Comparazione offerte live",
       "title": "Stiamo cercando le migliori offerte",
-      "subtitle": "Confrontiamo retailer affidabili, costi di spedizione e link prodotto prima di mostrarti la scheda prodotto.",
-      "subtitleWithName": "Stiamo confrontando retailer affidabili, costi di spedizione e link prodotto per {name}.",
+      "subtitle": "Confrontiamo prezzi e spedizione tra i retailer prima di mostrarti il risultato.",
+      "subtitleWithName": "Stiamo confrontando prezzi e spedizione tra i retailer per {name}.",
       "status": "Controlliamo Notino, Douglas, Amazon, Sephora e altri store.",
       "moreStores": "+ altri",
       "steps": {
@@ -531,7 +530,7 @@
     "amazon": {
       "eyebrow": "Sei cliente Prime?",
       "title": "Acquista su Amazon",
-      "subtitle": "Controlla spedizione Prime e tempi di consegna su Amazon prima di passare alle alternative piu economiche.",
+      "subtitle": "Controlla spedizione Prime e tempi di consegna su Amazon.",
       "cta": "Acquista su Amazon",
       "ctaPrefix": "Acquista su"
     },
@@ -576,7 +575,7 @@
     },
     "detail": {
       "cheaperAlternativesSavings": "Un mood simile a meno. Puoi risparmiare fino a {savings} rispetto a questa bottiglia.",
-      "cheaperAlternativesSubtitle": "Fragranze simili con un prezzo totale piu basso, selezionate per affinità di profilo e convenienza.",
+      "cheaperAlternativesSubtitle": "Fragranze simili a un prezzo inferiore.",
       "overviewLabels": {
         "family": "Famiglia",
         "notes": "Note",
@@ -595,7 +594,7 @@
       "notes": {
         "eyebrow": "Note",
         "title": "Piramide olfattiva",
-        "subtitle": "Note di testa, cuore e fondo ordinate per rilevanza, con accesso diretto a fragranze simili."
+        "subtitle": "Note di testa, cuore e fondo con link diretti a fragranze simili."
       },
       "badges": {
         "moods": "Mood",
@@ -610,7 +609,7 @@
       "discovery": {
         "eyebrow": "Scoperta",
         "title": "Fragranze simili",
-        "subtitle": "Fragranze con profilo, note e segnale stilistico simili."
+        "subtitle": "Fragranze con note e profilo olfattivo simili."
       }
     }
   },
@@ -619,8 +618,8 @@
       "eyebrow": "Editoriale",
       "title": "Migliori profumi e classifiche fragranze curate",
       "subtitle": "Esplora classifiche editoriali pensate per confrontare i migliori profumi per stile, durata, valore e identita olfattiva.",
-      "bodyOne": "Le classifiche Odora non sono semplici liste casuali: servono a orientare la scoperta quando vuoi partire da un criterio chiaro, come profumi arabi, profumi niche, profumi longevi o migliori fragranze sotto una certa soglia di prezzo.",
-      "bodyTwo": "Ogni sezione ti porta poi alle singole schede prodotto, dove puoi verificare note, impressione olfattiva e offerte disponibili. Usa questa pagina come hub editoriale e il catalogo come strumento di confronto finale.",
+      "bodyOne": "Classifiche pensate per orientarti quando cerchi qualcosa di specifico: profumi arabi, niche, longevi o i migliori sotto un certo budget.",
+      "bodyTwo": "Da ogni classifica puoi andare direttamente alla scheda prodotto per note, profilo olfattivo e offerte.",
       "primaryCta": "Vai al catalogo",
       "secondaryCta": "Apri il finder",
       "sections": {
@@ -637,12 +636,12 @@
         "value": {
           "eyebrow": "Valore",
           "title": "Migliori profumi sotto €{priceCap}",
-          "subtitle": "Acquisti intelligenti che restano nel budget senza sembrare compromessi."
+          "subtitle": "Le migliori fragranze accessibili, senza compromessi sulla qualita."
         },
         "performance": {
           "eyebrow": "Performance",
           "title": "Migliori fragranze a lunga durata",
-          "subtitle": "Fragranze selezionate per il tipo di persistenza che le persone notano davvero."
+          "subtitle": "Fragranze scelte per durata e proiezione reale."
         }
       }
     }
@@ -654,8 +653,8 @@
       "eyebrow": "Odora Journal",
       "title": "Blog, guide e consigli sul mondo dei profumi",
       "subtitle": "Guide olfattive, consigli di stile e approfondimenti per orientarti meglio nella scelta della prossima fragranza.",
-      "bodyOne": "Il blog Odora raccoglie articoli pensati per chiarire dubbi pratici, migliorare la scoperta e dare contesto a note, famiglie olfattive e modi d'uso che spesso nelle normali schede prodotto restano impliciti.",
-      "bodyTwo": "Usa questa pagina per leggere guide, poi passa al catalogo o al finder quando vuoi trasformare l'ispirazione in una selezione concreta di profumi da confrontare.",
+      "bodyOne": "Articoli pratici su note, famiglie olfattive e consigli d'uso per orientarti meglio nella scelta.",
+      "bodyTwo": "Leggi le guide e poi passa al catalogo o al Finder per confrontare i profumi.",
       "primaryCta": "Vai al catalogo",
       "secondaryCta": "Apri il finder",
       "empty": "Nessun articolo ancora. Torna presto."

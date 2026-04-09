@@ -2,9 +2,9 @@ import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 
 import {
-  getLocaleFromAcceptLanguage,
   getLocalizedPathname,
   localeCookieName,
+  resolveRequestLocale,
   routing,
 } from "@/lib/i18n";
 import {
@@ -37,6 +37,13 @@ export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const canonicalHost = getBaseSiteHost();
   const requestHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ?? request.headers.get("host");
+  const resolvedLocale = resolveRequestLocale({
+    cookieLocale: request.cookies.get(localeCookieName)?.value,
+    acceptLanguage: request.headers.get("accept-language"),
+    country:
+      request.headers.get("x-vercel-ip-country") ??
+      request.headers.get("x-country-code"),
+  });
   const hasLocalePrefix = routing.locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );
@@ -52,14 +59,29 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
-  if (!hasLocalePrefix) {
-    request.cookies.set(
-      localeCookieName,
-      getLocaleFromAcceptLanguage(request.headers.get("accept-language")),
-    );
+  if (!hasLocalePrefix && pathname === "/") {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = getLocalizedPathname(resolvedLocale, "/");
+
+    const response = NextResponse.redirect(redirectUrl, 307);
+    response.cookies.set(localeCookieName, resolvedLocale, {
+      path: "/",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+
+    return response;
   }
 
   const response = handleI18nRouting(request);
+
+  if (!hasLocalePrefix) {
+    response.cookies.set(localeCookieName, resolvedLocale, {
+      path: "/",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 365,
+    });
+  }
 
   if (
     isLaunchGateEnabled() &&

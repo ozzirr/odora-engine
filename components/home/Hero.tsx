@@ -1,13 +1,15 @@
 import { useTranslations } from "next-intl";
 
-import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { Container } from "@/components/layout/Container";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
 
-export function Hero() {
+type HeroProps = {
+  footer?: React.ReactNode;
+};
+
+export function Hero({ footer }: HeroProps) {
   const t = useTranslations("home.hero");
-  const valueProps = [t("valueProps.compare"), t("valueProps.explore"), t("valueProps.choose")];
 
   return (
     <section className="pt-10 sm:pt-14 lg:pt-16">
@@ -19,8 +21,8 @@ export function Hero() {
           <div className="pointer-events-none absolute -left-16 top-8 h-36 w-36 rounded-full bg-white/40 blur-[72px] sm:h-52 sm:w-52" />
           <div className="pointer-events-none absolute -right-14 bottom-0 h-44 w-44 rounded-full bg-[#eadbc6]/48 blur-[74px] sm:h-60 sm:w-60" />
 
-          <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1.18fr)_19rem] lg:items-end">
-            <div className="text-center lg:text-left">
+          <div className="relative">
+            <div className="max-w-[42rem] text-center lg:text-left">
               <p className="inline-flex rounded-full border border-white/55 bg-white/58 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#907b66] shadow-[0_10px_24px_-18px_rgba(52,37,24,0.3)] backdrop-blur-[2px] sm:text-[10.5px] sm:tracking-[0.24em]">
                 {t("eyebrow")}
               </p>
@@ -44,55 +46,15 @@ export function Hero() {
                 >
                   {t("startFinder")}
                 </Link>
-                <AuthModalTrigger
-                  mode="signup"
-                  className={buttonStyles({
-                    variant: "secondary",
-                    size: "lg",
-                    className: "w-full min-w-[11rem] bg-white/58 backdrop-blur-[2px] sm:w-auto",
-                  })}
-                >
-                  {t("browseCatalog")}
-                </AuthModalTrigger>
               </div>
-
-              <ul className="mt-6 flex flex-col items-center gap-2 text-left sm:mt-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-4 sm:gap-y-2 lg:hidden">
-                {valueProps.map((item, index) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span className="font-display text-[1rem] text-[#b08c20]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[12.5px] leading-[1.35] text-[#7a6857]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="hidden rounded-[1.55rem] border border-white/55 bg-white/48 p-4 text-left shadow-[0_18px_44px_-30px_rgba(47,34,22,0.34)] backdrop-blur-[3px] sm:p-5 lg:block">
-              <div className="flex items-center justify-between gap-3 border-b border-[#e6d8c5] pb-3">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#8f7a66]">
-                  {t("spotlight")}
-                </p>
-                <span className="h-2.5 w-2.5 rounded-full bg-[#1E4B3B]" aria-hidden="true" />
-              </div>
-
-              <ul className="mt-4 space-y-2.5">
-                {valueProps.map((item, index) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 rounded-[1.1rem] border border-[#eadfcf] bg-[#fffaf3]/82 px-3.5 py-3"
-                  >
-                    <span className="font-display text-[1.2rem] leading-none text-[#b08c20]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[13px] leading-[1.45] text-[#6d5b49]">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </div>
+
+          {footer ? (
+            <div className="relative mt-8 border-t border-[#e2d6c6] pt-7 sm:mt-10 sm:pt-8">
+              {footer}
+            </div>
+          ) : null}
         </div>
       </Container>
     </section>

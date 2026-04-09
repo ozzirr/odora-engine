@@ -15,7 +15,10 @@ import {
   getAuthMode,
   type AuthMode,
 } from "@/lib/auth-modal";
-import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
+import {
+  APP_HEADER_OFFSET_CLASS,
+  APP_OVERLAY_LAYER_CLASS,
+} from "@/lib/chrome";
 import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -26,7 +29,7 @@ const AuthPanel = dynamic(
 
 function HeaderFallback() {
   return (
-    <div className="sticky top-0 z-40 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125">
+    <div className="fixed inset-x-0 top-0 z-40 border-b border-[#ede4d8] bg-[#fbf8f2]/96 backdrop-blur-lg backdrop-saturate-125">
       <div className="mx-auto h-16 w-full max-w-6xl px-4 sm:h-18 sm:px-6 lg:px-8" />
     </div>
   );
@@ -210,7 +213,10 @@ export function LocaleShell({
         )}
         <div
           data-mobile-menu-content="true"
-          className={cn("min-h-screen transition-[filter,opacity,transform] duration-300 ease-out")}
+          className={cn(
+            "min-h-screen transition-[filter,opacity,transform] duration-300 ease-out",
+            hideChrome ? null : "pt-[4.5rem]",
+          )}
         >
           <main>{children}</main>
           {hideChrome ? null : <Footer />}

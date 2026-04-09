@@ -5,6 +5,7 @@ export type AppLocale = (typeof locales)[number];
 
 export const defaultLocale: AppLocale = "en";
 export const localeCookieName = "NEXT_LOCALE";
+const ITALY_COUNTRY_CODES = new Set(["IT", "SM", "VA"]);
 
 export const pathnames = {
   "/": "/",
@@ -83,8 +84,57 @@ export function hasLocale(value: string): value is AppLocale {
 }
 
 export function getLocaleFromAcceptLanguage(value: string | null | undefined): AppLocale {
-  const preferredLanguage = value?.split(",")[0]?.trim().toLowerCase() ?? "";
+  const parsedLanguages = (value ?? "")
+    .split(",")
+    .map((segment) => {
+      const [language, ...params] = segment.trim().toLowerCase().split(";");
+      const qValue = params.find((param) => param.trim().startsWith("q="))?.split("=")[1];
+      const quality = Number.parseFloat(qValue ?? "1");
+
+      return {
+        language,
+        quality: Number.isFinite(quality) ? quality : 1,
+      };
+    })
+    .filter((entry) => entry.language)
+    .sort((left, right) => right.quality - left.quality);
+
+  const preferredLanguage = parsedLanguages[0]?.language ?? "";
   return preferredLanguage.startsWith("it") ? "it" : "en";
+}
+
+export function getLocaleFromCountry(value: string | null | undefined): AppLocale | null {
+  const countryCode = value?.trim().toUpperCase();
+
+  if (!countryCode) {
+    return null;
+  }
+
+  return ITALY_COUNTRY_CODES.has(countryCode) ? "it" : null;
+}
+
+type ResolveRequestLocaleInput = {
+  cookieLocale?: string | null;
+  acceptLanguage?: string | null;
+  country?: string | null;
+};
+
+export function resolveRequestLocale({
+  cookieLocale,
+  acceptLanguage,
+  country,
+}: ResolveRequestLocaleInput): AppLocale {
+  if (cookieLocale && hasLocale(cookieLocale)) {
+    return cookieLocale;
+  }
+
+  const countryLocale = getLocaleFromCountry(country);
+
+  if (countryLocale) {
+    return countryLocale;
+  }
+
+  return getLocaleFromAcceptLanguage(acceptLanguage);
 }
 
 function localizeTemplate(locale: AppLocale, pathname: AppPathname) {

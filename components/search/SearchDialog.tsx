@@ -164,10 +164,10 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
             </button>
 
             {/* Header */}
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8b7762] sm:text-xs">
               {t("eyebrow")}
             </p>
-            <h2 className="mt-1 pr-12 font-display text-[2.6rem] leading-[0.94] text-[#21180f] sm:text-[3.2rem]">
+            <h2 className="mt-2 pr-12 font-display text-[2.15rem] leading-[0.96] tracking-[-0.02em] text-[#21180f] sm:text-[2.65rem]">
               {t("title")}
             </h2>
 
@@ -188,7 +188,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("placeholder")}
-                className="min-w-0 flex-1 bg-transparent text-[1.55rem] leading-none text-[#1c1712] placeholder:text-[#b0a090] focus:outline-none sm:text-[1.8rem]"
+                className="min-w-0 flex-1 bg-transparent text-[1.15rem] leading-none text-[#1c1712] placeholder:text-[#b0a090] focus:outline-none sm:text-[1.35rem]"
               />
               {isLoading && (
                 <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-[#d4c8b8] border-t-[#8a7060] sm:h-5 sm:w-5" />
@@ -217,10 +217,10 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
                         ) : null}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-[1.05rem] font-semibold leading-[1.2] text-[#1c1712] sm:text-[1.2rem]">
+                        <p className="truncate text-[1rem] font-semibold leading-[1.2] text-[#1c1712] sm:text-[1.08rem]">
                           {perfume.name}
                         </p>
-                        <p className="truncate text-[0.95rem] text-[#7a6a58] sm:text-[1rem]">
+                        <p className="truncate text-[0.88rem] text-[#7a6a58] sm:text-[0.95rem]">
                           {perfume.brand.name}
                           {perfume.fragranceFamily ? (
                             <span className="ml-1.5 opacity-60">· {perfume.fragranceFamily}</span>

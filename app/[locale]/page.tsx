@@ -82,21 +82,20 @@ export default async function HomePage({ params }: HomePageProps) {
   const latestPosts = await getLatestBlogPosts(resolvedLocale, 3).catch(() => []);
 
   return (
-    <>
-      <Hero />
-      <ValueStrip />
+    <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
+      <>
+        <Hero footer={<TrustedStores stores={homepageData.trustedStores} variant="embedded" />} />
+        <ValueStrip />
 
-      <Container>
-        <FeaturedPerfumes perfumes={homepageData.featured.slice(0, 6).map(toPerfumeCardItem)} />
-        <QuickFilters />
-        <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
+        <Container>
+          <FeaturedPerfumes perfumes={homepageData.featured.slice(0, 6).map(toPerfumeCardItem)} />
+          <QuickFilters />
           <HowItWorks />
-        </ScopedIntlProvider>
-        <TrustedStores stores={homepageData.trustedStores} />
-        <LatestPosts posts={latestPosts} locale={resolvedLocale} />
-        <FinalCTA />
-        <div className="pb-16 lg:pb-20" />
-      </Container>
-    </>
+          <LatestPosts posts={latestPosts} locale={resolvedLocale} />
+          <FinalCTA />
+          <div className="pb-16 lg:pb-20" />
+        </Container>
+      </>
+    </ScopedIntlProvider>
   );
 }

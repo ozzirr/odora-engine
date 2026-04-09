@@ -30,7 +30,7 @@
       "close": "Close",
       "eyebrow": "Menu",
       "introTitle": "Quick access",
-      "introDescription": "Access the full Odora catalog, discover the finest fragrances, and unlock exclusive offers reserved for members.",
+      "introDescription": "Access the full catalog and compare the best offers.",
       "featuredTags": {
         "bestseller": "Bestsellers",
         "niche": "Niche",
@@ -151,7 +151,7 @@
     "hero": {
       "eyebrow": "Smart fragrance discovery",
       "title": "Find the fragrance that feels like you.",
-      "subtitle": "Explore selected perfumes, understand their character, and compare the best available offers.",
+      "subtitle": "Browse the catalog, learn the notes, and compare the best prices.",
       "valueProps": {
         "compare": "Compare prices across trusted retailers",
         "explore": "Explore perfumes by notes, mood, and style",
@@ -175,7 +175,7 @@
     "trending": {
       "eyebrow": "Trending Now",
       "title": "Trending picks right now",
-      "subtitle": "A curated edit of fragrances people are discovering and revisiting right now.",
+      "subtitle": "The most popular fragrances people are exploring right now.",
       "badges": {
         "heroPick": "Odora pick",
         "trending": "Trending"
@@ -188,7 +188,7 @@
     "featured": {
       "eyebrow": "Odora selection",
       "title": "Selected perfumes",
-      "subtitle": "A considered edit of bottles worth knowing, from easy daily signatures to richer statement scents."
+      "subtitle": "Perfumes worth knowing — from everyday classics to bolder, more intense scents."
     },
     "quickFilters": {
       "eyebrow": "Quick Start",
@@ -205,27 +205,27 @@
       "cards": {
         "vanillaLovers": {
           "label": "Vanilla Lovers",
-          "subtitle": "Finder preset for creamy vanilla-led perfumes with cozy warmth."
+          "subtitle": "Warm, creamy perfumes with vanilla at the center."
         },
         "freshDaily": {
           "label": "Fresh Daily",
-          "subtitle": "Crisp everyday matches with fresh mood, daily-wear use, and bright notes."
+          "subtitle": "Light, fresh fragrances perfect for everyday wear."
         },
         "arabicSignature": {
           "label": "Arabic Signature",
-          "subtitle": "Rich Arabic profiles filtered by bold mood, oud note, and Arabic-only catalog data."
+          "subtitle": "Bold Arabic fragrances with oud and strong character."
         },
         "officeSafe": {
           "label": "Office Safe",
-          "subtitle": "Finder shortcut for elegant office-friendly perfumes with soft musky structure."
+          "subtitle": "Elegant, understated perfumes ideal for the office."
         },
         "dateNight": {
           "label": "Date Night",
-          "subtitle": "Romantic evening matches tuned to date-night wear and warm amber signatures."
+          "subtitle": "Romantic, warm fragrances for evening occasions."
         },
         "summerCitrus": {
           "label": "Summer Citrus",
-          "subtitle": "Fresh summer presets centered on sparkling citrus-style notes."
+          "subtitle": "Fresh citrus fragrances made for summer."
         }
       },
       "openInFinder": "Open in Finder"
@@ -251,13 +251,12 @@
     },
     "trustedStores": {
       "eyebrow": "Trusted Stores",
-      "title": "Best offers from trusted retailers",
-      "subtitle": "Compare selected retailers in a cleaner, easier-to-read flow."
+      "title": "Compare prices from the best stores in one place"
     },
     "discoveryCollections": {
       "eyebrow": "Collections",
       "title": "Discovery collections",
-      "subtitle": "Browse the catalog through thoughtful edits built around style, mood, and what you want to find next.",
+      "subtitle": "Thematic selections to explore the catalog by style, mood, and occasion.",
       "type": {
         "finderPreset": "Finder preset",
         "catalogRoute": "Catalog route"
@@ -287,8 +286,8 @@
   },
   "notFound": {
     "eyebrow": "Page unavailable",
-    "title": "What you were looking for is no longer here, but the next fragrance still might be.",
-    "description": "This page may have been removed, updated, or may no longer be available. In the meantime you can jump back into Finder, browse the catalog, and continue from a real edit of perfumes on Odora.",
+    "title": "This page no longer exists.",
+    "description": "This page may have been removed or updated. Try the Finder or browse the catalog.",
     "primaryCta": "Open Finder",
     "secondaryCta": "Browse catalog",
     "helperCards": {
@@ -308,7 +307,7 @@
     "alternatives": {
       "eyebrow": "Alternatives worth exploring",
       "title": "Other perfumes to continue from",
-      "subtitle": "If this path ends here, continue from a current selection inside the Odora catalog."
+      "subtitle": "Continue browsing with these perfumes from the catalog."
     }
   },
   "finder": {
@@ -316,8 +315,8 @@
       "eyebrow": "Finder",
       "title": "Find the right perfume by notes, mood, and budget",
       "subtitle": "Use the finder to narrow the catalog by real fragrance preferences including notes, season, occasion, and price range.",
-      "bodyOne": "Odora Finder helps turn broad ideas such as warm perfume, office fragrance, or vanilla perfume into a more useful shortlist of matching scents.",
-      "bodyTwo": "You can use Finder as a discovery starting point, compare Arabic or niche options, and then move into product pages to inspect notes, performance, and current pricing.",
+      "bodyOne": "Start from an idea — warm perfume, office fragrance, vanilla scent — and the Finder shows you the best matches in the catalog.",
+      "bodyTwo": "Discover new bottles, compare Arabic or niche options, then check the product page for notes, performance, and pricing.",
       "primaryCta": "Browse the catalog",
       "secondaryCta": "View rankings"
     },
@@ -413,8 +412,8 @@
       "eyebrow": "Catalog",
       "title": "Perfume catalog by notes, fragrance family, and price",
       "subtitle": "Explore the Odora catalog to compare perfumes by fragrance family, key notes, price range, and style.",
-      "bodyOne": "This page organizes the catalog so you can compare multiple fragrances without bouncing across scattered product pages. Filter by family, price, notes, and sort order to get to the perfumes that actually deserve attention.",
-      "bodyTwo": "If you already know what kind of perfume you want, start with the filters. If you still need direction, use Finder or the curated rankings first and then return here to refine the comparison.",
+      "bodyOne": "Filter by fragrance family, price, notes, and sort order to quickly find the perfumes you're looking for.",
+      "bodyTwo": "If you know what you want, use the filters. If you need direction, start with the Finder or the rankings.",
       "primaryCta": "Use Finder",
       "secondaryCta": "Open rankings"
     },
@@ -508,8 +507,8 @@
     "transition": {
       "eyebrow": "Live offer comparison",
       "title": "We’re searching for the best offers",
-      "subtitle": "We’re comparing trusted retailers, shipping costs, and product links before showing the product page.",
-      "subtitleWithName": "We’re comparing trusted retailers, shipping costs, and product links for {name}.",
+      "subtitle": "Comparing prices and shipping across retailers before showing you the result.",
+      "subtitleWithName": "Comparing prices and shipping across retailers for {name}.",
       "status": "Checking Notino, Douglas, Amazon, Sephora, and more.",
       "moreStores": "+ more",
       "steps": {
@@ -531,7 +530,7 @@
     "amazon": {
       "eyebrow": "Prime member?",
       "title": "Buy on Amazon",
-      "subtitle": "Check Prime delivery and shipping timing on Amazon before moving on to cheaper alternatives.",
+      "subtitle": "Check Prime delivery and shipping on Amazon.",
       "cta": "Buy on Amazon",
       "ctaPrefix": "Buy on"
     },
@@ -576,7 +575,7 @@
     },
     "detail": {
       "cheaperAlternativesSavings": "A similar mood for less. You can save up to {savings} compared to this bottle.",
-      "cheaperAlternativesSubtitle": "Similar fragrances with a lower total price, selected for profile match and value.",
+      "cheaperAlternativesSubtitle": "Similar fragrances at a lower price.",
       "overviewLabels": {
         "family": "Family",
         "notes": "Notes",
@@ -595,7 +594,7 @@
       "notes": {
         "eyebrow": "Notes",
         "title": "Fragrance pyramid",
-        "subtitle": "Top, heart, and base notes arranged by prominence, with direct paths to explore similar scents."
+        "subtitle": "Top, heart, and base notes with direct links to similar fragrances."
       },
       "badges": {
         "moods": "Moods",
@@ -610,7 +609,7 @@
       "discovery": {
         "eyebrow": "Discovery",
         "title": "Similar fragrances",
-        "subtitle": "Fragrances with similar profile, notes, and style signal."
+        "subtitle": "Fragrances with similar notes and scent profile."
       }
     }
   },
@@ -619,8 +618,8 @@
       "eyebrow": "Editorial",
       "title": "Best perfumes and curated fragrance rankings",
       "subtitle": "Explore editorial rankings built to compare the best perfumes by style, longevity, value, and fragrance identity.",
-      "bodyOne": "Odora rankings are not generic listicles. They are built to guide discovery when you want a clear starting point such as Arabic perfumes, niche perfumes, long-lasting fragrances, or the best perfumes under a target budget.",
-      "bodyTwo": "Each section leads into individual product pages where you can inspect notes, scent profile, and available offers. Use this page as your editorial hub and the catalog as your final comparison layer.",
+      "bodyOne": "Rankings designed to guide you when you're looking for something specific: Arabic perfumes, niche picks, long-lasting fragrances, or the best under a set budget.",
+      "bodyTwo": "From each ranking you can go straight to the product page for notes, scent profile, and offers.",
       "primaryCta": "Go to catalog",
       "secondaryCta": "Open Finder",
       "sections": {
@@ -637,12 +636,12 @@
         "value": {
           "eyebrow": "Value",
           "title": "Best perfumes under €{priceCap}",
-          "subtitle": "Smart buys that stay under budget without feeling compromise-driven."
+          "subtitle": "The best affordable fragrances, with no compromise on quality."
         },
         "performance": {
           "eyebrow": "Performance",
           "title": "Best long-lasting fragrances",
-          "subtitle": "Fragrances selected for the kind of staying power people actually notice."
+          "subtitle": "Fragrances chosen for real-world longevity and projection."
         }
       }
     }
@@ -654,8 +653,8 @@
       "eyebrow": "Odora Journal",
       "title": "Blog, guides, and advice from the fragrance world",
       "subtitle": "Fragrance guides, style tips, and deeper editorial context to help you choose your next scent with more clarity.",
-      "bodyOne": "The Odora blog collects practical articles designed to clarify common questions, improve discovery, and add context around notes, fragrance families, and usage patterns that product pages often leave implicit.",
-      "bodyTwo": "Use this page to read guides first, then move into the catalog or Finder when you want to turn inspiration into a concrete shortlist of fragrances to compare.",
+      "bodyOne": "Practical articles on notes, fragrance families, and usage tips to help you choose better.",
+      "bodyTwo": "Read the guides, then head to the catalog or Finder to compare fragrances.",
       "primaryCta": "Go to catalog",
       "secondaryCta": "Open Finder",
       "empty": "No articles yet. Check back soon."
