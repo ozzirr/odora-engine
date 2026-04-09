@@ -53,6 +53,10 @@ export const pathnames = {
     en: "/signup",
     it: "/registrati",
   },
+  "/reset-password": {
+    en: "/reset-password",
+    it: "/reimposta-password",
+  },
   "/profile": {
     en: "/profile",
     it: "/profilo",

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { loginWithPassword, type LoginFormState } from "@/app/login/actions";
 import { buttonStyles } from "@/components/ui/Button";
+import { Link } from "@/lib/navigation";
 
 type LoginFormProps = {
   nextPath?: string;
@@ -54,6 +55,11 @@ export function LoginForm({ nextPath = "/perfumes", initialError }: LoginFormPro
           placeholder={t("passwordPlaceholder")}
           className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
         />
+        <div className="flex justify-end">
+          <Link href="/reset-password" className="text-xs font-medium text-[#6b5745] underline-offset-2 hover:underline">
+            {t("forgotPassword")}
+          </Link>
+        </div>
       </div>
 
       {state?.error ? (

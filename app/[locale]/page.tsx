@@ -5,19 +5,13 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
-import { FeaturedPerfumes } from "@/components/home/FeaturedPerfumes";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { LatestPosts } from "@/components/home/LatestPosts";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import { TrustedStores } from "@/components/home/TrustedStores";
 import { ValueStrip } from "@/components/home/ValueStrip";
-import { getLatestBlogPosts } from "@/lib/blog";
-import {
-  getHomepageData,
-  toPerfumeCardItem,
-} from "@/lib/homepage";
+import { getHomepageData } from "@/lib/homepage";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import {
@@ -79,7 +73,6 @@ export default async function HomePage({ params }: HomePageProps) {
   }
 
   const homepageData = await getHomepageData();
-  const latestPosts = await getLatestBlogPosts(resolvedLocale, 3).catch(() => []);
 
   return (
     <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
@@ -88,10 +81,8 @@ export default async function HomePage({ params }: HomePageProps) {
         <ValueStrip />
 
         <Container>
-          <FeaturedPerfumes perfumes={homepageData.featured.slice(0, 6).map(toPerfumeCardItem)} />
           <QuickFilters />
           <HowItWorks />
-          <LatestPosts posts={latestPosts} locale={resolvedLocale} />
           <FinalCTA />
           <div className="pb-16 lg:pb-20" />
         </Container>

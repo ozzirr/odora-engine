@@ -8,6 +8,7 @@ type AuthModalTriggerProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "chil
   children: ReactNode;
   mode: AuthMode;
   onOpen?: () => void;
+  resolveNextPath?: (pathname: string, searchParams: URLSearchParams, hash: string) => string;
 };
 
 export function AuthModalTrigger({
@@ -15,6 +16,7 @@ export function AuthModalTrigger({
   mode,
   onClick,
   onOpen,
+  resolveNextPath,
   type = "button",
   ...props
 }: AuthModalTriggerProps) {
@@ -29,10 +31,17 @@ export function AuthModalTrigger({
         }
 
         const { pathname, search, hash } = window.location;
+        const mutableSearchParams = new URLSearchParams(search);
         window.history.pushState(
           null,
           "",
-          buildAuthModalUrl(pathname, new URLSearchParams(search), mode, hash),
+          buildAuthModalUrl(
+            pathname,
+            mutableSearchParams,
+            mode,
+            hash,
+            resolveNextPath?.(pathname, mutableSearchParams, hash),
+          ),
         );
         onOpen?.();
       }}

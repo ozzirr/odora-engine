@@ -29,9 +29,11 @@ export function buildAuthModalUrl(
   searchParams: SearchParamsLike,
   mode: AuthMode,
   hash: string,
+  nextPathOverride?: string,
 ) {
   const params = toMutableSearchParams(searchParams);
-  const nextPath = params.get("authNext") || buildPathWithoutAuthModal(pathname, params, hash);
+  const nextPath =
+    nextPathOverride || params.get("authNext") || buildPathWithoutAuthModal(pathname, params, hash);
 
   params.delete("error");
   params.set("auth", mode);

@@ -22,20 +22,20 @@ export function Hero({ footer }: HeroProps) {
           <div className="pointer-events-none absolute -right-14 bottom-0 h-44 w-44 rounded-full bg-[#eadbc6]/48 blur-[74px] sm:h-60 sm:w-60" />
 
           <div className="relative">
-            <div className="max-w-[42rem] text-center lg:text-left">
+            <div className="mx-auto max-w-[46rem] text-center">
               <p className="inline-flex rounded-full border border-white/55 bg-white/58 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#907b66] shadow-[0_10px_24px_-18px_rgba(52,37,24,0.3)] backdrop-blur-[2px] sm:text-[10.5px] sm:tracking-[0.24em]">
                 {t("eyebrow")}
               </p>
 
-              <h1 className="mx-auto mt-5 max-w-[12.5ch] text-balance font-display text-[2.65rem] leading-[0.92] tracking-[-0.025em] text-[#1c1712] sm:mt-6 sm:max-w-[10.5ch] sm:text-[3.7rem] lg:mx-0 lg:text-[4.9rem]">
+              <h1 className="mx-auto mt-5 max-w-[12.5ch] text-balance font-display text-[2.65rem] leading-[0.92] tracking-[-0.025em] text-[#1c1712] sm:mt-6 sm:max-w-[10.5ch] sm:text-[3.7rem] lg:max-w-[15ch] lg:text-[4.7rem] xl:max-w-[16ch]">
                 {t("title")}
               </h1>
 
-              <p className="mx-auto mt-4 max-w-[32rem] text-[15px] leading-[1.66] text-[#6b5a49] sm:mt-5 sm:text-[16.5px] sm:leading-[1.76] lg:mx-0 lg:max-w-[38rem]">
+              <p className="mx-auto mt-4 max-w-[38rem] text-[15px] leading-[1.66] text-[#6b5a49] sm:mt-5 sm:text-[16.5px] sm:leading-[1.76]">
                 {t("subtitle")}
               </p>
 
-              <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
+              <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:justify-center">
                 <Link
                   href="/finder"
                   className={buttonStyles({

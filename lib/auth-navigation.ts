@@ -1,4 +1,11 @@
-const AUTH_PATH_SEGMENTS = new Set(["login", "signup", "accedi", "registrati"]);
+const AUTH_PATH_SEGMENTS = new Set([
+  "login",
+  "signup",
+  "accedi",
+  "registrati",
+  "reset-password",
+  "reimposta-password",
+]);
 
 function getPathname(value: string) {
   try {

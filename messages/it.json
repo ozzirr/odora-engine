@@ -151,7 +151,7 @@
     "hero": {
       "eyebrow": "Scoperta fragranze smart",
       "title": "Trova la fragranza che ti rappresenta.",
-      "subtitle": "Esplora il catalogo, scopri le note e confronta i prezzi migliori.",
+      "subtitle": "Esplora il catalogo, scopri le note e confronta i prezzi migliori dei tuoi profumi preferiti.",
       "valueProps": {
         "compare": "Confronta i prezzi tra retailer affidabili",
         "explore": "Esplora profumi per note, mood e stile",
@@ -665,7 +665,7 @@
       "page": {
         "eyebrow": "Account Odora",
         "title": "Accedi",
-        "subtitle": "Continua a esplorare il catalogo con il tuo profilo Odora.",
+        "subtitle": "Con il tuo profilo Odora puoi sbloccare funzionalità avanzate, utilizzare la ricerca e accedere all’intero catalogo.",
         "or": "oppure",
         "signupPrompt": "Non hai ancora un account?",
         "signupLink": "Crea account",
@@ -682,8 +682,40 @@
           "emailPlaceholder": "nome@esempio.com",
           "password": "Password",
           "passwordPlaceholder": "Inserisci la password",
+          "forgotPassword": "Password dimenticata?",
           "submitting": "Accesso in corso...",
           "submit": "Accedi"
+        }
+      }
+    },
+    "resetPassword": {
+      "page": {
+        "request": {
+          "eyebrow": "Recupero account",
+          "title": "Reimposta password",
+          "subtitle": "Inserisci la tua email e ti invieremo un link per creare una nuova password.",
+          "backToLogin": "Torna al login"
+        },
+        "update": {
+          "eyebrow": "Nuova password",
+          "title": "Scegli una nuova password",
+          "subtitle": "Imposta una nuova password per completare il recupero dell'account.",
+          "backToLogin": "Torna al login"
+        },
+        "requestForm": {
+          "email": "Email",
+          "emailPlaceholder": "nome@esempio.com",
+          "submitting": "Invio in corso...",
+          "submit": "Invia link di reset"
+        },
+        "updateForm": {
+          "password": "Nuova password",
+          "passwordPlaceholder": "Inserisci la nuova password",
+          "confirmPassword": "Conferma password",
+          "confirmPasswordPlaceholder": "Conferma la nuova password",
+          "submitting": "Aggiornamento in corso...",
+          "submit": "Aggiorna password",
+          "continue": "Vai al profilo"
         }
       }
     },
@@ -723,6 +755,21 @@
         "missingCredentials": "Inserisci email e password.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
         "invalidCredentials": "Credenziali non valide. Controlla email e password."
+      },
+      "resetPasswordRequest": {
+        "missingEmail": "Inserisci la tua email.",
+        "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "requestFailed": "Non sono riuscito a inviare il link di reset. Riprova tra poco.",
+        "success": "Se l'email esiste, riceverai a breve un link per reimpostare la password."
+      },
+      "updatePassword": {
+        "missingCredentials": "Inserisci e conferma la nuova password.",
+        "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
+        "passwordMismatch": "Le password non coincidono.",
+        "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "invalidSession": "Link di recupero non valido o scaduto. Richiedi un nuovo link.",
+        "updateFailed": "Non sono riuscito ad aggiornare la password. Riprova.",
+        "success": "Password aggiornata correttamente. Ora puoi continuare con il tuo account."
       },
       "signup": {
         "missingCredentials": "Inserisci email e password.",
@@ -1027,6 +1074,10 @@
       "signup": {
         "title": "Crea account | Odora",
         "description": "Crea il tuo account Odora per sbloccare il catalogo completo e salvare la tua esperienza di scoperta."
+      },
+      "resetPassword": {
+        "title": "Reimposta password | Odora",
+        "description": "Richiedi un link per reimpostare la password del tuo account Odora o imposta una nuova password."
       },
       "profile": {
         "title": "Profilo | Odora",

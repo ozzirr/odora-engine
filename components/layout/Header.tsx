@@ -29,6 +29,7 @@ type HeaderProps = {
 
 const SEARCH_BTN_CLASS =
   "flex w-full items-center gap-3 rounded-[1.4rem] border border-[#eadfce] bg-white/80 px-4 py-3.5 text-[#3d3026] transition-all hover:border-[#d6c3ac] hover:bg-[#fffdf9]";
+const SEARCH_DIALOG_PARAM = "searchDialog";
 
 const SearchIcon = () => (
   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f3eadf] text-[#8b735d]">
@@ -44,11 +45,13 @@ function MobileSearchButton({
   label,
   onOpenSearch,
   onCloseMenu,
+  resolveSearchAuthNextPath,
 }: {
   isAuthenticated: boolean;
   label: string;
   onOpenSearch: () => void;
   onCloseMenu: () => void;
+  resolveSearchAuthNextPath: (pathname: string, searchParams: URLSearchParams, hash: string) => string;
 }) {
   if (isAuthenticated) {
     return (
@@ -68,7 +71,12 @@ function MobileSearchButton({
         </button>
       }
     >
-      <AuthModalTrigger mode="login" onOpen={onCloseMenu} className={SEARCH_BTN_CLASS}>
+      <AuthModalTrigger
+        mode="login"
+        onOpen={onCloseMenu}
+        resolveNextPath={resolveSearchAuthNextPath}
+        className={SEARCH_BTN_CLASS}
+      >
         <SearchIcon />
         <span className="text-base font-medium">{label}</span>
       </AuthModalTrigger>
@@ -95,6 +103,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");
   const canOpenAuthModal = !isAuthenticated && pathname !== "/login" && pathname !== "/signup";
   const authModalOpen = getAuthMode(searchParams.get("auth")) !== null;
+  const shouldOpenSearchAfterLogin = searchParams.get(SEARCH_DIALOG_PARAM) === "1";
 
   const isActivePath = (href: string) => {
     if (href === "/") {
@@ -150,6 +159,33 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
     return () => window.cancelAnimationFrame(frameId);
   }, [menuOpen, authModalOpen]);
+
+  useEffect(() => {
+    if (!isAuthenticated || !shouldOpenSearchAfterLogin || searchOpen) {
+      return;
+    }
+
+    setSearchOpen(true);
+
+    const params = new URLSearchParams(window.location.search);
+    params.delete(SEARCH_DIALOG_PARAM);
+    const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}${window.location.hash}`;
+    window.history.replaceState(null, "", nextUrl);
+  }, [isAuthenticated, searchOpen, shouldOpenSearchAfterLogin]);
+
+  const resolveSearchAuthNextPath = (
+    currentPathname: string,
+    currentSearchParams: URLSearchParams,
+    hash: string,
+  ) => {
+    const nextParams = new URLSearchParams(currentSearchParams.toString());
+    nextParams.delete("auth");
+    nextParams.delete("authNext");
+    nextParams.delete("error");
+    nextParams.set(SEARCH_DIALOG_PARAM, "1");
+
+    return `${currentPathname}${nextParams.toString() ? `?${nextParams.toString()}` : ""}${hash}`;
+  };
 
   const handleMenuToggle = () => {
     if (authModalOpen) {
@@ -219,6 +255,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               <AuthModalTrigger
                 mode="login"
                 aria-label={searchT("label")}
+                resolveNextPath={resolveSearchAuthNextPath}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ddd0bf] bg-white/60 text-[#7a6a58] transition-colors hover:border-[#c9b89e] hover:text-[#3d2e22]"
               >
                 <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
@@ -343,6 +380,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
                   label={searchT("label")}
                   onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
                   onCloseMenu={() => setMenuOpen(false)}
+                  resolveSearchAuthNextPath={resolveSearchAuthNextPath}
                 />
               </div>
             </div>

@@ -682,8 +682,40 @@
           "emailPlaceholder": "name@example.com",
           "password": "Password",
           "passwordPlaceholder": "Enter your password",
+          "forgotPassword": "Forgot password?",
           "submitting": "Logging in...",
           "submit": "Log in"
+        }
+      }
+    },
+    "resetPassword": {
+      "page": {
+        "request": {
+          "eyebrow": "Account recovery",
+          "title": "Reset password",
+          "subtitle": "Enter your email and we’ll send you a link to create a new password.",
+          "backToLogin": "Back to login"
+        },
+        "update": {
+          "eyebrow": "New password",
+          "title": "Choose a new password",
+          "subtitle": "Set a new password to complete account recovery.",
+          "backToLogin": "Back to login"
+        },
+        "requestForm": {
+          "email": "Email",
+          "emailPlaceholder": "name@example.com",
+          "submitting": "Sending...",
+          "submit": "Send reset link"
+        },
+        "updateForm": {
+          "password": "New password",
+          "passwordPlaceholder": "Enter your new password",
+          "confirmPassword": "Confirm password",
+          "confirmPasswordPlaceholder": "Confirm your new password",
+          "submitting": "Updating...",
+          "submit": "Update password",
+          "continue": "Go to profile"
         }
       }
     },
@@ -723,6 +755,21 @@
         "missingCredentials": "Enter your email and password.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
         "invalidCredentials": "Invalid credentials. Check your email and password."
+      },
+      "resetPasswordRequest": {
+        "missingEmail": "Enter your email.",
+        "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "requestFailed": "Could not send the reset link. Try again shortly.",
+        "success": "If the email exists, you’ll receive a password reset link shortly."
+      },
+      "updatePassword": {
+        "missingCredentials": "Enter and confirm your new password.",
+        "passwordTooShort": "Password must contain at least 8 characters.",
+        "passwordMismatch": "Passwords do not match.",
+        "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "invalidSession": "Recovery link is invalid or expired. Request a new link.",
+        "updateFailed": "Could not update the password. Try again.",
+        "success": "Password updated successfully. You can now continue with your account."
       },
       "signup": {
         "missingCredentials": "Enter your email and password.",
@@ -1027,6 +1074,10 @@
       "signup": {
         "title": "Create account | Odora",
         "description": "Create your Odora account to unlock the full catalog and save your discovery experience."
+      },
+      "resetPassword": {
+        "title": "Reset password | Odora",
+        "description": "Request a password reset link for your Odora account or set a new password."
       },
       "profile": {
         "title": "Profile | Odora",
