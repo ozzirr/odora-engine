@@ -9,6 +9,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
+import { DEPLOY_ID } from "@/lib/deploy-id";
 import {
   buildFinderPreferencesFromInput,
   hasConfiguredFinderPreferences,
@@ -16,7 +17,7 @@ import {
 import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
-import { isDatabaseConfigured, prisma, runPrismaOperations } from "@/lib/prisma";
+import { isDatabaseConfigured, prisma, withDatabaseRetry } from "@/lib/prisma";
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -41,53 +42,84 @@ function getEmptyFinderOptions(): FinderOptions {
   };
 }
 
-const getCachedFinderOptions = unstable_cache(async (): Promise<FinderOptions> => {
+async function getFinderOptionSlugs(
+  label: keyof FinderOptions,
+  loader: () => Promise<Array<{ slug: string }>>,
+) {
+  try {
+    const rows = await withDatabaseRetry(loader);
+    return {
+      values: rows.map((item) => item.slug),
+      ok: true,
+    };
+  } catch (error) {
+    logCatalogQueryError(`finder:options:${label}`, error);
+    return {
+      values: [],
+      ok: false,
+    };
+  }
+}
+
+async function getFinderOptionsUncached(): Promise<FinderOptions> {
   if (!isDatabaseConfigured) {
     return getEmptyFinderOptions();
   }
 
-  try {
-    const [moods, seasons, occasions, notes] = await runPrismaOperations([
-      () =>
-        prisma.mood.findMany({
-          select: { slug: true },
-          orderBy: { slug: "asc" },
-        }),
-      () =>
-        prisma.season.findMany({
-          select: { slug: true },
-          orderBy: { slug: "asc" },
-        }),
-      () =>
-        prisma.occasion.findMany({
-          select: { slug: true },
-          orderBy: { slug: "asc" },
-        }),
-      () =>
-        prisma.note.findMany({
-          select: { slug: true },
-          orderBy: { slug: "asc" },
-          take: 80,
-        }),
-    ]);
+  const [moods, seasons, occasions, notes] = await Promise.all([
+    getFinderOptionSlugs("moods", () =>
+      prisma.mood.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+    ),
+    getFinderOptionSlugs("seasons", () =>
+      prisma.season.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+    ),
+    getFinderOptionSlugs("occasions", () =>
+      prisma.occasion.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+      }),
+    ),
+    getFinderOptionSlugs("notes", () =>
+      prisma.note.findMany({
+        select: { slug: true },
+        orderBy: { slug: "asc" },
+        take: 80,
+      }),
+    ),
+  ]);
 
-    return {
-      moods: moods.map((item) => item.slug),
-      seasons: seasons.map((item) => item.slug),
-      occasions: occasions.map((item) => item.slug),
-      notes: notes.map((item) => item.slug),
-    };
+  if (![moods, seasons, occasions, notes].some((entry) => entry.ok)) {
+    throw new Error("Finder options unavailable for all taxonomies.");
+  }
+
+  return {
+    moods: moods.values,
+    seasons: seasons.values,
+    occasions: occasions.values,
+    notes: notes.values,
+  };
+}
+
+const getCachedFinderOptions = unstable_cache(async (): Promise<FinderOptions> => {
+  return getFinderOptionsUncached();
+}, [DEPLOY_ID, "finder-options"], {
+  revalidate: 21600,
+  tags: [PUBLIC_CACHE_TAGS.catalog, PUBLIC_CACHE_TAGS.finderOptions],
+});
+
+async function getFinderOptions() {
+  try {
+    return await getCachedFinderOptions();
   } catch (error) {
     logCatalogQueryError("finder:options", error);
     return getEmptyFinderOptions();
   }
-}, ["finder-options"], {
-  revalidate: 21600,
-  tags: [PUBLIC_CACHE_TAGS.finderOptions],
-});
-
-async function getFinderOptions() {
-  return getCachedFinderOptions();
 }
 
 type FinderPageProps = {
