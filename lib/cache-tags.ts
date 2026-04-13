@@ -1,4 +1,5 @@
 export const PUBLIC_CACHE_TAGS = {
+  blog: "blog",
   catalog: "catalog",
   homepage: "homepage",
   finderOptions: "finder-options",

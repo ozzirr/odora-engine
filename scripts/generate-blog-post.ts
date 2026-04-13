@@ -19,6 +19,8 @@ import { fal } from "@fal-ai/client";
 import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
 
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+
 const prisma = new PrismaClient();
 const anthropic = new Anthropic();
 
@@ -35,6 +37,34 @@ function getSupabaseClient() {
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
+}
+
+async function revalidateBlogCache() {
+  const revalidateUrl = process.env.ODORA_REVALIDATE_URL?.trim();
+  const revalidateToken = process.env.ODORA_REVALIDATE_TOKEN?.trim();
+
+  if (!revalidateUrl || !revalidateToken) {
+    console.log("[blog:generate] cache revalidation skipped (missing ODORA_REVALIDATE_URL or ODORA_REVALIDATE_TOKEN)");
+    return;
+  }
+
+  const response = await fetch(revalidateUrl, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${revalidateToken}`,
+    },
+    body: JSON.stringify({
+      tags: [PUBLIC_CACHE_TAGS.blog],
+    }),
+  });
+
+  if (!response.ok) {
+    const message = await response.text().catch(() => response.statusText);
+    throw new Error(`Cache revalidation failed (${response.status}): ${message}`);
+  }
+
+  console.log("[blog:generate] cache revalidated for blog pages");
 }
 
 // ---------------------------------------------------------------------------
@@ -441,6 +471,8 @@ async function main() {
     create: { slug, locale: "en", publishedAt, coverImageUrl, ...postEn },
     update: { publishedAt, coverImageUrl, ...postEn },
   });
+
+  await revalidateBlogCache();
 
   console.log(`[blog:generate] ✓ published slug="${slug}" (it + en) coverImage=${coverImageUrl ? "yes" : "none"}`);
   await prisma.$disconnect();

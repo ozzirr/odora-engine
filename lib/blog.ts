@@ -1,6 +1,7 @@
 import { BlogPostStatus } from "@prisma/client";
 import { unstable_cache } from "next/cache";
 
+import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { DEPLOY_ID } from "@/lib/deploy-id";
 import { prisma } from "@/lib/prisma";
 
@@ -40,7 +41,10 @@ export async function getLatestBlogPosts(locale: string, limit = 3): Promise<Blo
         },
       }),
     [DEPLOY_ID, "blog-latest", locale, String(limit)],
-    { revalidate: BLOG_REVALIDATE_SECONDS },
+    {
+      revalidate: BLOG_REVALIDATE_SECONDS,
+      tags: [PUBLIC_CACHE_TAGS.blog],
+    },
   )();
 }
 
@@ -61,7 +65,10 @@ export async function getBlogPostList(locale: string): Promise<BlogPostCard[]> {
         },
       }),
     [DEPLOY_ID, "blog-list", locale],
-    { revalidate: BLOG_REVALIDATE_SECONDS },
+    {
+      revalidate: BLOG_REVALIDATE_SECONDS,
+      tags: [PUBLIC_CACHE_TAGS.blog],
+    },
   )();
 }
 
@@ -84,7 +91,10 @@ export async function getBlogPost(slug: string, locale: string): Promise<BlogPos
         },
       }) as Promise<BlogPostFull | null>,
     [DEPLOY_ID, "blog-post", locale, slug],
-    { revalidate: BLOG_REVALIDATE_SECONDS },
+    {
+      revalidate: BLOG_REVALIDATE_SECONDS,
+      tags: [PUBLIC_CACHE_TAGS.blog],
+    },
   )();
 }
 
@@ -97,7 +107,10 @@ export async function getAllPublishedBlogSlugs(locale: string): Promise<string[]
         select: { slug: true },
       }),
     [DEPLOY_ID, "blog-slugs", locale],
-    { revalidate: BLOG_REVALIDATE_SECONDS },
+    {
+      revalidate: BLOG_REVALIDATE_SECONDS,
+      tags: [PUBLIC_CACHE_TAGS.blog],
+    },
   )();
 
   return posts.map((post) => post.slug);

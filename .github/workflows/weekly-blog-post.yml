@@ -62,5 +62,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           FAL_KEY: ${{ secrets.FAL_KEY }}
+          ODORA_REVALIDATE_TOKEN: ${{ secrets.ODORA_REVALIDATE_TOKEN }}
+          ODORA_REVALIDATE_URL: https://www.odora.it/api/revalidate
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
