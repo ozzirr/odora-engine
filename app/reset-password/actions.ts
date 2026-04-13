@@ -1,9 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { buildRateLimitIdentity, getClientIp } from "@/lib/security/request-context";
+import { consumeRateLimit } from "@/lib/security/rate-limit";
 import { getBaseSiteUrl } from "@/lib/site-url";
 import { createClient } from "@/lib/supabase/server";
 
@@ -29,6 +32,25 @@ export async function requestPasswordReset(
 
   if (!email) {
     return { error: t("missingEmail") };
+  }
+
+  const requestHeaders = await headers();
+  const clientIp = getClientIp(requestHeaders);
+  const rateLimitChecks = [
+    consumeRateLimit(buildRateLimitIdentity(["reset-password", clientIp]), {
+      limit: 5,
+      windowMs: 15 * 60 * 1000,
+      blockMs: 30 * 60 * 1000,
+    }),
+    consumeRateLimit(buildRateLimitIdentity(["reset-password", clientIp, email]), {
+      limit: 2,
+      windowMs: 30 * 60 * 1000,
+      blockMs: 60 * 60 * 1000,
+    }),
+  ];
+
+  if (rateLimitChecks.some((result) => !result.allowed)) {
+    return { error: t("tooManyAttempts") };
   }
 
   let supabase;

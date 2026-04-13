@@ -754,13 +754,15 @@
       "login": {
         "missingCredentials": "Enter your email and password.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
-        "invalidCredentials": "Invalid credentials. Check your email and password."
+        "invalidCredentials": "Invalid credentials. Check your email and password.",
+        "tooManyAttempts": "Too many login attempts. Try again shortly."
       },
       "resetPasswordRequest": {
         "missingEmail": "Enter your email.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
         "requestFailed": "Could not send the reset link. Try again shortly.",
-        "success": "If the email exists, you’ll receive a password reset link shortly."
+        "success": "If the email exists, you’ll receive a password reset link shortly.",
+        "tooManyAttempts": "Too many reset requests. Try again shortly."
       },
       "updatePassword": {
         "missingCredentials": "Enter and confirm your new password.",
@@ -777,7 +779,8 @@
         "passwordMismatch": "Passwords do not match.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
         "signupFailed": "Sign-up was not completed. Check your details and try again.",
-        "success": "Account created. Check your email to confirm registration and complete login."
+        "success": "Account created. Check your email to confirm registration and complete login.",
+        "tooManyAttempts": "Too many sign-up attempts. Try again shortly."
       }
     }
   },

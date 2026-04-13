@@ -1,6 +1,7 @@
 import { defaultLocale, type AppLocale } from "@/lib/i18n";
 
 const AFFILIATE_TAG = process.env.NEXT_PUBLIC_AMAZON_AFFILIATE_TAG ?? "2erre-21";
+const ALLOWED_AMAZON_HOSTS = new Set(["amazon.it", "www.amazon.it", "amazon.com", "www.amazon.com"]);
 
 type AmazonTargetInput = {
   amazonUrl?: string | null;
@@ -24,6 +25,19 @@ function appendAffiliateTag(url: string): string {
   }
 }
 
+export function isAllowedAmazonHostname(hostname: string) {
+  const normalized = hostname.trim().toLowerCase();
+  if (!normalized) {
+    return false;
+  }
+
+  return (
+    ALLOWED_AMAZON_HOSTS.has(normalized) ||
+    normalized.endsWith(".amazon.it") ||
+    normalized.endsWith(".amazon.com")
+  );
+}
+
 function getValidatedAmazonUrl(value?: string | null) {
   const normalized = value?.trim();
   if (!normalized) {
@@ -36,7 +50,7 @@ function getValidatedAmazonUrl(value?: string | null) {
       return null;
     }
 
-    if (!parsed.hostname.includes("amazon.")) {
+    if (!isAllowedAmazonHostname(parsed.hostname)) {
       return null;
     }
 

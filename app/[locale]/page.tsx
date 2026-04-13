@@ -63,7 +63,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   if (isLaunchGateEnabled()) {
     const cookieStore = await cookies();
-    const hasAccess = hasLaunchGateAccess(
+    const hasAccess = await hasLaunchGateAccess(
       cookieStore.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value,
     );
 

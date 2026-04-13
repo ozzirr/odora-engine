@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
@@ -8,6 +9,8 @@ import { sanitizeAuthNextPath } from "@/lib/auth-navigation";
 import { getBaseSiteUrl } from "@/lib/supabase/config";
 import { createClient } from "@/lib/supabase/server";
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { buildRateLimitIdentity, getClientIp } from "@/lib/security/request-context";
+import { consumeRateLimit } from "@/lib/security/rate-limit";
 
 export type SignupFormState = {
   error?: string;
@@ -45,6 +48,25 @@ export async function signupWithPassword(
 
   if (password !== confirmPassword) {
     return { error: t("passwordMismatch") };
+  }
+
+  const requestHeaders = await headers();
+  const clientIp = getClientIp(requestHeaders);
+  const rateLimitChecks = [
+    consumeRateLimit(buildRateLimitIdentity(["signup", clientIp]), {
+      limit: 5,
+      windowMs: 30 * 60 * 1000,
+      blockMs: 60 * 60 * 1000,
+    }),
+    consumeRateLimit(buildRateLimitIdentity(["signup", clientIp, email]), {
+      limit: 3,
+      windowMs: 30 * 60 * 1000,
+      blockMs: 60 * 60 * 1000,
+    }),
+  ];
+
+  if (rateLimitChecks.some((result) => !result.allowed)) {
+    return { error: t("tooManyAttempts") };
   }
 
   let supabase;

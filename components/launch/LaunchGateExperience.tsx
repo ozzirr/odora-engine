@@ -23,6 +23,7 @@ const copy = {
     passwordPlaceholder: "Enter password",
     unlock: "Enter preview",
     passwordError: "Password not valid.",
+    rateLimitError: "Too many attempts. Try again shortly.",
     highlights: [
       "Coming soon page for public visitors",
       "Early-access preview behind password",
@@ -41,6 +42,7 @@ const copy = {
     passwordPlaceholder: "Inserisci password",
     unlock: "Entra nella preview",
     passwordError: "Password non valida.",
+    rateLimitError: "Troppi tentativi. Riprova tra poco.",
     highlights: [
       "Coming soon per i visitatori pubblici",
       "Preview privata protetta da password",
@@ -95,13 +97,13 @@ export function LaunchGateExperience({ locale }: LaunchGateExperienceProps) {
       });
 
       if (!response.ok) {
-        throw new Error("invalid_password");
+        throw new Error(response.status === 429 ? "rate_limited" : "invalid_password");
       }
 
       const payload = (await response.json()) as { redirectPath?: string };
       window.location.assign(payload.redirectPath || `/${locale}`);
-    } catch {
-      setPasswordError(text.passwordError);
+    } catch (error) {
+      setPasswordError(error instanceof Error && error.message === "rate_limited" ? text.rateLimitError : text.passwordError);
     } finally {
       setIsSubmittingAccess(false);
     }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { isAllowedAmazonHostname } from "@/lib/amazon";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export async function GET(request: Request) {
@@ -21,6 +22,14 @@ export async function GET(request: Request) {
     }
   } catch {
     return NextResponse.json({ error: "Invalid url" }, { status: 400 });
+  }
+
+  if (type !== "amazon") {
+    return NextResponse.json({ error: "Unsupported destination" }, { status: 400 });
+  }
+
+  if (!isAllowedAmazonHostname(destination.hostname)) {
+    return NextResponse.json({ error: "Destination not allowed" }, { status: 400 });
   }
 
   if (isDatabaseConfigured) {

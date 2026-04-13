@@ -14,6 +14,7 @@ import {
   isLaunchGateEnabled,
   isLaunchGateHomePath,
 } from "@/lib/launch-gate";
+import { applySecurityHeaders } from "@/lib/security/http";
 import { getBaseSiteHost } from "@/lib/site-url";
 import { updateSession } from "@/lib/supabase/middleware";
 
@@ -56,7 +57,7 @@ export async function proxy(request: NextRequest) {
   ) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.host = canonicalHost;
-    return NextResponse.redirect(redirectUrl, 308);
+    return applySecurityHeaders(NextResponse.redirect(redirectUrl, 308), request);
   }
 
   if (!hasLocalePrefix && pathname === "/") {
@@ -70,7 +71,7 @@ export async function proxy(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 365,
     });
 
-    return response;
+    return applySecurityHeaders(response, request);
   }
 
   const response = handleI18nRouting(request);
@@ -85,19 +86,22 @@ export async function proxy(request: NextRequest) {
 
   if (
     isLaunchGateEnabled() &&
-    !hasLaunchGateAccess(request.cookies.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value) &&
+    !(await hasLaunchGateAccess(request.cookies.get(LAUNCH_GATE_ACCESS_COOKIE_NAME)?.value)) &&
     hasLocalePrefix &&
     !isLaunchGateHomePath(pathname)
   ) {
     const locale = getLaunchGateLocaleFromPathname(pathname);
-    return NextResponse.redirect(new URL(getLocalizedPathname(locale, "/"), request.url));
+    return applySecurityHeaders(
+      NextResponse.redirect(new URL(getLocalizedPathname(locale, "/"), request.url)),
+      request,
+    );
   }
 
   if (!requiresSessionRefresh(pathname)) {
-    return response;
+    return applySecurityHeaders(response, request);
   }
 
-  return updateSession(request, response);
+  return applySecurityHeaders(await updateSession(request, response), request);
 }
 
 export const config = {

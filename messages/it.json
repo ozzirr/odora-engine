@@ -754,13 +754,15 @@
       "login": {
         "missingCredentials": "Inserisci email e password.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
-        "invalidCredentials": "Credenziali non valide. Controlla email e password."
+        "invalidCredentials": "Credenziali non valide. Controlla email e password.",
+        "tooManyAttempts": "Troppi tentativi di accesso. Riprova tra poco."
       },
       "resetPasswordRequest": {
         "missingEmail": "Inserisci la tua email.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
         "requestFailed": "Non sono riuscito a inviare il link di reset. Riprova tra poco.",
-        "success": "Se l'email esiste, riceverai a breve un link per reimpostare la password."
+        "success": "Se l'email esiste, riceverai a breve un link per reimpostare la password.",
+        "tooManyAttempts": "Troppi tentativi di reset. Riprova tra poco."
       },
       "updatePassword": {
         "missingCredentials": "Inserisci e conferma la nuova password.",
@@ -777,7 +779,8 @@
         "passwordMismatch": "Le password non coincidono.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
         "signupFailed": "Registrazione non completata. Verifica i dati e riprova.",
-        "success": "Account creato. Controlla la tua email per confermare la registrazione e completare l'accesso."
+        "success": "Account creato. Controlla la tua email per confermare la registrazione e completare l'accesso.",
+        "tooManyAttempts": "Troppi tentativi di registrazione. Riprova tra poco."
       }
     }
   },
