@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -96,12 +95,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mt-8">
           {post.coverImageUrl ? (
             <div className="mb-8 aspect-[16/9] w-full overflow-hidden rounded-[1.2rem] bg-[#f4ece0]">
-              <Image
+              <img
                 src={post.coverImageUrl}
                 alt={post.title}
                 width={1280}
                 height={720}
                 sizes="(max-width: 1024px) 100vw, 768px"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover"
               />
             </div>

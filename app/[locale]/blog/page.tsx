@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
@@ -73,12 +72,14 @@ export default async function BlogPage({ params }: BlogPageProps) {
               >
                 {post.coverImageUrl ? (
                   <div className="aspect-[16/9] w-full overflow-hidden bg-[#f4ece0]">
-                    <Image
+                    <img
                       src={post.coverImageUrl}
                       alt={post.title}
                       width={720}
                       height={405}
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
