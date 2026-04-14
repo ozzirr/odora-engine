@@ -6,6 +6,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.21"],
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
