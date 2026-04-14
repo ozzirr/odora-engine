@@ -24,6 +24,11 @@
 .DS_Store
 *.pem
 .audio-transcribe/
+overnight.log
+.tmp/
+
+# local image pipeline (uploaded to Supabase Storage)
+/approved-images/
 
 # debug
 npm-debug.log*
