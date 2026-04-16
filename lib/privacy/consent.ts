@@ -9,6 +9,7 @@ export const PRIVACY_DISCLOSURE_UPDATED_AT = "2026-04-01T00:00:00.000Z";
 export const PRIVACY_CONSENT_UPDATED_EVENT = "odora:privacy-consent-updated";
 export const ADSENSE_ACCOUNT_ID = "pub-3711710548947054";
 export const ADSENSE_CLIENT_ID = `ca-${ADSENSE_ACCOUNT_ID}`;
+export const GA_MEASUREMENT_ID = "G-S27RFQXHQ2";
 
 export type ConsentCategory = "necessary" | "analytics" | "marketing";
 
@@ -31,6 +32,7 @@ export type PrivacyServiceId =
   | "locale"
   | "launch-gate"
   | "vercel-analytics"
+  | "google-analytics"
   | "google-adsense";
 
 export type PrivacyServiceDefinition = {
@@ -107,6 +109,13 @@ export const privacyServices: PrivacyServiceDefinition[] = [
     category: "analytics",
     provider: "Vercel",
     cookieNames: [],
+    active: true,
+  },
+  {
+    id: "google-analytics",
+    category: "analytics",
+    provider: "Google",
+    cookieNames: ["_ga", "_ga_*"],
     active: true,
   },
   {

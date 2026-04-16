@@ -126,6 +126,11 @@
         "purpose": "Helps understand, in aggregate form, which pages are used most and how the overall experience can be improved.",
         "storage": "Aggregate measurements provided by Vercel Analytics; no marketing or remarketing cookies are active in the project."
       },
+      "google-analytics": {
+        "label": "Google Analytics",
+        "purpose": "Collects anonymous usage data to help understand how visitors interact with the site and improve the experience.",
+        "storage": "Google may set first-party cookies (_ga, _ga_*) to distinguish unique visitors and sessions."
+      },
       "google-adsense": {
         "label": "Google AdSense",
         "purpose": "Loads advertising only after explicit marketing consent so Odora can show ads in eligible placements.",
