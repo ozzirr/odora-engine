@@ -38,7 +38,7 @@ export function PerfumesClient({
         <p className="text-sm text-[#615140]">
           {t("showing", { visible: initialPerfumes.length, total })}
         </p>
-        <PerfumeGrid perfumes={initialPerfumes} cardVariant="finder" layout="list" />
+        <PerfumeGrid perfumes={initialPerfumes} cardVariant="finder" layout="list" injectInFeedAd />
 
         {isCatalogLocked ? <CatalogGate previewLimit={FREE_CATALOG_PREVIEW_LIMIT} /> : null}
 

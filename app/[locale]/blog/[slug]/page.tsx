@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
+import { AdInArticle } from "@/components/ads/AdUnit";
 import { Container } from "@/components/layout/Container";
 import { getAllPublishedBlogSlugs, getBlogPost } from "@/lib/blog";
 import { hasLocale, locales, type AppLocale } from "@/lib/i18n";
@@ -125,6 +126,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </p>
 
           <div className="mt-8">
+            <AdInArticle />
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (

@@ -603,6 +603,7 @@ export function FinderExperience({
               layout="list"
               animateItems
               itemAnimationKey={resultAnimationKey}
+              injectInFeedAd
             />
           )}
 

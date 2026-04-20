@@ -1,5 +1,7 @@
+import { Fragment } from "react";
 import { useTranslations } from "next-intl";
 
+import { AdInFeed } from "@/components/ads/AdUnit";
 import { PerfumeCard, type PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { cn } from "@/lib/utils";
 
@@ -11,6 +13,8 @@ type PerfumeGridProps = {
   layout?: "grid" | "list";
   animateItems?: boolean;
   itemAnimationKey?: number | string;
+  injectInFeedAd?: boolean;
+  adAfterIndex?: number;
 };
 
 export function PerfumeGrid({
@@ -21,6 +25,8 @@ export function PerfumeGrid({
   layout = "grid",
   animateItems = false,
   itemAnimationKey = "default",
+  injectInFeedAd = false,
+  adAfterIndex = 5,
 }: PerfumeGridProps) {
   const t = useTranslations("catalog.grid");
 
@@ -31,6 +37,8 @@ export function PerfumeGrid({
       </div>
     );
   }
+
+  const shouldInjectAd = injectInFeedAd && layout === "list" && perfumes.length > adAfterIndex;
 
   return (
     <div
@@ -44,23 +52,25 @@ export function PerfumeGrid({
       )}
     >
       {perfumes.map((perfume, index) => (
-        <div
-          key={animateItems ? `${itemAnimationKey}-${perfume.id}` : perfume.id}
-          className={cn(
-            animateItems
-              ? "finder-card-animate opacity-0 translate-y-5 [animation:finder-card-in_480ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
-              : undefined,
-          )}
-          style={
-            animateItems
-              ? {
-                  animationDelay: `${Math.min(index, 8) * 70}ms`,
-                }
-              : undefined
-          }
-        >
-          <PerfumeCard perfume={perfume} variant={cardVariant} />
-        </div>
+        <Fragment key={animateItems ? `${itemAnimationKey}-${perfume.id}` : perfume.id}>
+          <div
+            className={cn(
+              animateItems
+                ? "finder-card-animate opacity-0 translate-y-5 [animation:finder-card-in_480ms_cubic-bezier(0.22,1,0.36,1)_forwards]"
+                : undefined,
+            )}
+            style={
+              animateItems
+                ? {
+                    animationDelay: `${Math.min(index, 8) * 70}ms`,
+                  }
+                : undefined
+            }
+          >
+            <PerfumeCard perfume={perfume} variant={cardVariant} />
+          </div>
+          {shouldInjectAd && index === adAfterIndex ? <AdInFeed /> : null}
+        </Fragment>
       ))}
     </div>
   );
