@@ -32,6 +32,7 @@ type PerfumeHeroProps = {
     amazonUrl?: string | null;
     brand: {
       name: string;
+      slug?: string | null;
     };
     notes?: Array<{
       intensity?: number | null;
@@ -128,7 +129,16 @@ export function PerfumeHero({ perfume, bestOffer }: PerfumeHeroProps) {
 
             <div className="min-w-0 space-y-3 sm:space-y-4">
               <div className="min-w-0">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">{brandName}</p>
+                {perfume.brand?.slug ? (
+                  <Link
+                    href={{ pathname: "/brands/[slug]", params: { slug: perfume.brand.slug } }}
+                    className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763] hover:text-[#1f1914] transition-colors"
+                  >
+                    {brandName}
+                  </Link>
+                ) : (
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">{brandName}</p>
+                )}
                 <h1 className="mt-1.5 font-display text-[1.95rem] leading-[0.94] text-[#1f1914] sm:text-[2.65rem] lg:text-[3.15rem]">
                   {perfume.name}
                 </h1>

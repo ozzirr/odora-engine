@@ -66,6 +66,10 @@ export function buildPageMetadata({
   const resolvedLocale = locale === "it" ? "it" : "en";
   const alternateLinks = getAlternateLinks(pathname, params, query);
   const canonicalPath = alternateLinks[resolvedLocale];
+  const languagesWithDefault = {
+    ...alternateLinks,
+    "x-default": alternateLinks.en ?? canonicalPath,
+  };
   const canonicalUrl = toAbsoluteUrl(canonicalPath);
   const socialImageUrl = resolveSocialImageUrl(image);
 
@@ -74,7 +78,7 @@ export function buildPageMetadata({
     description,
     alternates: {
       canonical: canonicalPath,
-      languages: alternateLinks,
+      languages: languagesWithDefault,
     },
     openGraph: {
       type,

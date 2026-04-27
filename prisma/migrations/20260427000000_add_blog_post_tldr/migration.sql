@@ -1,0 +1,1 @@
+ALTER TABLE "BlogPost" ADD COLUMN "tldr" TEXT[] DEFAULT ARRAY[]::TEXT[];

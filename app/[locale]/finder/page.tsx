@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { unstable_cache } from "next/cache";
+import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
@@ -14,6 +15,7 @@ import {
   buildFinderPreferencesFromInput,
   hasConfiguredFinderPreferences,
 } from "@/lib/finder";
+import { getFinderPreset } from "@/lib/finder-presets";
 import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -181,6 +183,27 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   const t = await getTranslations({ locale: resolvedLocale, namespace: "finder.page" });
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const resolvedSearchParams = await searchParams;
+  const presetLabel = readSearchParam(resolvedSearchParams, "preset") ?? null;
+  const presetConfig = getFinderPreset(presetLabel);
+  const hasOtherFilterParams = [
+    "gender",
+    "mood",
+    "season",
+    "occasion",
+    "budget",
+    "preferredNote",
+    "arabicOnly",
+    "nicheOnly",
+  ].some((key) => Boolean(readSearchParam(resolvedSearchParams, key)));
+
+  if (presetConfig && !hasOtherFilterParams) {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(presetConfig)) {
+      if (value) params.set(key, value);
+    }
+    redirect(`${getLocalizedPathname(resolvedLocale, "/finder")}?${params.toString()}`);
+  }
+
   const finderOptions = await getFinderOptions();
   const isAuthenticated = await getIsAuthenticated();
   const initialPreferences = buildFinderPreferencesFromInput({
@@ -193,7 +216,6 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
     arabicOnly: readSearchParam(resolvedSearchParams, "arabicOnly") ?? null,
     nicheOnly: readSearchParam(resolvedSearchParams, "nicheOnly") ?? null,
   });
-  const presetLabel = readSearchParam(resolvedSearchParams, "preset") ?? null;
   const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
   const hasSubmittedSearch = isFinderSubmitted(resolvedSearchParams);
   const shouldLoadResults = hasConfiguredPreferences || hasSubmittedSearch;

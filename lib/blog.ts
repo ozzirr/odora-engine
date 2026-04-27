@@ -19,6 +19,8 @@ export type BlogPostFull = BlogPostCard & {
   content: string;
   seoTitle: string | null;
   seoDescription: string | null;
+  updatedAt: Date | string;
+  tldr: string[];
 };
 
 const BLOG_REVALIDATE_SECONDS = 3600;
@@ -88,6 +90,8 @@ export async function getBlogPost(slug: string, locale: string): Promise<BlogPos
           publishedAt: true,
           seoTitle: true,
           seoDescription: true,
+          updatedAt: true,
+          tldr: true,
         },
       }) as Promise<BlogPostFull | null>,
     [DEPLOY_ID, "blog-post", locale, slug],

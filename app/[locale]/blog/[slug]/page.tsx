@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import ReactMarkdown from "react-markdown";
 
 import { AdInArticle } from "@/components/ads/AdUnit";
 import { Container } from "@/components/layout/Container";
 import { getAllPublishedBlogSlugs, getBlogPost } from "@/lib/blog";
 import { hasLocale, locales, type AppLocale } from "@/lib/i18n";
-import { buildPageMetadata, toAbsoluteUrl } from "@/lib/metadata";
+import { buildPageMetadata } from "@/lib/metadata";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { buildArticleSchema } from "@/lib/structured-data";
 
 export const revalidate = 3600;
 
@@ -62,29 +65,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBlogPost(slug, resolvedLocale);
   if (!post) notFound();
 
-  const backLabel = resolvedLocale === "it" ? "← Torna al Blog" : "← Back to Blog";
+  const t = await getTranslations({ locale: resolvedLocale, namespace: "blog.post" });
+  const backLabel = t("backLabel");
+  const tldrItems = post.tldr && post.tldr.length > 0 ? post.tldr : null;
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
+  const articleSchema = buildArticleSchema({
     headline: post.title,
     description: post.excerpt,
-    datePublished: new Date(post.publishedAt).toISOString(),
-    dateModified: new Date(post.publishedAt).toISOString(),
-    inLanguage: resolvedLocale === "it" ? "it-IT" : "en-GB",
-    author: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
-    publisher: { "@type": "Organization", name: "Odora", url: toAbsoluteUrl("/") },
-    mainEntityOfPage: { "@type": "WebPage", "@id": toAbsoluteUrl(`/${resolvedLocale}/blog/${slug}`) },
-    ...(post.coverImageUrl ? { image: post.coverImageUrl } : {}),
-    keywords: post.tags.join(", "),
-  };
+    path: `/${resolvedLocale}/blog/${slug}`,
+    locale: resolvedLocale,
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
+    image: post.coverImageUrl,
+    keywords: post.tags,
+  });
 
   return (
     <Container>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+      <StructuredData data={articleSchema} />
       <div className="mx-auto mt-12 max-w-2xl">
         <Link
           href={`/${resolvedLocale}/blog`}
@@ -124,6 +122,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <p className="mt-6 text-lg text-[#625243] leading-8 border-l-2 border-[#e0d5c6] pl-4 italic">
             {post.excerpt}
           </p>
+
+          {tldrItems ? (
+            <aside
+              aria-label={t("tldrTitle")}
+              className="mt-8 rounded-2xl border border-[#ddcfbc] bg-[#f8f1e6] p-5"
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
+                {t("tldrTitle")}
+              </p>
+              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[15px] leading-7 text-[#3d2e20]">
+                {tldrItems.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </aside>
+          ) : null}
 
           <div className="mt-8">
             <AdInArticle />

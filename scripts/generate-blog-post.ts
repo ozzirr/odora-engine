@@ -20,6 +20,13 @@ import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
 
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
+import { buildFinderQuery, finderPresets } from "@/lib/finder-presets";
+
+function presetUrl(locale: "it" | "en", presetName: keyof typeof finderPresets) {
+  const path = locale === "it" ? "/it/trova-profumo" : "/en/finder";
+  const query = buildFinderQuery(finderPresets[presetName]).toString();
+  return `https://www.odora.it${path}?${query}`;
+}
 
 const prisma = new PrismaClient();
 const anthropic = new Anthropic();
@@ -74,11 +81,11 @@ const INTERNAL_LINKS_IT = `
 Puoi inserire link interni Odora usando la sintassi Markdown [testo](url):
 - Catalogo profumi: [scopri tutti i profumi](https://www.odora.it/it/profumi)
 - Finder intelligente: [usa il Finder Odora](https://www.odora.it/it/trova-profumo)
-- Preset profumi freschi: [Fresco quotidiano](https://www.odora.it/it/trova-profumo?preset=Fresh+Daily)
-- Preset vaniglia: [Amanti della vaniglia](https://www.odora.it/it/trova-profumo?preset=Vanilla+Lovers)
-- Preset profumi arabi: [Firma araba](https://www.odora.it/it/trova-profumo?preset=Arabic+Signature&arabicOnly=true)
-- Preset ufficio: [Perfetto per ufficio](https://www.odora.it/it/trova-profumo?preset=Office+Safe)
-- Preset serata: [Serata romantica](https://www.odora.it/it/trova-profumo?preset=Date+Night)
+- Preset profumi freschi: [Fresco quotidiano](${presetUrl("it", "Fresh Daily")})
+- Preset vaniglia: [Amanti della vaniglia](${presetUrl("it", "Vanilla Lovers")})
+- Preset profumi arabi: [Firma araba](${presetUrl("it", "Arabic Signature")})
+- Preset ufficio: [Perfetto per ufficio](${presetUrl("it", "Office Safe")})
+- Preset serata: [Serata romantica](${presetUrl("it", "Date Night")})
 - Classifiche top profumi: [classifiche Odora](https://www.odora.it/it/classifiche)
 Inserisci 2-4 link interni in modo naturale nel testo, non tutti insieme.
 `.trim();
@@ -87,11 +94,11 @@ const INTERNAL_LINKS_EN = `
 You can include internal Odora links using Markdown syntax [text](url):
 - Perfume catalog: [explore all fragrances](https://www.odora.it/en/perfumes)
 - Smart Finder: [use the Odora Finder](https://www.odora.it/en/finder)
-- Fresh preset: [Fresh Daily](https://www.odora.it/en/finder?preset=Fresh+Daily)
-- Vanilla preset: [Vanilla Lovers](https://www.odora.it/en/finder?preset=Vanilla+Lovers)
-- Arabic preset: [Arabic Signature](https://www.odora.it/en/finder?preset=Arabic+Signature&arabicOnly=true)
-- Office preset: [Office Safe](https://www.odora.it/en/finder?preset=Office+Safe)
-- Date night preset: [Date Night](https://www.odora.it/en/finder?preset=Date+Night)
+- Fresh preset: [Fresh Daily](${presetUrl("en", "Fresh Daily")})
+- Vanilla preset: [Vanilla Lovers](${presetUrl("en", "Vanilla Lovers")})
+- Arabic preset: [Arabic Signature](${presetUrl("en", "Arabic Signature")})
+- Office preset: [Office Safe](${presetUrl("en", "Office Safe")})
+- Date night preset: [Date Night](${presetUrl("en", "Date Night")})
 - Top fragrances ranking: [Odora top rankings](https://www.odora.it/en/top)
 Insert 2-4 internal links naturally in the text, not all at once.
 `.trim();
@@ -313,6 +320,7 @@ type GeneratedPost = {
   seoTitle: string;
   seoDescription: string;
   tags: string[];
+  tldr: string[];
 };
 
 async function generatePost(topic: Topic, locale: "it" | "en"): Promise<GeneratedPost> {
@@ -355,8 +363,11 @@ Rispondi con questo JSON esatto (nessun testo fuori):
   "content": "contenuto markdown completo 900-1100 parole",
   "seoTitle": "title tag SEO (max 60 caratteri, keyword primaria all'inizio)",
   "seoDescription": "meta description con keyword primaria e CTA (max 155 caratteri)",
-  "tags": ["tag1", "tag2", "tag3"]
-}`
+  "tags": ["tag1", "tag2", "tag3"],
+  "tldr": ["bullet 1: punto chiave conciso e auto-conclusivo (max 120 caratteri)", "bullet 2", "bullet 3", "bullet 4"]
+}
+
+Il campo "tldr" deve contenere 4-5 bullet point auto-conclusivi che riassumono i concetti chiave dell'articolo. Ogni bullet deve essere una frase breve e autonoma (max 120 caratteri), leggibile senza il resto dell'articolo. Servono come "Key takeaways" all'inizio del post e per essere citati da ChatGPT/Perplexity.`
     : `Write an SEO-optimised blog post for Odora.it.
 
 Proposed title: "${topic.title}"
@@ -382,8 +393,11 @@ Reply with this exact JSON (no text outside):
   "content": "full markdown content 900-1100 words",
   "seoTitle": "SEO title tag (max 60 chars, primary keyword first)",
   "seoDescription": "meta description with primary keyword and CTA (max 155 chars)",
-  "tags": ["tag1", "tag2", "tag3"]
-}`;
+  "tags": ["tag1", "tag2", "tag3"],
+  "tldr": ["bullet 1: concise self-contained key point (max 120 chars)", "bullet 2", "bullet 3", "bullet 4"]
+}
+
+The "tldr" field must contain 4-5 self-contained bullet points summarizing the article's key concepts. Each bullet must be a short standalone sentence (max 120 chars), readable without the rest of the article. They serve as "Key takeaways" at the top of the post and to be quoted by ChatGPT/Perplexity.`;
 
   const message = await anthropic.messages.create({
     model: "claude-sonnet-4-6",

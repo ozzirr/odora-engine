@@ -301,6 +301,7 @@ model BlogPost {
   status         BlogPostStatus @default(PUBLISHED)
   title          String
   excerpt        String
+  tldr           String[]       @default([])
   content        String
   coverImageUrl  String?
   seoTitle       String?

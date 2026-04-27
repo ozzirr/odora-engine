@@ -17,6 +17,7 @@ import {
 import { getPerfumeShortText } from "@/lib/perfume-text";
 import { getBestOfferSummary } from "@/lib/pricing";
 import { isDatabaseConfigured, prisma, runPrismaOperations, withDatabaseRetry } from "@/lib/prisma";
+import { finderPresets, type FinderPresetQuery } from "@/lib/finder-presets";
 
 export type QuickFilterIllustration =
   | "vanilla"
@@ -41,18 +42,6 @@ export type HomepageMoodCardToneKey =
   | "balanced"
   | "magnetic"
   | "bright";
-
-type FinderPresetQuery = Partial<{
-  preset: string;
-  gender: string;
-  mood: string;
-  season: string;
-  occasion: string;
-  budget: string;
-  preferredNote: string;
-  arabicOnly: "true";
-  nicheOnly: "true";
-}>;
 
 export type HomepageMoodCard = {
   id: HomepageMoodCardId;
@@ -184,69 +173,42 @@ const homepageMoodCardConfig = [
     toneKey: "warm" as const,
     gradientClass: "from-[#f7eddc] via-[#f2e7d4] to-[#eadcc7]",
     illustration: "vanilla" as const,
-    preset: {
-      preset: "Vanilla Lovers",
-      mood: "cozy",
-      preferredNote: "vanilla",
-    },
+    preset: finderPresets["Vanilla Lovers"],
   },
   {
     id: "freshDaily" as const,
     toneKey: "clean" as const,
     gradientClass: "from-[#edf6f2] via-[#e2f1ee] to-[#d7ece8]",
     illustration: "fresh" as const,
-    preset: {
-      preset: "Fresh Daily",
-      mood: "fresh",
-      occasion: "daily-wear",
-      preferredNote: "bergamot",
-    },
+    preset: finderPresets["Fresh Daily"],
   },
   {
     id: "arabicSignature" as const,
     toneKey: "bold" as const,
     gradientClass: "from-[#efe5d9] via-[#ead8c6] to-[#dfc5ac]",
     illustration: "oud" as const,
-    preset: {
-      preset: "Arabic Signature",
-      arabicOnly: "true",
-    },
+    preset: finderPresets["Arabic Signature"],
   },
   {
     id: "officeSafe" as const,
     toneKey: "balanced" as const,
     gradientClass: "from-[#f5f1ea] via-[#efe9df] to-[#e7dfd4]",
     illustration: "musk" as const,
-    preset: {
-      preset: "Office Safe",
-      mood: "elegant",
-      occasion: "office",
-      preferredNote: "musk",
-    },
+    preset: finderPresets["Office Safe"],
   },
   {
     id: "dateNight" as const,
     toneKey: "magnetic" as const,
     gradientClass: "from-[#efe3e0] via-[#ead8d6] to-[#ddc3c0]",
     illustration: "rose" as const,
-    preset: {
-      preset: "Date Night",
-      mood: "romantic",
-      occasion: "date-night",
-      preferredNote: "amber",
-    },
+    preset: finderPresets["Date Night"],
   },
   {
     id: "summerCitrus" as const,
     toneKey: "bright" as const,
     gradientClass: "from-[#f7efdc] via-[#f4e4b8] to-[#edd49a]",
     illustration: "citrus" as const,
-    preset: {
-      preset: "Summer Citrus",
-      mood: "fresh",
-      season: "summer",
-      preferredNote: "bergamot",
-    },
+    preset: finderPresets["Summer Citrus"],
   },
 ] satisfies Array<Omit<HomepageMoodCard, "href">>;
 

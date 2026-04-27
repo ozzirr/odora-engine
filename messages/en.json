@@ -616,6 +616,38 @@
         "title": "Similar fragrances",
         "subtitle": "Fragrances with similar notes and scent profile."
       }
+    },
+    "faq": {
+      "eyebrow": "Frequently asked",
+      "title": "Frequently asked questions about {name}",
+      "subtitle": "Quick answers on price, longevity and best occasions.",
+      "items": {
+        "price": {
+          "q": "How much does {name} by {brand} cost?",
+          "qNoBrand": "How much does {name} cost?",
+          "a": "The best price today for {name} is {price}, updated by comparing major online stores. The final price may vary depending on size, shipping and retailer promotions.",
+          "aNoPrice": "The price of {name} varies depending on size, retailer and availability. On Odora we compare the major stores in real time to always show you the lowest total available."
+        },
+        "longevity": {
+          "q": "How long does {name} last on skin?",
+          "a": "{name} has a longevity score of {longevity} out of 10. Real-world performance depends on skin type, season and amount applied: on average a fragrance with this score stays detectable for several hours."
+        },
+        "season": {
+          "q": "Which season is {name} best for?",
+          "a": "{name} belongs to the {family} family and performs best in the seasons matching its scent profile. On Odora you'll find recommended moods and occasions right inside the perfume page."
+        },
+        "gender": {
+          "q": "Is {name} a men's or women's fragrance?",
+          "aMen": "{name} by {brand} is classified as a men's fragrance, although many modern scents are unisex and can be worn freely.",
+          "aWomen": "{name} by {brand} is classified as a women's fragrance, although many modern scents are unisex and can be worn freely.",
+          "aUnisex": "{name} by {brand} is a unisex fragrance, designed to be worn by anyone who enjoys its scent profile.",
+          "aGeneric": "{name} can be worn by anyone who enjoys its scent profile: more and more modern fragrances are designed as unisex."
+        },
+        "where": {
+          "q": "Where can I buy {name} at the best price?",
+          "a": "On Odora we compare offers from the main online stores for {name} in real time, showing you the lowest total including shipping. Click 'Go to offer' to buy from the retailer of your choice."
+        }
+      }
     }
   },
   "top": {
@@ -663,6 +695,21 @@
       "primaryCta": "Go to catalog",
       "secondaryCta": "Open Finder",
       "empty": "No articles yet. Check back soon."
+    },
+    "post": {
+      "tldrTitle": "Key takeaways",
+      "backLabel": "← Back to Blog"
+    }
+  },
+  "brand": {
+    "page": {
+      "eyebrow": "Brand",
+      "title": "{name} perfumes",
+      "subtitle": "Discover every fragrance from {name}: notes, performance, and price comparison across the major online stores.",
+      "perfumesTitle": "All {name} perfumes",
+      "perfumesEmpty": "No perfumes available for this brand right now.",
+      "country": "Origin: {country}",
+      "breadcrumbBrand": "Brand"
     }
   },
   "auth": {
@@ -1117,6 +1164,13 @@
         "notFoundTitle": "Perfume not found | Odora",
         "title": "{name} by {brand}: notes, price, and alternatives | Odora",
         "unknownBrand": "Unknown brand"
+      },
+      "brandDetail": {
+        "fallbackTitle": "Brand | Odora",
+        "fallbackDescription": "Explore the brand's fragrances on Odora.",
+        "notFoundTitle": "Brand not found | Odora",
+        "title": "{name}: perfumes, notes, and prices | Odora",
+        "description": "Discover {name} perfumes on Odora: detailed pages, notes, performance, and price comparison across major online stores."
       }
     }
   }

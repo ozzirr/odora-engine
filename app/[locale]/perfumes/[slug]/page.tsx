@@ -14,6 +14,7 @@ import { NotesList } from "@/components/perfumes/NotesList";
 import { OfferTable } from "@/components/perfumes/OfferTable";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
+import { FaqSection } from "@/components/seo/FaqSection";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
@@ -31,7 +32,8 @@ import { buildPageMetadata } from "@/lib/metadata";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
-import { buildBreadcrumbSchema, buildProductSchema } from "@/lib/structured-data";
+import { buildBreadcrumbSchema, buildFaqSchema, buildProductSchema } from "@/lib/structured-data";
+import { buildPerfumeFaqItems } from "@/lib/perfume-faq";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { formatCurrency } from "@/lib/utils";
 
@@ -341,6 +343,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const t = await getTranslations({ locale: resolvedLocale, namespace: "perfume.detail" });
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const taxonomyT = await getTranslations({ locale: resolvedLocale, namespace: "taxonomy" });
+  const faqT = await getTranslations({ locale: resolvedLocale, namespace: "perfume.faq" });
   const data = await getPerfumePageData(slug);
 
   if (!data) {
@@ -421,6 +424,19 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const detailPath = getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug });
   const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
   const brandName = perfume.brand?.name ?? t("unknown");
+  const familyLabel =
+    getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT) || perfume.fragranceFamily;
+  const bestPriceLabel = bestOffer
+    ? formatCurrency(bestOffer.bestTotalPrice, bestOffer.bestCurrency ?? "EUR", resolvedLocale)
+    : null;
+  const faqItems = buildPerfumeFaqItems(faqT, {
+    name: perfume.name,
+    brand: perfume.brand?.name ?? null,
+    family: familyLabel,
+    longevity: perfume.longevityScore ?? null,
+    gender: perfume.gender ?? null,
+    bestPriceLabel,
+  });
   return (
     <>
       <StructuredData
@@ -440,7 +456,17 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             currency: bestOffer?.bestCurrency ?? null,
             price: bestOffer?.bestTotalPrice ?? null,
             offerUrl: bestOffer?.bestUrl ?? null,
+            editorialReview:
+              typeof perfume.ratingInternal === "number" && perfume.ratingInternal > 0
+                ? {
+                    ratingValue: perfume.ratingInternal,
+                    bestRating: 5,
+                    worstRating: 1,
+                    reviewBody: overviewText,
+                  }
+                : null,
           }),
+          ...(faqItems.length > 0 ? [buildFaqSchema(faqItems)] : []),
         ]}
       />
       <ScopedIntlProvider
@@ -526,6 +552,13 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             />
             <PerfumeGrid perfumes={similarPerfumes} />
           </section>
+
+          <FaqSection
+            eyebrow={faqT("eyebrow")}
+            title={faqT("title", { name: perfume.name })}
+            subtitle={faqT("subtitle")}
+            items={faqItems}
+          />
         </Container>
       </ScopedIntlProvider>
     </>

@@ -34,6 +34,17 @@ const getSitemapBlogPosts = unstable_cache(
   { tags: [PUBLIC_CACHE_TAGS.blog] },
 );
 
+const getSitemapBrands = unstable_cache(
+  async () =>
+    prisma.brand.findMany({
+      where: { perfumes: { some: {} } },
+      select: { slug: true, updatedAt: true },
+      orderBy: { name: "asc" },
+    }),
+  [DEPLOY_ID, "sitemap-brands"],
+  { tags: [PUBLIC_CACHE_TAGS.catalog] },
+);
+
 const getSitemapPerfumes = unstable_cache(
   async () =>
     prisma.perfume.findMany({
@@ -70,10 +81,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const perfumes = await getSitemapPerfumes();
+  const brands = await getSitemapBrands();
 
   return [
     ...entries,
     ...blogEntries,
+    ...locales.flatMap((locale) =>
+      brands.map((brand) => ({
+        url: toAbsoluteUrl(getLocalizedPathname(locale, "/brands/[slug]", { slug: brand.slug })),
+        lastModified: brand.updatedAt,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      })),
+    ),
     ...locales.flatMap((locale) =>
       perfumes.map((perfume) => ({
         url: toAbsoluteUrl(getLocalizedPathname(locale, "/perfumes/[slug]", { slug: perfume.slug })),
