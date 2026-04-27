@@ -15,6 +15,7 @@ import { config } from "dotenv";
 config({ override: true });
 
 import Anthropic from "@anthropic-ai/sdk";
+import type { Message } from "@anthropic-ai/sdk/resources/messages/messages";
 import { fal } from "@fal-ai/client";
 import { createClient } from "@supabase/supabase-js";
 import { PrismaClient } from "@prisma/client";
@@ -315,6 +316,199 @@ type GeneratedPost = {
   tags: string[];
 };
 
+const JSON_OUTPUT_INSTRUCTIONS =
+  "Return only valid JSON. No markdown. No comments. Escape all quotes inside string values. Do not include trailing commas.";
+
+const generatedPostJsonSchema = {
+  type: "object",
+  additionalProperties: false,
+  properties: {
+    title: { type: "string" },
+    excerpt: { type: "string" },
+    content: { type: "string" },
+    seoTitle: { type: "string" },
+    seoDescription: { type: "string" },
+    tags: {
+      type: "array",
+      items: { type: "string" },
+      minItems: 1,
+    },
+  },
+  required: ["title", "excerpt", "content", "seoTitle", "seoDescription", "tags"],
+};
+
+class GeneratedPostParseError extends Error {
+  constructor(
+    message: string,
+    readonly step: string,
+    readonly rawOutput: string,
+    readonly cause?: unknown,
+  ) {
+    super(message);
+    this.name = "GeneratedPostParseError";
+  }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function validateGeneratedPost(value: unknown): GeneratedPost {
+  if (!isRecord(value)) {
+    throw new Error("Generated post is not a JSON object");
+  }
+
+  const requiredStringFields = ["title", "excerpt", "content", "seoTitle", "seoDescription"] as const;
+  for (const field of requiredStringFields) {
+    if (typeof value[field] !== "string" || value[field].trim().length === 0) {
+      throw new Error(`Generated post is missing required string field "${field}"`);
+    }
+  }
+
+  if (!Array.isArray(value.tags) || value.tags.length === 0 || !value.tags.every((tag) => typeof tag === "string" && tag.trim().length > 0)) {
+    throw new Error('Generated post is missing required string array field "tags"');
+  }
+
+  const { title, excerpt, content, seoTitle, seoDescription, tags } = value;
+
+  return {
+    title: title as string,
+    excerpt: excerpt as string,
+    content: content as string,
+    seoTitle: seoTitle as string,
+    seoDescription: seoDescription as string,
+    tags: tags as string[],
+  };
+}
+
+function stripMarkdownJsonFences(raw: string): string {
+  return raw
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
+}
+
+function getBalancedJsonObjectCandidate(input: string, startIndex: number): string | null {
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+
+  for (let index = startIndex; index < input.length; index += 1) {
+    const char = input[index];
+
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === '"') {
+        inString = false;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      inString = true;
+      continue;
+    }
+
+    if (char === "{") {
+      depth += 1;
+    } else if (char === "}") {
+      depth -= 1;
+      if (depth === 0) {
+        return input.slice(startIndex, index + 1);
+      }
+      if (depth < 0) {
+        return null;
+      }
+    }
+  }
+
+  return null;
+}
+
+function parseFirstValidJsonObject(input: string): unknown {
+  let lastParseError: unknown = null;
+
+  for (let index = 0; index < input.length; index += 1) {
+    if (input[index] !== "{") continue;
+
+    const candidate = getBalancedJsonObjectCandidate(input, index);
+    if (!candidate) continue;
+
+    try {
+      return JSON.parse(candidate) as unknown;
+    } catch (error) {
+      lastParseError = error;
+    }
+  }
+
+  throw lastParseError instanceof Error
+    ? lastParseError
+    : new Error("No valid JSON object found in model response");
+}
+
+function parseGeneratedPost(rawOutput: string): GeneratedPost {
+  let step = "trim response";
+
+  try {
+    const trimmed = rawOutput.trim();
+    if (!trimmed) {
+      throw new Error("Model response was empty");
+    }
+
+    step = "remove markdown JSON fences";
+    const withoutFences = stripMarkdownJsonFences(trimmed);
+
+    step = "extract first valid JSON object";
+    const parsed = parseFirstValidJsonObject(withoutFences);
+
+    step = "validate generated blog post fields";
+    return validateGeneratedPost(parsed);
+  } catch (error) {
+    throw new GeneratedPostParseError(
+      error instanceof Error ? error.message : "Failed to parse generated blog post JSON",
+      step,
+      rawOutput,
+      error,
+    );
+  }
+}
+
+function sanitizeModelOutputPreview(rawOutput: string, maxLength = 1200): string {
+  let preview = rawOutput.replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim();
+
+  for (const [name, value] of Object.entries(process.env)) {
+    if (!value || value.length < 8) continue;
+    if (!/(KEY|TOKEN|SECRET|PASSWORD|AUTH|SUPABASE|ANTHROPIC|FAL)/i.test(name)) continue;
+    preview = preview.split(value).join(`[redacted:${name}]`);
+  }
+
+  preview = preview
+    .replace(/\b(sk-ant-[A-Za-z0-9_-]+)/g, "[redacted:anthropic-key]")
+    .replace(/\b([A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,})\b/g, "[redacted:jwt]")
+    .replace(/\b[A-Za-z0-9_=-]{32,}\b/g, "[redacted:token-like]");
+
+  return preview.length > maxLength ? `${preview.slice(0, maxLength)}...` : preview;
+}
+
+function logGeneratedPostParseFailure(error: GeneratedPostParseError, locale: "it" | "en", attempt: number) {
+  console.error(`[blog:generate] ${locale} JSON parse failed on attempt ${attempt}`);
+  console.error(`[blog:generate] ${locale} failed step: ${error.step}`);
+  console.error(`[blog:generate] ${locale} parse error: ${error.message}`);
+  console.error(`[blog:generate] ${locale} raw model output preview: ${sanitizeModelOutputPreview(error.rawOutput)}`);
+}
+
+function extractTextFromMessage(message: Message): string {
+  return message.content
+    .filter((block) => block.type === "text")
+    .map((block) => block.text)
+    .join("\n")
+    .trim();
+}
+
 async function generatePost(topic: Topic, locale: "it" | "en"): Promise<GeneratedPost> {
   const isIt = locale === "it";
   const internalLinks = isIt ? INTERNAL_LINKS_IT : INTERNAL_LINKS_EN;
@@ -323,11 +517,13 @@ async function generatePost(topic: Topic, locale: "it" | "en"): Promise<Generate
     ? `Sei un copywriter SEO esperto specializzato in profumeria di lusso che scrive per Odora.it.
 Odora è un sito italiano di scoperta e confronto profumi con catalogo selezionato e Finder intelligente.
 Scrivi articoli in italiano ottimizzati per Google, con tono autorevole, caldo e accessibile.
-Rispondi ONLY con un JSON valido, nessun testo aggiuntivo fuori dal JSON.`
+Rispondi ONLY con un JSON valido, nessun testo aggiuntivo fuori dal JSON.
+${JSON_OUTPUT_INSTRUCTIONS}`
     : `You are an SEO copywriter specialising in luxury perfumery writing for Odora.it.
 Odora is an Italian fragrance discovery and price comparison site with a curated catalog and smart Finder.
 Write articles in English optimised for Google, with an authoritative yet warm and accessible tone.
-Reply ONLY with valid JSON, no additional text outside the JSON.`;
+Reply ONLY with valid JSON, no additional text outside the JSON.
+${JSON_OUTPUT_INSTRUCTIONS}`;
 
   const userPrompt = isIt
     ? `Scrivi un articolo blog SEO ottimizzato per Odora.it.
@@ -356,7 +552,9 @@ Rispondi con questo JSON esatto (nessun testo fuori):
   "seoTitle": "title tag SEO (max 60 caratteri, keyword primaria all'inizio)",
   "seoDescription": "meta description con keyword primaria e CTA (max 155 caratteri)",
   "tags": ["tag1", "tag2", "tag3"]
-}`
+}
+
+${JSON_OUTPUT_INSTRUCTIONS}`
     : `Write an SEO-optimised blog post for Odora.it.
 
 Proposed title: "${topic.title}"
@@ -383,22 +581,52 @@ Reply with this exact JSON (no text outside):
   "seoTitle": "SEO title tag (max 60 chars, primary keyword first)",
   "seoDescription": "meta description with primary keyword and CTA (max 155 chars)",
   "tags": ["tag1", "tag2", "tag3"]
-}`;
+}
 
-  const message = await anthropic.messages.create({
-    model: "claude-sonnet-4-6",
-    max_tokens: 4000,
-    system: systemPrompt,
-    messages: [{ role: "user", content: userPrompt }],
-  });
+${JSON_OUTPUT_INSTRUCTIONS}`;
 
-  const text = message.content[0];
-  if (text.type !== "text") throw new Error("Unexpected response type");
+  let previousInvalidOutput: string | null = null;
 
-  const jsonMatch = text.text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) throw new Error("No JSON found in response");
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const correctivePrompt: string | null = previousInvalidOutput
+      ? `The previous response was invalid JSON and could not be parsed. Generate the same blog post object again, using valid JSON only. ${JSON_OUTPUT_INSTRUCTIONS}`
+      : null;
 
-  return JSON.parse(jsonMatch[0]) as GeneratedPost;
+    const message: Message = await anthropic.messages.create({
+      model: "claude-sonnet-4-6",
+      max_tokens: 4000,
+      stream: false,
+      system: systemPrompt,
+      messages: [{ role: "user", content: correctivePrompt ? `${userPrompt}\n\n${correctivePrompt}` : userPrompt }],
+      output_config: {
+        format: {
+          type: "json_schema",
+          schema: generatedPostJsonSchema,
+        },
+      },
+    });
+
+    const rawOutput = extractTextFromMessage(message);
+    if (!rawOutput) {
+      const error: GeneratedPostParseError = new GeneratedPostParseError("Anthropic response did not include a text JSON payload", "read Anthropic text response", JSON.stringify(message.content));
+      logGeneratedPostParseFailure(error, locale, attempt);
+      if (attempt === 2) throw error;
+      previousInvalidOutput = error.rawOutput;
+      continue;
+    }
+
+    try {
+      return parseGeneratedPost(rawOutput);
+    } catch (error) {
+      if (!(error instanceof GeneratedPostParseError)) throw error;
+      logGeneratedPostParseFailure(error, locale, attempt);
+      if (attempt === 2) throw error;
+      previousInvalidOutput = rawOutput;
+      console.log(`[blog:generate] retrying ${locale} generation with corrective JSON-only prompt...`);
+    }
+  }
+
+  throw new Error(`Failed to generate valid ${locale} blog post JSON`);
 }
 
 // ---------------------------------------------------------------------------
