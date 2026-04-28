@@ -43,7 +43,7 @@ export function SaveListButton({
     }
 
     startTransition(async () => {
-      const result = await toggleSavePerfumeList(listId);
+      const result = await toggleSavePerfumeList(listId, locale);
       if (!result.ok) {
         setError(result.error ?? t("saveError"));
         return;

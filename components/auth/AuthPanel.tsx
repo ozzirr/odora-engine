@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AuthSocialButtons } from "@/components/auth/AuthSocialButtons";
@@ -46,6 +47,8 @@ export function AuthPanel({
   const switchMode = isLogin ? "signup" : "login";
   const switchText = isLogin ? t("signupLink") : t("loginLink");
   const switchPrompt = isLogin ? t("signupPrompt") : t("loginPrompt");
+  const [signupSuccessMessage, setSignupSuccessMessage] = useState<string | null>(null);
+  const showSignupSuccess = !isLogin && signupSuccessMessage;
 
   return (
     <div
@@ -66,47 +69,63 @@ export function AuthPanel({
         </button>
       ) : null}
 
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{t("eyebrow")}</p>
-      <h1 id={titleId} className="mt-2 pr-10 font-display text-4xl text-[#21180f]">
-        {t("title")}
-      </h1>
-      <p className="mt-2 text-sm text-[#685747]">{t("subtitle")}</p>
-
-      {isLogin ? (
-        <LoginForm nextPath={nextPath} initialError={initialError} showDevLogin={showDevLogin} />
+      {showSignupSuccess ? (
+        <div className="flex min-h-72 items-center justify-center px-2 py-10 text-center">
+          <div className="rounded-2xl border border-[#d1dbc3] bg-[#f3f8eb] px-6 py-8">
+            <p className="mx-auto max-w-sm text-xl font-medium leading-8 text-[#405a34]">
+              {signupSuccessMessage}
+            </p>
+          </div>
+        </div>
       ) : (
-        <SignupForm nextPath={nextPath} initialError={initialError} />
+        <>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{t("eyebrow")}</p>
+          <h1 id={titleId} className="mt-2 pr-10 font-display text-4xl text-[#21180f]">
+            {t("title")}
+          </h1>
+          <p className="mt-2 text-sm text-[#685747]">{t("subtitle")}</p>
+
+          {isLogin ? (
+            <LoginForm nextPath={nextPath} initialError={initialError} showDevLogin={showDevLogin} />
+          ) : (
+            <SignupForm
+              nextPath={nextPath}
+              initialError={initialError}
+              onSuccess={setSignupSuccessMessage}
+            />
+          )}
+
+          <div className="my-5 flex items-center gap-3">
+            <span className="h-px flex-1 bg-[#e4d8c9]" />
+            <span className="text-xs uppercase tracking-[0.1em] text-[#8b7762]">{t("or")}</span>
+            <span className="h-px flex-1 bg-[#e4d8c9]" />
+          </div>
+
+          <AuthSocialButtons nextPath={nextPath} />
+
+          <p className="mt-6 text-sm text-[#675545]">
+            {switchPrompt}{" "}
+            {onSwitchMode ? (
+              <button
+                type="button"
+                onClick={() => onSwitchMode(switchMode)}
+                className="font-semibold text-[#2b2118] underline-offset-2 hover:underline"
+              >
+                {switchText}
+              </button>
+            ) : (
+              <Link
+                href={switchHref ?? (isLogin ? "/signup" : "/login")}
+                className="font-semibold text-[#2b2118] underline-offset-2 hover:underline"
+              >
+                {switchText}
+              </Link>
+            )}
+          </p>
+
+          <p className="mt-3 text-xs text-[#8b7762]">{t("socialNotice")}</p>
+        </>
       )}
-
-      <div className="my-5 flex items-center gap-3">
-        <span className="h-px flex-1 bg-[#e4d8c9]" />
-        <span className="text-xs uppercase tracking-[0.1em] text-[#8b7762]">{t("or")}</span>
-        <span className="h-px flex-1 bg-[#e4d8c9]" />
-      </div>
-
-      <AuthSocialButtons nextPath={nextPath} />
-
-      <p className="mt-6 text-sm text-[#675545]">
-        {switchPrompt}{" "}
-        {onSwitchMode ? (
-          <button
-            type="button"
-            onClick={() => onSwitchMode(switchMode)}
-            className="font-semibold text-[#2b2118] underline-offset-2 hover:underline"
-          >
-            {switchText}
-          </button>
-        ) : (
-          <Link
-            href={switchHref ?? (isLogin ? "/signup" : "/login")}
-            className="font-semibold text-[#2b2118] underline-offset-2 hover:underline"
-          >
-            {switchText}
-          </Link>
-        )}
-      </p>
-
-      <p className="mt-3 text-xs text-[#8b7762]">{t("socialNotice")}</p>
     </div>
   );
 }

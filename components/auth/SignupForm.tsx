@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 
 import { signupWithPassword, type SignupFormState } from "@/app/signup/actions";
@@ -9,17 +9,34 @@ import { buttonStyles } from "@/components/ui/Button";
 type SignupFormProps = {
   nextPath?: string;
   initialError?: string;
+  onSuccess?: (message: string) => void;
 };
 
 const initialState: SignupFormState = {};
 
-export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormProps) {
+export function SignupForm({ nextPath = "/perfumes", initialError, onSuccess }: SignupFormProps) {
   const t = useTranslations("auth.signup.page.form");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(signupWithPassword, {
     ...initialState,
     ...(initialError ? { error: initialError } : {}),
   });
+
+  useEffect(() => {
+    if (state?.message) {
+      onSuccess?.(state.message);
+    }
+  }, [onSuccess, state?.message]);
+
+  if (state?.message) {
+    return (
+      <div className="mt-8 flex min-h-48 items-center justify-center rounded-2xl border border-[#d1dbc3] bg-[#f3f8eb] px-6 py-10 text-center">
+        <p className="max-w-sm text-lg font-medium leading-8 text-[#405a34] sm:text-xl">
+          {state.message}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <form action={formAction} className="mt-6 space-y-4">

@@ -3,11 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { PerfumeListVisibility } from "@prisma/client";
 
+import { sendListSavedEmail } from "@/lib/email/notifications";
 import {
   ensureAppUser,
+  getPublicListKey,
   getUniqueListSlug,
   type PerfumeListVisibilityValue,
 } from "@/lib/perfume-lists";
+import { defaultLocale, getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
+import { toAbsoluteUrl } from "@/lib/metadata";
 import { prisma } from "@/lib/prisma";
 import { createClient } from "@/lib/supabase/server";
 
@@ -237,13 +241,28 @@ export type ToggleSaveResult = {
   error?: string;
 };
 
-export async function toggleSavePerfumeList(listId: number): Promise<ToggleSaveResult> {
+export async function toggleSavePerfumeList(
+  listId: number,
+  requestedLocale?: string,
+): Promise<ToggleSaveResult> {
   try {
     const user = await getAuthenticatedAppUser();
+    const locale: AppLocale = requestedLocale && hasLocale(requestedLocale) ? requestedLocale : defaultLocale;
 
     const list = await prisma.perfumeList.findFirst({
       where: { id: listId, visibility: PerfumeListVisibility.PUBLIC },
-      select: { id: true, userId: true },
+      select: {
+        id: true,
+        userId: true,
+        name: true,
+        slug: true,
+        user: {
+          select: {
+            email: true,
+            name: true,
+          },
+        },
+      },
     });
 
     if (!list) {
@@ -263,6 +282,25 @@ export async function toggleSavePerfumeList(listId: number): Promise<ToggleSaveR
       await prisma.perfumeListSave.delete({ where: { id: existing.id } });
     } else {
       await prisma.perfumeListSave.create({ data: { userId: user.id, listId } });
+      if (list.user.email) {
+        const listUrl = toAbsoluteUrl(
+          getLocalizedPathname(locale, "/lists/[listKey]", {
+            listKey: getPublicListKey(list),
+          }),
+        );
+        const emailResult = await sendListSavedEmail({
+          to: list.user.email,
+          creatorName: list.user.name,
+          saverName: user.name,
+          listName: list.name,
+          listUrl,
+          locale,
+        });
+
+        if (!emailResult.ok) {
+          console.error("Failed to send list saved notification", emailResult.error);
+        }
+      }
     }
 
     const saveCount = await prisma.perfumeListSave.count({ where: { listId } });

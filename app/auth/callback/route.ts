@@ -46,7 +46,14 @@ export async function GET(request: NextRequest) {
   const type = requestUrl.searchParams.get("type");
   const rawNextPath = requestUrl.searchParams.get("next");
   const fallbackLocale = getFallbackLocale(request, rawNextPath);
-  const nextPath = sanitizeAuthNextPath(rawNextPath, getLocalizedPathname(fallbackLocale, "/perfumes"));
+  const isRecovery = type === "recovery";
+  const nextPath = sanitizeAuthNextPath(
+    rawNextPath,
+    isRecovery
+      ? `${getLocalizedPathname(fallbackLocale, "/reset-password")}?mode=update`
+      : getLocalizedPathname(fallbackLocale, "/perfumes"),
+    { allowAuthPaths: isRecovery },
+  );
   const successRedirect = NextResponse.redirect(new URL(nextPath, requestUrl.origin));
 
   let supabase;

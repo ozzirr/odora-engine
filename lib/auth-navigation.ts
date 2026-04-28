@@ -21,7 +21,15 @@ export function isAuthPath(value: string) {
   return lastSegment ? AUTH_PATH_SEGMENTS.has(lastSegment) : false;
 }
 
-export function sanitizeAuthNextPath(value: string | null | undefined, fallbackPath: string) {
+type SanitizeAuthNextPathOptions = {
+  allowAuthPaths?: boolean;
+};
+
+export function sanitizeAuthNextPath(
+  value: string | null | undefined,
+  fallbackPath: string,
+  options: SanitizeAuthNextPathOptions = {},
+) {
   if (!value) {
     return fallbackPath;
   }
@@ -31,7 +39,7 @@ export function sanitizeAuthNextPath(value: string | null | undefined, fallbackP
     return fallbackPath;
   }
 
-  if (isAuthPath(trimmed)) {
+  if (!options.allowAuthPaths && isAuthPath(trimmed)) {
     return fallbackPath;
   }
 
