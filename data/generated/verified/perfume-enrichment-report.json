@@ -1,21 +1,21 @@
 {
   "summary": {
-    "totalRowsProcessed": 10,
-    "totalMatched": 3,
-    "totalUnmatched": 7,
+    "totalRowsProcessed": 22,
+    "totalMatched": 22,
+    "totalUnmatched": 0,
     "lowConfidenceMatches": 0,
     "ambiguousMatches": 0,
-    "rowsEnriched": 3,
-    "rowsUnchanged": 7,
+    "rowsEnriched": 22,
+    "rowsUnchanged": 0,
     "rowsWithCatalogFieldChanges": 0,
-    "rowsWithProvenanceOnlyChanges": 3,
-    "conflicts": 3,
+    "rowsWithProvenanceOnlyChanges": 22,
+    "conflicts": 22,
     "fieldsEnrichedByType": {
-      "matched_source": 3,
-      "matched_url": 3,
-      "matched_name": 3,
-      "matched_confidence": 3,
-      "source_last_checked_at": 3
+      "matched_source": 22,
+      "matched_url": 22,
+      "matched_name": 22,
+      "matched_confidence": 22,
+      "source_last_checked_at": 22
     }
   },
   "adapterCoverage": [
@@ -318,13 +318,13 @@
   "rows": [
     {
       "rowIndex": 2,
-      "brand": "Orto Parisi",
-      "name": "Megamare",
-      "slug": "orto-parisi-megamare",
+      "brand": "Tom Ford",
+      "name": "Grey Vetiver Eau de Parfum",
+      "slug": "tom-ford-grey-vetiver-eau-de-parfum",
       "matched": true,
       "matchedSource": "Parfumo Top Lists",
-      "matchedUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
-      "matchedName": "Megamare",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
+      "matchedName": "Grey Vetiver Eau de Parfum",
       "confidenceScore": 1,
       "confidenceLevel": "high",
       "enrichmentStatus": "matched_provenance_only",
@@ -332,8 +332,8 @@
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Megamare",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "name": "Grey Vetiver Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -352,8 +352,8 @@
       "conflictsDetected": [
         {
           "field": "imageSourceUrl",
-          "currentValue": "https://media.parfumo.com/perfumes/0f/0ff2f2-megamare-orto-parisi_1200.jpg",
-          "sourceValue": "https://media.parfumo.com/perfumes/0f/0ff2f2-megamare-orto-parisi_1200.jpg?width=240&aspect_ratio=1:1",
+          "currentValue": "https://media.parfumo.com/perfumes/6a/6abac6-grey-vetiver-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/6a/6abac6-grey-vetiver-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
           "message": "Trusted source value differs from the existing verified value and was not auto-applied."
         }
       ],
@@ -361,7 +361,7 @@
         "releaseYear": {
           "field": "releaseYear",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -373,7 +373,7 @@
         "topNotes": {
           "field": "topNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -385,7 +385,7 @@
         "middleNotes": {
           "field": "middleNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -397,7 +397,7 @@
         "baseNotes": {
           "field": "baseNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -409,7 +409,7 @@
         "fragranceFamily": {
           "field": "fragranceFamily",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -493,7 +493,7 @@
         "imageSourceUrl": {
           "field": "imageSourceUrl",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "sourceField": "image_url",
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -504,18 +504,18 @@
         }
       },
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Megamare."
+        "Accepted trusted Parfumo Top Lists candidate: Grey Vetiver Eau de Parfum."
       ]
     },
     {
       "rowIndex": 3,
-      "brand": "Orto Parisi",
-      "name": "Bergamask",
-      "slug": "orto-parisi-bergamask",
+      "brand": "Tom Ford",
+      "name": "Noir Eau de Parfum",
+      "slug": "tom-ford-noir-eau-de-parfum",
       "matched": true,
       "matchedSource": "Parfumo Top Lists",
-      "matchedUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
-      "matchedName": "Bergamask",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
+      "matchedName": "Noir Eau de Parfum",
       "confidenceScore": 1,
       "confidenceLevel": "high",
       "enrichmentStatus": "matched_provenance_only",
@@ -523,8 +523,8 @@
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Bergamask",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "name": "Noir Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -543,8 +543,8 @@
       "conflictsDetected": [
         {
           "field": "imageSourceUrl",
-          "currentValue": "https://media.parfumo.com/perfumes/25/253ace-bergamask-orto-parisi_1200.jpg",
-          "sourceValue": "https://media.parfumo.com/perfumes/25/253ace-bergamask-orto-parisi_1200.jpg?width=240&aspect_ratio=1:1",
+          "currentValue": "https://media.parfumo.com/perfumes/01/01bfa4-noir-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/01/01bfa4-noir-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
           "message": "Trusted source value differs from the existing verified value and was not auto-applied."
         }
       ],
@@ -552,7 +552,7 @@
         "releaseYear": {
           "field": "releaseYear",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -564,7 +564,7 @@
         "topNotes": {
           "field": "topNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -576,7 +576,7 @@
         "middleNotes": {
           "field": "middleNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -588,7 +588,7 @@
         "baseNotes": {
           "field": "baseNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -600,7 +600,7 @@
         "fragranceFamily": {
           "field": "fragranceFamily",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -684,7 +684,7 @@
         "imageSourceUrl": {
           "field": "imageSourceUrl",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "sourceField": "image_url",
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -695,18 +695,18 @@
         }
       },
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Bergamask."
+        "Accepted trusted Parfumo Top Lists candidate: Noir Eau de Parfum."
       ]
     },
     {
       "rowIndex": 4,
-      "brand": "Orto Parisi",
-      "name": "Terroni",
-      "slug": "orto-parisi-terroni",
+      "brand": "Tom Ford",
+      "name": "Noir Anthracite",
+      "slug": "tom-ford-noir-anthracite",
       "matched": true,
       "matchedSource": "Parfumo Top Lists",
-      "matchedUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
-      "matchedName": "Terroni",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
+      "matchedName": "Noir Anthracite",
       "confidenceScore": 1,
       "confidenceLevel": "high",
       "enrichmentStatus": "matched_provenance_only",
@@ -714,8 +714,8 @@
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Terroni",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "name": "Noir Anthracite",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -734,8 +734,8 @@
       "conflictsDetected": [
         {
           "field": "imageSourceUrl",
-          "currentValue": "https://media.parfumo.com/perfumes/cc/ccfee9-terroni-orto-parisi_1200.jpg",
-          "sourceValue": "https://media.parfumo.com/perfumes/cc/ccfee9-terroni-orto-parisi_1200.jpg?width=240&aspect_ratio=1:1",
+          "currentValue": "https://media.parfumo.com/perfumes/77/77c31a-noir-anthracite-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/77/77c31a-noir-anthracite-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
           "message": "Trusted source value differs from the existing verified value and was not auto-applied."
         }
       ],
@@ -743,7 +743,7 @@
         "releaseYear": {
           "field": "releaseYear",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -755,7 +755,7 @@
         "topNotes": {
           "field": "topNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -767,7 +767,7 @@
         "middleNotes": {
           "field": "middleNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -779,7 +779,7 @@
         "baseNotes": {
           "field": "baseNotes",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -791,7 +791,7 @@
         "fragranceFamily": {
           "field": "fragranceFamily",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": null,
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -875,7 +875,7 @@
         "imageSourceUrl": {
           "field": "imageSourceUrl",
           "source": "Parfumo Top Lists",
-          "sourceUrl": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "sourceField": "image_url",
           "confidence": 1,
           "lastCheckedAt": "2026-04-28T17:26:10.405Z",
@@ -886,84 +886,109 @@
         }
       },
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Terroni."
+        "Accepted trusted Parfumo Top Lists candidate: Noir Anthracite."
       ]
     },
     {
       "rowIndex": 5,
-      "brand": "Orto Parisi",
-      "name": "Viride",
-      "slug": "orto-parisi-viride",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Velvet Orchid Eau de Parfum",
+      "slug": "tom-ford-velvet-orchid-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
+      "matchedName": "Velvet Orchid Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Velvet Orchid Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/38/385038-velvet-orchid-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/38/385038-velvet-orchid-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1040,96 +1065,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Velvet Orchid Eau de Parfum."
       ]
     },
     {
       "rowIndex": 6,
-      "brand": "Orto Parisi",
-      "name": "Cuoium",
-      "slug": "orto-parisi-cuoium",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Metallique",
+      "slug": "tom-ford-metallique",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
+      "matchedName": "Metallique",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Metallique",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/90/9077c0-metallique-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/90/9077c0-metallique-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1206,96 +1256,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Metallique."
       ]
     },
     {
       "rowIndex": 7,
-      "brand": "Orto Parisi",
-      "name": "Stercus",
-      "slug": "orto-parisi-stercus",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Sahara Noir",
+      "slug": "tom-ford-sahara-noir",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
+      "matchedName": "Sahara Noir",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Sahara Noir",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/cd/cd2953-sahara-noir-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/cd/cd2953-sahara-noir-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1372,96 +1447,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Sahara Noir."
       ]
     },
     {
       "rowIndex": 8,
-      "brand": "Orto Parisi",
-      "name": "Boccanera",
-      "slug": "orto-parisi-boccanera",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Black Orchid Eau de Parfum",
+      "slug": "tom-ford-black-orchid-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
+      "matchedName": "Black Orchid Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Black Orchid Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/bb/bbbf67-black-orchid-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/bb/bbbf67-black-orchid-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1538,96 +1638,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Eau de Parfum."
       ]
     },
     {
       "rowIndex": 9,
-      "brand": "Orto Parisi",
-      "name": "Seminalis",
-      "slug": "orto-parisi-seminalis",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Ombré Leather Parfum",
+      "slug": "tom-ford-ombre-leather-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
+      "matchedName": "Ombré Leather Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ombré Leather Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/3f/3fa6b6-ombre-leather-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/3f/3fa6b6-ombre-leather-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1704,96 +1829,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Ombré Leather Parfum."
       ]
     },
     {
       "rowIndex": 10,
-      "brand": "Orto Parisi",
-      "name": "Brutus",
-      "slug": "orto-parisi-brutus",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Tobacco Oud",
+      "slug": "tom-ford-tobacco-oud",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
+      "matchedName": "Tobacco Oud",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Tobacco Oud",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/ec/ec4679-tobacco-oud-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/ec/ec4679-tobacco-oud-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -1870,96 +2020,121 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
-          "source": null,
-          "sourceUrl": null,
-          "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Existing verified value was preserved and the conflict was logged for manual review."
           ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Tobacco Oud."
       ]
     },
     {
       "rowIndex": 11,
-      "brand": "Orto Parisi",
-      "name": "Risvelium",
-      "slug": "orto-parisi-risvelium",
-      "matched": false,
-      "matchedSource": null,
-      "matchedUrl": null,
-      "matchedName": null,
-      "confidenceScore": null,
-      "confidenceLevel": "none",
-      "enrichmentStatus": "unmatched",
-      "candidateMatches": [],
-      "fieldsEnriched": [],
-      "fieldsSkipped": [],
-      "conflictsDetected": [],
+      "brand": "Tom Ford",
+      "name": "Oud Minérale",
+      "slug": "tom-ford-oud-minerale",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
+      "matchedName": "Oud Minérale",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Oud Minérale",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/14/143592-oud-minerale-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/14/143592-oud-minerale-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
       "fieldProvenance": {
         "releaseYear": {
           "field": "releaseYear",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "topNotes": {
           "field": "topNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "middleNotes": {
           "field": "middleNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "baseNotes": {
           "field": "baseNotes",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "fragranceFamily": {
           "field": "fragranceFamily",
-          "source": null,
-          "sourceUrl": null,
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
           "sourceField": null,
-          "confidence": null,
-          "lastCheckedAt": null,
-          "overwriteDecision": "not_implemented",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
           "notes": [
-            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
           ]
         },
         "descriptionShort": {
@@ -2036,6 +2211,125 @@
         },
         "imageSourceUrl": {
           "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Oud Minérale."
+      ]
+    },
+    {
+      "rowIndex": 12,
+      "brand": "Tom Ford",
+      "name": "Neroli Portofino Eau de Parfum",
+      "slug": "tom-ford-neroli-portofino-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+      "matchedName": "Neroli Portofino Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Neroli Portofino Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/5c/5ccfe2-neroli-portofino-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/5c/5ccfe2-neroli-portofino-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
           "source": null,
           "sourceUrl": null,
           "sourceField": null,
@@ -2045,10 +2339,2183 @@
           "notes": [
             "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
           ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
         }
       },
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Neroli Portofino Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 13,
+      "brand": "Tom Ford",
+      "name": "Plum Japonais",
+      "slug": "tom-ford-plum-japonais",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+      "matchedName": "Plum Japonais",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Plum Japonais",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/a1/a1e9da-plum-japonais-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/a1/a1e9da-plum-japonais-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Plum Japonais."
+      ]
+    },
+    {
+      "rowIndex": 14,
+      "brand": "Tom Ford",
+      "name": "Bitter Peach Eau de Parfum",
+      "slug": "tom-ford-bitter-peach-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+      "matchedName": "Bitter Peach Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Bitter Peach Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/e3/e3f5b6-bitter-peach-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/e3/e3f5b6-bitter-peach-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Bitter Peach Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 15,
+      "brand": "Tom Ford",
+      "name": "Eau d'Ombré Leather",
+      "slug": "tom-ford-eau-d-ombre-leather",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+      "matchedName": "Eau d'Ombré Leather",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Eau d'Ombré Leather",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/68/68249f-eau-d-ombre-leather-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/68/68249f-eau-d-ombre-leather-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Eau d'Ombré Leather."
+      ]
+    },
+    {
+      "rowIndex": 16,
+      "brand": "Tom Ford",
+      "name": "Ébène Fumé Eau de Parfum",
+      "slug": "tom-ford-ebene-fume-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+      "matchedName": "Ébène Fumé Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ébène Fumé Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/c2/c2d4a0-ebene-fume-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/c2/c2d4a0-ebene-fume-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ébène Fumé Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 17,
+      "brand": "Tom Ford",
+      "name": "Soleil Neige Eau de Parfum",
+      "slug": "tom-ford-soleil-neige-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+      "matchedName": "Soleil Neige Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Soleil Neige Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/f4/f462fe_soleil-neige-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/f4/f462fe_soleil-neige-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Soleil Neige Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 18,
+      "brand": "Tom Ford",
+      "name": "Costa Azzurra Eau de Parfum",
+      "slug": "tom-ford-costa-azzurra-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+      "matchedName": "Costa Azzurra Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Costa Azzurra Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/ef/efdf1a-costa-azzurra-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/ef/efdf1a-costa-azzurra-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Costa Azzurra Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 19,
+      "brand": "Tom Ford",
+      "name": "White Suede Eau de Parfum",
+      "slug": "tom-ford-white-suede-eau-de-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+      "matchedName": "White Suede Eau de Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "White Suede Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/95/957f14-white-suede-eau-de-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/95/957f14-white-suede-eau-de-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: White Suede Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 20,
+      "brand": "Tom Ford",
+      "name": "Vanille Fatale",
+      "slug": "tom-ford-vanille-fatale",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+      "matchedName": "Vanille Fatale",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Vanille Fatale",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/a6/a6bb83-vanille-fatale-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/a6/a6bb83-vanille-fatale-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Vanille Fatale."
+      ]
+    },
+    {
+      "rowIndex": 21,
+      "brand": "Tom Ford",
+      "name": "Black Orchid Parfum",
+      "slug": "tom-ford-black-orchid-parfum",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+      "matchedName": "Black Orchid Parfum",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Black Orchid Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/6b/6bf5a5-black-orchid-parfum-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/6b/6bf5a5-black-orchid-parfum-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Parfum."
+      ]
+    },
+    {
+      "rowIndex": 22,
+      "brand": "Tom Ford",
+      "name": "Mandarino di Amalfi Acqua",
+      "slug": "tom-ford-mandarino-di-amalfi-acqua",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+      "matchedName": "Mandarino di Amalfi Acqua",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mandarino di Amalfi Acqua",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/23/23f65d-mandarino-di-amalfi-acqua-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/23/23f65d-mandarino-di-amalfi-acqua-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mandarino di Amalfi Acqua."
+      ]
+    },
+    {
+      "rowIndex": 23,
+      "brand": "Tom Ford",
+      "name": "Cherry Smoke",
+      "slug": "tom-ford-cherry-smoke",
+      "matched": true,
+      "matchedSource": "Parfumo Top Lists",
+      "matchedUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+      "matchedName": "Cherry Smoke",
+      "confidenceScore": 1,
+      "confidenceLevel": "high",
+      "enrichmentStatus": "matched_provenance_only",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Cherry Smoke",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "fieldsEnriched": [
+        "matched_source",
+        "matched_url",
+        "matched_name",
+        "matched_confidence",
+        "source_last_checked_at"
+      ],
+      "fieldsSkipped": [
+        "imageSourceUrl"
+      ],
+      "conflictsDetected": [
+        {
+          "field": "imageSourceUrl",
+          "currentValue": "https://media.parfumo.com/perfumes/fa/fa5266-cherry-smoke-tom-ford_1200.jpg",
+          "sourceValue": "https://media.parfumo.com/perfumes/fa/fa5266-cherry-smoke-tom-ford_1200.jpg?width=240&aspect_ratio=1:1",
+          "message": "Trusted source value differs from the existing verified value and was not auto-applied."
+        }
+      ],
+      "fieldProvenance": {
+        "releaseYear": {
+          "field": "releaseYear",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "topNotes": {
+          "field": "topNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "middleNotes": {
+          "field": "middleNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "baseNotes": {
+          "field": "baseNotes",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "fragranceFamily": {
+          "field": "fragranceFamily",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": null,
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "unsupported_by_adapter",
+          "notes": [
+            "Top-list snapshots currently provide trusted identity, URL, rating metadata, and image URL only."
+          ]
+        },
+        "descriptionShort": {
+          "field": "descriptionShort",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "descriptionLong": {
+          "field": "descriptionLong",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites, Fragrantica."
+          ]
+        },
+        "longevityScore": {
+          "field": "longevityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "sillageScore": {
+          "field": "sillageScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "versatilityScore": {
+          "field": "versatilityScore",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Fragrantica."
+          ]
+        },
+        "officialSourceUrl": {
+          "field": "officialSourceUrl",
+          "source": null,
+          "sourceUrl": null,
+          "sourceField": null,
+          "confidence": null,
+          "lastCheckedAt": null,
+          "overwriteDecision": "not_implemented",
+          "notes": [
+            "Awaiting implementation for trusted adapter(s): Official Brand Sites."
+          ]
+        },
+        "imageSourceUrl": {
+          "field": "imageSourceUrl",
+          "source": "Parfumo Top Lists",
+          "sourceUrl": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "sourceField": "image_url",
+          "confidence": 1,
+          "lastCheckedAt": "2026-04-28T17:26:10.405Z",
+          "overwriteDecision": "conflict_logged",
+          "notes": [
+            "Existing verified value was preserved and the conflict was logged for manual review."
+          ]
+        }
+      },
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Cherry Smoke."
       ]
     }
   ]

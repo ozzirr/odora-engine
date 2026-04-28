@@ -1,20 +1,20 @@
 {
   "summary": {
-    "totalItems": 10
+    "totalItems": 22
   },
   "items": [
     {
       "rowIndex": 2,
-      "brand": "Orto Parisi",
-      "name": "Megamare",
-      "slug": "orto-parisi-megamare",
+      "brand": "Tom Ford",
+      "name": "Grey Vetiver Eau de Parfum",
+      "slug": "tom-ford-grey-vetiver-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Megamare",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Megamare",
+          "name": "Grey Vetiver Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -22,21 +22,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Megamare."
+        "Accepted trusted Parfumo Top Lists candidate: Grey Vetiver Eau de Parfum."
       ]
     },
     {
       "rowIndex": 3,
-      "brand": "Orto Parisi",
-      "name": "Bergamask",
-      "slug": "orto-parisi-bergamask",
+      "brand": "Tom Ford",
+      "name": "Noir Eau de Parfum",
+      "slug": "tom-ford-noir-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Bergamask",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Bergamask",
+          "name": "Noir Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -44,21 +44,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Bergamask."
+        "Accepted trusted Parfumo Top Lists candidate: Noir Eau de Parfum."
       ]
     },
     {
       "rowIndex": 4,
-      "brand": "Orto Parisi",
-      "name": "Terroni",
-      "slug": "orto-parisi-terroni",
+      "brand": "Tom Ford",
+      "name": "Noir Anthracite",
+      "slug": "tom-ford-noir-anthracite",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Terroni",
-          "url": "https://www.parfumo.com/Perfumes/Orto_Parisi/Terroni",
+          "name": "Noir Anthracite",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -66,91 +66,425 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Terroni."
+        "Accepted trusted Parfumo Top Lists candidate: Noir Anthracite."
       ]
     },
     {
       "rowIndex": 5,
-      "brand": "Orto Parisi",
-      "name": "Viride",
-      "slug": "orto-parisi-viride",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Velvet Orchid Eau de Parfum",
+      "slug": "tom-ford-velvet-orchid-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Velvet Orchid Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Velvet Orchid Eau de Parfum."
       ]
     },
     {
       "rowIndex": 6,
-      "brand": "Orto Parisi",
-      "name": "Cuoium",
-      "slug": "orto-parisi-cuoium",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Metallique",
+      "slug": "tom-ford-metallique",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Metallique",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Metallique."
       ]
     },
     {
       "rowIndex": 7,
-      "brand": "Orto Parisi",
-      "name": "Stercus",
-      "slug": "orto-parisi-stercus",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Sahara Noir",
+      "slug": "tom-ford-sahara-noir",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Sahara Noir",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Sahara Noir."
       ]
     },
     {
       "rowIndex": 8,
-      "brand": "Orto Parisi",
-      "name": "Boccanera",
-      "slug": "orto-parisi-boccanera",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Black Orchid Eau de Parfum",
+      "slug": "tom-ford-black-orchid-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Black Orchid Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Eau de Parfum."
       ]
     },
     {
       "rowIndex": 9,
-      "brand": "Orto Parisi",
-      "name": "Seminalis",
-      "slug": "orto-parisi-seminalis",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Ombré Leather Parfum",
+      "slug": "tom-ford-ombre-leather-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ombré Leather Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Ombré Leather Parfum."
       ]
     },
     {
       "rowIndex": 10,
-      "brand": "Orto Parisi",
-      "name": "Brutus",
-      "slug": "orto-parisi-brutus",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Tobacco Oud",
+      "slug": "tom-ford-tobacco-oud",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Tobacco Oud",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Tobacco Oud."
       ]
     },
     {
       "rowIndex": 11,
-      "brand": "Orto Parisi",
-      "name": "Risvelium",
-      "slug": "orto-parisi-risvelium",
-      "issueType": "unmatched",
-      "candidateMatches": [],
-      "recommendedNextAction": "Find a trusted source manually or add a new adapter that can search this perfume safely.",
+      "brand": "Tom Ford",
+      "name": "Oud Minérale",
+      "slug": "tom-ford-oud-minerale",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Oud Minérale",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "No trusted adapter returned a usable source candidate for this perfume."
+        "Accepted trusted Parfumo Top Lists candidate: Oud Minérale."
+      ]
+    },
+    {
+      "rowIndex": 12,
+      "brand": "Tom Ford",
+      "name": "Neroli Portofino Eau de Parfum",
+      "slug": "tom-ford-neroli-portofino-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Neroli Portofino Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Neroli Portofino Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 13,
+      "brand": "Tom Ford",
+      "name": "Plum Japonais",
+      "slug": "tom-ford-plum-japonais",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Plum Japonais",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Plum Japonais."
+      ]
+    },
+    {
+      "rowIndex": 14,
+      "brand": "Tom Ford",
+      "name": "Bitter Peach Eau de Parfum",
+      "slug": "tom-ford-bitter-peach-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Bitter Peach Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Bitter Peach Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 15,
+      "brand": "Tom Ford",
+      "name": "Eau d'Ombré Leather",
+      "slug": "tom-ford-eau-d-ombre-leather",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Eau d'Ombré Leather",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Eau d'Ombré Leather."
+      ]
+    },
+    {
+      "rowIndex": 16,
+      "brand": "Tom Ford",
+      "name": "Ébène Fumé Eau de Parfum",
+      "slug": "tom-ford-ebene-fume-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ébène Fumé Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ébène Fumé Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 17,
+      "brand": "Tom Ford",
+      "name": "Soleil Neige Eau de Parfum",
+      "slug": "tom-ford-soleil-neige-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Soleil Neige Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Soleil Neige Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 18,
+      "brand": "Tom Ford",
+      "name": "Costa Azzurra Eau de Parfum",
+      "slug": "tom-ford-costa-azzurra-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Costa Azzurra Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Costa Azzurra Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 19,
+      "brand": "Tom Ford",
+      "name": "White Suede Eau de Parfum",
+      "slug": "tom-ford-white-suede-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "White Suede Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: White Suede Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 20,
+      "brand": "Tom Ford",
+      "name": "Vanille Fatale",
+      "slug": "tom-ford-vanille-fatale",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Vanille Fatale",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Vanille Fatale."
+      ]
+    },
+    {
+      "rowIndex": 21,
+      "brand": "Tom Ford",
+      "name": "Black Orchid Parfum",
+      "slug": "tom-ford-black-orchid-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Black Orchid Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Parfum."
+      ]
+    },
+    {
+      "rowIndex": 22,
+      "brand": "Tom Ford",
+      "name": "Mandarino di Amalfi Acqua",
+      "slug": "tom-ford-mandarino-di-amalfi-acqua",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mandarino di Amalfi Acqua",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mandarino di Amalfi Acqua."
+      ]
+    },
+    {
+      "rowIndex": 23,
+      "brand": "Tom Ford",
+      "name": "Cherry Smoke",
+      "slug": "tom-ford-cherry-smoke",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Cherry Smoke",
+          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Cherry Smoke."
       ]
     }
   ]

@@ -114,7 +114,7 @@ async function main() {
   console.log(`[descriptions:backfill] dryRun=${dryRun} missingOnly=${missingOnly} brandSlug=${brandSlug ?? "any"} limit=${limit ?? "all"}`);
 
   const where: Record<string, unknown> = {};
-  if (missingOnly) where.descriptionLong = "";
+  if (missingOnly) where.OR = [{ descriptionLong: "" }, { catalogStatus: "IMPORTED_UNVERIFIED" }];
   if (brandSlug) where.brand = { slug: brandSlug };
 
   const perfumes = await prisma.perfume.findMany({
