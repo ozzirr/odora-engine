@@ -713,6 +713,11 @@
       "saveSoon": "Salva su Odora",
       "followSoon": "Segui lista",
       "comingSoon": "In arrivo",
+      "saveAction": "Salva su Odora",
+      "saved": "Salvata",
+      "saveError": "Operazione non riuscita.",
+      "savedByCount": "{count, plural, =0 {Nessuno l'ha ancora salvata} =1 {Salvata da 1 utente} other {Salvata da # utenti}}",
+      "ownerBadge": "La tua lista",
       "authorEyebrow": "L'autore",
       "authorBio": "Curator Odora — appassionato di fragranze, qui condivide selezioni personali e guide olfattive.",
       "authorAllLists": "Vedi tutte le liste",
@@ -734,6 +739,19 @@
       "ctaSubtitle": "Esplora il catalogo o usa il Finder per ricevere consigli su misura.",
       "ctaCatalog": "Vai al catalogo",
       "ctaFinder": "Apri il Finder"
+    }
+  },
+  "userProfile": {
+    "page": {
+      "eyebrow": "Curator Odora",
+      "subtitle": "Le selezioni pubbliche di {name}",
+      "listsTitle": "Liste di {name}",
+      "listsEmpty": "Questo curator non ha ancora liste pubbliche.",
+      "savedTitle": "Liste salvate",
+      "savedEmpty": "Nessuna lista salvata ancora.",
+      "perfumeCount": "{count, plural, =1 {# profumo} other {# profumi}}",
+      "notFoundTitle": "Curator non trovato",
+      "notFoundDescription": "Questo profilo non e disponibile."
     }
   },
   "brand": {

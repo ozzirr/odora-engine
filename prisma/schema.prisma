@@ -72,9 +72,11 @@ model User {
   id        String        @id
   email     String?
   name      String?
+  bio       String?
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   lists     PerfumeList[]
+  listSaves PerfumeListSave[]
 }
 
 model Brand {
@@ -161,10 +163,24 @@ model PerfumeList {
   updatedAt   DateTime              @updatedAt
   user        User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   items       PerfumeListItem[]
+  saves       PerfumeListSave[]
 
   @@unique([userId, slug])
   @@index([userId])
   @@index([visibility])
+}
+
+model PerfumeListSave {
+  id        Int         @id @default(autoincrement())
+  userId    String
+  listId    Int
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  list      PerfumeList @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, listId])
+  @@index([listId])
+  @@index([userId])
 }
 
 model PerfumeListItem {

@@ -81,6 +81,10 @@ export const pathnames = {
     en: "/lists/[listKey]",
     it: "/lists/[listKey]",
   },
+  "/users/[userId]": {
+    en: "/users/[userId]",
+    it: "/users/[userId]",
+  },
 } as const;
 
 export type AppPathname = keyof typeof pathnames;

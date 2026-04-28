@@ -4,12 +4,10 @@ import { getTranslations } from "next-intl/server";
 
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
-import {
-  CopyLinkButton,
-  DisabledSocialButton,
-  ShareButtons,
-} from "@/components/lists/ShareButtons";
+import { SaveListButton } from "@/components/lists/SaveListButton";
+import { CopyLinkButton, ShareButtons } from "@/components/lists/ShareButtons";
 import { UserAvatar } from "@/components/lists/UserAvatar";
+import { getListSaveCount, isListSavedBy } from "@/lib/perfume-list-saves";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
@@ -133,7 +131,11 @@ export default async function PublicListPage({ params }: PublicListPageProps) {
   const t = await getTranslations({ locale: resolvedLocale, namespace: "publicList.page" });
   const perfumes = list.items.map((item) => item.perfume);
   const perfumeIds = perfumes.map((p) => p.id);
-  const similarLists = await getSimilarLists(list.id, perfumeIds);
+  const [similarLists, saveCount, isSaved] = await Promise.all([
+    getSimilarLists(list.id, perfumeIds),
+    getListSaveCount(list.id),
+    isListSavedBy(list.id, currentUser?.id ?? null),
+  ]);
 
   const authorName = list.user.name?.trim() || "Odora";
   const isPublic = list.visibility === "PUBLIC";
@@ -177,11 +179,19 @@ export default async function PublicListPage({ params }: PublicListPageProps) {
           </div>
 
           {isPublic ? (
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap items-center gap-2">
               <CopyLinkButton url={absoluteUrl} variant="primary" />
-              <DisabledSocialButton label={t("saveSoon")} tooltip={t("comingSoon")} />
-              <DisabledSocialButton label={t("followSoon")} tooltip={t("comingSoon")} />
+              <SaveListButton
+                listId={list.id}
+                initialSaved={isSaved}
+                initialCount={saveCount}
+                isAuthenticated={Boolean(currentUser)}
+                isOwner={currentUser?.id === list.userId}
+              />
             </div>
+          ) : null}
+          {isPublic && saveCount > 0 ? (
+            <p className="mt-3 text-xs text-[#8b7762]">{t("savedByCount", { count: saveCount })}</p>
           ) : null}
         </header>
 
@@ -194,14 +204,16 @@ export default async function PublicListPage({ params }: PublicListPageProps) {
                 {t("authorEyebrow")}
               </p>
               <h2 className="font-display text-2xl text-[#21180f]">{authorName}</h2>
-              <p className="text-[14.5px] leading-[1.7] text-[#6b5a49]">{t("authorBio")}</p>
+              <p className="text-[14.5px] leading-[1.7] text-[#6b5a49]">
+                {list.user.bio?.trim() || t("authorBio")}
+              </p>
             </div>
-            <span
-              title={t("comingSoon")}
-              className="cursor-not-allowed rounded-full border border-dashed border-[#d8c9b6] bg-[#faf4eb] px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#a89889]"
+            <Link
+              href={{ pathname: "/users/[userId]", params: { userId: list.userId } }}
+              className="rounded-full border border-[#ddcfbe] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#1f1914] transition hover:bg-[#faf4eb]"
             >
               {t("authorAllLists")}
-            </span>
+            </Link>
           </div>
         </section>
 

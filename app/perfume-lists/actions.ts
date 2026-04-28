@@ -229,3 +229,52 @@ export async function createListAndAddPerfume(
 
   return addPerfumeToLists(perfumeId, [created.listId]);
 }
+
+export type ToggleSaveResult = {
+  ok: boolean;
+  saved: boolean;
+  saveCount: number;
+  error?: string;
+};
+
+export async function toggleSavePerfumeList(listId: number): Promise<ToggleSaveResult> {
+  try {
+    const user = await getAuthenticatedAppUser();
+
+    const list = await prisma.perfumeList.findFirst({
+      where: { id: listId, visibility: PerfumeListVisibility.PUBLIC },
+      select: { id: true, userId: true },
+    });
+
+    if (!list) {
+      return { ok: false, saved: false, saveCount: 0, error: "Lista non trovata o non pubblica." };
+    }
+
+    if (list.userId === user.id) {
+      return { ok: false, saved: false, saveCount: 0, error: "Non puoi salvare una tua lista." };
+    }
+
+    const existing = await prisma.perfumeListSave.findUnique({
+      where: { userId_listId: { userId: user.id, listId } },
+      select: { id: true },
+    });
+
+    if (existing) {
+      await prisma.perfumeListSave.delete({ where: { id: existing.id } });
+    } else {
+      await prisma.perfumeListSave.create({ data: { userId: user.id, listId } });
+    }
+
+    const saveCount = await prisma.perfumeListSave.count({ where: { listId } });
+    revalidatePath("/lists/[listKey]", "page");
+
+    return { ok: true, saved: !existing, saveCount };
+  } catch (error) {
+    return {
+      ok: false,
+      saved: false,
+      saveCount: 0,
+      error: error instanceof Error ? error.message : "Errore imprevisto.",
+    };
+  }
+}
