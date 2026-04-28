@@ -845,6 +845,7 @@
           "passwordPlaceholder": "Scegli una password",
           "confirmPassword": "Conferma password",
           "confirmPasswordPlaceholder": "Conferma la password",
+          "marketingConsent": "Voglio ricevere email da Odora con novita, aggiornamenti e contenuti editoriali. Posso disiscrivermi in qualsiasi momento.",
           "submitting": "Creazione account...",
           "submit": "Crea account"
         }

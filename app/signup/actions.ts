@@ -12,6 +12,7 @@ import { getBaseSiteUrl } from "@/lib/supabase/config";
 import { createAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
+import { subscribeToNewsletter } from "@/lib/newsletter";
 import { buildRateLimitIdentity, getClientIp } from "@/lib/security/request-context";
 import { consumeRateLimit } from "@/lib/security/rate-limit";
 
@@ -31,6 +32,7 @@ export async function signupWithPassword(
   const emailValue = formData.get("email");
   const passwordValue = formData.get("password");
   const confirmPasswordValue = formData.get("confirmPassword");
+  const marketingConsent = formData.get("marketingConsent") === "on";
   const nextPath = sanitizeAuthNextPath(
     typeof formData.get("next") === "string" ? (formData.get("next") as string) : null,
     getLocalizedPathname(locale, "/perfumes"),
@@ -75,6 +77,24 @@ export async function signupWithPassword(
   const callbackUrl = new URL("/auth/callback", getBaseSiteUrl());
   callbackUrl.searchParams.set("next", nextPath);
 
+  const subscribeMarketingEmail = async () => {
+    if (!marketingConsent) {
+      return;
+    }
+
+    const result = await subscribeToNewsletter({
+      email,
+      locale,
+      source: "signup",
+      ip: clientIp,
+      userAgent: requestHeaders.get("user-agent"),
+    });
+
+    if (!result.ok) {
+      console.error("Failed to save signup marketing consent", result.error);
+    }
+  };
+
   if (getAuthEmailProvider() === "resend") {
     if (!isResendConfigured() || !isSupabaseAdminConfigured()) {
       return { error: t("authEmailUnavailable") };
@@ -93,22 +113,29 @@ export async function signupWithPassword(
       },
     });
 
-    const actionUrl = data?.properties?.action_link;
-    if (error || !actionUrl) {
+    const tokenHash = data?.properties?.hashed_token;
+    if (error || !tokenHash) {
       return { error: t("signupFailed") };
     }
+
+    const actionUrl = new URL("/auth/callback", getBaseSiteUrl());
+    actionUrl.searchParams.set("token_hash", tokenHash);
+    actionUrl.searchParams.set("type", "signup");
+    actionUrl.searchParams.set("next", nextPath);
 
     const emailResult = await sendSignupConfirmationEmail({
       to: email,
       name,
       locale,
-      actionUrl,
+      actionUrl: actionUrl.toString(),
     });
 
     if (!emailResult.ok) {
       console.error("Failed to send Resend signup confirmation email", emailResult.error);
       return { error: t("signupEmailFailed") };
     }
+
+    await subscribeMarketingEmail();
 
     return {
       message: t("success"),
@@ -138,10 +165,13 @@ export async function signupWithPassword(
   }
 
   if (data.session) {
+    await subscribeMarketingEmail();
     revalidatePath("/", "layout");
     revalidatePath(nextPath);
     redirect(nextPath);
   }
+
+  await subscribeMarketingEmail();
 
   return {
     message: t("success"),

@@ -85,6 +85,15 @@ export function SignupForm({ nextPath = "/perfumes", initialError }: SignupFormP
         />
       </div>
 
+      <label className="flex gap-3 rounded-xl border border-[#ddcfbe] bg-white px-3 py-3 text-sm leading-6 text-[#5f4d3d]">
+        <input
+          name="marketingConsent"
+          type="checkbox"
+          className="mt-1 h-4 w-4 shrink-0 rounded border-[#bda88f] accent-[#2c2219]"
+        />
+        <span>{t("marketingConsent")}</span>
+      </label>
+
       {state?.error ? (
         <div className="rounded-xl border border-[#dfcab0] bg-[#faf4eb] px-3 py-2 text-sm text-[#6d5644]">
           {state.error}

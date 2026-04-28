@@ -68,6 +68,11 @@ enum PerfumeListVisibility {
   PUBLIC
 }
 
+enum NewsletterSubscriberStatus {
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
 model User {
   id        String        @id
   email     String?
@@ -350,6 +355,27 @@ model AffiliateClick {
   @@index([perfumeSlug])
   @@index([destination])
   @@index([createdAt])
+}
+
+model NewsletterSubscriber {
+  id              Int                        @id @default(autoincrement())
+  email           String                     @unique
+  locale          String?
+  status          NewsletterSubscriberStatus @default(SUBSCRIBED)
+  source          String
+  consentVersion  String
+  consentText     String
+  consentedAt     DateTime                   @default(now())
+  unsubscribedAt  DateTime?
+  lastSubmittedAt DateTime                   @default(now())
+  ipHash          String?
+  userAgent       String?
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
+
+  @@index([status])
+  @@index([locale])
+  @@index([consentedAt])
 }
 
 enum BlogPostStatus {

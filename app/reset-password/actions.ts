@@ -81,12 +81,17 @@ export async function requestPasswordReset(
       },
     });
 
-    const actionUrl = data?.properties?.action_link;
-    if (!error && actionUrl) {
+    const tokenHash = data?.properties?.hashed_token;
+    if (!error && tokenHash) {
+      const actionUrl = new URL("/auth/callback", getBaseSiteUrl());
+      actionUrl.searchParams.set("token_hash", tokenHash);
+      actionUrl.searchParams.set("type", "recovery");
+      actionUrl.searchParams.set("next", nextPath);
+
       const emailResult = await sendPasswordResetEmail({
         to: email,
         locale,
-        actionUrl,
+        actionUrl: actionUrl.toString(),
       });
 
       if (!emailResult.ok) {
