@@ -6,7 +6,10 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
 import { sanitizeAuthNextPath } from "@/lib/auth-navigation";
+import { sendSignupConfirmationEmail } from "@/lib/email/auth";
+import { getAuthEmailProvider, isResendConfigured } from "@/lib/email/resend";
 import { getBaseSiteUrl } from "@/lib/supabase/config";
+import { createAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
 import { buildRateLimitIdentity, getClientIp } from "@/lib/security/request-context";
@@ -69,6 +72,49 @@ export async function signupWithPassword(
     return { error: t("tooManyAttempts") };
   }
 
+  const callbackUrl = new URL("/auth/callback", getBaseSiteUrl());
+  callbackUrl.searchParams.set("next", nextPath);
+
+  if (getAuthEmailProvider() === "resend") {
+    if (!isResendConfigured() || !isSupabaseAdminConfigured()) {
+      return { error: t("authEmailUnavailable") };
+    }
+
+    const supabaseAdmin = createAdminClient();
+    const { data, error } = await supabaseAdmin.auth.admin.generateLink({
+      type: "signup",
+      email,
+      password,
+      options: {
+        data: {
+          name,
+        },
+        redirectTo: callbackUrl.toString(),
+      },
+    });
+
+    const actionUrl = data?.properties?.action_link;
+    if (error || !actionUrl) {
+      return { error: t("signupFailed") };
+    }
+
+    const emailResult = await sendSignupConfirmationEmail({
+      to: email,
+      name,
+      locale,
+      actionUrl,
+    });
+
+    if (!emailResult.ok) {
+      console.error("Failed to send Resend signup confirmation email", emailResult.error);
+      return { error: t("signupEmailFailed") };
+    }
+
+    return {
+      message: t("success"),
+    };
+  }
+
   let supabase;
   try {
     supabase = await createClient();
@@ -83,7 +129,7 @@ export async function signupWithPassword(
       data: {
         name,
       },
-      emailRedirectTo: `${getBaseSiteUrl()}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+      emailRedirectTo: callbackUrl.toString(),
     },
   });
 

@@ -4,10 +4,13 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
+import { sendPasswordResetEmail } from "@/lib/email/auth";
+import { getAuthEmailProvider, isResendConfigured } from "@/lib/email/resend";
 import { defaultLocale, getLocalizedPathname, hasLocale } from "@/lib/i18n";
 import { buildRateLimitIdentity, getClientIp } from "@/lib/security/request-context";
 import { consumeRateLimit } from "@/lib/security/rate-limit";
 import { getBaseSiteUrl } from "@/lib/site-url";
+import { createAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
 export type PasswordResetRequestState = {
@@ -63,6 +66,37 @@ export async function requestPasswordReset(
   const nextPath = `${getLocalizedPathname(locale, "/reset-password")}?mode=update`;
   const callbackUrl = new URL("/auth/callback", getBaseSiteUrl());
   callbackUrl.searchParams.set("next", nextPath);
+
+  if (getAuthEmailProvider() === "resend") {
+    if (!isResendConfigured() || !isSupabaseAdminConfigured()) {
+      return { error: t("authEmailUnavailable") };
+    }
+
+    const supabaseAdmin = createAdminClient();
+    const { data, error } = await supabaseAdmin.auth.admin.generateLink({
+      type: "recovery",
+      email,
+      options: {
+        redirectTo: callbackUrl.toString(),
+      },
+    });
+
+    const actionUrl = data?.properties?.action_link;
+    if (!error && actionUrl) {
+      const emailResult = await sendPasswordResetEmail({
+        to: email,
+        locale,
+        actionUrl,
+      });
+
+      if (!emailResult.ok) {
+        console.error("Failed to send Resend password reset email", emailResult.error);
+        return { error: t("requestFailed") };
+      }
+    }
+
+    return { message: t("success") };
+  }
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: callbackUrl.toString(),

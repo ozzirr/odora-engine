@@ -865,6 +865,7 @@
       "resetPasswordRequest": {
         "missingEmail": "Inserisci la tua email.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "authEmailUnavailable": "Configurazione email non disponibile. Riprova tra poco.",
         "requestFailed": "Non sono riuscito a inviare il link di reset. Riprova tra poco.",
         "success": "Se l'email esiste, riceverai a breve un link per reimpostare la password.",
         "tooManyAttempts": "Troppi tentativi di reset. Riprova tra poco."
@@ -883,7 +884,9 @@
         "passwordTooShort": "La password deve contenere almeno 8 caratteri.",
         "passwordMismatch": "Le password non coincidono.",
         "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
+        "authEmailUnavailable": "Configurazione email non disponibile. Riprova tra poco.",
         "signupFailed": "Registrazione non completata. Verifica i dati e riprova.",
+        "signupEmailFailed": "Account creato, ma non sono riuscito a inviare l'email di conferma. Riprova tra poco.",
         "success": "Account creato. Controlla la tua email per confermare la registrazione e completare l'accesso.",
         "tooManyAttempts": "Troppi tentativi di registrazione. Riprova tra poco."
       }

@@ -865,6 +865,7 @@
       "resetPasswordRequest": {
         "missingEmail": "Enter your email.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "authEmailUnavailable": "Email configuration is unavailable. Try again shortly.",
         "requestFailed": "Could not send the reset link. Try again shortly.",
         "success": "If the email exists, you’ll receive a password reset link shortly.",
         "tooManyAttempts": "Too many reset requests. Try again shortly."
@@ -883,7 +884,9 @@
         "passwordTooShort": "Password must contain at least 8 characters.",
         "passwordMismatch": "Passwords do not match.",
         "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
+        "authEmailUnavailable": "Email configuration is unavailable. Try again shortly.",
         "signupFailed": "Sign-up was not completed. Check your details and try again.",
+        "signupEmailFailed": "Account created, but the confirmation email could not be sent. Try again shortly.",
         "success": "Account created. Check your email to confirm registration and complete login.",
         "tooManyAttempts": "Too many sign-up attempts. Try again shortly."
       }
