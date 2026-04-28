@@ -3,7 +3,7 @@
  * Run from the worktree root: node --import tsx scripts/upload-images-to-supabase.ts
  */
 
-import { readFile, readdir, access } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = process.cwd();

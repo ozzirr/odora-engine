@@ -1,4 +1,4 @@
-import type { EnrichmentCandidate, EnrichmentSourceAuditEntry, NormalizedPerfumeRecord } from "@/lib/perfume-data/types";
+import type { EnrichmentCandidate, EnrichmentSourceAuditEntry } from "@/lib/perfume-data/types";
 import type { PerfumeSourceAdapter } from "@/lib/perfume-data/sources/base";
 
 const adapterId = "fragrantica";
@@ -25,7 +25,7 @@ export function createFragranticaAdapter(): PerfumeSourceAdapter {
     implemented: false,
     supportedFields: [],
     plannedFields: [...plannedFields],
-    async searchCandidates(_record: NormalizedPerfumeRecord): Promise<EnrichmentCandidate[]> {
+    async searchCandidates(): Promise<EnrichmentCandidate[]> {
       return [];
     },
     async fetchSourceRecord() {

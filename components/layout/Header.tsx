@@ -165,12 +165,16 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
       return;
     }
 
-    setSearchOpen(true);
+    const frameId = window.requestAnimationFrame(() => {
+      setSearchOpen(true);
+    });
 
     const params = new URLSearchParams(window.location.search);
     params.delete(SEARCH_DIALOG_PARAM);
     const nextUrl = `${window.location.pathname}${params.toString() ? `?${params.toString()}` : ""}${window.location.hash}`;
     window.history.replaceState(null, "", nextUrl);
+
+    return () => window.cancelAnimationFrame(frameId);
   }, [isAuthenticated, searchOpen, shouldOpenSearchAfterLogin]);
 
   const resolveSearchAuthNextPath = (

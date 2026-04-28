@@ -238,6 +238,7 @@ export function FinderExperience({
     initialResults,
     initialSubmitted,
     initialTotal,
+    authStatus,
     presetLabel,
   ]);
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-import { ADSENSE_CLIENT_ID } from "@/lib/privacy/consent";
+import { ADSENSE_CLIENT_ID, ADSENSE_SCRIPT_LOADED_EVENT } from "@/lib/privacy/consent";
 import { useMarketingConsent } from "@/lib/privacy/use-marketing-consent";
 
 declare global {
@@ -34,16 +34,27 @@ function AdUnit({
   const pushedRef = useRef(false);
 
   useEffect(() => {
-    if (!hasMarketingConsent || pushedRef.current) {
+    if (!hasMarketingConsent) {
       return;
     }
 
-    try {
-      (window.adsbygoogle = window.adsbygoogle ?? []).push({});
-      pushedRef.current = true;
-    } catch {
-      // Ignore: the adsbygoogle script may not be loaded yet.
-    }
+    const pushAd = () => {
+      if (pushedRef.current) {
+        return;
+      }
+
+      try {
+        (window.adsbygoogle = window.adsbygoogle ?? []).push({});
+        pushedRef.current = true;
+      } catch {
+        // Retry when the AdSense script reports that it finished loading.
+      }
+    };
+
+    pushAd();
+    window.addEventListener(ADSENSE_SCRIPT_LOADED_EVENT, pushAd);
+
+    return () => window.removeEventListener(ADSENSE_SCRIPT_LOADED_EVENT, pushAd);
   }, [hasMarketingConsent]);
 
   if (!hasMarketingConsent) {

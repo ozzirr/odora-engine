@@ -701,6 +701,41 @@
       "backLabel": "← Torna al Blog"
     }
   },
+  "publicList": {
+    "page": {
+      "badgePublic": "Lista pubblica",
+      "badgePrivate": "Lista privata",
+      "byAuthor": "Curata da {name}",
+      "perfumeCount": "{count, plural, =1 {# profumo} other {# profumi}}",
+      "descriptionFallback": "Una selezione di profumi pensata per ispirarti e guidarti nella scelta della prossima fragranza.",
+      "copyLink": "Copia link",
+      "copyLinkSuccess": "Link copiato!",
+      "saveSoon": "Salva su Odora",
+      "followSoon": "Segui lista",
+      "comingSoon": "In arrivo",
+      "authorEyebrow": "L'autore",
+      "authorBio": "Curator Odora — appassionato di fragranze, qui condivide selezioni personali e guide olfattive.",
+      "authorAllLists": "Vedi tutte le liste",
+      "introEyebrow": "Perché questa selezione",
+      "introTitle": "L'idea dietro la lista",
+      "perfumesEyebrow": "Selezione",
+      "perfumesTitle": "I profumi in lista",
+      "perfumesEmpty": "Questa lista non contiene ancora profumi.",
+      "shareEyebrow": "Condividi",
+      "shareTitle": "Mostra questa lista a chi ami",
+      "shareSubtitle": "Manda la selezione a un amico o salvala per leggerla con calma.",
+      "shareWhatsapp": "WhatsApp",
+      "shareTelegram": "Telegram",
+      "similarEyebrow": "Liste simili",
+      "similarTitle": "Altre selezioni che potrebbero piacerti",
+      "similarEmpty": "Ancora nessuna lista simile pubblica.",
+      "ctaEyebrow": "Continua la scoperta",
+      "ctaTitle": "Scopri altri profumi",
+      "ctaSubtitle": "Esplora il catalogo o usa il Finder per ricevere consigli su misura.",
+      "ctaCatalog": "Vai al catalogo",
+      "ctaFinder": "Apri il Finder"
+    }
+  },
   "brand": {
     "page": {
       "eyebrow": "Brand",

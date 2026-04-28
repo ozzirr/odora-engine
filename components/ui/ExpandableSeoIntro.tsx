@@ -9,7 +9,7 @@ import type { AppPathname } from "@/lib/i18n";
 import { Link } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 
-type SeoIntroPathname = Exclude<AppPathname, "/perfumes/[slug]" | "/blog/[slug]" | "/brands/[slug]">;
+type SeoIntroPathname = Exclude<AppPathname, "/perfumes/[slug]" | "/blog/[slug]" | "/brands/[slug]" | "/lists/[listKey]">;
 
 type SeoIntroCta = {
   href: SeoIntroPathname;

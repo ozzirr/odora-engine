@@ -75,3 +75,43 @@ export async function loginWithPassword(
   revalidatePath(nextPath);
   redirect(nextPath);
 }
+
+export async function loginAsDevUser(
+  _previousState: LoginFormState,
+  formData: FormData,
+): Promise<LoginFormState> {
+  if (process.env.NODE_ENV === "production") {
+    return { error: "Dev login is disabled in production." };
+  }
+
+  const localeValue = formData.get("locale");
+  const locale = typeof localeValue === "string" && hasLocale(localeValue) ? localeValue : defaultLocale;
+  const nextPath = sanitizeAuthNextPath(
+    typeof formData.get("next") === "string" ? (formData.get("next") as string) : null,
+    getLocalizedPathname(locale, "/perfumes"),
+  );
+
+  const email = process.env.DEV_LOGIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.DEV_LOGIN_PASSWORD;
+
+  if (!email || !password) {
+    return { error: "Set DEV_LOGIN_EMAIL and DEV_LOGIN_PASSWORD in .env.local." };
+  }
+
+  let supabase;
+  try {
+    supabase = await createClient();
+  } catch {
+    return { error: "Auth client unavailable." };
+  }
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    return { error: `Dev login failed: ${error.message}` };
+  }
+
+  revalidatePath("/", "layout");
+  revalidatePath(nextPath);
+  redirect(nextPath);
+}

@@ -5,11 +5,13 @@ import { getTranslations } from "next-intl/server";
 import { signOut } from "@/app/profile/actions";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { ProfileForm } from "@/components/profile/ProfileForm";
+import { PerfumeListsSection } from "@/components/profile/PerfumeListsSection";
 import { LogoutButton } from "@/components/profile/LogoutButton";
 import { Container } from "@/components/layout/Container";
 import { getLocalizedPathname, hasLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
-import { getCurrentUserSummary } from "@/lib/supabase/auth-state";
+import { ensureAppUser, getUserPerfumeLists } from "@/lib/perfume-lists";
+import { getCurrentUser, getCurrentUserSummary } from "@/lib/supabase/auth-state";
 
 export const dynamic = "force-dynamic";
 
@@ -40,15 +42,18 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   const { locale } = await params;
   const resolvedLocale = hasLocale(locale) ? locale : "en";
   const t = await getTranslations({ locale: resolvedLocale, namespace: "profile.page" });
-  const user = await getCurrentUserSummary();
+  const [user, supabaseUser] = await Promise.all([getCurrentUserSummary(), getCurrentUser()]);
 
-  if (!user.isAuthenticated || !user.email) {
+  if (!user.isAuthenticated || !user.email || !supabaseUser) {
     redirect(
       getLocalizedPathname(resolvedLocale, "/login", undefined, {
         next: getLocalizedPathname(resolvedLocale, "/profile"),
       }),
     );
   }
+
+  const appUser = await ensureAppUser(supabaseUser);
+  const lists = await getUserPerfumeLists(appUser.id);
 
   return (
     <Container className="py-14 sm:py-18">
@@ -79,6 +84,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             </ScopedIntlProvider>
           </form>
         </aside>
+
+        <PerfumeListsSection lists={lists} />
       </div>
     </Container>
   );

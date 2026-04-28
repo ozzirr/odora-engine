@@ -12,7 +12,6 @@ import type {
   EnrichmentSourceAuditEntry,
   EnrichmentStatus,
   EnrichmentSummary,
-  enrichmentTargetFields,
   EnrichmentTargetField,
   FieldOverwriteDecision,
   FieldProvenanceEntry,

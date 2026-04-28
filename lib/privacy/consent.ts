@@ -7,6 +7,7 @@ export const CONSENT_VERSION = "v1";
 export const CONSENT_COOKIE_MAX_AGE = 60 * 60 * 24 * 180;
 export const PRIVACY_DISCLOSURE_UPDATED_AT = "2026-04-01T00:00:00.000Z";
 export const PRIVACY_CONSENT_UPDATED_EVENT = "odora:privacy-consent-updated";
+export const ADSENSE_SCRIPT_LOADED_EVENT = "odora:adsense-script-loaded";
 export const ADSENSE_ACCOUNT_ID = "pub-3711710548947054";
 export const ADSENSE_CLIENT_ID = `ca-${ADSENSE_ACCOUNT_ID}`;
 export const GA_MEASUREMENT_ID = "G-S27RFQXHQ2";

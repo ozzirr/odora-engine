@@ -48,7 +48,111 @@ function isSupportedCurrency(value: unknown): value is string {
   return typeof value === "string" && /^[A-Z]{3}$/.test(value);
 }
 
+const RETAILER_SEARCH_BUILDERS: Array<{
+  matches: (hostname: string) => boolean;
+  buildUrl: (query: string) => string;
+}> = [
+  {
+    matches: (hostname) => hostname === "sephora.it" || hostname.endsWith(".sephora.it"),
+    buildUrl: (query) => `https://www.sephora.it/cerca/?q=${encodeSearchQuery(query, "+")}`,
+  },
+  {
+    matches: (hostname) => hostname === "notino.it" || hostname.endsWith(".notino.it"),
+    buildUrl: (query) => `https://www.notino.it/search.asp?exps=${encodeSearchQuery(query, "%20")}`,
+  },
+  {
+    matches: (hostname) => hostname === "douglas.it" || hostname.endsWith(".douglas.it"),
+    buildUrl: (query) => `https://www.douglas.it/it/search?q=${encodeSearchQuery(query, "%20")}`,
+  },
+];
+
+const SEARCH_PARAM_NAMES = ["q", "exps", "k", "query", "search"];
+const IGNORED_RETAILER_PATH_SEGMENTS = new Set([
+  "it",
+  "p",
+  "product",
+  "products",
+  "profumo",
+  "profumi",
+  "fragranze",
+  "fragrance",
+  "fragrances",
+]);
+
+function encodeSearchQuery(query: string, spaceEncoding: "+" | "%20") {
+  return encodeURIComponent(query).replace(/%20/g, spaceEncoding);
+}
+
+function normalizeSearchQuery(value: string) {
+  return value
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['’]/g, "")
+    .replace(/&/g, " ")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function getQueryFromRetailerUrl(url: URL) {
+  for (const paramName of SEARCH_PARAM_NAMES) {
+    const value = url.searchParams.get(paramName);
+    const normalized = value ? normalizeSearchQuery(value) : "";
+    if (normalized) {
+      return normalized;
+    }
+  }
+
+  const segments = url.pathname
+    .split("/")
+    .map((segment) => normalizeSearchQuery(decodeURIComponent(segment)))
+    .filter((segment) => segment && !IGNORED_RETAILER_PATH_SEGMENTS.has(segment));
+
+  const lastSegment = segments.at(-1);
+  const previousTokens = new Set(segments.slice(0, -1).flatMap((segment) => segment.split(" ")));
+  if (lastSegment && lastSegment.split(" ").some((token) => previousTokens.has(token))) {
+    return lastSegment;
+  }
+
+  return normalizeSearchQuery(segments.join(" "));
+}
+
+function getRetailerSearchUrl(value?: string | null) {
+  const normalized = value?.trim();
+  if (!normalized) {
+    return null;
+  }
+
+  try {
+    const parsed = new URL(normalized);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return null;
+    }
+
+    const hostname = parsed.hostname.toLowerCase();
+    const retailer = RETAILER_SEARCH_BUILDERS.find((builder) => builder.matches(hostname));
+    if (!retailer) {
+      return null;
+    }
+
+    const query = getQueryFromRetailerUrl(parsed);
+    if (!query) {
+      return null;
+    }
+
+    return retailer.buildUrl(query);
+  } catch {
+    return null;
+  }
+}
+
 export function getOfferUrl(affiliateUrl?: string | null, productUrl?: string | null) {
+  const retailerSearchUrl = getRetailerSearchUrl(productUrl) ?? getRetailerSearchUrl(affiliateUrl);
+  if (retailerSearchUrl) {
+    return retailerSearchUrl;
+  }
+
   const candidates = [affiliateUrl, productUrl];
 
   for (const raw of candidates) {

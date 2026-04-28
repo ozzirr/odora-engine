@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
+import { AddToListButton } from "@/components/perfumes/AddToListButton";
 import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
 import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
@@ -26,13 +27,14 @@ import {
   type CatalogMode,
 } from "@/lib/catalog";
 import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/lib/discovery";
-import { getPopularPerfumeSlugs } from "@/lib/homepage";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
+import { ensureAppUser, getUserPerfumeListsForPerfume } from "@/lib/perfume-lists";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductSchema } from "@/lib/structured-data";
+import { getCurrentUser } from "@/lib/supabase/auth-state";
 import { buildPerfumeFaqItems } from "@/lib/perfume-faq";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { formatCurrency } from "@/lib/utils";
@@ -45,6 +47,7 @@ type PerfumeDetailPageProps = {
 };
 
 export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 const perfumeDetailInclude = {
   brand: true,
@@ -265,12 +268,6 @@ async function getPerfumePageData(slug: string) {
   )();
 }
 
-export async function generateStaticParams() {
-  const slugs = await getPopularPerfumeSlugs(24);
-
-  return slugs.map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
@@ -344,13 +341,15 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const taxonomyT = await getTranslations({ locale: resolvedLocale, namespace: "taxonomy" });
   const faqT = await getTranslations({ locale: resolvedLocale, namespace: "perfume.faq" });
-  const data = await getPerfumePageData(slug);
+  const [data, supabaseUser] = await Promise.all([getPerfumePageData(slug), getCurrentUser()]);
 
   if (!data) {
     notFound();
   }
 
   const { perfume, allPerfumes } = data;
+  const appUser = supabaseUser ? await ensureAppUser(supabaseUser) : null;
+  const userLists = appUser ? await getUserPerfumeListsForPerfume(appUser.id, perfume.id) : [];
 
   const bestOffer = computeBestOffer(perfume.offers);
   const similarPerfumes = getSimilarPerfumes(perfume, allPerfumes, 4);
@@ -476,6 +475,13 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         <PerfumeDetailNavigationReady />
         <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
           <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
+
+          <AddToListButton
+            perfumeId={perfume.id}
+            isAuthenticated={Boolean(appUser)}
+            lists={userLists}
+            loginNextPath={detailPath}
+          />
 
           <section className="space-y-4">
             <SectionTitle

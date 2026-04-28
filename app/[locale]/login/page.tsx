@@ -55,6 +55,7 @@ export default async function LoginPage({ params, searchParams }: LoginPageProps
           nextPath={nextPath}
           initialError={mapLoginAuthError(errorCode, t)}
           switchHref="/signup"
+          showDevLogin={process.env.NODE_ENV !== "production"}
         />
       </ScopedIntlProvider>
     </Container>

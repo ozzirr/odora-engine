@@ -19,11 +19,9 @@ function getAnalyticsConsent() {
 }
 
 export function GtagScript() {
-  const [consent, setConsent] = useState(false);
+  const [consent, setConsent] = useState(() => getAnalyticsConsent());
 
   useEffect(() => {
-    setConsent(getAnalyticsConsent());
-
     const handleConsentUpdated = (event: Event) => {
       const customEvent = event as CustomEvent<ConsentState>;
       setConsent(customEvent.detail.analytics);

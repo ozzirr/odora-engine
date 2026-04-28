@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -94,7 +95,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="mt-8">
           {post.coverImageUrl ? (
             <div className="mb-8 aspect-[16/9] w-full overflow-hidden rounded-[1.2rem] bg-[#f4ece0]">
-              <img
+              <Image
                 src={post.coverImageUrl}
                 alt={post.title}
                 width={1280}

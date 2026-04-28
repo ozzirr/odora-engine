@@ -17,11 +17,9 @@ function getMarketingConsent() {
 }
 
 export function useMarketingConsent() {
-  const [consent, setConsent] = useState(false);
+  const [consent, setConsent] = useState(() => getMarketingConsent());
 
   useEffect(() => {
-    setConsent(getMarketingConsent());
-
     const handleConsentUpdated = (event: Event) => {
       const customEvent = event as CustomEvent<ConsentState>;
       setConsent(customEvent.detail.marketing);

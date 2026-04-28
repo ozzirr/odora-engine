@@ -6,7 +6,7 @@ import { HtmlLangSync } from "@/components/i18n/HtmlLangSync";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { LocaleShell } from "@/components/layout/LocaleShell";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { getAlternateLinks, hasLocale, locales } from "@/lib/i18n";
+import { getAlternateLinks, hasLocale } from "@/lib/i18n";
 import { isLaunchGateEnabled } from "@/lib/launch-gate";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
 import { getBaseSiteUrl } from "@/lib/site-url";
@@ -17,10 +17,6 @@ type LocaleLayoutProps = {
     locale: string;
   }>;
 };
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({ params }: LocaleLayoutProps): Promise<Metadata> {
   const { locale } = await params;

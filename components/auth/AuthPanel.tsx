@@ -20,6 +20,7 @@ type AuthPanelProps = {
   switchHref?: "/login" | "/signup";
   surface?: "solid" | "glass";
   className?: string;
+  showDevLogin?: boolean;
 };
 
 const surfaceClasses = {
@@ -38,6 +39,7 @@ export function AuthPanel({
   switchHref,
   surface = "solid",
   className,
+  showDevLogin = false,
 }: AuthPanelProps) {
   const isLogin = mode === "login";
   const t = useTranslations(isLogin ? "auth.login.page" : "auth.signup.page");
@@ -71,7 +73,7 @@ export function AuthPanel({
       <p className="mt-2 text-sm text-[#685747]">{t("subtitle")}</p>
 
       {isLogin ? (
-        <LoginForm nextPath={nextPath} initialError={initialError} />
+        <LoginForm nextPath={nextPath} initialError={initialError} showDevLogin={showDevLogin} />
       ) : (
         <SignupForm nextPath={nextPath} initialError={initialError} />
       )}
