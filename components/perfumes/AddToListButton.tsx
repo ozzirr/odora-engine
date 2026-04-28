@@ -16,9 +16,18 @@ type AddToListButtonProps = {
   isAuthenticated: boolean;
   lists: UserPerfumeListForPerfume[];
   loginNextPath: string;
+  variant?: "card" | "compact";
+  className?: string;
 };
 
-export function AddToListButton({ perfumeId, isAuthenticated, lists, loginNextPath }: AddToListButtonProps) {
+export function AddToListButton({
+  perfumeId,
+  isAuthenticated,
+  lists,
+  loginNextPath,
+  variant = "card",
+  className,
+}: AddToListButtonProps) {
   const locale = useLocale();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -27,8 +36,21 @@ export function AddToListButton({ perfumeId, isAuthenticated, lists, loginNextPa
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+  const addLabel = locale === "it" ? "Aggiungi alla lista" : "Add to list";
+  const loginLabel = locale === "it" ? "Accedi per salvare" : "Log in to save";
 
   if (!isAuthenticated) {
+    if (variant === "compact") {
+      return (
+        <a
+          href={`/${locale === "it" ? "it/accedi" : "en/login"}?next=${encodeURIComponent(loginNextPath)}`}
+          className={buttonStyles({ className })}
+        >
+          {loginLabel}
+        </a>
+      );
+    }
+
     return (
       <div className="rounded-[1.45rem] border border-[#ddcfbc] bg-[#fffdf9] p-4">
         <p className="font-display text-2xl text-[#21180f]">Aggiungi a lista</p>
@@ -86,21 +108,34 @@ export function AddToListButton({ perfumeId, isAuthenticated, lists, loginNextPa
     });
   };
 
-  return (
-    <div className="rounded-[1.45rem] border border-[#ddcfbc] bg-[#fffdf9] p-4">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="font-display text-2xl text-[#21180f]">Aggiungi a lista</p>
-          <p className="mt-1 text-sm text-[#685747]">Salva questo profumo in una o piu selezioni personali.</p>
+  const trigger =
+    variant === "compact" ? (
+      <button type="button" className={buttonStyles({ className })} onClick={() => setOpen(true)}>
+        <span className="inline-flex items-center justify-center gap-2">
+          <span aria-hidden="true">＋</span>
+          <span>{addLabel}</span>
+        </span>
+      </button>
+    ) : (
+      <div className="rounded-[1.45rem] border border-[#ddcfbc] bg-[#fffdf9] p-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="font-display text-2xl text-[#21180f]">Aggiungi a lista</p>
+            <p className="mt-1 text-sm text-[#685747]">Salva questo profumo in una o piu selezioni personali.</p>
+          </div>
+          <button type="button" className={buttonStyles({ className: "w-full sm:w-auto" })} onClick={() => setOpen(true)}>
+            {addLabel}
+          </button>
         </div>
-        <button type="button" className={buttonStyles({ className: "w-full sm:w-auto" })} onClick={() => setOpen(true)}>
-          Aggiungi a lista
-        </button>
+
+        {message ? <p className="mt-3 text-sm text-[#4d6340]">{message}</p> : null}
+        {error ? <p className="mt-3 text-sm text-[#7c3f35]">{error}</p> : null}
       </div>
+    );
 
-      {message ? <p className="mt-3 text-sm text-[#4d6340]">{message}</p> : null}
-      {error ? <p className="mt-3 text-sm text-[#7c3f35]">{error}</p> : null}
-
+  return (
+    <>
+      {trigger}
       {open ? (
         <div className="fixed inset-0 z-[120] flex items-end justify-center bg-[rgba(26,20,15,0.32)] px-4 py-5 backdrop-blur-sm sm:items-center">
           <div className="w-full max-w-lg rounded-[1.8rem] border border-[#ddcfbe] bg-[#fffdf9] p-5 shadow-[0_34px_90px_-42px_rgba(36,25,16,0.65)]">
@@ -178,6 +213,6 @@ export function AddToListButton({ perfumeId, isAuthenticated, lists, loginNextPa
           </div>
         </div>
       ) : null}
-    </div>
+    </>
   );
 }

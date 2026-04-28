@@ -7,12 +7,10 @@ import { getTranslations } from "next-intl/server";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { AddToListButton } from "@/components/perfumes/AddToListButton";
-import { AmazonCalloutCard } from "@/components/perfumes/AmazonCalloutCard";
-import { BestOfferCard } from "@/components/perfumes/BestOfferCard";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
 import { NotesList } from "@/components/perfumes/NotesList";
-import { OfferTable } from "@/components/perfumes/OfferTable";
+import { PerfumeCommunitySection } from "@/components/perfumes/PerfumeCommunitySection";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
 import { FaqSection } from "@/components/seo/FaqSection";
@@ -268,6 +266,74 @@ async function getPerfumePageData(slug: string) {
   )();
 }
 
+async function getPerfumeCommunityData(perfumeId: number) {
+  if (!prisma.perfumeReview || !prisma.perfumePurchasePrice) {
+    return {
+      stats: {
+        reviewCount: 0,
+        avgLongevity: null,
+        avgSillage: null,
+        avgVersatility: null,
+        priceCount: 0,
+        avgPrice: null,
+        currency: "EUR",
+      },
+      reviews: [],
+    };
+  }
+
+  const [reviewAggregates, priceAggregates, reviews] = await Promise.all([
+    prisma.perfumeReview.aggregate({
+      where: { perfumeId },
+      _count: { _all: true },
+      _avg: {
+        longevityScore: true,
+        sillageScore: true,
+        versatilityScore: true,
+      },
+    }),
+    prisma.perfumePurchasePrice.aggregate({
+      where: { perfumeId, currency: "EUR" },
+      _count: { _all: true },
+      _avg: {
+        priceAmount: true,
+      },
+    }),
+    prisma.perfumeReview.findMany({
+      where: { perfumeId, source: "user", text: { not: null } },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+      select: {
+        id: true,
+        longevityScore: true,
+        sillageScore: true,
+        versatilityScore: true,
+        text: true,
+        createdAt: true,
+        user: {
+          select: {
+            name: true,
+            countryCode: true,
+          },
+        },
+      },
+    }),
+  ]);
+
+  return {
+    stats: {
+      reviewCount: reviewAggregates._count._all,
+      avgLongevity: reviewAggregates._avg.longevityScore,
+      avgSillage: reviewAggregates._avg.sillageScore,
+      avgVersatility: reviewAggregates._avg.versatilityScore,
+      priceCount: priceAggregates._count._all,
+      avgPrice: priceAggregates._avg.priceAmount,
+      currency: "EUR",
+    },
+    reviews,
+  };
+}
+
 export async function generateMetadata({ params }: PerfumeDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const resolvedLocale = (hasLocale(locale) ? locale : "en") as AppLocale;
@@ -350,8 +416,18 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const { perfume, allPerfumes } = data;
   const appUser = supabaseUser ? await ensureAppUser(supabaseUser) : null;
   const userLists = appUser ? await getUserPerfumeListsForPerfume(appUser.id, perfume.id) : [];
-
   const bestOffer = computeBestOffer(perfume.offers);
+  const communityData = await getPerfumeCommunityData(perfume.id);
+  const communityStats = {
+    ...communityData.stats,
+    avgLongevity: communityData.stats.avgLongevity ?? perfume.longevityScore ?? null,
+    avgSillage: communityData.stats.avgSillage ?? perfume.sillageScore ?? null,
+    avgVersatility: communityData.stats.avgVersatility ?? perfume.versatilityScore ?? null,
+    avgPrice: communityData.stats.avgPrice ?? bestOffer?.bestTotalPrice ?? null,
+    currency: communityData.stats.avgPrice != null
+      ? communityData.stats.currency
+      : bestOffer?.bestCurrency ?? communityData.stats.currency,
+  };
   const similarPerfumes = getSimilarPerfumes(perfume, allPerfumes, 4);
   const similarIds = new Set(similarPerfumes.map((p) => p.id));
   const cheaperAlternatives = getCheaperAlternatives(perfume, allPerfumes, 4, similarIds);
@@ -421,6 +497,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     occasions: t("overviewLabels.occasions"),
   });
   const detailPath = getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug });
+  const loginHref = getLocalizedPathname(resolvedLocale, "/login", undefined, { next: detailPath });
   const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
   const brandName = perfume.brand?.name ?? t("unknown");
   const familyLabel =
@@ -474,24 +551,32 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       >
         <PerfumeDetailNavigationReady />
         <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
-          <PerfumeHero perfume={perfume} bestOffer={bestOffer} />
-
-          <AddToListButton
-            perfumeId={perfume.id}
-            isAuthenticated={Boolean(appUser)}
-            lists={userLists}
-            loginNextPath={detailPath}
+          <PerfumeHero
+            perfume={perfume}
+            bestOffer={bestOffer}
+            reviewCount={communityStats.reviewCount}
+            listAction={
+              <AddToListButton
+                perfumeId={perfume.id}
+                isAuthenticated={Boolean(appUser)}
+                lists={userLists}
+                loginNextPath={detailPath}
+                variant="compact"
+                className="h-12 w-full sm:w-full lg:w-auto lg:min-w-[180px] lg:px-6"
+              />
+            }
           />
-
-          <section className="space-y-4">
-            <SectionTitle
-              eyebrow={t("prices.eyebrow")}
-              title={t("prices.title")}
-              subtitle={t("prices.subtitle")}
-            />
-            {bestOffer ? <BestOfferCard bestOffer={bestOffer} showButton={false} /> : null}
-            <OfferTable offers={perfume.offers} />
-          </section>
+          <PerfumeCommunitySection
+            perfumeId={perfume.id}
+            detailPath={detailPath}
+            isAuthenticated={Boolean(appUser)}
+            loginHref={loginHref}
+            locale={resolvedLocale}
+            stats={communityStats}
+            reviews={communityData.reviews}
+            userCountryCode={appUser?.countryCode}
+            mode="summary"
+          />
 
           <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
             <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
@@ -534,11 +619,16 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             />
           </section>
 
-          <AmazonCalloutCard
-            perfumeName={perfume.name}
-            brandName={perfume.brand?.name}
-            amazonUrl={perfume.amazonUrl}
-            perfumeSlug={perfume.slug}
+          <PerfumeCommunitySection
+            perfumeId={perfume.id}
+            detailPath={detailPath}
+            isAuthenticated={Boolean(appUser)}
+            loginHref={loginHref}
+            locale={resolvedLocale}
+            stats={communityStats}
+            reviews={communityData.reviews}
+            userCountryCode={appUser?.countryCode}
+            mode="contribute"
           />
 
           <section className="space-y-4">

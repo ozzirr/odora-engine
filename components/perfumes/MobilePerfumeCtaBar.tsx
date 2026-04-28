@@ -10,7 +10,6 @@ import { APP_FLOATING_LAYER_CLASS } from "@/lib/chrome";
 import { cn } from "@/lib/utils";
 
 type MobilePerfumeCtaBarProps = {
-  bestOfferUrl?: string | null;
   amazonUrl?: string | null;
 };
 
@@ -29,10 +28,8 @@ function AmazonWordmark({ className }: { className?: string }) {
 }
 
 export function MobilePerfumeCtaBar({
-  bestOfferUrl,
   amazonUrl,
 }: MobilePerfumeCtaBarProps) {
-  const heroT = useTranslations("perfume.hero");
   const amazonT = useTranslations("perfume.amazon");
   const barRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -41,7 +38,7 @@ export function MobilePerfumeCtaBar({
     () => true,
     () => false,
   );
-  const hasAnyCta = Boolean(bestOfferUrl || amazonUrl);
+  const hasAnyCta = Boolean(amazonUrl);
   const isBarActive = isVisible;
 
   useEffect(() => {
@@ -104,7 +101,7 @@ export function MobilePerfumeCtaBar({
       root.removeAttribute("data-mobile-perfume-cta-active");
       root.style.removeProperty("--mobile-perfume-cta-offset");
     };
-  }, [amazonUrl, bestOfferUrl, hasAnyCta, isBarActive, isClient]);
+  }, [amazonUrl, hasAnyCta, isBarActive, isClient]);
 
   if (!isClient || !hasAnyCta) {
     return null;
@@ -124,17 +121,6 @@ export function MobilePerfumeCtaBar({
     >
       <div className="border-t border-[#ddcfbc] bg-[#fbf8f2]/96 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] shadow-[0_-18px_40px_-28px_rgba(50,35,20,0.45)] backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
-          {bestOfferUrl ? (
-            <a
-              href={bestOfferUrl}
-              target="_blank"
-              rel="noreferrer"
-              className={buttonStyles({ className: "h-12 w-full" })}
-            >
-              {heroT("goToOffer")}
-            </a>
-          ) : null}
-
           {amazonUrl ? (
             <a
               href={amazonUrl}

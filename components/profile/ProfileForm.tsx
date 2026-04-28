@@ -9,11 +9,13 @@ import { buttonStyles } from "@/components/ui/Button";
 type ProfileFormProps = {
   email: string;
   initialName: string;
+  initialCountryCode?: string | null;
+  initialBirthDate?: string | null;
 };
 
 const initialState: ProfileFormState = {};
 
-export function ProfileForm({ email, initialName }: ProfileFormProps) {
+export function ProfileForm({ email, initialName, initialCountryCode, initialBirthDate }: ProfileFormProps) {
   const t = useTranslations("profile.form");
   const locale = useLocale();
   const [state, formAction, isPending] = useActionState(updateProfile, initialState);
@@ -49,6 +51,36 @@ export function ProfileForm({ email, initialName }: ProfileFormProps) {
           disabled
           className="h-11 w-full rounded-xl border border-[#e4d8ca] bg-[#f6f0e8] px-3 text-sm text-[#796857]"
         />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-1.5">
+          <label htmlFor="countryCode" className="text-sm font-medium text-[#3a2e24]">
+            {t("countryCode")}
+          </label>
+          <input
+            id="countryCode"
+            name="countryCode"
+            type="text"
+            maxLength={2}
+            defaultValue={initialCountryCode ?? ""}
+            placeholder={t("countryCodePlaceholder")}
+            className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm uppercase outline-none transition focus:border-[#bda88f]"
+          />
+        </div>
+
+        <div className="space-y-1.5">
+          <label htmlFor="birthDate" className="text-sm font-medium text-[#3a2e24]">
+            {t("birthDate")}
+          </label>
+          <input
+            id="birthDate"
+            name="birthDate"
+            type="date"
+            defaultValue={initialBirthDate ?? ""}
+            className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
+          />
+        </div>
       </div>
 
       {state?.error ? (

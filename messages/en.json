@@ -910,6 +910,9 @@
       "name": "Name",
       "namePlaceholder": "How should we call you",
       "email": "Email",
+      "countryCode": "Country",
+      "countryCodePlaceholder": "IT",
+      "birthDate": "Birth date",
       "saving": "Saving...",
       "submit": "Save changes"
     },
@@ -917,6 +920,8 @@
       "authUnavailable": "Authentication configuration is unavailable. Try again shortly.",
       "invalidSession": "Invalid session. Please log in again.",
       "nameTooLong": "Name cannot exceed 80 characters.",
+      "countryInvalid": "Enter a valid country code, for example IT.",
+      "birthDateInvalid": "Enter a valid birth date.",
       "updateFailed": "Couldn’t update your profile. Try again.",
       "updated": "Profile updated."
     }

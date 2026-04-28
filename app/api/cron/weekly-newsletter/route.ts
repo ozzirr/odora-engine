@@ -30,11 +30,26 @@ async function getRecommendedPerfumes() {
     select: {
       name: true,
       slug: true,
+      imageUrl: true,
       descriptionShort: true,
+      fragranceFamily: true,
       brand: {
         select: {
           name: true,
         },
+      },
+      notes: {
+        select: {
+          intensity: true,
+          note: {
+            select: {
+              name: true,
+              slug: true,
+            },
+          },
+        },
+        orderBy: [{ intensity: "desc" }, { id: "asc" }],
+        take: 3,
       },
     },
   });

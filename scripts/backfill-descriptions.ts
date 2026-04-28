@@ -81,7 +81,7 @@ async function generateDescription(p: PerfumeData): Promise<string> {
   const prompt = buildPrompt(p);
 
   const message = await anthropic.messages.create({
-    model: "claude-3-haiku-20240307",
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 200,
     system: `Sei un copywriter esperto di profumeria di lusso italiana.
 Scrivi esattamente 2 frasi in italiano per la sezione "Panoramica" di una scheda profumo.
@@ -104,14 +104,22 @@ Regole:
 
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
+  const missingOnly = process.argv.includes("--missing-only");
+  const brandSlugArg = process.argv.find((a) => a.startsWith("--brand-slug="));
+  const brandSlug = brandSlugArg ? brandSlugArg.replace("--brand-slug=", "") : undefined;
   const limit = process.argv.find((a) => a.startsWith("--limit="))
     ? parseInt(process.argv.find((a) => a.startsWith("--limit="))!.replace("--limit=", ""))
     : undefined;
 
-  console.log(`[descriptions:backfill] dryRun=${dryRun} limit=${limit ?? "all"}`);
+  console.log(`[descriptions:backfill] dryRun=${dryRun} missingOnly=${missingOnly} brandSlug=${brandSlug ?? "any"} limit=${limit ?? "all"}`);
+
+  const where: Record<string, unknown> = {};
+  if (missingOnly) where.descriptionLong = "";
+  if (brandSlug) where.brand = { slug: brandSlug };
 
   const perfumes = await prisma.perfume.findMany({
     take: limit,
+    where,
     select: {
       id: true,
       name: true,

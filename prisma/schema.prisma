@@ -78,10 +78,14 @@ model User {
   email     String?
   name      String?
   bio       String?
+  countryCode String?
+  birthDate DateTime?
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   lists     PerfumeList[]
   listSaves PerfumeListSave[]
+  perfumeReviews PerfumeReview[]
+  perfumePurchasePrices PerfumePurchasePrice[]
 }
 
 model Brand {
@@ -138,6 +142,8 @@ model Perfume {
   offers             Offer[]
   homepagePlacements PerfumeHomepagePlacement[]
   listItems          PerfumeListItem[]
+  reviews            PerfumeReview[]
+  purchasePrices     PerfumePurchasePrice[]
 
   @@index([brandId])
   @@index([fragranceFamily])
@@ -155,6 +161,49 @@ model Perfume {
   @@index([gender, ratingInternal(sort: Desc), name], map: "perfume_gender_rating_name_idx")
   @@index([priceRange, ratingInternal(sort: Desc), name], map: "perfume_price_range_rating_name_idx")
   @@index([fragranceFamily, ratingInternal(sort: Desc), name], map: "perfume_family_rating_name_idx")
+}
+
+model PerfumeReview {
+  id               Int      @id @default(autoincrement())
+  userId           String
+  perfumeId        Int
+  source           String   @default("user")
+  longevityScore   Int
+  sillageScore     Int
+  versatilityScore Int
+  text             String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  perfume          Perfume  @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, perfumeId])
+  @@index([perfumeId])
+  @@index([userId])
+  @@index([source])
+  @@index([createdAt])
+}
+
+model PerfumePurchasePrice {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  perfumeId    Int
+  source       String   @default("user")
+  priceAmount  Float
+  currency     String   @default("EUR")
+  countryCode  String?
+  storeName    String?
+  purchaseDate DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  perfume      Perfume  @relation(fields: [perfumeId], references: [id], onDelete: Cascade)
+
+  @@index([perfumeId])
+  @@index([userId])
+  @@index([source])
+  @@index([countryCode])
+  @@index([createdAt])
 }
 
 model PerfumeList {

@@ -65,7 +65,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
           <div className="mt-8">
             <ScopedIntlProvider locale={resolvedLocale} namespaces={["profile"]}>
-              <ProfileForm email={user.email} initialName={user.displayName ?? ""} />
+              <ProfileForm
+                email={user.email}
+                initialName={appUser.name ?? user.displayName ?? ""}
+                initialCountryCode={appUser.countryCode}
+                initialBirthDate={appUser.birthDate ? appUser.birthDate.toISOString().slice(0, 10) : null}
+              />
             </ScopedIntlProvider>
           </div>
         </section>

@@ -910,6 +910,9 @@
       "name": "Nome",
       "namePlaceholder": "Come vuoi essere chiamato",
       "email": "Email",
+      "countryCode": "Nazione",
+      "countryCodePlaceholder": "IT",
+      "birthDate": "Data di nascita",
       "saving": "Salvataggio...",
       "submit": "Salva modifiche"
     },
@@ -917,6 +920,8 @@
       "authUnavailable": "Configurazione autenticazione non disponibile. Riprova tra poco.",
       "invalidSession": "Sessione non valida. Effettua di nuovo l'accesso.",
       "nameTooLong": "Il nome non puo superare 80 caratteri.",
+      "countryInvalid": "Inserisci un codice paese valido, ad esempio IT.",
+      "birthDateInvalid": "Inserisci una data di nascita valida.",
       "updateFailed": "Non sono riuscito ad aggiornare il profilo. Riprova.",
       "updated": "Profilo aggiornato."
     }
