@@ -8,8 +8,8 @@ import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { AddToListButton } from "@/components/perfumes/AddToListButton";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
+import { OlfactoryPyramidCard } from "@/components/perfumes/OlfactoryPyramidCard";
 import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
-import { NotesList } from "@/components/perfumes/NotesList";
 import { PerfumeCommunitySection } from "@/components/perfumes/PerfumeCommunitySection";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
@@ -562,10 +562,11 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
                 lists={userLists}
                 loginNextPath={detailPath}
                 variant="compact"
-                className="h-12 w-full sm:w-full lg:w-auto lg:min-w-[180px] lg:px-6"
+                className="h-12 w-full"
               />
             }
           />
+
           <PerfumeCommunitySection
             perfumeId={perfume.id}
             detailPath={detailPath}
@@ -578,24 +579,20 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             mode="summary"
           />
 
-          <section className="rounded-2xl border border-[#ddcfbc] bg-white p-6">
+          <section className="rounded-[1.45rem] border border-[#ddcfbc] bg-white p-6 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
             <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
           </section>
 
-          <section className="space-y-4">
-            <SectionTitle
-              eyebrow={t("notes.eyebrow")}
-              title={t("notes.title")}
-              subtitle={t("notes.subtitle")}
-            />
-            <NotesList notes={notesForRender} />
-          </section>
+          <OlfactoryPyramidCard notes={notesForRender} />
 
           <section className="grid gap-4 md:grid-cols-3">
             <MoodBadges
               title={t("badges.moods")}
               items={(perfume.moods ?? []).map((item) => ({
-                name: getLocalizedTaxonomyLabel(item.mood?.slug, "moods", taxonomyT) || item.mood?.name || t("unknown"),
+                name:
+                  getLocalizedTaxonomyLabel(item.mood?.slug, "moods", taxonomyT) ||
+                  item.mood?.name ||
+                  t("unknown"),
                 weight: item.weight,
               }))}
             />
@@ -603,7 +600,9 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
               title={t("badges.seasons")}
               items={(perfume.seasons ?? []).map((item) => ({
                 name:
-                  getLocalizedTaxonomyLabel(item.season?.slug, "seasons", taxonomyT) || item.season?.name || t("unknown"),
+                  getLocalizedTaxonomyLabel(item.season?.slug, "seasons", taxonomyT) ||
+                  item.season?.name ||
+                  t("unknown"),
                 weight: item.weight,
               }))}
             />
@@ -631,6 +630,30 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             mode="contribute"
           />
 
+          <div className="grid gap-4 lg:grid-cols-2">
+            <section className="rounded-[1.45rem] border border-[#eadfce] bg-[linear-gradient(135deg,#fffdf9,#fff7eb)] p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
+              <h2 className="font-display text-2xl text-[#21180f]">Attiva avviso prezzo</h2>
+              <p className="mt-2 text-sm leading-6 text-[#685747]">
+                Ti avviseremo quando il prezzo diminuisce su Amazon.
+              </p>
+              <button
+                type="button"
+                className="mt-4 h-11 w-full rounded-xl border border-[#ddcfbc] bg-white text-sm font-semibold text-[#1e4b3b] shadow-[0_16px_34px_-32px_rgba(53,39,27,0.28)]"
+              >
+                Attiva avviso
+              </button>
+            </section>
+
+            <section className="rounded-[1.45rem] border border-[#eadfce] bg-white p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
+              <h2 className="font-display text-2xl text-[#21180f]">Acquista in sicurezza</h2>
+              <div className="mt-4 space-y-3 text-sm leading-6 text-[#4f4032]">
+                <p>Venduto e spedito da Amazon quando disponibile</p>
+                <p>Reso gratuito entro 30 giorni</p>
+                <p>Pagamento sicuro su Amazon</p>
+              </div>
+            </section>
+          </div>
+
           <section className="space-y-4">
             <SectionTitle
               eyebrow={t("value.eyebrow")}
@@ -640,7 +663,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             <PerfumeGrid perfumes={cheaperAlternatives} />
           </section>
 
-          <section className="space-y-4 pb-4 md:pb-6">
+          <section className="space-y-4">
             <SectionTitle
               eyebrow={t("discovery.eyebrow")}
               title={t("discovery.title")}

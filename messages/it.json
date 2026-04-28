@@ -18,7 +18,7 @@
         "home": "Home",
         "perfumes": "Profumi",
         "finder": "Finder",
-        "top": "Top",
+        "brands": "Brand",
         "blog": "Blog"
       },
       "account": {
@@ -60,7 +60,7 @@
         "home": "Home",
         "perfumes": "Profumi",
         "finder": "Finder",
-        "top": "Top",
+        "brands": "Brand",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -755,6 +755,14 @@
     }
   },
   "brand": {
+    "list": {
+      "eyebrow": "Tutti i brand",
+      "title": "Tutti i brand",
+      "subtitle": "Esplora tutte le maison del nostro catalogo. Apri un brand per scoprire i suoi profumi e seguilo per ricevere una notifica a ogni nuova uscita.",
+      "perfumeCount": "{count, plural, one {# profumo} other {# profumi}}",
+      "empty": "Nessun brand disponibile al momento.",
+      "breadcrumb": "Brand"
+    },
     "page": {
       "eyebrow": "Brand",
       "title": "Profumi {name}",
@@ -762,7 +770,13 @@
       "perfumesTitle": "Tutti i profumi di {name}",
       "perfumesEmpty": "Nessun profumo disponibile per questo brand al momento.",
       "country": "Origine: {country}",
-      "breadcrumbBrand": "Brand"
+      "breadcrumbBrand": "Brand",
+      "follow": "Segui",
+      "following": "Stai seguendo",
+      "followHint": "Riceverai una notifica quando uscirà un nuovo profumo.",
+      "followLoginHint": "Accedi per seguire questo brand e ricevere gli aggiornamenti.",
+      "followError": "Impossibile aggiornare la tua preferenza. Riprova.",
+      "followToggleAria": "Attiva o disattiva il follow su {name}"
     }
   },
   "auth": {
@@ -1233,6 +1247,10 @@
         "notFoundTitle": "Brand non trovato | Odora",
         "title": "{name}: profumi, note e prezzi | Odora",
         "description": "Scopri i profumi di {name} su Odora: schede dettagliate, note, performance e confronto prezzi tra i principali store online."
+      },
+      "brands": {
+        "title": "Tutti i brand di profumi | Odora",
+        "description": "Sfoglia la directory completa delle maison di profumi su Odora. Apri un brand per scoprire i suoi profumi, le note e i prezzi."
       }
     }
   }

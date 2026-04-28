@@ -63,6 +63,36 @@ export async function getBrandPerfumes(brandId: number) {
   )();
 }
 
+export async function getAllBrandsWithCount() {
+  if (!isDatabaseConfigured) return [];
+  const catalogMode = resolveCatalogMode();
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+
+  return unstable_cache(
+    async () => {
+      const brands = await prisma.brand.findMany({
+        where: { perfumes: { some: visibilityWhere ?? {} } },
+        select: {
+          id: true,
+          name: true,
+          slug: true,
+          country: true,
+          logoUrl: true,
+          _count: {
+            select: {
+              perfumes: visibilityWhere ? { where: visibilityWhere } : true,
+            },
+          },
+        },
+        orderBy: { name: "asc" },
+      });
+      return brands;
+    },
+    [DEPLOY_ID, "brands-list", catalogMode],
+    { revalidate: BRAND_REVALIDATE_SECONDS, tags: [PUBLIC_CACHE_TAGS.catalog] },
+  )();
+}
+
 export async function getAllBrandSlugs() {
   if (!isDatabaseConfigured) return [];
   return unstable_cache(

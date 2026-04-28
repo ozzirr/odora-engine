@@ -77,21 +77,10 @@ export function PerfumeCommunitySection({
     const isItalian = locale === "it";
     const distribution = buildDistribution(stats.reviewCount);
     const highlightedReviews = reviews.slice(0, 2);
-    const insights = isItalian
-      ? [
-          "Consigliato quando vuoi una scia presente ma curata.",
-          "Apprezzato soprattutto nelle uscite serali e nelle occasioni eleganti.",
-          "Letto come un profumo riconoscibile, pulito e maschile.",
-        ]
-      : [
-          "Recommended when you want a polished but noticeable trail.",
-          "Often appreciated for evenings and elegant occasions.",
-          "Perceived as recognizable, clean, and masculine.",
-        ];
 
     return (
       <section className="rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
-        <div className="grid gap-7 lg:grid-cols-[0.95fr_0.82fr_1fr] lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">Social proof</p>
             <h2 className="mt-2 font-display text-3xl text-[#21180f] sm:text-4xl">
@@ -99,8 +88,8 @@ export function PerfumeCommunitySection({
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-6 text-[#685747]">
               {isItalian
-                ? "Una sintesi qualitativa dei segnali lasciati dagli utenti, senza ripetere score e metriche gia visibili in alto."
-                : "Qualitative signals from the community, without repeating the score and metrics already shown above."}
+                ? "Distribuzione delle valutazioni e recensioni testuali lasciate dalla community Odora."
+                : "Rating distribution and written reviews from the Odora community."}
             </p>
 
             <div className="mt-5 space-y-2.5">
@@ -115,20 +104,6 @@ export function PerfumeCommunitySection({
                   </span>
                   <span className="text-right text-xs font-medium text-[#7a6855]">{item.percent}%</span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[1.4rem] border border-[#eadfce] bg-[#fbf7f0] p-4">
-            <h3 className="font-display text-2xl text-[#21180f]">{isItalian ? "In sintesi" : "In short"}</h3>
-            <div className="mt-4 space-y-3">
-              {insights.map((insight, index) => (
-                <p key={insight} className="flex gap-3 text-sm leading-6 text-[#5d4c3b]">
-                  <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[11px] font-semibold text-[#1e4b3b]">
-                    {index + 1}
-                  </span>
-                  <span>{insight}</span>
-                </p>
               ))}
             </div>
           </div>

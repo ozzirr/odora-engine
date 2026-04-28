@@ -5,9 +5,12 @@ import { getTranslations } from "next-intl/server";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
+import { BrandFollowButton } from "@/components/brands/BrandFollowButton";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { isFollowingBrand } from "@/lib/brand-follows";
 import { getBrandBySlug, getBrandPerfumes } from "@/lib/brands";
+import { getCurrentUser } from "@/lib/supabase/auth-state";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import {
@@ -59,6 +62,10 @@ export default async function BrandPage({ params }: BrandPageProps) {
   const t = await getTranslations({ locale: resolvedLocale, namespace: "brand.page" });
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const perfumes = await getBrandPerfumes(brand.id);
+  const currentUser = await getCurrentUser();
+  const initialIsFollowing = currentUser
+    ? await isFollowingBrand(currentUser.id, brand.id)
+    : false;
 
   const detailPath = getLocalizedPathname(resolvedLocale, "/brands/[slug]", { slug });
   const homePath = getLocalizedPathname(resolvedLocale, "/");
@@ -102,7 +109,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
 
       <ScopedIntlProvider
         locale={resolvedLocale}
-        namespaces={["common", "catalog", "perfume", "taxonomy"]}
+        namespaces={["common", "catalog", "perfume", "taxonomy", "brand"]}
       >
         <Container className="space-y-8 pt-6 pb-16 md:pt-8">
           <header className="rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-10">
@@ -131,6 +138,14 @@ export default async function BrandPage({ params }: BrandPageProps) {
                     {t("country", { country: brand.country })}
                   </p>
                 ) : null}
+                <div className="pt-2">
+                  <BrandFollowButton
+                    brandId={brand.id}
+                    brandName={brand.name}
+                    initialIsFollowing={initialIsFollowing}
+                    initialIsAuthenticated={Boolean(currentUser)}
+                  />
+                </div>
               </div>
             </div>
           </header>

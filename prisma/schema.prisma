@@ -86,6 +86,7 @@ model User {
   listSaves PerfumeListSave[]
   perfumeReviews PerfumeReview[]
   perfumePurchasePrices PerfumePurchasePrice[]
+  brandFollows BrandFollow[]
 }
 
 model Brand {
@@ -98,6 +99,21 @@ model Brand {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   perfumes    Perfume[]
+  followers   BrandFollow[]
+}
+
+model BrandFollow {
+  id              Int       @id @default(autoincrement())
+  userId          String
+  brandId         Int
+  createdAt       DateTime  @default(now())
+  lastNotifiedAt  DateTime?
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  brand           Brand     @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, brandId])
+  @@index([brandId])
+  @@index([userId])
 }
 
 model Perfume {

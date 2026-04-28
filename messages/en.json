@@ -18,7 +18,7 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Finder",
-        "top": "Top",
+        "brands": "Brands",
         "blog": "Blog"
       },
       "account": {
@@ -60,7 +60,7 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Finder",
-        "top": "Top",
+        "brands": "Brands",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -762,7 +762,21 @@
       "perfumesTitle": "All {name} perfumes",
       "perfumesEmpty": "No perfumes available for this brand right now.",
       "country": "Origin: {country}",
-      "breadcrumbBrand": "Brand"
+      "breadcrumbBrand": "Brand",
+      "follow": "Follow",
+      "following": "Following",
+      "followHint": "Get notified when a new perfume is released.",
+      "followLoginHint": "Log in to follow this brand and get release updates.",
+      "followError": "Could not update your follow. Please try again.",
+      "followToggleAria": "Toggle following {name}"
+    },
+    "list": {
+      "eyebrow": "Brand directory",
+      "title": "All brands",
+      "subtitle": "Explore every fragrance house in our catalog. Open a brand to browse its perfumes and follow it to receive an alert whenever a new release lands.",
+      "perfumeCount": "{count, plural, one {# perfume} other {# perfumes}}",
+      "empty": "No brands available right now.",
+      "breadcrumb": "Brands"
     }
   },
   "auth": {
@@ -1233,6 +1247,10 @@
         "notFoundTitle": "Brand not found | Odora",
         "title": "{name}: perfumes, notes, and prices | Odora",
         "description": "Discover {name} perfumes on Odora: detailed pages, notes, performance, and price comparison across major online stores."
+      },
+      "brands": {
+        "title": "All fragrance brands | Odora",
+        "description": "Browse the complete directory of fragrance houses on Odora. Open any brand to discover its perfumes, notes, and prices."
       }
     }
   }

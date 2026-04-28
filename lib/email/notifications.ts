@@ -385,3 +385,88 @@ export function sendWeeklyRecommendationsEmail({
     text: `${intro}\n\n${perfumeText}${blogText}\n\n${unsubscribeUrl}`,
   });
 }
+
+type BrandNewPerfumeEmailInput = {
+  to: string;
+  locale: AppLocale;
+  brandName: string;
+  brandSlug: string;
+  perfumes: Array<{ name: string; slug: string; imageUrl: string | null }>;
+};
+
+export function sendBrandNewPerfumeEmail({
+  to,
+  locale,
+  brandName,
+  brandSlug,
+  perfumes,
+}: BrandNewPerfumeEmailInput) {
+  const isItalian = locale === "it";
+  const subject = isItalian
+    ? perfumes.length === 1
+      ? `${brandName}: nuova fragranza disponibile`
+      : `${brandName}: ${perfumes.length} nuove fragranze`
+    : perfumes.length === 1
+      ? `${brandName}: a new fragrance has landed`
+      : `${brandName}: ${perfumes.length} new fragrances`;
+
+  const heading = isItalian
+    ? `Novità da ${brandName}`
+    : `New from ${brandName}`;
+  const intro = isItalian
+    ? `Un brand che segui ha rilasciato nuovi profumi. Ecco cosa è arrivato nel catalogo Odora:`
+    : `A brand you follow has just released new perfumes. Here is what landed in the Odora catalog:`;
+
+  const list = perfumes
+    .map((perfume) => {
+      const href = toAbsoluteUrl(
+        getLocalizedPathname(locale, "/perfumes/[slug]", { slug: perfume.slug }),
+      );
+      const imageUrl = perfume.imageUrl?.trim() || toAbsoluteUrl("/images/perfume-placeholder.svg");
+      return `<tr>
+        <td style="padding:0 0 16px;width:74px;vertical-align:top;">
+          <a href="${escapeHtml(href)}" style="text-decoration:none;">
+            <img src="${escapeHtml(imageUrl)}" width="64" height="80" alt="${escapeHtml(perfume.name)}" style="display:block;width:64px;height:80px;object-fit:cover;border:1px solid #e3d6c8;border-radius:12px;background:#fbf7f0;" />
+          </a>
+        </td>
+        <td style="padding:0 0 16px 12px;vertical-align:top;">
+          <p style="margin:0 0 6px;font-size:16px;font-weight:700;line-height:22px;color:#21180f;">
+            <a href="${escapeHtml(href)}" style="color:#21180f;text-decoration:none;">${escapeHtml(`${brandName} ${perfume.name}`)}</a>
+          </p>
+          <p style="margin:0;">${renderButton(isItalian ? "Apri scheda" : "Open page", href)}</p>
+        </td>
+      </tr>`;
+    })
+    .join("");
+
+  const brandHref = toAbsoluteUrl(
+    getLocalizedPathname(locale, "/brands/[slug]", { slug: brandSlug }),
+  );
+  const brandCta = isItalian
+    ? `Tutti i profumi di ${brandName}`
+    : `All ${brandName} perfumes`;
+
+  const html = renderLayout(
+    subject,
+    heading,
+    `<p style="margin:0 0 18px;font-size:16px;line-height:24px;color:#5f4d3d;">${escapeHtml(intro)}</p>
+     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;">${list}</table>
+     <p style="margin:18px 0 0;">${renderButton(brandCta, brandHref)}</p>`,
+  );
+
+  const textLines = perfumes
+    .map((perfume) => {
+      const href = toAbsoluteUrl(
+        getLocalizedPathname(locale, "/perfumes/[slug]", { slug: perfume.slug }),
+      );
+      return `- ${brandName} ${perfume.name}: ${href}`;
+    })
+    .join("\n");
+
+  return sendEmail({
+    to,
+    subject,
+    html,
+    text: `${heading}\n\n${intro}\n\n${textLines}\n\n${brandHref}`,
+  });
+}

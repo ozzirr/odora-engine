@@ -13,7 +13,7 @@ export function Footer() {
     { href: "/" as const, label: t("nav.home") },
     { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
-    { href: "/top" as const, label: t("nav.top") },
+    { href: "/brands" as const, label: t("nav.brands") },
     { href: "/blog" as const, label: t("nav.blog") },
   ];
   const legalLinks = [
