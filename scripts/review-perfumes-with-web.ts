@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config({ override: true });
 
-import { mkdir, writeFile, readFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 import Anthropic from "@anthropic-ai/sdk";
@@ -95,89 +95,11 @@ async function reviewOne(brand: string, name: string, year: number | null): Prom
   });
 
   const textParts = response.content
-    .filter((b: { type: string }) => b.type === "text")
-    .map((b: { type: string; text: string }) => b.text)
+    .map((block) => ("text" in block && typeof block.text === "string" ? block.text : ""))
+    .filter((text) => text.length > 0)
     .join("\n");
 
   return extractJson(textParts);
-}
-
-function applyableNotes(arr: unknown): string[] {
-  if (!Array.isArray(arr)) return [];
-  return arr
-    .filter((v): v is string => typeof v === "string")
-    .map((v) => v.trim())
-    .filter((v) => v.length > 0 && v.length < 60);
-}
-
-async function applyToDatabase(
-  perfumeId: number,
-  result: ReviewResult,
-): Promise<{ updatedNotes: number; updatedFields: string[] }> {
-  const updatedFields: string[] = [];
-  const data: Record<string, unknown> = {};
-
-  if (result.releaseYear && Number.isInteger(result.releaseYear) && result.releaseYear > 1900 && result.releaseYear <= new Date().getFullYear() + 1) {
-    data.releaseYear = result.releaseYear;
-    updatedFields.push("releaseYear");
-  }
-
-  if (result.fragranceFamily && typeof result.fragranceFamily === "string" && result.fragranceFamily.length < 80) {
-    data.fragranceFamily = result.fragranceFamily;
-    updatedFields.push("fragranceFamily");
-  }
-
-  if (Object.keys(data).length > 0) {
-    await prisma.perfume.update({ where: { id: perfumeId }, data });
-  }
-
-  // Replace notes only if confidence is high or medium and we have at least 2 of the 3 levels populated
-  const top = applyableNotes(result.topNotes);
-  const heart = applyableNotes(result.heartNotes);
-  const base = applyableNotes(result.baseNotes);
-  const filledLevels = [top, heart, base].filter((arr) => arr.length > 0).length;
-
-  if ((result.confidence === "high" || result.confidence === "medium") && filledLevels >= 2) {
-    // Wipe existing notes for this perfume, then re-create
-    await prisma.perfumeNote.deleteMany({ where: { perfumeId } });
-    let created = 0;
-    for (const [list, type] of [
-      [top, "TOP"],
-      [heart, "HEART"],
-      [base, "BASE"],
-    ] as const) {
-      for (let i = 0; i < list.length; i++) {
-        const noteName = list[i];
-        const slug = noteName
-          .toLowerCase()
-          .normalize("NFD")
-          .replace(/[̀-ͯ]/g, "")
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-        if (!slug) continue;
-
-        const note = await prisma.note.upsert({
-          where: { slug },
-          update: { name: noteName },
-          create: { name: noteName, slug },
-        });
-
-        await prisma.perfumeNote.create({
-          data: {
-            perfumeId,
-            noteId: note.id,
-            noteType: type,
-            intensity: Math.max(1, list.length - i),
-          },
-        });
-        created++;
-      }
-    }
-    updatedFields.push("notes");
-    return { updatedNotes: created, updatedFields };
-  }
-
-  return { updatedNotes: 0, updatedFields };
 }
 
 async function main() {
@@ -242,18 +164,7 @@ async function main() {
       }
 
       rawLines.push(JSON.stringify({ slug: perfume.slug, brand: perfume.brand.name, name: perfume.name, result }));
-
-      if (!dryRun && result.found && (conf === "high" || conf === "medium")) {
-        const applied = await applyToDatabase(perfume.id, result);
-        if (applied.updatedFields.length > 0) {
-          summary.promoted++;
-          console.log(`${label} — ${conf} · applied: ${applied.updatedFields.join(",")} (notes=${applied.updatedNotes})`);
-        } else {
-          console.log(`${label} — ${conf} · nothing applicable`);
-        }
-      } else {
-        console.log(`${label} — ${conf} · ${dryRun ? "dry-run" : "skip apply"}`);
-      }
+      console.log(`${label} — ${conf}${result.found === false ? " (not found)" : ""}`);
     } catch (error) {
       summary.failed++;
       console.error(`${label} — ERROR:`, (error as Error).message);
