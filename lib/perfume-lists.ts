@@ -11,6 +11,20 @@ export type UserPerfumeListSummary = {
   description: string | null;
   visibility: PerfumeListVisibilityValue;
   itemCount: number;
+  items: Array<{
+    id: number;
+    perfumeId: number;
+    perfume: {
+      id: number;
+      slug: string;
+      name: string;
+      imageUrl: string | null;
+      fragranceFamily: string;
+      brand: {
+        name: string;
+      };
+    };
+  }>;
 };
 
 export type UserPerfumeListForPerfume = UserPerfumeListSummary & {
@@ -87,6 +101,25 @@ export async function getUserPerfumeLists(userId: string): Promise<UserPerfumeLi
     where: { userId },
     orderBy: { updatedAt: "desc" },
     include: {
+      items: {
+        orderBy: [{ position: "asc" }, { createdAt: "desc" }],
+        select: {
+          id: true,
+          perfumeId: true,
+          perfume: {
+            select: {
+              id: true,
+              slug: true,
+              name: true,
+              imageUrl: true,
+              fragranceFamily: true,
+              brand: {
+                select: { name: true },
+              },
+            },
+          },
+        },
+      },
       _count: {
         select: { items: true },
       },
@@ -100,6 +133,7 @@ export async function getUserPerfumeLists(userId: string): Promise<UserPerfumeLi
     description: list.description,
     visibility: list.visibility,
     itemCount: list._count.items,
+    items: list.items,
   }));
 }
 
@@ -128,6 +162,7 @@ export async function getUserPerfumeListsForPerfume(
     description: list.description,
     visibility: list.visibility,
     itemCount: list._count.items,
+    items: [],
     containsPerfume: list.items.length > 0,
   }));
 }

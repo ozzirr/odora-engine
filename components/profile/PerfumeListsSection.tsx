@@ -7,9 +7,11 @@ import { useLocale } from "next-intl";
 import {
   createPerfumeList,
   deletePerfumeList,
+  removePerfumeFromList,
   updatePerfumeList,
   type PerfumeListActionResult,
 } from "@/app/perfume-lists/actions";
+import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { buttonStyles } from "@/components/ui/Button";
 import { Link } from "@/lib/navigation";
 import type { UserPerfumeListSummary } from "@/lib/perfume-lists";
@@ -45,6 +47,18 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
       setError(null);
       setMessage(successMessage);
       setEditing(null);
+      router.refresh();
+      return;
+    }
+
+    setMessage(null);
+    setError(result.error ?? "Operazione non riuscita.");
+  };
+
+  const handleBackgroundResult = (result: PerfumeListActionResult, successMessage: string) => {
+    if (result.ok) {
+      setError(null);
+      setMessage(successMessage);
       router.refresh();
       return;
     }
@@ -90,6 +104,27 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
 
     startTransition(async () => {
       handleResult(await deletePerfumeList(list.id), "Lista eliminata.");
+    });
+  };
+
+  const removePerfume = (list: UserPerfumeListSummary, perfumeId: number, perfumeName: string) => {
+    if (!window.confirm(`Rimuovere "${perfumeName}" da "${list.name}"?`)) {
+      return;
+    }
+
+    startTransition(async () => {
+      const result = await removePerfumeFromList(list.id, perfumeId);
+      if (result.ok && editing?.mode === "edit" && editing.list.id === list.id) {
+        setEditing({
+          mode: "edit",
+          list: {
+            ...editing.list,
+            itemCount: Math.max(0, editing.list.itemCount - 1),
+            items: editing.list.items.filter((item) => item.perfumeId !== perfumeId),
+          },
+        });
+      }
+      handleBackgroundResult(result, "Profumo rimosso dalla lista.");
     });
   };
 
@@ -188,7 +223,7 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
 
       {editing ? (
         <div className="fixed inset-0 z-[120] flex items-end justify-center bg-[rgba(26,20,15,0.32)] px-4 py-5 backdrop-blur-sm sm:items-center">
-          <form action={submitList} className="w-full max-w-lg rounded-[1.8rem] border border-[#ddcfbe] bg-[#fffdf9] p-5 shadow-[0_34px_90px_-42px_rgba(36,25,16,0.65)] sm:p-6">
+          <form action={submitList} className="max-h-[calc(100dvh-2.5rem)] w-full max-w-2xl overflow-y-auto rounded-[1.8rem] border border-[#ddcfbe] bg-[#fffdf9] p-5 shadow-[0_34px_90px_-42px_rgba(36,25,16,0.65)] sm:p-6">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8b7762]">
@@ -234,6 +269,77 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
                 </select>
               </label>
             </div>
+
+            {editing.mode === "edit" ? (
+              <div className="mt-6 rounded-[1.35rem] border border-[#e2d5c5] bg-white p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8b7762]">
+                      Profumi nella lista
+                    </p>
+                    <p className="mt-1 text-sm text-[#685747]">
+                      {editing.list.itemCount} {editing.list.itemCount === 1 ? "profumo salvato" : "profumi salvati"}
+                    </p>
+                  </div>
+                </div>
+
+                {editing.list.items.length === 0 ? (
+                  <p className="mt-4 rounded-xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-4 text-sm text-[#685747]">
+                    Questa lista non contiene ancora profumi.
+                  </p>
+                ) : (
+                  <div className="mt-4 space-y-2">
+                    {editing.list.items.map((item) => {
+                      const brandName = item.perfume.brand.name;
+
+                      return (
+                        <div
+                          key={item.id}
+                          className="grid grid-cols-[3.5rem_minmax(0,1fr)] gap-3 rounded-2xl border border-[#eadfce] bg-[#fffdf9] p-2.5 sm:grid-cols-[4rem_minmax(0,1fr)_auto] sm:items-center"
+                        >
+                          <Link
+                            href={{ pathname: "/perfumes/[slug]", params: { slug: item.perfume.slug } }}
+                            className="relative h-16 overflow-hidden rounded-xl border border-[#e0d2c0] bg-[#f8f2e8]"
+                          >
+                            <PerfumeImage
+                              imageUrl={item.perfume.imageUrl}
+                              perfumeName={item.perfume.name}
+                              brandName={brandName}
+                              fragranceFamily={item.perfume.fragranceFamily}
+                              sizes="4rem"
+                              imageClassName="object-contain"
+                            />
+                          </Link>
+                          <div className="min-w-0">
+                            <p className="truncate text-xs font-semibold uppercase tracking-[0.14em] text-[#8b7762]">
+                              {brandName}
+                            </p>
+                            <Link
+                              href={{ pathname: "/perfumes/[slug]", params: { slug: item.perfume.slug } }}
+                              className="mt-1 block truncate font-medium text-[#21180f]"
+                            >
+                              {item.perfume.name}
+                            </Link>
+                          </div>
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            className={buttonStyles({
+                              variant: "ghost",
+                              size: "sm",
+                              className: "col-span-2 w-full text-[#7c3f35] sm:col-span-1 sm:w-auto",
+                            })}
+                            onClick={() => removePerfume(editing.list, item.perfumeId, item.perfume.name)}
+                          >
+                            Rimuovi
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            ) : null}
 
             <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
               <button type="button" className={buttonStyles({ variant: "secondary" })} onClick={() => setEditing(null)}>

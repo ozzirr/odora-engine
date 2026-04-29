@@ -47,25 +47,12 @@ type PerfumeCommunitySectionProps = {
 
 const initialState: CommunityActionState = {};
 
-function countryFlag(countryCode: string | null | undefined) {
-  if (!countryCode || countryCode.length !== 2) {
-    return "🌍";
-  }
-
-  return countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
-    .join("");
-}
-
 export function PerfumeCommunitySection({
   perfumeId,
   detailPath,
   isAuthenticated,
   loginHref,
   locale,
-  stats,
   reviews,
   userCountryCode,
   mode = "summary",
@@ -75,37 +62,35 @@ export function PerfumeCommunitySection({
 
   if (mode === "summary") {
     const isItalian = locale === "it";
-    const distribution = buildDistribution(stats.reviewCount);
     const highlightedReviews = reviews.slice(0, 2);
+    const hasReviews = highlightedReviews.length > 0;
 
     return (
       <section className="rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">Social proof</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">Community</p>
             <h2 className="mt-2 font-display text-3xl text-[#21180f] sm:text-4xl">
-              {isItalian ? "Perche piace" : "Why people like it"}
+              {isItalian ? "Recensioni della community" : "Community reviews"}
             </h2>
             <p className="mt-2 max-w-xl text-sm leading-6 text-[#685747]">
-              {isItalian
-                ? "Distribuzione delle valutazioni e recensioni testuali lasciate dalla community Odora."
-                : "Rating distribution and written reviews from the Odora community."}
+              {hasReviews
+                ? isItalian
+                  ? "Esperienze reali condivise dagli utenti Odora."
+                  : "Real experiences shared by Odora users."
+                : isItalian
+                  ? "Le recensioni appariranno qui quando gli utenti inizieranno a valutare questo profumo."
+                  : "Reviews will appear here once users start rating this perfume."}
             </p>
 
-            <div className="mt-5 space-y-2.5">
-              {distribution.map((item) => (
-                <div key={item.stars} className="grid grid-cols-[2.25rem_minmax(0,1fr)_2.75rem] items-center gap-3">
-                  <span className="text-sm font-semibold text-[#3a2e24]">{item.stars}★</span>
-                  <span className="h-2.5 overflow-hidden rounded-full bg-[#efe7dc]">
-                    <span
-                      className="block h-full rounded-full bg-[#1e4b3b]"
-                      style={{ width: `${item.percent}%` }}
-                    />
-                  </span>
-                  <span className="text-right text-xs font-medium text-[#7a6855]">{item.percent}%</span>
-                </div>
-              ))}
-            </div>
+            {!hasReviews ? (
+              <a
+                href="#contribuisci-valutazione"
+                className={buttonStyles({ variant: "secondary", className: "mt-5 w-full sm:w-auto" })}
+              >
+                {isItalian ? "Scrivi la prima recensione" : "Write the first review"}
+              </a>
+            ) : null}
           </div>
 
           <div>
@@ -113,7 +98,7 @@ export function PerfumeCommunitySection({
               {isItalian ? "Recensioni in evidenza" : "Highlighted reviews"}
             </h3>
             <div className="mt-4 space-y-3">
-              {highlightedReviews.length === 0 ? (
+              {!hasReviews ? (
                 <p className="rounded-[1.25rem] border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-4 text-sm leading-6 text-[#685747]">
                   {isItalian
                     ? "Le recensioni testuali appariranno qui appena la community le pubblica."
@@ -145,7 +130,7 @@ export function PerfumeCommunitySection({
   }
 
   return (
-    <section className="rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
+    <section id="contribuisci-valutazione" className="scroll-mt-24 rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">Community</p>
       <h2 className="mt-2 font-display text-3xl text-[#21180f] sm:text-4xl">Contribuisci a questo profumo</h2>
       <p className="mt-2 max-w-2xl text-sm leading-6 text-[#685747]">
@@ -229,51 +214,8 @@ export function PerfumeCommunitySection({
           </form>
         </div>
       )}
-
-      <div className="mt-6 space-y-3">
-        {reviews.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-5 text-sm text-[#685747]">
-            Ancora nessuna recensione pubblica. Puoi essere il primo.
-          </p>
-        ) : (
-          reviews.map((review) => (
-            <article key={review.id} className="rounded-2xl border border-[#eadfce] bg-white p-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-medium text-[#21180f]">
-                  <span aria-hidden="true" className="mr-2">{countryFlag(review.user.countryCode)}</span>
-                  {review.user.name ?? "Utente Odora"}
-                </p>
-                <p className="text-xs text-[#8b7762]">
-                  P {review.longevityScore}/10 · S {review.sillageScore}/10 · V {review.versatilityScore}/10
-                </p>
-              </div>
-              {review.text ? <p className="mt-2 text-sm leading-6 text-[#685747]">{review.text}</p> : null}
-            </article>
-          ))
-        )}
-      </div>
     </section>
   );
-}
-
-function buildDistribution(reviewCount: number) {
-  if (reviewCount <= 0) {
-    return [
-      { stars: 5, percent: 0 },
-      { stars: 4, percent: 0 },
-      { stars: 3, percent: 0 },
-      { stars: 2, percent: 0 },
-      { stars: 1, percent: 0 },
-    ];
-  }
-
-  return [
-    { stars: 5, percent: 62 },
-    { stars: 4, percent: 24 },
-    { stars: 3, percent: 9 },
-    { stars: 2, percent: 3 },
-    { stars: 1, percent: 2 },
-  ];
 }
 
 function ScoreInput({ name, label }: { name: string; label: string }) {

@@ -13,9 +13,12 @@ import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetai
 import { PerfumeCommunitySection } from "@/components/perfumes/PerfumeCommunitySection";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
+import { PriceAlertCard } from "@/components/perfumes/PriceAlertCard";
+import { PriceCard } from "@/components/perfumes/PriceCard";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { getAmazonProductUrl } from "@/lib/amazon";
 import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
 import {
   getCatalogVisibilityWhereForMode,
@@ -416,6 +419,17 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const { perfume, allPerfumes } = data;
   const appUser = supabaseUser ? await ensureAppUser(supabaseUser) : null;
   const userLists = appUser ? await getUserPerfumeListsForPerfume(appUser.id, perfume.id) : [];
+  const priceAlert = appUser && prisma.perfumePriceAlert
+    ? await prisma.perfumePriceAlert.findUnique({
+        where: {
+          userId_perfumeId: {
+            userId: appUser.id,
+            perfumeId: perfume.id,
+          },
+        },
+        select: { active: true },
+      })
+    : null;
   const bestOffer = computeBestOffer(perfume.offers);
   const communityData = await getPerfumeCommunityData(perfume.id);
   const communityStats = {
@@ -500,6 +514,13 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
   const loginHref = getLocalizedPathname(resolvedLocale, "/login", undefined, { next: detailPath });
   const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
   const brandName = perfume.brand?.name ?? t("unknown");
+  const amazonUrl = getAmazonProductUrl({
+    amazonUrl: perfume.amazonUrl,
+    brandName,
+    perfumeName: perfume.name,
+    locale: resolvedLocale,
+    perfumeSlug: perfume.slug,
+  });
   const familyLabel =
     getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT) || perfume.fragranceFamily;
   const bestPriceLabel = bestOffer
@@ -553,7 +574,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
           <PerfumeHero
             perfume={perfume}
-            bestOffer={bestOffer}
             reviewCount={communityStats.reviewCount}
             listAction={
               <AddToListButton
@@ -565,18 +585,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
                 className="h-12 w-full"
               />
             }
-          />
-
-          <PerfumeCommunitySection
-            perfumeId={perfume.id}
-            detailPath={detailPath}
-            isAuthenticated={Boolean(appUser)}
-            loginHref={loginHref}
-            locale={resolvedLocale}
-            stats={communityStats}
-            reviews={communityData.reviews}
-            userCountryCode={appUser?.countryCode}
-            mode="summary"
           />
 
           <section className="rounded-[1.45rem] border border-[#ddcfbc] bg-white p-6 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
@@ -630,29 +638,27 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             mode="contribute"
           />
 
-          <div className="grid gap-4 lg:grid-cols-2">
-            <section className="rounded-[1.45rem] border border-[#eadfce] bg-[linear-gradient(135deg,#fffdf9,#fff7eb)] p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
-              <h2 className="font-display text-2xl text-[#21180f]">Attiva avviso prezzo</h2>
-              <p className="mt-2 text-sm leading-6 text-[#685747]">
-                Ti avviseremo quando il prezzo diminuisce su Amazon.
-              </p>
-              <button
-                type="button"
-                className="mt-4 h-11 w-full rounded-xl border border-[#ddcfbc] bg-white text-sm font-semibold text-[#1e4b3b] shadow-[0_16px_34px_-32px_rgba(53,39,27,0.28)]"
-              >
-                Attiva avviso
-              </button>
-            </section>
+          <PerfumeCommunitySection
+            perfumeId={perfume.id}
+            detailPath={detailPath}
+            isAuthenticated={Boolean(appUser)}
+            loginHref={loginHref}
+            locale={resolvedLocale}
+            stats={communityStats}
+            reviews={communityData.reviews}
+            userCountryCode={appUser?.countryCode}
+            mode="summary"
+          />
 
-            <section className="rounded-[1.45rem] border border-[#eadfce] bg-white p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
-              <h2 className="font-display text-2xl text-[#21180f]">Acquista in sicurezza</h2>
-              <div className="mt-4 space-y-3 text-sm leading-6 text-[#4f4032]">
-                <p>Venduto e spedito da Amazon quando disponibile</p>
-                <p>Reso gratuito entro 30 giorni</p>
-                <p>Pagamento sicuro su Amazon</p>
-              </div>
-            </section>
-          </div>
+          <PriceAlertCard
+            perfumeId={perfume.id}
+            detailPath={detailPath}
+            isAuthenticated={Boolean(appUser)}
+            loginHref={loginHref}
+            isActive={Boolean(priceAlert?.active)}
+          />
+
+          <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
 
           <section className="space-y-4">
             <SectionTitle

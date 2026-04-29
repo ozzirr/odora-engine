@@ -1,15 +1,14 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
 import { MobilePerfumeCtaBar } from "@/components/perfumes/MobilePerfumeCtaBar";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
-import { PriceCard } from "@/components/perfumes/PriceCard";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import { getAmazonProductUrl } from "@/lib/amazon";
 import { type AppLocale } from "@/lib/i18n";
 import { getPerfumeShortText } from "@/lib/perfume-text";
-import type { ComputedBestOffer } from "@/lib/pricing";
 import { Link } from "@/lib/navigation";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { cn } from "@/lib/utils";
@@ -57,7 +56,6 @@ type PerfumeHeroProps = {
     }>;
   };
   listAction?: ReactNode;
-  bestOffer: ComputedBestOffer | null;
   reviewCount: number;
 };
 
@@ -116,7 +114,19 @@ function RatingBlock({
   );
 }
 
-export function PerfumeHero({ perfume, listAction, bestOffer, reviewCount }: PerfumeHeroProps) {
+function AmazonWordmark({ className }: { className?: string }) {
+  return (
+    <Image
+      src="/images/logo_amazon.webp"
+      alt="Amazon"
+      width={110}
+      height={34}
+      className={cn("brightness-0 invert", className)}
+    />
+  );
+}
+
+export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroProps) {
   const t = useTranslations("perfume.hero");
   const commonT = useTranslations("common");
   const taxonomyT = useTranslations("taxonomy");
@@ -141,7 +151,7 @@ export function PerfumeHero({ perfume, listAction, bestOffer, reviewCount }: Per
   ].filter((metric) => metric.value !== null);
   return (
     <>
-      <section className="rounded-[1.7rem] border border-[#ddd0be] bg-[#fffdf9] p-4 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6">
+      <section data-perfume-hero="true" className="rounded-[1.7rem] border border-[#ddd0be] bg-[#fffdf9] p-4 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6">
         <div className="grid gap-5 lg:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <div className="relative h-[20rem] overflow-hidden rounded-[1.25rem] border border-[#ddcfbc] bg-white shadow-[0_18px_36px_-28px_rgba(53,39,27,0.28)] sm:h-[25rem] lg:h-[31rem]">
             <PerfumeImage
@@ -191,15 +201,25 @@ export function PerfumeHero({ perfume, listAction, bestOffer, reviewCount }: Per
                 rel="noreferrer"
                 className={buttonStyles({
                   className:
-                    "h-12 w-full bg-[#ff9f0a] !text-[#23170c] shadow-[0_18px_35px_-24px_rgba(255,159,10,0.74)] hover:bg-[#f09100] hover:!text-[#23170c]",
+                    "hidden h-12 w-full bg-[#ff9f0a] !text-[#23170c] hover:bg-[#f09100] hover:!text-[#23170c] sm:flex",
                 })}
               >
-                {locale === "it" ? "Scopri su Amazon" : "View on Amazon"}
+                <span className="inline-flex items-center gap-2">
+                  <span>{locale === "it" ? "Acquista su" : "Buy on"}</span>
+                  <span className="inline-flex min-w-[92px] items-center justify-center">
+                    <AmazonWordmark className="h-[24px] w-auto object-contain translate-y-[1px]" />
+                  </span>
+                </span>
               </a>
-            </div>
-
-            <div className="mt-4">
-              <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
+              <a
+                href="#contribuisci-valutazione"
+                className={buttonStyles({
+                  variant: "secondary",
+                  className: "h-12 w-full sm:col-span-2",
+                })}
+              >
+                {locale === "it" ? "Valuta questo profumo" : "Rate this perfume"}
+              </a>
             </div>
           </div>
         </div>
@@ -207,6 +227,7 @@ export function PerfumeHero({ perfume, listAction, bestOffer, reviewCount }: Per
 
       <MobilePerfumeCtaBar
         amazonUrl={amazonUrl}
+        listAction={listAction}
       />
     </>
   );

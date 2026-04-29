@@ -3,7 +3,7 @@ import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLo
 
 export default function PerfumeDetailRouteLoading() {
   return (
-    <Container className="pt-4 pb-40 md:pt-6 md:pb-10">
+    <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
       <PerfumeDetailLoadingState />
     </Container>
   );

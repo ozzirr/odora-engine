@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { APP_HEADER_OFFSET_CLASS, APP_OVERLAY_LAYER_CLASS } from "@/lib/chrome";
 import { lockDocumentScroll } from "@/lib/document-scroll-lock";
+import { Container } from "@/components/layout/Container";
 import { PerfumeDetailLoadingState } from "@/components/perfumes/PerfumeDetailLoadingState";
 import { cn } from "@/lib/utils";
 
@@ -108,14 +109,16 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
       {pendingNavigation ? (
         <div
           className={cn(
-            `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} flex items-center justify-center bg-[rgba(24,20,16,0.24)] px-4 py-6 backdrop-blur-[18px] sm:px-6 sm:py-8`,
+            `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-y-auto bg-[#fbf8f2]`,
             APP_OVERLAY_LAYER_CLASS,
           )}
         >
-          <PerfumeDetailLoadingState
-            variant="overlay"
-            perfumeName={pendingNavigation.perfumeName}
-          />
+          <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
+            <PerfumeDetailLoadingState
+              variant="overlay"
+              perfumeName={pendingNavigation.perfumeName}
+            />
+          </Container>
         </div>
       ) : null}
     </PerfumeDetailNavigationContext.Provider>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { type ReactNode, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 
@@ -11,9 +11,12 @@ import { cn } from "@/lib/utils";
 
 type MobilePerfumeCtaBarProps = {
   amazonUrl?: string | null;
+  listAction?: ReactNode;
 };
 
-const CTA_REVEAL_SCROLL_THRESHOLD_PX = 24;
+const FALLBACK_HERO_REVEAL_SCROLL_THRESHOLD_PX = 520;
+const APP_HEADER_HEIGHT_PX = 72;
+const HERO_SELECTOR = "[data-perfume-hero='true']";
 
 function AmazonWordmark({ className }: { className?: string }) {
   return (
@@ -29,6 +32,7 @@ function AmazonWordmark({ className }: { className?: string }) {
 
 export function MobilePerfumeCtaBar({
   amazonUrl,
+  listAction,
 }: MobilePerfumeCtaBarProps) {
   const amazonT = useTranslations("perfume.amazon");
   const barRef = useRef<HTMLDivElement | null>(null);
@@ -38,7 +42,7 @@ export function MobilePerfumeCtaBar({
     () => true,
     () => false,
   );
-  const hasAnyCta = Boolean(amazonUrl);
+  const hasAnyCta = Boolean(amazonUrl || listAction);
   const isBarActive = isVisible;
 
   useEffect(() => {
@@ -46,26 +50,24 @@ export function MobilePerfumeCtaBar({
       return;
     }
 
-    let lastScrollY = window.scrollY;
-
     const updateVisibility = () => {
-      const currentScrollY = window.scrollY;
-      const isScrollingDown = currentScrollY > lastScrollY;
+      const hero = document.querySelector<HTMLElement>(HERO_SELECTOR);
 
-      if (currentScrollY <= CTA_REVEAL_SCROLL_THRESHOLD_PX) {
-        setIsVisible(false);
-      } else if (isScrollingDown) {
-        setIsVisible(true);
+      if (!hero) {
+        setIsVisible(window.scrollY > FALLBACK_HERO_REVEAL_SCROLL_THRESHOLD_PX);
+        return;
       }
 
-      lastScrollY = currentScrollY;
+      setIsVisible(hero.getBoundingClientRect().bottom <= APP_HEADER_HEIGHT_PX + 8);
     };
 
     updateVisibility();
     window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
 
     return () => {
       window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
     };
   }, [hasAnyCta, isClient]);
 
@@ -121,6 +123,7 @@ export function MobilePerfumeCtaBar({
     >
       <div className="border-t border-[#ddcfbc] bg-[#fbf8f2]/96 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] shadow-[0_-18px_40px_-28px_rgba(50,35,20,0.45)] backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
+          {listAction ? <div>{listAction}</div> : null}
           {amazonUrl ? (
             <a
               href={amazonUrl}
@@ -128,7 +131,7 @@ export function MobilePerfumeCtaBar({
               rel="noreferrer"
               className={buttonStyles({
                 className:
-                  "h-12 w-full bg-[#ffb647] !text-[#23170c] hover:bg-[#f0a62f] hover:!text-[#23170c]",
+                  "h-12 w-full bg-[#ff9f0a] !text-[#23170c] hover:bg-[#f09100] hover:!text-[#23170c]",
               })}
             >
               <span className="inline-flex items-center gap-2">
