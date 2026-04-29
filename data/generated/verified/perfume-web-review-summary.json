@@ -1,0 +1,10 @@
+{
+  "total": 42,
+  "found": 0,
+  "notFound": 0,
+  "highConfidence": 0,
+  "mediumConfidence": 0,
+  "lowConfidence": 0,
+  "promoted": 0,
+  "failed": 42
+}

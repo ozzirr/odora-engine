@@ -1,20 +1,20 @@
 {
   "summary": {
-    "totalItems": 22
+    "totalItems": 100
   },
   "items": [
     {
       "rowIndex": 2,
-      "brand": "Tom Ford",
-      "name": "Grey Vetiver Eau de Parfum",
-      "slug": "tom-ford-grey-vetiver-eau-de-parfum",
+      "brand": "Petite Beaute",
+      "name": "Spongebob Squarepants - Patrick",
+      "slug": "petite-beaute-spongebob-squarepants-patrick",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Grey Vetiver Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Grey_Vetiver",
+          "name": "Spongebob Squarepants - Patrick",
+          "url": "https://www.parfumo.com/Perfumes/Petite_Beaute/Spongebob_Squarepants__Patrick",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -22,21 +22,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Grey Vetiver Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Spongebob Squarepants - Patrick."
       ]
     },
     {
       "rowIndex": 3,
-      "brand": "Tom Ford",
-      "name": "Noir Eau de Parfum",
-      "slug": "tom-ford-noir-eau-de-parfum",
+      "brand": "Arabian Oud",
+      "name": "Madawi 40 Years Gold Edition",
+      "slug": "arabian-oud-madawi-40-years-gold-edition",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Noir Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Eau_de_Parfum",
+          "name": "Madawi 40 Years Gold Edition",
+          "url": "https://www.parfumo.com/Perfumes/Arabian_Oud/madawi-40-years-gold-edition",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -44,21 +44,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Noir Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Madawi 40 Years Gold Edition."
       ]
     },
     {
       "rowIndex": 4,
-      "brand": "Tom Ford",
-      "name": "Noir Anthracite",
-      "slug": "tom-ford-noir-anthracite",
+      "brand": "The Spirit of Dubai",
+      "name": "Dubai - Rimal Eau de Parfum",
+      "slug": "the-spirit-of-dubai-dubai-rimal-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Noir Anthracite",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Noir_Anthracite",
+          "name": "Dubai - Rimal Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/the-spirit-of-dubai/dubai-rimal-eau-de-parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -66,21 +66,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Noir Anthracite."
+        "Accepted trusted Parfumo Top Lists candidate: Dubai - Rimal Eau de Parfum."
       ]
     },
     {
       "rowIndex": 5,
-      "brand": "Tom Ford",
-      "name": "Velvet Orchid Eau de Parfum",
-      "slug": "tom-ford-velvet-orchid-eau-de-parfum",
+      "brand": "Al Wataniah",
+      "name": "Kayaan Classic",
+      "slug": "al-wataniah-kayaan-classic",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Velvet Orchid Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Velvet_Orchid_Eau_de_Parfum",
+          "name": "Kayaan Classic",
+          "url": "https://www.parfumo.com/Perfumes/Al_Wataniah/kayaan-classic-1",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -88,21 +88,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Velvet Orchid Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Kayaan Classic."
       ]
     },
     {
       "rowIndex": 6,
-      "brand": "Tom Ford",
-      "name": "Metallique",
-      "slug": "tom-ford-metallique",
+      "brand": "Cartier",
+      "name": "Must de Cartier Parfum",
+      "slug": "cartier-must-de-cartier-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Metallique",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/metallique",
+          "name": "Must de Cartier Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Cartier/Must_de_Cartier_Parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -110,21 +110,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Metallique."
+        "Accepted trusted Parfumo Top Lists candidate: Must de Cartier Parfum."
       ]
     },
     {
       "rowIndex": 7,
-      "brand": "Tom Ford",
-      "name": "Sahara Noir",
-      "slug": "tom-ford-sahara-noir",
+      "brand": "Les Eaux Primordiales",
+      "name": "Ambre Extrait de Parfum",
+      "slug": "les-eaux-primordiales-ambre-extrait-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Sahara Noir",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Sahara_Noir",
+          "name": "Ambre Extrait de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Les_Eaux_Primordiales/ambre-extrait-de-parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -132,21 +132,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Sahara Noir."
+        "Accepted trusted Parfumo Top Lists candidate: Ambre Extrait de Parfum."
       ]
     },
     {
       "rowIndex": 8,
-      "brand": "Tom Ford",
-      "name": "Black Orchid Eau de Parfum",
-      "slug": "tom-ford-black-orchid-eau-de-parfum",
+      "brand": "Nusuk",
+      "name": "Ateeq",
+      "slug": "nusuk-ateeq",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Black Orchid Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Black_Orchid_Eau_de_Parfum",
+          "name": "Ateeq",
+          "url": "https://www.parfumo.com/Perfumes/nusuk/ateeq",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -154,21 +154,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Ateeq."
       ]
     },
     {
       "rowIndex": 9,
-      "brand": "Tom Ford",
-      "name": "Ombré Leather Parfum",
-      "slug": "tom-ford-ombre-leather-parfum",
+      "brand": "Rayhaan",
+      "name": "Aquatica",
+      "slug": "rayhaan-aquatica",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Ombré Leather Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ombre-leather-parfum",
+          "name": "Aquatica",
+          "url": "https://www.parfumo.com/Perfumes/rayhaan/aquatica",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -176,21 +176,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Ombré Leather Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Aquatica."
       ]
     },
     {
       "rowIndex": 10,
-      "brand": "Tom Ford",
-      "name": "Tobacco Oud",
-      "slug": "tom-ford-tobacco-oud",
+      "brand": "Shiseido",
+      "name": "Féminité du Bois Eau de Parfum",
+      "slug": "shiseido-feminite-du-bois-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Tobacco Oud",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Tobacco_Oud",
+          "name": "Féminité du Bois Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Shiseido/Feminite_du_Bois_Eau_de_Parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -198,21 +198,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Tobacco Oud."
+        "Accepted trusted Parfumo Top Lists candidate: Féminité du Bois Eau de Parfum."
       ]
     },
     {
       "rowIndex": 11,
-      "brand": "Tom Ford",
-      "name": "Oud Minérale",
-      "slug": "tom-ford-oud-minerale",
+      "brand": "Birkholz",
+      "name": "Portraits of Portofino",
+      "slug": "birkholz-portraits-of-portofino",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Oud Minérale",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Oud_Minerale",
+          "name": "Portraits of Portofino",
+          "url": "https://www.parfumo.com/Perfumes/Birkholz/portraits-of-portofino",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -220,21 +220,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Oud Minérale."
+        "Accepted trusted Parfumo Top Lists candidate: Portraits of Portofino."
       ]
     },
     {
       "rowIndex": 12,
-      "brand": "Tom Ford",
-      "name": "Neroli Portofino Eau de Parfum",
-      "slug": "tom-ford-neroli-portofino-eau-de-parfum",
+      "brand": "The Woods Collection",
+      "name": "Dusk",
+      "slug": "the-woods-collection-dusk",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Neroli Portofino Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Neroli_Portofino_Eau_de_Parfum",
+          "name": "Dusk",
+          "url": "https://www.parfumo.com/Perfumes/The_Woods_Collection/dusk",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -242,21 +242,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Neroli Portofino Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Dusk."
       ]
     },
     {
       "rowIndex": 13,
-      "brand": "Tom Ford",
-      "name": "Plum Japonais",
-      "slug": "tom-ford-plum-japonais",
+      "brand": "Jil Sander",
+      "name": "Background Eau de Toilette",
+      "slug": "jil-sander-background-eau-de-toilette",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Plum Japonais",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Plum_Japonais",
+          "name": "Background Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Jil_Sander/Background_Eau_de_Toilette",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -264,21 +264,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Plum Japonais."
+        "Accepted trusted Parfumo Top Lists candidate: Background Eau de Toilette."
       ]
     },
     {
       "rowIndex": 14,
-      "brand": "Tom Ford",
-      "name": "Bitter Peach Eau de Parfum",
-      "slug": "tom-ford-bitter-peach-eau-de-parfum",
+      "brand": "Nikos",
+      "name": "Sculpture Parfum",
+      "slug": "nikos-sculpture-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Bitter Peach Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/bitter-peach-eau-de-parfum",
+          "name": "Sculpture Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Nikos/sculpture-parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -286,21 +286,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Bitter Peach Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Sculpture Parfum."
       ]
     },
     {
       "rowIndex": 15,
-      "brand": "Tom Ford",
-      "name": "Eau d'Ombré Leather",
-      "slug": "tom-ford-eau-d-ombre-leather",
+      "brand": "Joop!",
+      "name": "Nuit d'été Eau de Toilette",
+      "slug": "joop-nuit-dete-eau-de-toilette",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Eau d'Ombré Leather",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/eau-d-ombre-leather",
+          "name": "Nuit d'été Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Joop/Nuit_d_ete_Eau_de_Toilette",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -308,21 +308,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Eau d'Ombré Leather."
+        "Accepted trusted Parfumo Top Lists candidate: Nuit d'été Eau de Toilette."
       ]
     },
     {
       "rowIndex": 16,
-      "brand": "Tom Ford",
-      "name": "Ébène Fumé Eau de Parfum",
-      "slug": "tom-ford-ebene-fume-eau-de-parfum",
+      "brand": "Karl Lagerfeld",
+      "name": "KL Eau de Toilette",
+      "slug": "karl-lagerfeld-kl-eau-de-toilette",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Ébène Fumé Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/ebene-fume-eau-de-parfum",
+          "name": "KL Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/karl-lagerfeld/KL_Eau_de_Toilette",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -330,21 +330,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Ébène Fumé Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: KL Eau de Toilette."
       ]
     },
     {
       "rowIndex": 17,
-      "brand": "Tom Ford",
-      "name": "Soleil Neige Eau de Parfum",
-      "slug": "tom-ford-soleil-neige-eau-de-parfum",
+      "brand": "Aaron Terence Hughes",
+      "name": "Homme",
+      "slug": "aaron-terence-hughes-homme",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Soleil Neige Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/soleil-neige",
+          "name": "Homme",
+          "url": "https://www.parfumo.com/Perfumes/Aaron_Terence_Hughes/homme",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -352,21 +352,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Soleil Neige Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Homme."
       ]
     },
     {
       "rowIndex": 18,
-      "brand": "Tom Ford",
-      "name": "Costa Azzurra Eau de Parfum",
-      "slug": "tom-ford-costa-azzurra-eau-de-parfum",
+      "brand": "Grossmith",
+      "name": "Hasu-no-Hana Eau de Parfum",
+      "slug": "grossmith-hasu-no-hana-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Costa Azzurra Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Costa_Azzurra_Eau_de_Parfum",
+          "name": "Hasu-no-Hana Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Grossmith/Hasu_no_Hana_Eau_de_Parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -374,21 +374,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Costa Azzurra Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Hasu-no-Hana Eau de Parfum."
       ]
     },
     {
       "rowIndex": 19,
-      "brand": "Tom Ford",
-      "name": "White Suede Eau de Parfum",
-      "slug": "tom-ford-white-suede-eau-de-parfum",
+      "brand": "Boadicea the Victorious",
+      "name": "Bodacious",
+      "slug": "boadicea-the-victorious-bodacious",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "White Suede Eau de Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/White_Suede",
+          "name": "Bodacious",
+          "url": "https://www.parfumo.com/Perfumes/Boadicea_the_Victorious/bodacious",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -396,21 +396,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: White Suede Eau de Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Bodacious."
       ]
     },
     {
       "rowIndex": 20,
-      "brand": "Tom Ford",
-      "name": "Vanille Fatale",
-      "slug": "tom-ford-vanille-fatale",
+      "brand": "Reinvēnted",
+      "name": "Sacred Bond Eau de Parfum",
+      "slug": "reinvented-sacred-bond-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Vanille Fatale",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Vanille_Fatale",
+          "name": "Sacred Bond Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/reinvented/sacred-bond-eau-de-parfum",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -418,21 +418,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Vanille Fatale."
+        "Accepted trusted Parfumo Top Lists candidate: Sacred Bond Eau de Parfum."
       ]
     },
     {
       "rowIndex": 21,
-      "brand": "Tom Ford",
-      "name": "Black Orchid Parfum",
-      "slug": "tom-ford-black-orchid-parfum",
+      "brand": "Caron",
+      "name": "Tabac Blond Eau de Parfum",
+      "slug": "caron-tabac-blond-eau-de-parfum",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Black Orchid Parfum",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/black-orchid-parfum",
+          "name": "Tabac Blond Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Caron/Tabac_Blond",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -440,21 +440,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Black Orchid Parfum."
+        "Accepted trusted Parfumo Top Lists candidate: Tabac Blond Eau de Parfum."
       ]
     },
     {
       "rowIndex": 22,
-      "brand": "Tom Ford",
-      "name": "Mandarino di Amalfi Acqua",
-      "slug": "tom-ford-mandarino-di-amalfi-acqua",
+      "brand": "Grauton Parfums",
+      "name": "Pour Homme",
+      "slug": "grauton-parfums-pour-homme",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Mandarino di Amalfi Acqua",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/Mandarino_di_Amalfi_Acqua",
+          "name": "Pour Homme",
+          "url": "https://www.parfumo.com/Perfumes/grauton-parfums/pour-homme",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -462,21 +462,21 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Mandarino di Amalfi Acqua."
+        "Accepted trusted Parfumo Top Lists candidate: Pour Homme."
       ]
     },
     {
       "rowIndex": 23,
-      "brand": "Tom Ford",
-      "name": "Cherry Smoke",
-      "slug": "tom-ford-cherry-smoke",
+      "brand": "Maison Alhambra",
+      "name": "Hercules",
+      "slug": "maison-alhambra-hercules",
       "issueType": "conflict",
       "candidateMatches": [
         {
           "source": "Parfumo Top Lists",
           "sourceId": "parfumo-top-lists",
-          "name": "Cherry Smoke",
-          "url": "https://www.parfumo.com/Perfumes/Tom_Ford/cherry-smoke",
+          "name": "Hercules",
+          "url": "https://www.parfumo.com/Perfumes/maison-alhambra/hercules",
           "confidenceScore": 1,
           "confidenceLevel": "high",
           "matchReason": "Exact brand and name match."
@@ -484,7 +484,1732 @@
       ],
       "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
       "notes": [
-        "Accepted trusted Parfumo Top Lists candidate: Cherry Smoke."
+        "Accepted trusted Parfumo Top Lists candidate: Hercules."
+      ]
+    },
+    {
+      "rowIndex": 24,
+      "brand": "Slumberhouse",
+      "name": "Norne (2012)",
+      "slug": "slumberhouse-norne-2012",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Norne (2012)",
+          "url": "https://www.parfumo.com/Perfumes/Slumberhouse/Norne",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Norne (2012)."
+      ]
+    },
+    {
+      "rowIndex": 25,
+      "brand": "Molinard",
+      "name": "Habanita (1988) Eau de Toilette",
+      "slug": "molinard-habanita-1988-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Habanita (1988) Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Molinard/Habanita_1988_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Habanita (1988) Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 26,
+      "brand": "Puredistance",
+      "name": "White",
+      "slug": "puredistance-white",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "White",
+          "url": "https://www.parfumo.com/Perfumes/Puredistance/White",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: White."
+      ]
+    },
+    {
+      "rowIndex": 27,
+      "brand": "Fendi",
+      "name": "Theorema Eau de Parfum",
+      "slug": "fendi-theorema-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Theorema Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Fendi/Theorema_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Theorema Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 28,
+      "brand": "Léonard",
+      "name": "Balahé Eau de Toilette",
+      "slug": "leonard-balahe-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Balahé Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Leonard/Balahe",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Balahé Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 29,
+      "brand": "Lou de Pre",
+      "name": "Mystic Dream",
+      "slug": "lou-de-pre-mystic-dream",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mystic Dream",
+          "url": "https://www.parfumo.com/Perfumes/lou-de-pre/mystic-dream",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mystic Dream."
+      ]
+    },
+    {
+      "rowIndex": 30,
+      "brand": "Ojar",
+      "name": "Infusion Velours Eau de Parfum",
+      "slug": "ojar-infusion-velours-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Infusion Velours Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/ojar/infusion-velours-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Infusion Velours Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 31,
+      "brand": "Les Indémodables",
+      "name": "Vanille Havane Eau de Parfum",
+      "slug": "les-indemodables-vanille-havane-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Vanille Havane Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Les_Indemodables/vanille-havane-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Vanille Havane Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 32,
+      "brand": "pernoire",
+      "name": "Anelo",
+      "slug": "pernoire-anelo",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Anelo",
+          "url": "https://www.parfumo.com/Perfumes/pernoire/anelo",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Anelo."
+      ]
+    },
+    {
+      "rowIndex": 33,
+      "brand": "Issey Miyake",
+      "name": "L'Eau d'Issey pour Homme Noir Ambré",
+      "slug": "issey-miyake-leau-dissey-pour-homme-noir-ambre",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "L'Eau d'Issey pour Homme Noir Ambré",
+          "url": "https://www.parfumo.com/Perfumes/Issey_Miyake/L_Eau_d_Issey_pour_Homme_Noir_Ambre",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: L'Eau d'Issey pour Homme Noir Ambré."
+      ]
+    },
+    {
+      "rowIndex": 34,
+      "brand": "Lubin",
+      "name": "Akkad",
+      "slug": "lubin-akkad",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Akkad",
+          "url": "https://www.parfumo.com/Perfumes/Lubin/Akkad",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Akkad."
+      ]
+    },
+    {
+      "rowIndex": 35,
+      "brand": "Lancaster",
+      "name": "Lancaster Eau de Toilette Concentrée",
+      "slug": "lancaster-lancaster-eau-de-toilette-concentree",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Lancaster Eau de Toilette Concentrée",
+          "url": "https://www.parfumo.com/Perfumes/Lancaster/Lancaster_Concentrate",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Lancaster Eau de Toilette Concentrée."
+      ]
+    },
+    {
+      "rowIndex": 36,
+      "brand": "Matière Première",
+      "name": "Radical Rose Eau de Parfum",
+      "slug": "matiere-premiere-radical-rose-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Radical Rose Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/matiere-premiere/radical-rose",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Radical Rose Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 37,
+      "brand": "Indult",
+      "name": "Tihota",
+      "slug": "indult-tihota",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Tihota",
+          "url": "https://www.parfumo.com/Perfumes/Indult/Tihota",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Tihota."
+      ]
+    },
+    {
+      "rowIndex": 38,
+      "brand": "Aura Perfume",
+      "name": "Sublime",
+      "slug": "aura-perfume-sublime",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Sublime",
+          "url": "https://www.parfumo.com/Perfumes/aura-perfume/sublime-aura-sublime",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Sublime."
+      ]
+    },
+    {
+      "rowIndex": 39,
+      "brand": "The Dua Brand",
+      "name": "Popped Cherry",
+      "slug": "the-dua-brand-popped-cherry",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Popped Cherry",
+          "url": "https://www.parfumo.com/Perfumes/the-dua-brand/Popped_Cherry",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Popped Cherry."
+      ]
+    },
+    {
+      "rowIndex": 40,
+      "brand": "Al Rehab",
+      "name": "Choco Musk Concentrated Perfume",
+      "slug": "al-rehab-choco-musk-concentrated-perfume",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Choco Musk Concentrated Perfume",
+          "url": "https://www.parfumo.com/Perfumes/Al_Rehab/choco-musk-concentrated-perfume",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Choco Musk Concentrated Perfume."
+      ]
+    },
+    {
+      "rowIndex": 41,
+      "brand": "Lalique",
+      "name": "Ombre Noire",
+      "slug": "lalique-ombre-noire",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ombre Noire",
+          "url": "https://www.parfumo.com/Perfumes/Lalique/Ombre_Noire",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ombre Noire."
+      ]
+    },
+    {
+      "rowIndex": 42,
+      "brand": "Davidoff",
+      "name": "Relax Eau de Toilette",
+      "slug": "davidoff-relax-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Relax Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Davidoff/Relax_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Relax Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 43,
+      "brand": "Zadig & Voltaire",
+      "name": "Just Rock! pour Lui",
+      "slug": "zadig-and-voltaire-just-rock-pour-lui",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Just Rock! pour Lui",
+          "url": "https://www.parfumo.com/Perfumes/Zadig__Voltaire/Just_Rock_pour_Lui",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Just Rock! pour Lui."
+      ]
+    },
+    {
+      "rowIndex": 44,
+      "brand": "Rogue",
+      "name": "Mousse Illuminée",
+      "slug": "rogue-mousse-illuminee",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mousse Illuminée",
+          "url": "https://www.parfumo.com/Perfumes/Rogue/Mousse_Illuminee",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mousse Illuminée."
+      ]
+    },
+    {
+      "rowIndex": 45,
+      "brand": "Montale",
+      "name": "Infinity",
+      "slug": "montale-infinity",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Infinity",
+          "url": "https://www.parfumo.com/Perfumes/Montale/infinity",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Infinity."
+      ]
+    },
+    {
+      "rowIndex": 46,
+      "brand": "Rue Broca",
+      "name": "Théorème pour Homme",
+      "slug": "rue-broca-theoreme-pour-homme",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Théorème pour Homme",
+          "url": "https://www.parfumo.com/Perfumes/rue-broca/theoreme-pour-homme",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Théorème pour Homme."
+      ]
+    },
+    {
+      "rowIndex": 47,
+      "brand": "Bond No. 9",
+      "name": "Lafayette Street",
+      "slug": "bond-no-9-lafayette-street",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Lafayette Street",
+          "url": "https://www.parfumo.com/Perfumes/Bond_No_9/Lafayette_Street",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Lafayette Street."
+      ]
+    },
+    {
+      "rowIndex": 48,
+      "brand": "Chloé",
+      "name": "Love, Chloé Eau Intense",
+      "slug": "chloe-love-chloe-eau-intense",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Love, Chloé Eau Intense",
+          "url": "https://www.parfumo.com/Perfumes/Chloe/Love_Eau_Intense",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Love, Chloé Eau Intense."
+      ]
+    },
+    {
+      "rowIndex": 49,
+      "brand": "Estēe Lauder",
+      "name": "Private Collection Eau de Parfum",
+      "slug": "estee-lauder-private-collection-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Private Collection Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Estee_Lauder/Private_Collection_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Private Collection Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 50,
+      "brand": "Victoria's Secret",
+      "name": "Bare Vanilla",
+      "slug": "victorias-secret-bare-vanilla",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Bare Vanilla",
+          "url": "https://www.parfumo.com/Perfumes/Victoria_s_Secret/Bare_Vanilla",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Bare Vanilla."
+      ]
+    },
+    {
+      "rowIndex": 51,
+      "brand": "Stendhal",
+      "name": "Ambre Sublime",
+      "slug": "stendhal-ambre-sublime",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ambre Sublime",
+          "url": "https://www.parfumo.com/Perfumes/Stendhal/Ambre_Sublime",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ambre Sublime."
+      ]
+    },
+    {
+      "rowIndex": 52,
+      "brand": "Tiziana Terenzi",
+      "name": "Rosso Pompei",
+      "slug": "tiziana-terenzi-rosso-pompei",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Rosso Pompei",
+          "url": "https://www.parfumo.com/Perfumes/Tiziana_Terenzi/rosso-pompei",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Rosso Pompei."
+      ]
+    },
+    {
+      "rowIndex": 53,
+      "brand": "Electimuss",
+      "name": "Imperium Extrait de Parfum",
+      "slug": "electimuss-imperium-extrait-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Imperium Extrait de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Electimuss/imperium-extrait-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Imperium Extrait de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 54,
+      "brand": "Masque",
+      "name": "III-IV Tango",
+      "slug": "masque-iii-iv-tango",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "III-IV Tango",
+          "url": "https://www.parfumo.com/Perfumes/Masque/IIIV_Tango",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: III-IV Tango."
+      ]
+    },
+    {
+      "rowIndex": 55,
+      "brand": "Khadlaj",
+      "name": "Shiyaaka for Men",
+      "slug": "khadlaj-shiyaaka-for-men",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Shiyaaka for Men",
+          "url": "https://www.parfumo.com/Perfumes/Khadlaj/shiyaaka-for-men-shiyaaka-silver-1",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Shiyaaka for Men."
+      ]
+    },
+    {
+      "rowIndex": 56,
+      "brand": "David Beckham",
+      "name": "Exquisite Leather",
+      "slug": "david-beckham-exquisite-leather",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Exquisite Leather",
+          "url": "https://www.parfumo.com/Perfumes/David_Beckham/exquisite-leather",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Exquisite Leather."
+      ]
+    },
+    {
+      "rowIndex": 57,
+      "brand": "Ralph Lauren",
+      "name": "Safari Eau de Parfum",
+      "slug": "ralph-lauren-safari-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Safari Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Ralph_Lauren/Safari_Eau_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Safari Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 58,
+      "brand": "Câline",
+      "name": "Madame Chérie",
+      "slug": "caline-madame-cherie",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Madame Chérie",
+          "url": "https://www.parfumo.com/Perfumes/caline/madame-cherie",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Madame Chérie."
+      ]
+    },
+    {
+      "rowIndex": 59,
+      "brand": "Histoires de Parfums",
+      "name": "Ambre 114",
+      "slug": "histoires-de-parfums-ambre-114",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ambre 114",
+          "url": "https://www.parfumo.com/Perfumes/Histoires_de_Parfums/Ambre_114",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ambre 114."
+      ]
+    },
+    {
+      "rowIndex": 60,
+      "brand": "Mancera",
+      "name": "Amore Caffè",
+      "slug": "mancera-amore-caffe",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Amore Caffè",
+          "url": "https://www.parfumo.com/Perfumes/Mancera/amore-caffe",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Amore Caffè."
+      ]
+    },
+    {
+      "rowIndex": 61,
+      "brand": "Chopard",
+      "name": "Oud Malaki",
+      "slug": "chopard-oud-malaki",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Oud Malaki",
+          "url": "https://www.parfumo.com/Perfumes/Chopard/Oud_Malaki",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Oud Malaki."
+      ]
+    },
+    {
+      "rowIndex": 62,
+      "brand": "Guess",
+      "name": "Seductive Noir Eau de Toilette",
+      "slug": "guess-seductive-noir-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Seductive Noir Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Guess/seductive-noir-eau-de-toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Seductive Noir Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 63,
+      "brand": "Jean-Louis Scherrer",
+      "name": "Jean-Louis Scherrer Eau de Toilette",
+      "slug": "jean-louis-scherrer-jean-louis-scherrer-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Jean-Louis Scherrer Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Jean_Louis_Scherrer/Jean_Louis_Scherrer_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Jean-Louis Scherrer Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 64,
+      "brand": "Fragonard",
+      "name": "Grain de Soleil",
+      "slug": "fragonard-grain-de-soleil",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Grain de Soleil",
+          "url": "https://www.parfumo.com/Perfumes/Fragonard/Grain_de_Soleil",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Grain de Soleil."
+      ]
+    },
+    {
+      "rowIndex": 65,
+      "brand": "Mind Games",
+      "name": "French Defense",
+      "slug": "mind-games-french-defense",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "French Defense",
+          "url": "https://www.parfumo.com/Perfumes/mind-games/french-defense",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: French Defense."
+      ]
+    },
+    {
+      "rowIndex": 66,
+      "brand": "Sora Dora",
+      "name": "Mandorle Extrait de Parfum",
+      "slug": "sora-dora-mandorle-extrait-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mandorle Extrait de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/sora-dora/mandorle-extrait-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mandorle Extrait de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 67,
+      "brand": "Frapin",
+      "name": "L'Humaniste",
+      "slug": "frapin-lhumaniste",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "L'Humaniste",
+          "url": "https://www.parfumo.com/Perfumes/Frapin/L_Humaniste",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: L'Humaniste."
+      ]
+    },
+    {
+      "rowIndex": 68,
+      "brand": "Dries Van Noten",
+      "name": "Soie Malaquais",
+      "slug": "dries-van-noten-soie-malaquais",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Soie Malaquais",
+          "url": "https://www.parfumo.com/Perfumes/dries-van-noten/soie-malaquais",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Soie Malaquais."
+      ]
+    },
+    {
+      "rowIndex": 69,
+      "brand": "Aedes de Venustas",
+      "name": "Copal Azur",
+      "slug": "aedes-de-venustas-copal-azur",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Copal Azur",
+          "url": "https://www.parfumo.com/Perfumes/Aedes_de_Venustas/Copal_Azur",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Copal Azur."
+      ]
+    },
+    {
+      "rowIndex": 70,
+      "brand": "Comme des Garçons",
+      "name": "Series 3: Incense - Kyoto",
+      "slug": "comme-des-garcons-series-3-incense-kyoto",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Series 3: Incense - Kyoto",
+          "url": "https://www.parfumo.com/Perfumes/Comme_des_Garons/Series_3_Incense_Kyoto",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Series 3: Incense - Kyoto."
+      ]
+    },
+    {
+      "rowIndex": 71,
+      "brand": "Aramis",
+      "name": "Tuscany per Uomo Eau de Toilette",
+      "slug": "aramis-tuscany-per-uomo-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Tuscany per Uomo Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Aramis/Tuscany_per_Uomo_Etruscan_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Tuscany per Uomo Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 72,
+      "brand": "Widian",
+      "name": "London Eau de Parfum",
+      "slug": "widian-london-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "London Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Widian/london-eau-de-parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: London Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 73,
+      "brand": "Chanel",
+      "name": "Coco Parfum",
+      "slug": "chanel-coco-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Coco Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Chanel/Coco_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Coco Parfum."
+      ]
+    },
+    {
+      "rowIndex": 74,
+      "brand": "Roja Parfums",
+      "name": "Amber Aoud Absolue Précieux",
+      "slug": "roja-parfums-amber-aoud-absolue-precieux",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Amber Aoud Absolue Précieux",
+          "url": "https://www.parfumo.com/Perfumes/Roja_Parfums/Amber_Aoud_Absolue_Precieux",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Amber Aoud Absolue Précieux."
+      ]
+    },
+    {
+      "rowIndex": 75,
+      "brand": "Guerlain",
+      "name": "Shalimar Extrait",
+      "slug": "guerlain-shalimar-extrait",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Shalimar Extrait",
+          "url": "https://www.parfumo.com/Perfumes/Guerlain/Shalimar_Extrait",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Shalimar Extrait."
+      ]
+    },
+    {
+      "rowIndex": 76,
+      "brand": "Anfas",
+      "name": "Ishq Special",
+      "slug": "anfas-ishq-special",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Ishq Special",
+          "url": "https://www.parfumo.com/Perfumes/Anfas/ishq-special",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Ishq Special."
+      ]
+    },
+    {
+      "rowIndex": 77,
+      "brand": "Parfums d'Elmar",
+      "name": "Kaya",
+      "slug": "parfums-delmar-kaya",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Kaya",
+          "url": "https://www.parfumo.com/Perfumes/Parfums_dElmar/kaya",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Kaya."
+      ]
+    },
+    {
+      "rowIndex": 78,
+      "brand": "Xerjoff",
+      "name": "Alexandria II Anniversary",
+      "slug": "xerjoff-alexandria-ii-anniversary",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Alexandria II Anniversary",
+          "url": "https://www.parfumo.com/Perfumes/Xerjoff/alexandria-ii-anniversary",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Alexandria II Anniversary."
+      ]
+    },
+    {
+      "rowIndex": 79,
+      "brand": "Yves Saint Laurent",
+      "name": "Opium (1977) Eau de Toilette",
+      "slug": "yves-saint-laurent-opium-1977-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Opium (1977) Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Yves_Saint_Laurent/Opium_1977_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Opium (1977) Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 80,
+      "brand": "Dolce & Gabbana",
+      "name": "The One Luminous Night",
+      "slug": "dolce-and-gabbana-the-one-luminous-night",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "The One Luminous Night",
+          "url": "https://www.parfumo.com/Perfumes/Dolce_Gabbana/the-one-luminous-night",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: The One Luminous Night."
+      ]
+    },
+    {
+      "rowIndex": 81,
+      "brand": "Clive Christian",
+      "name": "C: Woody Leather",
+      "slug": "clive-christian-c-woody-leather",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "C: Woody Leather",
+          "url": "https://www.parfumo.com/Perfumes/Clive_Christian/c-woody-leather",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: C: Woody Leather."
+      ]
+    },
+    {
+      "rowIndex": 82,
+      "brand": "Lattafa Pride",
+      "name": "Art of Nature II",
+      "slug": "lattafa-pride-art-of-nature-ii",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Art of Nature II",
+          "url": "https://www.parfumo.com/Perfumes/lattafa-pride/art-of-nature-ii",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Art of Nature II."
+      ]
+    },
+    {
+      "rowIndex": 83,
+      "brand": "Jean Paul Gaultier",
+      "name": "Classique Essence de Parfum",
+      "slug": "jean-paul-gaultier-classique-essence-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Classique Essence de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Jean_Paul_Gaultier/Classique_Essence_de_Parfum",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Classique Essence de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 84,
+      "brand": "Lattafa",
+      "name": "Angham Eau de Parfum",
+      "slug": "lattafa-angham-eau-de-parfum",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Angham Eau de Parfum",
+          "url": "https://www.parfumo.com/Perfumes/Lattafa/angham-eau-de-parfum-1",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Angham Eau de Parfum."
+      ]
+    },
+    {
+      "rowIndex": 85,
+      "brand": "Bvlgari",
+      "name": "Le Gemme - Kobraa",
+      "slug": "bvlgari-le-gemme-kobraa",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Le Gemme - Kobraa",
+          "url": "https://www.parfumo.com/Perfumes/Bvlgari/le-gemme-kobraa",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Le Gemme - Kobraa."
+      ]
+    },
+    {
+      "rowIndex": 86,
+      "brand": "Prada",
+      "name": "Cargo de Nuit",
+      "slug": "prada-cargo-de-nuit",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Cargo de Nuit",
+          "url": "https://www.parfumo.com/Perfumes/Prada/cargo-de-nuit",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Cargo de Nuit."
+      ]
+    },
+    {
+      "rowIndex": 87,
+      "brand": "Zara",
+      "name": "Sand Desert at Sunset Intense",
+      "slug": "zara-sand-desert-at-sunset-intense",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Sand Desert at Sunset Intense",
+          "url": "https://www.parfumo.com/Perfumes/Zara/sand-desert-at-sunset-intense",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Sand Desert at Sunset Intense."
+      ]
+    },
+    {
+      "rowIndex": 88,
+      "brand": "Louis Vuitton",
+      "name": "Symphony",
+      "slug": "louis-vuitton-symphony",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Symphony",
+          "url": "https://www.parfumo.com/Perfumes/Louis_Vuitton/symphony",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Symphony."
+      ]
+    },
+    {
+      "rowIndex": 89,
+      "brand": "Kilian",
+      "name": "Angels' Share on the Rocks",
+      "slug": "kilian-angels-share-on-the-rocks",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Angels' Share on the Rocks",
+          "url": "https://www.parfumo.com/Perfumes/Kilian/angels-share-on-the-rocks-1",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Angels' Share on the Rocks."
+      ]
+    },
+    {
+      "rowIndex": 90,
+      "brand": "Sospiro",
+      "name": "Basso",
+      "slug": "sospiro-basso",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Basso",
+          "url": "https://www.parfumo.com/Perfumes/Sospiro/basso",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Basso."
+      ]
+    },
+    {
+      "rowIndex": 91,
+      "brand": "Dior",
+      "name": "Dior Homme Intense (2007)",
+      "slug": "dior-dior-homme-intense-2007",
+      "issueType": "ambiguous",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Homme Intense (2011)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Homme_Intense_2011",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        },
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dior Homme Intense (2007)",
+          "url": "https://www.parfumo.com/Perfumes/Dior/Dior_Homme_Intense",
+          "confidenceScore": 0.6,
+          "confidenceLevel": "low",
+          "matchReason": "Multiple trusted Parfumo candidates share the same normalized key."
+        }
+      ],
+      "recommendedNextAction": "Choose the correct trusted source candidate manually or tighten the matching rules.",
+      "notes": [
+        "Multiple low-confidence candidates require manual disambiguation."
+      ]
+    },
+    {
+      "rowIndex": 92,
+      "brand": "Amouage",
+      "name": "Guidance 46",
+      "slug": "amouage-guidance-46",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Guidance 46",
+          "url": "https://www.parfumo.com/Perfumes/Amouage/guidance-46",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Guidance 46."
+      ]
+    },
+    {
+      "rowIndex": 93,
+      "brand": "Acqua di Parma",
+      "name": "Buongiorno",
+      "slug": "acqua-di-parma-buongiorno",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Buongiorno",
+          "url": "https://www.parfumo.com/Perfumes/Acqua_di_Parma/buongiorno",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Buongiorno."
+      ]
+    },
+    {
+      "rowIndex": 94,
+      "brand": "Editions de Parfums Frédéric Malle",
+      "name": "The Moon",
+      "slug": "editions-de-parfums-frederic-malle-the-moon",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "The Moon",
+          "url": "https://www.parfumo.com/Perfumes/Editions_de_Parfum_Frederic_Malle/the-moon-1",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: The Moon."
+      ]
+    },
+    {
+      "rowIndex": 95,
+      "brand": "Gucci",
+      "name": "Envy for Men Eau de Toilette",
+      "slug": "gucci-envy-for-men-eau-de-toilette",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Envy for Men Eau de Toilette",
+          "url": "https://www.parfumo.com/Perfumes/Gucci/Envy_for_Men_Eau_de_Toilette",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Envy for Men Eau de Toilette."
+      ]
+    },
+    {
+      "rowIndex": 96,
+      "brand": "Mugler",
+      "name": "Alien Liqueur de Parfum - Création 2013",
+      "slug": "mugler-alien-liqueur-de-parfum-creation-2013",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Alien Liqueur de Parfum - Création 2013",
+          "url": "https://www.parfumo.com/Perfumes/mugler/Alien_Liqueur_de_Parfum_Creation_2013",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Alien Liqueur de Parfum - Création 2013."
+      ]
+    },
+    {
+      "rowIndex": 97,
+      "brand": "Atkinsons",
+      "name": "Shine Despite Everything",
+      "slug": "atkinsons-shine-despite-everything",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Shine Despite Everything",
+          "url": "https://www.parfumo.com/Perfumes/Atkinsons/shine-despite-everything",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Shine Despite Everything."
+      ]
+    },
+    {
+      "rowIndex": 98,
+      "brand": "Pana Dora",
+      "name": "Imperial Wood",
+      "slug": "pana-dora-imperial-wood",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Imperial Wood",
+          "url": "https://www.parfumo.com/Perfumes/pana-dora/imperial-wood",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Imperial Wood."
+      ]
+    },
+    {
+      "rowIndex": 99,
+      "brand": "Nishane",
+      "name": "Mana",
+      "slug": "nishane-mana",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Mana",
+          "url": "https://www.parfumo.com/Perfumes/Nishane/mana",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Mana."
+      ]
+    },
+    {
+      "rowIndex": 100,
+      "brand": "Roberto Ugolini",
+      "name": "17 Rosso Limited Edition",
+      "slug": "roberto-ugolini-17-rosso-limited-edition",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "17 Rosso Limited Edition",
+          "url": "https://www.parfumo.com/Perfumes/Roberto_Ugolini/17-rosso-limited-edition",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: 17 Rosso Limited Edition."
+      ]
+    },
+    {
+      "rowIndex": 101,
+      "brand": "Celine",
+      "name": "Dans Paris",
+      "slug": "celine-dans-paris",
+      "issueType": "conflict",
+      "candidateMatches": [
+        {
+          "source": "Parfumo Top Lists",
+          "sourceId": "parfumo-top-lists",
+          "name": "Dans Paris",
+          "url": "https://www.parfumo.com/Perfumes/Celine/dans-paris",
+          "confidenceScore": 1,
+          "confidenceLevel": "high",
+          "matchReason": "Exact brand and name match."
+        }
+      ],
+      "recommendedNextAction": "Review conflicting field values manually before applying any overwrite.",
+      "notes": [
+        "Accepted trusted Parfumo Top Lists candidate: Dans Paris."
       ]
     }
   ]
