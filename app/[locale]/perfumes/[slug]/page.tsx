@@ -511,7 +511,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     occasions: t("overviewLabels.occasions"),
   });
   const detailPath = getLocalizedPathname(resolvedLocale, "/perfumes/[slug]", { slug });
-  const loginHref = getLocalizedPathname(resolvedLocale, "/login", undefined, { next: detailPath });
   const perfumesPath = getLocalizedPathname(resolvedLocale, "/perfumes");
   const brandName = perfume.brand?.name ?? t("unknown");
   const amazonUrl = getAmazonProductUrl({
@@ -630,7 +629,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             perfumeId={perfume.id}
             detailPath={detailPath}
             isAuthenticated={Boolean(appUser)}
-            loginHref={loginHref}
             locale={resolvedLocale}
             stats={communityStats}
             reviews={communityData.reviews}
@@ -642,7 +640,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             perfumeId={perfume.id}
             detailPath={detailPath}
             isAuthenticated={Boolean(appUser)}
-            loginHref={loginHref}
             locale={resolvedLocale}
             stats={communityStats}
             reviews={communityData.reviews}
@@ -654,7 +651,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             perfumeId={perfume.id}
             detailPath={detailPath}
             isAuthenticated={Boolean(appUser)}
-            loginHref={loginHref}
             isActive={Boolean(priceAlert?.active)}
           />
 

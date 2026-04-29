@@ -7,6 +7,7 @@ import {
   savePerfumeReview,
   type CommunityActionState,
 } from "@/app/perfume-community/actions";
+import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { buttonStyles } from "@/components/ui/Button";
 import type { AppLocale } from "@/lib/i18n";
 
@@ -37,7 +38,6 @@ type PerfumeCommunitySectionProps = {
   perfumeId: number;
   detailPath: string;
   isAuthenticated: boolean;
-  loginHref: string;
   locale: AppLocale;
   stats: CommunityStats;
   reviews: CommunityReview[];
@@ -46,12 +46,20 @@ type PerfumeCommunitySectionProps = {
 };
 
 const initialState: CommunityActionState = {};
+const REVIEW_INTENT = "review";
+const AUTH_INTENT_PARAM = "authIntent";
+
+function buildReviewNextPath(detailPath: string) {
+  const nextUrl = new URL(detailPath, "https://odora.local");
+  nextUrl.searchParams.set(AUTH_INTENT_PARAM, REVIEW_INTENT);
+  nextUrl.hash = "contribuisci-valutazione";
+  return `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+}
 
 export function PerfumeCommunitySection({
   perfumeId,
   detailPath,
   isAuthenticated,
-  loginHref,
   locale,
   reviews,
   userCountryCode,
@@ -84,12 +92,22 @@ export function PerfumeCommunitySection({
             </p>
 
             {!hasReviews ? (
-              <a
-                href="#contribuisci-valutazione"
-                className={buttonStyles({ variant: "secondary", className: "mt-5 w-full sm:w-auto" })}
-              >
-                {isItalian ? "Scrivi la prima recensione" : "Write the first review"}
-              </a>
+              isAuthenticated ? (
+                <a
+                  href="#contribuisci-valutazione"
+                  className={buttonStyles({ variant: "secondary", className: "mt-5 w-full sm:w-auto" })}
+                >
+                  {isItalian ? "Scrivi la prima recensione" : "Write the first review"}
+                </a>
+              ) : (
+                <AuthModalTrigger
+                  mode="login"
+                  resolveNextPath={() => buildReviewNextPath(detailPath)}
+                  className={buttonStyles({ variant: "secondary", className: "mt-5 w-full sm:w-auto" })}
+                >
+                  {isItalian ? "Scrivi la prima recensione" : "Write the first review"}
+                </AuthModalTrigger>
+              )
             ) : null}
           </div>
 
@@ -140,9 +158,13 @@ export function PerfumeCommunitySection({
       {!isAuthenticated ? (
         <div className="mt-6 rounded-2xl border border-[#eadfce] bg-[#fbf7f0] p-4 text-sm text-[#685747]">
           Accedi per scrivere una recensione guidata o aggiungere quanto hai pagato questo profumo.
-          <a href={loginHref} className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}>
+          <AuthModalTrigger
+            mode="login"
+            resolveNextPath={() => buildReviewNextPath(detailPath)}
+            className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}
+          >
             Accedi
-          </a>
+          </AuthModalTrigger>
         </div>
       ) : (
         <div className="mt-6 grid gap-4 lg:grid-cols-2">

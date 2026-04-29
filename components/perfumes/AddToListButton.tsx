@@ -1,16 +1,20 @@
 "use client";
 
-import { useState, useSyncExternalStore, useTransition } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, useTransition } from "react";
 import { createPortal } from "react-dom";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 
 import {
   addPerfumeToLists,
   createListAndAddPerfume,
 } from "@/app/perfume-lists/actions";
+import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 import { buttonStyles } from "@/components/ui/Button";
 import type { UserPerfumeListForPerfume } from "@/lib/perfume-lists";
+
+const ADD_TO_LIST_INTENT = "add-to-list";
+const AUTH_INTENT_PARAM = "authIntent";
 
 type AddToListButtonProps = {
   perfumeId: number;
@@ -31,6 +35,7 @@ export function AddToListButton({
 }: AddToListButtonProps) {
   const locale = useLocale();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<number[]>([]);
   const [createOpen, setCreateOpen] = useState(false);
@@ -44,16 +49,49 @@ export function AddToListButton({
   );
   const addLabel = locale === "it" ? "Aggiungi alla lista" : "Add to list";
   const loginLabel = locale === "it" ? "Accedi per salvare" : "Log in to save";
+  const restoredIntentRef = useRef(false);
+
+  const resolveAddToListNextPath = () => {
+    const nextUrl = new URL(loginNextPath, window.location.origin);
+    nextUrl.searchParams.set(AUTH_INTENT_PARAM, ADD_TO_LIST_INTENT);
+    return `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+  };
+
+  useEffect(() => {
+    if (!isAuthenticated || restoredIntentRef.current) {
+      return;
+    }
+
+    if (searchParams.get(AUTH_INTENT_PARAM) !== ADD_TO_LIST_INTENT) {
+      return;
+    }
+
+    restoredIntentRef.current = true;
+    setOpen(true);
+
+    if (lists.length === 0) {
+      setCreateOpen(true);
+    }
+
+    const nextParams = new URLSearchParams(window.location.search);
+    nextParams.delete(AUTH_INTENT_PARAM);
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${nextParams.toString() ? `?${nextParams.toString()}` : ""}${window.location.hash}`,
+    );
+  }, [isAuthenticated, lists.length, searchParams]);
 
   if (!isAuthenticated) {
     if (variant === "compact") {
       return (
-        <a
-          href={`/${locale === "it" ? "it/accedi" : "en/login"}?next=${encodeURIComponent(loginNextPath)}`}
+        <AuthModalTrigger
+          mode="login"
+          resolveNextPath={resolveAddToListNextPath}
           className={buttonStyles({ className })}
         >
           {loginLabel}
-        </a>
+        </AuthModalTrigger>
       );
     }
 
@@ -63,12 +101,13 @@ export function AddToListButton({
         <p className="mt-1 text-sm leading-6 text-[#685747]">
           Accedi o registrati per salvare questo profumo nelle tue liste.
         </p>
-        <a
-          href={`/${locale === "it" ? "it/accedi" : "en/login"}?next=${encodeURIComponent(loginNextPath)}`}
+        <AuthModalTrigger
+          mode="login"
+          resolveNextPath={resolveAddToListNextPath}
           className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}
         >
           Accedi
-        </a>
+        </AuthModalTrigger>
       </div>
     );
   }

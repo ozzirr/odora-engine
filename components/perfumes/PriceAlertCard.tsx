@@ -3,41 +3,50 @@
 import { useActionState } from "react";
 
 import { savePerfumePriceAlert, type PriceAlertActionState } from "@/app/perfume-price-alert/actions";
+import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
 
 type PriceAlertCardProps = {
   perfumeId: number;
   detailPath: string;
   isAuthenticated: boolean;
-  loginHref: string;
   isActive?: boolean;
 };
 
 const initialState: PriceAlertActionState = {};
+const PRICE_ALERT_INTENT = "price-alert";
+const AUTH_INTENT_PARAM = "authIntent";
+
+function buildPriceAlertNextPath(detailPath: string) {
+  const nextUrl = new URL(detailPath, "https://odora.local");
+  nextUrl.searchParams.set(AUTH_INTENT_PARAM, PRICE_ALERT_INTENT);
+  nextUrl.hash = "avviso-prezzo";
+  return `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+}
 
 export function PriceAlertCard({
   perfumeId,
   detailPath,
   isAuthenticated,
-  loginHref,
   isActive = false,
 }: PriceAlertCardProps) {
   const [state, action, pending] = useActionState(savePerfumePriceAlert, initialState);
   const active = isActive || state.ok;
 
   return (
-    <section className="rounded-[1.45rem] border border-[#eadfce] bg-[linear-gradient(135deg,#fffdf9,#fff7eb)] p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
+    <section id="avviso-prezzo" className="scroll-mt-24 rounded-[1.45rem] border border-[#eadfce] bg-[linear-gradient(135deg,#fffdf9,#fff7eb)] p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
       <h2 className="font-display text-2xl text-[#21180f]">Attiva avviso prezzo</h2>
       <p className="mt-2 text-sm leading-6 text-[#685747]">
         Ti avviseremo quando il prezzo diminuisce su Amazon.
       </p>
 
       {!isAuthenticated ? (
-        <a
-          href={loginHref}
+        <AuthModalTrigger
+          mode="login"
+          resolveNextPath={() => buildPriceAlertNextPath(detailPath)}
           className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-xl border border-[#ddcfbc] bg-white text-sm font-semibold text-[#1e4b3b] shadow-[0_16px_34px_-32px_rgba(53,39,27,0.28)]"
         >
           Accedi per attivare
-        </a>
+        </AuthModalTrigger>
       ) : (
         <form action={action}>
           <input type="hidden" name="perfumeId" value={perfumeId} />

@@ -18,6 +18,7 @@ export function buildPathWithoutAuthModal(
   const params = toMutableSearchParams(searchParams);
   params.delete("auth");
   params.delete("authNext");
+  params.delete("authIntent");
   params.delete("error");
 
   const search = params.toString();
