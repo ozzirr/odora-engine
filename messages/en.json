@@ -757,16 +757,17 @@
   "brand": {
     "page": {
       "eyebrow": "Brand",
-      "title": "{name} perfumes",
-      "subtitle": "Discover every fragrance from {name}: notes, performance, and price comparison across the major online stores.",
+      "title": "{name}",
+      "subtitle": "Explore the {name} perfume database: fragrance notes, families, community reviews, and selected purchase links when available.",
       "perfumesTitle": "All {name} perfumes",
       "perfumesEmpty": "No perfumes available for this brand right now.",
       "country": "Origin: {country}",
       "breadcrumbBrand": "Brand",
       "follow": "Follow",
       "following": "Following",
-      "followHint": "Get notified when a new perfume is released.",
-      "followLoginHint": "Log in to follow this brand and get release updates.",
+      "followTitle": "Follow the {name} brand on Odora",
+      "followHint": "Get updates when we add new perfumes from this brand.",
+      "followLoginHint": "Log in to follow this brand and get updates on new perfumes.",
       "followError": "Could not update your follow. Please try again.",
       "followToggleAria": "Toggle following {name}"
     },
@@ -1245,8 +1246,8 @@
         "fallbackTitle": "Brand | Odora",
         "fallbackDescription": "Explore the brand's fragrances on Odora.",
         "notFoundTitle": "Brand not found | Odora",
-        "title": "{name}: perfumes, notes, and prices | Odora",
-        "description": "Discover {name} perfumes on Odora: detailed pages, notes, performance, and price comparison across major online stores."
+        "title": "{name}: perfumes, notes, and community | Odora",
+        "description": "Explore {name} perfumes on Odora: detailed pages, fragrance notes, community reviews, and selected purchase links."
       },
       "brands": {
         "title": "All fragrance brands | Odora",

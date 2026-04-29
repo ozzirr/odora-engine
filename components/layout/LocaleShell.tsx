@@ -135,6 +135,20 @@ function AuthModalOverlay({ isStandaloneAuthPage }: AuthModalOverlayProps) {
   }, [renderedMode]);
 
   useEffect(() => {
+    const root = document.documentElement;
+
+    if (renderedMode) {
+      root.setAttribute("data-auth-modal-open", "true");
+    } else {
+      root.removeAttribute("data-auth-modal-open");
+    }
+
+    return () => {
+      root.removeAttribute("data-auth-modal-open");
+    };
+  }, [renderedMode]);
+
+  useEffect(() => {
     if (!renderedMode) {
       return;
     }

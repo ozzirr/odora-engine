@@ -42,37 +42,51 @@ export function BrandFollowButton({
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col gap-2">
-        <AuthModalTrigger
-          mode="login"
-          className={buttonStyles({ variant: "secondary", size: "sm" })}
-          aria-label={t("followToggleAria", { name: brandName })}
-        >
-          {t("follow")}
-        </AuthModalTrigger>
-        <p className="text-[12px] text-[#907b66]">{t("followLoginHint")}</p>
+      <div className="rounded-[1.35rem] border border-[#e4d8c8] bg-[#fbf7f0] p-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-[#2a2018]">{t("followTitle", { name: brandName })}</p>
+            <p className="mt-1 text-[12.5px] leading-5 text-[#806b56]">{t("followLoginHint")}</p>
+          </div>
+          <AuthModalTrigger
+            mode="login"
+            className={buttonStyles({ variant: "primary", size: "sm", className: "w-full shrink-0 sm:w-auto" })}
+            aria-label={t("followToggleAria", { name: brandName })}
+          >
+            {t("follow")}
+          </AuthModalTrigger>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <button
-        type="button"
-        onClick={handleClick}
-        disabled={isPending}
-        aria-pressed={isFollowing}
-        aria-label={t("followToggleAria", { name: brandName })}
-        className={cn(
-          buttonStyles({ variant: isFollowing ? "primary" : "secondary", size: "sm" }),
-          isPending && "opacity-60",
-        )}
-      >
-        {isFollowing ? t("following") : t("follow")}
-      </button>
-      <p className="text-[12px] text-[#907b66]">
-        {error ?? t("followHint")}
-      </p>
+    <div className="rounded-[1.35rem] border border-[#e4d8c8] bg-[#fbf7f0] p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-[#2a2018]">{t("followTitle", { name: brandName })}</p>
+          <p className={cn("mt-1 text-[12.5px] leading-5", error ? "text-[#8a4036]" : "text-[#806b56]")}>
+            {error ?? t("followHint")}
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={handleClick}
+          disabled={isPending}
+          aria-pressed={isFollowing}
+          aria-label={t("followToggleAria", { name: brandName })}
+          className={cn(
+            buttonStyles({
+              variant: isFollowing ? "primary" : "secondary",
+              size: "sm",
+              className: "w-full shrink-0 sm:w-auto",
+            }),
+            isPending && "opacity-60",
+          )}
+        >
+          {isFollowing ? t("following") : t("follow")}
+        </button>
+      </div>
     </div>
   );
 }

@@ -765,16 +765,17 @@
     },
     "page": {
       "eyebrow": "Brand",
-      "title": "Profumi {name}",
-      "subtitle": "Scopri tutte le fragranze di {name}: note, performance e prezzo confrontato tra i principali store.",
+      "title": "{name}",
+      "subtitle": "Esplora il database dei profumi {name}: note olfattive, famiglie, recensioni della community e link di acquisto selezionati quando disponibili.",
       "perfumesTitle": "Tutti i profumi di {name}",
       "perfumesEmpty": "Nessun profumo disponibile per questo brand al momento.",
       "country": "Origine: {country}",
       "breadcrumbBrand": "Brand",
       "follow": "Segui",
       "following": "Stai seguendo",
-      "followHint": "Riceverai una notifica quando uscirà un nuovo profumo.",
-      "followLoginHint": "Accedi per seguire questo brand e ricevere gli aggiornamenti.",
+      "followTitle": "Segui il brand {name} su Odora",
+      "followHint": "Riceverai aggiornamenti quando aggiungiamo nuovi profumi del brand.",
+      "followLoginHint": "Accedi per seguire il brand e ricevere novita sui nuovi profumi.",
       "followError": "Impossibile aggiornare la tua preferenza. Riprova.",
       "followToggleAria": "Attiva o disattiva il follow su {name}"
     }
@@ -1245,8 +1246,8 @@
         "fallbackTitle": "Brand | Odora",
         "fallbackDescription": "Esplora i profumi del brand su Odora.",
         "notFoundTitle": "Brand non trovato | Odora",
-        "title": "{name}: profumi, note e prezzi | Odora",
-        "description": "Scopri i profumi di {name} su Odora: schede dettagliate, note, performance e confronto prezzi tra i principali store online."
+        "title": "{name}: profumi, note e community | Odora",
+        "description": "Esplora i profumi di {name} su Odora: schede dettagliate, note olfattive, recensioni della community e link di acquisto selezionati."
       },
       "brands": {
         "title": "Tutti i brand di profumi | Odora",

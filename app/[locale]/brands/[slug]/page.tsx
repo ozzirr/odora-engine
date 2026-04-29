@@ -112,18 +112,19 @@ export default async function BrandPage({ params }: BrandPageProps) {
         namespaces={["common", "catalog", "perfume", "taxonomy", "brand"]}
       >
         <Container className="space-y-8 pt-6 pb-16 md:pt-8">
-          <header className="rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-10">
-            <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+          <header className="overflow-hidden rounded-3xl border border-[#dfd1bf] bg-white shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)]">
+            <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.42fr)] lg:items-end">
+              <div className="flex flex-col items-start gap-6 sm:flex-row">
               {brand.logoUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={brand.logoUrl}
                   alt={brand.name}
-                  className="h-20 w-20 rounded-2xl object-contain bg-[#f8f1e6] p-2"
+                  className="h-20 w-20 shrink-0 rounded-2xl bg-[#f8f1e6] object-contain p-2"
                   loading="eager"
                 />
               ) : null}
-              <div className="space-y-3">
+              <div className="min-w-0 space-y-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
                   {t("eyebrow")}
                 </p>
@@ -138,14 +139,15 @@ export default async function BrandPage({ params }: BrandPageProps) {
                     {t("country", { country: brand.country })}
                   </p>
                 ) : null}
-                <div className="pt-2">
-                  <BrandFollowButton
-                    brandId={brand.id}
-                    brandName={brand.name}
-                    initialIsFollowing={initialIsFollowing}
-                    initialIsAuthenticated={Boolean(currentUser)}
-                  />
-                </div>
+              </div>
+              </div>
+              <div className="lg:pl-2">
+                <BrandFollowButton
+                  brandId={brand.id}
+                  brandName={brand.name}
+                  initialIsFollowing={initialIsFollowing}
+                  initialIsAuthenticated={Boolean(currentUser)}
+                />
               </div>
             </div>
           </header>

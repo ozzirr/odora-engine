@@ -37,13 +37,35 @@ export function MobilePerfumeCtaBar({
   const amazonT = useTranslations("perfume.amazon");
   const barRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
   const isClient = useSyncExternalStore(
     () => () => {},
     () => true,
     () => false,
   );
   const hasAnyCta = Boolean(amazonUrl || listAction);
-  const isBarActive = isVisible;
+  const isBarActive = isVisible && !authModalOpen;
+
+  useEffect(() => {
+    if (!isClient) {
+      return;
+    }
+
+    const root = document.documentElement;
+    const updateAuthModalState = () => {
+      setAuthModalOpen(root.getAttribute("data-auth-modal-open") === "true");
+    };
+
+    updateAuthModalState();
+
+    const observer = new MutationObserver(updateAuthModalState);
+    observer.observe(root, {
+      attributeFilter: ["data-auth-modal-open"],
+      attributes: true,
+    });
+
+    return () => observer.disconnect();
+  }, [isClient]);
 
   useEffect(() => {
     if (!isClient || !hasAnyCta) {
@@ -114,7 +136,7 @@ export function MobilePerfumeCtaBar({
       ref={barRef}
       data-mobile-perfume-cta="true"
       className={cn(
-        "fixed inset-x-0 bottom-0 z-[70] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden",
+        "fixed inset-x-0 bottom-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:hidden",
         APP_FLOATING_LAYER_CLASS,
         isBarActive
           ? "translate-y-0"
