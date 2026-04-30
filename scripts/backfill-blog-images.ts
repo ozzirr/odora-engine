@@ -67,12 +67,14 @@ async function generateAndUploadImage(tags: string[], slug: string): Promise<str
       prompt,
       image_size: "landscape_16_9",
       num_images: 1,
+      output_format: "jpeg",
       safety_tolerance: "2",
     },
     logs: false,
-  }) as { data: { images: Array<{ url: string }> } };
+  }) as { data: { images: Array<{ url: string; content_type?: string }> } };
 
-  const generatedUrl = result.data.images[0]?.url;
+  const generatedImage = result.data.images[0];
+  const generatedUrl = generatedImage?.url;
   if (!generatedUrl) throw new Error("fal.ai returned no image URL");
   console.log(`  fal.ai ✓`);
 
@@ -80,13 +82,19 @@ async function generateAndUploadImage(tags: string[], slug: string): Promise<str
   const imageResponse = await fetch(generatedUrl);
   if (!imageResponse.ok) throw new Error(`fetch failed: ${imageResponse.status}`);
   const buffer = await imageResponse.arrayBuffer();
+  const contentType =
+    generatedImage?.content_type ||
+    imageResponse.headers.get("content-type") ||
+    "image/jpeg";
+  const extension =
+    contentType === "image/png" ? "png" : contentType === "image/webp" ? "webp" : "jpg";
 
   // Upload to Supabase Storage
-  const filename = `${slug}-${Date.now()}.webp`;
+  const filename = `${slug}-${Date.now()}.${extension}`;
   const { error: uploadError } = await supabase.storage
     .from("blog-images")
     .upload(filename, buffer, {
-      contentType: "image/webp",
+      contentType,
       upsert: false,
       cacheControl: "31536000",
     });

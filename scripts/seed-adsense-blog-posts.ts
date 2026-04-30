@@ -615,12 +615,120 @@ If a fragrance becomes more alcoholic, sour or flat after a few months, storage 
   },
 ];
 
+const articleEnhancements: Record<string, Record<"it" | "en", string>> = {
+  "migliori-profumi-uomo-2026-ogni-stagione": {
+    it: `
+## Risorse utili per approfondire
+
+Per completare la scelta, confronta le famiglie olfattive nel [catalogo profumi Odora](/it/profumi), usa il [Finder Odora](/it/trova-profumo) se vuoi filtrare per occasione e controlla le [classifiche Odora](/it/classifiche) per scoprire alternative popolari.
+
+Per capire meglio ingredienti e sicurezza delle fragranze puoi leggere anche le risorse di [IFRA](https://ifrafragrance.org/safe-use/introduction) e la pagina educativa di [The Fragrance Foundation](https://fragrance.org/fragrance-family/), utili per orientarti tra famiglie olfattive e uso corretto.
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+To complete your shortlist, compare scent families in the [Odora perfume catalog](/en/perfumes), use the [Odora Finder](/en/finder) for occasion-based filtering, and check the [Odora rankings](/en/top) for popular alternatives.
+
+For broader fragrance education, the resources from [IFRA](https://ifrafragrance.org/safe-use/introduction) and [The Fragrance Foundation](https://fragrance.org/fragrance-family/) are useful starting points for understanding safe use and fragrance families.
+`.trim(),
+  },
+  "profumi-vaniglia-migliori-guida": {
+    it: `
+## Risorse utili per approfondire
+
+Se vuoi confrontare vaniglie piu dolci, legnose o ambrate, parti dal [catalogo profumi Odora](/it/profumi) e poi usa il [Finder Odora](/it/trova-profumo) per restringere la ricerca per stagione, intensita e budget. Puoi anche consultare le [classifiche Odora](/it/classifiche) per trovare alternative vicine.
+
+Per una lettura piu tecnica sugli ingredienti, la scheda di [The Good Scents Company sulla vanillina](http://www.thegoodscentscompany.com/data/rw1001361.html) e le risorse divulgative di [The Fragrance Foundation](https://fragrance.org/fragrance-family/) aiutano a capire perche la vaniglia puo risultare cremosa, ambrata o gourmand.
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+If you want to compare sweeter, woodier or more ambery vanilla fragrances, start from the [Odora catalog](/en/perfumes), then use the [Odora Finder](/en/finder) to narrow by season, intensity and budget. The [Odora rankings](/en/top) can also surface nearby alternatives.
+
+For a more technical ingredient angle, [The Good Scents Company entry on vanillin](http://www.thegoodscentscompany.com/data/rw1001361.html) and [The Fragrance Foundation](https://fragrance.org/fragrance-family/) are useful references for understanding why vanilla can smell creamy, ambery or gourmand.
+`.trim(),
+  },
+  "profumi-estivi-freschi-agrumati": {
+    it: `
+## Risorse utili per approfondire
+
+Per cercare profumi freschi in modo pratico, confronta agrumi, muschi e note marine nel [catalogo Odora](/it/profumi), prova il percorso fresco del [Finder Odora](/it/trova-profumo) e salva le opzioni migliori dalle [classifiche](/it/classifiche).
+
+Per informazioni generali sull'uso sicuro delle fragranze al sole e sulla sensibilita cutanea, consulta le linee guida di [IFRA](https://ifrafragrance.org/safe-use/introduction) e le informazioni pubbliche della [Commissione Europea sugli allergeni delle fragranze](https://single-market-economy.ec.europa.eu/sectors/cosmetics/cosmetic-products-specific-topics/fragrance-allergens_en).
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+To search fresh scents practically, compare citrus, musk and marine notes in the [Odora catalog](/en/perfumes), try a fresh profile in the [Odora Finder](/en/finder), and save promising options from the [rankings](/en/top).
+
+For general information on safe fragrance use and skin sensitivity, see [IFRA](https://ifrafragrance.org/safe-use/introduction) and the European Commission's public information on [fragrance allergens](https://single-market-economy.ec.europa.eu/sectors/cosmetics/cosmetic-products-specific-topics/fragrance-allergens_en).
+`.trim(),
+  },
+  "profumi-da-ufficio-discreti-eleganti": {
+    it: `
+## Risorse utili per approfondire
+
+Per trovare profumi da lavoro davvero portabili, filtra le famiglie fresche, muschiate e legnose nel [catalogo Odora](/it/profumi), poi prova il [Finder Odora](/it/trova-profumo) impostando un profilo pulito o elegante. Le [classifiche Odora](/it/classifiche) aiutano a confrontare alternative simili.
+
+Per approfondire la sensibilita alle fragranze negli ambienti condivisi, puoi leggere le informazioni della [Mayo Clinic sulle allergie](https://www.mayoclinic.org/diseases-conditions/allergies/symptoms-causes/syc-20351497) e le linee guida generali di [IFRA](https://ifrafragrance.org/safe-use/introduction).
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+To find wearable work fragrances, filter fresh, musky and woody families in the [Odora catalog](/en/perfumes), then use the [Odora Finder](/en/finder) with a clean or elegant profile. The [Odora rankings](/en/top) help compare similar options.
+
+For broader context on fragrance sensitivity in shared spaces, see the [Mayo Clinic overview of allergies](https://www.mayoclinic.org/diseases-conditions/allergies/symptoms-causes/syc-20351497) and [IFRA's safe-use resources](https://ifrafragrance.org/safe-use/introduction).
+`.trim(),
+  },
+  "profumi-arabi-oud-ambra-rosa": {
+    it: `
+## Risorse utili per approfondire
+
+Per confrontare oud, ambra e rosa con criteri pratici, parti dal [catalogo Odora](/it/profumi), usa il [Finder Odora](/it/trova-profumo) selezionando note legnose o ambrate e guarda le [classifiche Odora](/it/classifiche) per trovare alternative piu accessibili.
+
+Per approfondire il contesto culturale delle materie prime, sono utili la voce [Encyclopaedia Britannica sull'oud/agarwood](https://www.britannica.com/plant/agarwood) e le risorse educative di [The Fragrance Foundation](https://fragrance.org/fragrance-family/).
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+To compare oud, amber and rose with practical filters, start from the [Odora catalog](/en/perfumes), use the [Odora Finder](/en/finder) with woody or ambery notes, and check the [Odora rankings](/en/top) for more accessible alternatives.
+
+For cultural and material context, the [Encyclopaedia Britannica entry on agarwood](https://www.britannica.com/plant/agarwood) and [The Fragrance Foundation](https://fragrance.org/fragrance-family/) are useful external references.
+`.trim(),
+  },
+  "come-far-durare-profumo-piu-a-lungo": {
+    it: `
+## Risorse utili per approfondire
+
+Se vuoi scegliere profumi piu persistenti, confronta famiglie ambrate, legnose e muschiate nel [catalogo Odora](/it/profumi), prova il [Finder Odora](/it/trova-profumo) e usa le [classifiche](/it/classifiche) per individuare alternative con profili simili.
+
+Per informazioni generali su sicurezza, conservazione e sensibilita cutanea, consulta le risorse di [IFRA](https://ifrafragrance.org/safe-use/introduction) e le informazioni della [Commissione Europea sugli allergeni delle fragranze](https://single-market-economy.ec.europa.eu/sectors/cosmetics/cosmetic-products-specific-topics/fragrance-allergens_en).
+`.trim(),
+    en: `
+## Useful resources for deeper research
+
+If you want longer-lasting scents, compare ambery, woody and musky families in the [Odora catalog](/en/perfumes), try the [Odora Finder](/en/finder), and use the [rankings](/en/top) to identify similar profiles.
+
+For general information on safe use, storage and skin sensitivity, see [IFRA](https://ifrafragrance.org/safe-use/introduction) and the European Commission's public information on [fragrance allergens](https://single-market-economy.ec.europa.eu/sectors/cosmetics/cosmetic-products-specific-topics/fragrance-allergens_en).
+`.trim(),
+  },
+};
+
+function getEnhancedContent(post: SeedPost) {
+  const enhancement = articleEnhancements[post.slug]?.[post.locale];
+
+  return enhancement ? `${post.content}\n\n${enhancement}` : post.content;
+}
+
 async function main() {
   for (const post of posts) {
+    const content = getEnhancedContent(post);
+
     await prisma.blogPost.upsert({
       where: { slug_locale: { slug: post.slug, locale: post.locale } },
       create: {
         ...post,
+        content,
         status: BlogPostStatus.PUBLISHED,
         coverImageUrl: null,
       },
@@ -628,13 +736,12 @@ async function main() {
         title: post.title,
         excerpt: post.excerpt,
         tldr: post.tldr,
-        content: post.content,
+        content,
         seoTitle: post.seoTitle,
         seoDescription: post.seoDescription,
         tags: post.tags,
         status: BlogPostStatus.PUBLISHED,
         publishedAt: post.publishedAt,
-        coverImageUrl: null,
       },
     });
   }
