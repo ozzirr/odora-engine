@@ -5,6 +5,7 @@ import { getCatalogVisibilityWhereForMode, resolveCatalogMode } from "@/lib/cata
 import { DEPLOY_ID } from "@/lib/deploy-id";
 import { getLocalizedPathname, locales, type AppPathname } from "@/lib/i18n";
 import { toAbsoluteUrl } from "@/lib/metadata";
+import { isPerfumeEligibleForSearchIndex } from "@/lib/perfume-seo";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 
 export const revalidate = 3600;
@@ -54,7 +55,22 @@ const getSitemapBrands = unstable_cache(
 const getSitemapPerfumes = unstable_cache(
   async () =>
     prisma.perfume.findMany({
-      select: { slug: true, updatedAt: true },
+      select: {
+        slug: true,
+        updatedAt: true,
+        descriptionShort: true,
+        descriptionLong: true,
+        imageUrl: true,
+        dataQuality: true,
+        catalogStatus: true,
+        officialSourceUrl: true,
+        sourceConfidence: true,
+        notes: {
+          select: {
+            id: true,
+          },
+        },
+      },
       where: getCatalogVisibilityWhereForMode(resolveCatalogMode()),
       orderBy: { updatedAt: "desc" },
     }),
@@ -122,6 +138,7 @@ async function getSitemapEntries(): Promise<SitemapEntry[]> {
     getSitemapPerfumes(),
     getSitemapBrands(),
   ]);
+  const indexablePerfumes = perfumes.filter(isPerfumeEligibleForSearchIndex);
 
   return [
     ...entries,
@@ -140,7 +157,7 @@ async function getSitemapEntries(): Promise<SitemapEntry[]> {
       })),
     ),
     ...locales.flatMap((locale) =>
-      perfumes.map((perfume) => ({
+      indexablePerfumes.map((perfume) => ({
         url: toAbsoluteUrl(getLocalizedPathname(locale, "/perfumes/[slug]", { slug: perfume.slug })),
         lastModified: perfume.updatedAt,
         changeFrequency: "weekly" as const,

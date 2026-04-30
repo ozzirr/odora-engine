@@ -31,6 +31,7 @@ import { getCheaperAlternatives, getPerfumeNotes, getSimilarPerfumes } from "@/l
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import { ensureAppUser, getUserPerfumeListsForPerfume } from "@/lib/perfume-lists";
+import { isPerfumeEligibleForSearchIndex } from "@/lib/perfume-seo";
 import { getPerfumeOverviewText, getPerfumeShortText } from "@/lib/perfume-text";
 import { isDatabaseConfigured, prisma } from "@/lib/prisma";
 import { computeBestOffer } from "@/lib/pricing";
@@ -390,6 +391,12 @@ export async function generateMetadata({ params }: PerfumeDetailPageProps): Prom
       pathname: "/perfumes/[slug]",
       params: { slug },
       image: perfume.imageUrl,
+      robots: isPerfumeEligibleForSearchIndex(perfume)
+        ? undefined
+        : {
+            index: false,
+            follow: true,
+          },
     });
   } catch (error) {
     logCatalogQueryError("perfumes:metadata", error);
