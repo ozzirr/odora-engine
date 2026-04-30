@@ -119,7 +119,11 @@ function FinderSearchLoading({
 
             <div className="mt-7 grid gap-3">
               {items.map((item, index) => (
-                <div key={item} className="flex items-center gap-3 text-sm text-[#ead8bd]">
+                <div
+                  key={item}
+                  className="finder-loading-animate flex items-center gap-3 text-sm text-[#ead8bd]"
+                  style={{ animation: `finder-loading-step 1.8s ${index * 180}ms ease-in-out infinite` }}
+                >
                   <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#d9b77f]/45 bg-[#d9b77f]/15">
                     <span
                       className={cn(
@@ -135,12 +139,13 @@ function FinderSearchLoading({
           </div>
 
           <div className="relative mx-auto h-64 w-64 max-w-full">
-            <div className="absolute inset-0 rounded-full border border-[#d9b77f]/25" />
-            <div className="absolute inset-8 rounded-full border border-white/15" />
-            <div className="absolute inset-16 rounded-full bg-[#fffaf1] shadow-[0_30px_90px_-45px_rgba(0,0,0,0.9)]" />
-            <div className="absolute left-1/2 top-1/2 h-28 w-16 -translate-x-1/2 -translate-y-1/2 rounded-[45%_45%_38%_38%] border border-[#d8cab7] bg-gradient-to-b from-white via-[#f7efe3] to-[#d9c6ad] shadow-[0_18px_60px_-35px_rgba(0,0,0,0.75)]" />
+            <div className="finder-loading-animate absolute inset-0 rounded-full border border-[#d9b77f]/25" style={{ animation: "finder-loading-ring 2.4s ease-in-out infinite" }} />
+            <div className="finder-loading-animate absolute inset-8 rounded-full border border-white/20" style={{ animation: "finder-loading-ring 2.4s 220ms ease-in-out infinite" }} />
+            <div className="finder-loading-animate absolute inset-16 rounded-full bg-[#fffaf1] shadow-[0_30px_90px_-45px_rgba(0,0,0,0.9)]" style={{ animation: "finder-loading-ring 2.4s 420ms ease-in-out infinite" }} />
+            <div className="finder-loading-animate absolute left-1/2 top-1/2 h-28 w-16 -translate-x-1/2 -translate-y-1/2 rounded-[45%_45%_38%_38%] border border-[#d8cab7] bg-gradient-to-b from-white via-[#f7efe3] to-[#d9c6ad] shadow-[0_18px_60px_-35px_rgba(0,0,0,0.75)]" style={{ animation: "finder-loading-float 2.6s ease-in-out infinite" }} />
             <div className="absolute left-1/2 top-[4.2rem] h-5 w-10 -translate-x-1/2 rounded-t-lg bg-[#d8cab7]" />
-            <div className="absolute inset-0 animate-spin rounded-full border-t border-[#d9b77f]" />
+            <div className="finder-loading-animate absolute inset-0 rounded-full border-t border-[#d9b77f] border-r-transparent" style={{ animation: "finder-loading-orbit 1.55s linear infinite" }} />
+            <div className="finder-loading-animate absolute inset-6 rounded-full border-b border-white/45 border-l-transparent" style={{ animation: "finder-loading-orbit 2.2s linear infinite reverse" }} />
           </div>
         </div>
       </div>
@@ -923,26 +928,26 @@ export function FinderExperience({
                 </h2>
                 <p className="mt-3 text-sm leading-6 text-[#655240]">{t("lead.description")}</p>
 
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-stretch">
                   <input
                     type="email"
                     required
                     value={leadEmail}
                     onChange={(event) => setLeadEmail(event.target.value)}
                     placeholder={t("lead.placeholder")}
-                    className="h-12 min-w-0 flex-1 rounded-full border border-[#d8cab7] bg-white px-4 text-sm text-[#211914] outline-none transition focus:border-[#1E4B3B]"
+                    className="h-14 min-w-0 flex-1 rounded-[1.15rem] border border-[#d8cab7] bg-white px-5 text-base text-[#211914] shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] outline-none transition placeholder:text-[#a19080] focus:border-[#1E4B3B] focus:ring-4 focus:ring-[#1E4B3B]/10"
                   />
-                  <Button type="submit" disabled={leadStatus === "submitting" || !leadConsent}>
+                  <Button type="submit" size="lg" disabled={leadStatus === "submitting" || !leadConsent} className="h-14 px-8 text-base max-sm:w-full">
                     {leadStatus === "submitting" ? t("lead.sending") : t("lead.submit")}
                   </Button>
                 </div>
 
-                <label className="mt-4 flex gap-3 rounded-[1rem] border border-[#e5d9c8] bg-white/70 p-3 text-xs leading-5 text-[#6a5846]">
+                <label className="mt-5 flex gap-3 rounded-[1.15rem] border border-[#e5d9c8] bg-white/70 p-4 text-sm leading-6 text-[#6a5846]">
                   <input
                     type="checkbox"
                     checked={leadConsent}
                     onChange={(event) => setLeadConsent(event.target.checked)}
-                    className="mt-1 h-4 w-4"
+                    className="mt-1 h-5 w-5 shrink-0"
                   />
                   <span>{t("lead.consent")}</span>
                 </label>
