@@ -21,8 +21,8 @@ import {
 import { isDatabaseConfigured, prisma, withDatabaseRetry } from "@/lib/prisma";
 
 export const FINDER_RESULTS_PAGE_SIZE = 20;
-const FINDER_MIN_CANDIDATES = 120;
-const FINDER_FILTERED_CANDIDATE_CAP = 320;
+const FINDER_MIN_CANDIDATES = 240;
+const FINDER_FILTERED_CANDIDATE_CAP = 500;
 
 const finderInclude = {
   brand: true,

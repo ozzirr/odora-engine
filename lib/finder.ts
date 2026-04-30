@@ -221,59 +221,13 @@ export function normalizeFinderQueryFilters(input: FinderQueryInput): Normalized
 }
 
 export function buildFinderWhere(filters: NormalizedFinderFilters): Prisma.PerfumeWhereInput {
-  // Mood/season/occasion/note mappings are currently sparse in the catalog.
-  // These relation filters must stay optional; otherwise Finder behaves like
-  // an implicit inner-join and collapses results to a tiny subset.
+  // Finder is a recommendation flow, not a strict catalog filter. Taxonomy
+  // mappings are intentionally used for ranking later because the catalog can
+  // be sparse across mood, season, occasion, gender, notes, and budget.
   return {
-    ...(filters.gender ? { gender: filters.gender } : {}),
-    ...(filters.priceRange ? { priceRange: filters.priceRange } : {}),
     ...(filters.isArabic ? { isArabic: true } : {}),
     ...(filters.isNiche ? { isNiche: true } : {}),
     ...(filters.fragranceFamily ? { fragranceFamily: filters.fragranceFamily } : {}),
-    ...(filters.moodSlug
-      ? {
-          moods: {
-            some: {
-              mood: {
-                slug: filters.moodSlug,
-              },
-            },
-          },
-        }
-      : {}),
-    ...(filters.seasonSlug
-      ? {
-          seasons: {
-            some: {
-              season: {
-                slug: filters.seasonSlug,
-              },
-            },
-          },
-        }
-      : {}),
-    ...(filters.occasionSlug
-      ? {
-          occasions: {
-            some: {
-              occasion: {
-                slug: filters.occasionSlug,
-              },
-            },
-          },
-        }
-      : {}),
-    ...(filters.noteSlug
-      ? {
-          notes: {
-            some: {
-              note: {
-                slug: filters.noteSlug,
-              },
-            },
-          },
-        }
-      : {}),
   };
 }
 
@@ -363,56 +317,12 @@ export function matchPerfumesFromPreferences(
         return null;
       }
 
-      if (genderTarget && perfume.gender !== genderTarget) {
-        return null;
-      }
-
-      if (selectedBudget) {
-        const perfumeBudget = priceRangeToBudget[perfume.priceRange] ?? "luxury";
-        if (perfumeBudget !== selectedBudget) {
-          return null;
-        }
-      }
-
-      if (
-        preferredMood &&
-        !(perfume.moods ?? []).some((mood) => normalize(mood.mood?.slug ?? "") === preferredMood)
-      ) {
-        return null;
-      }
-
-      if (
-        preferredSeason &&
-        !(perfume.seasons ?? []).some(
-          (season) => normalize(season.season?.slug ?? "") === preferredSeason,
-        )
-      ) {
-        return null;
-      }
-
-      if (
-        preferredOccasion &&
-        !(perfume.occasions ?? []).some(
-          (occasion) => normalize(occasion.occasion?.slug ?? "") === preferredOccasion,
-        )
-      ) {
-        return null;
-      }
-
-      if (
-        preferredNote &&
-        !(perfume.notes ?? []).some((note) => {
-          const slug = normalize(note.note?.slug ?? "");
-          return slug === preferredNote || slug.includes(preferredNote);
-        })
-      ) {
-        return null;
-      }
-
       let score = 0;
 
-      if (genderTarget) {
+      if (genderTarget && perfume.gender === genderTarget) {
         score += 4;
+      } else if (genderTarget && perfume.gender === Gender.UNISEX) {
+        score += 2;
       }
 
       if (
@@ -432,6 +342,15 @@ export function matchPerfumesFromPreferences(
       }
 
       if (
+        preferredOccasion &&
+        (perfume.occasions ?? []).some(
+          (occasion) => normalize(occasion.occasion?.slug ?? "") === preferredOccasion,
+        )
+      ) {
+        score += 3;
+      }
+
+      if (
         preferredNote &&
         (perfume.notes ?? []).some((note) => {
           const slug = normalize(note.note?.slug ?? "");
@@ -442,7 +361,9 @@ export function matchPerfumesFromPreferences(
       }
 
       if (selectedBudget) {
-        score += 3;
+        const perfumeBudget = priceRangeToBudget[perfume.priceRange] ?? "luxury";
+        const distance = Math.abs((budgetRank[perfumeBudget] ?? 4) - budgetRank[selectedBudget]);
+        score += Math.max(0, 3 - distance);
       }
 
       if (preferences.arabicOnly && perfume.isArabic) {

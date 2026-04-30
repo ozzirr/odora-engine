@@ -334,6 +334,125 @@
       },
       "arabicOnly": "Arabic only",
       "nicheOnly": "Niche only",
+      "immersive": {
+        "eyebrow": "Odora Finder",
+        "title": "Build your fragrance signature.",
+        "subtitle": "Answer a few sensory choices. Odora reads mood, season, occasion, and budget to create a personal selection with a final email report."
+      },
+      "progress": "Step {current} of {total}",
+      "start": "Start experience",
+      "back": "Back",
+      "next": "Continue",
+      "skip": "Skip this step",
+      "resultsEyebrow": "Personal selection",
+      "resultsSubtitle": "You see the best matches immediately. The full report adds sensory analysis, alternatives, and wear guidance.",
+      "allResultsEyebrow": "More compatible matches",
+      "steps": {
+        "mood": {
+          "eyebrow": "Mood",
+          "title": "What atmosphere should it leave?",
+          "description": "Choose the main feeling: elegant, clean, romantic, bold, or cozy."
+        },
+        "season": {
+          "eyebrow": "Season",
+          "title": "What climate should it work in?",
+          "description": "Weather changes how fragrance performs. Here we tune freshness, warmth, and ideal longevity."
+        },
+        "occasion": {
+          "eyebrow": "Occasion",
+          "title": "Where will you wear it?",
+          "description": "Office, evening, and daily wear need different levels of projection and polish."
+        },
+        "note": {
+          "eyebrow": "Raw material",
+          "title": "Which note attracts you most?",
+          "description": "We start from a recognizable olfactory material to guide the selection."
+        },
+        "budget": {
+          "eyebrow": "Budget",
+          "title": "How much do you want to invest?",
+          "description": "We filter the selection by price range without losing character."
+        },
+        "gender": {
+          "eyebrow": "Profile",
+          "title": "Which direction do you prefer?",
+          "description": "Choose a classic direction or let Odora stay open to unisex perfumes."
+        }
+      },
+      "choiceHints": {
+        "defaultMood": "A sensory direction to refine the selection.",
+        "defaultSeason": "We adapt intensity and freshness to the climate.",
+        "defaultOccasion": "We balance presence, elegance, and ease of wear.",
+        "defaultNote": "We use this note as the signature of the selection.",
+        "moods": {
+          "elegant": "Clean, polished, composed.",
+          "fresh": "Airy, bright, just-showered.",
+          "romantic": "Soft, warm, magnetic.",
+          "bold": "Present trail and strong character.",
+          "cozy": "Comfort, skin, controlled sweetness."
+        },
+        "seasons": {
+          "spring": "Bright and natural without feeling heavy.",
+          "summer": "Fresh and wearable even in heat.",
+          "fall": "Spices, woods, and soft depth.",
+          "winter": "Rich, long-lasting, and more enveloping."
+        },
+        "occasions": {
+          "daily-wear": "Easy to wear often without fatigue.",
+          "office": "Elegant, subtle, professional.",
+          "date-night": "More sensual and memorable."
+        },
+        "notes": {
+          "bergamot": "Bright, citrusy, clean opening.",
+          "vanilla": "Creamy, warm, reassuring.",
+          "oud": "Intense, woody, luxurious.",
+          "musk": "Clean, skin-like, soft.",
+          "amber": "Warm, ambery, enveloping.",
+          "rose": "Elegant, floral, modern.",
+          "sandalwood": "Woody, creamy, sophisticated.",
+          "citrus": "Immediate fresh energy."
+        },
+        "gender": {
+          "any": "Maximum matching freedom.",
+          "male": "More masculine direction.",
+          "female": "More feminine direction.",
+          "unisex": "Modern, versatile balance."
+        },
+        "budget": {
+          "any": "Keep all price ranges open.",
+          "budget": "Accessible, smart picks.",
+          "mid": "Best balance of price and quality.",
+          "premium": "A more refined selection.",
+          "luxury": "Only high-impact recommendations."
+        }
+      },
+      "preview": {
+        "eyebrow": "Live preview",
+        "title": "Your guiding fragrance",
+        "text": "As you choose, Odora prepares the report logic: signature, occasions, and alternatives.",
+        "readyEyebrow": "Main match",
+        "readyText": "{total} compatible perfumes found in the catalog."
+      },
+      "report": {
+        "eyebrow": "Inside the full report",
+        "items": {
+          "profile": "Personal olfactory profile",
+          "matches": "Top matches with rationale",
+          "occasions": "When to wear each perfume",
+          "alternatives": "Budget, premium, and signature alternatives"
+        }
+      },
+      "lead": {
+        "eyebrow": "Email report",
+        "title": "Get the full analysis.",
+        "description": "We send the full selection and the link to save the perfumes in your Odora profile.",
+        "placeholder": "Your email",
+        "submit": "Send report",
+        "sending": "Sending...",
+        "consent": "I agree to receive Odora marketing emails and content. I can unsubscribe at any time.",
+        "success": "Done: we will send your Odora report to this email.",
+        "error": "We could not save the email. Try again shortly."
+      },
       "fallbackError": "Live matching is temporarily unavailable. Showing the closest catalog matches instead.",
       "preset": {
         "eyebrow": "Finder preset",

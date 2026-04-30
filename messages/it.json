@@ -334,6 +334,125 @@
       },
       "arabicOnly": "Solo arabi",
       "nicheOnly": "Solo niche",
+      "immersive": {
+        "eyebrow": "Odora Finder",
+        "title": "Costruiamo la tua firma olfattiva.",
+        "subtitle": "Rispondi a poche scelte sensoriali. Odora legge mood, stagione, occasione e budget per creare la tua selezione personalizzata."
+      },
+      "progress": "Step {current} di {total}",
+      "start": "Avvia esperienza",
+      "back": "Indietro",
+      "next": "Continua",
+      "skip": "Salta questo step",
+      "resultsEyebrow": "Selezione personale",
+      "resultsSubtitle": "Ti mostriamo subito i match migliori. Il report completo aggiunge analisi sensoriale, alternative e consigli d'uso.",
+      "allResultsEyebrow": "Altri match compatibili",
+      "steps": {
+        "mood": {
+          "eyebrow": "Mood",
+          "title": "Che atmosfera vuoi lasciare?",
+          "description": "Scegli la sensazione principale: elegante, pulita, romantica, decisa o avvolgente."
+        },
+        "season": {
+          "eyebrow": "Stagione",
+          "title": "In che clima deve funzionare?",
+          "description": "Il clima cambia moltissimo la resa. Qui definiamo freschezza, calore e persistenza ideale."
+        },
+        "occasion": {
+          "eyebrow": "Occasione",
+          "title": "Dove vuoi indossarlo?",
+          "description": "Ufficio, serata o uso quotidiano richiedono intensita e scie diverse."
+        },
+        "note": {
+          "eyebrow": "Materia prima",
+          "title": "Quale nota ti attira di piu?",
+          "description": "Partiamo da una materia olfattiva riconoscibile per orientare la selezione."
+        },
+        "budget": {
+          "eyebrow": "Budget",
+          "title": "Quanto vuoi investire?",
+          "description": "Filtriamo la selezione in base alla fascia prezzo senza perdere carattere."
+        },
+        "gender": {
+          "eyebrow": "Profilo",
+          "title": "Che direzione preferisci?",
+          "description": "Puoi scegliere una direzione classica oppure lasciare Odora libero su profumi unisex."
+        }
+      },
+      "choiceHints": {
+        "defaultMood": "Una direzione sensoriale per affinare la selezione.",
+        "defaultSeason": "Adattiamo intensita e freschezza al clima.",
+        "defaultOccasion": "Bilanciamo presenza, eleganza e facilita d'uso.",
+        "defaultNote": "Usiamo questa nota come firma della selezione.",
+        "moods": {
+          "elegant": "Pulito, curato, composto.",
+          "fresh": "Aria, luce e sensazione appena uscita dalla doccia.",
+          "romantic": "Morbido, caldo, magnetico.",
+          "bold": "Scia presente e carattere deciso.",
+          "cozy": "Comfort, pelle, dolcezza controllata."
+        },
+        "seasons": {
+          "spring": "Luminoso e naturale, senza pesare.",
+          "summer": "Fresco e portabile anche con caldo.",
+          "fall": "Spezie, legni e profondita morbida.",
+          "winter": "Ricco, persistente e piu avvolgente."
+        },
+        "occasions": {
+          "daily-wear": "Facile da usare spesso, senza stancare.",
+          "office": "Elegante, discreto, professionale.",
+          "date-night": "Piu sensuale e memorabile."
+        },
+        "notes": {
+          "bergamot": "Apertura brillante, agrumata, pulita.",
+          "vanilla": "Cremosa, calda, rassicurante.",
+          "oud": "Intensa, legnosa, lussuosa.",
+          "musk": "Pulita, pelle, morbida.",
+          "amber": "Calda, ambrata, avvolgente.",
+          "rose": "Elegante, floreale, moderna.",
+          "sandalwood": "Legnosa, cremosa, sofisticata.",
+          "citrus": "Energia fresca e immediata."
+        },
+        "gender": {
+          "any": "Massima liberta di matching.",
+          "male": "Direzione piu maschile.",
+          "female": "Direzione piu femminile.",
+          "unisex": "Equilibrio moderno e trasversale."
+        },
+        "budget": {
+          "any": "Lascia aperte tutte le fasce.",
+          "budget": "Scelte accessibili e furbe.",
+          "mid": "Miglior equilibrio tra prezzo e qualita.",
+          "premium": "Selezione piu ricercata.",
+          "luxury": "Solo proposte ad alto impatto."
+        }
+      },
+      "preview": {
+        "eyebrow": "Anteprima live",
+        "title": "Il tuo profumo guida",
+        "text": "Mentre scegli, Odora prepara la logica del report: firma, occasioni e alternative.",
+        "readyEyebrow": "Match principale",
+        "readyText": "{total} profumi compatibili trovati nel catalogo."
+      },
+      "report": {
+        "eyebrow": "Nel report completo",
+        "items": {
+          "profile": "Profilo olfattivo personale",
+          "matches": "Top match con motivazione",
+          "occasions": "Quando usare ogni profumo",
+          "alternatives": "Alternative budget, premium e signature"
+        }
+      },
+      "lead": {
+        "eyebrow": "Report via email",
+        "title": "Ricevi l'analisi completa.",
+        "description": "Ti inviamo la selezione completa e il link per salvare i profumi nel tuo profilo Odora.",
+        "placeholder": "La tua email",
+        "submit": "Invia report",
+        "sending": "Invio...",
+        "consent": "Accetto di ricevere email marketing e contenuti Odora. Posso disiscrivermi in qualsiasi momento.",
+        "success": "Perfetto: ti invieremo il report Odora a questa email.",
+        "error": "Non siamo riusciti a salvare l'email. Riprova tra poco."
+      },
       "fallbackError": "Il matching live e temporaneamente non disponibile. Ti mostriamo i match di catalogo piu vicini.",
       "preset": {
         "eyebrow": "Preset Finder",

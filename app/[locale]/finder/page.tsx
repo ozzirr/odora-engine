@@ -7,7 +7,6 @@ import { FinderExperience } from "@/components/finder/FinderExperience";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
 import { DEPLOY_ID } from "@/lib/deploy-id";
@@ -229,7 +228,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
       };
   const finderPath = getLocalizedPathname(resolvedLocale, "/finder");
   return (
-    <Container className="space-y-6 pt-6 sm:space-y-8 sm:pt-8">
+    <Container className="pt-4 sm:pt-6">
       {!shouldLoadResults ? (
         <StructuredData
           data={[
@@ -251,17 +250,6 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
         locale={resolvedLocale}
         namespaces={["common", "finder", "catalog", "perfume", "taxonomy"]}
       >
-        <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-          <ExpandableSeoIntro
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            subtitle={t("subtitle")}
-            body={[t("bodyOne"), t("bodyTwo")]}
-            primaryCta={{ href: "/perfumes", label: t("primaryCta") }}
-            secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
-          />
-        </section>
-
         <FinderExperience
           availableOptions={finderOptions}
           isAuthenticated={isAuthenticated}
