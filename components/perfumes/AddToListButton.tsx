@@ -47,8 +47,7 @@ export function AddToListButton({
     () => true,
     () => false,
   );
-  const addLabel = locale === "it" ? "Aggiungi alla lista" : "Add to list";
-  const loginLabel = locale === "it" ? "Accedi per salvare" : "Log in to save";
+  const addLabel = locale === "it" ? "Aggiungi ai preferiti" : "Add to favorites";
   const restoredIntentRef = useRef(false);
 
   const resolveAddToListNextPath = () => {
@@ -66,13 +65,6 @@ export function AddToListButton({
       return;
     }
 
-    restoredIntentRef.current = true;
-    setOpen(true);
-
-    if (lists.length === 0) {
-      setCreateOpen(true);
-    }
-
     const nextParams = new URLSearchParams(window.location.search);
     nextParams.delete(AUTH_INTENT_PARAM);
     window.history.replaceState(
@@ -80,6 +72,15 @@ export function AddToListButton({
       "",
       `${window.location.pathname}${nextParams.toString() ? `?${nextParams.toString()}` : ""}${window.location.hash}`,
     );
+
+    restoredIntentRef.current = true;
+    window.setTimeout(() => {
+      setOpen(true);
+
+      if (lists.length === 0) {
+        setCreateOpen(true);
+      }
+    }, 0);
   }, [isAuthenticated, lists.length, searchParams]);
 
   if (!isAuthenticated) {
@@ -90,14 +91,14 @@ export function AddToListButton({
           resolveNextPath={resolveAddToListNextPath}
           className={buttonStyles({ className })}
         >
-          {loginLabel}
+          {addLabel}
         </AuthModalTrigger>
       );
     }
 
     return (
       <div className="rounded-[1.45rem] border border-[#ddcfbc] bg-[#fffdf9] p-4">
-        <p className="font-display text-2xl text-[#21180f]">Aggiungi a lista</p>
+        <p className="font-display text-2xl text-[#21180f]">Aggiungi ai preferiti</p>
         <p className="mt-1 text-sm leading-6 text-[#685747]">
           Accedi o registrati per salvare questo profumo nelle tue liste.
         </p>
@@ -106,7 +107,7 @@ export function AddToListButton({
           resolveNextPath={resolveAddToListNextPath}
           className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}
         >
-          Accedi
+          {addLabel}
         </AuthModalTrigger>
       </div>
     );

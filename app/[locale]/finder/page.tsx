@@ -13,6 +13,7 @@ import {
   buildFinderPreferencesFromInput,
   hasConfiguredFinderPreferences,
 } from "@/lib/finder";
+import { getLatestBlogPosts } from "@/lib/blog";
 import { getFinderPreset } from "@/lib/finder-presets";
 import { FINDER_RESULTS_PAGE_SIZE, getFinderSearch } from "@/lib/finder-search";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
@@ -216,15 +217,19 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
   });
   const hasConfiguredPreferences = hasConfiguredFinderPreferences(initialPreferences);
   const hasSubmittedSearch = isFinderSubmitted(resolvedSearchParams);
-  const shouldLoadResults = hasConfiguredPreferences || hasSubmittedSearch;
-  const initialSearchResult = shouldLoadResults
-    ? await getFinderSearch(initialPreferences, 0, FINDER_RESULTS_PAGE_SIZE)
-    : {
-        results: [],
-        total: 0,
-        hasMore: false,
-        nextOffset: 0,
-      };
+  const shouldStartExperience = readSearchParam(resolvedSearchParams, "start") === "1";
+  const shouldLoadResults = hasSubmittedSearch || (hasConfiguredPreferences && !shouldStartExperience);
+  const [initialSearchResult, latestBlogPosts] = await Promise.all([
+    shouldLoadResults
+      ? getFinderSearch(initialPreferences, 0, FINDER_RESULTS_PAGE_SIZE)
+      : Promise.resolve({
+          results: [],
+          total: 0,
+          hasMore: false,
+          nextOffset: 0,
+        }),
+    getLatestBlogPosts(resolvedLocale, 3),
+  ]);
   const finderPath = getLocalizedPathname(resolvedLocale, "/finder");
   return (
     <div className="bg-[#211914]">
@@ -258,6 +263,8 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
           initialHasMore={initialSearchResult.hasMore}
           initialNextOffset={initialSearchResult.nextOffset}
           initialSubmitted={shouldLoadResults}
+          initialStarted={shouldStartExperience}
+          latestBlogPosts={latestBlogPosts}
           presetLabel={presetLabel}
         />
       </ScopedIntlProvider>

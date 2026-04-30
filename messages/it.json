@@ -49,6 +49,13 @@
         "loginCta": "Accedi o registrati"
       }
     },
+    "finderLauncher": {
+      "eyebrow": "Finder",
+      "label": "Smart Finder",
+      "restart": "Modifica ricerca",
+      "aria": "Apri lo Smart Finder",
+      "restartAria": "Torna allo step Mood dello Smart Finder"
+    },
     "footer": {
       "description": "Scopri profumi, confronta note e prezzi e trova la bottiglia giusta piu velocemente.",
       "navigation": "Navigazione",
@@ -460,8 +467,19 @@
         "submit": "Invia report",
         "sending": "Invio...",
         "consent": "Accetto di ricevere email marketing e contenuti Odora. Posso disiscrivermi in qualsiasi momento.",
-        "success": "Perfetto: ti invieremo il report Odora a questa email.",
+        "success": "Perfetto: ti abbiamo inviato il report Odora con i tuoi match migliori.",
         "error": "Non siamo riusciti a salvare l'email. Riprova tra poco."
+      },
+      "blog": {
+        "eyebrow": "Scopri il blog",
+        "title": "Guide per scegliere meglio",
+        "all": "Tutti"
+      },
+      "noResults": {
+        "eyebrow": "Nessun match trovato",
+        "title": "Prova ad affinare la ricerca.",
+        "description": "Questa combinazione è troppo stretta per il catalogo attuale. Rientra nel primo step, modifica mood, stagione, occasione o budget e rilancia il Finder.",
+        "cta": "Modifica la ricerca"
       },
       "fallbackError": "Il matching live e temporaneamente non disponibile. Ti mostriamo i match di catalogo piu vicini.",
       "preset": {

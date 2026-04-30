@@ -6,6 +6,7 @@ import { usePathname as useActivePathname } from "@/lib/navigation";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { mapLoginAuthError } from "@/components/auth/auth-errors";
+import { FloatingFinderButton } from "@/components/finder/FloatingFinderButton";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { PerfumeDetailNavigationProvider } from "@/components/perfumes/PerfumeDetailNavigation";
@@ -241,6 +242,7 @@ export function LocaleShell({
             <AuthModalOverlay isStandaloneAuthPage={isStandaloneAuthPage} />
           </Suspense>
         )}
+        {hideChrome ? null : <FloatingFinderButton />}
       </div>
     </PerfumeDetailNavigationProvider>
   );

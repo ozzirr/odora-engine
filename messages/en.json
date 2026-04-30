@@ -49,6 +49,13 @@
         "loginCta": "Log in or sign up"
       }
     },
+    "finderLauncher": {
+      "eyebrow": "Finder",
+      "label": "Smart Finder",
+      "restart": "Edit search",
+      "aria": "Open Smart Finder",
+      "restartAria": "Return to the Smart Finder mood step"
+    },
     "footer": {
       "description": "Discover perfumes, compare notes and prices, and find the right bottle faster.",
       "navigation": "Navigation",
@@ -460,8 +467,19 @@
         "submit": "Send report",
         "sending": "Sending...",
         "consent": "I agree to receive Odora marketing emails and content. I can unsubscribe at any time.",
-        "success": "Done: we will send your Odora report to this email.",
+        "success": "Done: we sent your Odora report with your best matches.",
         "error": "We could not save the email. Try again shortly."
+      },
+      "blog": {
+        "eyebrow": "Discover the blog",
+        "title": "Guides to choose better",
+        "all": "All"
+      },
+      "noResults": {
+        "eyebrow": "No matches found",
+        "title": "Try refining the search.",
+        "description": "This combination is too narrow for the current catalog. Go back to the first step, adjust mood, season, occasion, or budget, and run Finder again.",
+        "cta": "Edit search"
       },
       "fallbackError": "Live matching is temporarily unavailable. Showing the closest catalog matches instead.",
       "preset": {

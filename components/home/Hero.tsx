@@ -37,7 +37,7 @@ export function Hero({ footer }: HeroProps) {
 
               <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:justify-center">
                 <Link
-                  href="/finder"
+                  href={{ pathname: "/finder", query: { start: "1" } }}
                   className={buttonStyles({
                     size: "lg",
                     className:

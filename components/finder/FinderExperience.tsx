@@ -6,12 +6,15 @@ import { useLocale, useTranslations } from "next-intl";
 import { CatalogGate } from "@/components/catalog/CatalogGate";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { Button } from "@/components/ui/Button";
+import type { BlogPostCard } from "@/lib/blog";
 import {
   defaultFinderPreferences,
   serializeFinderPreferences,
   type FinderPerfume,
   type FinderPreferences,
 } from "@/lib/finder";
+import { FINDER_LAST_SEARCH_STORAGE_KEY } from "@/lib/finder-storage";
+import { Link } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { cn } from "@/lib/utils";
@@ -32,6 +35,8 @@ type FinderExperienceProps = {
   initialHasMore: boolean;
   initialNextOffset: number;
   initialSubmitted: boolean;
+  initialStarted: boolean;
+  latestBlogPosts: BlogPostCard[];
   presetLabel?: string | null;
 };
 
@@ -50,7 +55,10 @@ type ChoiceOption = {
 };
 
 const FINDER_RESULTS_PAGE_SIZE = 20;
-const FREE_FINDER_PREVIEW_LIMIT = 10;
+const FEATURED_FINDER_RESULTS_LIMIT = 3;
+const FREE_FINDER_OTHER_MATCH_LIMIT = 5;
+const FREE_FINDER_PREVIEW_LIMIT = FEATURED_FINDER_RESULTS_LIMIT + FREE_FINDER_OTHER_MATCH_LIMIT;
+const FINDER_SUGGESTION_LIMIT = FREE_FINDER_PREVIEW_LIMIT;
 const CURATED_MOODS = ["elegant", "fresh", "romantic", "bold", "cozy"];
 const CURATED_SEASONS = ["spring", "summer", "fall", "winter"];
 const CURATED_OCCASIONS = ["daily-wear", "office", "date-night"];
@@ -153,6 +161,55 @@ function FinderSearchLoading({
   );
 }
 
+function FinderBlogTeaser({ posts, locale }: { posts: BlogPostCard[]; locale: string }) {
+  const t = useTranslations("finder.experience.blog");
+
+  if (posts.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="mt-5 rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-5 text-[#fff8ed] sm:p-6">
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+            {t("eyebrow")}
+          </p>
+          <h3 className="mt-2 font-display text-[2rem] leading-none">{t("title")}</h3>
+        </div>
+        <Link
+          href="/blog"
+          locale={locale}
+          className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#ead8bd] transition-colors hover:text-white"
+        >
+          {t("all")} →
+        </Link>
+      </div>
+
+      <div className="mt-5 grid gap-3">
+        {posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={{ pathname: "/blog/[slug]", params: { slug: post.slug } }}
+            locale={locale}
+            className="group rounded-[1.15rem] border border-white/10 bg-[#fffaf1] p-4 text-[#211914] transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            {post.tags[0] ? (
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
+                {post.tags[0]}
+              </p>
+            ) : null}
+            <h4 className="mt-2 font-display text-[1.45rem] leading-tight transition-colors group-hover:text-[#1E4B3B]">
+              {post.title}
+            </h4>
+            <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#675545]">{post.excerpt}</p>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function FinderExperience({
   availableOptions,
   isAuthenticated,
@@ -162,6 +219,8 @@ export function FinderExperience({
   initialHasMore,
   initialNextOffset,
   initialSubmitted,
+  initialStarted,
+  latestBlogPosts,
   presetLabel,
 }: FinderExperienceProps) {
   const t = useTranslations("finder.experience");
@@ -170,14 +229,14 @@ export function FinderExperience({
   const authStatus = useAuthStatus(isAuthenticated);
   const [preferences, setPreferences] = useState<FinderPreferences>(initialPreferences);
   const [results, setResults] = useState<FinderPerfume[]>(
-    isAuthenticated ? initialResults : initialResults.slice(0, FREE_FINDER_PREVIEW_LIMIT),
+    initialResults.slice(0, FINDER_SUGGESTION_LIMIT),
   );
   const [totalMatches, setTotalMatches] = useState(initialTotal);
   const [nextOffset, setNextOffset] = useState(initialNextOffset);
   const [hasMoreResults, setHasMoreResults] = useState(initialHasMore);
   const [submitted, setSubmitted] = useState(initialSubmitted);
   const [activePresetLabel, setActivePresetLabel] = useState<string | null>(presetLabel ?? null);
-  const [isStarted, setIsStarted] = useState(initialSubmitted);
+  const [isStarted, setIsStarted] = useState(initialSubmitted || initialStarted);
   const [activeStep, setActiveStep] = useState(initialSubmitted ? 5 : 0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -414,14 +473,12 @@ export function FinderExperience({
       setResults((current) => {
         const remainingPreviewSlots = Math.max(
           0,
-          FREE_FINDER_PREVIEW_LIMIT - (mode === "append" ? current.length : 0),
+          FINDER_SUGGESTION_LIMIT - (mode === "append" ? current.length : 0),
         );
         const fetchedResults =
-          mode === "append" && !authStatus
+          mode === "append"
             ? payload.results.slice(0, remainingPreviewSlots)
-            : authStatus
-              ? payload.results
-              : payload.results.slice(0, FREE_FINDER_PREVIEW_LIMIT);
+            : payload.results.slice(0, FINDER_SUGGESTION_LIMIT);
 
         if (mode === "replace") {
           return fetchedResults;
@@ -433,26 +490,26 @@ export function FinderExperience({
       });
 
       setTotalMatches(payload.total ?? payload.results.length);
-      setHasMoreResults(payload.hasMore);
+      setHasMoreResults(false);
       setNextOffset(payload.nextOffset);
     },
-    [authStatus],
+    [],
   );
 
   useEffect(() => {
-    if (hasLocalSubmittedSearchRef.current && !initialSubmitted) {
+    if (hasLocalSubmittedSearchRef.current && !initialSubmitted && !initialStarted) {
       return;
     }
 
     hasLocalSubmittedSearchRef.current = initialSubmitted;
     setPreferences(initialPreferences);
-    setResults(authStatus ? initialResults : initialResults.slice(0, FREE_FINDER_PREVIEW_LIMIT));
+    setResults(initialResults.slice(0, FINDER_SUGGESTION_LIMIT));
     setTotalMatches(initialTotal);
     setNextOffset(initialNextOffset);
-    setHasMoreResults(initialHasMore);
+    setHasMoreResults(false);
     setSubmitted(initialSubmitted);
     setActivePresetLabel(presetLabel ?? null);
-    setIsStarted(initialSubmitted);
+    setIsStarted(initialSubmitted || initialStarted);
     setActiveStep(initialSubmitted ? 5 : 0);
     setErrorMessage(null);
     setIsLoading(false);
@@ -464,13 +521,12 @@ export function FinderExperience({
     }
     isFetchingMoreRef.current = false;
   }, [
-    initialHasMore,
     initialNextOffset,
     initialPreferences,
     initialResults,
     initialSubmitted,
     initialTotal,
-    authStatus,
+    initialStarted,
     presetLabel,
   ]);
 
@@ -504,6 +560,30 @@ export function FinderExperience({
     window.history.replaceState(window.history.state, "", nextUrl);
   }, []);
 
+  const persistLastFinderSearch = useCallback((nextPreferences: FinderPreferences) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(
+        FINDER_LAST_SEARCH_STORAGE_KEY,
+        JSON.stringify({
+          gender: nextPreferences.gender,
+          mood: nextPreferences.mood,
+          season: nextPreferences.season,
+          occasion: nextPreferences.occasion,
+          budget: nextPreferences.budget,
+          preferredNote: nextPreferences.preferredNote,
+          arabicOnly: nextPreferences.arabicOnly,
+          nicheOnly: nextPreferences.nicheOnly,
+        }),
+      );
+    } catch {
+      // Local storage can be unavailable in private contexts; the Finder still works without it.
+    }
+  }, []);
+
   const runFinderSearch = useCallback(async () => {
     setIsLoading(true);
     setErrorMessage(null);
@@ -512,6 +592,7 @@ export function FinderExperience({
 
     const preservePreset = presetLabel && currentPreferenceSignature === initialPreferenceSignature ? presetLabel : null;
     const nextParams = buildFinderQueryParams(preferences, preservePreset, true);
+    persistLastFinderSearch(preferences);
 
     try {
       const response = await fetch("/api/finder", {
@@ -547,6 +628,7 @@ export function FinderExperience({
     currentPreferenceSignature,
     initialPreferenceSignature,
     preferences,
+    persistLastFinderSearch,
     presetLabel,
     syncFinderHistory,
     t,
@@ -572,10 +654,33 @@ export function FinderExperience({
     isFetchingMoreRef.current = false;
   };
 
+  const refineSearchFromMood = () => {
+    hasLocalSubmittedSearchRef.current = false;
+    setSubmitted(false);
+    setIsStarted(true);
+    setActiveStep(0);
+    setResults([]);
+    setTotalMatches(0);
+    setNextOffset(0);
+    setHasMoreResults(false);
+    setErrorMessage(null);
+    setIsLoading(false);
+    setIsLoadingMore(false);
+    setLeadStatus("idle");
+    setLeadMessage(null);
+
+    const params = buildFinderQueryParams(preferences, activePresetLabel, false);
+    params.set("start", "1");
+    syncFinderHistory(params);
+    isFetchingMoreRef.current = false;
+  };
+
   const isCatalogLocked = !authStatus && totalMatches > results.length && results.length >= FREE_FINDER_PREVIEW_LIMIT;
-  const canLoadMore = hasMoreResults && !isCatalogLocked;
+  const canLoadMore = hasMoreResults && results.length < FINDER_SUGGESTION_LIMIT;
+  const hasNoResults = submitted && !isLoading && results.length === 0;
+  const showFinderBlog = submitted && !isLoading && results.length > 0;
   const showPresetBanner = Boolean(activePresetLabel) && hasConfiguredPreferences(preferences);
-  const featuredResults = results.slice(0, 3);
+  const featuredResults = results.slice(0, FEATURED_FINDER_RESULTS_LIMIT);
 
   const loadMoreResults = useCallback(async () => {
     if (isFetchingMoreRef.current || !canLoadMore) {
@@ -649,6 +754,10 @@ export function FinderExperience({
           email: leadEmail,
           locale,
           consent: leadConsent,
+          preferences,
+          resultIds: results.slice(0, FREE_FINDER_PREVIEW_LIMIT).map((perfume) => perfume.id),
+          source: "finder_report",
+          totalMatches,
         }),
       });
 
@@ -883,7 +992,39 @@ export function FinderExperience({
           />
         ) : null}
 
-        {submitted && !isLoading ? (
+        {hasNoResults ? (
+          <section className="mt-6 space-y-5">
+            {errorMessage ? (
+              <div className="rounded-[1.2rem] border border-[#dfc19b] bg-[#fff3df] px-4 py-3 text-sm text-[#6b4c27]">
+                {errorMessage}
+              </div>
+            ) : null}
+
+            <div className="relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-white/[0.08] p-6 text-[#fff8ed] sm:p-8 lg:p-10">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(217,183,127,0.2),transparent_30%),radial-gradient(circle_at_80%_24%,rgba(255,250,241,0.1),transparent_28%)]" />
+              <div className="relative max-w-2xl">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                  {t("noResults.eyebrow")}
+                </p>
+                <h2 className="mt-4 font-display text-[2.8rem] leading-[0.92] sm:text-[4rem]">
+                  {t("noResults.title")}
+                </h2>
+                <p className="mt-5 text-sm leading-6 text-[#dac8ad] sm:text-base sm:leading-7">
+                  {t("noResults.description")}
+                </p>
+                <div className="mt-7">
+                  <Button type="button" size="lg" onClick={refineSearchFromMood}>
+                    {t("noResults.cta")}
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <FinderBlogTeaser posts={latestBlogPosts} locale={locale} />
+          </section>
+        ) : null}
+
+        {submitted && !isLoading && !hasNoResults ? (
           <section className="mt-6 space-y-5">
             {errorMessage ? (
               <div className="rounded-[1.2rem] border border-[#dfc19b] bg-[#fff3df] px-4 py-3 text-sm text-[#6b4c27]">
@@ -964,7 +1105,7 @@ export function FinderExperience({
                 </p>
                 <div className="mt-5">
                   <PerfumeGrid
-                    perfumes={results.slice(3)}
+                    perfumes={results.slice(FEATURED_FINDER_RESULTS_LIMIT)}
                     cardVariant="finder"
                     layout="list"
                     animateItems
@@ -974,7 +1115,10 @@ export function FinderExperience({
                 </div>
                 {isLoadingMore ? <p className="mt-4 text-sm text-[#d9c7ab]">{t("finding")}</p> : null}
                 {!isLoading && canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
-                {!isLoading && isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_PREVIEW_LIMIT} /> : null}
+                {!isLoading && isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_OTHER_MATCH_LIMIT} /> : null}
+                {showFinderBlog ? (
+                  <FinderBlogTeaser posts={latestBlogPosts} locale={locale} />
+                ) : null}
               </div>
             </div>
           </section>

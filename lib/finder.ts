@@ -307,7 +307,7 @@ export function matchPerfumesFromPreferences(
       ? (preferredBudget as keyof typeof budgetRank)
       : undefined;
 
-  return perfumes
+  const scoredMatches = perfumes
     .map((perfume) => {
       if (preferences.arabicOnly && !perfume.isArabic) {
         return null;
@@ -382,6 +382,7 @@ export function matchPerfumesFromPreferences(
       };
     })
     .filter((item): item is NonNullable<typeof item> => item !== null)
+    .filter((item) => item.score > 0)
     .sort((a, b) => {
       if (b.score !== a.score) {
         return b.score - a.score;
@@ -392,6 +393,22 @@ export function matchPerfumesFromPreferences(
       }
 
       return b.rating - a.rating;
+    });
+
+  if (scoredMatches.length > 0) {
+    return scoredMatches.map((item) => item.perfume);
+  }
+
+  return [...perfumes]
+    .sort((a, b) => {
+      const left = a.ratingInternal ?? 0;
+      const right = b.ratingInternal ?? 0;
+
+      if (right !== left) {
+        return right - left;
+      }
+
+      return a.name.localeCompare(b.name);
     })
-    .map((item) => item.perfume);
+    .slice(0, 20);
 }
