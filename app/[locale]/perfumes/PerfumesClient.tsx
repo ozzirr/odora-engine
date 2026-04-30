@@ -7,12 +7,16 @@ import { PerfumeFilters } from "@/components/perfumes/PerfumeFilters";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import type { ParsedPerfumeFilters } from "@/lib/filters";
-import { FREE_CATALOG_PREVIEW_LIMIT } from "@/lib/perfumes-catalog";
+import { FREE_CATALOG_PREVIEW_LIMIT, type CatalogFilterOption } from "@/lib/perfumes-catalog";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type PerfumesClientProps = {
   initialPerfumes: PerfumeCardItem[];
   selectedFilters: ParsedPerfumeFilters;
+  filterOptions: {
+    families: CatalogFilterOption[];
+    notes: CatalogFilterOption[];
+  };
   total: number;
   hasMore: boolean;
   isAuthenticated: boolean;
@@ -21,6 +25,7 @@ type PerfumesClientProps = {
 export function PerfumesClient({
   initialPerfumes,
   selectedFilters,
+  filterOptions,
   total,
   hasMore,
   isAuthenticated,
@@ -32,7 +37,7 @@ export function PerfumesClient({
 
   return (
     <div className="mt-8 grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start lg:gap-8">
-      <PerfumeFilters selectedFilters={selectedFilters} />
+      <PerfumeFilters selectedFilters={selectedFilters} filterOptions={filterOptions} />
 
       <section className="space-y-4 lg:min-w-0 lg:pb-8">
         <p className="text-sm text-[#615140]">

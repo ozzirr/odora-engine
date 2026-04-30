@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 
 import { FinderExperience } from "@/components/finder/FinderExperience";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
-import { Container } from "@/components/layout/Container";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { logCatalogQueryError } from "@/lib/catalog";
@@ -228,7 +227,7 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
       };
   const finderPath = getLocalizedPathname(resolvedLocale, "/finder");
   return (
-    <Container className="pt-4 sm:pt-6">
+    <div className="bg-[#211914]">
       {!shouldLoadResults ? (
         <StructuredData
           data={[
@@ -262,6 +261,6 @@ export default async function FinderPage({ params, searchParams }: FinderPagePro
           presetLabel={presetLabel}
         />
       </ScopedIntlProvider>
-    </Container>
+    </div>
   );
 }

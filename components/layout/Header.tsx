@@ -94,7 +94,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const isAuthenticated = useAuthStatus(initialIsAuthenticated, { refreshOnChange: true });
   const navItems = [
     { href: "/" as const, label: t("nav.home") },
-    { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/brands" as const, label: t("nav.brands") },
     { href: "/blog" as const, label: t("nav.blog") },
@@ -287,7 +286,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               {accountLabel}
             </Link>
           )}
-          <Link href="/perfumes" className={buttonStyles({ size: "sm" })}>
+          <Link href="/finder" className={buttonStyles({ size: "sm" })}>
             {t("cta")}
           </Link>
         </nav>
@@ -487,7 +486,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               )}
 
               <Link
-                href="/perfumes"
+                href="/finder"
                 onClick={() => setMenuOpen(false)}
                 className={buttonStyles({ size: "md", className: "w-full justify-center" })}
               >

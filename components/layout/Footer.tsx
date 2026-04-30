@@ -11,7 +11,6 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const navLinks = [
     { href: "/" as const, label: t("nav.home") },
-    { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/brands" as const, label: t("nav.brands") },
     { href: "/blog" as const, label: t("nav.blog") },

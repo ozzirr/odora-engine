@@ -179,6 +179,53 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   }
 }
 
+@keyframes finder-loading-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px) scale(1.035);
+  }
+}
+
+@keyframes finder-loading-orbit {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes finder-loading-ring {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: scale(0.94);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes finder-loading-step {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: translateX(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(8px);
+  }
+}
+
 @keyframes trusted-stores-marquee {
   0% {
     transform: translateX(0);
@@ -230,5 +277,9 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .finder-loading-animate {
+    animation: none !important;
   }
 }

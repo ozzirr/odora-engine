@@ -17,15 +17,15 @@
       "nav": {
         "home": "Home",
         "perfumes": "Perfumes",
-        "finder": "Finder",
-        "brands": "Brands",
+        "finder": "Smart Finder",
+        "brands": "All brands",
         "blog": "Blog"
       },
       "account": {
         "profile": "Your profile",
         "login": "Log in"
       },
-      "cta": "Explore perfumes",
+      "cta": "Smart Finder",
       "menu": "Menu",
       "close": "Close",
       "eyebrow": "Menu",
@@ -38,7 +38,7 @@
         "onSale": "On sale"
       },
       "search": {
-        "label": "Search",
+        "label": "Search catalog",
         "eyebrow": "Quick search",
         "title": "Find a fragrance",
         "placeholder": "Name, brand, fragrance family...",
@@ -59,8 +59,8 @@
       "nav": {
         "home": "Home",
         "perfumes": "Perfumes",
-        "finder": "Finder",
-        "brands": "Brands",
+        "finder": "Smart Finder",
+        "brands": "All brands",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -347,6 +347,16 @@
       "resultsEyebrow": "Personal selection",
       "resultsSubtitle": "You see the best matches immediately. The full report adds sensory analysis, alternatives, and wear guidance.",
       "allResultsEyebrow": "More compatible matches",
+      "searching": {
+        "eyebrow": "Analysis in progress",
+        "title": "We are building your selection.",
+        "description": "Odora is matching mood, season, occasion, and budget against the catalog to show only the most coherent perfumes.",
+        "items": {
+          "profile": "Reading the sensory profile",
+          "catalog": "Comparing available fragrances",
+          "report": "Preparing the personal report"
+        }
+      },
       "steps": {
         "mood": {
           "eyebrow": "Mood",
@@ -534,10 +544,10 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalog",
-      "title": "Perfume catalog by notes, fragrance family, and price",
-      "subtitle": "Explore the Odora catalog to compare perfumes by fragrance family, key notes, price range, and style.",
-      "bodyOne": "Filter by fragrance family, price, notes, and sort order to quickly find the perfumes you're looking for.",
-      "bodyTwo": "If you know what you want, use the filters. If you need direction, start with the Finder or the rankings.",
+      "title": "Odora perfume archive",
+      "subtitle": "A technical catalog view for searching directly by family, budget, gender, or main note.",
+      "bodyOne": "For a more personal guided selection, use Finder. This page keeps catalog search essential without overly strict filters.",
+      "bodyTwo": "",
       "primaryCta": "Use Finder",
       "secondaryCta": "Open rankings"
     },
@@ -554,7 +564,7 @@
         "heart": "Heart note",
         "base": "Base note",
         "gender": "Gender",
-        "note": "Any note"
+        "note": "Preferred note"
       },
       "sortOptions": {
         "rating": "Top rated",

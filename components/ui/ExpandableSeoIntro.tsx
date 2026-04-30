@@ -39,7 +39,8 @@ export function ExpandableSeoIntro({
   const t = useTranslations("common.actions");
   const [expanded, setExpanded] = useState(false);
   const contentId = useId();
-  const hasBody = body.some((paragraph) => paragraph.trim().length > 0);
+  const visibleBody = body.filter((paragraph) => paragraph.trim().length > 0);
+  const hasBody = visibleBody.length > 0;
 
   return (
     <div>
@@ -91,7 +92,7 @@ export function ExpandableSeoIntro({
           )}
         >
           <div className="space-y-3 text-sm leading-7 text-[#5f5041] sm:text-base">
-            {body.map((paragraph) => (
+            {visibleBody.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>

@@ -10,6 +10,8 @@ export const genderOptions = [
 
 export const familyOptions = [
   { value: "woody" },
+  { value: "amber" },
+  { value: "floral" },
   { value: "fresh" },
   { value: "oriental" },
   { value: "gourmand" },
@@ -46,7 +48,7 @@ export const sortOptions = [
 ] as const;
 
 export type GenderParam = (typeof genderOptions)[number]["value"];
-export type FamilyParam = (typeof familyOptions)[number]["value"];
+export type FamilyParam = string;
 export type PriceParam = (typeof priceOptions)[number]["value"];
 export type SortParam = (typeof sortOptions)[number]["value"];
 
@@ -83,8 +85,10 @@ const priceMap: Record<PriceParam, PriceRange> = {
 
 const familyKeywords: Record<FamilyParam, string[]> = {
   woody: ["woody", "wood"],
+  amber: ["amber", "ambrato"],
+  floral: ["floral", "flower"],
   fresh: ["fresh", "green"],
-  oriental: ["oriental", "amber", "oud"],
+  oriental: ["oriental"],
   gourmand: ["gourmand", "vanilla"],
   citrus: ["citrus"],
   aromatic: ["aromatic"],
@@ -127,6 +131,26 @@ function normalizeNoteInput(input: string | undefined) {
     .replace(/-+/g, "-");
 
   return normalized.length > 0 ? normalized : undefined;
+}
+
+function normalizeFamilyInput(input: string | undefined) {
+  if (!input) {
+    return undefined;
+  }
+
+  const normalized = input
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\s/-]/g, "")
+    .replace(/[\/\s]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return normalized.length > 0 ? normalized : undefined;
+}
+
+function familyParamToSearchValue(input: string) {
+  return input.replace(/-/g, " ");
 }
 
 function resolveNoteSlugs(noteValue: string) {
@@ -181,9 +205,7 @@ export function buildPerfumeQuery(searchParams: SearchParamInput) {
     gender: genderOptions.some((option) => option.value === genderParam)
       ? (genderParam as GenderParam)
       : undefined,
-    family: familyOptions.some((option) => option.value === familyParam)
-      ? (familyParam as FamilyParam)
-      : undefined,
+    family: normalizeFamilyInput(familyParam),
     price: priceOptions.some((option) => option.value === priceParam)
       ? (priceParam as PriceParam)
       : undefined,
@@ -209,10 +231,14 @@ export function buildPerfumeQuery(searchParams: SearchParamInput) {
   }
 
   if (parsed.family) {
+    const familySearchValue = familyParamToSearchValue(parsed.family);
+    const keywords = familyKeywords[parsed.family] ?? [familySearchValue];
+
     andFilters.push({
-      OR: familyKeywords[parsed.family].map((keyword) => ({
+      OR: keywords.map((keyword) => ({
         fragranceFamily: {
           contains: keyword,
+          mode: "insensitive",
         },
       })),
     });

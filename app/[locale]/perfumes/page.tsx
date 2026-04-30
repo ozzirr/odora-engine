@@ -11,7 +11,7 @@ import { buildPerfumeQuery, type ParsedPerfumeFilters } from "@/lib/filters";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import { Link } from "@/lib/navigation";
-import { getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
+import { getCatalogFilterOptions, getPerfumesPage, PERFUMES_PAGE_SIZE } from "@/lib/perfumes-catalog";
 import {
   buildBreadcrumbSchema,
   buildCollectionPageSchema,
@@ -115,16 +115,23 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
     redirect(getLocalizedPathname(resolvedLocale, "/perfumes", undefined, flatQuery));
   }
 
-  const { perfumes, selectedFilters, total, hasMore } = await getPerfumesPage(resolvedSearchParams, {
-    offset: (currentPage - 1) * PERFUMES_PAGE_SIZE,
-    limit: PERFUMES_PAGE_SIZE,
-    accessMode: isAuthenticated ? "full" : "preview",
-  }).catch(() => ({
-    perfumes: [],
-    selectedFilters: buildPerfumeQuery(resolvedSearchParams).parsed,
-    total: 0,
-    hasMore: false,
-  }));
+  const [perfumesPage, filterOptions] = await Promise.all([
+    getPerfumesPage(resolvedSearchParams, {
+      offset: (currentPage - 1) * PERFUMES_PAGE_SIZE,
+      limit: PERFUMES_PAGE_SIZE,
+      accessMode: isAuthenticated ? "full" : "preview",
+    }).catch(() => ({
+      perfumes: [],
+      selectedFilters: buildPerfumeQuery(resolvedSearchParams).parsed,
+      total: 0,
+      hasMore: false,
+      relaxedFromZero: false,
+      offset: (currentPage - 1) * PERFUMES_PAGE_SIZE,
+      limit: PERFUMES_PAGE_SIZE,
+    })),
+    getCatalogFilterOptions(),
+  ]);
+  const { perfumes, selectedFilters, total, hasMore } = perfumesPage;
   const hasFilters = hasActiveCatalogFilters(selectedFilters);
   const totalPages = Math.max(1, Math.ceil(total / PERFUMES_PAGE_SIZE));
   const visiblePages = buildPageList(currentPage, totalPages);
@@ -181,6 +188,7 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         <PerfumesClient
           initialPerfumes={perfumes}
           selectedFilters={selectedFilters}
+          filterOptions={filterOptions}
           total={total}
           hasMore={hasMore}
           isAuthenticated={isAuthenticated}

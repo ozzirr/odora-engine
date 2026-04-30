@@ -90,25 +90,61 @@ function hasConfiguredPreferences(preferences: FinderPreferences) {
   );
 }
 
-function FinderResultsSkeleton({ label }: { label: string }) {
+function FinderSearchLoading({
+  eyebrow,
+  title,
+  description,
+  items,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: string[];
+}) {
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
-      {Array.from({ length: 3 }).map((_, index) => (
-        <div
-          key={`finder-results-skeleton-${index}`}
-          className="min-h-[23rem] overflow-hidden rounded-[1.5rem] border border-white/35 bg-white/45 shadow-[0_24px_70px_-48px_rgba(20,17,14,0.45)]"
-        >
-          <div className="h-48 animate-pulse bg-[#e8dac6]" />
-          <div className="space-y-3 p-5">
-            <div className="h-3 w-24 animate-pulse rounded-full bg-[#d8c8b5]" />
-            <div className="h-8 w-3/4 animate-pulse rounded-full bg-[#d5c3ad]" />
-            <div className="h-4 w-full animate-pulse rounded-full bg-[#e0d1bf]" />
-            <div className="h-4 w-4/5 animate-pulse rounded-full bg-[#e0d1bf]" />
-            {index === 0 ? <p className="pt-2 text-sm text-[#6f5b47]">{label}</p> : null}
+    <section className="grid min-h-[calc(100svh-10.5rem)] items-center py-6">
+      <div className="relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-white/[0.08] p-6 text-[#fff8ed] sm:p-8 lg:p-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(217,183,127,0.24),transparent_30%),radial-gradient(circle_at_80%_30%,rgba(255,250,241,0.12),transparent_26%)]" />
+        <div className="relative grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_18rem] lg:items-center">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+              {eyebrow}
+            </p>
+            <h2 className="mt-4 max-w-2xl font-display text-[2.6rem] leading-[0.95] sm:text-[4rem]">
+              {title}
+            </h2>
+            <p className="mt-5 max-w-xl text-sm leading-6 text-[#dac8ad] sm:text-base sm:leading-7">
+              {description}
+            </p>
+
+            <div className="mt-7 grid gap-3">
+              {items.map((item, index) => (
+                <div key={item} className="flex items-center gap-3 text-sm text-[#ead8bd]">
+                  <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#d9b77f]/45 bg-[#d9b77f]/15">
+                    <span
+                      className={cn(
+                        "h-2 w-2 rounded-full bg-[#d9b77f]",
+                        index === 0 ? "animate-pulse" : index === 1 ? "animate-[pulse_1.4s_ease-in-out_infinite]" : "animate-[pulse_1.8s_ease-in-out_infinite]",
+                      )}
+                    />
+                  </span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative mx-auto h-64 w-64 max-w-full">
+            <div className="absolute inset-0 rounded-full border border-[#d9b77f]/25" />
+            <div className="absolute inset-8 rounded-full border border-white/15" />
+            <div className="absolute inset-16 rounded-full bg-[#fffaf1] shadow-[0_30px_90px_-45px_rgba(0,0,0,0.9)]" />
+            <div className="absolute left-1/2 top-1/2 h-28 w-16 -translate-x-1/2 -translate-y-1/2 rounded-[45%_45%_38%_38%] border border-[#d8cab7] bg-gradient-to-b from-white via-[#f7efe3] to-[#d9c6ad] shadow-[0_18px_60px_-35px_rgba(0,0,0,0.75)]" />
+            <div className="absolute left-1/2 top-[4.2rem] h-5 w-10 -translate-x-1/2 rounded-t-lg bg-[#d8cab7]" />
+            <div className="absolute inset-0 animate-spin rounded-full border-t border-[#d9b77f]" />
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 }
 
@@ -148,6 +184,7 @@ export function FinderExperience({
   const [leadMessage, setLeadMessage] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const isFetchingMoreRef = useRef(false);
+  const hasLocalSubmittedSearchRef = useRef(initialSubmitted);
 
   const moodOptions = useMemo(
     () => prioritizeOptions(availableOptions.moods, CURATED_MOODS, preferences.mood),
@@ -398,6 +435,11 @@ export function FinderExperience({
   );
 
   useEffect(() => {
+    if (hasLocalSubmittedSearchRef.current && !initialSubmitted) {
+      return;
+    }
+
+    hasLocalSubmittedSearchRef.current = initialSubmitted;
     setPreferences(initialPreferences);
     setResults(authStatus ? initialResults : initialResults.slice(0, FREE_FINDER_PREVIEW_LIMIT));
     setTotalMatches(initialTotal);
@@ -460,6 +502,7 @@ export function FinderExperience({
   const runFinderSearch = useCallback(async () => {
     setIsLoading(true);
     setErrorMessage(null);
+    hasLocalSubmittedSearchRef.current = true;
     setSubmitted(true);
 
     const preservePreset = presetLabel && currentPreferenceSignature === initialPreferenceSignature ? presetLabel : null;
@@ -505,6 +548,7 @@ export function FinderExperience({
   ]);
 
   const resetForm = () => {
+    hasLocalSubmittedSearchRef.current = false;
     setPreferences(defaultFinderPreferences);
     setResults([]);
     setTotalMatches(0);
@@ -641,11 +685,11 @@ export function FinderExperience({
   };
 
   return (
-    <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#211914] text-[#fff8ed] shadow-[0_40px_120px_-70px_rgba(22,14,8,0.85)] [overflow-anchor:none] sm:rounded-[2.4rem]">
+    <div className="relative isolate overflow-hidden bg-[#211914] text-[#fff8ed] [overflow-anchor:none]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(238,205,157,0.32),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(111,139,111,0.24),transparent_26%),linear-gradient(135deg,#1b1511_0%,#33241c_48%,#14120f_100%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-white/35" />
 
-      <div className="relative min-h-[calc(100svh-7.5rem)] p-4 sm:p-6 lg:p-8">
+      <div className="relative mx-auto min-h-[calc(100svh-4.5rem)] w-full max-w-6xl p-4 sm:p-6 lg:p-8">
         {!isStarted && !submitted ? (
           <section className="grid min-h-[calc(100svh-10.5rem)] items-center gap-8 lg:grid-cols-[minmax(0,1fr)_26rem]">
             <div className="max-w-3xl">
@@ -821,7 +865,20 @@ export function FinderExperience({
           </section>
         ) : null}
 
-        {submitted ? (
+        {submitted && isLoading ? (
+          <FinderSearchLoading
+            eyebrow={t("searching.eyebrow")}
+            title={t("searching.title")}
+            description={t("searching.description")}
+            items={[
+              t("searching.items.profile"),
+              t("searching.items.catalog"),
+              t("searching.items.report"),
+            ]}
+          />
+        ) : null}
+
+        {submitted && !isLoading ? (
           <section className="mt-6 space-y-5">
             {errorMessage ? (
               <div className="rounded-[1.2rem] border border-[#dfc19b] bg-[#fff3df] px-4 py-3 text-sm text-[#6b4c27]">
@@ -843,17 +900,13 @@ export function FinderExperience({
               </div>
 
               <div className="mt-5">
-                {isLoading ? (
-                  <FinderResultsSkeleton label={t("finding")} />
-                ) : (
-                  <PerfumeGrid
-                    perfumes={featuredResults.length ? featuredResults : results}
-                    cardVariant="finder"
-                    layout="list"
-                    animateItems
-                    itemAnimationKey={resultAnimationKey}
-                  />
-                )}
+                <PerfumeGrid
+                  perfumes={featuredResults.length ? featuredResults : results}
+                  cardVariant="finder"
+                  layout="list"
+                  animateItems
+                  itemAnimationKey={resultAnimationKey}
+                />
               </div>
             </div>
 

@@ -17,15 +17,15 @@
       "nav": {
         "home": "Home",
         "perfumes": "Profumi",
-        "finder": "Finder",
-        "brands": "Brand",
+        "finder": "Smart Finder",
+        "brands": "Tutti i brand",
         "blog": "Blog"
       },
       "account": {
         "profile": "Il tuo profilo",
         "login": "Accedi"
       },
-      "cta": "Esplora profumi",
+      "cta": "Smart Finder",
       "menu": "Menu",
       "close": "Chiudi",
       "eyebrow": "Menu",
@@ -38,7 +38,7 @@
         "onSale": "In offerta"
       },
       "search": {
-        "label": "Cerca",
+        "label": "Cerca nel catalogo",
         "eyebrow": "Ricerca rapida",
         "title": "Cerca un profumo",
         "placeholder": "Nome, brand, famiglia olfattiva...",
@@ -59,8 +59,8 @@
       "nav": {
         "home": "Home",
         "perfumes": "Profumi",
-        "finder": "Finder",
-        "brands": "Brand",
+        "finder": "Smart Finder",
+        "brands": "Tutti i brand",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -347,6 +347,16 @@
       "resultsEyebrow": "Selezione personale",
       "resultsSubtitle": "Ti mostriamo subito i match migliori. Il report completo aggiunge analisi sensoriale, alternative e consigli d'uso.",
       "allResultsEyebrow": "Altri match compatibili",
+      "searching": {
+        "eyebrow": "Analisi in corso",
+        "title": "Stiamo creando la tua selezione.",
+        "description": "Incrociamo mood, stagione, occasione e budget con il catalogo Odora per mostrarti solo i profumi piu coerenti.",
+        "items": {
+          "profile": "Leggiamo il profilo sensoriale",
+          "catalog": "Confrontiamo le fragranze disponibili",
+          "report": "Prepariamo il report personale"
+        }
+      },
       "steps": {
         "mood": {
           "eyebrow": "Mood",
@@ -534,10 +544,10 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalogo",
-      "title": "Catalogo profumi per note, famiglia olfattiva e prezzo",
-      "subtitle": "Esplora il catalogo Odora per confrontare profumi in base a famiglia olfattiva, note principali, fascia prezzo e stile.",
-      "bodyOne": "Filtra per famiglia olfattiva, prezzo, note e ordinamento per trovare rapidamente i profumi che cerchi.",
-      "bodyTwo": "Se sai cosa cerchi, usa i filtri. Se vuoi esplorare, parti dal Finder o dalle classifiche.",
+      "title": "Archivio profumi Odora",
+      "subtitle": "Una vista tecnica del catalogo per chi vuole cercare direttamente per famiglia, budget, genere o nota principale.",
+      "bodyOne": "Per una selezione guidata e piu personale, usa il Finder. Qui manteniamo una ricerca essenziale per consultare il catalogo senza filtri troppo rigidi.",
+      "bodyTwo": "",
       "primaryCta": "Usa il finder",
       "secondaryCta": "Apri le classifiche"
     },
@@ -554,7 +564,7 @@
         "heart": "Nota di cuore",
         "base": "Nota di fondo",
         "gender": "Genere",
-        "note": "Qualsiasi nota"
+        "note": "Nota preferita"
       },
       "sortOptions": {
         "rating": "Piu votati",
