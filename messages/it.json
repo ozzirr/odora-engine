@@ -163,9 +163,9 @@
     "hero": {
       "eyebrow": "Scoperta fragranze smart",
       "title": "Trova la fragranza che ti rappresenta.",
-      "subtitle": "Esplora il catalogo, scopri le note e confronta i prezzi migliori dei tuoi profumi preferiti.",
+      "subtitle": "Rispondi a poche scelte sensoriali: Odora legge mood, stagione, occasione e budget per suggerirti profumi coerenti con il tuo stile.",
       "valueProps": {
-        "compare": "Confronta i prezzi tra retailer affidabili",
+        "compare": "Smart Finder guidato da mood e occasioni",
         "explore": "Esplora profumi per note, mood e stile",
         "choose": "Scegli con piu sicurezza"
       },
@@ -245,25 +245,25 @@
     "howItWorks": {
       "eyebrow": "Come funziona Odora",
       "title": "Un modo piu semplice per scegliere bene",
-      "subtitle": "Passa dall'ispirazione al confronto senza saltare tra schede e pagine retailer.",
+      "subtitle": "Passa dall'ispirazione a una selezione personale, senza perderti in filtri tecnici o cataloghi infiniti.",
       "steps": {
         "discover": {
-          "title": "Scopri",
-          "description": "Parti da note, stile, mood o occasione."
+          "title": "Racconta",
+          "description": "Parti da mood, stagione, occasione, nota preferita e budget."
         },
         "compare": {
-          "title": "Confronta",
-          "description": "Confronta negozi, spedizione e prezzo totale a colpo d'occhio."
+          "title": "Affina",
+          "description": "Odora restringe il catalogo e mostra solo suggerimenti coerenti."
         },
         "choose": {
-          "title": "Scegli",
-          "description": "Vai dal retailer con un'idea piu chiara di cosa ti sta bene e quanto costa."
+          "title": "Salva",
+          "description": "Ricevi il report, salva i profumi e riparti quando vuoi dal Finder."
         }
       }
     },
-    "trustedStores": {
-      "eyebrow": "Negozi affidabili",
-      "title": "Confronta i prezzi dei migliori negozi in un unico posto"
+    "brandStrip": {
+      "eyebrow": "Brand nel catalogo",
+      "title": "Case iconiche, designer e profumeria di nicchia"
     },
     "discoveryCollections": {
       "eyebrow": "Collezioni",
@@ -284,16 +284,16 @@
     },
     "valueStrip": {
       "curated": "Fragranze curate",
-      "stores": "Negozi affidabili",
+      "stores": "Brand iconici",
       "guides": "Guide editoriali",
-      "compare": "Confronto facile"
+      "compare": "Finder smart"
     },
     "finalCta": {
       "eyebrow": "Inizia la scoperta",
       "title": "Non sai da dove partire?",
       "subtitle": "Prova il Finder: ti guida verso la fragranza giusta in base al tuo stile, umore e occasione.",
       "primaryCta": "Apri il Finder",
-      "secondaryCta": "Sfoglia il catalogo"
+      "secondaryCta": "Leggi il blog"
     }
   },
   "notFound": {

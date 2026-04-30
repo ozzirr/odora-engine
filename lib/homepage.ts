@@ -153,7 +153,7 @@ export type HomepageData = {
   trending: HomePerfumeRecord[];
   featured: HomePerfumeRecord[];
   collections: HomeCollectionCard[];
-  trustedStores: string[];
+  featuredBrands: string[];
 };
 
 function getEmptyHomepageData(): HomepageData {
@@ -163,7 +163,7 @@ function getEmptyHomepageData(): HomepageData {
     trending: [],
     featured: [],
     collections: [],
-    trustedStores: [],
+    featuredBrands: [],
   };
 }
 
@@ -424,7 +424,7 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
   }
 
   try {
-    const [heroCandidates, trendingCandidates, featuredCandidates, fallbackCandidates, collections] =
+    const [heroCandidates, trendingCandidates, featuredCandidates, fallbackCandidates, collections, featuredBrands] =
       await runPrismaOperations([
         () => getHomepageSectionPerfumes(HomepageSection.HERO, 4, catalogMode),
         () => getHomepageSectionPerfumes(HomepageSection.TRENDING, 8, catalogMode),
@@ -439,6 +439,7 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
             orderBy: [{ homepagePriority: "asc" }, { title: "asc" }],
             take: 6,
           }),
+        () => getFeaturedBrandNames(20, catalogMode),
       ]);
 
     const heroSpotlights = toUniquePerfumes([
@@ -467,18 +468,13 @@ async function getHomepageDataUncached(catalogMode: CatalogMode): Promise<Homepa
       excludedFeaturedIds,
     );
     const featured = diversifyByFragranceFamily(featuredCandidatesWithoutOverlap, 6, 2);
-    const trustedStores = selectTrustedStores(
-      toUniquePerfumes([...heroSpotlights, ...trending, ...featured]),
-      4,
-    );
-
     return {
       hero,
       heroSpotlights,
       trending,
       featured,
       collections: collections.map(toCollectionCard),
-      trustedStores,
+      featuredBrands,
     };
   } catch (error) {
     logCatalogQueryError("home:homepage", error);
@@ -572,10 +568,58 @@ async function getPopularPerfumeSlugsUncached(
   }
 }
 
-const FEATURED_STORES = ["Notino", "Douglas", "Sephora", "Amazon"];
+const FALLBACK_FEATURED_BRANDS = [
+  "Dior",
+  "Chanel",
+  "Tom Ford",
+  "Yves Saint Laurent",
+  "Giorgio Armani",
+  "Maison Francis Kurkdjian",
+  "Xerjoff",
+  "Creed",
+  "Kilian Paris",
+  "Initio",
+  "Parfums de Marly",
+  "Louis Vuitton",
+  "Prada",
+  "Versace",
+  "Givenchy",
+  "Gucci",
+  "Hermes",
+  "Byredo",
+  "Le Labo",
+  "Nasomatto",
+];
 
-export function selectTrustedStores(_perfumes: HomePerfumeRecord[], count = 4) {
-  return FEATURED_STORES.slice(0, count);
+async function getFeaturedBrandNames(limit: number, catalogMode: CatalogMode) {
+  const visibilityWhere = getCatalogVisibilityWhereForMode(catalogMode);
+
+  const brands = await prisma.brand.findMany({
+    where: visibilityWhere
+      ? {
+          perfumes: {
+            some: visibilityWhere,
+          },
+        }
+      : undefined,
+    select: {
+      name: true,
+      _count: {
+        select: {
+          perfumes: true,
+        },
+      },
+    },
+    orderBy: [{ perfumes: { _count: "desc" } }, { name: "asc" }],
+    take: limit,
+  });
+
+  const names = brands
+    .map((brand) => brand.name.trim())
+    .filter(Boolean)
+    .filter((name, index, array) => array.indexOf(name) === index);
+
+  return names.length > 0 ? names : FALLBACK_FEATURED_BRANDS.slice(0, limit);
 }
 
 export function toHomeSpotlight(

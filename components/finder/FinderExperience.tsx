@@ -799,7 +799,7 @@ export function FinderExperience({
   };
 
   return (
-    <div className="relative isolate overflow-hidden bg-[#211914] text-[#fff8ed] [overflow-anchor:none]">
+    <div className="relative isolate overflow-hidden bg-[#211914] pb-36 text-[#fff8ed] [overflow-anchor:none]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(238,205,157,0.32),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(111,139,111,0.24),transparent_26%),linear-gradient(135deg,#1b1511_0%,#33241c_48%,#14120f_100%)]" />
       <div className="absolute inset-x-0 top-0 h-px bg-white/35" />
 
@@ -1032,7 +1032,7 @@ export function FinderExperience({
               </div>
             ) : null}
 
-            <div className="rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-4 text-[#fff8ed] sm:p-5">
+            <div className="rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-4 text-[#fff8ed] shadow-[0_24px_70px_-46px_rgba(0,0,0,0.72)] sm:p-5 lg:p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
@@ -1056,10 +1056,10 @@ export function FinderExperience({
               </div>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+            <div className="grid items-start gap-5 lg:grid-cols-[minmax(22rem,0.9fr)_minmax(0,1.1fr)] xl:grid-cols-[minmax(24rem,0.82fr)_minmax(0,1.18fr)]">
               <form
                 onSubmit={handleLeadSubmit}
-                className="rounded-[1.6rem] border border-[#d9b77f]/30 bg-[#fffaf1] p-5 text-[#211914] sm:p-6"
+                className="self-start rounded-[1.6rem] border border-[#d9b77f]/30 bg-[#fffaf1] p-5 text-[#211914] shadow-[0_24px_70px_-48px_rgba(0,0,0,0.5)] sm:p-6 lg:sticky lg:top-28"
               >
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                   {t("lead.eyebrow")}
@@ -1099,11 +1099,16 @@ export function FinderExperience({
                 ) : null}
               </form>
 
-              <div className="rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-5 text-[#fff8ed] sm:p-6">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
-                  {t("allResultsEyebrow")}
-                </p>
-                <div className="mt-5">
+              <div className="self-start rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-4 text-[#fff8ed] shadow-[0_24px_70px_-46px_rgba(0,0,0,0.72)] sm:p-5 lg:p-6">
+                <div className="flex items-end justify-between gap-4">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                    {t("allResultsEyebrow")}
+                  </p>
+                  <p className="hidden text-xs text-[#cdbba2] lg:block">
+                    {Math.max(0, results.length - FEATURED_FINDER_RESULTS_LIMIT)} match
+                  </p>
+                </div>
+                <div className="mt-4">
                   <PerfumeGrid
                     perfumes={results.slice(FEATURED_FINDER_RESULTS_LIMIT)}
                     cardVariant="finder"
@@ -1124,6 +1129,7 @@ export function FinderExperience({
           </section>
         ) : null}
       </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[linear-gradient(180deg,rgba(33,25,20,0)_0%,rgba(73,62,50,0.54)_48%,#fbf8f2_100%)]" />
     </div>
   );
 }

@@ -15,9 +15,8 @@ export default function OpenGraphImage() {
           display: "flex",
           height: "100%",
           width: "100%",
-          background:
-            "radial-gradient(circle at top left, #fff4e5 0%, #f5e3cd 34%, #d8b992 66%, #8f6540 100%)",
-          color: "#24180f",
+          background: "linear-gradient(135deg, #17110d 0%, #2d2119 48%, #0f0d0b 100%)",
+          color: "#fff8ed",
           fontFamily: "ui-serif, Georgia, Cambria, 'Times New Roman', serif",
           position: "relative",
           overflow: "hidden",
@@ -31,20 +30,28 @@ export default function OpenGraphImage() {
             width: 420,
             height: 420,
             borderRadius: 9999,
-            background: "rgba(255, 255, 255, 0.22)",
-            filter: "blur(18px)",
+            background: "rgba(217, 183, 127, 0.2)",
+            filter: "blur(26px)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: -180,
-            left: -60,
-            width: 520,
-            height: 520,
+            bottom: -220,
+            left: -100,
+            width: 620,
+            height: 620,
             borderRadius: 9999,
-            background: "rgba(114, 70, 33, 0.18)",
-            filter: "blur(22px)",
+            background: "rgba(255, 248, 237, 0.12)",
+            filter: "blur(34px)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 38,
+            borderRadius: 42,
+            border: "1px solid rgba(255, 248, 237, 0.24)",
           }}
         />
 
@@ -62,24 +69,25 @@ export default function OpenGraphImage() {
               display: "flex",
               alignItems: "center",
               gap: 18,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 72,
-                height: 72,
-                borderRadius: 24,
-                background: "rgba(255, 249, 242, 0.75)",
-                border: "1px solid rgba(97, 63, 35, 0.18)",
-                fontSize: 30,
-                fontWeight: 700,
-                letterSpacing: "-0.04em",
               }}
             >
-              O
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 72,
+                  height: 72,
+                  borderRadius: 9999,
+                  background: "#fff8ed",
+                  color: "#1E4B3B",
+                  border: "1px solid rgba(217, 183, 127, 0.42)",
+                  fontSize: 32,
+                  fontWeight: 700,
+                  letterSpacing: "-0.04em",
+                }}
+              >
+                O
             </div>
             <div
               style={{
@@ -94,20 +102,20 @@ export default function OpenGraphImage() {
                   fontSize: 20,
                   letterSpacing: "0.24em",
                   textTransform: "uppercase",
-                  color: "#6f5339",
+                  color: "#d9b77f",
                 }}
               >
-                Perfume discovery
+                Smart fragrance finder
               </div>
               <div
                 style={{
                   display: "flex",
-                  fontSize: 28,
+                  fontSize: 36,
                   fontWeight: 700,
-                  letterSpacing: "-0.05em",
+                  letterSpacing: "0.08em",
                 }}
               >
-                Odora
+                ODORA
               </div>
             </div>
           </div>
@@ -123,24 +131,24 @@ export default function OpenGraphImage() {
             <div
               style={{
                 display: "flex",
-                fontSize: 78,
+                fontSize: 82,
                 lineHeight: 1,
                 fontWeight: 700,
-                letterSpacing: "-0.06em",
+                letterSpacing: "-0.045em",
               }}
             >
-              Discover perfumes with a better preview.
+              Trova la tua firma olfattiva.
             </div>
             <div
               style={{
                 display: "flex",
                 fontSize: 30,
                 lineHeight: 1.35,
-                color: "#4c3828",
+                color: "#ead8bd",
                 maxWidth: 840,
               }}
             >
-              Compare notes, price, mood, and standout picks in one refined fragrance experience.
+              Rispondi a poche scelte sensoriali: Odora legge mood, stagione, occasione e budget per creare una selezione personale.
             </div>
           </div>
 
@@ -159,7 +167,7 @@ export default function OpenGraphImage() {
                 flexWrap: "wrap",
               }}
             >
-              {["Finder", "Catalog", "Price comparison"].map((label) => (
+              {["Mood", "Stagione", "Occasione", "Budget"].map((label) => (
                 <div
                   key={label}
                   style={{
@@ -167,10 +175,10 @@ export default function OpenGraphImage() {
                     alignItems: "center",
                     padding: "12px 18px",
                     borderRadius: 9999,
-                    background: "rgba(255, 248, 240, 0.72)",
-                    border: "1px solid rgba(97, 63, 35, 0.14)",
+                    background: "rgba(255, 248, 237, 0.12)",
+                    border: "1px solid rgba(255, 248, 237, 0.22)",
                     fontSize: 20,
-                    color: "#5d4532",
+                    color: "#fff8ed",
                   }}
                 >
                   {label}
@@ -184,10 +192,10 @@ export default function OpenGraphImage() {
                 fontSize: 20,
                 textTransform: "uppercase",
                 letterSpacing: "0.18em",
-                color: "#6b4e35",
+                color: "#d9b77f",
               }}
             >
-              odora
+              odora.it
             </div>
           </div>
         </div>

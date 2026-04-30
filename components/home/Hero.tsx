@@ -14,24 +14,24 @@ export function Hero({ footer }: HeroProps) {
   return (
     <section className="pt-10 sm:pt-14 lg:pt-16">
       <Container>
-        <div className="paper-texture relative overflow-hidden rounded-[2rem] border border-[#e4d8c8]/80 bg-[linear-gradient(135deg,#faf6ef_0%,#f7f0e5_56%,#f1e4d2_100%)] px-6 py-8 shadow-[0_24px_70px_-34px_rgba(50,35,20,0.34)] sm:px-10 sm:py-10 lg:px-12 lg:py-12">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.88),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(226,209,186,0.56),transparent_28%),linear-gradient(120deg,rgba(255,255,255,0.1),transparent_44%)]" />
-          <div className="pointer-events-none absolute inset-4 rounded-[1.55rem] border border-white/40 sm:inset-6" />
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-[linear-gradient(180deg,rgba(202,176,126,0.18),transparent_38%,rgba(202,176,126,0.08)_100%)]" />
-          <div className="pointer-events-none absolute -left-16 top-8 h-36 w-36 rounded-full bg-white/40 blur-[72px] sm:h-52 sm:w-52" />
-          <div className="pointer-events-none absolute -right-14 bottom-0 h-44 w-44 rounded-full bg-[#eadbc6]/48 blur-[74px] sm:h-60 sm:w-60" />
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-[#211914] px-6 py-8 text-[#fff8ed] shadow-[0_26px_78px_-34px_rgba(20,14,10,0.62)] sm:px-10 sm:py-10 lg:px-12 lg:py-12">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(238,205,157,0.3),transparent_31%),radial-gradient(circle_at_82%_18%,rgba(111,139,111,0.22),transparent_28%),linear-gradient(135deg,#1b1511_0%,#33241c_50%,#14120f_100%)]" />
+          <div className="pointer-events-none absolute inset-4 rounded-[1.55rem] border border-white/12 sm:inset-6" />
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-[linear-gradient(180deg,rgba(217,183,127,0.18),transparent_38%,rgba(255,248,237,0.06)_100%)]" />
+          <div className="pointer-events-none absolute -left-16 top-8 h-36 w-36 rounded-full bg-[#d9b77f]/18 blur-[72px] sm:h-52 sm:w-52" />
+          <div className="pointer-events-none absolute -right-14 bottom-0 h-44 w-44 rounded-full bg-white/10 blur-[74px] sm:h-60 sm:w-60" />
 
           <div className="relative">
             <div className="mx-auto max-w-[46rem] text-center">
-              <p className="inline-flex rounded-full border border-white/55 bg-white/58 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#907b66] shadow-[0_10px_24px_-18px_rgba(52,37,24,0.3)] backdrop-blur-[2px] sm:text-[10.5px] sm:tracking-[0.24em]">
+              <p className="inline-flex rounded-full border border-white/18 bg-white/[0.08] px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#d9b77f] shadow-[0_10px_24px_-18px_rgba(0,0,0,0.5)] backdrop-blur-[2px] sm:text-[10.5px] sm:tracking-[0.24em]">
                 {t("eyebrow")}
               </p>
 
-              <h1 className="mx-auto mt-5 max-w-[12.5ch] text-balance font-display text-[2.65rem] leading-[0.92] tracking-[-0.025em] text-[#1c1712] sm:mt-6 sm:max-w-[10.5ch] sm:text-[3.7rem] lg:max-w-[15ch] lg:text-[4.7rem] xl:max-w-[16ch]">
+              <h1 className="mx-auto mt-5 max-w-[12.5ch] text-balance font-display text-[2.65rem] leading-[0.92] tracking-[-0.025em] text-[#fff8ed] sm:mt-6 sm:max-w-[10.5ch] sm:text-[3.7rem] lg:max-w-[15ch] lg:text-[4.7rem] xl:max-w-[16ch]">
                 {t("title")}
               </h1>
 
-              <p className="mx-auto mt-4 max-w-[38rem] text-[15px] leading-[1.66] text-[#6b5a49] sm:mt-5 sm:text-[16.5px] sm:leading-[1.76]">
+              <p className="mx-auto mt-4 max-w-[38rem] text-[15px] leading-[1.66] text-[#dac8ad] sm:mt-5 sm:text-[16.5px] sm:leading-[1.76]">
                 {t("subtitle")}
               </p>
 
@@ -51,7 +51,7 @@ export function Hero({ footer }: HeroProps) {
           </div>
 
           {footer ? (
-            <div className="relative mt-8 border-t border-[#e2d6c6] pt-7 sm:mt-10 sm:pt-8">
+            <div className="relative mt-8 border-t border-white/12 pt-7 sm:mt-10 sm:pt-8">
               {footer}
             </div>
           ) : null}

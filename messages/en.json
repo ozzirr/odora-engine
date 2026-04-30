@@ -163,9 +163,9 @@
     "hero": {
       "eyebrow": "Smart fragrance discovery",
       "title": "Find the fragrance that feels like you.",
-      "subtitle": "Browse the catalog, learn the notes, and compare the best prices.",
+      "subtitle": "Answer a few sensory choices: Odora reads mood, season, occasion, and budget to suggest fragrances that fit your style.",
       "valueProps": {
-        "compare": "Compare prices across trusted retailers",
+        "compare": "Smart Finder guided by mood and occasion",
         "explore": "Explore perfumes by notes, mood, and style",
         "choose": "Choose with more confidence"
       },
@@ -245,25 +245,25 @@
     "howItWorks": {
       "eyebrow": "How Odora Works",
       "title": "A simpler way to choose well",
-      "subtitle": "Move from inspiration to comparison without bouncing between multiple tabs and retailer pages.",
+      "subtitle": "Move from inspiration to a personal selection without getting lost in technical filters or endless catalogs.",
       "steps": {
         "discover": {
-          "title": "Discover",
-          "description": "Start with notes, style, mood, or occasion."
+          "title": "Tell",
+          "description": "Start with mood, season, occasion, favorite note, and budget."
         },
         "compare": {
-          "title": "Compare",
-          "description": "Compare stores, shipping, and total price at a glance."
+          "title": "Refine",
+          "description": "Odora narrows the catalog and shows only coherent suggestions."
         },
         "choose": {
-          "title": "Choose",
-          "description": "Leave for the retailer with a clearer sense of what fits and what it costs."
+          "title": "Save",
+          "description": "Receive the report, save perfumes, and restart from Finder whenever you want."
         }
       }
     },
-    "trustedStores": {
-      "eyebrow": "Trusted Stores",
-      "title": "Compare prices from the best stores in one place"
+    "brandStrip": {
+      "eyebrow": "Brands in catalog",
+      "title": "Iconic houses, designers, and niche perfumery"
     },
     "discoveryCollections": {
       "eyebrow": "Collections",
@@ -284,16 +284,16 @@
     },
     "valueStrip": {
       "curated": "Curated fragrances",
-      "stores": "Trusted stores",
+      "stores": "Iconic brands",
       "guides": "Editorial guides",
-      "compare": "Easy comparison"
+      "compare": "Smart Finder"
     },
     "finalCta": {
       "eyebrow": "Start discovering",
       "title": "Not sure where to begin?",
       "subtitle": "Try the Finder — it guides you to the right fragrance based on your style, mood, and occasion.",
       "primaryCta": "Open the Finder",
-      "secondaryCta": "Browse catalog"
+      "secondaryCta": "Read the blog"
     }
   },
   "notFound": {

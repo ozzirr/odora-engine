@@ -74,7 +74,7 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
   if (variant === "finder") {
     return (
       <article className="group relative overflow-hidden rounded-[1.75rem] border border-[#e1d5c5] bg-white shadow-[0_20px_45px_-36px_rgba(50,35,20,0.4)] transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_24px_52px_-34px_rgba(50,35,20,0.55)]">
-        <div className="grid min-h-[12.5rem] grid-cols-[8.5rem_minmax(0,1fr)] sm:grid-cols-[11rem_minmax(0,1fr)]">
+        <div className="grid min-h-[12.5rem] grid-cols-[8.5rem_minmax(0,1fr)] sm:grid-cols-[10rem_minmax(0,1fr)] xl:grid-cols-[9.25rem_minmax(0,1fr)]">
           <div className="relative h-full min-h-[12.5rem] overflow-hidden bg-white">
             <PerfumeImage
               imageUrl={perfume.imageUrl}
@@ -86,8 +86,8 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
             />
           </div>
 
-          <div className="flex min-w-0 flex-col justify-between p-4 sm:p-5">
-            <div className="space-y-3">
+          <div className="flex min-w-0 flex-col justify-between p-4 sm:p-5 xl:p-4">
+            <div className="space-y-2.5">
               <div className="flex items-start justify-between gap-3">
                 <p className="min-w-0 text-[11px] uppercase tracking-[0.16em] text-[#8a7763] sm:text-xs">
                   {brandName}
@@ -100,7 +100,7 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
               </div>
 
               <div>
-                <h3 className="font-display text-[2rem] leading-[0.98] text-[#1f1914] sm:text-[2.2rem]">
+                <h3 className="font-display text-[2rem] leading-[0.98] text-[#1f1914] sm:text-[2.05rem] xl:text-[1.95rem]">
                   {perfume.name}
                 </h3>
                 {summary ? (

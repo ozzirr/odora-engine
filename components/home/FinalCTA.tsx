@@ -36,7 +36,7 @@ export function FinalCTA() {
               {t("primaryCta")}
             </Link>
             <Link
-              href="/perfumes"
+              href="/blog"
               className={buttonStyles({
                 variant: "secondary",
                 size: "lg",

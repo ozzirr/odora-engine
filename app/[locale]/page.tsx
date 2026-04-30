@@ -8,8 +8,8 @@ import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { BrandLogoStrip } from "@/components/home/TrustedStores";
 import { QuickFilters } from "@/components/home/QuickFilters";
-import { TrustedStores } from "@/components/home/TrustedStores";
 import { ValueStrip } from "@/components/home/ValueStrip";
 import { getHomepageData } from "@/lib/homepage";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
@@ -77,7 +77,7 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
       <>
-        <Hero footer={<TrustedStores stores={homepageData.trustedStores} variant="embedded" />} />
+        <Hero footer={<BrandLogoStrip brands={homepageData.featuredBrands} variant="embedded" />} />
         <ValueStrip />
 
         <Container>
