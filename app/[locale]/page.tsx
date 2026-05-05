@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { LaunchGateExperience } from "@/components/launch/LaunchGateExperience";
-import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { BrandLogoStrip } from "@/components/home/TrustedStores";
@@ -83,7 +82,6 @@ export default async function HomePage({ params }: HomePageProps) {
         <Container>
           <QuickFilters />
           <HowItWorks />
-          <FinalCTA />
           <div className="pb-16 lg:pb-20" />
         </Container>
       </>

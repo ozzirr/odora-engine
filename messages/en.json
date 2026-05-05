@@ -281,28 +281,6 @@
       "stores": "Iconic brands",
       "guides": "Editorial guides",
       "compare": "Smart Finder"
-    },
-    "finalCta": {
-      "eyebrow": "Start discovering",
-      "title": "Explore the Odora catalog.",
-      "subtitle": "Browse fragrances, compare families and notes, or use Finder when you want a guided selection.",
-      "primaryCta": "Go to catalog",
-      "secondaryCta": "Open Finder",
-      "panelEyebrow": "Available paths",
-      "panel": {
-        "catalog": {
-          "title": "Catalog",
-          "body": "Direct search across perfumes, notes, brands, and price."
-        },
-        "finder": {
-          "title": "Finder",
-          "body": "Guided selection built from mood, occasion, and budget."
-        },
-        "brands": {
-          "title": "Brands",
-          "body": "Explore the fragrance houses inside the Odora catalog."
-        }
-      }
     }
   },
   "notFound": {
