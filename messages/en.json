@@ -49,13 +49,6 @@
         "loginCta": "Log in or sign up"
       }
     },
-    "finderLauncher": {
-      "eyebrow": "Finder",
-      "label": "Smart Finder",
-      "restart": "Edit search",
-      "aria": "Open Smart Finder",
-      "restartAria": "Return to the Smart Finder mood step"
-    },
     "footer": {
       "description": "Discover perfumes, compare notes and prices, and find the right bottle faster.",
       "navigation": "Navigation",

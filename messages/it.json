@@ -49,13 +49,6 @@
         "loginCta": "Accedi o registrati"
       }
     },
-    "finderLauncher": {
-      "eyebrow": "Finder",
-      "label": "Smart Finder",
-      "restart": "Modifica ricerca",
-      "aria": "Apri lo Smart Finder",
-      "restartAria": "Torna allo step Mood dello Smart Finder"
-    },
     "footer": {
       "description": "Scopri profumi, confronta note e prezzi e trova la bottiglia giusta piu velocemente.",
       "navigation": "Navigazione",
