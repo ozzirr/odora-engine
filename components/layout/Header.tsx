@@ -94,6 +94,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const isAuthenticated = useAuthStatus(initialIsAuthenticated, { refreshOnChange: true });
   const navItems = [
     { href: "/" as const, label: t("nav.home") },
+    { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/brands" as const, label: t("nav.brands") },
     { href: "/blog" as const, label: t("nav.blog") },
@@ -226,7 +227,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -297,7 +298,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation-panel"
           className={cn(
-            "inline-flex h-11 items-center gap-3 rounded-full border px-3.5 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_18px_40px_-28px_rgba(31,25,20,0.9)] backdrop-blur-sm transition-all md:hidden",
+            "inline-flex h-11 items-center gap-3 rounded-full border px-3.5 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_18px_40px_-28px_rgba(31,25,20,0.9)] backdrop-blur-sm transition-all lg:hidden",
             menuOpen
               ? "border-[#204f3f] bg-[#1e4b3b] text-white"
               : "border-[#d8cbb9] bg-white/70 text-[#3e3025] hover:border-[#cfbda5] hover:bg-white",
@@ -337,7 +338,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
       <div
         className={cn(
-          `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} z-30 transition-opacity duration-300 md:hidden`,
+          `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} z-30 transition-opacity duration-300 lg:hidden`,
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
       >

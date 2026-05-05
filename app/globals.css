@@ -246,7 +246,7 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   display: flex;
   width: max-content;
   align-items: center;
-  animation: trusted-stores-marquee 22s linear infinite;
+  animation: trusted-stores-marquee 34s linear infinite;
   will-change: transform;
 }
 

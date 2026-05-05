@@ -632,16 +632,16 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             />
           </section>
 
-          <PerfumeCommunitySection
-            perfumeId={perfume.id}
-            detailPath={detailPath}
-            isAuthenticated={Boolean(appUser)}
-            locale={resolvedLocale}
-            stats={communityStats}
-            reviews={communityData.reviews}
-            userCountryCode={appUser?.countryCode}
-            mode="contribute"
-          />
+          <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+            <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
+
+            <PriceAlertCard
+              perfumeId={perfume.id}
+              detailPath={detailPath}
+              isAuthenticated={Boolean(appUser)}
+              isActive={Boolean(priceAlert?.active)}
+            />
+          </section>
 
           <PerfumeCommunitySection
             perfumeId={perfume.id}
@@ -651,17 +651,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             stats={communityStats}
             reviews={communityData.reviews}
             userCountryCode={appUser?.countryCode}
-            mode="summary"
           />
-
-          <PriceAlertCard
-            perfumeId={perfume.id}
-            detailPath={detailPath}
-            isAuthenticated={Boolean(appUser)}
-            isActive={Boolean(priceAlert?.active)}
-          />
-
-          <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
 
           <section className="space-y-4">
             <SectionTitle

@@ -111,17 +111,17 @@ function FinderSearchLoading({
 }) {
   return (
     <section className="grid min-h-[calc(100svh-10.5rem)] items-center py-6">
-      <div className="relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-white/[0.08] p-6 text-[#fff8ed] sm:p-8 lg:p-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(217,183,127,0.24),transparent_30%),radial-gradient(circle_at_80%_30%,rgba(255,250,241,0.12),transparent_26%)]" />
+      <div className="paper-texture relative overflow-hidden rounded-[1.8rem] border border-[#e6dacc] bg-[linear-gradient(180deg,rgba(255,252,247,0.97),rgba(246,238,228,0.98))] p-6 text-[#1e1813] shadow-[0_28px_70px_-42px_rgba(45,31,18,0.24)] sm:p-8 lg:p-10">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(217,183,127,0.14),transparent_30%),radial-gradient(circle_at_80%_30%,rgba(226,237,229,0.34),transparent_26%)]" />
         <div className="relative grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_18rem] lg:items-center">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
               {eyebrow}
             </p>
-            <h2 className="mt-4 max-w-2xl font-display text-[2.6rem] leading-[0.95] sm:text-[4rem]">
+            <h2 className="mt-4 max-w-2xl font-display text-[2.6rem] leading-[0.95] text-[#1e1813] sm:text-[4rem]">
               {title}
             </h2>
-            <p className="mt-5 max-w-xl text-sm leading-6 text-[#dac8ad] sm:text-base sm:leading-7">
+            <p className="mt-5 max-w-xl text-sm leading-6 text-[#655240] sm:text-base sm:leading-7">
               {description}
             </p>
 
@@ -129,10 +129,10 @@ function FinderSearchLoading({
               {items.map((item, index) => (
                 <div
                   key={item}
-                  className="finder-loading-animate flex items-center gap-3 text-sm text-[#ead8bd]"
+                  className="finder-loading-animate flex items-center gap-3 text-sm text-[#6b5845]"
                   style={{ animation: `finder-loading-step 1.8s ${index * 180}ms ease-in-out infinite` }}
                 >
-                  <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#d9b77f]/45 bg-[#d9b77f]/15">
+                  <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#d9b77f]/45 bg-[#fff9ef]">
                     <span
                       className={cn(
                         "h-2 w-2 rounded-full bg-[#d9b77f]",
@@ -147,8 +147,8 @@ function FinderSearchLoading({
           </div>
 
           <div className="relative mx-auto h-64 w-64 max-w-full">
-            <div className="finder-loading-animate absolute inset-0 rounded-full border border-[#d9b77f]/25" style={{ animation: "finder-loading-ring 2.4s ease-in-out infinite" }} />
-            <div className="finder-loading-animate absolute inset-8 rounded-full border border-white/20" style={{ animation: "finder-loading-ring 2.4s 220ms ease-in-out infinite" }} />
+            <div className="finder-loading-animate absolute inset-0 rounded-full border border-[#d9b77f]/30" style={{ animation: "finder-loading-ring 2.4s ease-in-out infinite" }} />
+            <div className="finder-loading-animate absolute inset-8 rounded-full border border-[#e9ddd0]" style={{ animation: "finder-loading-ring 2.4s 220ms ease-in-out infinite" }} />
             <div className="finder-loading-animate absolute inset-16 rounded-full bg-[#fffaf1] shadow-[0_30px_90px_-45px_rgba(0,0,0,0.9)]" style={{ animation: "finder-loading-ring 2.4s 420ms ease-in-out infinite" }} />
             <div className="finder-loading-animate absolute left-1/2 top-1/2 h-28 w-16 -translate-x-1/2 -translate-y-1/2 rounded-[45%_45%_38%_38%] border border-[#d8cab7] bg-gradient-to-b from-white via-[#f7efe3] to-[#d9c6ad] shadow-[0_18px_60px_-35px_rgba(0,0,0,0.75)]" style={{ animation: "finder-loading-float 2.6s ease-in-out infinite" }} />
             <div className="absolute left-1/2 top-[4.2rem] h-5 w-10 -translate-x-1/2 rounded-t-lg bg-[#d8cab7]" />
@@ -169,18 +169,18 @@ function FinderBlogTeaser({ posts, locale }: { posts: BlogPostCard[]; locale: st
   }
 
   return (
-    <section className="mt-5 rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-5 text-[#fff8ed] sm:p-6">
+    <section className="mt-5 rounded-[1.6rem] border border-[#e5d9c8] bg-white/72 p-5 text-[#1e1813] shadow-[0_18px_46px_-36px_rgba(50,35,20,0.2)] sm:p-6">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
             {t("eyebrow")}
           </p>
-          <h3 className="mt-2 font-display text-[2rem] leading-none">{t("title")}</h3>
+          <h3 className="mt-2 font-display text-[2rem] leading-none text-[#1f1812]">{t("title")}</h3>
         </div>
         <Link
           href="/blog"
           locale={locale}
-          className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#ead8bd] transition-colors hover:text-white"
+          className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7c6652] transition-colors hover:text-[#1E4B3B]"
         >
           {t("all")} →
         </Link>
@@ -247,6 +247,7 @@ export function FinderExperience({
   const [leadStatus, setLeadStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [leadMessage, setLeadMessage] = useState<string | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const stepButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const isFetchingMoreRef = useRef(false);
   const hasLocalSubmittedSearchRef = useRef(initialSubmitted);
 
@@ -739,6 +740,19 @@ export function FinderExperience({
     return () => observer.disconnect();
   }, [canLoadMore, loadMoreResults, submitted]);
 
+  useEffect(() => {
+    const activeButton = stepButtonRefs.current[activeStep];
+    if (!activeButton) {
+      return;
+    }
+
+    activeButton.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeStep]);
+
   const handleLeadSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLeadStatus("submitting");
@@ -799,21 +813,20 @@ export function FinderExperience({
   };
 
   return (
-    <div className="relative isolate overflow-hidden bg-[#211914] pb-36 text-[#fff8ed] [overflow-anchor:none]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(238,205,157,0.32),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(111,139,111,0.24),transparent_26%),linear-gradient(135deg,#1b1511_0%,#33241c_48%,#14120f_100%)]" />
-      <div className="absolute inset-x-0 top-0 h-px bg-white/35" />
+    <div className="relative isolate overflow-hidden pb-24 text-[#1e1813] [overflow-anchor:none]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,255,255,0.7),transparent_28%),radial-gradient(circle_at_84%_16%,rgba(220,234,223,0.48),transparent_24%),linear-gradient(180deg,#f8f4ec_0%,#fbf8f2_52%,#f4ede3_100%)]" />
 
       <div className="relative mx-auto min-h-[calc(100svh-4.5rem)] w-full max-w-6xl p-4 sm:p-6 lg:p-8">
         {!isStarted && !submitted ? (
           <section className="grid min-h-[calc(100svh-10.5rem)] items-center gap-8 lg:grid-cols-[minmax(0,1fr)_26rem]">
             <div className="max-w-3xl">
-              <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#ead8bd]">
+              <div className="inline-flex rounded-full border border-[#e0d3c3] bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                 {t("immersive.eyebrow")}
               </div>
-              <h1 className="mt-6 max-w-[11ch] font-display text-[3.6rem] leading-[0.86] text-[#fff7ea] sm:text-[5rem] lg:text-[6.2rem]">
+              <h1 className="mt-6 max-w-[12ch] font-display text-[3.2rem] leading-[0.9] text-[#1f1710] sm:text-[4.5rem] lg:text-[5.3rem]">
                 {t("immersive.title")}
               </h1>
-              <p className="mt-6 max-w-xl text-[15px] leading-7 text-[#d7c4aa] sm:text-lg sm:leading-8">
+              <p className="mt-6 max-w-xl text-[15px] leading-7 text-[#655240] sm:text-lg sm:leading-8">
                 {t("immersive.subtitle")}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -828,8 +841,8 @@ export function FinderExperience({
               </div>
             </div>
 
-            <div className="hidden rounded-[1.6rem] border border-white/12 bg-white/[0.07] p-5 backdrop-blur lg:block">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+            <div className="paper-texture hidden rounded-[1.6rem] border border-[#e5d9c8] bg-white/72 p-5 shadow-[0_24px_54px_-38px_rgba(50,35,20,0.22)] lg:block">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                 {t("report.eyebrow")}
               </p>
               <div className="mt-5 space-y-3">
@@ -841,11 +854,11 @@ export function FinderExperience({
                   t("steps.budget.eyebrow"),
                   t("steps.gender.eyebrow"),
                 ].map((item, index) => (
-                  <div key={item} className="flex items-center gap-3 rounded-[1rem] border border-white/10 bg-white/[0.06] px-4 py-3">
+                  <div key={item} className="flex items-center gap-3 rounded-[1rem] border border-[#eadfce] bg-[#fcfaf6] px-4 py-3">
                     <span className="grid h-8 w-8 place-items-center rounded-full bg-[#d9b77f] text-xs font-bold text-[#211914]">
                       {index + 1}
                     </span>
-                    <span className="text-sm font-semibold uppercase tracking-[0.12em] text-[#ead8bd]">{item}</span>
+                    <span className="text-sm font-semibold uppercase tracking-[0.12em] text-[#5f5041]">{item}</span>
                   </div>
                 ))}
               </div>
@@ -855,25 +868,28 @@ export function FinderExperience({
           <section className="flex min-h-[calc(100svh-10.5rem)] flex-col">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                   {t("progress", { current: activeStep + 1, total: steps.length })}
                 </p>
-                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-white/12 lg:w-[26rem]">
+                <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#ede2d3] lg:w-[26rem]">
                   <div className="h-full rounded-full bg-[#d9b77f] transition-all duration-500" style={{ width: `${progress}%` }} />
                 </div>
               </div>
 
-              <div className="flex gap-1.5 overflow-x-auto pb-1">
+              <div className="flex gap-1.5 overflow-x-auto pb-1 scroll-smooth">
                 {steps.map((step, index) => (
                   <button
                     key={step.id}
+                    ref={(node) => {
+                      stepButtonRefs.current[index] = node;
+                    }}
                     type="button"
                     onClick={() => preserveViewportPosition(() => setActiveStep(index))}
                     className={cn(
                       "h-10 shrink-0 rounded-full border px-3 text-[11px] font-semibold uppercase tracking-[0.12em] transition",
                       index === activeStep
                         ? "border-[#d9b77f] bg-[#d9b77f] text-[#1f1710]"
-                        : "border-white/12 bg-white/[0.06] text-[#d8c3a6] hover:bg-white/[0.1]",
+                        : "border-[#e2d6c8] bg-white/75 text-[#7b6652] hover:bg-white",
                     )}
                   >
                     {index + 1}. {step.eyebrow}
@@ -970,7 +986,7 @@ export function FinderExperience({
             {showPresetBanner ? (
               <div className="mt-4 flex flex-wrap gap-2">
                 {presetChips.map((chip) => (
-                  <span key={chip} className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs text-[#e8d8c2]">
+                  <span key={chip} className="rounded-full border border-[#e0d4c5] bg-white/74 px-3 py-1 text-xs text-[#6b5845]">
                     {chip}
                   </span>
                 ))}
@@ -1000,16 +1016,16 @@ export function FinderExperience({
               </div>
             ) : null}
 
-            <div className="relative overflow-hidden rounded-[1.8rem] border border-white/12 bg-white/[0.08] p-6 text-[#fff8ed] sm:p-8 lg:p-10">
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(217,183,127,0.2),transparent_30%),radial-gradient(circle_at_80%_24%,rgba(255,250,241,0.1),transparent_28%)]" />
+            <div className="paper-texture relative overflow-hidden rounded-[1.8rem] border border-[#e5d9c8] bg-[linear-gradient(180deg,rgba(255,252,247,0.98),rgba(246,238,228,0.98))] p-6 text-[#1e1813] shadow-[0_24px_54px_-38px_rgba(50,35,20,0.22)] sm:p-8 lg:p-10">
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(217,183,127,0.12),transparent_30%),radial-gradient(circle_at_80%_24%,rgba(222,234,223,0.18),transparent_28%)]" />
               <div className="relative max-w-2xl">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                   {t("noResults.eyebrow")}
                 </p>
-                <h2 className="mt-4 font-display text-[2.8rem] leading-[0.92] sm:text-[4rem]">
+                <h2 className="mt-4 font-display text-[2.8rem] leading-[0.92] text-[#1f1812] sm:text-[4rem]">
                   {t("noResults.title")}
                 </h2>
-                <p className="mt-5 text-sm leading-6 text-[#dac8ad] sm:text-base sm:leading-7">
+                <p className="mt-5 text-sm leading-6 text-[#655240] sm:text-base sm:leading-7">
                   {t("noResults.description")}
                 </p>
                 <div className="mt-7">
@@ -1032,17 +1048,17 @@ export function FinderExperience({
               </div>
             ) : null}
 
-            <div className="rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-4 text-[#fff8ed] shadow-[0_24px_70px_-46px_rgba(0,0,0,0.72)] sm:p-5 lg:p-6">
+            <div className="rounded-[1.6rem] border border-[#e5d9c8] bg-white/76 p-4 text-[#1e1813] shadow-[0_24px_54px_-38px_rgba(50,35,20,0.22)] sm:p-5 lg:p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                     {t("resultsEyebrow")}
                   </p>
-                  <h2 className="mt-2 font-display text-[2.3rem] leading-none sm:text-[3rem]">
+                  <h2 className="mt-2 font-display text-[2.3rem] leading-none text-[#1f1812] sm:text-[3rem]">
                     {t("results", { total: totalMatches })}
                   </h2>
                 </div>
-                <p className="max-w-md text-sm leading-6 text-[#dac8ad]">{t("resultsSubtitle")}</p>
+                <p className="max-w-md text-sm leading-6 text-[#655240]">{t("resultsSubtitle")}</p>
               </div>
 
               <div className="mt-5">
@@ -1099,12 +1115,12 @@ export function FinderExperience({
                 ) : null}
               </form>
 
-              <div className="self-start rounded-[1.6rem] border border-white/12 bg-white/[0.08] p-4 text-[#fff8ed] shadow-[0_24px_70px_-46px_rgba(0,0,0,0.72)] sm:p-5 lg:p-6">
+              <div className="self-start rounded-[1.6rem] border border-[#e5d9c8] bg-white/76 p-4 text-[#1e1813] shadow-[0_24px_54px_-38px_rgba(50,35,20,0.22)] sm:p-5 lg:p-6">
                 <div className="flex items-end justify-between gap-4">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#d9b77f]">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a6e4d]">
                     {t("allResultsEyebrow")}
                   </p>
-                  <p className="hidden text-xs text-[#cdbba2] lg:block">
+                  <p className="hidden text-xs text-[#8d7763] lg:block">
                     {Math.max(0, results.length - FEATURED_FINDER_RESULTS_LIMIT)} match
                   </p>
                 </div>
@@ -1118,7 +1134,7 @@ export function FinderExperience({
                     injectInFeedAd
                   />
                 </div>
-                {isLoadingMore ? <p className="mt-4 text-sm text-[#d9c7ab]">{t("finding")}</p> : null}
+                {isLoadingMore ? <p className="mt-4 text-sm text-[#7c6652]">{t("finding")}</p> : null}
                 {!isLoading && canLoadMore ? <div ref={loadMoreRef} className="h-6 w-full" /> : null}
                 {!isLoading && isCatalogLocked ? <CatalogGate previewLimit={FREE_FINDER_OTHER_MATCH_LIMIT} /> : null}
                 {showFinderBlog ? (
@@ -1129,7 +1145,6 @@ export function FinderExperience({
           </section>
         ) : null}
       </div>
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-[linear-gradient(180deg,rgba(33,25,20,0)_0%,rgba(73,62,50,0.54)_48%,#fbf8f2_100%)]" />
     </div>
   );
 }

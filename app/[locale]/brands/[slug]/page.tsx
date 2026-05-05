@@ -8,6 +8,7 @@ import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { BrandFollowButton } from "@/components/brands/BrandFollowButton";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { resolveBrandLogoUrl } from "@/lib/brand-logos";
 import { isFollowingBrand } from "@/lib/brand-follows";
 import { getBrandBySlug, getBrandPerfumes } from "@/lib/brands";
 import { getCurrentUser } from "@/lib/supabase/auth-state";
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: BrandPageProps): Promise<Meta
     locale: resolvedLocale,
     pathname: "/brands/[slug]",
     params: { slug },
-    image: brand.logoUrl,
+    image: resolveBrandLogoUrl(brand.logoUrl, brand.name, brand.slug),
   });
 }
 
@@ -63,6 +64,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
   const navT = await getTranslations({ locale: resolvedLocale, namespace: "layout.header.nav" });
   const perfumes = await getBrandPerfumes(brand.id);
   const currentUser = await getCurrentUser();
+  const resolvedLogoUrl = resolveBrandLogoUrl(brand.logoUrl, brand.name, brand.slug);
   const initialIsFollowing = currentUser
     ? await isFollowingBrand(currentUser.id, brand.id)
     : false;
@@ -85,7 +87,7 @@ export default async function BrandPage({ params }: BrandPageProps) {
             name: brand.name,
             path: detailPath,
             description: brand.description,
-            logoUrl: brand.logoUrl,
+            logoUrl: resolvedLogoUrl,
             country: brand.country,
           }),
           buildCollectionPageSchema({
@@ -115,10 +117,10 @@ export default async function BrandPage({ params }: BrandPageProps) {
           <header className="overflow-hidden rounded-3xl border border-[#dfd1bf] bg-white shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)]">
             <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.42fr)] lg:items-end">
               <div className="flex flex-col items-start gap-6 sm:flex-row">
-              {brand.logoUrl ? (
+              {resolvedLogoUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
-                  src={brand.logoUrl}
+                  src={resolvedLogoUrl}
                   alt={brand.name}
                   className="h-20 w-20 shrink-0 rounded-2xl bg-[#f8f1e6] object-contain p-2"
                   loading="eager"

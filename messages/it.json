@@ -18,7 +18,7 @@
         "home": "Home",
         "perfumes": "Profumi",
         "finder": "Smart Finder",
-        "brands": "Tutti i brand",
+        "brands": "Brand",
         "blog": "Blog"
       },
       "account": {
@@ -67,7 +67,7 @@
         "home": "Home",
         "perfumes": "Profumi",
         "finder": "Smart Finder",
-        "brands": "Tutti i brand",
+        "brands": "Brand",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -164,12 +164,6 @@
       "eyebrow": "Scoperta fragranze smart",
       "title": "Trova la fragranza che ti rappresenta.",
       "subtitle": "Rispondi a poche scelte sensoriali: Odora legge mood, stagione, occasione e budget per suggerirti profumi coerenti con il tuo stile.",
-      "valueProps": {
-        "compare": "Smart Finder guidato da mood e occasioni",
-        "explore": "Esplora profumi per note, mood e stile",
-        "choose": "Scegli con piu sicurezza"
-      },
-      "browseCatalog": "Sei nuovo? Registrati",
       "startFinder": "Avvia ricerca personalizzata",
       "spotlight": "In evidenza",
       "badges": {
@@ -290,10 +284,25 @@
     },
     "finalCta": {
       "eyebrow": "Inizia la scoperta",
-      "title": "Non sai da dove partire?",
-      "subtitle": "Prova il Finder: ti guida verso la fragranza giusta in base al tuo stile, umore e occasione.",
-      "primaryCta": "Apri il Finder",
-      "secondaryCta": "Leggi il blog"
+      "title": "Esplora il catalogo Odora.",
+      "subtitle": "Sfoglia le fragranze, confronta famiglie e note, oppure usa il Finder quando vuoi una selezione guidata.",
+      "primaryCta": "Vai al catalogo",
+      "secondaryCta": "Apri il Finder",
+      "panelEyebrow": "Percorsi disponibili",
+      "panel": {
+        "catalog": {
+          "title": "Catalogo",
+          "body": "Ricerca diretta tra profumi, note, brand e prezzo."
+        },
+        "finder": {
+          "title": "Finder",
+          "body": "Selezione guidata a partire da mood, occasione e budget."
+        },
+        "brands": {
+          "title": "Brand",
+          "body": "Esplora le maison presenti nel catalogo Odora."
+        }
+      }
     }
   },
   "notFound": {
@@ -343,8 +352,8 @@
       "nicheOnly": "Solo niche",
       "immersive": {
         "eyebrow": "Odora Finder",
-        "title": "Costruiamo la tua firma olfattiva.",
-        "subtitle": "Rispondi a poche scelte sensoriali. Odora legge mood, stagione, occasione e budget per creare la tua selezione personalizzata."
+        "title": "Restringi il catalogo partendo dai tuoi gusti.",
+        "subtitle": "Rispondi a poche scelte sensoriali. Odora usa mood, stagione, occasione e budget per ordinare il catalogo in modo piu personale, senza uscire dal linguaggio del sito."
       },
       "progress": "Step {current} di {total}",
       "start": "Avvia esperienza",
@@ -562,7 +571,7 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalogo",
-      "title": "Archivio profumi Odora",
+      "title": "Catalogo profumi Odora",
       "subtitle": "Una vista tecnica del catalogo per chi vuole cercare direttamente per famiglia, budget, genere o nota principale.",
       "bodyOne": "Per una selezione guidata e piu personale, usa il Finder. Qui manteniamo una ricerca essenziale per consultare il catalogo senza filtri troppo rigidi.",
       "bodyTwo": "",
@@ -903,9 +912,9 @@
   },
   "brand": {
     "list": {
-      "eyebrow": "Tutti i brand",
-      "title": "Tutti i brand",
-      "subtitle": "Esplora tutte le maison del nostro catalogo. Apri un brand per scoprire i suoi profumi e seguilo per ricevere una notifica a ogni nuova uscita.",
+      "eyebrow": "Brand nel catalogo",
+      "title": "Maison e brand",
+      "subtitle": "Esplora le maison presenti nel catalogo Odora. Apri una scheda brand per vedere i profumi disponibili e seguire le nuove uscite.",
       "perfumeCount": "{count, plural, one {# profumo} other {# profumi}}",
       "empty": "Nessun brand disponibile al momento.",
       "breadcrumb": "Brand"
@@ -1397,8 +1406,8 @@
         "description": "Esplora i profumi di {name} su Odora: schede dettagliate, note olfattive, recensioni della community e link di acquisto selezionati."
       },
       "brands": {
-        "title": "Tutti i brand di profumi | Odora",
-        "description": "Sfoglia la directory completa delle maison di profumi su Odora. Apri un brand per scoprire i suoi profumi, le note e i prezzi."
+        "title": "Brand e maison di profumi | Odora",
+        "description": "Sfoglia i brand presenti nel catalogo Odora. Apri una maison per scoprire profumi, note e prezzi disponibili."
       }
     }
   }

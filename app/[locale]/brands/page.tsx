@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { resolveBrandLogoUrl } from "@/lib/brand-logos";
 import { Link } from "@/lib/navigation";
 import { getAllBrandsWithCount } from "@/lib/brands";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
@@ -77,9 +78,7 @@ export default async function BrandsListPage({ params }: BrandsPageProps) {
           ) : (
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {brands.map((brand) => {
-                const href = getLocalizedPathname(resolvedLocale, "/brands/[slug]", {
-                  slug: brand.slug,
-                });
+                const resolvedLogoUrl = resolveBrandLogoUrl(brand.logoUrl, brand.name, brand.slug);
 
                 return (
                   <li key={brand.id}>
@@ -89,10 +88,10 @@ export default async function BrandsListPage({ params }: BrandsPageProps) {
                       aria-label={brand.name}
                     >
                       <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#ecdfca] bg-[#f8f1e6]">
-                        {brand.logoUrl ? (
+                        {resolvedLogoUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
-                            src={brand.logoUrl}
+                            src={resolvedLogoUrl}
                             alt={brand.name}
                             className="h-full w-full object-contain p-1.5"
                             loading="lazy"

@@ -8,6 +8,7 @@ import { unstable_cache } from "next/cache";
 import type { PerfumeCardItem } from "@/components/perfumes/PerfumeCard";
 import { PUBLIC_CACHE_TAGS } from "@/lib/cache-tags";
 import { DEPLOY_ID } from "@/lib/deploy-id";
+import { getCuratedBrandLogoUrl } from "@/lib/brand-logos";
 import {
   getCatalogVisibilityWhereForMode,
   logCatalogQueryError,
@@ -617,9 +618,27 @@ async function getFeaturedBrandNames(limit: number, catalogMode: CatalogMode) {
   const names = brands
     .map((brand) => brand.name.trim())
     .filter(Boolean)
+    .filter((name) => getCuratedBrandLogoUrl(name))
     .filter((name, index, array) => array.indexOf(name) === index);
 
-  return names.length > 0 ? names : FALLBACK_FEATURED_BRANDS.slice(0, limit);
+  if (names.length >= Math.min(limit, 6)) {
+    return names.slice(0, limit);
+  }
+
+  const fallbackNames = FALLBACK_FEATURED_BRANDS.filter((name) => getCuratedBrandLogoUrl(name));
+  const mergedNames = [...names];
+
+  for (const fallbackName of fallbackNames) {
+    if (!mergedNames.includes(fallbackName)) {
+      mergedNames.push(fallbackName);
+    }
+
+    if (mergedNames.length >= limit) {
+      break;
+    }
+  }
+
+  return mergedNames;
 }
 
 export function toHomeSpotlight(

@@ -18,7 +18,7 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Smart Finder",
-        "brands": "All brands",
+        "brands": "Brands",
         "blog": "Blog"
       },
       "account": {
@@ -67,7 +67,7 @@
         "home": "Home",
         "perfumes": "Perfumes",
         "finder": "Smart Finder",
-        "brands": "All brands",
+        "brands": "Brands",
         "blog": "Blog"
       },
       "legalLinks": {
@@ -164,12 +164,6 @@
       "eyebrow": "Smart fragrance discovery",
       "title": "Find the fragrance that feels like you.",
       "subtitle": "Answer a few sensory choices: Odora reads mood, season, occasion, and budget to suggest fragrances that fit your style.",
-      "valueProps": {
-        "compare": "Smart Finder guided by mood and occasion",
-        "explore": "Explore perfumes by notes, mood, and style",
-        "choose": "Choose with more confidence"
-      },
-      "browseCatalog": "Log in or sign up",
       "startFinder": "Start personalized search",
       "spotlight": "Spotlight",
       "badges": {
@@ -290,10 +284,25 @@
     },
     "finalCta": {
       "eyebrow": "Start discovering",
-      "title": "Not sure where to begin?",
-      "subtitle": "Try the Finder — it guides you to the right fragrance based on your style, mood, and occasion.",
-      "primaryCta": "Open the Finder",
-      "secondaryCta": "Read the blog"
+      "title": "Explore the Odora catalog.",
+      "subtitle": "Browse fragrances, compare families and notes, or use Finder when you want a guided selection.",
+      "primaryCta": "Go to catalog",
+      "secondaryCta": "Open Finder",
+      "panelEyebrow": "Available paths",
+      "panel": {
+        "catalog": {
+          "title": "Catalog",
+          "body": "Direct search across perfumes, notes, brands, and price."
+        },
+        "finder": {
+          "title": "Finder",
+          "body": "Guided selection built from mood, occasion, and budget."
+        },
+        "brands": {
+          "title": "Brands",
+          "body": "Explore the fragrance houses inside the Odora catalog."
+        }
+      }
     }
   },
   "notFound": {
@@ -343,8 +352,8 @@
       "nicheOnly": "Niche only",
       "immersive": {
         "eyebrow": "Odora Finder",
-        "title": "Build your fragrance signature.",
-        "subtitle": "Answer a few sensory choices. Odora reads mood, season, occasion, and budget to create a personal selection with a final email report."
+        "title": "Narrow the catalog from your taste.",
+        "subtitle": "Answer a few sensory choices. Odora uses mood, season, occasion, and budget to sort the catalog more personally while staying inside the same site language."
       },
       "progress": "Step {current} of {total}",
       "start": "Start experience",
@@ -562,7 +571,7 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalog",
-      "title": "Odora perfume archive",
+      "title": "Odora perfume catalog",
       "subtitle": "A technical catalog view for searching directly by family, budget, gender, or main note.",
       "bodyOne": "For a more personal guided selection, use Finder. This page keeps catalog search essential without overly strict filters.",
       "bodyTwo": "",
@@ -920,8 +929,8 @@
     },
     "list": {
       "eyebrow": "Brand directory",
-      "title": "All brands",
-      "subtitle": "Explore every fragrance house in our catalog. Open a brand to browse its perfumes and follow it to receive an alert whenever a new release lands.",
+      "title": "Fragrance houses and brands",
+      "subtitle": "Explore the fragrance houses in the Odora catalog. Open a brand page to browse available perfumes and follow new releases.",
       "perfumeCount": "{count, plural, one {# perfume} other {# perfumes}}",
       "empty": "No brands available right now.",
       "breadcrumb": "Brands"
@@ -1397,8 +1406,8 @@
         "description": "Explore {name} perfumes on Odora: detailed pages, fragrance notes, community reviews, and selected purchase links."
       },
       "brands": {
-        "title": "All fragrance brands | Odora",
-        "description": "Browse the complete directory of fragrance houses on Odora. Open any brand to discover its perfumes, notes, and prices."
+        "title": "Fragrance houses and brands | Odora",
+        "description": "Browse the brands in the Odora catalog. Open any fragrance house to discover its perfumes, notes, and prices."
       }
     }
   }
