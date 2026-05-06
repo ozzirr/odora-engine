@@ -2,7 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
 
 import {
   createPerfumeList,
@@ -13,10 +12,12 @@ import {
 } from "@/app/perfume-lists/actions";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { buttonStyles } from "@/components/ui/Button";
+import type { AppLocale } from "@/lib/i18n";
 import { Link } from "@/lib/navigation";
 import type { UserPerfumeListSummary } from "@/lib/perfume-lists";
 
 type PerfumeListsSectionProps = {
+  locale: AppLocale;
   lists: UserPerfumeListSummary[];
 };
 
@@ -34,8 +35,55 @@ function getSharePath(locale: string, list: UserPerfumeListSummary) {
   return `/${locale}/lists/${list.id}-${list.slug}`;
 }
 
-export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
-  const locale = useLocale();
+function ListCover({ list }: { list: UserPerfumeListSummary }) {
+  const previewItems = list.items.slice(0, 4);
+
+  if (previewItems.length === 0) {
+    return (
+      <div className="flex h-44 items-center justify-center rounded-[1.35rem] border border-dashed border-[#d8c9b6] bg-[#fbf7f0] text-center sm:h-52">
+        <div>
+          <p className="font-display text-2xl text-[#21180f]">Lista vuota</p>
+          <p className="mt-2 text-sm text-[#685747]">Aggiungi profumi dal catalogo.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid h-44 grid-cols-4 grid-rows-2 gap-2 rounded-[1.35rem] border border-[#e0d2c0] bg-[#f8f2e8] p-2 sm:h-52">
+      {previewItems.map((item, index) => {
+        const brandName = item.perfume.brand.name;
+        const isMain = index === 0;
+
+        return (
+          <Link
+            key={item.id}
+            href={{ pathname: "/perfumes/[slug]", params: { slug: item.perfume.slug } }}
+            className={[
+              "relative overflow-hidden rounded-[1rem] border border-white/70 bg-white shadow-[0_14px_26px_-24px_rgba(53,39,27,0.42)]",
+              isMain ? "col-span-2 row-span-2" : "",
+              previewItems.length === 2 && index === 1 ? "col-span-2 row-span-2" : "",
+              previewItems.length === 3 && index === 1 ? "col-span-2" : "",
+              previewItems.length === 3 && index === 2 ? "col-span-2" : "",
+            ].join(" ")}
+            aria-label={`${item.perfume.name} di ${brandName}`}
+          >
+            <PerfumeImage
+              imageUrl={item.perfume.imageUrl}
+              perfumeName={item.perfume.name}
+              brandName={brandName}
+              fragranceFamily={item.perfume.fragranceFamily}
+              sizes={isMain ? "18rem" : "9rem"}
+              imageClassName="object-contain p-2"
+            />
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+export function PerfumeListsSection({ locale, lists }: PerfumeListsSectionProps) {
   const router = useRouter();
   const [editing, setEditing] = useState<EditingState>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -129,7 +177,7 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
   };
 
   return (
-    <section className="rounded-3xl border border-[#ddcfbe] bg-[linear-gradient(180deg,#fffdf9,#f7f0e6)] p-6 shadow-[0_20px_46px_-34px_rgba(53,39,27,0.4)] sm:p-8 lg:col-span-2">
+    <section className="rounded-[2rem] border border-[#ddcfbe] bg-[linear-gradient(180deg,#fffdf9,#f7f0e6)] p-6 shadow-[0_20px_46px_-34px_rgba(53,39,27,0.4)] sm:p-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8b7762]">
@@ -167,54 +215,68 @@ export function PerfumeListsSection({ lists }: PerfumeListsSectionProps) {
           <p className="mt-2 text-sm text-[#685747]">Crea la tua prima selezione di profumi.</p>
         </div>
       ) : (
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className={lists.length === 1 ? "mt-6 grid gap-4" : "mt-6 grid gap-4 xl:grid-cols-2"}>
           {lists.map((list) => (
-            <article key={list.id} className="rounded-[1.45rem] border border-[#e0d2c0] bg-white/82 p-5 shadow-[0_18px_36px_-32px_rgba(53,39,27,0.35)]">
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3 className="font-display text-2xl leading-none text-[#21180f]">{list.name}</h3>
-                  {list.description ? (
-                    <p className="mt-2 text-sm leading-6 text-[#685747]">{list.description}</p>
-                  ) : null}
+            <article
+              key={list.id}
+              className="grid gap-5 rounded-[1.65rem] border border-[#e0d2c0] bg-white/88 p-4 shadow-[0_18px_36px_-32px_rgba(53,39,27,0.35)] md:grid-cols-[minmax(15rem,0.82fr)_minmax(0,1fr)] md:p-5"
+            >
+              <ListCover list={list} />
+
+              <div className="flex min-w-0 flex-col">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="font-display text-3xl leading-none text-[#21180f]">{list.name}</h3>
+                    {list.description ? (
+                      <p className="mt-3 max-w-xl text-sm leading-6 text-[#685747]">{list.description}</p>
+                    ) : null}
+                  </div>
+                  <span className="shrink-0 rounded-full border border-[#dfcfbc] bg-[#f8f2e8] px-3 py-1 text-[11px] font-semibold text-[#6b5948]">
+                    {list.visibility === "PUBLIC" ? "Lista pubblica" : "Lista privata"}
+                  </span>
                 </div>
-                <span className="shrink-0 rounded-full border border-[#dfcfbc] bg-[#f8f2e8] px-3 py-1 text-[11px] font-semibold text-[#6b5948]">
-                  {list.visibility === "PUBLIC" ? "Lista pubblica" : "Lista privata"}
-                </span>
-              </div>
 
-              <p className="mt-4 text-sm text-[#6b5948]">
-                {list.itemCount} {list.itemCount === 1 ? "profumo" : "profumi"}
-              </p>
+                <div className="mt-5 flex flex-wrap items-center gap-2 text-sm text-[#6b5948]">
+                  <span className="rounded-full border border-[#eadfce] bg-[#fbf7f0] px-3 py-1">
+                    {list.itemCount} {list.itemCount === 1 ? "profumo" : "profumi"}
+                  </span>
+                  {list.items.slice(0, 3).map((item) => (
+                    <span key={item.id} className="max-w-[11rem] truncate rounded-full border border-[#eadfce] bg-white px-3 py-1">
+                      {item.perfume.name}
+                    </span>
+                  ))}
+                </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                <Link
-                  href={{ pathname: "/lists/[listKey]", params: { listKey: `${list.id}-${list.slug}` } }}
-                  className={buttonStyles({ size: "sm", className: "px-4" })}
-                >
-                  Apri
-                </Link>
-                <button
-                  type="button"
-                  className={buttonStyles({ variant: "secondary", size: "sm", className: "px-4" })}
-                  onClick={() => setEditing({ mode: "edit", list })}
-                >
-                  Modifica
-                </button>
-                <button
-                  type="button"
-                  className={buttonStyles({ variant: "secondary", size: "sm", className: "px-4" })}
-                  onClick={() => void copyShareLink(list)}
-                >
-                  Copia link
-                </button>
-                <button
-                  type="button"
-                  disabled={isPending}
-                  className={buttonStyles({ variant: "ghost", size: "sm", className: "px-4 text-[#7c3f35]" })}
-                  onClick={() => removeList(list)}
-                >
-                  Elimina
-                </button>
+                <div className="mt-auto flex flex-wrap gap-2 pt-5">
+                  <Link
+                    href={{ pathname: "/lists/[listKey]", params: { listKey: `${list.id}-${list.slug}` } }}
+                    className={buttonStyles({ size: "sm", className: "px-4" })}
+                  >
+                    Apri
+                  </Link>
+                  <button
+                    type="button"
+                    className={buttonStyles({ variant: "secondary", size: "sm", className: "px-4" })}
+                    onClick={() => setEditing({ mode: "edit", list })}
+                  >
+                    Modifica
+                  </button>
+                  <button
+                    type="button"
+                    className={buttonStyles({ variant: "secondary", size: "sm", className: "px-4" })}
+                    onClick={() => void copyShareLink(list)}
+                  >
+                    Copia link
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isPending}
+                    className={buttonStyles({ variant: "ghost", size: "sm", className: "px-4 text-[#7c3f35]" })}
+                    onClick={() => removeList(list)}
+                  >
+                    Elimina
+                  </button>
+                </div>
               </div>
             </article>
           ))}

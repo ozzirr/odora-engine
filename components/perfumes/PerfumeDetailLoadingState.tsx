@@ -9,7 +9,17 @@ const PILL_WIDTHS = ["w-24", "w-20"];
 const STAT_WIDTHS = ["w-16", "w-14", "w-16"];
 
 function SkeletonBlock({ className }: { className?: string }) {
-  return <div className={cn("animate-pulse rounded-full bg-[#e8dece]", className)} />;
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "relative overflow-hidden rounded-full bg-[#e8dece]",
+        "after:absolute after:inset-y-0 after:-left-1/2 after:w-1/2 after:bg-gradient-to-r after:from-transparent after:via-white/45 after:to-transparent after:content-['']",
+        "motion-safe:after:animate-[loading-slide_1.65s_ease-in-out_infinite]",
+        className,
+      )}
+    />
+  );
 }
 
 function BottleImageSkeleton() {
@@ -19,12 +29,16 @@ function BottleImageSkeleton() {
       <div className="absolute inset-x-8 bottom-8 h-24 rounded-full bg-[#d8c7b0]/35 blur-3xl sm:inset-x-14" />
 
       <div className="absolute left-1/2 top-1/2 h-[72%] w-[34%] min-w-28 max-w-52 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute left-1/2 -top-[7%] h-[7%] w-[24%] -translate-x-1/2 rounded-t-md bg-[#bfa98e]" />
         <div className="absolute left-1/2 top-0 h-[12%] w-[42%] -translate-x-1/2 rounded-t-[1.1rem] rounded-b-md bg-[#d3c2ac]" />
         <div className="absolute left-1/2 top-[9%] h-[9%] w-[56%] -translate-x-1/2 rounded-lg bg-[#c8b59d]" />
         <div className="absolute left-1/2 top-[17%] h-[78%] w-full -translate-x-1/2 rounded-[2.25rem] border border-[#d5c4ad] bg-[#efe5d7]/82 shadow-[0_28px_46px_-30px_rgba(66,48,31,0.5)]" />
         <div className="absolute left-1/2 top-[35%] h-[28%] w-[72%] -translate-x-1/2 rounded-[1.2rem] border border-[#d9c9b4] bg-[#f8f1e7]/88" />
+        <div className="absolute left-1/2 top-[45%] h-[4%] w-[46%] -translate-x-1/2 rounded-full bg-[#dfd0bb]" />
+        <div className="absolute left-1/2 top-[54%] h-[3%] w-[32%] -translate-x-1/2 rounded-full bg-[#e4d7c5]" />
         <div className="absolute left-[18%] top-[24%] h-[58%] w-[10%] rounded-full bg-white/45 blur-sm" />
         <div className="absolute right-[18%] top-[28%] h-[50%] w-[8%] rounded-full bg-white/35 blur-sm" />
+        <div className="absolute bottom-0 left-1/2 h-[5%] w-[72%] -translate-x-1/2 rounded-[50%] bg-[#b9a58c]/28 blur-sm" />
       </div>
     </div>
   );
@@ -203,6 +217,9 @@ export function PerfumeDetailLoadingState({ variant = "page" }: PerfumeDetailLoa
           "w-full rounded-[1.7rem] border border-[#ddd0be] bg-[#fffdf9] p-4 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6",
         )}
       >
+        <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-[#efe5d6]">
+          <div className="loading-bar-fill h-full w-1/3 rounded-full bg-[#cda664]" />
+        </div>
         <div className="grid gap-5 lg:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <div className="relative h-[20rem] overflow-hidden rounded-[1.25rem] border border-[#ddcfbc] bg-white shadow-[0_18px_36px_-28px_rgba(53,39,27,0.28)] sm:h-[25rem] lg:h-[31rem]">
             <BottleImageSkeleton />

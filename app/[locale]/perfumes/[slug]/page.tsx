@@ -10,6 +10,7 @@ import { AddToListButton } from "@/components/perfumes/AddToListButton";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { OlfactoryPyramidCard } from "@/components/perfumes/OlfactoryPyramidCard";
 import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
+import { PerfumeDetailReadyScrollRestore } from "@/components/perfumes/PerfumeDetailScrollMemory";
 import { PerfumeCommunitySection } from "@/components/perfumes/PerfumeCommunitySection";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { PerfumeHero } from "@/components/perfumes/PerfumeHero";
@@ -306,7 +307,6 @@ async function getPerfumeCommunityData(perfumeId: number) {
     prisma.perfumeReview.findMany({
       where: { perfumeId, source: "user", text: { not: null } },
       orderBy: { createdAt: "desc" },
-      take: 6,
       select: {
         id: true,
         longevityScore: true,
@@ -577,6 +577,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
         namespaces={["catalog", "common", "perfume", "taxonomy"]}
       >
         <PerfumeDetailNavigationReady />
+        <PerfumeDetailReadyScrollRestore />
         <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
           <PerfumeHero
             perfume={perfume}

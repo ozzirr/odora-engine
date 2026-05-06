@@ -27,10 +27,24 @@ const noopNavigationContext: PerfumeDetailNavigationContextValue = {
   completeNavigation: () => {},
 };
 
+function restoreWindowScroll(top: number) {
+  const targetTop = Math.max(0, Math.round(top));
+
+  window.requestAnimationFrame(() => {
+    window.scrollTo({ top: targetTop, left: 0, behavior: "auto" });
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: targetTop, left: 0, behavior: "auto" });
+    });
+  });
+}
+
 export function PerfumeDetailNavigationProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [pendingNavigation, setPendingNavigation] = useState<PendingPerfumeNavigation | null>(null);
   const hideTimeoutRef = useRef<number | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const overlayScrollTopRef = useRef(0);
 
   useEffect(() => {
     return () => {
@@ -74,6 +88,7 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
             sourcePathname: pathname,
             startedAt: Date.now(),
           });
+          overlayScrollTopRef.current = 0;
         },
         completeNavigation: () => {
           setPendingNavigation((current) => {
@@ -86,8 +101,10 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
             }
 
             const remainingMs = Math.max(0, MIN_LOADING_STATE_MS - (Date.now() - current.startedAt));
+            const restoreTop = overlayRef.current?.scrollTop ?? overlayScrollTopRef.current;
 
             if (remainingMs === 0) {
+              restoreWindowScroll(restoreTop);
               return null;
             }
 
@@ -97,6 +114,7 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
 
             hideTimeoutRef.current = window.setTimeout(() => {
               setPendingNavigation(null);
+              restoreWindowScroll(restoreTop);
               hideTimeoutRef.current = null;
             }, remainingMs);
 
@@ -108,6 +126,10 @@ export function PerfumeDetailNavigationProvider({ children }: { children: React.
       {children}
       {pendingNavigation ? (
         <div
+          ref={overlayRef}
+          onScroll={(event) => {
+            overlayScrollTopRef.current = event.currentTarget.scrollTop;
+          }}
           className={cn(
             `pointer-events-auto fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} overflow-y-auto bg-[#fbf8f2]`,
             APP_OVERLAY_LAYER_CLASS,

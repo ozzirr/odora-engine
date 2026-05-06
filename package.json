@@ -19,6 +19,7 @@
     "perfumes:scores:backfill": "node --import tsx scripts/backfill-perfume-scores.ts",
     "perfumes:scores:sync": "node --import tsx scripts/apply-score-backfill-to-verified.ts",
     "community:baseline": "node --import tsx scripts/backfill-community-baseline.ts",
+    "community:reviews": "node --import tsx scripts/backfill-synthetic-reviews.ts",
     "prices:sync": "node --import tsx scripts/sync-prices.ts",
     "offers:backup": "node --import tsx scripts/backup-offers.ts",
     "offers:restore": "node --import tsx scripts/restore-offers.ts",

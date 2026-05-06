@@ -93,11 +93,9 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const isAuthenticated = useAuthStatus(initialIsAuthenticated, { refreshOnChange: true });
   const navItems = [
-    { href: "/" as const, label: t("nav.home") },
     { href: "/perfumes" as const, label: t("nav.perfumes") },
     { href: "/finder" as const, label: t("nav.finder") },
     { href: "/brands" as const, label: t("nav.brands") },
-    { href: "/blog" as const, label: t("nav.blog") },
   ];
   const accountHref = isAuthenticated ? "/profile" : "/login";
   const accountLabel = isAuthenticated ? t("account.profile") : t("account.login");

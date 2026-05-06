@@ -21,9 +21,9 @@ export function ProfileForm({ email, initialName, initialCountryCode, initialBir
   const [state, formAction, isPending] = useActionState(updateProfile, initialState);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="space-y-5">
       <input type="hidden" name="locale" value={locale} />
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <label htmlFor="name" className="text-sm font-medium text-[#3a2e24]">
           {t("name")}
         </label>
@@ -34,11 +34,11 @@ export function ProfileForm({ email, initialName, initialCountryCode, initialBir
           autoComplete="name"
           defaultValue={initialName}
           placeholder={t("namePlaceholder")}
-          className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
+          className="h-12 w-full rounded-2xl border border-[#ddcfbe] bg-white px-4 text-sm outline-none transition focus:border-[#214f3e] focus:ring-4 focus:ring-[#214f3e]/10"
         />
       </div>
 
-      <div className="space-y-1.5">
+      <div className="space-y-2">
         <label htmlFor="email" className="text-sm font-medium text-[#3a2e24]">
           {t("email")}
         </label>
@@ -49,12 +49,12 @@ export function ProfileForm({ email, initialName, initialCountryCode, initialBir
           value={email}
           readOnly
           disabled
-          className="h-11 w-full rounded-xl border border-[#e4d8ca] bg-[#f6f0e8] px-3 text-sm text-[#796857]"
+          className="h-12 w-full rounded-2xl border border-[#e4d8ca] bg-[#f6f0e8] px-4 text-sm text-[#796857]"
         />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           <label htmlFor="countryCode" className="text-sm font-medium text-[#3a2e24]">
             {t("countryCode")}
           </label>
@@ -65,11 +65,11 @@ export function ProfileForm({ email, initialName, initialCountryCode, initialBir
             maxLength={2}
             defaultValue={initialCountryCode ?? ""}
             placeholder={t("countryCodePlaceholder")}
-            className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm uppercase outline-none transition focus:border-[#bda88f]"
+            className="h-12 w-full rounded-2xl border border-[#ddcfbe] bg-white px-4 text-sm uppercase outline-none transition focus:border-[#214f3e] focus:ring-4 focus:ring-[#214f3e]/10"
           />
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           <label htmlFor="birthDate" className="text-sm font-medium text-[#3a2e24]">
             {t("birthDate")}
           </label>
@@ -78,7 +78,7 @@ export function ProfileForm({ email, initialName, initialCountryCode, initialBir
             name="birthDate"
             type="date"
             defaultValue={initialBirthDate ?? ""}
-            className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none transition focus:border-[#bda88f]"
+            className="h-12 w-full rounded-2xl border border-[#ddcfbe] bg-white px-4 text-sm outline-none transition focus:border-[#214f3e] focus:ring-4 focus:ring-[#214f3e]/10"
           />
         </div>
       </div>
