@@ -157,6 +157,13 @@ export function resolveRequestLocale({
   return getLocaleFromAcceptLanguage(acceptLanguage);
 }
 
+export function resolvePublicEntryLocale({
+  acceptLanguage,
+  country,
+}: Pick<ResolveRequestLocaleInput, "acceptLanguage" | "country">): AppLocale {
+  return getLocaleFromCountry(country) ?? getLocaleFromAcceptLanguage(acceptLanguage);
+}
+
 function localizeTemplate(locale: AppLocale, pathname: AppPathname) {
   const localizedPath = pathnames[pathname];
   return String(typeof localizedPath === "string" ? localizedPath : localizedPath[locale]);
