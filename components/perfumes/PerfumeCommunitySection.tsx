@@ -79,12 +79,14 @@ function ScoreInput({ name, label }: { name: string; label: string }) {
 function ReviewForm({
   perfumeId,
   detailPath,
+  isItalian,
   reviewAction,
   reviewPending,
   reviewState,
 }: {
   perfumeId: number;
   detailPath: string;
+  isItalian: boolean;
   reviewAction: (formData: FormData) => void;
   reviewPending: boolean;
   reviewState: CommunityActionState;
@@ -93,26 +95,36 @@ function ReviewForm({
     <form action={reviewAction} className="rounded-[1.35rem] border border-[#eadfce] bg-white p-4 shadow-[0_18px_36px_-30px_rgba(53,39,27,0.2)] sm:p-5">
       <input type="hidden" name="perfumeId" value={perfumeId} />
       <input type="hidden" name="detailPath" value={detailPath} />
-      <h3 className="font-display text-2xl text-[#21180f]">Scrivi una recensione</h3>
+      <h3 className="font-display text-2xl text-[#21180f]">
+        {isItalian ? "Scrivi una recensione" : "Write a review"}
+      </h3>
       <p className="mt-2 text-sm leading-6 text-[#685747]">
-        Lascia un voto rapido su persistenza, scia e versatilita, con due righe opzionali sulla tua esperienza.
+        {isItalian
+          ? "Lascia un voto rapido su persistenza, scia e versatilita, con due righe opzionali sulla tua esperienza."
+          : "Leave quick scores for longevity, sillage, and versatility, with an optional note about your experience."}
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <ScoreInput name="longevityScore" label="Persistenza" />
-        <ScoreInput name="sillageScore" label="Scia" />
-        <ScoreInput name="versatilityScore" label="Versatilita" />
+        <ScoreInput name="longevityScore" label={isItalian ? "Persistenza" : "Longevity"} />
+        <ScoreInput name="sillageScore" label={isItalian ? "Scia" : "Sillage"} />
+        <ScoreInput name="versatilityScore" label={isItalian ? "Versatilita" : "Versatility"} />
       </div>
       <textarea
         name="text"
         rows={4}
         maxLength={500}
-        placeholder="Due righe opzionali sulla tua esperienza"
+        placeholder={isItalian ? "Due righe opzionali sulla tua esperienza" : "Optional note about your experience"}
         className="mt-3 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 py-2 text-sm outline-none"
       />
       {reviewState.error ? <p className="mt-2 text-sm text-[#7c3f35]">{reviewState.error}</p> : null}
       {reviewState.message ? <p className="mt-2 text-sm text-[#4d6340]">{reviewState.message}</p> : null}
       <button type="submit" disabled={reviewPending} className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}>
-        {reviewPending ? "Salvataggio..." : "Salva recensione"}
+        {reviewPending
+          ? isItalian
+            ? "Salvataggio..."
+            : "Saving..."
+          : isItalian
+            ? "Salva recensione"
+            : "Save review"}
       </button>
     </form>
   );
@@ -122,6 +134,7 @@ function PriceForm({
   perfumeId,
   detailPath,
   userCountryCode,
+  isItalian,
   priceAction,
   pricePending,
   priceState,
@@ -129,6 +142,7 @@ function PriceForm({
   perfumeId: number;
   detailPath: string;
   userCountryCode?: string | null;
+  isItalian: boolean;
   priceAction: (formData: FormData) => void;
   pricePending: boolean;
   priceState: CommunityActionState;
@@ -137,9 +151,13 @@ function PriceForm({
     <form action={priceAction} className="rounded-[1.35rem] border border-[#eadfce] bg-white p-4 shadow-[0_18px_36px_-30px_rgba(53,39,27,0.2)] sm:p-5">
       <input type="hidden" name="perfumeId" value={perfumeId} />
       <input type="hidden" name="detailPath" value={detailPath} />
-      <h3 className="font-display text-2xl text-[#21180f]">Aggiungi il prezzo pagato</h3>
+      <h3 className="font-display text-2xl text-[#21180f]">
+        {isItalian ? "Aggiungi il prezzo pagato" : "Add the price you paid"}
+      </h3>
       <p className="mt-2 text-sm leading-6 text-[#685747]">
-        Condividi quanto lo hai pagato e dove, cosi la pagina diventa piu utile anche sul lato prezzo reale.
+        {isItalian
+          ? "Condividi quanto lo hai pagato e dove, cosi la pagina diventa piu utile anche sul lato prezzo reale."
+          : "Share what you paid and where, so the page becomes more useful for real-world pricing too."}
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_96px]">
         <input
@@ -163,13 +181,13 @@ function PriceForm({
         <input
           name="countryCode"
           defaultValue={userCountryCode ?? ""}
-          placeholder="Paese, es. IT"
+          placeholder={isItalian ? "Paese, es. IT" : "Country, e.g. US"}
           maxLength={2}
           className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm uppercase outline-none"
         />
         <input
           name="storeName"
-          placeholder="Store opzionale"
+          placeholder={isItalian ? "Store opzionale" : "Optional store"}
           className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
         />
       </div>
@@ -181,7 +199,13 @@ function PriceForm({
       {priceState.error ? <p className="mt-2 text-sm text-[#7c3f35]">{priceState.error}</p> : null}
       {priceState.message ? <p className="mt-2 text-sm text-[#4d6340]">{priceState.message}</p> : null}
       <button type="submit" disabled={pricePending} className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}>
-        {pricePending ? "Salvataggio..." : "Aggiungi prezzo"}
+        {pricePending
+          ? isItalian
+            ? "Salvataggio..."
+            : "Saving..."
+          : isItalian
+            ? "Aggiungi prezzo"
+            : "Add price"}
       </button>
     </form>
   );
@@ -441,6 +465,7 @@ export function PerfumeCommunitySection({
           <ReviewForm
             perfumeId={perfumeId}
             detailPath={detailPath}
+            isItalian={isItalian}
             reviewAction={reviewAction}
             reviewPending={reviewPending}
             reviewState={reviewState}
@@ -452,6 +477,7 @@ export function PerfumeCommunitySection({
             perfumeId={perfumeId}
             detailPath={detailPath}
             userCountryCode={userCountryCode}
+            isItalian={isItalian}
             priceAction={priceAction}
             pricePending={pricePending}
             priceState={priceState}

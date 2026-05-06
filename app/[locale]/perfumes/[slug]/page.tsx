@@ -132,6 +132,130 @@ const perfumeDiscoveryInclude = {
   },
 } satisfies Prisma.PerfumeSelect;
 
+const SYNTHETIC_REVIEWER_PREFIX = "odora-synthetic-reviewer-";
+
+type PerfumeDetailRecord = Prisma.PerfumeGetPayload<{ include: typeof perfumeDetailInclude }>;
+type CommunityReviewRecord = {
+  id: number;
+  userId: string;
+  longevityScore: number;
+  sillageScore: number;
+  versatilityScore: number;
+  text: string | null;
+  createdAt: Date;
+  user: {
+    name: string | null;
+    countryCode: string | null;
+  };
+};
+
+function hashNumber(input: string) {
+  let hash = 2166136261;
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function pickDeterministic<T>(items: readonly T[], seed: number) {
+  return items[seed % items.length];
+}
+
+function getMainNoteNames(perfume: PerfumeDetailRecord, count = 2) {
+  return perfume.notes
+    .slice()
+    .sort((left, right) => (right.intensity ?? 0) - (left.intensity ?? 0))
+    .slice(0, count)
+    .map((item) => item.note?.name)
+    .filter((name): name is string => Boolean(name));
+}
+
+function joinEnglishList(words: string[]) {
+  if (words.length === 0) return "";
+  if (words.length === 1) return words[0];
+  if (words.length === 2) return `${words[0]} and ${words[1]}`;
+  return `${words.slice(0, -1).join(", ")}, and ${words[words.length - 1]}`;
+}
+
+function buildEnglishSyntheticReview(perfume: PerfumeDetailRecord, review: CommunityReviewRecord) {
+  const seed = hashNumber(`${perfume.id}:${review.userId}:${review.id}:en-review-v1`);
+  const notes = joinEnglishList(getMainNoteNames(perfume, seed % 3 === 0 ? 3 : 2));
+  const family = perfume.fragranceFamily.toLowerCase();
+  const performance =
+    review.longevityScore >= 8
+      ? "It lasts longer than I expected, especially on fabric."
+      : review.longevityScore <= 5
+        ? "The longevity is moderate, so I would reapply it during a long day."
+        : "The longevity feels balanced and easy to manage.";
+  const sillage =
+    review.sillageScore >= 8
+      ? "The projection is noticeable, so I would keep the sprays controlled."
+      : review.sillageScore <= 5
+        ? "The trail stays close, which makes it comfortable in smaller spaces."
+        : "The trail is present without taking over the room.";
+  const context = pickDeterministic(
+    [
+      "I wore it for a normal day rather than just testing it on paper.",
+      "I tested it across a few hours and paid attention to the drydown.",
+      "I tried it outside and then again indoors, where the softer side came through.",
+      "It made more sense on skin than from the opening spray alone.",
+    ],
+    seed,
+  );
+  const familySentence = family.includes("wood")
+    ? "The woody side gives it structure and keeps it from feeling too simple."
+    : family.includes("amber") || family.includes("oriental")
+      ? "The warm side is the part that stays with me the most."
+      : family.includes("fresh") || family.includes("citrus")
+        ? "The fresh side keeps it clean without making it feel flat."
+        : family.includes("floral")
+          ? "The floral part feels polished rather than overly sweet."
+          : "The overall profile is clear and easy to understand.";
+  const noteSentence = notes
+    ? `On my skin, the notes I notice most are ${notes}.`
+    : "On my skin, the blend feels cleaner than the first spray suggests.";
+  const priceSentence =
+    perfume.priceRange === "LUXURY" || perfume.isNiche
+      ? "At this price, I would still test it first, but the quality feels convincing."
+      : "For the price range, it feels like a solid and wearable choice.";
+  const closing = pickDeterministic(
+    [
+      "I would wear it again, mostly when I want something polished but not loud.",
+      "It is not for every situation, but in the right mood it works well.",
+      "I would recommend it to someone who likes this style and wants an easy reach.",
+      "It feels reliable, especially if you already enjoy this fragrance family.",
+    ],
+    seed >> 3,
+  );
+
+  return [context, noteSentence, familySentence, performance, sillage, priceSentence, closing]
+    .filter(Boolean)
+    .slice(0, 4 + (seed % 3))
+    .join(" ");
+}
+
+function localizeCommunityReviews(
+  reviews: CommunityReviewRecord[],
+  locale: AppLocale,
+  perfume: PerfumeDetailRecord,
+) {
+  if (locale !== "en") {
+    return reviews;
+  }
+
+  return reviews.map((review) => {
+    if (!review.userId.startsWith(SYNTHETIC_REVIEWER_PREFIX)) {
+      return review;
+    }
+
+    return {
+      ...review,
+      text: buildEnglishSyntheticReview(perfume, review),
+    };
+  });
+}
+
 async function getPerfumeRecordBySlugUncached(slug: string, catalogMode: CatalogMode) {
   if (!isDatabaseConfigured) {
     return null;
@@ -271,7 +395,7 @@ async function getPerfumePageData(slug: string) {
   )();
 }
 
-async function getPerfumeCommunityData(perfumeId: number) {
+async function getPerfumeCommunityData(perfume: PerfumeDetailRecord, locale: AppLocale) {
   if (!prisma.perfumeReview || !prisma.perfumePurchasePrice) {
     return {
       stats: {
@@ -289,7 +413,7 @@ async function getPerfumeCommunityData(perfumeId: number) {
 
   const [reviewAggregates, priceAggregates, reviews] = await Promise.all([
     prisma.perfumeReview.aggregate({
-      where: { perfumeId },
+      where: { perfumeId: perfume.id },
       _count: { _all: true },
       _avg: {
         longevityScore: true,
@@ -298,17 +422,18 @@ async function getPerfumeCommunityData(perfumeId: number) {
       },
     }),
     prisma.perfumePurchasePrice.aggregate({
-      where: { perfumeId, currency: "EUR" },
+      where: { perfumeId: perfume.id, currency: "EUR" },
       _count: { _all: true },
       _avg: {
         priceAmount: true,
       },
     }),
     prisma.perfumeReview.findMany({
-      where: { perfumeId, source: "user", text: { not: null } },
+      where: { perfumeId: perfume.id, source: "user", text: { not: null } },
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
+        userId: true,
         longevityScore: true,
         sillageScore: true,
         versatilityScore: true,
@@ -324,6 +449,8 @@ async function getPerfumeCommunityData(perfumeId: number) {
     }),
   ]);
 
+  const localizedReviews = localizeCommunityReviews(reviews, locale, perfume);
+
   return {
     stats: {
       reviewCount: reviewAggregates._count._all,
@@ -334,7 +461,7 @@ async function getPerfumeCommunityData(perfumeId: number) {
       avgPrice: priceAggregates._avg.priceAmount,
       currency: "EUR",
     },
-    reviews,
+    reviews: localizedReviews,
   };
 }
 
@@ -438,7 +565,7 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       })
     : null;
   const bestOffer = computeBestOffer(perfume.offers);
-  const communityData = await getPerfumeCommunityData(perfume.id);
+  const communityData = await getPerfumeCommunityData(perfume, resolvedLocale);
   const communityStats = {
     ...communityData.stats,
     avgLongevity: communityData.stats.avgLongevity ?? perfume.longevityScore ?? null,
