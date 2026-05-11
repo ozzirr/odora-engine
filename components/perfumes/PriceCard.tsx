@@ -50,10 +50,10 @@ export function PriceCard({ bestOffer, amazonUrl, className }: PriceCardProps) {
         className,
       )}
     >
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7763]">
         {isItalian ? "Miglior prezzo online" : "Best price online"}
       </p>
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">
+      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7763]">
         {isItalian ? "Da" : "From"}
       </p>
       <p className="mt-1 text-[2.75rem] font-semibold leading-none text-[#1f1914] sm:text-[2.9rem]">
@@ -81,11 +81,11 @@ export function PriceCard({ bestOffer, amazonUrl, className }: PriceCardProps) {
         </span>
       </a>
 
-      <p className="mt-2 text-center text-xs font-medium text-[#8a7763]">
+      <p className="mt-2 text-center text-sm font-medium text-[#8a7763]">
         {isItalian ? "I prezzi possono variare in base al retailer" : "Prices may vary by retailer"}
       </p>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2 text-xs font-medium text-[#315f4c]">
+      <div className="mt-3 flex flex-wrap items-center gap-2 text-sm font-medium text-[#315f4c]">
         <span className="inline-flex h-2 w-2 rounded-full bg-[#1e4b3b]" />
         <span>{isItalian ? "Link affiliato Amazon" : "Amazon affiliate link"}</span>
         <span className="text-[#b9a58d]">/</span>

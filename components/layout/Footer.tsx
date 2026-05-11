@@ -30,7 +30,7 @@ export function Footer() {
         <div className="rounded-[var(--radius-card-lg)] border border-[#ede4d8] bg-[linear-gradient(180deg,rgba(255,252,247,0.92),rgba(246,238,228,0.95))] p-5 shadow-[var(--shadow-card)] sm:p-7">
           <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.78fr)]">
             <div className="rounded-[var(--radius-card)] border border-[#ede4d8] bg-white/72 p-5 sm:p-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#907b66]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#907b66]">
                 {t("navigation")}
               </p>
               <div className="mt-4 grid grid-cols-2 gap-2.5">
@@ -61,7 +61,7 @@ export function Footer() {
             </div>
 
             <div className="rounded-[var(--radius-card)] border border-[#ede4d8] bg-[linear-gradient(180deg,rgba(248,242,234,0.92),rgba(242,233,221,0.88))] p-5 sm:p-6">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#907b66]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#907b66]">
                 {t("legal")}
               </p>
               <div className="mt-4 flex flex-col gap-2.5">
@@ -77,7 +77,7 @@ export function Footer() {
               </div>
 
               <div className="mt-5 border-t border-[#ede4d8] pt-4">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#907b66]">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#907b66]">
                   {t("privacyControlsTitle")}
                 </p>
                 <div className="mt-2.5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
+import { SearchDialog } from "@/components/search/SearchDialog";
 import { buttonStyles } from "@/components/ui/Button";
 import { buildPathWithoutAuthModal, getAuthMode } from "@/lib/auth-modal";
 import {
@@ -18,10 +18,6 @@ import { lockDocumentScroll } from "@/lib/document-scroll-lock";
 import { Link, usePathname } from "@/lib/navigation";
 import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 import { cn } from "@/lib/utils";
-
-const SearchDialog = dynamic(
-  () => import("@/components/search/SearchDialog").then((module) => module.SearchDialog),
-);
 
 type HeaderProps = {
   initialIsAuthenticated?: boolean;
@@ -296,7 +292,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation-panel"
           className={cn(
-            "inline-flex h-11 items-center gap-3 rounded-full border px-3.5 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_18px_40px_-28px_rgba(31,25,20,0.9)] backdrop-blur-sm transition-all lg:hidden",
+            "inline-flex h-11 items-center gap-3 rounded-full border px-3.5 text-sm font-semibold uppercase tracking-[0.14em] shadow-[0_18px_40px_-28px_rgba(31,25,20,0.9)] backdrop-blur-sm transition-all lg:hidden",
             menuOpen
               ? "border-[#204f3f] bg-[#1e4b3b] text-white"
               : "border-[#d8cbb9] bg-white/70 text-[#3e3025] hover:border-[#cfbda5] hover:bg-white",
@@ -364,7 +360,7 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
 
           <div className="relative px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-5">
             <div className="mb-5 border-b border-[#eadfce] pb-4">
-              <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-[#8c745c]">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8c745c]">
                 {t("eyebrow")}
               </p>
               <div className="relative mt-3 pr-16 sm:pr-18">

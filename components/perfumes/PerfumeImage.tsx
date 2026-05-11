@@ -60,18 +60,18 @@ function PerfumeImageFallback({
       <div className="absolute left-1/2 top-1/2 h-[72%] w-[45%] -translate-x-1/2 -translate-y-1/2 rounded-[2.3rem] border border-[#d8c6b0] bg-[#fbf5ec]/85 shadow-[0_26px_38px_-26px_rgba(71,52,34,0.52)]" />
 
       <div className="relative z-10 flex h-full flex-col justify-between px-5 py-6 text-center">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#806e5a]">{brandName}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#806e5a]">{brandName}</p>
 
         <div className="space-y-2">
           <p className="font-display text-2xl leading-tight text-[#271d15] sm:text-3xl">{perfumeName}</p>
           {fragranceFamily ? (
-            <span className="inline-flex rounded-full border border-[#d4c0aa] bg-[#fbf5ec]/90 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-[#715f4c]">
+            <span className="inline-flex rounded-full border border-[#d4c0aa] bg-[#fbf5ec]/90 px-3 py-1 text-xs uppercase tracking-[0.1em] text-[#715f4c]">
               {fragranceFamily}
             </span>
           ) : null}
         </div>
 
-        <p className="text-[10px] uppercase tracking-[0.16em] text-[#8f7c68]">{t("selection")}</p>
+        <p className="text-xs uppercase tracking-[0.12em] text-[#8f7c68]">{t("selection")}</p>
       </div>
     </div>
   );

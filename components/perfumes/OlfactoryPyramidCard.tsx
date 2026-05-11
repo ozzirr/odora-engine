@@ -36,7 +36,7 @@ export function OlfactoryPyramidCard({ notes }: { notes: NoteListItem[] }) {
     <section className="overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#907b66]">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#907b66]">
             {locale === "it" ? "Note" : "Notes"}
           </p>
           <h2 className="mt-1 font-display text-xl text-[#21180f] sm:text-2xl">
@@ -65,7 +65,7 @@ export function OlfactoryPyramidCard({ notes }: { notes: NoteListItem[] }) {
                   "mx-auto flex h-full max-w-[34rem] flex-col items-center justify-center gap-2.5 text-center",
                 )}
               >
-                <h3 className={cn("text-[10px] font-bold uppercase tracking-[0.18em]", level.labelClassName)}>
+                <h3 className={cn("text-xs font-bold uppercase tracking-[0.14em]", level.labelClassName)}>
                   {t(`types.${type}`)}
                 </h3>
                 <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2">
@@ -78,7 +78,7 @@ export function OlfactoryPyramidCard({ notes }: { notes: NoteListItem[] }) {
                     <span className={cn("flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors", level.iconClassName)}>
                       <NoteIcon slug={item.slug} className="h-4 w-4" />
                     </span>
-                    <span className="truncate text-[11px] font-semibold leading-tight text-[#2f251d]">
+                    <span className="truncate text-xs font-semibold leading-tight text-[#2f251d]">
                       {item.name}
                     </span>
                   </Link>

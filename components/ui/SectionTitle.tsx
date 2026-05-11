@@ -11,7 +11,7 @@ export function SectionTitle({ eyebrow, title, subtitle, as = "h2" }: SectionTit
   return (
     <div className="space-y-3">
       {eyebrow ? (
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#907b66]">
           {eyebrow}
         </p>
       ) : null}

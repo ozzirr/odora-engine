@@ -62,7 +62,7 @@ type PerfumeHeroProps = {
 function MetricItem({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="min-w-0 rounded-xl border border-[#e4d8c8] bg-white/68 px-2 py-2 text-center shadow-[0_12px_28px_-26px_rgba(53,39,27,0.32)]">
-      <p className="truncate text-[9px] font-semibold uppercase leading-none tracking-[0.1em] text-[#8a7763]">
+      <p className="truncate text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-[#8a7763]">
         {label}
       </p>
       <p className="mt-1 text-base font-semibold leading-none text-[#1f1914]">
@@ -103,7 +103,7 @@ function RatingBlock({
       <div className="pointer-events-none absolute right-3 top-3 h-14 w-14 rounded-full border border-[#e7dac8]/70 bg-white/34" />
       <div className="relative flex items-start justify-between gap-4">
         <div>
-          <p className="max-w-[11rem] text-[10px] font-semibold uppercase leading-[1.35] tracking-[0.16em] text-[#8a7763] sm:max-w-none">
+          <p className="max-w-[12rem] text-[11px] font-semibold uppercase leading-[1.35] tracking-[0.12em] text-[#8a7763] sm:max-w-none">
             {label}
           </p>
           <p className="mt-1 text-[2.35rem] font-semibold leading-none tracking-[-0.02em] text-[#1f1914] sm:text-[2.55rem]">
@@ -206,7 +206,7 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
                   {perfume.name}
                 </h1>
                 {popularityBadge ? (
-                  <span className="mt-1 rounded-full border border-[#d7e4d8] bg-[#edf4ee] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1e4b3b]">
+                  <span className="mt-1 rounded-full border border-[#d7e4d8] bg-[#edf4ee] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#1e4b3b]">
                     {popularityBadge}
                   </span>
                 ) : null}

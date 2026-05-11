@@ -123,7 +123,7 @@ export function PerfumeFilters({ selectedFilters, filterOptions }: PerfumeFilter
               <NoteIcon slug={activeNoteFilter.value} className="h-5 w-5" />
             </span>
             <div className="min-w-0">
-              <p className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-[#9a846d]">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#9a846d]">
                 {activeNoteFilter.typeLabel}
               </p>
               <p className="mt-1 font-display text-[1.3rem] leading-[1.02] tracking-[-0.02em] text-[#31251b]">

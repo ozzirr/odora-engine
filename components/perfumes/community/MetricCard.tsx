@@ -37,7 +37,7 @@ export function MetricCard({ label, value, score, icon, muted = false }: MetricC
     <article className="rounded-2xl border border-[#eadfce] bg-white p-3 shadow-[0_16px_34px_-30px_rgba(53,39,27,0.26)] transition-all duration-200 active:scale-[0.99] sm:p-4 sm:hover:-translate-y-0.5 sm:hover:shadow-[0_22px_42px_-32px_rgba(53,39,27,0.34)]">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8b7762]">{label}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8b7762]">{label}</p>
           <p className={cn("mt-1 truncate text-xl font-semibold text-[#21180f] sm:text-2xl", muted && "text-[#8b7762]")}>
             {value}
           </p>

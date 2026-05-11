@@ -35,7 +35,7 @@ function MiniMetric({ label, value }: { label: string; value: number }) {
 
   return (
     <div className="rounded-xl border border-[#e4d8c8] bg-[#fffdf9]/78 px-2.5 py-2 text-center shadow-[0_12px_28px_-26px_rgba(53,39,27,0.32)]">
-      <p className="truncate text-[9px] font-semibold uppercase leading-none tracking-[0.1em] text-[#8a7763]">
+      <p className="truncate text-[11px] font-semibold uppercase leading-none tracking-[0.08em] text-[#8a7763]">
         {label}
       </p>
       <p className="mt-1 text-base font-semibold leading-none text-[#1f1914]">
@@ -67,12 +67,12 @@ export function ReviewCard({ review, index, isItalian }: ReviewCardProps) {
           <div className="flex flex-wrap items-center gap-2">
             <p className="truncate text-base font-semibold text-[#21180f] sm:text-lg">{username}</p>
             {badge ? (
-              <span className="rounded-full border border-[#d7e4d8] bg-white px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-[0.1em] text-[#56745c]">
+              <span className="rounded-full border border-[#d7e4d8] bg-white px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#56745c]">
                 {badge}
               </span>
             ) : null}
           </div>
-          <p className="text-xs text-[#8b7762]">
+          <p className="text-sm leading-5 text-[#8b7762]">
             {isItalian ? "Esperienza condivisa dalla community" : "Shared community experience"}
           </p>
         </div>

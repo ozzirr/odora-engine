@@ -98,7 +98,7 @@ export function BestOfferCard({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">{resolvedTitle}</p>
           {updatedLabel ? (
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#dfcfbc] bg-white/78 px-2.5 py-1 text-[10px] font-medium text-[#665545] shadow-[0_14px_26px_-24px_rgba(56,40,25,0.42)]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#dfcfbc] bg-white/78 px-2.5 py-1 text-xs font-medium text-[#665545] shadow-[0_14px_26px_-24px_rgba(56,40,25,0.42)]">
               <span className="h-2 w-2 rounded-full bg-[#1e4b3b]" />
               {updatedLabel}
             </span>
@@ -114,7 +114,7 @@ export function BestOfferCard({
             </div>
 
             <div className="flex flex-col items-start gap-1.5 text-left sm:items-end sm:text-right">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8a7763]">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7763]">
                 {t("selectedRetailer")}
               </p>
               <RetailerLogo
@@ -130,12 +130,12 @@ export function BestOfferCard({
 
         <div className="mt-3 grid grid-cols-2 gap-2.5">
           <div className="rounded-[1.1rem] border border-[#e3d6c7] bg-white/74 px-3.5 py-3 shadow-[0_16px_35px_-34px_rgba(56,40,25,0.38)]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">{t("item")}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a7763]">{t("item")}</p>
             <p className="mt-1 text-base font-semibold text-[#241b14]">{itemPrice}</p>
           </div>
 
           <div className="rounded-[1.1rem] border border-[#e3d6c7] bg-white/74 px-3.5 py-3 shadow-[0_16px_35px_-34px_rgba(56,40,25,0.38)]">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">{t("shipping")}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a7763]">{t("shipping")}</p>
             <p className="mt-1 text-base font-semibold text-[#241b14]">{shippingPrice}</p>
           </div>
         </div>
