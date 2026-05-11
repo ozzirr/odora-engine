@@ -22,7 +22,10 @@ type AddToListButtonProps = {
   lists: UserPerfumeListForPerfume[];
   loginNextPath: string;
   variant?: "card" | "compact";
+  buttonVariant?: "primary" | "secondary";
   className?: string;
+  label?: string;
+  onAuthRequired?: () => void;
 };
 
 export function AddToListButton({
@@ -31,7 +34,10 @@ export function AddToListButton({
   lists,
   loginNextPath,
   variant = "card",
+  buttonVariant = "primary",
   className,
+  label,
+  onAuthRequired,
 }: AddToListButtonProps) {
   const locale = useLocale();
   const router = useRouter();
@@ -47,7 +53,7 @@ export function AddToListButton({
     () => true,
     () => false,
   );
-  const addLabel = locale === "it" ? "Aggiungi ai preferiti" : "Add to favorites";
+  const addLabel = label ?? (locale === "it" ? "Aggiungi ai preferiti" : "Add to favorites");
   const restoredIntentRef = useRef(false);
 
   const resolveAddToListNextPath = () => {
@@ -85,13 +91,31 @@ export function AddToListButton({
 
   if (!isAuthenticated) {
     if (variant === "compact") {
+      if (onAuthRequired) {
+        return (
+          <button type="button" className={buttonStyles({ variant: buttonVariant, className })} onClick={onAuthRequired}>
+            <span className="inline-flex items-center justify-center gap-2">
+              <span aria-hidden="true">＋</span>
+              <span>{addLabel}</span>
+            </span>
+          </button>
+        );
+      }
+
       return (
         <AuthModalTrigger
           mode="login"
           resolveNextPath={resolveAddToListNextPath}
-          className={buttonStyles({ className })}
+          className={buttonStyles({ variant: buttonVariant, className })}
         >
-          {addLabel}
+          {label ? (
+            <span className="inline-flex items-center justify-center gap-2">
+              <span aria-hidden="true">＋</span>
+              <span>{addLabel}</span>
+            </span>
+          ) : (
+            addLabel
+          )}
         </AuthModalTrigger>
       );
     }
@@ -156,7 +180,7 @@ export function AddToListButton({
 
   const trigger =
     variant === "compact" ? (
-      <button type="button" className={buttonStyles({ className })} onClick={() => setOpen(true)}>
+      <button type="button" className={buttonStyles({ variant: buttonVariant, className })} onClick={() => setOpen(true)}>
         <span className="inline-flex items-center justify-center gap-2">
           <span aria-hidden="true">＋</span>
           <span>{addLabel}</span>

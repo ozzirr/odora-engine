@@ -652,6 +652,14 @@
     "hero": {
       "unknownBrand": "Unknown brand",
       "rating": "Rating {value}",
+      "score": {
+        "label": "Odora Community Score"
+      },
+      "badges": {
+        "communityFavorite": "Community favorite",
+        "earlyRatings": "Early ratings",
+        "popular": "Popular"
+      },
       "metrics": {
         "longevity": "Longevity",
         "sillage": "Sillage",
@@ -772,7 +780,7 @@
         },
         "where": {
           "q": "Where can I buy {name} at the best price?",
-          "a": "On Odora we compare offers from the main online stores for {name} in real time, showing you the lowest total including shipping. Click 'Go to offer' to buy from the retailer of your choice."
+          "a": "On Odora we compare offers from the main online stores for {name} in real time, showing you the lowest total including shipping. Click 'Compare prices' to view available offers and choose the retailer."
         }
       }
     }

@@ -18,6 +18,7 @@ import { PriceAlertCard } from "@/components/perfumes/PriceAlertCard";
 import { PriceCard } from "@/components/perfumes/PriceCard";
 import { FaqSection } from "@/components/seo/FaqSection";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { buttonStyles } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { getAmazonProductUrl } from "@/lib/amazon";
 import { PUBLIC_CACHE_TAGS, getPerfumeDetailTag } from "@/lib/cache-tags";
@@ -39,6 +40,7 @@ import { computeBestOffer } from "@/lib/pricing";
 import { buildBreadcrumbSchema, buildFaqSchema, buildProductSchema } from "@/lib/structured-data";
 import { getCurrentUser } from "@/lib/supabase/auth-state";
 import { buildPerfumeFaqItems } from "@/lib/perfume-faq";
+import { Link } from "@/lib/navigation";
 import { getLocalizedTaxonomyLabel } from "@/lib/taxonomy-display";
 import { formatCurrency } from "@/lib/utils";
 
@@ -609,6 +611,9 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
     : t("cheaperAlternativesSubtitle");
   const localizedPerfume = {
     ...perfume,
+    longevityScore: communityStats.avgLongevity != null ? Math.round(communityStats.avgLongevity) : perfume.longevityScore,
+    sillageScore: communityStats.avgSillage != null ? Math.round(communityStats.avgSillage) : perfume.sillageScore,
+    versatilityScore: communityStats.avgVersatility != null ? Math.round(communityStats.avgVersatility) : perfume.versatilityScore,
     fragranceFamily: getLocalizedTaxonomyLabel(perfume.fragranceFamily, "families", taxonomyT) || perfume.fragranceFamily,
     notes: perfume.notes?.map((item) => ({
       ...item,
@@ -705,9 +710,9 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       >
         <PerfumeDetailNavigationReady />
         <PerfumeDetailReadyScrollRestore />
-        <Container className="space-y-6 pt-4 pb-40 md:space-y-8 md:pt-6 md:pb-10">
+        <Container className="space-y-4 pt-3 pb-40 md:space-y-8 md:pt-6 md:pb-10">
           <PerfumeHero
-            perfume={perfume}
+            perfume={localizedPerfume}
             reviewCount={communityStats.reviewCount}
             listAction={
               <AddToListButton
@@ -716,16 +721,29 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
                 lists={userLists}
                 loginNextPath={detailPath}
                 variant="compact"
-                className="h-12 w-full"
+                buttonVariant="secondary"
+                label={resolvedLocale === "it" ? "Aggiungi alla collezione" : "Add to collection"}
+                className="h-12 w-full rounded-2xl"
               />
             }
           />
 
-          <section className="rounded-[1.45rem] border border-[#ddcfbc] bg-white p-6 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
+          <section className="rounded-2xl border border-[#ddcfbc] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
             <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
           </section>
 
           <OlfactoryPyramidCard notes={notesForRender} />
+
+          <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+            <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
+
+            <PriceAlertCard
+              perfumeId={perfume.id}
+              detailPath={detailPath}
+              isAuthenticated={Boolean(appUser)}
+              isActive={Boolean(priceAlert?.active)}
+            />
+          </section>
 
           <section className="grid gap-4 md:grid-cols-3">
             <MoodBadges
@@ -760,17 +778,6 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             />
           </section>
 
-          <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
-            <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
-
-            <PriceAlertCard
-              perfumeId={perfume.id}
-              detailPath={detailPath}
-              isAuthenticated={Boolean(appUser)}
-              isActive={Boolean(priceAlert?.active)}
-            />
-          </section>
-
           <PerfumeCommunitySection
             perfumeId={perfume.id}
             detailPath={detailPath}
@@ -778,25 +785,26 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             locale={resolvedLocale}
             stats={communityStats}
             reviews={communityData.reviews}
+            userLists={userLists}
             userCountryCode={appUser?.countryCode}
           />
 
-          <section className="space-y-4">
+          <section className="space-y-3 sm:space-y-4">
             <SectionTitle
               eyebrow={t("value.eyebrow")}
               title={t("value.title")}
               subtitle={cheaperAlternativesSubtitle}
             />
-            <PerfumeGrid perfumes={cheaperAlternatives} />
+            <PerfumeGrid perfumes={cheaperAlternatives} layout="mobile-carousel" cardVariant="compact" />
           </section>
 
-          <section className="space-y-4">
+          <section className="space-y-3 sm:space-y-4">
             <SectionTitle
               eyebrow={t("discovery.eyebrow")}
               title={t("discovery.title")}
               subtitle={t("discovery.subtitle")}
             />
-            <PerfumeGrid perfumes={similarPerfumes} />
+            <PerfumeGrid perfumes={similarPerfumes} layout="mobile-carousel" cardVariant="compact" />
           </section>
 
           <FaqSection
@@ -805,6 +813,34 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             subtitle={faqT("subtitle")}
             items={faqItems}
           />
+
+          <section className="overflow-hidden rounded-2xl border border-[#d7c8b6] bg-[linear-gradient(135deg,#fffdf9_0%,#edf4ee_54%,#f7efe4_100%)] p-4 shadow-[0_22px_55px_-40px_rgba(44,31,20,0.38)] sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#1e4b3b]">
+                  Smart Finder
+                </p>
+                <h2 className="mt-1 font-display text-xl leading-tight text-[#21180f] sm:text-2xl">
+                  {resolvedLocale === "it"
+                    ? "Trova il prossimo profumo giusto per te"
+                    : "Find the next fragrance that fits you"}
+                </h2>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[#5d4c3b]">
+                  {resolvedLocale === "it"
+                    ? "Rispondi a poche domande e lascia che Odora ti suggerisca fragranze in linea con gusto, stagione e budget."
+                    : "Answer a few quick questions and let Odora suggest fragrances aligned with your taste, season, and budget."}
+                </p>
+              </div>
+              <Link
+                href="/finder"
+                className={buttonStyles({
+                  className: "h-12 w-full rounded-2xl px-6 sm:w-auto",
+                })}
+              >
+                {resolvedLocale === "it" ? "Apri Smart Finder" : "Open Smart Finder"}
+              </Link>
+            </div>
+          </section>
         </Container>
       </ScopedIntlProvider>
     </>

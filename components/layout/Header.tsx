@@ -333,10 +333,11 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           <span>{menuOpen ? t("close") : t("menu")}</span>
         </button>
       </div>
+    </header>
 
       <div
         className={cn(
-          `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} z-30 transition-opacity duration-300 lg:hidden`,
+          `fixed inset-x-0 bottom-0 ${APP_HEADER_OFFSET_CLASS} z-[70] transition-opacity duration-300 lg:hidden`,
           menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
       >
@@ -496,7 +497,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
         </div>
       </div>
 
-    </header>
     {searchOpen ? <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} /> : null}
     </>
   );

@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 
 type PerfumeGridProps = {
   perfumes: PerfumeCardItem[];
-  cardVariant?: "default" | "catalog" | "featured" | "finder";
+  cardVariant?: "default" | "catalog" | "featured" | "finder" | "compact";
   mobileColumns?: 2 | 3;
   desktopColumns?: 3 | 4;
-  layout?: "grid" | "list";
+  layout?: "grid" | "list" | "mobile-carousel";
   animateItems?: boolean;
   itemAnimationKey?: number | string;
   injectInFeedAd?: boolean;
@@ -39,6 +39,18 @@ export function PerfumeGrid({
   }
 
   const shouldInjectAd = injectInFeedAd && layout === "list" && perfumes.length > adAfterIndex;
+
+  if (layout === "mobile-carousel") {
+    return (
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
+        {perfumes.map((perfume) => (
+          <div key={perfume.id} className="min-w-[calc(50%-0.375rem)] snap-start sm:min-w-0">
+            <PerfumeCard perfume={perfume} variant={cardVariant} />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div

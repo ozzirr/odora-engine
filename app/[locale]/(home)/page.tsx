@@ -10,7 +10,6 @@ import { HowItWorks } from "@/components/home/HowItWorks";
 import { BrandLogoStrip } from "@/components/home/TrustedStores";
 import { QuickFilters } from "@/components/home/QuickFilters";
 import { ValueStrip } from "@/components/home/ValueStrip";
-import { getHomepageData } from "@/lib/homepage";
 import { hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
 import {
@@ -71,12 +70,10 @@ export default async function HomePage({ params }: HomePageProps) {
     }
   }
 
-  const homepageData = await getHomepageData();
-
   return (
     <ScopedIntlProvider locale={resolvedLocale} namespaces={["home"]}>
       <>
-        <Hero footer={<BrandLogoStrip brands={homepageData.featuredBrands} variant="embedded" />} />
+        <Hero footer={<BrandLogoStrip brands={[]} variant="embedded" />} />
         <ValueStrip />
 
         <Container>

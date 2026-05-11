@@ -1,16 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import { type ReactNode, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { buttonStyles } from "@/components/ui/Button";
 import { APP_FLOATING_LAYER_CLASS } from "@/lib/chrome";
 import { cn } from "@/lib/utils";
 
 type MobilePerfumeCtaBarProps = {
-  amazonUrl?: string | null;
+  compareHref?: string;
   listAction?: ReactNode;
 };
 
@@ -18,23 +17,11 @@ const FALLBACK_HERO_REVEAL_SCROLL_THRESHOLD_PX = 520;
 const APP_HEADER_HEIGHT_PX = 72;
 const HERO_SELECTOR = "[data-perfume-hero='true']";
 
-function AmazonWordmark({ className }: { className?: string }) {
-  return (
-    <Image
-      src="/images/logo_amazon.webp"
-      alt="Amazon"
-      width={110}
-      height={34}
-      className={cn("brightness-0 invert", className)}
-    />
-  );
-}
-
 export function MobilePerfumeCtaBar({
-  amazonUrl,
+  compareHref = "#price-offers",
   listAction,
 }: MobilePerfumeCtaBarProps) {
-  const amazonT = useTranslations("perfume.amazon");
+  const locale = useLocale();
   const barRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -43,7 +30,7 @@ export function MobilePerfumeCtaBar({
     () => true,
     () => false,
   );
-  const hasAnyCta = Boolean(amazonUrl || listAction);
+  const hasAnyCta = Boolean(compareHref || listAction);
   const isBarActive = isVisible && !authModalOpen;
 
   useEffect(() => {
@@ -125,7 +112,7 @@ export function MobilePerfumeCtaBar({
       root.removeAttribute("data-mobile-perfume-cta-active");
       root.style.removeProperty("--mobile-perfume-cta-offset");
     };
-  }, [amazonUrl, hasAnyCta, isBarActive, isClient]);
+  }, [compareHref, hasAnyCta, isBarActive, isClient]);
 
   if (!isClient || !hasAnyCta) {
     return null;
@@ -143,27 +130,18 @@ export function MobilePerfumeCtaBar({
           : "pointer-events-none translate-y-[calc(100%+env(safe-area-inset-bottom))]",
       )}
     >
-      <div className="border-t border-[#ddcfbc] bg-[#fbf8f2]/96 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.9rem)] shadow-[0_-18px_40px_-28px_rgba(50,35,20,0.45)] backdrop-blur-sm">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2">
-          {listAction ? <div>{listAction}</div> : null}
-          {amazonUrl ? (
-            <a
-              href={amazonUrl}
-              target="_blank"
-              rel="noreferrer"
-              className={buttonStyles({
-                className:
-                  "h-12 w-full bg-[#ff9f0a] !text-[#23170c] hover:bg-[#f09100] hover:!text-[#23170c]",
-              })}
-            >
-              <span className="inline-flex items-center gap-2">
-                <span>{amazonT("ctaPrefix")}</span>
-                <span className="inline-flex min-w-[86px] items-center justify-center">
-                  <AmazonWordmark className="h-[22px] w-auto object-contain translate-y-[1px]" />
-                </span>
-              </span>
-            </a>
-          ) : null}
+      <div className="border-t border-[#ddcfbc] bg-[#fbf8f2]/90 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+0.85rem)] shadow-[0_-18px_40px_-28px_rgba(50,35,20,0.45)] backdrop-blur-md">
+        <div className={cn("mx-auto grid w-full max-w-6xl gap-2", listAction ? "grid-cols-2" : "grid-cols-1")}>
+          {listAction ? <div className="[&>*]:h-12 [&>*]:w-full [&>*]:rounded-2xl [&>*]:px-3 [&>*]:text-[13px]">{listAction}</div> : null}
+          <a
+            href={compareHref}
+            className={buttonStyles({
+              className:
+                "h-12 w-full rounded-2xl bg-[#1e4b3b] text-[13px] shadow-[0_14px_28px_-18px_rgba(30,75,59,0.62)]",
+            })}
+          >
+            {locale === "it" ? "Confronta prezzi" : "Compare prices"}
+          </a>
         </div>
       </div>
     </div>,

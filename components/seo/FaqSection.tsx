@@ -16,21 +16,23 @@ export function FaqSection({ eyebrow, title, subtitle, items }: FaqSectionProps)
   if (items.length === 0) return null;
 
   return (
-    <section className="space-y-4">
+    <section className="space-y-3 sm:space-y-4">
       <SectionTitle eyebrow={eyebrow} title={title} subtitle={subtitle} />
-      <div className="space-y-2 rounded-2xl border border-[#ddcfbc] bg-white p-2">
+      <div className="space-y-1.5 rounded-2xl border border-[#ddcfbc] bg-white p-2 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.22)]">
         {items.map((item, idx) => (
           <details
             key={idx}
-            className="group rounded-xl px-4 py-3 open:bg-[#f8f1e6] transition-colors"
+            className="group rounded-2xl px-3 py-2.5 transition-colors open:bg-[#f8f1e6] sm:px-4 sm:py-3"
           >
-            <summary className="cursor-pointer list-none text-[15px] font-semibold text-[#1f1914] flex items-center justify-between gap-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-[#1f1914] sm:text-[15px]">
               <span>{item.question}</span>
-              <span className="text-[#907b66] transition-transform group-open:rotate-45 text-xl leading-none">
-                +
+              <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f0e8dd] text-[#907b66] transition-transform duration-200 group-open:rotate-180">
+                <svg aria-hidden="true" className="h-3.5 w-3.5" fill="none" viewBox="0 0 16 16">
+                  <path d="m4 6 4 4 4-4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+                </svg>
               </span>
             </summary>
-            <p className="mt-3 text-[14.5px] leading-[1.7] text-[#3d2e20]">
+            <p className="mt-2 text-sm leading-relaxed text-[#3d2e20] sm:text-[14.5px]">
               {item.answer}
             </p>
           </details>

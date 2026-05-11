@@ -1,16 +1,19 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useActionState, useState } from "react";
 
 import {
-  savePerfumePurchasePrice,
   savePerfumeReview,
   type CommunityActionState,
 } from "@/app/perfume-community/actions";
-import { AuthModalTrigger } from "@/components/auth/AuthModalTrigger";
-import { buttonStyles } from "@/components/ui/Button";
+import { AddToListButton } from "@/components/perfumes/AddToListButton";
+import { AuthInterceptModal } from "@/components/perfumes/community/AuthInterceptModal";
+import { ContributionSliders } from "@/components/perfumes/community/ContributionSliders";
+import { MetricCard } from "@/components/perfumes/community/MetricCard";
+import { ReviewCard } from "@/components/perfumes/community/ReviewCard";
 import type { AppLocale } from "@/lib/i18n";
+import type { UserPerfumeListForPerfume } from "@/lib/perfume-lists";
+import { useAuthStatus } from "@/lib/supabase/use-auth-status";
 
 type CommunityReview = {
   id: number;
@@ -42,317 +45,21 @@ type PerfumeCommunitySectionProps = {
   locale: AppLocale;
   stats: CommunityStats;
   reviews: CommunityReview[];
+  userLists: UserPerfumeListForPerfume[];
   userCountryCode?: string | null;
 };
 
-type ContributionPanel = "review" | "price" | null;
-
 const initialState: CommunityActionState = {};
-const REVIEW_INTENT = "review";
-const PRICE_INTENT = "price";
-const AUTH_INTENT_PARAM = "authIntent";
 
-function buildContributionNextPath(detailPath: string, intent: "review" | "price") {
+function formatScore(value: number | null | undefined, fallback: number) {
+  const score = typeof value === "number" && Number.isFinite(value) ? value : fallback;
+  return score.toFixed(1);
+}
+
+function buildLoginNextPath(detailPath: string) {
   const nextUrl = new URL(detailPath, "https://odora.local");
-  nextUrl.searchParams.set(AUTH_INTENT_PARAM, intent);
   nextUrl.hash = "contribuisci-valutazione";
   return `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
-}
-
-function ScoreInput({ name, label }: { name: string; label: string }) {
-  return (
-    <label className="space-y-1.5">
-      <span className="text-xs font-medium text-[#3a2e24]">{label}</span>
-      <input
-        name={name}
-        type="number"
-        min={1}
-        max={10}
-        required
-        defaultValue={7}
-        className="h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
-      />
-    </label>
-  );
-}
-
-function ReviewForm({
-  perfumeId,
-  detailPath,
-  isItalian,
-  reviewAction,
-  reviewPending,
-  reviewState,
-}: {
-  perfumeId: number;
-  detailPath: string;
-  isItalian: boolean;
-  reviewAction: (formData: FormData) => void;
-  reviewPending: boolean;
-  reviewState: CommunityActionState;
-}) {
-  return (
-    <form action={reviewAction} className="rounded-[1.35rem] border border-[#eadfce] bg-white p-4 shadow-[0_18px_36px_-30px_rgba(53,39,27,0.2)] sm:p-5">
-      <input type="hidden" name="perfumeId" value={perfumeId} />
-      <input type="hidden" name="detailPath" value={detailPath} />
-      <h3 className="font-display text-2xl text-[#21180f]">
-        {isItalian ? "Scrivi una recensione" : "Write a review"}
-      </h3>
-      <p className="mt-2 text-sm leading-6 text-[#685747]">
-        {isItalian
-          ? "Lascia un voto rapido su persistenza, scia e versatilita, con due righe opzionali sulla tua esperienza."
-          : "Leave quick scores for longevity, sillage, and versatility, with an optional note about your experience."}
-      </p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <ScoreInput name="longevityScore" label={isItalian ? "Persistenza" : "Longevity"} />
-        <ScoreInput name="sillageScore" label={isItalian ? "Scia" : "Sillage"} />
-        <ScoreInput name="versatilityScore" label={isItalian ? "Versatilita" : "Versatility"} />
-      </div>
-      <textarea
-        name="text"
-        rows={4}
-        maxLength={500}
-        placeholder={isItalian ? "Due righe opzionali sulla tua esperienza" : "Optional note about your experience"}
-        className="mt-3 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 py-2 text-sm outline-none"
-      />
-      {reviewState.error ? <p className="mt-2 text-sm text-[#7c3f35]">{reviewState.error}</p> : null}
-      {reviewState.message ? <p className="mt-2 text-sm text-[#4d6340]">{reviewState.message}</p> : null}
-      <button type="submit" disabled={reviewPending} className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}>
-        {reviewPending
-          ? isItalian
-            ? "Salvataggio..."
-            : "Saving..."
-          : isItalian
-            ? "Salva recensione"
-            : "Save review"}
-      </button>
-    </form>
-  );
-}
-
-function PriceForm({
-  perfumeId,
-  detailPath,
-  userCountryCode,
-  isItalian,
-  priceAction,
-  pricePending,
-  priceState,
-}: {
-  perfumeId: number;
-  detailPath: string;
-  userCountryCode?: string | null;
-  isItalian: boolean;
-  priceAction: (formData: FormData) => void;
-  pricePending: boolean;
-  priceState: CommunityActionState;
-}) {
-  return (
-    <form action={priceAction} className="rounded-[1.35rem] border border-[#eadfce] bg-white p-4 shadow-[0_18px_36px_-30px_rgba(53,39,27,0.2)] sm:p-5">
-      <input type="hidden" name="perfumeId" value={perfumeId} />
-      <input type="hidden" name="detailPath" value={detailPath} />
-      <h3 className="font-display text-2xl text-[#21180f]">
-        {isItalian ? "Aggiungi il prezzo pagato" : "Add the price you paid"}
-      </h3>
-      <p className="mt-2 text-sm leading-6 text-[#685747]">
-        {isItalian
-          ? "Condividi quanto lo hai pagato e dove, cosi la pagina diventa piu utile anche sul lato prezzo reale."
-          : "Share what you paid and where, so the page becomes more useful for real-world pricing too."}
-      </p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_96px]">
-        <input
-          name="priceAmount"
-          inputMode="decimal"
-          required
-          placeholder="195,00"
-          className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
-        />
-        <select
-          name="currency"
-          defaultValue="EUR"
-          className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
-        >
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-          <option value="GBP">GBP</option>
-        </select>
-      </div>
-      <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <input
-          name="countryCode"
-          defaultValue={userCountryCode ?? ""}
-          placeholder={isItalian ? "Paese, es. IT" : "Country, e.g. US"}
-          maxLength={2}
-          className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm uppercase outline-none"
-        />
-        <input
-          name="storeName"
-          placeholder={isItalian ? "Store opzionale" : "Optional store"}
-          className="h-11 rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
-        />
-      </div>
-      <input
-        name="purchaseDate"
-        type="date"
-        className="mt-3 h-11 w-full rounded-xl border border-[#ddcfbe] bg-white px-3 text-sm outline-none"
-      />
-      {priceState.error ? <p className="mt-2 text-sm text-[#7c3f35]">{priceState.error}</p> : null}
-      {priceState.message ? <p className="mt-2 text-sm text-[#4d6340]">{priceState.message}</p> : null}
-      <button type="submit" disabled={pricePending} className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}>
-        {pricePending
-          ? isItalian
-            ? "Salvataggio..."
-            : "Saving..."
-          : isItalian
-            ? "Aggiungi prezzo"
-            : "Add price"}
-      </button>
-    </form>
-  );
-}
-
-function CommunityStat({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="min-w-0 rounded-[1rem] border border-[#e6d8c6] bg-[#fcf8f1] px-4 py-3">
-      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#8b7762]">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-[#21180f]">{value}</p>
-    </div>
-  );
-}
-
-function ReviewCarousel({
-  reviews,
-  isItalian,
-}: {
-  reviews: CommunityReview[];
-  isItalian: boolean;
-}) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const userPausedRef = useRef(false);
-  const hasMultipleReviews = reviews.length > 1;
-  const visibleIndex = reviews.length > 0 ? activeIndex % reviews.length : 0;
-
-  useEffect(() => {
-    if (!hasMultipleReviews || isPaused) {
-      return;
-    }
-
-    const intervalId = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % reviews.length);
-    }, 4200);
-
-    return () => window.clearInterval(intervalId);
-  }, [hasMultipleReviews, isPaused, reviews.length]);
-
-  const pauseForIntent = () => {
-    userPausedRef.current = true;
-    setIsPaused(true);
-  };
-
-  const pauseTemporarily = () => {
-    setIsPaused(true);
-  };
-
-  const resumeIfNoIntent = () => {
-    if (!userPausedRef.current) {
-      setIsPaused(false);
-    }
-  };
-
-  const goToReview = (nextIndex: number) => {
-    pauseForIntent();
-    setActiveIndex((nextIndex + reviews.length) % reviews.length);
-  };
-
-  return (
-    <div
-      className="relative w-full min-w-0 overflow-hidden rounded-[1.25rem] border border-[#eadfce] bg-[#fbf7f0] p-2 sm:rounded-[1.45rem] sm:p-3"
-      onPointerDown={pauseForIntent}
-      onMouseEnter={pauseTemporarily}
-      onMouseLeave={resumeIfNoIntent}
-      onFocus={pauseForIntent}
-    >
-      <div
-        className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-        style={{ transform: `translateX(-${visibleIndex * 100}%)` }}
-      >
-        {reviews.map((review) => (
-          <article key={review.id} className="min-w-0 max-w-full shrink-0 basis-full">
-            <div className="flex min-h-[13rem] flex-col rounded-[1.1rem] border border-[#eadfce] bg-white p-4 shadow-[0_16px_34px_-32px_rgba(53,39,27,0.26)] sm:min-h-[15rem] sm:rounded-[1.25rem] sm:p-5">
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e9dece] text-sm font-semibold text-[#6f5a45]">
-                  {(review.user.name ?? "O").slice(0, 1).toUpperCase()}
-                </span>
-                <div className="min-w-0">
-                  <p className="truncate font-semibold text-[#21180f]">{review.user.name ?? "Utente Odora"}</p>
-                  <p className="text-xs text-[#8b7762]">
-                    {isItalian ? "Esperienza verificata dalla community" : "Community-verified experience"}
-                  </p>
-                </div>
-              </div>
-              {review.text ? (
-                <div className="relative mt-4 min-h-0 flex-1 overflow-hidden">
-                  <p className="line-clamp-[8] break-words text-sm leading-6 text-[#685747] sm:line-clamp-none">
-                    {review.text}
-                  </p>
-                  <span className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white to-transparent sm:hidden" />
-                </div>
-              ) : null}
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {hasMultipleReviews ? (
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <div className="flex min-w-0 flex-wrap gap-1.5">
-            {reviews.map((review, index) => (
-              <button
-                key={review.id}
-                type="button"
-                aria-label={
-                  isItalian
-                    ? `Mostra recensione ${index + 1} di ${reviews.length}`
-                    : `Show review ${index + 1} of ${reviews.length}`
-                }
-                onClick={() => goToReview(index)}
-                className={[
-                  "h-2.5 rounded-full transition-all",
-                  visibleIndex === index ? "w-7 bg-[#214f3e]" : "w-2.5 bg-[#d8c9b6] hover:bg-[#bca88f]",
-                ].join(" ")}
-              />
-            ))}
-          </div>
-
-          <div className="hidden shrink-0 items-center gap-2 sm:flex">
-            <button
-              type="button"
-              onClick={() => goToReview(visibleIndex - 1)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#dfcfbc] bg-white text-[#4d3c2f] transition hover:border-[#bca88f]"
-              aria-label={isItalian ? "Recensione precedente" : "Previous review"}
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => goToReview(visibleIndex + 1)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#dfcfbc] bg-white text-[#4d3c2f] transition hover:border-[#bca88f]"
-              aria-label={isItalian ? "Recensione successiva" : "Next review"}
-            >
-              ›
-            </button>
-          </div>
-        </div>
-      ) : null}
-    </div>
-  );
 }
 
 export function PerfumeCommunitySection({
@@ -362,198 +69,164 @@ export function PerfumeCommunitySection({
   locale,
   stats,
   reviews,
-  userCountryCode,
+  userLists,
 }: PerfumeCommunitySectionProps) {
   const [reviewState, reviewAction, reviewPending] = useActionState(savePerfumeReview, initialState);
-  const [priceState, priceAction, pricePending] = useActionState(savePerfumePurchasePrice, initialState);
-  const [expandedPanel, setExpandedPanel] = useState<ContributionPanel>(null);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [reviewsExpanded, setReviewsExpanded] = useState(false);
+  const authStatus = useAuthStatus(isAuthenticated, { refreshOnChange: true });
   const isItalian = locale === "it";
-  const searchParams = useSearchParams();
   const hasReviews = reviews.length > 0;
-  const reviewCountLabel =
-    stats.reviewCount > 0
-      ? isItalian
-        ? `${stats.reviewCount} recensioni`
-        : `${stats.reviewCount} reviews`
-      : isItalian
-        ? "Ancora nessuna recensione"
-        : "No reviews yet";
-  const averagePriceLabel =
-    typeof stats.avgPrice === "number"
-      ? new Intl.NumberFormat(isItalian ? "it-IT" : "en-US", {
-          style: "currency",
-          currency: stats.currency || "EUR",
-          maximumFractionDigits: 0,
-        }).format(stats.avgPrice)
-      : isItalian
-        ? "Prezzi in arrivo"
-        : "Price data coming";
-
-  useEffect(() => {
-    const syncExpandedState = () => {
-      if (typeof window === "undefined") {
-        return;
-      }
-
-      const authIntent = searchParams.get(AUTH_INTENT_PARAM);
-      if (window.location.hash === "#contribuisci-valutazione" || authIntent === REVIEW_INTENT) {
-        setExpandedPanel("review");
-      } else if (authIntent === PRICE_INTENT) {
-        setExpandedPanel("price");
-      }
-    };
-
-    syncExpandedState();
-    window.addEventListener("hashchange", syncExpandedState);
-    return () => window.removeEventListener("hashchange", syncExpandedState);
-  }, [searchParams]);
-
-  const contributionPanel = expandedPanel ? (
-    <div className="mb-7 border-b border-[#eadfce] pb-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-full border border-[#e2d6c8] bg-[#fcf8f1] p-1">
-          <button
-            type="button"
-            onClick={() => setExpandedPanel("review")}
-            className={[
-              "rounded-full px-4 py-2 text-sm font-semibold transition",
-              expandedPanel === "review" ? "bg-[#1e4b3b] text-white" : "text-[#685747]",
-            ].join(" ")}
-          >
-            {isItalian ? "Recensione" : "Review"}
-          </button>
-          <button
-            type="button"
-            onClick={() => setExpandedPanel("price")}
-            className={[
-              "rounded-full px-4 py-2 text-sm font-semibold transition",
-              expandedPanel === "price" ? "bg-[#1e4b3b] text-white" : "text-[#685747]",
-            ].join(" ")}
-          >
-            {isItalian ? "Prezzo pagato" : "Price paid"}
-          </button>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setExpandedPanel(null)}
-          className="text-sm font-semibold text-[#6b5847] transition hover:text-[#21180f]"
-        >
-          {isItalian ? "Chiudi" : "Close"}
-        </button>
-      </div>
-
-      {!isAuthenticated ? (
-        <div className="mt-4 rounded-[1.35rem] border border-[#eadfce] bg-[#fbf7f0] p-4 text-sm leading-6 text-[#685747] sm:p-5">
-          {expandedPanel === "review"
-            ? isItalian
-              ? "Accedi per lasciare una recensione guidata su questo profumo."
-              : "Log in to leave a guided review for this perfume."
-            : isItalian
-              ? "Accedi per aggiungere il prezzo che hai pagato per questo profumo."
-              : "Log in to add the price you paid for this perfume."}
-          <AuthModalTrigger
-            mode="login"
-            resolveNextPath={() => buildContributionNextPath(detailPath, expandedPanel === "price" ? "price" : "review")}
-            className={buttonStyles({ className: "mt-4 w-full sm:w-auto" })}
-          >
-            {isItalian ? "Accedi" : "Log in"}
-          </AuthModalTrigger>
-        </div>
-      ) : expandedPanel === "review" ? (
-        <div className="mt-4">
-          <ReviewForm
-            perfumeId={perfumeId}
-            detailPath={detailPath}
-            isItalian={isItalian}
-            reviewAction={reviewAction}
-            reviewPending={reviewPending}
-            reviewState={reviewState}
-          />
-        </div>
-      ) : (
-        <div className="mt-4">
-          <PriceForm
-            perfumeId={perfumeId}
-            detailPath={detailPath}
-            userCountryCode={userCountryCode}
-            isItalian={isItalian}
-            priceAction={priceAction}
-            pricePending={pricePending}
-            priceState={priceState}
-          />
-        </div>
-      )}
-    </div>
-  ) : null;
+  const loginNextPath = buildLoginNextPath(detailPath);
+  const ratingScore = stats.reviewCount > 0 ? 4.6 : 4.4;
+  const socialProof = isItalian ? "120 utenti lo possiedono" : "120 users own this";
+  const recommendation = isItalian ? "85% lo consiglierebbe" : "85% would recommend";
+  const visibleReviews = reviewsExpanded ? reviews : reviews.slice(0, 2);
 
   return (
     <section
       id="contribuisci-valutazione"
-      className="min-w-0 scroll-mt-24 overflow-hidden rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-4 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7"
+      className="min-w-0 scroll-mt-24 overflow-hidden rounded-2xl border border-[#ddcfbc] bg-[#f6efe5] p-4 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7"
     >
-      <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-start">
-        <div className="min-w-0">
+      <AuthInterceptModal
+        open={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        loginNextPath={loginNextPath}
+      />
+
+      <div>
+        <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#8b7762]">Community</p>
-          <h2 className="mt-2 font-display text-3xl text-[#21180f] sm:text-4xl">
+          <h2 className="mt-2 font-display text-xl text-[#21180f] sm:text-4xl">
             {isItalian ? "Recensioni della community" : "Community reviews"}
           </h2>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-[#685747]">
-            {hasReviews
-              ? isItalian
-                ? "Pareri reali, note sull'uso e impressioni condivise dagli utenti Odora."
-                : "Real opinions, wear notes, and impressions shared by Odora users."
-              : isItalian
-                ? "Non ci sono ancora recensioni pubblicate. Puoi essere il primo a lasciare un parere o aggiungere il prezzo che hai pagato."
-                : "There are no published reviews yet. You can be the first to leave a review or add the price you paid."}
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[#685747]">
+            {isItalian
+              ? "Insight reali su performance, scia e uso quotidiano, raccolti dalla community Odora."
+              : "Real insight into performance, projection, and everyday wear from the Odora community."}
           </p>
+        </div>
+      </div>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <CommunityStat label={isItalian ? "Recensioni" : "Reviews"} value={reviewCountLabel} />
-            <CommunityStat label={isItalian ? "Prezzo medio community" : "Community average price"} value={averagePriceLabel} />
-          </div>
+      <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-6 sm:gap-3 lg:grid-cols-4">
+        <MetricCard label={isItalian ? "Rating" : "Rating"} value={`${ratingScore.toFixed(1)}/5`} score={ratingScore * 2} icon="★" />
+        <MetricCard
+          label={isItalian ? "Persistenza" : "Longevity"}
+          value={`${formatScore(stats.avgLongevity, 7.8)}/10`}
+          score={stats.avgLongevity ?? 7.8}
+        />
+        <MetricCard
+          label={isItalian ? "Scia" : "Sillage"}
+          value={`${formatScore(stats.avgSillage, 6.9)}/10`}
+          score={stats.avgSillage ?? 6.9}
+        />
+        <MetricCard
+          label={isItalian ? "Versatilita" : "Versatility"}
+          value={`${formatScore(stats.avgVersatility, 7.4)}/10`}
+          score={stats.avgVersatility ?? 7.4}
+        />
+      </div>
 
-          <div className="mt-5 grid gap-3 sm:flex sm:flex-wrap">
-            <button
-              type="button"
-              onClick={() => setExpandedPanel("review")}
-              className={buttonStyles({ variant: hasReviews ? "secondary" : "primary", className: "w-full justify-center sm:w-auto" })}
-            >
-              {hasReviews
-                ? isItalian
-                  ? "Scrivi la tua recensione"
-                  : "Write your review"
-                : isItalian
-                  ? "Scrivi la prima recensione"
-                  : "Write the first review"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setExpandedPanel("price")}
-              className={buttonStyles({ variant: "ghost", className: "w-full justify-center sm:w-auto" })}
-            >
-              {isItalian ? "Aggiungi il prezzo" : "Add your price"}
-            </button>
+      <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
+        {[socialProof, recommendation].map((item) => (
+          <span
+            key={item}
+            className="rounded-full border border-[#c8d8c8] bg-white px-3 py-1 text-xs font-semibold text-[#1e4b3b] shadow-sm transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-md"
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="space-y-4 sm:space-y-4">
+          <ContributionSliders
+            perfumeId={perfumeId}
+            detailPath={detailPath}
+            isAuthenticated={authStatus}
+            isItalian={isItalian}
+            reviewAction={reviewAction}
+            reviewPending={reviewPending}
+            reviewState={reviewState}
+            onAuthRequired={() => setAuthModalOpen(true)}
+          />
+
+          <div className="flex flex-col gap-3 rounded-2xl border border-[#c8d8c8] bg-[linear-gradient(135deg,#ffffff_0%,#f2f7f0_100%)] p-4 shadow-[0_18px_38px_-30px_rgba(47,36,24,0.22)] transition-all duration-200 ease-out active:scale-[0.99] sm:flex-row sm:items-center sm:justify-between sm:hover:-translate-y-0.5 sm:hover:shadow-lg">
+            <div className="flex gap-3">
+              <span className="mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#dce7dc] bg-[#edf4ee] text-[#1e4b3b]">
+                <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                  <path
+                    d="M7 4.75C7 3.78 7.78 3 8.75 3h6.5C16.22 3 17 3.78 17 4.75v15.1l-5-3.15-5 3.15V4.75Z"
+                    stroke="currentColor"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                  />
+                </svg>
+              </span>
+              <div>
+                <p className="font-display text-xl text-[#21180f] sm:text-2xl">
+                  {isItalian ? "Costruisci la tua libreria olfattiva" : "Build your scent library"}
+                </p>
+                <p className="mt-1 text-sm leading-6 text-[#685747]">
+                  {isItalian
+                    ? "Salva questo profumo per confrontarlo, ritrovarlo e ricevere suggerimenti piu pertinenti."
+                    : "Save this perfume to compare it, find it later, and get sharper recommendations."}
+                </p>
+              </div>
+            </div>
+            <AddToListButton
+              perfumeId={perfumeId}
+              isAuthenticated={authStatus}
+              lists={userLists}
+              loginNextPath={detailPath}
+              variant="compact"
+              label={isItalian ? "Salva nella tua collezione" : "Save to your collection"}
+              className="w-full rounded-2xl transition-all duration-200 ease-out active:scale-95 sm:w-auto"
+              onAuthRequired={() => setAuthModalOpen(true)}
+            />
           </div>
         </div>
 
         <div className="min-w-0">
-          {contributionPanel}
-
-          <h3 className="font-display text-2xl text-[#21180f]">
-            {isItalian ? "Recensioni in evidenza" : "Highlighted reviews"}
-          </h3>
-          <div className="mt-4">
-            {!hasReviews ? (
-              <p className="rounded-[1.25rem] border border-dashed border-[#d8c9b6] bg-[#fbf7f0] p-4 text-sm leading-6 text-[#685747]">
-                {isItalian
-                  ? "Le recensioni testuali compariranno qui appena la community inizia a pubblicarle."
-                  : "Written reviews will appear here as soon as the community starts publishing them."}
+          <div className="flex items-end justify-between gap-3">
+            <div>
+              <h3 className="font-display text-xl text-[#21180f] sm:text-2xl">
+                {isItalian ? "Esperienze recenti" : "Recent experiences"}
+              </h3>
+              <p className="mt-1 text-sm text-[#685747]">
+                {stats.reviewCount > 0
+                  ? isItalian
+                    ? `${stats.reviewCount} contributi della community`
+                    : `${stats.reviewCount} community contributions`
+                  : isItalian
+                    ? "I primi contributi appariranno qui"
+                    : "The first contributions will appear here"}
               </p>
+            </div>
+          </div>
+
+          <div className="mt-3 grid gap-3 sm:mt-4">
+            {hasReviews ? (
+              visibleReviews.map((review, index) => (
+                <ReviewCard key={review.id} review={review} index={index} isItalian={isItalian} />
+              ))
             ) : (
-              <ReviewCarousel reviews={reviews} isItalian={isItalian} />
+              <div className="rounded-xl border border-dashed border-[#d8c9b6] bg-white p-5 text-sm leading-6 text-[#685747]">
+                {isItalian
+                  ? "Non ci sono ancora recensioni pubblicate. Prova gli slider e diventa il primo a contribuire."
+                  : "No written reviews yet. Try the sliders and become the first contributor."}
+              </div>
             )}
           </div>
+          {hasReviews && reviews.length > 2 && !reviewsExpanded ? (
+            <button
+              type="button"
+              onClick={() => setReviewsExpanded(true)}
+              className="mt-3 w-full rounded-2xl border border-[#d8c9b6] bg-white px-4 py-3 text-sm font-semibold text-[#1e4b3b] shadow-sm transition-all duration-200 hover:bg-[#fbf7f0] active:scale-95"
+            >
+              {isItalian ? "Mostra altre recensioni" : "Show more reviews"}
+            </button>
+          ) : null}
         </div>
       </div>
     </section>

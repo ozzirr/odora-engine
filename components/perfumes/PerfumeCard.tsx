@@ -42,7 +42,7 @@ export type PerfumeCardItem = {
 
 type PerfumeCardProps = {
   perfume: PerfumeCardItem;
-  variant?: "default" | "catalog" | "featured" | "finder";
+  variant?: "default" | "catalog" | "featured" | "finder" | "compact";
 };
 
 export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) {
@@ -187,6 +187,42 @@ export function PerfumeCard({ perfume, variant = "default" }: PerfumeCardProps) 
             {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
             {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
           </div>
+        </div>
+      </article>
+    );
+  }
+
+  if (variant === "compact") {
+    return (
+      <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[#ede4d8] bg-white shadow-[0_14px_32px_-28px_rgba(50,35,20,0.38)] transition-all duration-200 active:scale-[0.99] sm:hover:-translate-y-1 sm:hover:shadow-[var(--shadow-card-hover)]">
+        <PerfumeDetailLink
+          href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}
+          perfumeName={perfume.name}
+        >
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-gradient-to-b from-[#f8f3eb] to-[#eee4d7]">
+            <PerfumeImage
+              imageUrl={perfume.imageUrl}
+              perfumeName={perfume.name}
+              brandName={brandName}
+              fragranceFamily={fragranceFamilyLabel}
+              sizes="(max-width: 640px) 48vw, 25vw"
+              imageClassName="object-contain object-center p-2 transition-transform duration-300 group-hover:scale-[1.03]"
+            />
+          </div>
+        </PerfumeDetailLink>
+
+        <div className="p-3">
+          <p className="line-clamp-1 text-[9.5px] font-semibold uppercase tracking-[0.16em] text-[#907b66]">
+            {brandName}
+          </p>
+          <PerfumeDetailLink
+            href={{ pathname: "/perfumes/[slug]", params: { slug: perfume.slug } }}
+            perfumeName={perfume.name}
+          >
+            <h3 className="mt-1 line-clamp-2 font-display text-[1.05rem] leading-[1.05] text-[#1e1813] transition-colors hover:text-[#6c5946]">
+              {perfume.name}
+            </h3>
+          </PerfumeDetailLink>
         </div>
       </article>
     );

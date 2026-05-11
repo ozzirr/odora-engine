@@ -60,22 +60,28 @@ function OverviewSkeleton() {
 
 function PyramidSkeleton() {
   return (
-    <section className="rounded-[1.45rem] border border-[#ddcfbc] bg-white p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
-      <SkeletonBlock className="h-8 w-56 rounded-xl" />
-      <div className="mt-5 space-y-5">
-        {[0, 1, 2].map((row) => (
-          <div key={row} className="grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-4 border-b border-[#eadfce] pb-4 last:border-0 last:pb-0">
-            <SkeletonBlock className="h-4 w-24" />
-            <div className="grid grid-cols-4 gap-3">
-              {[0, 1, 2, 3].map((item) => (
-                <div key={item} className="flex flex-col items-center gap-2">
-                  <SkeletonBlock className="h-10 w-10 rounded-full" />
-                  <SkeletonBlock className="h-2.5 w-14" />
+    <section className="overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
+      <SkeletonBlock className="h-3 w-16" />
+      <SkeletonBlock className="mt-3 h-8 w-56 rounded-xl" />
+      <div className="mt-4 rounded-2xl border border-[#eadfce] bg-[linear-gradient(180deg,#fffdf9_0%,#f7efe4_100%)] p-3 sm:p-4">
+        <div className="flex flex-col items-center gap-2.5">
+          {[
+            { width: "w-[72%] sm:w-[56%]", tone: "bg-[#e8bd58]/62" },
+            { width: "w-[88%] sm:w-[76%]", tone: "bg-[#8aa568]/58" },
+            { width: "w-full", tone: "bg-[#8d6d50]/50" },
+          ].map((row, index) => (
+            <div key={index} className={cn("min-h-[6.4rem] rounded-[1.2rem] border border-white/60 px-5 py-3 shadow-[0_18px_34px_-30px_rgba(53,39,27,0.38)]", row.width, row.tone)}>
+              <div className="flex h-full flex-col items-center justify-center gap-3">
+                <SkeletonBlock className="h-3 w-20 bg-white/65" />
+                <div className="flex max-w-full flex-wrap justify-center gap-1.5">
+                  {[0, 1, 2].map((item) => (
+                    <SkeletonBlock key={item} className="h-8 w-24 rounded-full bg-white/58" />
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -99,57 +105,35 @@ function BadgePanelsSkeleton() {
 
 function ContributeSkeleton() {
   return (
-    <section className="rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
+    <section className="rounded-2xl border border-[#ddcfbc] bg-[#f6efe5] p-4 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
       <SkeletonBlock className="h-3 w-24" />
-      <SkeletonBlock className="mt-3 h-9 w-72 max-w-full rounded-xl" />
+      <SkeletonBlock className="mt-3 h-7 w-72 max-w-full rounded-xl" />
       <SkeletonBlock className="mt-3 h-3.5 w-full max-w-lg" />
-      <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        {[0, 1].map((form) => (
-          <div key={form} className="rounded-2xl border border-[#eadfce] bg-white p-4">
-            <SkeletonBlock className="h-7 w-48 rounded-xl" />
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              {[0, 1, 2].map((input) => (
-                <SkeletonBlock key={input} className="h-11 rounded-xl" />
-              ))}
-            </div>
-            <SkeletonBlock className="mt-3 h-20 rounded-xl" />
-            <SkeletonBlock className="mt-3 h-11 rounded-xl bg-[#d8cdbb]" />
-          </div>
+      <div className="mt-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+        {[0, 1, 2, 3].map((item) => (
+          <SkeletonBlock key={item} className="h-20 rounded-2xl bg-white" />
         ))}
       </div>
-    </section>
-  );
-}
-
-function CommunitySkeleton() {
-  return (
-    <section className="rounded-3xl border border-[#ddcfbc] bg-[#fffdf9] p-5 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-7">
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-        <div>
-          <SkeletonBlock className="h-3 w-24" />
-          <SkeletonBlock className="mt-3 h-9 w-72 max-w-full rounded-xl" />
-          <SkeletonBlock className="mt-3 h-3.5 w-full max-w-lg" />
+      <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-[#b8cfbd] bg-[#eee2d2] p-4">
+            <SkeletonBlock className="h-6 w-48 rounded-xl" />
+            <div className="mt-4 grid gap-2.5">
+              {[0, 1, 2].map((input) => (
+                <SkeletonBlock key={input} className="h-20 rounded-2xl bg-white" />
+              ))}
+            </div>
+            <SkeletonBlock className="mt-4 h-11 rounded-2xl bg-[#d8cdbb]" />
+          </div>
+          <SkeletonBlock className="h-28 rounded-2xl bg-white" />
         </div>
         <div>
           <SkeletonBlock className="h-7 w-52 rounded-xl" />
           <div className="mt-4 space-y-3">
-            <SkeletonBlock className="h-24 rounded-[1.25rem]" />
-            <SkeletonBlock className="h-24 rounded-[1.25rem]" />
+            <SkeletonBlock className="h-32 rounded-2xl bg-white" />
+            <SkeletonBlock className="h-32 rounded-2xl bg-white" />
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function UtilityCardsSkeleton() {
-  return (
-    <section className="rounded-[1.45rem] border border-[#eadfce] bg-white p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)]">
-      <SkeletonBlock className="h-7 w-48 rounded-xl" />
-      <div className="mt-4 space-y-3">
-        <SkeletonBlock className="h-3.5 w-72 max-w-full" />
-        <SkeletonBlock className="h-3.5 w-56 max-w-full" />
-        <SkeletonBlock className="h-11 w-full rounded-xl" />
       </div>
     </section>
   );
@@ -157,12 +141,21 @@ function UtilityCardsSkeleton() {
 
 function PriceSkeleton() {
   return (
-    <section className="rounded-[1.55rem] border border-[#e1d2bf] bg-white p-5 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
-      <SkeletonBlock className="h-3 w-40" />
-      <SkeletonBlock className="mt-4 h-14 w-48 rounded-xl" />
-      <SkeletonBlock className="mt-4 h-4 w-40" />
-      <SkeletonBlock className="mt-3 h-4 w-64 max-w-full" />
-      <SkeletonBlock className="mt-5 h-12 rounded-full bg-[#f3c879]" />
+    <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
+      <div className="rounded-2xl border border-[#e1d2bf] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-5">
+        <SkeletonBlock className="h-3 w-40" />
+        <SkeletonBlock className="mt-4 h-14 w-48 rounded-xl" />
+        <SkeletonBlock className="mt-4 h-4 w-40" />
+        <SkeletonBlock className="mt-3 h-4 w-64 max-w-full" />
+        <SkeletonBlock className="mt-5 h-12 rounded-2xl bg-[#1e4b3b]/65" />
+        <SkeletonBlock className="mx-auto mt-3 h-3 w-44" />
+      </div>
+      <div className="rounded-2xl border border-[#eadfce] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.22)] sm:p-5">
+        <SkeletonBlock className="h-3 w-32" />
+        <SkeletonBlock className="mt-3 h-7 w-56 max-w-full rounded-xl" />
+        <SkeletonBlock className="mt-4 h-4 w-full max-w-sm" />
+        <SkeletonBlock className="mt-4 h-11 rounded-2xl bg-[#f0e9de]" />
+      </div>
     </section>
   );
 }
@@ -207,21 +200,37 @@ function FaqSkeleton() {
   );
 }
 
+function SmartFinderSkeleton() {
+  return (
+    <section className="rounded-2xl border border-[#d7c8b6] bg-[linear-gradient(135deg,#fffdf9_0%,#edf4ee_54%,#f7efe4_100%)] p-4 shadow-[0_22px_55px_-40px_rgba(44,31,20,0.38)] sm:p-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 flex-1">
+          <SkeletonBlock className="h-3 w-24" />
+          <SkeletonBlock className="mt-3 h-8 w-80 max-w-full rounded-xl" />
+          <SkeletonBlock className="mt-3 h-4 w-full max-w-2xl" />
+          <SkeletonBlock className="mt-2 h-4 w-3/4 max-w-xl" />
+        </div>
+        <SkeletonBlock className="h-12 w-full rounded-2xl bg-[#1e4b3b]/65 sm:w-44" />
+      </div>
+    </section>
+  );
+}
+
 export function PerfumeDetailLoadingState({ variant = "page" }: PerfumeDetailLoadingStateProps) {
   return (
-    <div role="status" aria-live="polite" data-loading-variant={variant} className="w-full space-y-6 md:space-y-8">
+    <div role="status" aria-live="polite" data-loading-variant={variant} className="w-full space-y-4 md:space-y-8">
       <span className="sr-only">Caricamento profumo</span>
 
       <div
         className={cn(
-          "w-full rounded-[1.7rem] border border-[#ddd0be] bg-[#fffdf9] p-4 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6",
+          "w-full rounded-2xl border border-[#ddd0be] bg-[#fffdf9] p-3 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6",
         )}
       >
         <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-[#efe5d6]">
           <div className="loading-bar-fill h-full w-1/3 rounded-full bg-[#cda664]" />
         </div>
         <div className="grid gap-5 lg:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-          <div className="relative h-[20rem] overflow-hidden rounded-[1.25rem] border border-[#ddcfbc] bg-white shadow-[0_18px_36px_-28px_rgba(53,39,27,0.28)] sm:h-[25rem] lg:h-[31rem]">
+          <div className="relative h-[18rem] overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white shadow-[0_18px_36px_-28px_rgba(53,39,27,0.28)] sm:h-[25rem] lg:h-[31rem]">
             <BottleImageSkeleton />
           </div>
 
@@ -257,9 +266,8 @@ export function PerfumeDetailLoadingState({ variant = "page" }: PerfumeDetailLoa
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <SkeletonBlock className="h-12 rounded-full" />
-              <SkeletonBlock className="hidden h-12 rounded-full bg-[#f3c879] sm:block" />
-              <SkeletonBlock className="h-12 rounded-full sm:col-span-2" />
+              <SkeletonBlock className="h-12 rounded-2xl bg-[#f0e9de]" />
+              <SkeletonBlock className="hidden h-12 rounded-2xl bg-[#f3c879] sm:block" />
             </div>
 
           </div>
@@ -268,14 +276,13 @@ export function PerfumeDetailLoadingState({ variant = "page" }: PerfumeDetailLoa
 
       <OverviewSkeleton />
       <PyramidSkeleton />
+      <PriceSkeleton />
       <BadgePanelsSkeleton />
       <ContributeSkeleton />
-      <CommunitySkeleton />
-      <UtilityCardsSkeleton />
-      <PriceSkeleton />
       <RelatedSkeleton />
       <RelatedSkeleton />
       <FaqSkeleton />
+      <SmartFinderSkeleton />
     </div>
   );
 }

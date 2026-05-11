@@ -61,47 +61,61 @@ type PerfumeHeroProps = {
 
 function MetricItem({ label, value }: { label: string; value: number | null }) {
   return (
-    <div className="rounded-[1rem] border border-[#deceb9] bg-white/78 px-3 py-3 text-center shadow-[0_16px_34px_-32px_rgba(53,39,27,0.26)]">
-      <p className="text-[9px] font-medium uppercase leading-[1.15] tracking-[0.1em] text-[#8a7763]">{label}</p>
-      <p className="mt-1 text-lg font-semibold leading-none text-[#1f1914]">
+    <div className="min-w-0 rounded-xl border border-[#e4d8c8] bg-white/68 px-2 py-2 text-center shadow-[0_12px_28px_-26px_rgba(53,39,27,0.32)]">
+      <p className="truncate text-[9px] font-semibold uppercase leading-none tracking-[0.1em] text-[#8a7763]">
+        {label}
+      </p>
+      <p className="mt-1 text-base font-semibold leading-none text-[#1f1914]">
         {value ?? "-"}
-        <span className="ml-1 text-[13px] font-medium text-[#6f5d4b]">/ 10</span>
+        <span className="ml-1 text-[12px] font-medium text-[#6f5d4b]">/10</span>
       </p>
     </div>
   );
 }
 
+function calculateOdoraCommunityScore(metrics: Array<{ value: number | null }>) {
+  const values = metrics
+    .map((metric) => metric.value)
+    .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+
+  if (values.length === 0) {
+    return null;
+  }
+
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
 function RatingBlock({
-  rating,
-  reviewCount,
+  score,
+  label,
   metrics,
 }: {
-  rating: number | null;
-  reviewCount: number;
+  score: number | null;
+  label: string;
   metrics: Array<{ label: string; value: number | null }>;
 }) {
-  if (!rating && metrics.length === 0) {
+  if (score == null && metrics.length === 0) {
     return null;
   }
 
   return (
-    <div className="rounded-[1.35rem] border border-[#dfd1be] bg-[#fffdf9]/88 p-3 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.32)] sm:p-4">
-      <div className="flex flex-wrap items-end justify-between gap-3">
+    <div className="relative overflow-hidden rounded-2xl border border-[#dfd1be] bg-[radial-gradient(circle_at_18%_18%,rgba(217,183,127,0.16),transparent_32%),linear-gradient(180deg,#fffdf9_0%,#fbf5ec_100%)] p-3 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.34)] sm:p-4">
+      <div className="pointer-events-none absolute right-3 top-3 h-14 w-14 rounded-full border border-[#e7dac8]/70 bg-white/34" />
+      <div className="relative flex items-start justify-between gap-4">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8a7763]">Odora score</p>
-          <p className="mt-1 text-[2rem] font-semibold leading-none text-[#1f1914]">
-            {rating ? (rating * 2).toFixed(1) : "-"}
-            <span className="ml-1 text-base font-medium text-[#6f5d4b]">/10</span>
+          <p className="max-w-[11rem] text-[10px] font-semibold uppercase leading-[1.35] tracking-[0.16em] text-[#8a7763] sm:max-w-none">
+            {label}
+          </p>
+          <p className="mt-1 text-[2.35rem] font-semibold leading-none tracking-[-0.02em] text-[#1f1914] sm:text-[2.55rem]">
+            {score != null ? score.toFixed(1) : "-"}
+            <span className="ml-1 text-lg font-medium tracking-normal text-[#6f5d4b]">/10</span>
           </p>
         </div>
-        <p className="pb-1 text-sm font-medium text-[#5b4c3d]">
-          {reviewCount > 0 ? `${reviewCount.toLocaleString("it-IT")} recensioni` : "Recensioni in crescita"}
-        </p>
       </div>
       {metrics.length > 0 ? (
         <div
           className={cn(
-            "mt-3 grid gap-2.5",
+            "relative mt-3 grid gap-2",
             metrics.length === 1 ? "grid-cols-1" : metrics.length === 2 ? "grid-cols-2" : "grid-cols-3",
           )}
         >
@@ -149,11 +163,21 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
     { label: t("metrics.sillage"), value: perfume.sillageScore },
     { label: t("metrics.versatility"), value: perfume.versatilityScore },
   ].filter((metric) => metric.value !== null);
+  const odoraCommunityScore = calculateOdoraCommunityScore(metrics);
+  const popularityBadge =
+    reviewCount >= 10
+      ? t("badges.communityFavorite")
+      : reviewCount > 0
+        ? t("badges.earlyRatings")
+        : perfume.isNiche
+          ? t("badges.popular")
+          : null;
   return (
     <>
-      <section data-perfume-hero="true" className="rounded-[1.7rem] border border-[#ddd0be] bg-[#fffdf9] p-4 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6">
-        <div className="grid gap-5 lg:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-          <div className="relative h-[20rem] overflow-hidden rounded-[1.25rem] border border-[#ddcfbc] bg-white shadow-[0_18px_36px_-28px_rgba(53,39,27,0.28)] sm:h-[25rem] lg:h-[31rem]">
+      <section data-perfume-hero="true" className="rounded-2xl border border-[#ddd0be] bg-[#fffdf9] p-3 shadow-[0_26px_70px_-48px_rgba(50,35,20,0.42)] sm:p-5 lg:p-6">
+        <div className="grid gap-4 lg:grid-cols-[minmax(18rem,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+          <div className="relative h-[18rem] overflow-hidden rounded-2xl border border-[#ddcfbc] bg-[linear-gradient(180deg,#ffffff_0%,#f3eadf_100%)] shadow-[0_18px_38px_-26px_rgba(53,39,27,0.34)] sm:h-[25rem] lg:h-[31rem]">
+            <div aria-hidden="true" className="absolute inset-x-8 bottom-5 h-16 rounded-full bg-[#d9c7b1]/45 blur-2xl" />
             <PerfumeImage
               imageUrl={perfume.imageUrl}
               perfumeName={perfume.name}
@@ -161,12 +185,12 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
               fragranceFamily={localizedFragranceFamily}
               priority
               sizes="(max-width: 1024px) 100vw, 42vw"
-              imageClassName="object-cover"
+              imageClassName="object-contain object-center p-3 transition-transform duration-300 lg:p-5"
             />
           </div>
 
           <div className="min-w-0 lg:py-2">
-            <div className="mt-6 min-w-0 lg:mt-0">
+            <div className="min-w-0 lg:mt-0">
               {perfume.brand?.slug ? (
                 <Link
                   href={{ pathname: "/brands/[slug]", params: { slug: perfume.brand.slug } }}
@@ -177,31 +201,41 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
               ) : (
                 <p className="text-sm font-semibold text-[#1f1914]">{brandName}</p>
               )}
-              <h1 className="mt-1 font-display text-[2.6rem] leading-[0.94] text-[#1f1914] sm:text-[3.25rem] lg:text-[4rem]">
-                {perfume.name}
-              </h1>
+              <div className="mt-1 flex flex-wrap items-start gap-2">
+                <h1 className="min-w-0 flex-1 font-display text-3xl leading-[0.98] text-[#1f1914] sm:text-[3.25rem] lg:text-[4rem]">
+                  {perfume.name}
+                </h1>
+                {popularityBadge ? (
+                  <span className="mt-1 rounded-full border border-[#d7e4d8] bg-[#edf4ee] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#1e4b3b]">
+                    {popularityBadge}
+                  </span>
+                ) : null}
+              </div>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5b4c3d]">{summary}</p>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-3 flex flex-wrap gap-2">
               <Badge variant="outline">{localizedFragranceFamily}</Badge>
               {perfume.isArabic ? <Badge variant="soft">{commonT("badges.arabic")}</Badge> : null}
               {perfume.isNiche ? <Badge variant="soft">{commonT("badges.niche")}</Badge> : null}
             </div>
 
-            <div className="mt-4">
-              <RatingBlock rating={perfume.ratingInternal} reviewCount={reviewCount} metrics={metrics} />
+            <div className="mt-3">
+              <RatingBlock
+                score={odoraCommunityScore}
+                label={t("score.label")}
+                metrics={metrics}
+              />
             </div>
 
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {listAction ? <div>{listAction}</div> : null}
               <a
                 href={amazonUrl}
                 target="_blank"
                 rel="noreferrer"
                 className={buttonStyles({
                   className:
-                    "hidden h-12 w-full bg-[#ff9f0a] !text-[#23170c] hover:bg-[#f09100] hover:!text-[#23170c] sm:flex",
+                    "h-12 w-full bg-[#ff9f0a] !text-[#23170c] hover:bg-[#f09100] hover:!text-[#23170c]",
                 })}
               >
                 <span className="inline-flex items-center gap-2">
@@ -211,22 +245,14 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
                   </span>
                 </span>
               </a>
-              <a
-                href="#contribuisci-valutazione"
-                className={buttonStyles({
-                  variant: "secondary",
-                  className: "h-12 w-full sm:col-span-2",
-                })}
-              >
-                {locale === "it" ? "Valuta questo profumo" : "Rate this perfume"}
-              </a>
+              {listAction ? <div>{listAction}</div> : null}
             </div>
           </div>
         </div>
       </section>
 
       <MobilePerfumeCtaBar
-        amazonUrl={amazonUrl}
+        compareHref="#price-offers"
         listAction={listAction}
       />
     </>

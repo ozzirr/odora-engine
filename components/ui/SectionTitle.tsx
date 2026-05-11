@@ -15,8 +15,8 @@ export function SectionTitle({ eyebrow, title, subtitle, as = "h2" }: SectionTit
           {eyebrow}
         </p>
       ) : null}
-      <HeadingTag className="font-display text-[1.85rem] leading-[1.1] text-[#1e1813] sm:text-[2.2rem] lg:text-[2.5rem]">{title}</HeadingTag>
-      {subtitle ? <p className="max-w-xl text-[14.5px] leading-[1.7] text-[#6b5a49]">{subtitle}</p> : null}
+      <HeadingTag className="font-display text-xl leading-[1.12] text-[#1e1813] sm:text-[2.2rem] lg:text-[2.5rem]">{title}</HeadingTag>
+      {subtitle ? <p className="max-w-xl text-sm leading-relaxed text-[#6b5a49] sm:text-[14.5px]">{subtitle}</p> : null}
     </div>
   );
 }

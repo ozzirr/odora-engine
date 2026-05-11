@@ -652,6 +652,14 @@
     "hero": {
       "unknownBrand": "Brand sconosciuto",
       "rating": "Valutazione {value}",
+      "score": {
+        "label": "Odora Community Score"
+      },
+      "badges": {
+        "communityFavorite": "Community favorite",
+        "earlyRatings": "Prime valutazioni",
+        "popular": "Popolare"
+      },
       "metrics": {
         "longevity": "Persistenza",
         "sillage": "Scia",
@@ -772,7 +780,7 @@
         },
         "where": {
           "q": "Dove comprare {name} al miglior prezzo?",
-          "a": "Su Odora confrontiamo in tempo reale le offerte dei principali store online per {name}, mostrandoti il totale piu basso comprensivo di spedizione. Clicca su 'Vai all'offerta' per acquistare dal retailer scelto."
+          "a": "Su Odora confrontiamo in tempo reale le offerte dei principali store online per {name}, mostrandoti il totale piu basso comprensivo di spedizione. Clicca su 'Confronta prezzi' per vedere le offerte disponibili e scegliere il retailer."
         }
       }
     }
