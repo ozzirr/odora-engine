@@ -5,7 +5,6 @@ import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/layout/Container";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { ExpandableSeoIntro } from "@/components/ui/ExpandableSeoIntro";
 import { buttonStyles } from "@/components/ui/Button";
 import { buildPerfumeQuery, type ParsedPerfumeFilters } from "@/lib/filters";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
@@ -174,16 +173,17 @@ export default async function PerfumesPage({ params, searchParams }: PerfumesPag
         locale={resolvedLocale}
         namespaces={["common", "catalog", "perfume", "taxonomy"]}
       >
-        <section className="space-y-4 rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-8">
-          <ExpandableSeoIntro
-            eyebrow={t("eyebrow")}
-            title={t("title")}
-            subtitle={t("subtitle")}
-            body={[t("bodyOne"), t("bodyTwo")]}
-            primaryCta={{ href: "/finder", label: t("primaryCta") }}
-            secondaryCta={{ href: "/top", label: t("secondaryCta"), variant: "secondary" }}
-          />
-        </section>
+        <header className="rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-10">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
+            {t("eyebrow")}
+          </p>
+          <h1 className="mt-3 font-display text-[2rem] leading-[1.1] text-[#1e1813] sm:text-[2.5rem]">
+            {t("title")}
+          </h1>
+          <p className="mt-3 max-w-2xl text-[14.5px] leading-[1.7] text-[#6b5a49]">
+            {t("subtitle")}
+          </p>
+        </header>
 
         <PerfumesClient
           initialPerfumes={perfumes}

@@ -542,8 +542,8 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalogo",
-      "title": "Catalogo profumi Odora",
-      "subtitle": "Una vista tecnica del catalogo per chi vuole cercare direttamente per famiglia, budget, genere o nota principale.",
+      "title": "Profumi nel catalogo Odora",
+      "subtitle": "Esplora le fragranze disponibili su Odora e filtra la selezione per famiglia olfattiva, prezzo, genere o note principali.",
       "bodyOne": "Per una selezione guidata e piu personale, usa il Finder. Qui manteniamo una ricerca essenziale per consultare il catalogo senza filtri troppo rigidi.",
       "bodyTwo": "",
       "primaryCta": "Usa il finder",
@@ -893,7 +893,7 @@
     "list": {
       "eyebrow": "Brand nel catalogo",
       "title": "Maison e brand",
-      "subtitle": "Esplora le maison presenti nel catalogo Odora. Apri una scheda brand per vedere i profumi disponibili e seguire le nuove uscite.",
+      "subtitle": "Sfoglia le maison presenti su Odora, apri una scheda brand e scopri i profumi disponibili nel catalogo.",
       "perfumeCount": "{count, plural, one {# profumo} other {# profumi}}",
       "empty": "Nessun brand disponibile al momento.",
       "breadcrumb": "Brand"

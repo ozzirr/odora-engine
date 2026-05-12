@@ -542,8 +542,8 @@
   "catalog": {
     "page": {
       "eyebrow": "Catalog",
-      "title": "Odora perfume catalog",
-      "subtitle": "A technical catalog view for searching directly by family, budget, gender, or main note.",
+      "title": "Perfumes in the Odora catalog",
+      "subtitle": "Explore the fragrances available on Odora and refine the selection by fragrance family, price, gender, or key notes.",
       "bodyOne": "For a more personal guided selection, use Finder. This page keeps catalog search essential without overly strict filters.",
       "bodyTwo": "",
       "primaryCta": "Use Finder",
@@ -909,7 +909,7 @@
     "list": {
       "eyebrow": "Brand directory",
       "title": "Fragrance houses and brands",
-      "subtitle": "Explore the fragrance houses in the Odora catalog. Open a brand page to browse available perfumes and follow new releases.",
+      "subtitle": "Browse the fragrance houses on Odora, open a brand page, and discover the perfumes available in the catalog.",
       "perfumeCount": "{count, plural, one {# perfume} other {# perfumes}}",
       "empty": "No brands available right now.",
       "breadcrumb": "Brands"
