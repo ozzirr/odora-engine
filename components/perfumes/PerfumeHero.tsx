@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 
-import { MobilePerfumeCtaBar } from "@/components/perfumes/MobilePerfumeCtaBar";
 import { PerfumeImage } from "@/components/perfumes/PerfumeImage";
 import { Badge } from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
@@ -250,11 +249,6 @@ export function PerfumeHero({ perfume, listAction, reviewCount }: PerfumeHeroPro
           </div>
         </div>
       </section>
-
-      <MobilePerfumeCtaBar
-        compareHref="#price-offers"
-        listAction={listAction}
-      />
     </>
   );
 }
