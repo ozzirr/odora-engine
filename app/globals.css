@@ -167,6 +167,53 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   }
 }
 
+@keyframes perfume-loading-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-8px) scale(1.015);
+  }
+}
+
+@keyframes perfume-loading-orbit {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes perfume-loading-mist {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0) scale(0.92);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: translateY(-18px) scale(1.18);
+  }
+}
+
+@keyframes perfume-loading-dot {
+  0%,
+  100% {
+    opacity: 0.38;
+    transform: scale(0.86);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
 @keyframes finder-card-in {
   0% {
     opacity: 0;
@@ -266,6 +313,22 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   .loading-bar-fill {
     animation: loading-slide 1.35s ease-in-out infinite;
   }
+
+  .perfume-loading-float {
+    animation: perfume-loading-float 4.2s ease-in-out infinite;
+  }
+
+  .perfume-loading-orbit {
+    animation: perfume-loading-orbit 14s linear infinite;
+  }
+
+  .perfume-loading-mist {
+    animation: perfume-loading-mist 3.4s ease-in-out infinite;
+  }
+
+  .perfume-loading-dot {
+    animation: perfume-loading-dot 1.4s ease-in-out infinite;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -280,6 +343,13 @@ html[data-mobile-menu-open="true"] [data-mobile-perfume-cta="true"] {
   }
 
   .finder-loading-animate {
+    animation: none !important;
+  }
+
+  .perfume-loading-float,
+  .perfume-loading-orbit,
+  .perfume-loading-mist,
+  .perfume-loading-dot {
     animation: none !important;
   }
 }

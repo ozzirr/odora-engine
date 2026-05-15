@@ -541,10 +541,10 @@
   },
   "catalog": {
     "page": {
-      "eyebrow": "Catalogo",
-      "title": "Profumi nel catalogo Odora",
-      "subtitle": "Esplora le fragranze disponibili su Odora e filtra la selezione per famiglia olfattiva, prezzo, genere o note principali.",
-      "bodyOne": "Per una selezione guidata e piu personale, usa il Finder. Qui manteniamo una ricerca essenziale per consultare il catalogo senza filtri troppo rigidi.",
+      "eyebrow": "Catalogo fragranze",
+      "title": "Trova il profumo giusto per note, stile e budget",
+      "subtitle": "Sfoglia le fragranze selezionate da Odora, confronta prezzi e trova il profumo piu adatto al tuo stile.",
+      "bodyOne": "Usa i filtri per partire da famiglia olfattiva, note, genere e fascia prezzo. Per una selezione piu guidata, passa allo Smart Finder.",
       "bodyTwo": "",
       "primaryCta": "Usa il finder",
       "secondaryCta": "Apri le classifiche"
@@ -629,6 +629,20 @@
     }
   },
   "perfume": {
+    "authIntercept": {
+      "eyebrow": "Odora",
+      "title": "Entra in Odora",
+      "description": "Salva i profumi, crea la tua collezione e condividi la tua esperienza con la community.",
+      "login": "Accedi",
+      "continue": "Continua a esplorare"
+    },
+    "anonymousGate": {
+      "eyebrow": "Odora",
+      "title": "Accedi per continuare",
+      "description": "Hai visitato {count} profumi diversi. Accedi o crea un account per continuare la ricerca e salvare le fragranze che ti interessano.",
+      "login": "Accedi",
+      "continue": "Continua per ora"
+    },
     "card": {
       "unknownBrand": "Brand sconosciuto",
       "from": "da",
@@ -1327,8 +1341,8 @@
         "description": "Usa Odora Finder per trovare profumi in base a note, mood, stagione, occasione e budget, poi confronta le fragranze piu adatte al tuo stile."
       },
       "perfumes": {
-        "title": "Catalogo profumi per note, famiglia e prezzo | Odora",
-        "description": "Sfoglia il catalogo profumi di Odora per famiglia olfattiva, note, prezzo e stile, con accesso rapido a schede prodotto e confronto offerte."
+        "title": "Trova profumi per note, stile e budget | Odora",
+        "description": "Sfoglia le fragranze selezionate da Odora, filtra per note, famiglia olfattiva e prezzo, e confronta le offerte disponibili."
       },
       "top": {
         "title": "Migliori profumi e classifiche fragranze | Odora",

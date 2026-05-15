@@ -37,46 +37,17 @@ const SearchIcon = () => (
 );
 
 function MobileSearchButton({
-  isAuthenticated,
   label,
   onOpenSearch,
-  onCloseMenu,
-  resolveSearchAuthNextPath,
 }: {
-  isAuthenticated: boolean;
   label: string;
   onOpenSearch: () => void;
-  onCloseMenu: () => void;
-  resolveSearchAuthNextPath: (pathname: string, searchParams: URLSearchParams, hash: string) => string;
 }) {
-  if (isAuthenticated) {
-    return (
-      <button type="button" onClick={onOpenSearch} className={SEARCH_BTN_CLASS}>
-        <SearchIcon />
-        <span className="text-base font-medium">{label}</span>
-      </button>
-    );
-  }
-
   return (
-    <Suspense
-      fallback={
-        <button type="button" className={SEARCH_BTN_CLASS}>
-          <SearchIcon />
-          <span className="text-base font-medium">{label}</span>
-        </button>
-      }
-    >
-      <AuthModalTrigger
-        mode="login"
-        onOpen={onCloseMenu}
-        resolveNextPath={resolveSearchAuthNextPath}
-        className={SEARCH_BTN_CLASS}
-      >
-        <SearchIcon />
-        <span className="text-base font-medium">{label}</span>
-      </AuthModalTrigger>
-    </Suspense>
+    <button type="button" onClick={onOpenSearch} className={SEARCH_BTN_CLASS}>
+      <SearchIcon />
+      <span className="text-base font-medium">{label}</span>
+    </button>
   );
 }
 
@@ -171,20 +142,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
     return () => window.cancelAnimationFrame(frameId);
   }, [isAuthenticated, searchOpen, shouldOpenSearchAfterLogin]);
 
-  const resolveSearchAuthNextPath = (
-    currentPathname: string,
-    currentSearchParams: URLSearchParams,
-    hash: string,
-  ) => {
-    const nextParams = new URLSearchParams(currentSearchParams.toString());
-    nextParams.delete("auth");
-    nextParams.delete("authNext");
-    nextParams.delete("error");
-    nextParams.set(SEARCH_DIALOG_PARAM, "1");
-
-    return `${currentPathname}${nextParams.toString() ? `?${nextParams.toString()}` : ""}${hash}`;
-  };
-
   const handleMenuToggle = () => {
     if (authModalOpen) {
       window.history.replaceState(
@@ -235,35 +192,6 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
             </Link>
           ))}
 
-          {/* Search trigger — desktop */}
-          {isAuthenticated ? (
-            <button
-              type="button"
-              aria-label={searchT("label")}
-              onClick={() => setSearchOpen(true)}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ddd0bf] bg-white/60 text-[#7a6a58] transition-colors hover:border-[#c9b89e] hover:text-[#3d2e22]"
-            >
-              <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
-                <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-            </button>
-          ) : (
-            <Suspense fallback={null}>
-              <AuthModalTrigger
-                mode="login"
-                aria-label={searchT("label")}
-                resolveNextPath={resolveSearchAuthNextPath}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ddd0bf] bg-white/60 text-[#7a6a58] transition-colors hover:border-[#c9b89e] hover:text-[#3d2e22]"
-              >
-                <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
-                  <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
-                  <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
-              </AuthModalTrigger>
-            </Suspense>
-          )}
-
           {canOpenAuthModal ? (
             <Suspense
               fallback={
@@ -284,6 +212,19 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
           <Link href="/finder" className={buttonStyles({ size: "sm" })}>
             {t("cta")}
           </Link>
+
+          {/* Search trigger — desktop */}
+          <button
+            type="button"
+            aria-label={searchT("label")}
+            onClick={() => setSearchOpen(true)}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ddd0bf] bg-white/60 text-[#7a6a58] transition-colors hover:border-[#c9b89e] hover:text-[#3d2e22]"
+          >
+            <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
+              <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M14 14l3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
         </nav>
 
         <button
@@ -374,13 +315,47 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               </div>
               <p className="mt-4 text-sm leading-6 text-[#705b49]">{t("introDescription")}</p>
               <div className="mt-4">
-                <MobileSearchButton
-                  isAuthenticated={isAuthenticated}
-                  label={searchT("label")}
-                  onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
-                  onCloseMenu={() => setMenuOpen(false)}
-                  resolveSearchAuthNextPath={resolveSearchAuthNextPath}
-                />
+                {canOpenAuthModal ? (
+                  <Suspense
+                    fallback={
+                      <Link
+                        href={accountHref}
+                        onClick={() => setMenuOpen(false)}
+                        className={buttonStyles({
+                          size: "md",
+                          variant: "secondary",
+                          className: "w-full justify-center",
+                        })}
+                      >
+                        {accountLabel}
+                      </Link>
+                    }
+                  >
+                    <AuthModalTrigger
+                      mode="login"
+                      onOpen={() => setMenuOpen(false)}
+                      className={buttonStyles({
+                        size: "md",
+                        variant: "secondary",
+                        className: "w-full justify-center",
+                      })}
+                    >
+                      {accountLabel}
+                    </AuthModalTrigger>
+                  </Suspense>
+                ) : (
+                  <Link
+                    href={accountHref}
+                    onClick={() => setMenuOpen(false)}
+                    className={buttonStyles({
+                      size: "md",
+                      variant: "secondary",
+                      className: "w-full justify-center",
+                    })}
+                  >
+                    {accountLabel}
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -438,56 +413,11 @@ export function Header({ initialIsAuthenticated = false }: HeaderProps) {
               })}
             </div>
 
-            <div className="mt-5 grid gap-3 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,238,229,0.98))] p-3 shadow-[0_18px_35px_-30px_rgba(31,25,20,0.45)] backdrop-blur-xl">
-              {canOpenAuthModal ? (
-                <Suspense
-                  fallback={
-                    <Link
-                      href={accountHref}
-                      onClick={() => setMenuOpen(false)}
-                      className={buttonStyles({
-                        size: "md",
-                        variant: "secondary",
-                        className: "w-full justify-center",
-                      })}
-                    >
-                      {accountLabel}
-                    </Link>
-                  }
-                >
-                  <AuthModalTrigger
-                    mode="login"
-                    onOpen={() => setMenuOpen(false)}
-                    className={buttonStyles({
-                      size: "md",
-                      variant: "secondary",
-                      className: "w-full justify-center",
-                    })}
-                  >
-                    {accountLabel}
-                  </AuthModalTrigger>
-                </Suspense>
-              ) : (
-                <Link
-                  href={accountHref}
-                  onClick={() => setMenuOpen(false)}
-                  className={buttonStyles({
-                    size: "md",
-                    variant: "secondary",
-                    className: "w-full justify-center",
-                  })}
-                >
-                  {accountLabel}
-                </Link>
-              )}
-
-              <Link
-                href="/finder"
-                onClick={() => setMenuOpen(false)}
-                className={buttonStyles({ size: "md", className: "w-full justify-center" })}
-              >
-                {t("cta")}
-              </Link>
+            <div className="mt-5 rounded-[1.6rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.94),rgba(245,238,229,0.98))] p-3 shadow-[0_18px_35px_-30px_rgba(31,25,20,0.45)] backdrop-blur-xl">
+              <MobileSearchButton
+                label={searchT("label")}
+                onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}
+              />
             </div>
           </div>
         </div>

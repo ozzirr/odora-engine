@@ -28,12 +28,12 @@ const pyramidLevels = {
   },
 } as const;
 
-export function OlfactoryPyramidCard({ notes }: { notes: NoteListItem[] }) {
+export function OlfactoryPyramidCard({ notes, className }: { notes: NoteListItem[]; className?: string }) {
   const t = useTranslations("perfume.notes");
   const locale = useLocale();
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6">
+    <section className={cn("overflow-hidden rounded-2xl border border-[#ddcfbc] bg-white p-4 shadow-[0_18px_42px_-36px_rgba(53,39,27,0.28)] sm:p-6", className)}>
       <div className="flex items-end justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#907b66]">

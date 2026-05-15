@@ -541,10 +541,10 @@
   },
   "catalog": {
     "page": {
-      "eyebrow": "Catalog",
-      "title": "Perfumes in the Odora catalog",
-      "subtitle": "Explore the fragrances available on Odora and refine the selection by fragrance family, price, gender, or key notes.",
-      "bodyOne": "For a more personal guided selection, use Finder. This page keeps catalog search essential without overly strict filters.",
+      "eyebrow": "Fragrance catalog",
+      "title": "Find the right perfume by notes, style, and budget",
+      "subtitle": "Browse Odora's selected fragrances, compare prices, and find the perfume that best fits your style.",
+      "bodyOne": "Use filters to start from fragrance family, notes, gender, and price range. For a more guided selection, switch to Smart Finder.",
       "bodyTwo": "",
       "primaryCta": "Use Finder",
       "secondaryCta": "Open rankings"
@@ -629,6 +629,20 @@
     }
   },
   "perfume": {
+    "authIntercept": {
+      "eyebrow": "Odora",
+      "title": "Join Odora",
+      "description": "Save perfumes, build your collection and share your experience with the community.",
+      "login": "Log in",
+      "continue": "Continue browsing"
+    },
+    "anonymousGate": {
+      "eyebrow": "Odora",
+      "title": "Log in to continue",
+      "description": "You’ve visited {count} different perfumes. Log in or create an account to keep searching and save the fragrances you like.",
+      "login": "Log in",
+      "continue": "Continue for now"
+    },
     "card": {
       "unknownBrand": "Unknown brand",
       "from": "from",
@@ -1327,8 +1341,8 @@
         "description": "Use Odora Finder to discover perfumes by notes, mood, season, occasion, and budget, then compare the fragrances that best match your style."
       },
       "perfumes": {
-        "title": "Perfume catalog by notes, family, and price | Odora",
-        "description": "Browse the Odora perfume catalog by fragrance family, notes, price, and style, with direct access to product pages and offer comparison."
+        "title": "Find perfumes by notes, style, and budget | Odora",
+        "description": "Browse Odora's selected fragrances, filter by notes, fragrance family, and price, and compare available offers."
       },
       "top": {
         "title": "Best perfumes and fragrance rankings | Odora",

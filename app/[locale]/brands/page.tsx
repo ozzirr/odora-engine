@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
+import { BrandListLink, BrandListScrollRestore } from "@/components/brands/BrandListScrollMemory";
+import { BrandLogoImage } from "@/components/brands/BrandLogoImage";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { resolveBrandLogoUrl } from "@/lib/brand-logos";
-import { Link } from "@/lib/navigation";
 import { getAllBrandsWithCount } from "@/lib/brands";
 import { getLocalizedPathname, hasLocale, type AppLocale } from "@/lib/i18n";
 import { buildPageMetadata } from "@/lib/metadata";
@@ -58,6 +59,7 @@ export default async function BrandsListPage({ params }: BrandsPageProps) {
       />
 
       <ScopedIntlProvider locale={resolvedLocale} namespaces={["common", "catalog"]}>
+        <BrandListScrollRestore />
         <Container className="space-y-8 pt-6 pb-16 md:pt-8">
           <header className="rounded-3xl border border-[#dfd1bf] bg-white p-6 shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)] sm:p-10">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
@@ -82,25 +84,17 @@ export default async function BrandsListPage({ params }: BrandsPageProps) {
 
                 return (
                   <li key={brand.id}>
-                    <Link
-                      href={{ pathname: "/brands/[slug]", params: { slug: brand.slug } }}
+                    <BrandListLink
+                      slug={brand.slug}
+                      brandName={brand.name}
                       className="group flex items-center gap-4 rounded-2xl border border-[#e3d6c2] bg-white p-4 transition-all hover:-translate-y-[1px] hover:border-[#c9b89e] hover:shadow-[0_18px_45px_-32px_rgba(48,34,20,0.32)]"
-                      aria-label={brand.name}
                     >
                       <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#ecdfca] bg-[#f8f1e6]">
-                        {resolvedLogoUrl ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={resolvedLogoUrl}
-                            alt={brand.name}
-                            className="h-full w-full object-contain p-1.5"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <span className="font-display text-2xl text-[#8b735d]">
-                            {brand.name.charAt(0)}
-                          </span>
-                        )}
+                        <BrandLogoImage
+                          src={resolvedLogoUrl}
+                          alt={brand.name}
+                          className="h-full w-full object-contain p-1.5"
+                        />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate font-display text-[1.1rem] text-[#1e1813] group-hover:text-[#0d0a07]">
@@ -125,7 +119,7 @@ export default async function BrandsListPage({ params }: BrandsPageProps) {
                           />
                         </svg>
                       </span>
-                    </Link>
+                    </BrandListLink>
                   </li>
                 );
               })}

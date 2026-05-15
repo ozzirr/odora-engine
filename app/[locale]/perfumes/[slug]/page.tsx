@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { AddToListButton } from "@/components/perfumes/AddToListButton";
+import { AnonymousPerfumeVisitGate } from "@/components/perfumes/AnonymousPerfumeVisitGate";
 import { MoodBadges } from "@/components/perfumes/MoodBadges";
 import { OlfactoryPyramidCard } from "@/components/perfumes/OlfactoryPyramidCard";
 import { PerfumeDetailNavigationReady } from "@/components/perfumes/PerfumeDetailNavigationReady";
@@ -710,6 +711,11 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
       >
         <PerfumeDetailNavigationReady />
         <PerfumeDetailReadyScrollRestore />
+        <AnonymousPerfumeVisitGate
+          isAuthenticated={Boolean(appUser)}
+          loginNextPath={detailPath}
+          perfumeSlug={perfume.slug}
+        />
         <Container className="space-y-4 pt-3 pb-40 md:space-y-8 md:pt-6 md:pb-10">
           <PerfumeHero
             perfume={localizedPerfume}
@@ -732,17 +738,23 @@ export default async function PerfumeDetailPage({ params }: PerfumeDetailPagePro
             <SectionTitle eyebrow={t("overview.eyebrow")} title={t("overview.title")} subtitle={overviewText} />
           </section>
 
-          <OlfactoryPyramidCard notes={notesForRender} />
+          <section className="grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-start">
+            <OlfactoryPyramidCard notes={notesForRender} className="lg:h-full" />
 
-          <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start">
-            <PriceCard bestOffer={bestOffer} amazonUrl={amazonUrl} />
+            <div className="grid gap-4 lg:sticky lg:top-24">
+              <PriceCard
+                bestOffer={bestOffer}
+                amazonUrl={amazonUrl}
+                className="border-[#d8c4aa] bg-[linear-gradient(180deg,#fffdf9_0%,#f7efe4_100%)]"
+              />
 
-            <PriceAlertCard
-              perfumeId={perfume.id}
-              detailPath={detailPath}
-              isAuthenticated={Boolean(appUser)}
-              isActive={Boolean(priceAlert?.active)}
-            />
+              <PriceAlertCard
+                perfumeId={perfume.id}
+                detailPath={detailPath}
+                isAuthenticated={Boolean(appUser)}
+                isActive={Boolean(priceAlert?.active)}
+              />
+            </div>
           </section>
 
           <section className="grid gap-4 md:grid-cols-3">

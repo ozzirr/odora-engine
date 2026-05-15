@@ -2,15 +2,8 @@ import { NextResponse } from "next/server";
 
 import { getCatalogVisibilityWhere } from "@/lib/catalog";
 import { prisma, isDatabaseConfigured } from "@/lib/prisma";
-import { getIsAuthenticated } from "@/lib/supabase/auth-state";
 
 export async function GET(request: Request) {
-  const isAuthenticated = await getIsAuthenticated();
-
-  if (!isAuthenticated) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   if (!isDatabaseConfigured) {
     return NextResponse.json({ results: [] });
   }

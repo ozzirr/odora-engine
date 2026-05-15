@@ -6,6 +6,7 @@ import { ScopedIntlProvider } from "@/components/i18n/ScopedIntlProvider";
 import { Container } from "@/components/layout/Container";
 import { PerfumeGrid } from "@/components/perfumes/PerfumeGrid";
 import { BrandFollowButton } from "@/components/brands/BrandFollowButton";
+import { BrandLogoImage } from "@/components/brands/BrandLogoImage";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { resolveBrandLogoUrl } from "@/lib/brand-logos";
@@ -117,15 +118,15 @@ export default async function BrandPage({ params }: BrandPageProps) {
           <header className="overflow-hidden rounded-3xl border border-[#dfd1bf] bg-white shadow-[0_20px_45px_-38px_rgba(48,34,20,0.24)]">
             <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.42fr)] lg:items-end">
               <div className="flex flex-col items-start gap-6 sm:flex-row">
-              {resolvedLogoUrl ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#f8f1e6]">
+                <BrandLogoImage
                   src={resolvedLogoUrl}
                   alt={brand.name}
-                  className="h-20 w-20 shrink-0 rounded-2xl bg-[#f8f1e6] object-contain p-2"
+                  className="h-full w-full object-contain p-2"
+                  fallbackClassName="text-3xl"
                   loading="eager"
                 />
-              ) : null}
+              </div>
               <div className="min-w-0 space-y-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#907b66]">
                   {t("eyebrow")}

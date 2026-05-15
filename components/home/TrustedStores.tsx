@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 
+import { BrandLogoImage } from "@/components/brands/BrandLogoImage";
 import { getCuratedBrandLogoUrl } from "@/lib/brand-logos";
 
 type BrandLogoStripProps = {
@@ -66,15 +67,14 @@ export function BrandLogoStrip({ brands, variant = "section" }: BrandLogoStripPr
                     : "trusted-stores-pill mx-2 inline-flex min-h-[4.5rem] min-w-[11rem] items-center justify-center gap-3 rounded-[1.35rem] border border-[#ede4d8] bg-white/88 px-6 py-4 text-[#211914] shadow-[0_16px_30px_-24px_rgba(44,31,20,0.32)] sm:min-w-[12.5rem]"
                 }
               >
-                {logoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#dfcfbc] bg-white">
+                  <BrandLogoImage
                     src={logoUrl}
-                    alt={`${brand} logo`}
-                    className="h-9 w-9 shrink-0 rounded-full border border-[#dfcfbc] bg-white object-contain p-1.5"
-                    loading="lazy"
+                    alt={brand}
+                    className="h-full w-full object-contain p-1.5"
+                    fallbackClassName="text-lg"
                   />
-                ) : null}
+                </span>
                 <span className="max-w-[9rem] truncate font-display text-[1.08rem] leading-none tracking-[0.02em]">
                   {brand}
                 </span>
